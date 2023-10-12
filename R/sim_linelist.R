@@ -3,12 +3,38 @@
 #' @description The linelist is simulated using a branching process and
 #' parameterised with previously published epidemiological parameters.
 #'
+#' @details For age-stratified hospitalised and death rates a `<data.frame>`
+#' will need to be passed to the `hosp_rate` and/or `hosp_death_rate`
+#' arguments. This `<data.frame>` should have three columns:
+#' * `min_age`: a column with one `numeric` per cell for the minimum age of
+#' the age group (inclusive).
+#' * `max_age`: a column with one `numeric` per cell for the maximum age of
+#' the age group (exclusive).
+#' * `rate`: a column with one `numeric` per cell for the proportion
+#' (or probability) of hospitalisation for that age group. Should be between
+#' 0 and 1.
+#'
+#'
 #' @param R A single `numeric` for the reproduction number.
 #' @param serial_interval An `<epidist>` object for the serial interval.
 #' @param onset_to_hosp An `<epidist>` object for the onset to hospitalisation
 #' delay distribution.
 #' @param onset_to_death An `<epidist>` object for the onset to death delay
 #' distribution.
+#' @param hosp_rate Either a single `numeric` for the hospitalisation rate of
+#' everyone in the population, or a `<data.frame>` with age specific
+#' hospitalisation rates. Default is 20% hospitalisation (`0.2`) for the entire
+#' population. See details and examples for more information.
+#' @param hosp_death_rate Either a single `numeric` for the death rate for
+#' hospitalised individuals across the population, or a `<data.frame>` with age
+#' specific hospitalised death rates. Default is 50% death rate in hospitals
+#' (`0.5`) for the entire population. See details and examples for more
+#' information.
+#' @param non_hosp_death_rate Either a single `numeric` for the death rate for
+#' outside of hospitals across the population, or a `<data.frame>` with age
+#' specific death rates outside of hospitals. Default is 5% death rate outside
+#' of hospitals  (`0.05`) for the entire population. See details and examples
+#' for more information.
 #' @param outbreak_start_date A `date` for the start of the outbreak.
 #' @param add_names A `logical` boolean for whether to add names to each row
 #' of the linelist. Default is `TRUE`.
@@ -23,10 +49,6 @@
 #' @param case_type_probs A named `numeric` vector with the probability of
 #' each case type. The names of the vector must be `"suspected"`, `"probable"`,
 #' `"confirmed"`. Values of each case type must sum to one.
-#' @param hosp_rate A `list` for the age-stratified hospitalisation rate.
-#' **Currently not implemented**.
-#' @param hosp_to_death_rate A `list` for the age-stratified rate at which
-#' those admitted to hospital go onto die. **Currently not implemented**.
 #' @param include_contacts A `logical` boolean to determine whether contacts
 #' are added to the linelist. **Currently not implmented**.
 #' @param ... [dots] Extra arguments to be passed to other functions.
@@ -35,10 +57,61 @@
 #'
 #' @return A linelist `<data.frame>`
 #' @export
+#'
+#' @examples
+#' # load data required to simulate linelist
+#' serial_interval <- epiparameter::epidist(
+#'   disease = "COVID-19",
+#'   epi_dist = "serial interval",
+#'   prob_distribution = "gamma",
+#'   prob_distribution_params = c(shape = 1, scale = 1)
+#' )
+#'
+#' # get onset to hospital admission from {epiparameter} database
+#' onset_to_hosp <- epiparameter::epidist_db(
+#'   disease = "COVID-19",
+#'   epi_dist = "onset to hospitalisation",
+#'   single_epidist = TRUE
+#' )
+#'
+#' # get onset to death from {epiparameter} database
+#' onset_to_death <- epiparameter::epidist_db(
+#'   disease = "COVID-19",
+#'   epi_dist = "onset to death",
+#'   single_epidist = TRUE
+#' )
+#' # example with single hospitalisation rate for entire population
+#' linelist <- sim_linelist(
+#'   R = 1.1,
+#'   serial_interval = serial_interval,
+#'   onset_to_hosp = onset_to_hosp,
+#'   onset_to_death = onset_to_death,
+#'   hosp_rate = 0.5
+#' )
+#'
+#' # example with age-stratified hospitalisation rate
+#' # 20% for over 80s
+#' # 10% for under 5s
+#' # 5% for the rest
+#' age_dep_hosp_rate <- data.frame(
+#'   min_age = c(1, 5, 80),
+#'   max_age = c(5, 80, 90),
+#'   rate = c(0.1, 0.05, 0.2)
+#' )
+#' linelist <- sim_linelist(
+#'   R = 1.1,
+#'   serial_interval = serial_interval,
+#'   onset_to_hosp = onset_to_hosp,
+#'   onset_to_death = onset_to_death,
+#'   hosp_rate = age_dep_hosp_rate
+#' )
 sim_linelist <- function(R,
                          serial_interval,
                          onset_to_hosp,
                          onset_to_death,
+                         hosp_rate = 0.2,
+                         hosp_death_rate = 0.5,
+                         non_hosp_death_rate = 0.05,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
                          add_ct = FALSE,
@@ -49,17 +122,10 @@ sim_linelist <- function(R,
                            probable = 0.3,
                            confirmed = 0.5
                          ),
-                         hosp_rate = list(), # basic version is non-stratified by age. this argument lets users add it
-                         hosp_to_death_rate = list(), # basic version should not include this, let user modify
                          include_contacts = FALSE, # WIP
                          ...) {
 
   chkDots(...)
-
-  # Introducing % of hospitalisations- higher amongst older people and young kids
-  # 20% for over 80s
-  # 10% for under 5s
-  # 5% for the rest
 
   # input checking
   checkmate::assert_number(R, lower = 0)
@@ -71,8 +137,6 @@ sim_linelist <- function(R,
   checkmate::assert_logical(add_ct, len = 1)
   checkmate::assert_integerish(min_chain_size, lower = 1)
   checkmate::assert_numeric(age_range, len = 2)
-  checkmate::assert_list(hosp_rate)
-  checkmate::assert_list(hosp_to_death_rate)
   checkmate::assert_numeric(case_type_probs, len = 3)
   checkmate::assert_names(
     names(case_type_probs),
@@ -81,8 +145,36 @@ sim_linelist <- function(R,
 
   stopifnot(
     "The values in the case_type_prob vector must sum to 1" =
-      sum(case_type_probs) == 1
+      sum(case_type_probs) == 1,
+    "hosp_rate must be a single numeric or a data.frame" =
+      is.numeric(hosp_rate) && length(hosp_rate) == 1 ||
+      is.data.frame(hosp_rate),
+    "hosp_death_rate must be a single numeric or a data.frame" =
+      is.numeric(hosp_death_rate) && length(hosp_death_rate) == 1 ||
+      is.data.frame(hosp_death_rate),
+    "non_hosp_death_rate must be a single numeric or a data.frame" =
+      is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
+      is.data.frame(non_hosp_death_rate)
   )
+
+  if (is.data.frame(hosp_rate)) {
+    hosp_rate <- .check_rate_df(
+      hosp_rate,
+      age_range = age_range
+    )
+  }
+  if (is.data.frame(hosp_death_rate)) {
+    hosp_death_rate <- .check_rate_df(
+      hosp_death_rate,
+      age_range = age_range
+    )
+  }
+  if (is.data.frame(non_hosp_death_rate)) {
+    non_hosp_death_rate <- .check_rate_df(
+      non_hosp_death_rate,
+      age_range = age_range
+    )
+  }
 
   chain_size <- 0
   # condition on a minimum chain size
@@ -120,8 +212,6 @@ sim_linelist <- function(R,
     distribution = "pois",
     rate = 3
   )
-  chain <- .add_hospitalisation(.data = chain, onset_to_hosp = onset_to_hosp)
-  chain <- .add_deaths(.data = chain, onset_to_death = onset_to_death)
 
   # add random age and gender
   chain$gender <- sample(c("m", "f"), replace = TRUE, size = nrow(chain))
@@ -131,61 +221,17 @@ sim_linelist <- function(R,
     size = nrow(chain)
   )
 
-  # death and hospitalisation are age-dependent
-
-  # Introducing % of hospitalisations- higher amongst older people and young kids
-  # 20% for over 80s
-  # 10% for under 5s
-  # 5% for the rest
-
-  ## TODO change this to allow user to modify hospitalisation rates
-
-  over_80s <- which(chain$age >= 80)
-  over_80s_sample <- sample(over_80s, replace = FALSE, size = 0.8*length(over_80s))
-  chain$hosp_rounded[over_80s_sample] <- NA
-
-  under_5s <- which(chain$age <= 5)
-  under_5s_sample <- sample(under_5s, replace = FALSE, size = 0.9*length(under_5s))
-  chain$hosp_rounded[under_5s_sample] <- NA
-
-  rest <- which(chain$age > 5 & chain$age < 80)
-  rest_sample <- sample(rest, replace = FALSE, size = 0.95*length(rest))
-  chain$hosp_rounded[rest_sample] <- NA
-
-  # Introducing a % of deaths, higher among hospitalised people
-  # Death rate in the hospital by age
-  # over 80s: 50%
-  # under 5s: 50%
-  # rest: 3%
-
-  over_80s_hosp <- which(chain$age >= 80 & !is.na(chain$hosp_rounded))
-  over_80s_hosp_dead <- sample(over_80s_hosp, replace = FALSE, size = length(over_80s_hosp) * 0.5)
-  chain$death_rounded[over_80s_hosp_dead] <- NA
-
-  under_5s_hosp <- which(chain$age <= 5 & !is.na(chain$hosp_rounded))
-  under_5s_hosp_dead <- sample(under_5s_hosp, replace = FALSE, size = length(under_5s_hosp) * 0.5)
-  chain$death_rounded[under_5s_hosp_dead] <- NA
-
-  rest_hosp <- which(chain$age > 5 & chain$age < 80 & !is.na(chain$hosp_rounded))
-  rest_hosp_dead <- sample(rest_hosp, replace = FALSE, size = 0.97 * length(rest_hosp))
-  chain$death_rounded[rest_hosp_dead] <- NA
-
-  # Death rate outside the hospital by age
-  # OVER 80s - 20%
-  # Under 5s - 10%
-  # Rest - 2%
-
-  over_80s_nothosp <- which(chain$age >= 80 & is.na(chain$hosp_rounded))
-  over80s_nothosp_sample <- sample(over_80s_nothosp, replace = FALSE, size = 0.8 * length(over_80s_nothosp))
-  chain$death_rounded[over80s_nothosp_sample] <- NA
-
-  under_5s_nothosp <- which(chain$age <= 5 & is.na(chain$hosp_rounded))
-  under5s_nothosp_sample <- sample(under_5s_nothosp, replace = FALSE, size = 0.9 * length(under_5s_nothosp))
-  chain$death_rounded[under5s_nothosp_sample] <- NA
-
-  rest_nothosp <- which(chain$age > 5 & chain$age < 80 & is.na(chain$hosp_rounded))
-  rest_nothosp_sample <- sample(rest_nothosp, replace = F, size = 0.98 * length(rest_nothosp))
-  chain$death_rounded[rest_nothosp_sample] <- NA
+  chain <- .add_hospitalisation(
+    .data = chain,
+    onset_to_hosp = onset_to_hosp,
+    hosp_rate = hosp_rate
+  )
+  chain <- .add_deaths(
+    .data = chain,
+    onset_to_death = onset_to_death,
+    hosp_death_rate = hosp_death_rate,
+    non_hosp_death_rate = non_hosp_death_rate
+  )
 
   # add hospitalisation and death dates
   chain$hospitalisation_date <- chain$hosp_rounded + outbreak_start_date
