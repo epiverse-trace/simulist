@@ -1,0 +1,42 @@
+suppressMessages({
+  serial_interval <- epiparameter::epidist(
+    disease = "COVID-19",
+    epi_dist = "serial interval",
+    prob_distribution = "gamma",
+    prob_distribution_params = c(shape = 1, scale = 1)
+  )
+
+  # get onset to hospital admission from {epiparameter} database
+  onset_to_hosp <- epiparameter::epidist_db(
+    disease = "COVID-19",
+    epi_dist = "onset to hospitalisation",
+    single_epidist = TRUE
+  )
+
+  # get onset to death from {epiparameter} database
+  onset_to_death <- epiparameter::epidist_db(
+    disease = "COVID-19",
+    epi_dist = "onset to death",
+    single_epidist = TRUE
+  )
+})
+
+
+
+test_that("sim_list works as expected", {
+  set.seed(1)
+  linelist <- sim_linelist(
+    R = 1.1,
+    serial_interval = serial_interval,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death
+  )
+
+  expect_s3_class(linelist, class = "data.frame")
+  expect_identical(dim(linelist), c(42L, 7L))
+  expect_identical(
+    colnames(linelist),
+    c("id", "gender", "age", "onset_date", "hospitalisation_date",
+      "date_first_contact", "date_last_contact")
+  )
+})
