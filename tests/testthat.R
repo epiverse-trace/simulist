@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(packagetemplate)
+library(simulist)
 
-test_check("packagetemplate")
+test_check("simulist")
