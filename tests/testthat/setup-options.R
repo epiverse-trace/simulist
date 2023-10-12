@@ -3,5 +3,5 @@
 options(
   warnPartialMatchAttr = TRUE,
   warnPartialMatchDollar = TRUE,
-  warnPartialMatchArgs = TRUE
+  warnPartialMatchArgs = FALSE # temporarily FALSE due to PartialMatchArgs in dependency
 )
