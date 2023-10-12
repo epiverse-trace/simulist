@@ -69,10 +69,38 @@ NULL
 
 #' @name .add_date
 .add_hospitalisation <- function(.data,
-                                 onset_to_hosp) {
+                                 onset_to_hosp,
+                                 hosp_rate) {
   .data$hospitalisation <- .data$time +
     epiparameter::generate(onset_to_hosp, nrow(.data))
   .data$hosp_rounded <- round(.data$hospitalisation, digits = 0) # rounded for incidence2, could remove
+
+  if (is.numeric(hosp_rate)) {
+    pop_sample <- sample(
+      1:nrow(.data),
+      replace = FALSE,
+      size = (1 - hosp_rate) * nrow(.data)
+    )
+    .data$hosp_rounded[pop_sample] <- NA
+  } else {
+    for (i in seq_len(nrow(hosp_rate))) {
+      if (i == nrow(hosp_rate)) {
+        # oldest age bracket has inclusive upper bound
+        age_bracket <- hosp_rate$min_age[i]:hosp_rate$max_age[i]
+      } else {
+        # remove last integer from bracket due to exclusive upper bound
+        age_bracket <- hosp_rate$min_age[i]:(hosp_rate$max_age[i] - 1)
+      }
+      age_group <- which(.data$age %in% age_bracket)
+      not_hosp_prob <- 1 - hosp_rate$rate[i]
+      age_group_sample <- sample(
+        age_group,
+        replace = FALSE,
+        size =  not_hosp_prob * length(age_group)
+      )
+      .data$hosp_rounded[age_group_sample] <- NA
+    }
+  }
 
   # return data
   .data
@@ -80,10 +108,49 @@ NULL
 
 #' @name .add_date
 .add_deaths <- function(.data,
-                        onset_to_death) {
+                        onset_to_death,
+                        hosp_death_rate,
+                        non_hosp_death_rate) {
   .data$deaths <- .data$time +
     epiparameter::generate(onset_to_death, nrow(.data))
   .data$death_rounded <- round(.data$deaths, digits = 0) # rounded for incidence2, could remove
+
+  apply_death_rate <- function(.data, rate, hosp = TRUE) {
+    if (is.numeric(hosp_death_rate)) {
+      pop_sample <- sample(
+        1:nrow(.data),
+        replace = FALSE,
+        size = (1 - hosp_death_rate) * nrow(.data)
+      )
+      .data$death_rounded[pop_sample] <- NA
+    } else {
+      for (i in seq_len(nrow(hosp_death_rate))) {
+        if (i == nrow(hosp_death_rate)) {
+          # oldest age bracket has inclusive upper bound
+          age_bracket <- hosp_death_rate$min_age[i]:hosp_death_rate$max_age[i]
+        } else {
+          # remove last integer from bracket due to exclusive upper bound
+          age_bracket <- hosp_death_rate$min_age[i]:(hosp_death_rate$max_age[i] - 1)
+        }
+        if (hosp) {
+          age_group <- which(.data$age %in% age_bracket & !is.na(.data$hosp_rounded))
+        } else {
+          age_group <- which(.data$age %in% age_bracket & is.na(.data$hosp_rounded))
+        }
+        not_hosp_death_prob <- 1 - hosp_death_rate$rate[i]
+        age_group_sample <- sample(
+          age_group,
+          replace = FALSE,
+          size =  not_hosp_death_prob * length(age_group)
+        )
+        .data$death_rounded[age_group_sample] <- NA
+      }
+    }
+    .data
+  }
+
+  .data <- apply_death_rate(.data, hosp_death_rate, hosp = TRUE)
+  .data <- apply_death_rate(.data, non_hosp_death_rate, hosp = FALSE)
 
   # return data
   .data
@@ -175,4 +242,3 @@ NULL
   # return data
   .data
 }
-
