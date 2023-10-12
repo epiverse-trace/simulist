@@ -1,0 +1,216 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.5.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "simulist" in publications use:'
+type: software
+license: MIT
+title: 'simulist: Tools to Simulated Linelist Data'
+version: 0.0.0.9000
+abstract: Provide tools to simulate raw case data for an epidemic in the form of line
+  lists, using model outputs, such as compartmental models, branching processes, or
+  network models.
+authors:
+- family-names: Lambert
+  given-names: Joshua W.
+  email: joshua.lambert@lshtm.ac.uk
+  orcid: https://orcid.org/0000-0001-5218-3046
+- family-names: Tamayo
+  given-names: Carmen
+  email: carmen.tamayo-cuartero@lshtm.ac.uk
+  orcid: https://orcid.org/0000-0003-4184-2864
+contact:
+- family-names: Lambert
+  given-names: Joshua W.
+  email: joshua.lambert@lshtm.ac.uk
+  orcid: https://orcid.org/0000-0001-5218-3046
+references:
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2023'
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: checkmate
+  abstract: 'checkmate: Fast and Versatile Argument Checks'
+  notes: Imports
+  url: https://mllg.github.io/checkmate/
+  repository: https://CRAN.R-project.org/package=checkmate
+  authors:
+  - family-names: Lang
+    given-names: Michel
+    email: michellang@gmail.com
+    orcid: https://orcid.org/0000-0001-9754-0393
+  year: '2023'
+- type: software
+  title: epiparameter
+  abstract: 'epiparameter: Library of Epidemiological Parameters'
+  notes: Imports
+  url: https://epiverse-trace.github.io/epiparameter/
+  authors:
+  - family-names: Lambert
+    given-names: Joshua W.
+    email: joshua.lambert@lshtm.ac.uk
+    orcid: https://orcid.org/0000-0001-5218-3046
+  - family-names: Kucharski
+    given-names: Adam
+    email: adam.kucharski@lshtm.ac.uk
+    orcid: https://orcid.org/0000-0001-8814-9421
+  year: '2023'
+- type: software
+  title: bpmodels
+  abstract: 'bpmodels: Simulating and Analysing Transmission Chain Statistics using
+    Branching Process Models'
+  notes: Imports
+  url: https://epiverse-trace.github.io/bpmodels/
+  authors:
+  - family-names: Azam
+    given-names: James M.
+    email: james.azam@lshtm.ac.uk
+    orcid: https://orcid.org/0000-0001-5782-7330
+  - family-names: Finger
+    given-names: Flavio
+    email: flavio.finger@epicentre.msf.org
+    orcid: https://orcid.org/0000-0002-8613-5170
+  - family-names: Funk
+    given-names: Sebastian
+    email: sebastian.funk@lshtm.ac.uk
+    orcid: https://orcid.org/0000-0002-2842-3406
+  year: '2023'
+- type: software
+  title: randomNames
+  abstract: 'randomNames: Generate Random Given and Surnames'
+  notes: Imports
+  url: https://CenterForAssessment.github.io/randomNames
+  repository: https://CRAN.R-project.org/package=randomNames
+  authors:
+  - family-names: Betebenner
+    given-names: Damian W.
+    email: dbetebenner@nciea.org
+  year: '2023'
+- type: software
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Imports
+  url: https://dplyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=dplyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+    orcid: https://orcid.org/0000-0003-4777-038X
+  year: '2023'
+- type: software
+  title: incidence2
+  abstract: 'incidence2: Compute, Handle and Plot Incidence of Dated Events'
+  notes: Suggests
+  url: https://github.com/reconverse/incidence2
+  repository: https://CRAN.R-project.org/package=incidence2
+  authors:
+  - family-names: Taylor
+    given-names: Tim
+    email: tim.taylor@hiddenelephants.co.uk
+    orcid: https://orcid.org/0000-0002-8587-7113
+  year: '2023'
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2023'
+- type: software
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@posit.co
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@posit.co
+  - family-names: Luraschi
+    given-names: Javier
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@posit.co
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@posit.co
+  - family-names: Chang
+    given-names: Winston
+    email: winston@posit.co
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@posit.co
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2023'
+- type: software
+  title: spelling
+  abstract: 'spelling: Tools for Spell Checking in R'
+  notes: Suggests
+  url: https://docs.ropensci.org/spelling/
+  repository: https://CRAN.R-project.org/package=spelling
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  - family-names: Hester
+    given-names: Jim
+    email: james.hester@rstudio.com
+  year: '2023'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2023'
+  version: '>= 3.0.0'
