@@ -126,6 +126,12 @@ sim_linelist <- function(R,
                          ...) {
 
   chkDots(...)
+  if (include_contacts) {
+    stop(
+      "Including contacts is not currently supported in {simulist}",
+      call. = FALSE
+    )
+  }
 
   # input checking
   checkmate::assert_number(R, lower = 0)
