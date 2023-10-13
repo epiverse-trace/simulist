@@ -3,7 +3,7 @@
 create_contacts <- function(.data, outbreak_start_date) {
 
   if (!"infector_name" %in% colnames(linelist)) {
-    linelist <- .add_names(linelist = linelist)
+    linelist <- .add_names(.data = linelist)
   }
 
   contact_investigation <- subset(
