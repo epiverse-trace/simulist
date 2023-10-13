@@ -250,7 +250,9 @@ sim_linelist <- function(R,
   )
 
   # add Ct if confirmed
-  chain <- .add_ct(.data = chain, distribution = "norm", mean = 25, sd = 2)
+  if (add_ct) {
+    chain <- .add_ct(.data = chain, distribution = "norm", mean = 25, sd = 2)
+  }
 
   if (include_contacts) {
     # TODO finalise create_contacts()
