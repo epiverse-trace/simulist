@@ -146,3 +146,6 @@ linelist <- sim_linelist(
   hosp_rate = age_dep_hosp_rate
 )
 }
+\author{
+Joshua W. Lambert, Carmen Tamayo
+}
