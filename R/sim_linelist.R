@@ -58,6 +58,8 @@
 #' @return A linelist `<data.frame>`
 #' @export
 #'
+#' @author Joshua W. Lambert, Carmen Tamayo
+#'
 #' @examples
 #' # load data required to simulate linelist
 #' serial_interval <- epiparameter::epidist(
