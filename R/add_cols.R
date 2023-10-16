@@ -77,7 +77,7 @@ NULL
 
   if (is.numeric(hosp_rate)) {
     pop_sample <- sample(
-      1:nrow(.data),
+      seq_len(nrow(.data)),
       replace = FALSE,
       size = (1 - hosp_rate) * nrow(.data)
     )
@@ -118,7 +118,7 @@ NULL
   apply_death_rate <- function(.data, rate, hosp = TRUE) {
     if (is.numeric(hosp_death_rate)) {
       pop_sample <- sample(
-        1:nrow(.data),
+        seq_len(nrow(.data)),
         replace = FALSE,
         size = (1 - hosp_death_rate) * nrow(.data)
       )
