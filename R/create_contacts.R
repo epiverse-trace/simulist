@@ -1,5 +1,6 @@
 # this function is still WIP
-
+# nocov start
+# nolint start
 create_contacts <- function(.data, outbreak_start_date) {
 
   if (!"infector_name" %in% colnames(linelist)) {
@@ -90,3 +91,5 @@ create_contacts <- function(.data, outbreak_start_date) {
   # return contacts
   contact_investigation
 }
+# nolint end
+# nocov end
