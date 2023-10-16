@@ -47,7 +47,7 @@ create_contacts <- function(.data, outbreak_start_date) {
       name.sep = " ",
       name.order = "first.last",
       gender = 0,
-      sample.with.replacement = F
+      sample.with.replacement = FALSE
     ),
     names_fem = randomNames::randomNames(
       n = cases_f,
@@ -55,7 +55,7 @@ create_contacts <- function(.data, outbreak_start_date) {
       name.sep = " ",
       name.order = "first.last",
       gender = 1,
-      sample.with.replacement = F
+      sample.with.replacement = FALSE
     )
   )
 
