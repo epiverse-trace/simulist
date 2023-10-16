@@ -199,7 +199,7 @@ sim_linelist <- function(R,
     chain_size <- max(chain$id)
   }
 
-  names(chain)[names(chain) == "ancestor"] = "infector"
+  names(chain)[names(chain) == "ancestor"] <- "infector"
 
   # add delays dates
   chain$time_rounded <- round(chain$time) # this could be unrounded (check for error)
