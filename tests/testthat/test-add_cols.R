@@ -77,7 +77,7 @@ test_that(".add_date_first_contact works as expected", {
   expect_identical(colnames(linelist), c(colnames(ll), "date_first_contact"))
 })
 
-test_that(".add_date_first_contact works as expected with different parameter", {
+test_that(".add_date_first_contact works as expected with different param", {
   ll <- .create_linelist(scenario = "pre_date_first_contact")
   linelist <- .add_date_first_contact(
     .data = ll,

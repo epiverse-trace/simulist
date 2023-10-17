@@ -186,7 +186,7 @@ sim_linelist <- function(R,
 
   chain_size <- 0
   # condition on a minimum chain size
-  while(chain_size < min_chain_size) {
+  while (chain_size < min_chain_size) {
     chain <- bpmodels::chain_sim(
       n = 1,
       offspring = "pois",
@@ -202,7 +202,8 @@ sim_linelist <- function(R,
   names(chain)[names(chain) == "ancestor"] <- "infector"
 
   # add delays dates
-  chain$time_rounded <- round(chain$time) # this could be unrounded (check for error)
+  # this could be unrounded (check for error)
+  chain$time_rounded <- round(chain$time)
   chain$onset_date <- chain$time + outbreak_start_date
 
   # add exposure date for cases
@@ -270,7 +271,7 @@ sim_linelist <- function(R,
 
   if (include_contacts) {
     # TODO finalise create_contacts()
-    contacts <- create_contacts(.data = chain)
+    contacts <- create_contacts(.data = chain) # nolint var assigned not used
   }
 
 

@@ -102,6 +102,6 @@ test_that("sim_list fails as expected for include_contacts = TRUE while WIP", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death, include_contacts = TRUE
     ),
-    regexp = "Including contacts is not currently supported in \\{simulist\\}"
+    regexp = "Including contacts is not currently supported in \\{simulist\\}" # nolint not a file path
   )
 })
