@@ -237,7 +237,7 @@ NULL
     no = NA_real_
   )
 
-  .data$ct_value < signif(.data$ct_value, digits = 3)
+  .data$ct_value <- signif(.data$ct_value, digits = 3)
 
   # return data
   .data
