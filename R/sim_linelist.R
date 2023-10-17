@@ -246,8 +246,14 @@ sim_linelist <- function(R, # nolint cyclocomp
   chain$hospitalisation_date <- chain$hosp_rounded + outbreak_start_date
   chain$death_date <- chain$death_rounded + outbreak_start_date
 
+  linelist_cols <- c(
+    "id", "case_type", "gender", "age", "onset_date", "hospitalisation_date",
+    "date_first_contact", "date_last_contact"
+  )
+
   if (add_names) {
     chain <- .add_names(.data = chain)
+    linelist_cols <- append(linelist_cols, "case_name", after = 1)
   }
 
   # add confirmed, probable, suspected case types
@@ -258,10 +264,6 @@ sim_linelist <- function(R, # nolint cyclocomp
     prob = case_type_probs
   )
 
-  linelist_cols <- c(
-    "id", "gender", "age", "onset_date", "hospitalisation_date",
-    "date_first_contact", "date_last_contact"
-  )
 
   # add Ct if confirmed
   if (add_ct) {
@@ -273,7 +275,6 @@ sim_linelist <- function(R, # nolint cyclocomp
     # TODO finalise create_contacts()
     contacts <- create_contacts(.data = chain) # nolint var assigned not used
   }
-
 
   chain <- chain[, linelist_cols]
 
