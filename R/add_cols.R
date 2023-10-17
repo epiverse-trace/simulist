@@ -216,7 +216,11 @@ NULL
   # add corresponding names to infectors
   infector_names <- .data[, c("id", "case_name")]
   names(infector_names)[2] <- "infector_name"
-  .data <- dplyr::left_join(.data, infector_names, by = dplyr::join_by(infector == id))
+  .data <- dplyr::left_join(
+    .data,
+    infector_names,
+    by = dplyr::join_by(infector == id) # nolint global var
+  )
 
   # return named linelist
   .data

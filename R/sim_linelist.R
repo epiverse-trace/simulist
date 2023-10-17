@@ -107,7 +107,7 @@
 #'   onset_to_death = onset_to_death,
 #'   hosp_rate = age_dep_hosp_rate
 #' )
-sim_linelist <- function(R,
+sim_linelist <- function(R, # nolint cyclocomp
                          serial_interval,
                          onset_to_hosp,
                          onset_to_death,
