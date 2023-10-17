@@ -17,11 +17,11 @@ Lifecycle
 linelist
 Linelist
 packagename
-packagetemplate
 parameterised
 Poisson
 RECON
 SARS
 sim
+st
 svg
 yaml
