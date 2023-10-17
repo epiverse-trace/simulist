@@ -31,11 +31,11 @@ test_that("sim_list works as expected", {
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 7L))
+  expect_identical(dim(linelist), c(42L, 9L))
   expect_identical(
     colnames(linelist),
-    c("id", "gender", "age", "onset_date", "hospitalisation_date",
-      "date_first_contact", "date_last_contact")
+    c("id", "case_name", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact")
   )
 })
 
@@ -67,11 +67,11 @@ test_that("sim_list works as expected with age-strat rates", {
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 7L))
+  expect_identical(dim(linelist), c(42L, 9L))
   expect_identical(
     colnames(linelist),
-    c("id", "gender", "age", "onset_date", "hospitalisation_date",
-      "date_first_contact", "date_last_contact")
+    c("id", "case_name", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact")
   )
 })
 
@@ -86,11 +86,12 @@ test_that("sim_list works as expected with Ct", {
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 8L))
+  expect_identical(dim(linelist), c(42L, 10L))
   expect_identical(
     colnames(linelist),
-    c("id", "gender", "age", "onset_date", "hospitalisation_date",
-      "date_first_contact", "date_last_contact", "ct_value")
+    c("id", "case_name", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact",
+      "ct_value")
   )
 })
 
