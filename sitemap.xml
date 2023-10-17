@@ -16,6 +16,21 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/dot-add_date.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-add_info.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-check_rate_df.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-create_linelist.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sim_linelist.html</loc>
   </url>
 </urlset>
