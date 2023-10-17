@@ -23,20 +23,17 @@ NULL
 
 #' @name .add_date
 .add_date_first_contact <- function(.data,
-                                    distribution = c("pois", "geom"),
+                                    distribution = "pois",
                                     ...) {
+  distribution <- match.arg(distribution)
+
   rdist <- switch(distribution,
-    pois = stats::rpois,
-    geom = stats::rgeom
+    pois = stats::rpois
   )
 
   dist_params <- c(...)
   if (length(dist_params) == 0) {
-    dist_params <- switch(
-      distribution,
-      pois = 3,
-      geom = 0.3
-    )
+    stop("Distribution parameters need to be supplied via ...", call. = FALSE)
   }
 
   .data$date_first_contact <- .data$date_last_contact -
@@ -49,8 +46,10 @@ NULL
 #' @name .add_date
 .add_date_last_contact <- function(.data,
                                    outbreak_start_date,
-                                   distribution = c("pois"),
+                                   distribution = "pois",
                                    ...) {
+  distribution <- match.arg(distribution)
+
   rdist <- switch(distribution,
     pois = stats::rpois
   )
@@ -96,7 +95,7 @@ NULL
       age_group_sample <- sample(
         age_group,
         replace = FALSE,
-        size =  not_hosp_prob * length(age_group)
+        size = not_hosp_prob * length(age_group)
       )
       .data$hosp_rounded[age_group_sample] <- NA
     }
@@ -141,7 +140,7 @@ NULL
         age_group_sample <- sample(
           age_group,
           replace = FALSE,
-          size =  not_hosp_death_prob * length(age_group)
+          size = not_hosp_death_prob * length(age_group)
         )
         .data$death_rounded[age_group_sample] <- NA
       }
@@ -196,7 +195,7 @@ NULL
     ),
     names_fem = randomNames::randomNames(
       n = cases_f,
-      which.names = 'both',
+      which.names = "both",
       name.sep = " ",
       name.order = "first.last",
       gender = 1,
@@ -218,15 +217,15 @@ NULL
 
 #' @name .add_info
 .add_ct <- function(.data, distribution = "norm", ...) {
+  distribution <- match.arg(distribution)
+
   rdist <- switch(distribution,
     norm = stats::rnorm
   )
 
   dist_params <- c(...)
   if (length(dist_params) == 0) {
-    dist_params <- switch(distribution,
-      norm = c(mean = 25, sd = 2)
-    )
+    stop("Distribution parameters need to be supplied via ...", call. = FALSE)
   }
 
   .data$ct_value <- ifelse(

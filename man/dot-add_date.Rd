@@ -8,14 +8,9 @@
 \alias{.add_deaths}
 \title{Add event date as column to infectious history \verb{<data.frame>}}
 \usage{
-.add_date_first_contact(.data, distribution = c("pois", "geom"), ...)
+.add_date_first_contact(.data, distribution = "pois", ...)
 
-.add_date_last_contact(
-  .data,
-  outbreak_start_date,
-  distribution = c("pois"),
-  ...
-)
+.add_date_last_contact(.data, outbreak_start_date, distribution = "pois", ...)
 
 .add_hospitalisation(.data, onset_to_hosp, hosp_rate)
 
