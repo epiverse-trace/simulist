@@ -257,9 +257,15 @@ sim_linelist <- function(R,
     prob = case_type_probs
   )
 
+  linelist_cols <- c(
+    "id", "gender", "age", "onset_date", "hospitalisation_date",
+    "date_first_contact", "date_last_contact"
+  )
+
   # add Ct if confirmed
   if (add_ct) {
     chain <- .add_ct(.data = chain, distribution = "norm", mean = 25, sd = 2)
+    linelist_cols <- c(linelist_cols, "ct_value")
   }
 
   if (include_contacts) {
@@ -267,10 +273,7 @@ sim_linelist <- function(R,
     contacts <- create_contacts(.data = chain)
   }
 
-  linelist_cols <- c(
-    "id", "gender", "age", "onset_date", "hospitalisation_date",
-    "date_first_contact", "date_last_contact"
-  )
+
   chain <- chain[, linelist_cols]
 
   # return linelist
