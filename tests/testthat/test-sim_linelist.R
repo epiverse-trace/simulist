@@ -95,6 +95,25 @@ test_that("sim_list works as expected with Ct", {
   )
 })
 
+test_that("sim_list works as expected with anonymous", {
+  set.seed(1)
+  linelist <- sim_linelist(
+    R = 1.1,
+    serial_interval = serial_interval,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    add_names = FALSE
+  )
+
+  expect_s3_class(linelist, class = "data.frame")
+  expect_identical(dim(linelist), c(42L, 8L))
+  expect_identical(
+    colnames(linelist),
+    c("id", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact")
+  )
+})
+
 test_that("sim_list fails as expected for include_contacts = TRUE while WIP", {
   expect_error(
     sim_linelist(
