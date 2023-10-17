@@ -18,51 +18,105 @@ knitr::opts_chunk$set(
 )
 ```
 
-# {{ packagename }} <img src="man/figures/logo.svg" align="right" width="120" />
+# _simulist_: Simulate linelist data <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
 [![R-CMD-check](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/{{ gh_repo }}/branch/main/graph/badge.svg)](https://app.codecov.io/gh/{{ gh_repo }}?branch=main)
-[![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept) 
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-{{ packagename }} provides functions to ....
+`{simulist}` is an R package to simulate a linelist of an infectious disease outbreak.
 
-<!-- This sentence is optional and can be removed -->
-{{ packagename }} is developed at the [CENTER|similar](url) at the [UNIVERSITY|similar](url) as part of the [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
+`{simulist}` is developed at the [Centre for the Mathematical Modelling of Infectious Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases) at the [London School of Hygiene and Tropical Medicine](https://www.lshtm.ac.uk/) as part of [Epiverse-TRACE](https://data.org/initiatives/epiverse/).
 
 ## Installation
 
-You can install the development version of {{ packagename }} from
+You can install the development version of `{simulist}` from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
-pak::pak("{{ gh_repo }}")
+# check whether {pak} is installed
+if(!require("pak")) install.packages("pak")
+pak::pak("epiverse-trace/simulist")
 ```
 
-## Example
+## Quick start
 
-These examples illustrate some of the current functionalities
+```{r load-simulist}
+library(simulist)
+library(epiparameter)
+```
 
+The linelist simulation requires a serial interval, onset-to-hospitalisation delay, and onset-to-death delay. We can load these load these from the library of epidemiological parameters in the `{epiparameter}` R package, or if these are not available, such as the serial interval for COVID-19 we can create them ourselves.
 
-## Development
+```{r create-epidists}
+# create COVID-19 serial interval
+serial_interval <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "serial interval",
+  prob_distribution = "gamma",
+  prob_distribution_params = c(shape = 1, scale = 1)
+)
 
-### Lifecycle
+# get onset to hospital admission from {epiparameter} database
+onset_to_hosp <- epiparameter::epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to hospitalisation",
+  single_epidist = TRUE
+)
 
-This package is currently a *concept*, as defined by the [RECON software
-lifecycle](https://www.reconverse.org/lifecycle.html). This means that essential
-features and mechanisms are still being developed, and the package is not ready
-for use outside of the development team.
+# get onset to death from {epiparameter} database
+onset_to_death <- epiparameter::epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to death",
+  single_epidist = TRUE
+)
+```
 
+To simulate a linelist for COVID-19 with an assumed reproduction number (`R`) of 1.1 we use the `sim_linelist()` function.
 
-### Contributions
+```{r sim-linelist}
+linelist <- sim_linelist(
+  R = 1.1,
+  serial_interval = serial_interval,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death
+)
+head(linelist)
+```
 
-Contributions are welcome via [pull requests](https://github.com/{{ gh_repo }}/pulls).
+In this example, the linelist is simulated using the default values (see `?sim_linelist`). The default hospitalisation rate is 0.2 (or 20% of individual infected become hospitalised) and the start date of the outbreak is 1st January 2023. To modify either of these to make them more realistic we can specify them.
 
-### Code of Conduct
+```{r sim-linelist-diff-args}
+linelist <- sim_linelist(
+  R = 1.1,
+  serial_interval = serial_interval,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  hosp_rate = 0.01,
+  outbreak_start_date = as.Date("2019-12-01")
+)
+head(linelist)
+```
 
-Please note that the {{ packagename }} project is released with a 
+## Help 
+
+To report a bug please open an [issue](https://github.com/epiverse-trace/simulist/issues/new/choose)
+
+## Contribute 
+
+Contributions to `{simulist}` are welcomed. Please follow the [package contributing guide](https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md).
+
+## Code of Conduct
+
+Please note that the `{simulist}` project is released with a 
 [Contributor Code of Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
+
+## Citing this package
+
+```{r message=FALSE, warning=FALSE}
+citation("simulist")
+```
