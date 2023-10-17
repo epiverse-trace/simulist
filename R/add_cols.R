@@ -72,7 +72,8 @@ NULL
                                  hosp_rate) {
   .data$hospitalisation <- .data$time +
     epiparameter::generate(onset_to_hosp, nrow(.data))
-  .data$hosp_rounded <- round(.data$hospitalisation, digits = 0) # rounded for incidence2, could remove
+  # rounded for incidence2, could remove
+  .data$hosp_rounded <- round(.data$hospitalisation, digits = 0)
 
   if (is.numeric(hosp_rate)) {
     pop_sample <- sample(
@@ -112,7 +113,8 @@ NULL
                         non_hosp_death_rate) {
   .data$deaths <- .data$time +
     epiparameter::generate(onset_to_death, nrow(.data))
-  .data$death_rounded <- round(.data$deaths, digits = 0) # rounded for incidence2, could remove
+  # rounded for incidence2, could remove
+  .data$death_rounded <- round(.data$deaths, digits = 0)
 
   apply_death_rate <- function(.data, rate, hosp = TRUE) {
     if (is.numeric(hosp_death_rate)) {
@@ -129,12 +131,17 @@ NULL
           age_bracket <- hosp_death_rate$min_age[i]:hosp_death_rate$max_age[i]
         } else {
           # remove last integer from bracket due to exclusive upper bound
-          age_bracket <- hosp_death_rate$min_age[i]:(hosp_death_rate$max_age[i] - 1)
+          age_bracket <-
+            hosp_death_rate$min_age[i]:(hosp_death_rate$max_age[i] - 1)
         }
         if (hosp) {
-          age_group <- which(.data$age %in% age_bracket & !is.na(.data$hosp_rounded))
+          age_group <- which(
+            .data$age %in% age_bracket & !is.na(.data$hosp_rounded)
+          )
         } else {
-          age_group <- which(.data$age %in% age_bracket & is.na(.data$hosp_rounded))
+          age_group <- which(
+            .data$age %in% age_bracket & is.na(.data$hosp_rounded)
+          )
         }
         not_hosp_death_prob <- 1 - hosp_death_rate$rate[i]
         age_group_sample <- sample(
