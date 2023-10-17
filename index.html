@@ -69,45 +69,149 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.svg" class="logo" alt=""><h1 id="packagetemplate-">packagetemplate <a class="anchor" aria-label="anchor" href="#packagetemplate-"></a>
+<img src="logo.svg" class="logo" alt=""><h1 id="simulist-simulate-linelist-data-">
+<em>simulist</em>: Simulate linelist data <a class="anchor" aria-label="anchor" href="#simulist-simulate-linelist-data-"></a>
 </h1>
 </div>
 <!-- badges: start -->
 
-<p>packagetemplate provides functions to ….</p>
-<!-- This sentence is optional and can be removed -->
-<p>packagetemplate is developed at the <a href="url">CENTER|similar</a> at the <a href="url">UNIVERSITY|similar</a> as part of the <a href="https://data.org/initiatives/epiverse/" class="external-link">Epiverse-TRACE program</a>.</p>
+<p><code>{simulist}</code> is an R package to simulate a linelist of an infectious disease outbreak.</p>
+<p><code>{simulist}</code> is developed at the <a href="https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases" class="external-link">Centre for the Mathematical Modelling of Infectious Diseases</a> at the <a href="https://www.lshtm.ac.uk/" class="external-link">London School of Hygiene and Tropical Medicine</a> as part of <a href="https://data.org/initiatives/epiverse/" class="external-link">Epiverse-TRACE</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of packagetemplate from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of <code>{simulist}</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<code class="sourceCode R"><span><span class="co"># check whether {pak} is installed</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://pak.r-lib.org/" class="external-link">"pak"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"epiverse-trace/simulist"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<p>These examples illustrate some of the current functionalities</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">simulist</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a></span><span class="op">)</span></span></code></pre></div>
+<p>The linelist simulation requires a serial interval, onset-to-hospitalisation delay, and onset-to-death delay. We can load these load these from the library of epidemiological parameters in the <a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a> R package, or if these are not available, such as the serial interval for COVID-19 we can create them ourselves.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create COVID-19 serial interval</span></span>
+<span><span class="va">serial_interval</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
+<span>  epi_dist <span class="op">=</span> <span class="st">"serial interval"</span>,</span>
+<span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span>
+<span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
+<span></span>
+<span><span class="co"># get onset to hospital admission from {epiparameter} database</span></span>
+<span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span>
+<span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
+<span>  epi_dist <span class="op">=</span> <span class="st">"onset to hospitalisation"</span>,</span>
+<span>  single_epidist <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using Linton NM, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov AR, Jung S,</span></span>
+<span><span class="co">#&gt; Yuan B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other</span></span>
+<span><span class="co">#&gt; Epidemiological Characteristics of 2019 Novel Coronavirus Infections</span></span>
+<span><span class="co">#&gt; with Right Truncation: A Statistical Analysis of Publicly Available</span></span>
+<span><span class="co">#&gt; Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538</span></span>
+<span><span class="co">#&gt; &lt;https://doi.org/10.3390/jcm9020538&gt;.. </span></span>
+<span><span class="co">#&gt; To retrieve the short citation use the 'get_citation' function</span></span>
+<span></span>
+<span><span class="co"># get onset to death from {epiparameter} database</span></span>
+<span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span>
+<span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
+<span>  epi_dist <span class="op">=</span> <span class="st">"onset to death"</span>,</span>
+<span>  single_epidist <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using Linton NM, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov AR, Jung S,</span></span>
+<span><span class="co">#&gt; Yuan B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other</span></span>
+<span><span class="co">#&gt; Epidemiological Characteristics of 2019 Novel Coronavirus Infections</span></span>
+<span><span class="co">#&gt; with Right Truncation: A Statistical Analysis of Publicly Available</span></span>
+<span><span class="co">#&gt; Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538</span></span>
+<span><span class="co">#&gt; &lt;https://doi.org/10.3390/jcm9020538&gt;.. </span></span>
+<span><span class="co">#&gt; To retrieve the short citation use the 'get_citation' function</span></span></code></pre></div>
+<p>To simulate a linelist for COVID-19 with an assumed reproduction number (<code>R</code>) of 1.1 we use the <code><a href="reference/sim_linelist.html">sim_linelist()</a></code> function.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
+<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
+<span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   id gender age onset_date hospitalisation_date date_first_contact</span></span>
+<span><span class="co">#&gt; 1  1      m  66 2023-01-01                 &lt;NA&gt;               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2      f  37 2023-01-01                 &lt;NA&gt;         2023-01-07</span></span>
+<span><span class="co">#&gt; 3  3      m  81 2023-01-01                 &lt;NA&gt;         2023-01-01</span></span>
+<span><span class="co">#&gt; 4  4      m  33 2023-01-02                 &lt;NA&gt;         2023-01-01</span></span>
+<span><span class="co">#&gt; 5  5      f  81 2023-01-02           2023-01-03         2023-01-06</span></span>
+<span><span class="co">#&gt; 6  6      m   1 2023-01-04           2023-01-08         2023-01-03</span></span>
+<span><span class="co">#&gt;   date_last_contact</span></span>
+<span><span class="co">#&gt; 1              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2        2023-01-09</span></span>
+<span><span class="co">#&gt; 3        2023-01-04</span></span>
+<span><span class="co">#&gt; 4        2023-01-02</span></span>
+<span><span class="co">#&gt; 5        2023-01-07</span></span>
+<span><span class="co">#&gt; 6        2023-01-06</span></span></code></pre></div>
+<p>In this example, the linelist is simulated using the default values (see <code><a href="reference/sim_linelist.html">?sim_linelist</a></code>). The default hospitalisation rate is 0.2 (or 20% of individual infected become hospitalised) and the start date of the outbreak is 1st January 2023. To modify either of these to make them more realistic we can specify them.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
+<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
+<span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
+<span>  hosp_rate <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>  outbreak_start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2019-12-01"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   id gender age onset_date hospitalisation_date date_first_contact</span></span>
+<span><span class="co">#&gt; 1  1      f  60 2019-12-01                 &lt;NA&gt;               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2      f  11 2019-12-01                 &lt;NA&gt;         2019-11-27</span></span>
+<span><span class="co">#&gt; 3  3      m  24 2019-12-02                 &lt;NA&gt;         2019-11-29</span></span>
+<span><span class="co">#&gt; 4  4      f  39 2019-12-02                 &lt;NA&gt;         2019-11-30</span></span>
+<span><span class="co">#&gt; 5  5      f  64 2019-12-01                 &lt;NA&gt;         2019-11-30</span></span>
+<span><span class="co">#&gt; 6  6      f  87 2019-12-02                 &lt;NA&gt;         2019-12-05</span></span>
+<span><span class="co">#&gt;   date_last_contact</span></span>
+<span><span class="co">#&gt; 1              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2        2019-12-01</span></span>
+<span><span class="co">#&gt; 3        2019-12-03</span></span>
+<span><span class="co">#&gt; 4        2019-12-04</span></span>
+<span><span class="co">#&gt; 5        2019-12-02</span></span>
+<span><span class="co">#&gt; 6        2019-12-06</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
+<h2 id="help">Help<a class="anchor" aria-label="anchor" href="#help"></a>
 </h2>
-<div class="section level3">
-<h3 id="lifecycle">Lifecycle<a class="anchor" aria-label="anchor" href="#lifecycle"></a>
-</h3>
-<p>This package is currently a <em>concept</em>, as defined by the <a href="https://www.reconverse.org/lifecycle.html" class="external-link">RECON software lifecycle</a>. This means that essential features and mechanisms are still being developed, and the package is not ready for use outside of the development team.</p>
+<p>To report a bug please open an <a href="https://github.com/epiverse-trace/simulist/issues/new/choose" class="external-link">issue</a></p>
 </div>
-<div class="section level3">
-<h3 id="contributions">Contributions<a class="anchor" aria-label="anchor" href="#contributions"></a>
-</h3>
-<p>Contributions are welcome via <a href="https://github.com/epiverse-trace/simulist/pulls" class="external-link">pull requests</a>.</p>
+<div class="section level2">
+<h2 id="contribute">Contribute<a class="anchor" aria-label="anchor" href="#contribute"></a>
+</h2>
+<p>Contributions to <code>{simulist}</code> are welcomed. Please follow the <a href="https://github.com/epiverse-trace/.github/blob/main/CONTRIBUTING.md" class="external-link">package contributing guide</a>.</p>
 </div>
-<div class="section level3">
-<h3 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
-</h3>
-<p>Please note that the packagetemplate project is released with a <a href="https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
+<p>Please note that the <code>{simulist}</code> project is released with a <a href="https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
+<div class="section level2">
+<h2 id="citing-this-package">Citing this package<a class="anchor" aria-label="anchor" href="#citing-this-package"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"simulist"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; To cite package 'simulist' in publications use:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Lambert J, Tamayo C (2023). _simulist: Tools to Simulated Linelist</span></span>
+<span><span class="co">#&gt;   Data_. R package version 0.0.0.9000.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   @Manual{,</span></span>
+<span><span class="co">#&gt;     title = {simulist: Tools to Simulated Linelist Data},</span></span>
+<span><span class="co">#&gt;     author = {Joshua W. Lambert and Carmen Tamayo},</span></span>
+<span><span class="co">#&gt;     year = {2023},</span></span>
+<span><span class="co">#&gt;     note = {R package version 0.0.0.9000},</span></span>
+<span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
@@ -150,7 +254,7 @@
 <li><a href="https://opensource.org/license/mit/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
 <li><a href="https://github.com/epiverse-trace/simulist/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/epiverse-trace/simulist/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/epiverse-trace/simulist?branch=main" class="external-link"><img src="https://codecov.io/gh/epiverse-trace/simulist/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.reconverse.org/lifecycle.html#concept" class="external-link"><img src="https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg" alt="lifecycle-concept"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
 
