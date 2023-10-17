@@ -19,9 +19,12 @@ Linelist
 packagename
 parameterised
 Poisson
+randomNames
 RECON
+resimulate
 SARS
 sim
 st
+stochasticity
 svg
 yaml
