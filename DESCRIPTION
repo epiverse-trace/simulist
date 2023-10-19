@@ -24,6 +24,7 @@ Imports:
 Suggests: 
     incidence2,
     knitr,
+    bookdown,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0)
