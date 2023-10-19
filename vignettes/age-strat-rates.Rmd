@@ -30,7 +30,7 @@ There are three rates in {simulist}, specifically in the `sim_linelist()` functi
 2. Death rate in hospitals (`hosp_death_rate`)
 3. Death rate outside of hospitals (`non_hosp_death_rate`)
 
-The default for `sim_lineslist()` is a `0.2` (or 20%) hospitalisation rate for individuals infected, `0.5` (or 50%) for hospitalised individuals that go on to die, and `0.05` (or 5%) for infected individuals to die outside of hospitals. These default rates are applied to all age groups in the populations. 
+The default for `sim_lineslist()` is a `0.2` (or 20%) hospitalisation rate for individuals infected, `0.5` (or 50%) death rate for hospitalised individuals, and `0.05` (or 5%) death rate for infected individuals outside of hospitals. These default rates are applied to all age groups in the populations. 
 
 However, it may be unrealistic to assume that the probability an infected person is admitted to hospital or dies is independent of their age. For many diseases, young children or elderly individuals are at higher risk of being hospitalised and having adverse outcomes.
 
@@ -168,7 +168,7 @@ linelist <- sim_linelist(
 )
 ```
 
-In order to make this code run with the age-stratified hospitalisation rate given the `age_range` can be adjusted.
+In order to make this code run with the age-stratified hospitalisation rate given, the `age_range` can be adjusted.
 
 ```{r, sim-age_strat-linelist-diff-age-range}
 age_dep_hosp_rate <- data.frame(
