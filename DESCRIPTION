@@ -19,8 +19,7 @@ Imports:
     checkmate,
     epiparameter,
     bpmodels,
-    randomNames,
-    dplyr
+    randomNames
 Suggests: 
     incidence2,
     knitr,
