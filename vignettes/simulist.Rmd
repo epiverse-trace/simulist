@@ -157,3 +157,7 @@ head(linelist)
 ```
 
 It is currently not possible to simulate with a non-uniform population age structure in {simulist}.
+
+## Age-stratified hospitalisation and death rates
+
+For an overview of how a linelist can be simulated with age-stratified (or age-dependent) hospitalisation and death rates see the [vignette dedicated to this topic](age-strat-rates.html).
