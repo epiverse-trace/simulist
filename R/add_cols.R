@@ -213,14 +213,15 @@ NULL
   .data$case_name[.data$gender == "m"] <- names$names_masc # move to start of df
   .data$case_name[.data$gender == "f"] <- names$names_fem
 
-  # add corresponding names to infectors
-  infector_names <- .data[, c("id", "case_name")]
-  names(infector_names)[2] <- "infector_name"
-  .data <- dplyr::left_join(
-    .data,
-    infector_names,
-    by = dplyr::join_by(infector == id) # nolint global var
+  # left join corresponding names to infectors preserving column and row order
+  infector_names <- data.frame(id = .data$id, infector_name = .data$case_name)
+  col_order <- c(colnames(.data), "infector_name")
+  .data <- merge(
+    .data, infector_names, by.x = "infector", by.y = "id", all.x = TRUE
   )
+  .data <- .data[order(is.na(.data$infector_name), decreasing = TRUE), ]
+  .data <- .data[col_order]
+  rownames(.data) <- NULL
 
   # return named linelist
   .data
