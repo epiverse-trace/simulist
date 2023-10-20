@@ -208,7 +208,13 @@ sim_linelist <- function(R, # nolint cyclocomp
 
   # add exposure date for cases
   id_time <- data.frame(infector = chain$id, infector_time = chain$time)
-  chain <- dplyr::left_join(chain, id_time, by = "infector")
+
+  # left join infector time to data preserving column and row order
+  col_order <- c(colnames(chain), "infector_time")
+  chain <- merge(chain, id_time, by = "infector", all.x = TRUE)
+  chain <- chain[order(is.na(chain$infector), decreasing = TRUE), ]
+  chain <- chain[col_order]
+  rownames(chain) <- NULL
 
   chain <- .add_date_last_contact(
     .data = chain,
