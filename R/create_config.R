@@ -6,13 +6,12 @@
 #' cases.
 #'
 #' Accepted arguments and their defaults are:
-#' * `last_contact_distribution = "pois"`,
-#' * `last_contact_distribution_params = c(rate = 3)`,
-#' * `first_contact_distribution = "pois"`,
-#' * `first_contact_distribution_params = c(rate = 3)`,
-#' * `ct_distribution = "norm"`,
-#' * `ct_distribution_params = c(mean = 25, sd = 2)`,
-#' * `genders = c("m", "f")`
+#' * `last_contact_distribution = "pois"`
+#' * `last_contact_distribution_params = c(rate = 3)`
+#' * `first_contact_distribution = "pois"`
+#' * `first_contact_distribution_params = c(rate = 3)`
+#' * `ct_distribution = "norm"`
+#' * `ct_distribution_params = c(mean = 25, sd = 2)`
 #'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
@@ -33,8 +32,7 @@ create_config <- function(...) {
     first_contact_distribution = "pois",
     first_contact_distribution_params = c(rate = 3),
     ct_distribution = "norm",
-    ct_distribution_params = c(mean = 25, sd = 2),
-    genders = c("m", "f")
+    ct_distribution_params = c(mean = 25, sd = 2)
   )
 
   # replace default args if in dots (remove args not for sim_linelist)

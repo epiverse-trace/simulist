@@ -24,13 +24,12 @@ cases.
 
 Accepted arguments and their defaults are:
 \itemize{
-\item \code{last_contact_distribution = "pois"},
-\item \code{last_contact_distribution_params = c(rate = 3)},
-\item \code{first_contact_distribution = "pois"},
-\item \code{first_contact_distribution_params = c(rate = 3)},
-\item \code{ct_distribution = "norm"},
-\item \code{ct_distribution_params = c(mean = 25, sd = 2)},
-\item \code{genders = c("m", "f")}
+\item \code{last_contact_distribution = "pois"}
+\item \code{last_contact_distribution_params = c(rate = 3)}
+\item \code{first_contact_distribution = "pois"}
+\item \code{first_contact_distribution_params = c(rate = 3)}
+\item \code{ct_distribution = "norm"}
+\item \code{ct_distribution_params = c(mean = 25, sd = 2)}
 }
 
 These parameters do not warrant their own arguments in
