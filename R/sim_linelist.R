@@ -49,6 +49,8 @@
 #' @param case_type_probs A named `numeric` vector with the probability of
 #' each case type. The names of the vector must be `"suspected"`, `"probable"`,
 #' `"confirmed"`. Values of each case type must sum to one.
+#' @param config A list of settings to adjust the randomly sampled delays and
+#' Ct values (if `add_ct = TRUE`). See [create_config()] for more information.
 #' @param include_contacts A `logical` boolean to determine whether contacts
 #' are added to the linelist. **Currently not implmented**.
 #' @param ... [dots] Extra arguments to be passed to other functions.
@@ -124,6 +126,7 @@ sim_linelist <- function(R, # nolint cyclocomp
                            probable = 0.3,
                            confirmed = 0.5
                          ),
+                         config = create_config(),
                          include_contacts = FALSE, # WIP
                          ...) {
 
@@ -219,13 +222,13 @@ sim_linelist <- function(R, # nolint cyclocomp
   chain <- .add_date_last_contact(
     .data = chain,
     outbreak_start_date = outbreak_start_date,
-    distribution = "pois",
-    rate = 3
+    distribution = config$last_contact_distribution,
+    config$last_contact_distribution_params
   )
   chain <- .add_date_first_contact(
     .data = chain,
-    distribution = "pois",
-    rate = 3
+    distribution = config$first_contact_distribution,
+    config$first_contact_distribution_params
   )
 
   # add random age and gender
@@ -273,7 +276,11 @@ sim_linelist <- function(R, # nolint cyclocomp
 
   # add Ct if confirmed
   if (add_ct) {
-    chain <- .add_ct(.data = chain, distribution = "norm", mean = 25, sd = 2)
+    chain <- .add_ct(
+      .data = chain,
+      distribution = config$ct_distribution,
+      config$ct_distribution_params
+    )
     linelist_cols <- c(linelist_cols, "ct_value")
   }
 
