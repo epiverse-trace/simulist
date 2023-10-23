@@ -144,7 +144,7 @@ test_that("sim_list works as expected with modified config parameters", {
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     config = create_config(
-      last_contact_distribution_params = c(rate = 5)
+      last_contact_distribution_params = c(lambda = 5)
     )
   )
 
