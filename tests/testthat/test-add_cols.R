@@ -20,7 +20,7 @@ test_that(".add_date_last_contact works as expected", {
     .data = ll,
     outbreak_start_date = as.Date("2023-01-01"),
     distribution = "pois",
-    rate = 3
+    lambda = 3
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_last_contact, class = "Date")
@@ -34,7 +34,7 @@ test_that(".add_date_last_contact works as expected with different parameter", {
     .data = ll,
     outbreak_start_date = as.Date("2023-01-01"),
     distribution = "pois",
-    rate = 1
+    lambda = 1
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_last_contact, class = "Date")
@@ -63,6 +63,26 @@ test_that(".add_date_last_contact fails as expected", {
     ),
     regexp = "Distribution parameters are missing, check config"
   )
+
+  expect_error(
+    .add_date_last_contact(
+      .data = ll,
+      outbreak_start_date = as.Date("2023-01-01"),
+      distribution = "pois",
+      prob = 0.5
+    ),
+    regexp = "Incorrect parameterisation of distribution, check config"
+  )
+
+  expect_error(
+    .add_date_last_contact(
+      .data = ll,
+      outbreak_start_date = as.Date("2023-01-01"),
+      distribution = "pois",
+      lambda = NA
+    ),
+    regexp = "Incorrect parameterisation of distribution, check config"
+  )
 })
 
 test_that(".add_date_first_contact works as expected", {
@@ -70,7 +90,7 @@ test_that(".add_date_first_contact works as expected", {
   linelist <- .add_date_first_contact(
     .data = ll,
     distribution = "pois",
-    rate = 3
+    lambda = 3
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_first_contact, class = "Date")
@@ -83,7 +103,7 @@ test_that(".add_date_first_contact works as expected with different param", {
   linelist <- .add_date_first_contact(
     .data = ll,
     distribution = "pois",
-    rate = 1
+    lambda = 1
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_first_contact, class = "Date")
@@ -109,6 +129,24 @@ test_that(".add_date_first_contact fails as expected", {
       distribution = "pois"
     ),
     regexp = "Distribution parameters are missing, check config"
+  )
+
+  expect_error(
+    .add_date_first_contact(
+      .data = ll,
+      distribution = "pois",
+      prob = 0.5
+    ),
+    regexp = "Incorrect parameterisation of distribution, check config"
+  )
+
+  expect_error(
+    .add_date_first_contact(
+      .data = ll,
+      distribution = "pois",
+      lambda = NA
+    ),
+    regexp = "Incorrect parameterisation of distribution, check config"
   )
 })
 
@@ -273,5 +311,15 @@ test_that(".add_ct fails as expected", {
   expect_error(
     .add_ct(.data = ll, distribution = "norm"),
     regexp = "Distribution parameters are missing, check config"
+  )
+
+  expect_error(
+    .add_ct(.data = ll, distribution = "norm", men = 1, sd = 1),
+    regexp = "Incorrect parameterisation of distribution, check config"
+  )
+
+  expect_error(
+    .add_ct(.data = ll, distribution = "norm", mean = NA),
+    regexp = "Incorrect parameterisation of distribution, check config"
   )
 })
