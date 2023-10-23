@@ -25,9 +25,9 @@ cases.
 Accepted arguments and their defaults are:
 \itemize{
 \item \code{last_contact_distribution = "pois"}
-\item \code{last_contact_distribution_params = c(rate = 3)}
+\item \code{last_contact_distribution_params = c(lambda = 3)}
 \item \code{first_contact_distribution = "pois"}
-\item \code{first_contact_distribution_params = c(rate = 3)}
+\item \code{first_contact_distribution_params = c(lambda = 3)}
 \item \code{ct_distribution = "norm"}
 \item \code{ct_distribution_params = c(mean = 25, sd = 2)}
 }
