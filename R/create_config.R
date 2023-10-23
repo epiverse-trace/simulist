@@ -7,9 +7,9 @@
 #'
 #' Accepted arguments and their defaults are:
 #' * `last_contact_distribution = "pois"`
-#' * `last_contact_distribution_params = c(rate = 3)`
+#' * `last_contact_distribution_params = c(lambda = 3)`
 #' * `first_contact_distribution = "pois"`
-#' * `first_contact_distribution_params = c(rate = 3)`
+#' * `first_contact_distribution_params = c(lambda = 3)`
 #' * `ct_distribution = "norm"`
 #' * `ct_distribution_params = c(mean = 25, sd = 2)`
 #'
@@ -28,9 +28,9 @@
 create_config <- function(...) {
   args <- list(
     last_contact_distribution = "pois",
-    last_contact_distribution_params = c(rate = 3),
+    last_contact_distribution_params = c(lambda = 3),
     first_contact_distribution = "pois",
-    first_contact_distribution_params = c(rate = 3),
+    first_contact_distribution_params = c(lambda = 3),
     ct_distribution = "norm",
     ct_distribution_params = c(mean = 25, sd = 2)
   )
