@@ -37,6 +37,9 @@ NULL
     stop("Distribution parameters are missing, check config", call. = FALSE)
   }
 
+  # name list elements with vec names to ensure arg matching in do.call
+  args <- c(nrow(.data), as.list(dist_params))
+
   tryCatch(
     error = function(cnd) {
       stop(
@@ -50,7 +53,7 @@ NULL
         call. = FALSE
       )
     },
-    first_contact_delay <- do.call(rdist, args = list(nrow(.data), dist_params))
+    first_contact_delay <- do.call(rdist, args = args)
   )
 
   .data$date_first_contact <- .data$date_last_contact - first_contact_delay
@@ -76,6 +79,9 @@ NULL
     stop("Distribution parameters are missing, check config", call. = FALSE)
   }
 
+  # name list elements with vec names to ensure arg matching in do.call
+  args <- c(nrow(.data), as.list(dist_params))
+
   tryCatch(
     error = function(cnd) {
       stop(
@@ -89,7 +95,7 @@ NULL
         call. = FALSE
       )
     },
-    last_contact_delay <- do.call(rdist, args = list(nrow(.data), dist_params))
+    last_contact_delay <- do.call(rdist, args = args)
   )
 
   .data$date_last_contact <- .data$infector_time + last_contact_delay +
@@ -258,6 +264,9 @@ NULL
     stop("Distribution parameters are missing, check config", call. = FALSE)
   }
 
+  # name list elements with vec names to ensure arg matching in do.call
+  args <- c(n = 1, as.list(dist_params))
+
   tryCatch(
     error = function(cnd) {
       stop(
@@ -271,7 +280,7 @@ NULL
         call. = FALSE
       )
     },
-    ct_value <- do.call(rdist, args = list(n = 1, dist_params))
+    ct_value <- do.call(rdist, args = args)
   )
 
   .data$ct_value <- ifelse(
