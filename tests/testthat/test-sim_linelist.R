@@ -114,6 +114,49 @@ test_that("sim_list works as expected with anonymous", {
   )
 })
 
+test_that("sim_list works as expected with modified config", {
+  set.seed(1)
+  linelist <- sim_linelist(
+    R = 1.1,
+    serial_interval = serial_interval,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    config = create_config(
+      last_contact_distribution = "geom",
+      last_contact_distribution_params = c(prob = 0.5)
+    )
+  )
+
+  expect_s3_class(linelist, class = "data.frame")
+  expect_identical(dim(linelist), c(42L, 9L))
+  expect_identical(
+    colnames(linelist),
+    c("id", "case_name", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact")
+  )
+})
+
+test_that("sim_list works as expected with modified config parameters", {
+  set.seed(1)
+  linelist <- sim_linelist(
+    R = 1.1,
+    serial_interval = serial_interval,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    config = create_config(
+      last_contact_distribution_params = c(rate = 5)
+    )
+  )
+
+  expect_s3_class(linelist, class = "data.frame")
+  expect_identical(dim(linelist), c(42L, 9L))
+  expect_identical(
+    colnames(linelist),
+    c("id", "case_name", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact")
+  )
+})
+
 test_that("sim_list fails as expected for include_contacts = TRUE while WIP", {
   expect_error(
     sim_linelist(
@@ -123,5 +166,47 @@ test_that("sim_list fails as expected for include_contacts = TRUE while WIP", {
       onset_to_death = onset_to_death, include_contacts = TRUE
     ),
     regexp = "Including contacts is not currently supported in \\{simulist\\}" # nolint not a file path
+  )
+})
+
+test_that("sim_list fails as expected with modified config", {
+  expect_error(
+    sim_linelist(
+      R = 1.1,
+      serial_interval = serial_interval,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = create_config(
+        last_contact_distribution = "geom"
+      )
+    ),
+    regexp = "Incorrect parameterisation of distribution, check config"
+  )
+
+  expect_error(
+    sim_linelist(
+      R = 1.1,
+      serial_interval = serial_interval,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      add_ct = TRUE,
+      config = create_config(
+        ct_distribution = "gamma"
+      )
+    ),
+    regexp = "(arg)*(should be one of)"
+  )
+})
+
+test_that("sim_list fails as expected with empty config", {
+  expect_error(
+    sim_linelist(
+      R = 1.1,
+      serial_interval = serial_interval,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = list()
+    ),
+    regexp = "Distribution parameters are missing, check config"
   )
 })
