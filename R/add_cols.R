@@ -23,21 +23,37 @@ NULL
 
 #' @name .add_date
 .add_date_first_contact <- function(.data,
-                                    distribution = "pois",
+                                    distribution = c("pois", "geom"),
                                     ...) {
   distribution <- match.arg(distribution)
 
   rdist <- switch(distribution,
-    pois = stats::rpois
+    pois = stats::rpois,
+    geom = stats::rgeom
   )
 
   dist_params <- c(...)
   if (length(dist_params) == 0) {
-    stop("Distribution parameters need to be supplied via ...", call. = FALSE)
+    stop("Distribution parameters are missing, check config", call. = FALSE)
   }
 
-  .data$date_first_contact <- .data$date_last_contact -
-    do.call(rdist, args = list(n = nrow(.data), dist_params))
+  tryCatch(
+    error = function(cnd) {
+      stop(
+        "Incorrect parameterisation of distribution, check config",
+        call. = FALSE
+      )
+    },
+    warning = function(cnd) {
+      stop(
+        "Incorrect parameterisation of distribution, check config",
+        call. = FALSE
+      )
+    },
+    first_contact_delay <- do.call(rdist, args = list(nrow(.data), dist_params))
+  )
+
+  .data$date_first_contact <- .data$date_last_contact - first_contact_delay
 
   # return data
   .data
@@ -46,20 +62,37 @@ NULL
 #' @name .add_date
 .add_date_last_contact <- function(.data,
                                    outbreak_start_date,
-                                   distribution = "pois",
+                                   distribution = c("pois", "geom"),
                                    ...) {
   distribution <- match.arg(distribution)
 
   rdist <- switch(distribution,
-    pois = stats::rpois
+    pois = stats::rpois,
+    geom = stats::rgeom
   )
 
   dist_params <- c(...)
   if (length(dist_params) == 0) {
-    stop("Distribution parameters need to be supplied via ...", call. = FALSE)
+    stop("Distribution parameters are missing, check config", call. = FALSE)
   }
-  .data$date_last_contact <- .data$infector_time +
-    do.call(rdist, args = list(nrow(.data), dist_params)) +
+
+  tryCatch(
+    error = function(cnd) {
+      stop(
+        "Incorrect parameterisation of distribution, check config",
+        call. = FALSE
+      )
+    },
+    warning = function(cnd) {
+      stop(
+        "Incorrect parameterisation of distribution, check config",
+        call. = FALSE
+      )
+    },
+    last_contact_delay <- do.call(rdist, args = list(nrow(.data), dist_params))
+  )
+
+  .data$date_last_contact <- .data$infector_time + last_contact_delay +
     outbreak_start_date
 
   # return data
@@ -212,21 +245,38 @@ NULL
 }
 
 #' @name .add_info
-.add_ct <- function(.data, distribution = "norm", ...) {
+.add_ct <- function(.data, distribution = c("norm", "lnorm"), ...) {
   distribution <- match.arg(distribution)
 
   rdist <- switch(distribution,
-    norm = stats::rnorm
+    norm = stats::rnorm,
+    lnorm = stats::rlnorm
   )
 
   dist_params <- c(...)
   if (length(dist_params) == 0) {
-    stop("Distribution parameters need to be supplied via ...", call. = FALSE)
+    stop("Distribution parameters are missing, check config", call. = FALSE)
   }
+
+  tryCatch(
+    error = function(cnd) {
+      stop(
+        "Incorrect parameterisation of distribution, check config",
+        call. = FALSE
+      )
+    },
+    warning = function(cnd) {
+      stop(
+        "Incorrect parameterisation of distribution, check config",
+        call. = FALSE
+      )
+    },
+    ct_value <- do.call(rdist, args = list(n = 1, dist_params))
+  )
 
   .data$ct_value <- ifelse(
     test = .data$case_type == "confirmed",
-    yes = do.call(rdist, args = list(n = 1, dist_params)),
+    yes = ct_value,
     no = NA_real_
   )
 

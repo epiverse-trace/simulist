@@ -8,7 +8,7 @@
 \usage{
 .add_names(.data)
 
-.add_ct(.data, distribution = "norm", ...)
+.add_ct(.data, distribution = c("norm", "lnorm"), ...)
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
