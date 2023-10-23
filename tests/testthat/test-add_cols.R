@@ -48,7 +48,8 @@ test_that(".add_date_last_contact fails as expected", {
     .add_date_last_contact(
       .data = ll,
       outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "geom",
+      distribution = "nbinom",
+      size = 10,
       prob = 0.5
     ),
     regexp = "(arg)*(should be)*(pois)"
@@ -60,7 +61,7 @@ test_that(".add_date_last_contact fails as expected", {
       outbreak_start_date = as.Date("2023-01-01"),
       distribution = "pois"
     ),
-    regexp = "Distribution parameters need to be supplied via ..."
+    regexp = "Distribution parameters are missing, check config"
   )
 })
 
@@ -95,7 +96,8 @@ test_that(".add_date_first_contact fails as expected", {
   expect_error(
     .add_date_first_contact(
       .data = ll,
-      distribution = "geom",
+      distribution = "nbinom",
+      size = 10,
       prob = 0.5
     ),
     regexp = "(arg)*(should be)*(pois)"
@@ -106,7 +108,7 @@ test_that(".add_date_first_contact fails as expected", {
       .data = ll,
       distribution = "pois"
     ),
-    regexp = "Distribution parameters need to be supplied via ..."
+    regexp = "Distribution parameters are missing, check config"
   )
 })
 
@@ -264,12 +266,12 @@ test_that(".add_ct works as expected with different parameter", {
 test_that(".add_ct fails as expected", {
   ll <- .create_linelist(scenario = "pre_ct")
   expect_error(
-    .add_ct(.data = ll, distribution = "lnorm", meanlog = 1, sdlog = 1),
-    regexp = "(arg)*(should be)*(norm)"
+    .add_ct(.data = ll, distribution = "gamma", shape = 1, scale = 1),
+    regexp = "(arg)*(should be)*(norm)*(lnorm)"
   )
 
   expect_error(
     .add_ct(.data = ll, distribution = "norm"),
-    regexp = "Distribution parameters need to be supplied via ..."
+    regexp = "Distribution parameters are missing, check config"
   )
 })
