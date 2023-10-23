@@ -53,7 +53,7 @@ NULL
         call. = FALSE
       )
     },
-    first_contact_delay <- do.call(rdist, args = args)
+    first_contact_delay <- do.call(rdist, args = args) # nolint implicit assignment
   )
 
   .data$date_first_contact <- .data$date_last_contact - first_contact_delay
@@ -95,7 +95,7 @@ NULL
         call. = FALSE
       )
     },
-    last_contact_delay <- do.call(rdist, args = args)
+    last_contact_delay <- do.call(rdist, args = args) # nolint implicit assignment
   )
 
   .data$date_last_contact <- .data$infector_time + last_contact_delay +
@@ -280,7 +280,7 @@ NULL
         call. = FALSE
       )
     },
-    ct_value <- do.call(rdist, args = args)
+    ct_value <- do.call(rdist, args = args) # nolint implicit assignment
   )
 
   .data$ct_value <- ifelse(
