@@ -1,19 +1,16 @@
-create_contacts <- function(.data,
+#' Create contacts table
+#'
+#' @inheritParams .add_date
+#' @inheritParams sim_contacts
+#'
+#' @return A contacts `<data.frame>`
+#' @keywords internal
+.create_contacts <- function(.data,
                             outbreak_start_date,
                             contact_distribution,
                             age_range,
-                            contact_tracing_status_probs = c(
-                              under_followup = 0.7,
-                              lost_to_followup = 0.2,
-                              unknown = 0.1
-                            ),
+                            contact_tracing_status_probs,
                             config) {
-  contact_distribution <- epiparameter::epidist(
-    disease = "COVID-19",
-    epi_dist = "contact_distribution",
-    prob_distribution = "pois",
-    prob_distribution_params = c(l = 5)
-  )
 
   if (!"infector_name" %in% colnames(.data)) {
     .data <- .add_names(.data = .data)
