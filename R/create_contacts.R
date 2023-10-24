@@ -84,7 +84,13 @@ create_contacts <- function(.data,
     config$first_contact_distribution_params
   )
 
-  other_contacts <- other_contacts[, c(1, 3, 6, 4, 5, 8, 7)]
+  other_contacts <- subset(
+    other_contacts,
+    select = c(
+      "infector", "part_name", "contact_name", "cnt_age", "cnt_gender",
+      "date_first_contact", "date_last_contact"
+    )
+  )
   other_contacts$was_case <- "N"
 
   # merge both datasets and keep all the values from both
