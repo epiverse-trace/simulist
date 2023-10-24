@@ -5,8 +5,10 @@ Authors@R: c(
     person(given = "Joshua W.", family = "Lambert", email = "joshua.lambert@lshtm.ac.uk", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-5218-3046")),
     person(given = "Carmen", family = "Tamayo", email = "carmen.tamayo-cuartero@lshtm.ac.uk", role = c("aut"),
-           comment = c(ORCID = "https://orcid.org/0000-0003-4184-2864"))
-  )
+           comment = c(ORCID = "https://orcid.org/0000-0003-4184-2864")),
+    person(given = "Hugo", family = "Gruson", email = "hugo.gruson@data.org", role = c("ctb"),
+           comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476"))
+           )
 Description: Provide tools to simulate raw case data for an epidemic in the form of 
     line lists, using model outputs, such as compartmental models, branching 
     processes, or network models.
