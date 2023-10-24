@@ -21,11 +21,20 @@ authors:
   given-names: Carmen
   email: carmen.tamayo-cuartero@lshtm.ac.uk
   orcid: https://orcid.org/0000-0003-4184-2864
+repository-code: https://github.com/epiverse-trace/simulist
+url: https://epiverse-trace.github.io/simulist/
 contact:
 - family-names: Lambert
   given-names: Joshua W.
   email: joshua.lambert@lshtm.ac.uk
   orcid: https://orcid.org/0000-0001-5218-3046
+keywords:
+- epidemiology
+- epiverse
+- linelist
+- outbreaks
+- r
+- r-package
 references:
 - type: software
   title: stats
