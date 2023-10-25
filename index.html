@@ -85,13 +85,13 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.svg" class="logo" alt=""><h1 id="simulist-simulate-linelist-data-">
-<em>simulist</em>: Simulate linelist data <a class="anchor" aria-label="anchor" href="#simulist-simulate-linelist-data-"></a>
+<img src="logo.svg" class="logo" alt=""><h1 id="simulist-simulate-line-list-data-">
+<em>simulist</em>: Simulate line list data <a class="anchor" aria-label="anchor" href="#simulist-simulate-line-list-data-"></a>
 </h1>
 </div>
 <!-- badges: start -->
 
-<p><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> is an R package to simulate a linelist of an infectious disease outbreak.</p>
+<p><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> is an R package to simulate infectious disease outbreak data, including line lists and contacts.</p>
 <p><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> is developed at the <a href="https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases" class="external-link">Centre for the Mathematical Modelling of Infectious Diseases</a> at the <a href="https://www.lshtm.ac.uk/" class="external-link">London School of Hygiene and Tropical Medicine</a> as part of <a href="https://data.org/initiatives/epiverse/" class="external-link">Epiverse-TRACE</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -108,7 +108,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a></span><span class="op">)</span></span></code></pre></div>
-<p>The linelist simulation requires a serial interval, onset-to-hospitalisation delay, and onset-to-death delay. We can load these load these from the library of epidemiological parameters in the <a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a> R package, or if these are not available, such as the serial interval for COVID-19 we can create them ourselves.</p>
+<p>The line list simulation requires a serial interval, onset-to-hospitalisation delay, and onset-to-death delay. We can load these load these from the library of epidemiological parameters in the <a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a> R package, or if these are not available, such as the serial interval for COVID-19 we can create them ourselves.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create COVID-19 serial interval</span></span>
 <span><span class="va">serial_interval</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
@@ -146,7 +146,7 @@
 <span><span class="co">#&gt; Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538</span></span>
 <span><span class="co">#&gt; &lt;https://doi.org/10.3390/jcm9020538&gt;.. </span></span>
 <span><span class="co">#&gt; To retrieve the short citation use the 'get_citation' function</span></span></code></pre></div>
-<p>To simulate a linelist for COVID-19 with an assumed reproduction number (<code>R</code>) of 1.1 we use the <code><a href="reference/sim_linelist.html">sim_linelist()</a></code> function.</p>
+<p>To simulate a line list for COVID-19 with an assumed reproduction number (<code>R</code>) of 1.1 we use the <code><a href="reference/sim_linelist.html">sim_linelist()</a></code> function.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
@@ -155,21 +155,21 @@
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id gender age onset_date hospitalisation_date date_first_contact</span></span>
-<span><span class="co">#&gt; 1  1      m  66 2023-01-01                 &lt;NA&gt;               &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2      f  37 2023-01-01                 &lt;NA&gt;         2023-01-07</span></span>
-<span><span class="co">#&gt; 3  3      m  81 2023-01-01                 &lt;NA&gt;         2023-01-01</span></span>
-<span><span class="co">#&gt; 4  4      m  33 2023-01-02                 &lt;NA&gt;         2023-01-01</span></span>
-<span><span class="co">#&gt; 5  5      f  81 2023-01-02           2023-01-03         2023-01-06</span></span>
-<span><span class="co">#&gt; 6  6      m   1 2023-01-04           2023-01-08         2023-01-03</span></span>
-<span><span class="co">#&gt;   date_last_contact</span></span>
-<span><span class="co">#&gt; 1              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2        2023-01-09</span></span>
-<span><span class="co">#&gt; 3        2023-01-04</span></span>
-<span><span class="co">#&gt; 4        2023-01-02</span></span>
-<span><span class="co">#&gt; 5        2023-01-07</span></span>
-<span><span class="co">#&gt; 6        2023-01-06</span></span></code></pre></div>
-<p>In this example, the linelist is simulated using the default values (see <code><a href="reference/sim_linelist.html">?sim_linelist</a></code>). The default hospitalisation rate is 0.2 (or 20% of individual infected become hospitalised) and the start date of the outbreak is 1st January 2023. To modify either of these to make them more realistic we can specify them.</p>
+<span><span class="co">#&gt;   id            case_name case_type gender age onset_date hospitalisation_date</span></span>
+<span><span class="co">#&gt; 1  1        Qais al-Wahab confirmed      m   1 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2    Hasana al-Baddour  probable      f  44 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3      Jasmine Masters  probable      f  34 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4 Joseph Fleischman Jr suspected      m  18 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5       Kirsten Nortey  probable      f  11 2023-01-03                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6         Eulogio Lepe suspected      m   1 2023-01-01           2023-01-02</span></span>
+<span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2         2023-01-03        2023-01-04</span></span>
+<span><span class="co">#&gt; 3         2022-12-31        2023-01-03</span></span>
+<span><span class="co">#&gt; 4         2023-01-04        2023-01-07</span></span>
+<span><span class="co">#&gt; 5         2023-01-03        2023-01-03</span></span>
+<span><span class="co">#&gt; 6         2023-01-01        2023-01-04</span></span></code></pre></div>
+<p>In this example, the line list is simulated using the default values (see <code><a href="reference/sim_linelist.html">?sim_linelist</a></code>). The default hospitalisation rate is 0.2 (or 20% of individual infected become hospitalised) and the start date of the outbreak is 1st January 2023. To modify either of these to make them more realistic we can specify them.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
@@ -180,25 +180,55 @@
 <span>  outbreak_start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2019-12-01"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id gender age onset_date hospitalisation_date date_first_contact</span></span>
-<span><span class="co">#&gt; 1  1      f  60 2019-12-01                 &lt;NA&gt;               &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2      f  11 2019-12-01                 &lt;NA&gt;         2019-11-27</span></span>
-<span><span class="co">#&gt; 3  3      m  24 2019-12-02                 &lt;NA&gt;         2019-11-29</span></span>
-<span><span class="co">#&gt; 4  4      f  39 2019-12-02                 &lt;NA&gt;         2019-11-30</span></span>
-<span><span class="co">#&gt; 5  5      f  64 2019-12-01                 &lt;NA&gt;         2019-11-30</span></span>
-<span><span class="co">#&gt; 6  6      f  87 2019-12-02                 &lt;NA&gt;         2019-12-05</span></span>
-<span><span class="co">#&gt;   date_last_contact</span></span>
-<span><span class="co">#&gt; 1              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2        2019-12-01</span></span>
-<span><span class="co">#&gt; 3        2019-12-03</span></span>
-<span><span class="co">#&gt; 4        2019-12-04</span></span>
-<span><span class="co">#&gt; 5        2019-12-02</span></span>
-<span><span class="co">#&gt; 6        2019-12-06</span></span></code></pre></div>
+<span><span class="co">#&gt;   id            case_name case_type gender age onset_date hospitalisation_date</span></span>
+<span><span class="co">#&gt; 1  1 Kyle-Michael Maltese  probable      m  48 2019-12-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2           Lynn Tzeng confirmed      f  60 2019-12-01           2019-12-05</span></span>
+<span><span class="co">#&gt; 3  3             Dylan Vo confirmed      m  87 2019-12-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4        Colton Elfvin  probable      m  30 2019-12-03                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5      Waleed Thompson suspected      m  25 2019-12-02                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6         Michael Moss confirmed      m  46 2019-12-02                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2         2019-12-01        2019-12-03</span></span>
+<span><span class="co">#&gt; 3         2019-11-27        2019-12-03</span></span>
+<span><span class="co">#&gt; 4         2019-12-01        2019-12-04</span></span>
+<span><span class="co">#&gt; 5         2019-12-01        2019-12-02</span></span>
+<span><span class="co">#&gt; 6         2019-11-30        2019-12-03</span></span></code></pre></div>
+<p>To simulate a table of contacts we can reuse the serial interval from the example above, and we additionally need a contact distribution. This distribution represents the variability in number of contacts that each person in the population has.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
+<span>  epi_dist <span class="op">=</span> <span class="st">"contact_distribution"</span>,</span>
+<span>  prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span>
+<span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>l <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
+<span></span>
+<span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_contacts.html">sim_contacts</a></span><span class="op">(</span></span>
+<span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
+<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">contacts</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        part_name        contact_name cnt_age cnt_gender date_first_contact</span></span>
+<span><span class="co">#&gt; 1   Tina Kennedy      Amber Carrillo       4          f         2023-01-02</span></span>
+<span><span class="co">#&gt; 2   Tina Kennedy    Alayna Weingardt      51          f         2023-01-03</span></span>
+<span><span class="co">#&gt; 3   Tina Kennedy Elizabeth Slovonsky      59          f         2023-01-05</span></span>
+<span><span class="co">#&gt; 4   Tina Kennedy   Nehemiah Franklin      59          m         2023-01-01</span></span>
+<span><span class="co">#&gt; 5   Tina Kennedy        Kiet Bennett      70          m         2023-01-05</span></span>
+<span><span class="co">#&gt; 6 Amber Carrillo         Kylie Enzer      27          f         2023-01-04</span></span>
+<span><span class="co">#&gt;   date_last_contact was_case         status</span></span>
+<span><span class="co">#&gt; 1        2023-01-02        Y           case</span></span>
+<span><span class="co">#&gt; 2        2023-01-03        Y           case</span></span>
+<span><span class="co">#&gt; 3        2023-01-06        Y           case</span></span>
+<span><span class="co">#&gt; 4        2023-01-03        N        unknown</span></span>
+<span><span class="co">#&gt; 5        2023-01-06        N under_followup</span></span>
+<span><span class="co">#&gt; 6        2023-01-06        Y           case</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="help">Help<a class="anchor" aria-label="anchor" href="#help"></a>
 </h2>
-<p>To report a bug please open an <a href="https://github.com/epiverse-trace/simulist/issues/new/choose" class="external-link">issue</a></p>
+<p>To report a bug please open an <a href="https://github.com/epiverse-trace/simulist/issues/new/choose" class="external-link">issue</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="contribute">Contribute<a class="anchor" aria-label="anchor" href="#contribute"></a>
@@ -213,20 +243,22 @@
 <div class="section level2">
 <h2 id="citing-this-package">Citing this package<a class="anchor" aria-label="anchor" href="#citing-this-package"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"simulist"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite package 'simulist' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Lambert J, Tamayo C (2023). _simulist: Tools to Simulated Linelist</span></span>
-<span><span class="co">#&gt;   Data_. R package version 0.0.0.9000.</span></span>
+<span><span class="co">#&gt;   Lambert J, Tamayo C (2023). _simulist: Tools to Simulated Line list</span></span>
+<span><span class="co">#&gt;   Data_. https://github.com/epiverse-trace/simulist,</span></span>
+<span><span class="co">#&gt;   https://epiverse-trace.github.io/simulist/.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   @Manual{,</span></span>
-<span><span class="co">#&gt;     title = {simulist: Tools to Simulated Linelist Data},</span></span>
+<span><span class="co">#&gt;     title = {simulist: Tools to Simulated Line list Data},</span></span>
 <span><span class="co">#&gt;     author = {Joshua W. Lambert and Carmen Tamayo},</span></span>
 <span><span class="co">#&gt;     year = {2023},</span></span>
-<span><span class="co">#&gt;     note = {R package version 0.0.0.9000},</span></span>
+<span><span class="co">#&gt;     note = {https://github.com/epiverse-trace/simulist,</span></span>
+<span><span class="co">#&gt; https://epiverse-trace.github.io/simulist/},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 </div>
