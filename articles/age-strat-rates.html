@@ -94,7 +94,7 @@
 <div class="alert alert-info">
 <p>If you are unfamiliar with the {simulist} package or the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function <a href="simulist.html">Get Started vignette</a> is a great place to start.</p>
 </div>
-<p>This vignette will describe how to simulate a linelist with age-stratified (or age-dependent) hospitalisation and death rates.</p>
+<p>This vignette will describe how to simulate a line list with age-stratified (or age-dependent) hospitalisation and death rates.</p>
 <p>There are three rates in {simulist}, specifically in the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function, that relate to hospitalisations and deaths:</p>
 <ol style="list-style-type: decimal">
 <li>Hospitalisation rate (<code>hosp_rate</code>)</li>
@@ -144,13 +144,13 @@
 <span><span class="co">#&gt; Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538</span></span>
 <span><span class="co">#&gt; &lt;https://doi.org/10.3390/jcm9020538&gt;.. </span></span>
 <span><span class="co">#&gt; To retrieve the short citation use the 'get_citation' function</span></span></code></pre></div>
-</details><p>We set the seed to ensure we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same linelist multiple times.</p>
+</details><p>We set the seed to ensure we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </details><div class="section level2">
 <h2 id="population-wide-rates">Population-wide rates<a class="anchor" aria-label="anchor" href="#population-wide-rates"></a>
 </h2>
-<p>Simulate a linelist with population-wide default rates:</p>
+<p>Simulate a line list with population-wide default rates:</p>
 <ul>
 <li>hospitalisation rate: <code>0.2</code>
 </li>

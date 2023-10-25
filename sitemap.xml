@@ -37,10 +37,16 @@
     <loc>/reference/dot-check_rate_df.html</loc>
   </url>
   <url>
+    <loc>/reference/dot-create_contacts.html</loc>
+  </url>
+  <url>
     <loc>/reference/dot-create_linelist.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sim_contacts.html</loc>
   </url>
   <url>
     <loc>/reference/sim_linelist.html</loc>
