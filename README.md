@@ -5,7 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# *simulist*: Simulate linelist data <img src="man/figures/logo.svg" align="right" width="120" />
+# *simulist*: Simulate line list data <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -18,8 +18,8 @@ coverage](https://codecov.io/gh/epiverse-trace/simulist/branch/main/graph/badge.
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-`{simulist}` is an R package to simulate a linelist of an infectious
-disease outbreak.
+`{simulist}` is an R package to simulate infectious disease outbreak
+data, including line lists and contacts.
 
 `{simulist}` is developed at the [Centre for the Mathematical Modelling
 of Infectious
@@ -46,7 +46,7 @@ library(simulist)
 library(epiparameter)
 ```
 
-The linelist simulation requires a serial interval,
+The line list simulation requires a serial interval,
 onset-to-hospitalisation delay, and onset-to-death delay. We can load
 these load these from the library of epidemiological parameters in the
 `{epiparameter}` R package, or if these are not available, such as the
@@ -91,7 +91,7 @@ onset_to_death <- epiparameter::epidist_db(
 #> To retrieve the short citation use the 'get_citation' function
 ```
 
-To simulate a linelist for COVID-19 with an assumed reproduction number
+To simulate a line list for COVID-19 with an assumed reproduction number
 (`R`) of 1.1 we use the `sim_linelist()` function.
 
 ``` r
@@ -102,25 +102,25 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id gender age onset_date hospitalisation_date date_first_contact
-#> 1  1      m  66 2023-01-01                 <NA>               <NA>
-#> 2  2      f  37 2023-01-01                 <NA>         2023-01-07
-#> 3  3      m  81 2023-01-01                 <NA>         2023-01-01
-#> 4  4      m  33 2023-01-02                 <NA>         2023-01-01
-#> 5  5      f  81 2023-01-02           2023-01-03         2023-01-06
-#> 6  6      m   1 2023-01-04           2023-01-08         2023-01-03
-#>   date_last_contact
-#> 1              <NA>
-#> 2        2023-01-09
-#> 3        2023-01-04
-#> 4        2023-01-02
-#> 5        2023-01-07
-#> 6        2023-01-06
+#>   id            case_name case_type gender age onset_date hospitalisation_date
+#> 1  1        Qais al-Wahab confirmed      m   1 2023-01-01                 <NA>
+#> 2  2    Hasana al-Baddour  probable      f  44 2023-01-01                 <NA>
+#> 3  3      Jasmine Masters  probable      f  34 2023-01-01                 <NA>
+#> 4  4 Joseph Fleischman Jr suspected      m  18 2023-01-01                 <NA>
+#> 5  5       Kirsten Nortey  probable      f  11 2023-01-03                 <NA>
+#> 6  6         Eulogio Lepe suspected      m   1 2023-01-01           2023-01-02
+#>   date_first_contact date_last_contact
+#> 1               <NA>              <NA>
+#> 2         2023-01-03        2023-01-04
+#> 3         2022-12-31        2023-01-03
+#> 4         2023-01-04        2023-01-07
+#> 5         2023-01-03        2023-01-03
+#> 6         2023-01-01        2023-01-04
 ```
 
-In this example, the linelist is simulated using the default values (see
-`?sim_linelist`). The default hospitalisation rate is 0.2 (or 20% of
-individual infected become hospitalised) and the start date of the
+In this example, the line list is simulated using the default values
+(see `?sim_linelist`). The default hospitalisation rate is 0.2 (or 20%
+of individual infected become hospitalised) and the start date of the
 outbreak is 1st January 2023. To modify either of these to make them
 more realistic we can specify them.
 
@@ -134,26 +134,62 @@ linelist <- sim_linelist(
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id gender age onset_date hospitalisation_date date_first_contact
-#> 1  1      f  60 2019-12-01                 <NA>               <NA>
-#> 2  2      f  11 2019-12-01                 <NA>         2019-11-27
-#> 3  3      m  24 2019-12-02                 <NA>         2019-11-29
-#> 4  4      f  39 2019-12-02                 <NA>         2019-11-30
-#> 5  5      f  64 2019-12-01                 <NA>         2019-11-30
-#> 6  6      f  87 2019-12-02                 <NA>         2019-12-05
-#>   date_last_contact
-#> 1              <NA>
-#> 2        2019-12-01
-#> 3        2019-12-03
-#> 4        2019-12-04
-#> 5        2019-12-02
-#> 6        2019-12-06
+#>   id            case_name case_type gender age onset_date hospitalisation_date
+#> 1  1 Kyle-Michael Maltese  probable      m  48 2019-12-01                 <NA>
+#> 2  2           Lynn Tzeng confirmed      f  60 2019-12-01           2019-12-05
+#> 3  3             Dylan Vo confirmed      m  87 2019-12-01                 <NA>
+#> 4  4        Colton Elfvin  probable      m  30 2019-12-03                 <NA>
+#> 5  5      Waleed Thompson suspected      m  25 2019-12-02                 <NA>
+#> 6  6         Michael Moss confirmed      m  46 2019-12-02                 <NA>
+#>   date_first_contact date_last_contact
+#> 1               <NA>              <NA>
+#> 2         2019-12-01        2019-12-03
+#> 3         2019-11-27        2019-12-03
+#> 4         2019-12-01        2019-12-04
+#> 5         2019-12-01        2019-12-02
+#> 6         2019-11-30        2019-12-03
+```
+
+To simulate a table of contacts we can reuse the serial interval from
+the example above, and we additionally need a contact distribution. This
+distribution represents the variability in number of contacts that each
+person in the population has.
+
+``` r
+contact_distribution <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "contact_distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(l = 5)
+)
+#> Citation cannot be created as author, year, journal or title is missing
+
+contacts <- sim_contacts(
+  R = 1.1,
+  serial_interval = serial_interval,
+  contact_distribution = contact_distribution
+)
+head(contacts)
+#>        part_name        contact_name cnt_age cnt_gender date_first_contact
+#> 1   Tina Kennedy      Amber Carrillo       4          f         2023-01-02
+#> 2   Tina Kennedy    Alayna Weingardt      51          f         2023-01-03
+#> 3   Tina Kennedy Elizabeth Slovonsky      59          f         2023-01-05
+#> 4   Tina Kennedy   Nehemiah Franklin      59          m         2023-01-01
+#> 5   Tina Kennedy        Kiet Bennett      70          m         2023-01-05
+#> 6 Amber Carrillo         Kylie Enzer      27          f         2023-01-04
+#>   date_last_contact was_case         status
+#> 1        2023-01-02        Y           case
+#> 2        2023-01-03        Y           case
+#> 3        2023-01-06        Y           case
+#> 4        2023-01-03        N        unknown
+#> 5        2023-01-06        N under_followup
+#> 6        2023-01-06        Y           case
 ```
 
 ## Help
 
 To report a bug please open an
-[issue](https://github.com/epiverse-trace/simulist/issues/new/choose)
+[issue](https://github.com/epiverse-trace/simulist/issues/new/choose).
 
 ## Contribute
 
@@ -174,15 +210,17 @@ By contributing to this project, you agree to abide by its terms.
 citation("simulist")
 #> To cite package 'simulist' in publications use:
 #> 
-#>   Lambert J, Tamayo C (2023). _simulist: Tools to Simulated Linelist
-#>   Data_. R package version 0.0.0.9000.
+#>   Lambert J, Tamayo C (2023). _simulist: Tools to Simulated Line list
+#>   Data_. https://github.com/epiverse-trace/simulist,
+#>   https://epiverse-trace.github.io/simulist/.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {simulist: Tools to Simulated Linelist Data},
+#>     title = {simulist: Tools to Simulated Line list Data},
 #>     author = {Joshua W. Lambert and Carmen Tamayo},
 #>     year = {2023},
-#>     note = {R package version 0.0.0.9000},
+#>     note = {https://github.com/epiverse-trace/simulist,
+#> https://epiverse-trace.github.io/simulist/},
 #>   }
 ```
