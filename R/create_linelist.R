@@ -1,7 +1,7 @@
-#' Create a mock linelist without simulating to test internal functions that
-#' require linelist data
+#' Create a mock line list without simulating to test internal functions that
+#' require line list data
 #'
-#' @param scenario A `character` string with the state of the linelist.
+#' @param scenario A `character` string with the state of the line list.
 #' Options are:
 #'
 #' * "pre_date_last_contact"
@@ -12,11 +12,11 @@
 #' * "pre_ct"
 #'
 #' @details Each of the scenarios are created by taking a snapshot (i.e copy)
-#' of the  linelist `<data.frame>` are each stage of the simulation
+#' of the  line list `<data.frame>` are each stage of the simulation
 #' ([sim_linelist()]) after setting the seed to 1 (`set.seed(1)`). The
 #' scenarios are before each function call, for example,
-#' `"pre_date_last_contact"` is the state of the linelist prior to calling
-#' [.add_date_last_contact()], and `"pre_names"` is the state of the linelist
+#' `"pre_date_last_contact"` is the state of the line list prior to calling
+#' [.add_date_last_contact()], and `"pre_names"` is the state of the line list
 #' prior to calling [.add_names()].
 #'
 #' # Script to reproduce data:
@@ -52,7 +52,7 @@
     pre_ct = 6
   )
 
-  # create default linelist before appending columns
+  # create default line list before appending columns
   linelist <- data.frame(
     n = 1,
     id = 1:42,
@@ -238,6 +238,6 @@
     )
   }
 
-  # return linelist
+  # return line list
   linelist
 }

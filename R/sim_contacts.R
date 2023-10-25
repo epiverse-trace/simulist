@@ -133,6 +133,6 @@ sim_contacts <- function(R,
     config = config
   )
 
-  # return linelist
+  # return line list
   contacts
 }

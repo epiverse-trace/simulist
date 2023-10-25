@@ -202,7 +202,7 @@ NULL
 }
 
 
-#' Add linelist information as column to infectious history `<data.frame>`
+#' Add line list information as column to infectious history `<data.frame>`
 #'
 #' @param .data A `<data.frame>` containing the infectious history from a
 #' branching process simulation
@@ -246,7 +246,7 @@ NULL
   .data <- .data[col_order]
   rownames(.data) <- NULL
 
-  # return named linelist
+  # return named line list
   .data
 }
 

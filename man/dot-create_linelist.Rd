@@ -2,13 +2,13 @@
 % Please edit documentation in R/create_linelist.R
 \name{.create_linelist}
 \alias{.create_linelist}
-\title{Create a mock linelist without simulating to test internal functions that
-require linelist data}
+\title{Create a mock line list without simulating to test internal functions that
+require line list data}
 \usage{
 .create_linelist(scenario)
 }
 \arguments{
-\item{scenario}{A \code{character} string with the state of the linelist.
+\item{scenario}{A \code{character} string with the state of the line list.
 Options are:
 \itemize{
 \item "pre_date_last_contact"
@@ -23,16 +23,16 @@ Options are:
 A \verb{<data.frame>}.
 }
 \description{
-Create a mock linelist without simulating to test internal functions that
-require linelist data
+Create a mock line list without simulating to test internal functions that
+require line list data
 }
 \details{
 Each of the scenarios are created by taking a snapshot (i.e copy)
-of the  linelist \verb{<data.frame>} are each stage of the simulation
+of the  line list \verb{<data.frame>} are each stage of the simulation
 (\code{\link[=sim_linelist]{sim_linelist()}}) after setting the seed to 1 (\code{set.seed(1)}). The
 scenarios are before each function call, for example,
-\code{"pre_date_last_contact"} is the state of the linelist prior to calling
-\code{\link[=.add_date_last_contact]{.add_date_last_contact()}}, and \code{"pre_names"} is the state of the linelist
+\code{"pre_date_last_contact"} is the state of the line list prior to calling
+\code{\link[=.add_date_last_contact]{.add_date_last_contact()}}, and \code{"pre_names"} is the state of the line list
 prior to calling \code{\link[=.add_names]{.add_names()}}.
 }
 \section{Script to reproduce data:}{

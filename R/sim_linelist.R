@@ -1,6 +1,6 @@
-#' Simulate a linelist
+#' Simulate a line list
 #'
-#' @description The linelist is simulated using a branching process and
+#' @description The line list is simulated using a branching process and
 #' parameterised with previously published epidemiological parameters.
 #'
 #' @details For age-stratified hospitalised and death rates a `<data.frame>`
@@ -37,9 +37,9 @@
 #' for more information.
 #' @param outbreak_start_date A `date` for the start of the outbreak.
 #' @param add_names A `logical` boolean for whether to add names to each row
-#' of the linelist. Default is `TRUE`.
+#' of the line list. Default is `TRUE`.
 #' @param add_ct A `logical` boolean for whether to add Ct values to each row
-#' of the linelist. Default is `FALSE`.
+#' of the line list. Default is `FALSE`.
 #' @param min_chain_size A single `numeric` defining the minimum chain size for
 #' the simulated outbreak. Default is `10`. This can be increased when the
 #' function should simulate a larger outbreak.
@@ -55,13 +55,13 @@
 #' **Currently not used and will return a warning if extra arguments are
 #' supplied**.
 #'
-#' @return A linelist `<data.frame>`
+#' @return A line list `<data.frame>`
 #' @export
 #'
 #' @author Joshua W. Lambert, Carmen Tamayo
 #'
 #' @examples
-#' # load data required to simulate linelist
+#' # load data required to simulate line list
 #' serial_interval <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "serial interval",
@@ -277,6 +277,6 @@ sim_linelist <- function(R, # nolint cyclocomp
 
   chain <- chain[, linelist_cols]
 
-  # return linelist
+  # return line list
   chain
 }
