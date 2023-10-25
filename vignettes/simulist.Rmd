@@ -18,18 +18,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-This is an introductory vignette to the {simulist} R package. {simulist} simulates epidemiological linelist data, to provide a row-by-row account of cases in an infectious disease outbreak.
+This is an introductory vignette to the {simulist} R package. {simulist} simulates epidemiological data, either a line list, to provide a row-by-row account of cases in an infectious disease outbreak, or a contacts table, to provide a history of which individuals were in contact with which others.
 
-The main function in the {simulist} package is `sim_linelist()`. This functions takes in arguments that control the dynamics of the outbreak, such as the serial interval, and outputs a linelist table (`<data.frame>`) with case information for each infected individual.
+The main function in the {simulist} package is `sim_linelist()`. This functions takes in arguments that control the dynamics of the outbreak, such as the serial interval, and outputs a line list table (`<data.frame>`) with case information for each infected individual.
 
-For this introduction we will simulate a linelist for a COVID-19 (SARS-CoV-2) outbreak. This will require two R packages: {simulist}, to produce the linelist, and {epiparameter} to provide epidemiological parameters, such as onset-to-death delays.
+For this introduction we will simulate a line list for a COVID-19 (SARS-CoV-2) outbreak. This will require two R packages: {simulist}, to produce the line list, and {epiparameter} to provide epidemiological parameters, such as onset-to-death delays.
 
 ```{r setup}
 library(simulist)
 library(epiparameter)
 ```
 
-First we load in some data that is required for the linelist simulation. Data on epidemiological parameters and distributions is read from the {epiparameter} R package.
+First we load in some data that is required for the line list simulation. Data on epidemiological parameters and distributions is read from the {epiparameter} R package.
 
 ```{r read-epidist}
 # get serial interval from {epiparameter} database
@@ -56,7 +56,7 @@ onset_to_death <- epidist_db(
 )
 ```
 
-The reproduction number (`R`) is the first argument in `sim_linelist()` and with the serial interval will control the growth rate of the simulated epidemic. Here we set it as 1.1. The minimum requirements to simulate a linelist are the reproduction number (`R`), the serial interval, onset-to-hospitalisation delay and onset-to-death delay.
+The reproduction number (`R`) is the first argument in `sim_linelist()` and with the serial interval will control the growth rate of the simulated epidemic. Here we set it as 1.1. The minimum requirements to simulate a line list are the reproduction number (`R`), the serial interval, onset-to-hospitalisation delay and onset-to-death delay.
 
 ```{r, sim-linelist}
 linelist <- sim_linelist(
@@ -72,7 +72,7 @@ head(linelist)
 
 In the midst of an infectious disease outbreak it may not be possible to confirm every case. A confirmed case is usually done via a diagnostic test which may or may not need to be carried out in the laboratory. There are several reasons why a case may not be confirmed, one example is limited testing capacity, especially in fast growing epidemics. The other categories for cases are: probable and suspected. Probable cases are those that show clinical evidence for the disease but have not, or cannot, be confirmed by a diagnostic test. Suspected cases are those that are possibly infected but do not show clear clinical or epidemiological evidence, nor has a diagnostic test been performed.
 
-The linelist output from the {simulist} simulation contains a column (`case_type`) with the type of case. 
+The line list output from the {simulist} simulation contains a column (`case_type`) with the type of case. 
 
 {simulist} can simulate varying probabilities of each case being suspected, probable or confirmed. By default the `sim_linelist()` function uses probabilities of `suspected = 0.2`, `probable = 0.3` and `confirmed = 0.5`. 
 
@@ -101,15 +101,15 @@ head(linelist)
 
 It is also possible to set one of these categories to `1`, in which case every case will be of that type. 
 
-The way {simulist} assigns case types is by pasting case types onto existing case data. Thus, it could be viewed that the true underlying data is that all cases in the simulation are confirmed, but that there is a lack of information in some cases. There are no cases in the output linelist that are incorrectly attributed as probable or suspected that have not been infected. That is to say, all individuals in the linelist, whatever their case type, are infected during the outbreak.
+The way {simulist} assigns case types is by pasting case types onto existing case data. Thus, it could be viewed that the true underlying data is that all cases in the simulation are confirmed, but that there is a lack of information in some cases. There are no cases in the output line list that are incorrectly attributed as probable or suspected that have not been infected. That is to say, all individuals in the line list, whatever their case type, are infected during the outbreak.
 
 ## Conditioning simulation on outbreak size
 
-The reproduction number has a strong influence on the size of an outbreak. However, the {simulist} package generates linelist data using a stochastic algorithm, so even when $R < 1$ it can produce a substantial outbreak by chance, or an $R >> 1$ will sometimes not produce a vast epidemic in one simulation (i.e. one replicate) due to the stochasticity. 
+The reproduction number has a strong influence on the size of an outbreak. However, the {simulist} package generates line list data using a stochastic algorithm, so even when $R < 1$ it can produce a substantial outbreak by chance, or an $R >> 1$ will sometimes not produce a vast epidemic in one simulation (i.e. one replicate) due to the stochasticity. 
 
-When requiring a minimum outbreak size we can specify the `min_chain_size` argument in `sim_linelist()`. By default this is set to 10. This means that the simulation will not return a linelist until the conditioning has been met. In other words, the simulation will resimulate a branching process model until an outbreak infects at least 10 people.
+When requiring a minimum outbreak size we can specify the `min_chain_size` argument in `sim_linelist()`. By default this is set to 10. This means that the simulation will not return a line list until the conditioning has been met. In other words, the simulation will resimulate a branching process model until an outbreak infects at least 10 people.
 
-When requiring a linelist that represents a large outbreak, such as the COVID-19 outbreak, setting the `min_chain_size` to a larger number guarantees a linelist of at least that size. Here we simulate a linelist requiring at least 250 cases.
+When requiring a line list that represents a large outbreak, such as the COVID-19 outbreak, setting the `min_chain_size` to a larger number guarantees a line list of at least that size. Here we simulate a line list requiring at least 250 cases.
 
 ```{r, sim-large-linelist}
 linelist <- sim_linelist(
@@ -124,9 +124,9 @@ head(linelist)
 
 The amount of time the simulation takes can be determined by the reproduction number (`R`) and the minimum outbreak size (`min_chain_size`). If the `min_outbreak_size` is large, for example hundreds or thousands of cases, and the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.
 
-## Anonymous linelist
+## Anonymous line list
 
-By default `sim_linelist()` provides the name of each individual in the linelist. If an anonymised linelist is required the `add_names` argument of `sim_linelist()` can be set to `FALSE`. 
+By default `sim_linelist()` provides the name of each individual in the line list. If an anonymised line list is required the `add_names` argument of `sim_linelist()` can be set to `FALSE`. 
 
 ```{r sim-anon-linelist}
 linelist <- sim_linelist(
@@ -139,7 +139,7 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
-The names used in the linelist are produced at random by the [{randomNames}](https://CRAN.R-project.org/package=randomNames) R package. Therefore, even when `add_names = TRUE` there is no personal data of real individuals being produced or shared.
+The names used in the line list are produced at random by the [{randomNames}](https://CRAN.R-project.org/package=randomNames) R package. Therefore, even when `add_names = TRUE` there is no personal data of real individuals being produced or shared.
 
 ## Population age
 
@@ -160,4 +160,24 @@ It is currently not possible to simulate with a non-uniform population age struc
 
 ## Age-stratified hospitalisation and death rates
 
-For an overview of how a linelist can be simulated with age-stratified (or age-dependent) hospitalisation and death rates see the [vignette dedicated to this topic](age-strat-rates.html).
+For an overview of how a line list can be simulated with age-stratified (or age-dependent) hospitalisation and death rates see the [vignette dedicated to this topic](age-strat-rates.html).
+
+## Simulate contacts table
+
+To simulate a contacts table, the `sim_contacts()` function can be used. This requires a contacts distribution (i.e. a distribution describing the variability in number of contacts for different individuals within the population). 
+
+```{r, sim-contacts}
+contact_distribution <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "contact_distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(l = 5)
+)
+
+contacts <- sim_contacts(
+  R = 1.1,
+  serial_interval = serial_interval,
+  contact_distribution = contact_distribution
+)
+head(contacts)
+```
