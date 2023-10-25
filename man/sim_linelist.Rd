@@ -19,7 +19,6 @@ sim_linelist(
   age_range = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.3, confirmed = 0.5),
   config = create_config(),
-  include_contacts = FALSE,
   ...
 )
 }
@@ -73,9 +72,6 @@ each case type. The names of the vector must be \code{"suspected"}, \code{"proba
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
 Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
-
-\item{include_contacts}{A \code{logical} boolean to determine whether contacts
-are added to the linelist. \strong{Currently not implmented}.}
 
 \item{...}{\link{dots} Extra arguments to be passed to other functions.
 \strong{Currently not used and will return a warning if extra arguments are
