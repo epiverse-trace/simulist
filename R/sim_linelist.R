@@ -178,104 +178,30 @@ sim_linelist <- function(R, # nolint cyclocomp
     )
   }
 
-  chain_size <- 0
-  # condition on a minimum chain size
-  while (chain_size < min_chain_size) {
-    chain <- bpmodels::chain_sim(
-      n = 1,
-      offspring = "pois",
-      stat = "size",
-      serial = function(x) epiparameter::generate(serial_interval, x),
-      lambda = R,
-      tree = TRUE,
-      infinite = 1000
-    )
-    chain_size <- max(chain$id)
-  }
-
-  names(chain)[names(chain) == "ancestor"] <- "infector"
-
-  # add delays dates
-  # this could be unrounded (check for error)
-  chain$time_rounded <- round(chain$time)
-  chain$onset_date <- chain$time + outbreak_start_date
-
-  # add exposure date for cases
-  id_time <- data.frame(infector = chain$id, infector_time = chain$time)
-
-  # left join infector time to data preserving column and row order
-  col_order <- c(colnames(chain), "infector_time")
-  chain <- merge(chain, id_time, by = "infector", all.x = TRUE)
-  chain <- chain[order(is.na(chain$infector), decreasing = TRUE), ]
-  chain <- chain[col_order]
-  rownames(chain) <- NULL
-
-  chain <- .add_date_last_contact(
-    .data = chain,
+  chain <- .sim_bp_linelist(
+    R = R,
+    serial_interval = serial_interval,
     outbreak_start_date = outbreak_start_date,
-    distribution = config$last_contact_distribution,
-    config$last_contact_distribution_params
-  )
-  chain <- .add_date_first_contact(
-    .data = chain,
-    distribution = config$first_contact_distribution,
-    config$first_contact_distribution_params
+    min_chain_size = min_chain_size,
+    age_range = age_range,
+    config = config
   )
 
-  # add random age and gender
-  chain$gender <- sample(c("m", "f"), replace = TRUE, size = nrow(chain))
-  chain$age <- sample(
-    age_range[1]:age_range[2],
-    replace = TRUE,
-    size = nrow(chain)
-  )
-
-  chain <- .add_hospitalisation(
-    .data = chain,
+  linelist <- .sim_clinical_linelist(
+    chain = chain,
     onset_to_hosp = onset_to_hosp,
-    hosp_rate = hosp_rate
-  )
-  chain <- .add_deaths(
-    .data = chain,
     onset_to_death = onset_to_death,
+    hosp_rate = hosp_rate,
     hosp_death_rate = hosp_death_rate,
-    non_hosp_death_rate = non_hosp_death_rate
+    non_hosp_death_rate = non_hosp_death_rate,
+    outbreak_start_date = outbreak_start_date,
+    add_names = add_names,
+    add_ct = add_ct,
+    case_type_probs = case_type_probs,
+    config = config
   )
 
-  # add hospitalisation and death dates
-  chain$hospitalisation_date <- chain$hosp_rounded + outbreak_start_date
-  chain$death_date <- chain$death_rounded + outbreak_start_date
-
-  linelist_cols <- c(
-    "id", "case_type", "gender", "age", "onset_date", "hospitalisation_date",
-    "date_first_contact", "date_last_contact"
-  )
-
-  if (add_names) {
-    chain <- .add_names(.data = chain)
-    linelist_cols <- append(linelist_cols, "case_name", after = 1)
-  }
-
-  # add confirmed, probable, suspected case types
-  chain$case_type <- sample(
-    x = names(case_type_probs),
-    size = nrow(chain),
-    replace = TRUE,
-    prob = case_type_probs
-  )
-
-
-  # add Ct if confirmed
-  if (add_ct) {
-    chain <- .add_ct(
-      .data = chain,
-      distribution = config$ct_distribution,
-      config$ct_distribution_params
-    )
-    linelist_cols <- c(linelist_cols, "ct_value")
-  }
-
-  chain <- chain[, linelist_cols]
+  chain <- linelist$chain[, linelist$cols]
 
   # return line list
   chain

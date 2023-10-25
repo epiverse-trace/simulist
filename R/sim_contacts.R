@@ -70,56 +70,13 @@ sim_contacts <- function(R,
       all.equal(sum(contact_tracing_status_probs), 1)
   )
 
-  chain_size <- 0
-  # condition on a minimum chain size
-  while (chain_size < min_chain_size) {
-    chain <- bpmodels::chain_sim(
-      n = 1,
-      offspring = "pois",
-      stat = "size",
-      serial = function(x) epiparameter::generate(serial_interval, x),
-      lambda = R,
-      tree = TRUE,
-      infinite = 1000
-    )
-    chain_size <- max(chain$id)
-  }
-
-  names(chain)[names(chain) == "ancestor"] <- "infector"
-
-  # add delays dates
-  # this could be unrounded (check for error)
-  chain$time_rounded <- round(chain$time)
-  chain$onset_date <- chain$time + outbreak_start_date
-
-  # add exposure date for cases
-  id_time <- data.frame(infector = chain$id, infector_time = chain$time)
-
-  # left join infector time to data preserving column and row order
-  col_order <- c(colnames(chain), "infector_time")
-  chain <- merge(chain, id_time, by = "infector", all.x = TRUE)
-  chain <- chain[order(is.na(chain$infector), decreasing = TRUE), ]
-  chain <- chain[col_order]
-  rownames(chain) <- NULL
-
-  chain <- .add_date_last_contact(
-    .data = chain,
+  chain <- .sim_bp_linelist(
+    R = R,
+    serial_interval = serial_interval,
     outbreak_start_date = outbreak_start_date,
-    distribution = config$last_contact_distribution,
-    config$last_contact_distribution_params
-  )
-  chain <- .add_date_first_contact(
-    .data = chain,
-    distribution = config$first_contact_distribution,
-    config$first_contact_distribution_params
-  )
-
-  # add random age and gender
-  chain$gender <- sample(c("m", "f"), replace = TRUE, size = nrow(chain))
-  chain$age <- sample(
-    age_range[1]:age_range[2],
-    replace = TRUE,
-    size = nrow(chain)
+    min_chain_size = min_chain_size,
+    age_range = age_range,
+    config = config
   )
 
   chain <- .add_names(.data = chain)
