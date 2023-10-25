@@ -3,3 +3,4 @@
 export(create_config)
 export(sim_contacts)
 export(sim_linelist)
+export(sim_outbreak)
