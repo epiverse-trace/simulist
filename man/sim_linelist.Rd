@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_linelist.R
 \name{sim_linelist}
 \alias{sim_linelist}
-\title{Simulate a linelist}
+\title{Simulate a line list}
 \usage{
 sim_linelist(
   R,
@@ -53,10 +53,10 @@ for more information.}
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
-of the linelist. Default is \code{TRUE}.}
+of the line list. Default is \code{TRUE}.}
 
 \item{add_ct}{A \code{logical} boolean for whether to add Ct values to each row
-of the linelist. Default is \code{FALSE}.}
+of the line list. Default is \code{FALSE}.}
 
 \item{min_chain_size}{A single \code{numeric} defining the minimum chain size for
 the simulated outbreak. Default is \code{10}. This can be increased when the
@@ -78,10 +78,10 @@ Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_conf
 supplied}.}
 }
 \value{
-A linelist \verb{<data.frame>}
+A line list \verb{<data.frame>}
 }
 \description{
-The linelist is simulated using a branching process and
+The line list is simulated using a branching process and
 parameterised with previously published epidemiological parameters.
 }
 \details{
@@ -99,7 +99,7 @@ the age group (exclusive).
 }
 }
 \examples{
-# load data required to simulate linelist
+# load data required to simulate line list
 serial_interval <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "serial interval",

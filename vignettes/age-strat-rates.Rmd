@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 If you are unfamiliar with the {simulist} package or the `sim_linelist()` function [Get Started vignette](simulist.html) is a great place to start.
 :::
 
-This vignette will describe how to simulate a linelist with age-stratified (or age-dependent) hospitalisation and death rates. 
+This vignette will describe how to simulate a line list with age-stratified (or age-dependent) hospitalisation and death rates. 
 
 There are three rates in {simulist}, specifically in the `sim_linelist()` function, that relate to hospitalisations and deaths:
 
@@ -66,7 +66,7 @@ onset_to_death <- epidist_db(
 )
 ```
 
-We set the seed to ensure we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same linelist multiple times.
+We set the seed to ensure we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
 
 ```{r, set-seed}
 set.seed(1)
@@ -74,7 +74,7 @@ set.seed(1)
 
 ## Population-wide rates
 
-Simulate a linelist with population-wide default rates: 
+Simulate a line list with population-wide default rates: 
 
 * hospitalisation rate: `0.2`
 * death rate in hospitals `0.5`

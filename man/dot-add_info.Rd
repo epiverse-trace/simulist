@@ -4,7 +4,7 @@
 \alias{.add_info}
 \alias{.add_names}
 \alias{.add_ct}
-\title{Add linelist information as column to infectious history \verb{<data.frame>}}
+\title{Add line list information as column to infectious history \verb{<data.frame>}}
 \usage{
 .add_names(.data)
 
@@ -33,6 +33,6 @@ Unless the column heading is already present in which the data is
 overwritten.
 }
 \description{
-Add linelist information as column to infectious history \verb{<data.frame>}
+Add line list information as column to infectious history \verb{<data.frame>}
 }
 \keyword{internal}

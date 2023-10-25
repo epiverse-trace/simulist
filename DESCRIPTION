@@ -1,5 +1,5 @@
 Package: simulist
-Title: Tools to Simulated Linelist Data
+Title: Tools to Simulated Line list Data
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Joshua W.", family = "Lambert", email = "joshua.lambert@lshtm.ac.uk", role = c("aut", "cre", "cph"),
