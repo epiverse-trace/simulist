@@ -51,8 +51,6 @@
 #' `"confirmed"`. Values of each case type must sum to one.
 #' @param config A list of settings to adjust the randomly sampled delays and
 #' Ct values (if `add_ct = TRUE`). See [create_config()] for more information.
-#' @param include_contacts A `logical` boolean to determine whether contacts
-#' are added to the linelist. **Currently not implmented**.
 #' @param ... [dots] Extra arguments to be passed to other functions.
 #' **Currently not used and will return a warning if extra arguments are
 #' supplied**.
@@ -127,16 +125,9 @@ sim_linelist <- function(R, # nolint cyclocomp
                            confirmed = 0.5
                          ),
                          config = create_config(),
-                         include_contacts = FALSE, # WIP
                          ...) {
 
   chkDots(...)
-  if (include_contacts) {
-    stop(
-      "Including contacts is not currently supported in {simulist}",
-      call. = FALSE
-    )
-  }
 
   # input checking
   checkmate::assert_number(R, lower = 0)
@@ -282,11 +273,6 @@ sim_linelist <- function(R, # nolint cyclocomp
       config$ct_distribution_params
     )
     linelist_cols <- c(linelist_cols, "ct_value")
-  }
-
-  if (include_contacts) {
-    # TODO finalise create_contacts()
-    contacts <- create_contacts(.data = chain) # nolint var assigned not used
   }
 
   chain <- chain[, linelist_cols]
