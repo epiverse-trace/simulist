@@ -65,7 +65,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/epiverse-trace/simulist/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -78,7 +85,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Age-stratified hospitalisation and death rates</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/simulist/blob/HEAD/vignettes/age-strat-rates.Rmd" class="external-link"><code>vignettes/age-strat-rates.Rmd</code></a></small>
       <div class="d-none name"><code>age-strat-rates.Rmd</code></div>
     </div>
 
@@ -98,7 +105,7 @@
 <p>However, it may be unrealistic to assume that the probability an infected person is admitted to hospital or dies is independent of their age. For many diseases, young children or elderly individuals are at higher risk of being hospitalised and having adverse outcomes.</p>
 <p>The <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function can accommodate age-stratified rates by accepting a <code>&lt;data.frame&gt;</code> instead of a single rate for the entire population.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">simulist</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a></span><span class="op">)</span></span></code></pre></div>
 </details><p>Here is an example that uses the default hospitalisation and death rates (inside and outside of hospital). First we load the requested delay distributions using the {epiparameter} package.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">

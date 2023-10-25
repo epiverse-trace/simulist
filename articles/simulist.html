@@ -65,7 +65,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/epiverse-trace/simulist/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -78,7 +85,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Getting Started with {simulist}</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/simulist/blob/HEAD/vignettes/simulist.Rmd" class="external-link"><code>vignettes/simulist.Rmd</code></a></small>
       <div class="d-none name"><code>simulist.Rmd</code></div>
     </div>
 
@@ -88,7 +95,7 @@
 <p>The main function in the {simulist} package is <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>. This functions takes in arguments that control the dynamics of the outbreak, such as the serial interval, and outputs a linelist table (<code>&lt;data.frame&gt;</code>) with case information for each infected individual.</p>
 <p>For this introduction we will simulate a linelist for a COVID-19 (SARS-CoV-2) outbreak. This will require two R packages: {simulist}, to produce the linelist, and {epiparameter} to provide epidemiological parameters, such as onset-to-death delays.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">simulist</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a></span><span class="op">)</span></span></code></pre></div>
 </details><p>First we load in some data that is required for the linelist simulation. Data on epidemiological parameters and distributions is read from the {epiparameter} R package.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -138,20 +145,20 @@
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id          case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1    Trysten Cobbins suspected      m  38 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2       Brandon Sath  probable      m   4 2023-01-01           2023-01-02</span></span>
-<span><span class="co">#&gt; 3  3    Saahir el-Ameen confirmed      m   9 2023-01-02           2023-01-04</span></span>
-<span><span class="co">#&gt; 4  4        Rebeca Sosa confirmed      f  48 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5   Christopher Murr  probable      m  30 2023-01-03                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6 Rockelle Hernandez confirmed      f   7 2023-01-03                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   id         case_name case_type gender age onset_date hospitalisation_date</span></span>
+<span><span class="co">#&gt; 1  1    Subhi el-Hatem  probable      m  31 2023-01-01           2023-01-06</span></span>
+<span><span class="co">#&gt; 2  2    Taylynn Garcia confirmed      f  56 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3 Matthew Griffiths  probable      m  39 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4  Ethen Loughridge confirmed      m  16 2023-01-01           2023-01-03</span></span>
+<span><span class="co">#&gt; 5  5    Cassidy Berger  probable      f  57 2023-01-02                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6    Tj Hogan-Mejja confirmed      m  48 2023-01-03                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2         2022-12-31        2023-01-02</span></span>
-<span><span class="co">#&gt; 3         2022-12-30        2023-01-03</span></span>
-<span><span class="co">#&gt; 4         2023-01-01        2023-01-04</span></span>
-<span><span class="co">#&gt; 5         2023-01-02        2023-01-08</span></span>
-<span><span class="co">#&gt; 6         2023-01-06        2023-01-08</span></span></code></pre></div>
+<span><span class="co">#&gt; 2         2022-12-30        2023-01-03</span></span>
+<span><span class="co">#&gt; 3         2022-12-31        2023-01-02</span></span>
+<span><span class="co">#&gt; 4         2023-01-06        2023-01-06</span></span>
+<span><span class="co">#&gt; 5         2023-01-02        2023-01-05</span></span>
+<span><span class="co">#&gt; 6         2023-01-02        2023-01-04</span></span></code></pre></div>
 </details><div class="section level2">
 <h2 id="case-type">Case type<a class="anchor" aria-label="anchor" href="#case-type"></a>
 </h2>
@@ -166,20 +173,20 @@
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id             case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1     Christopher Silva suspected      m   8 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2 Leida Hidalgo-Cuellar suspected      f  39 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3            Zeth Mayes  probable      m  34 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4        Matthew Forney  probable      m  37 2023-01-03                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5           Blessy Khan suspected      f  59 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6      Aspen Hutchinson confirmed      f  83 2023-01-02                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   id       case_name case_type gender age onset_date hospitalisation_date</span></span>
+<span><span class="co">#&gt; 1  1   Alaura Awtrey suspected      f   6 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2 Terrell Mcneace suspected      m  49 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3     Tylor Mcroy confirmed      f   2 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4    Michal Grove confirmed      f  60 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5      Nicole Tan  probable      f  90 2023-01-01           2023-01-02</span></span>
+<span><span class="co">#&gt; 6  6 Mustaba el-Mady confirmed      m  72 2023-01-02                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2         2023-01-02        2023-01-02</span></span>
-<span><span class="co">#&gt; 3         2022-12-29        2023-01-05</span></span>
-<span><span class="co">#&gt; 4         2023-01-06        2023-01-07</span></span>
-<span><span class="co">#&gt; 5         2023-01-03        2023-01-08</span></span>
-<span><span class="co">#&gt; 6         2023-01-07        2023-01-07</span></span></code></pre></div>
+<span><span class="co">#&gt; 2         2022-12-29        2023-01-03</span></span>
+<span><span class="co">#&gt; 3         2023-01-01        2023-01-04</span></span>
+<span><span class="co">#&gt; 4         2023-01-01        2023-01-04</span></span>
+<span><span class="co">#&gt; 5         2023-01-02        2023-01-03</span></span>
+<span><span class="co">#&gt; 6         2022-12-31        2023-01-05</span></span></code></pre></div>
 </details><p>To alter these probabilities, supply a named vector to the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> argument <code>case_type_probs</code>. The vector should contain three numbers, with the names <code>suspected</code>, <code>probable</code> and <code>confirmed</code>, with the numbers summing to one. Here we change the values to simulate an outbreak in which the proportion of cases confirmed by laboratory testing is high.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
@@ -190,20 +197,20 @@
 <span>  case_type_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>suspected <span class="op">=</span> <span class="fl">0.05</span>, probable <span class="op">=</span> <span class="fl">0.05</span>, confirmed <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id              case_name case_type gender age onset_date</span></span>
-<span><span class="co">#&gt; 1  1            Aaron Stitt confirmed      m  40 2023-01-01</span></span>
-<span><span class="co">#&gt; 2  2              David Yip confirmed      m  33 2023-01-01</span></span>
-<span><span class="co">#&gt; 3  3          Taaha al-Mian confirmed      m  65 2023-01-01</span></span>
-<span><span class="co">#&gt; 4  4 Megan Villagomez-Tapia confirmed      f   2 2023-01-02</span></span>
-<span><span class="co">#&gt; 5  5         Stephanie Wong confirmed      f  18 2023-01-03</span></span>
-<span><span class="co">#&gt; 6  6          Cleatus Horst suspected      m   1 2023-01-02</span></span>
-<span><span class="co">#&gt;   hospitalisation_date date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1                 &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2           2023-01-04         2023-01-02        2023-01-03</span></span>
-<span><span class="co">#&gt; 3                 &lt;NA&gt;         2022-12-30        2023-01-03</span></span>
-<span><span class="co">#&gt; 4                 &lt;NA&gt;         2022-12-25        2023-01-02</span></span>
-<span><span class="co">#&gt; 5                 &lt;NA&gt;         2022-12-31        2023-01-03</span></span>
-<span><span class="co">#&gt; 6                 &lt;NA&gt;         2023-01-03        2023-01-04</span></span></code></pre></div>
+<span><span class="co">#&gt;   id          case_name case_type gender age onset_date hospitalisation_date</span></span>
+<span><span class="co">#&gt; 1  1     Maranda Watson confirmed      f  77 2023-01-01           2023-01-08</span></span>
+<span><span class="co">#&gt; 2  2 Carlos Villegas II confirmed      m  44 2023-01-01           2023-01-02</span></span>
+<span><span class="co">#&gt; 3  3      Cynthia Davis confirmed      f  55 2023-01-03                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4      Andrea Gildon confirmed      f  62 2023-01-02                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5      Umaira el-Ben confirmed      f  33 2023-01-03                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6     Chase Blasdell confirmed      m  15 2023-01-04                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2         2023-01-01        2023-01-03</span></span>
+<span><span class="co">#&gt; 3         2022-12-31        2023-01-05</span></span>
+<span><span class="co">#&gt; 4         2022-12-31        2023-01-04</span></span>
+<span><span class="co">#&gt; 5         2023-01-03        2023-01-03</span></span>
+<span><span class="co">#&gt; 6         2023-01-03        2023-01-06</span></span></code></pre></div>
 </details><p>It is also possible to set one of these categories to <code>1</code>, in which case every case will be of that type.</p>
 <p>The way {simulist} assigns case types is by pasting case types onto existing case data. Thus, it could be viewed that the true underlying data is that all cases in the simulation are confirmed, but that there is a lack of information in some cases. There are no cases in the output linelist that are incorrectly attributed as probable or suspected that have not been infected. That is to say, all individuals in the linelist, whatever their case type, are infected during the outbreak.</p>
 </div>
@@ -222,20 +229,20 @@
 <span>  min_chain_size <span class="op">=</span> <span class="fl">250</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id        case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1        Nhi Ranjo  probable      f  68 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2 Savannah Ramirez confirmed      f  78 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3  Jane Gumataotao confirmed      f  23 2023-01-03                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4 Fat'hi al-Farrah suspected      m  88 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5  Tatiana Markoff confirmed      f   4 2023-01-03                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6     Emily Joseph  probable      f  43 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2         2023-01-04        2023-01-07</span></span>
-<span><span class="co">#&gt; 3         2023-01-01        2023-01-03</span></span>
-<span><span class="co">#&gt; 4         2023-01-01        2023-01-03</span></span>
-<span><span class="co">#&gt; 5         2023-01-05        2023-01-05</span></span>
-<span><span class="co">#&gt; 6         2022-12-30        2023-01-05</span></span></code></pre></div>
+<span><span class="co">#&gt;   id                case_name case_type gender age onset_date</span></span>
+<span><span class="co">#&gt; 1  1             Marina Weber confirmed      f  65 2023-01-01</span></span>
+<span><span class="co">#&gt; 2  2 Clara Martinez-Ruvalcaba confirmed      f   2 2023-01-01</span></span>
+<span><span class="co">#&gt; 3  3              Quynh Nauth confirmed      f  82 2023-01-01</span></span>
+<span><span class="co">#&gt; 4  4              Auna Froome suspected      f   5 2023-01-06</span></span>
+<span><span class="co">#&gt; 5  5         Chivithaya Visee confirmed      m  61 2023-01-03</span></span>
+<span><span class="co">#&gt; 6  6              Devon Perry suspected      m  71 2023-01-02</span></span>
+<span><span class="co">#&gt;   hospitalisation_date date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1                 &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2                 &lt;NA&gt;         2023-01-03        2023-01-07</span></span>
+<span><span class="co">#&gt; 3           2023-01-02         2023-01-04        2023-01-04</span></span>
+<span><span class="co">#&gt; 4                 &lt;NA&gt;         2023-01-01        2023-01-04</span></span>
+<span><span class="co">#&gt; 5           2023-01-08         2022-12-31        2023-01-05</span></span>
+<span><span class="co">#&gt; 6                 &lt;NA&gt;         2022-12-30        2023-01-03</span></span></code></pre></div>
 </details><p>The amount of time the simulation takes can be determined by the reproduction number (<code>R</code>) and the minimum outbreak size (<code>min_chain_size</code>). If the <code>min_outbreak_size</code> is large, for example hundreds or thousands of cases, and the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.</p>
 </div>
 <div class="section level2">
@@ -252,19 +259,19 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id case_type gender age onset_date hospitalisation_date date_first_contact</span></span>
-<span><span class="co">#&gt; 1  1 confirmed      m  78 2023-01-01                 &lt;NA&gt;               &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2  probable      f  56 2023-01-02           2023-01-06         2022-12-30</span></span>
-<span><span class="co">#&gt; 3  3 suspected      f  52 2023-01-03                 &lt;NA&gt;         2023-01-03</span></span>
-<span><span class="co">#&gt; 4  4 confirmed      f  32 2023-01-03                 &lt;NA&gt;         2023-01-04</span></span>
-<span><span class="co">#&gt; 5  5 suspected      f  55 2023-01-04                 &lt;NA&gt;         2022-12-31</span></span>
-<span><span class="co">#&gt; 6  6  probable      f   4 2023-01-04           2023-01-16         2023-01-04</span></span>
+<span><span class="co">#&gt; 1  1 confirmed      f  66 2023-01-01                 &lt;NA&gt;               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2  probable      m  40 2023-01-01                 &lt;NA&gt;         2022-12-31</span></span>
+<span><span class="co">#&gt; 3  3  probable      f  12 2023-01-03                 &lt;NA&gt;         2023-01-02</span></span>
+<span><span class="co">#&gt; 4  4 suspected      f  40 2023-01-01                 &lt;NA&gt;         2023-01-05</span></span>
+<span><span class="co">#&gt; 5  5  probable      m  68 2023-01-03                 &lt;NA&gt;         2023-01-02</span></span>
+<span><span class="co">#&gt; 6  6 confirmed      m  11 2023-01-03                 &lt;NA&gt;         2022-12-31</span></span>
 <span><span class="co">#&gt;   date_last_contact</span></span>
 <span><span class="co">#&gt; 1              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2        2023-01-03</span></span>
-<span><span class="co">#&gt; 3        2023-01-05</span></span>
-<span><span class="co">#&gt; 4        2023-01-07</span></span>
-<span><span class="co">#&gt; 5        2023-01-04</span></span>
-<span><span class="co">#&gt; 6        2023-01-08</span></span></code></pre></div>
+<span><span class="co">#&gt; 3        2023-01-03</span></span>
+<span><span class="co">#&gt; 4        2023-01-05</span></span>
+<span><span class="co">#&gt; 5        2023-01-06</span></span>
+<span><span class="co">#&gt; 6        2023-01-04</span></span></code></pre></div>
 </details><p>The names used in the linelist are produced at random by the <a href="https://CRAN.R-project.org/package=randomNames" class="external-link">{randomNames}</a> R package. Therefore, even when <code>add_names = TRUE</code> there is no personal data of real individuals being produced or shared.</p>
 </div>
 <div class="section level2">
@@ -280,20 +287,20 @@
 <span>  age_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">75</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id            case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1        Tiana Stennis confirmed      f   9 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2           Asia Leach confirmed      m  65 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3 Zachary Molner Hagan confirmed      m  33 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4       Steven Maestas  probable      m  61 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5         Chase Lanyon confirmed      m  31 2023-01-03           2023-01-03</span></span>
-<span><span class="co">#&gt; 6  6     Salaah al-Abbasi confirmed      m  30 2023-01-01           2023-01-02</span></span>
+<span><span class="co">#&gt;   id           case_name case_type gender age onset_date hospitalisation_date</span></span>
+<span><span class="co">#&gt; 1  1       Isaac Gerardo suspected      m  16 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2     Mu'taz al-Javid  probable      m  37 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3         Angel Davis suspected      f  27 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4 Sulaimaan al-Habeeb confirmed      m  38 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5       Ariana Murphy suspected      f  55 2023-01-01           2023-01-13</span></span>
+<span><span class="co">#&gt; 6  6    Nichole Martinez  probable      f   7 2023-01-04                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2         2022-12-28        2023-01-02</span></span>
-<span><span class="co">#&gt; 3         2022-12-30        2023-01-02</span></span>
-<span><span class="co">#&gt; 4         2023-01-01        2023-01-04</span></span>
-<span><span class="co">#&gt; 5         2023-01-02        2023-01-04</span></span>
-<span><span class="co">#&gt; 6         2022-12-31        2023-01-03</span></span></code></pre></div>
+<span><span class="co">#&gt; 2         2023-01-03        2023-01-03</span></span>
+<span><span class="co">#&gt; 3         2022-12-31        2023-01-03</span></span>
+<span><span class="co">#&gt; 4         2022-12-29        2023-01-03</span></span>
+<span><span class="co">#&gt; 5         2022-12-31        2023-01-02</span></span>
+<span><span class="co">#&gt; 6         2022-12-31        2023-01-02</span></span></code></pre></div>
 </details><p>It is currently not possible to simulate with a non-uniform population age structure in {simulist}.</p>
 </div>
 <div class="section level2">
