@@ -38,8 +38,6 @@ NULL
   names(chain)[names(chain) == "ancestor"] <- "infector"
 
   # add delays dates
-  # this could be unrounded (check for error)
-  chain$time_rounded <- round(chain$time)
   chain$onset_date <- chain$time + outbreak_start_date
 
   # add exposure date for cases
