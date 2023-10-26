@@ -181,3 +181,23 @@ contacts <- sim_contacts(
 )
 head(contacts)
 ```
+
+## Simulate both line list and contacts table
+
+To produce both a line list and a contacts table for the same outbreak, the `sim_linelist()` and `sim_contacts()` cannot be used separately due to the stochastic algorithm, meaning the data in the line list will be discordant with the contacts table. 
+
+In order to simulate a line list and a contacts table of the same outbreak the `sim_outbreak()` function is required. This will simulate a single outbreak and return a line list and a contacts table. The inputs of `sim_outbreak()` are a combination of the inputs required for `sim_linelist()` and `sim_contacts()`.
+
+```{r, sim-outbreak}
+outbreak <- sim_outbreak(
+  R = 1.1, 
+  serial_interval = serial_interval, 
+  onset_to_hosp = onset_to_hosp, 
+  onset_to_death = onset_to_death, 
+  contact_distribution = contact_distribution
+)
+head(outbreak$linelist)
+head(outbreak$contacts)
+```
+
+`sim_outbreak()` has the same features as `sim_linelist()` and `sim_contacts()`, this includes simulating with age-stratified rates of hospitalisation and death, the probability of case types or contact tracing status can be modified.
