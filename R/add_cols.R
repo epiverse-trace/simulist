@@ -111,8 +111,6 @@ NULL
                                  hosp_rate) {
   .data$hospitalisation <- .data$time +
     epiparameter::generate(onset_to_hosp, nrow(.data))
-  # rounded for incidence2, could remove
-  .data$hosp_rounded <- round(.data$hospitalisation, digits = 0)
 
   if (is.numeric(hosp_rate)) {
     pop_sample <- sample(
@@ -120,7 +118,7 @@ NULL
       replace = FALSE,
       size = (1 - hosp_rate) * nrow(.data)
     )
-    .data$hosp_rounded[pop_sample] <- NA
+    .data$hospitalisation[pop_sample] <- NA
   } else {
     for (i in seq_len(nrow(hosp_rate))) {
       if (i == nrow(hosp_rate)) {
@@ -137,7 +135,7 @@ NULL
         replace = FALSE,
         size = not_hosp_prob * length(age_group)
       )
-      .data$hosp_rounded[age_group_sample] <- NA
+      .data$hospitalisation[age_group_sample] <- NA
     }
   }
 
@@ -175,11 +173,11 @@ NULL
         }
         if (hosp) {
           age_group <- which(
-            .data$age %in% age_bracket & !is.na(.data$hosp_rounded)
+            .data$age %in% age_bracket & !is.na(.data$hospitalisation)
           )
         } else {
           age_group <- which(
-            .data$age %in% age_bracket & is.na(.data$hosp_rounded)
+            .data$age %in% age_bracket & is.na(.data$hospitalisation)
           )
         }
         not_hosp_death_prob <- 1 - hosp_death_rate$rate[i]
