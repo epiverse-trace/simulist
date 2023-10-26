@@ -119,6 +119,20 @@ contacts <- sim_contacts(
 head(contacts)
 ```
 
+If both the line list and contacts table are required, they can be jointly simulated using the `sim_outbreak()` function. This uses the same inputs as `sim_linelist()` and `sim_contacts()` to produce a line list and contacts table of the same outbreak (the arguments also have the same default settings as the other functions).
+
+```{r, sim-outbreak}
+outbreak <- sim_outbreak(
+  R = 1.1, 
+  serial_interval = serial_interval, 
+  onset_to_hosp = onset_to_hosp, 
+  onset_to_death = onset_to_death, 
+  contact_distribution = contact_distribution
+)
+head(outbreak$linelist)
+head(outbreak$contacts)
+```
+
 ## Help 
 
 To report a bug please open an [issue](https://github.com/epiverse-trace/simulist/issues/new/choose).
