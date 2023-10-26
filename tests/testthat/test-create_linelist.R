@@ -35,24 +35,24 @@ test_that(".create_linelist works for pre_hospitalisation", {
 test_that(".create_linelist works for pre_deaths", {
   linelist <- .create_linelist(scenario = "pre_deaths")
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 13L))
+  expect_identical(dim(linelist), c(42L, 12L))
   expect_identical(
     colnames(linelist),
     c("n", "id", "infector", "generation", "time", "onset_date",
       "infector_time", "date_last_contact", "date_first_contact", "gender",
-      "age", "hospitalisation", "hosp_rounded")
+      "age", "hospitalisation")
   )
 })
 
 test_that(".create_linelist works for pre_names", {
   linelist <- .create_linelist(scenario = "pre_names")
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 17L))
+  expect_identical(dim(linelist), c(42L, 16L))
   expect_identical(
     colnames(linelist),
     c("n", "id", "infector", "generation", "time", "onset_date",
       "infector_time", "date_last_contact", "date_first_contact", "gender",
-      "age", "hospitalisation", "hosp_rounded", "deaths", "death_rounded",
+      "age", "hospitalisation", "deaths", "death_rounded",
       "hospitalisation_date", "death_date")
   )
 })
@@ -60,12 +60,12 @@ test_that(".create_linelist works for pre_names", {
 test_that(".create_linelist works for pre_ct", {
   linelist <- .create_linelist(scenario = "pre_ct")
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 20L))
+  expect_identical(dim(linelist), c(42L, 19L))
   expect_identical(
     colnames(linelist),
     c("n", "id", "infector", "generation", "time", "onset_date",
       "infector_time", "date_last_contact", "date_first_contact", "gender",
-      "age", "hospitalisation", "hosp_rounded", "deaths", "death_rounded",
+      "age", "hospitalisation", "deaths", "death_rounded",
       "hospitalisation_date", "death_date", "case_name", "infector_name",
       "case_type")
   )

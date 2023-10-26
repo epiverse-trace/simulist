@@ -159,11 +159,10 @@ test_that(".add_hospitalisation works as expected", {
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$hospitalisation, type = "double")
-  expect_type(linelist$hosp_rounded, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "hospitalisation", "hosp_rounded")
+    c(colnames(ll), "hospitalisation")
   )
 })
 
@@ -176,11 +175,10 @@ test_that(".add_hospitalisation works as expected with different parameter", {
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$hospitalisation, type = "double")
-  expect_type(linelist$hosp_rounded, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "hospitalisation", "hosp_rounded")
+    c(colnames(ll), "hospitalisation")
   )
 })
 
@@ -198,11 +196,10 @@ test_that(".add_hospitalisation works as expected with age-strat rates", {
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$hospitalisation, type = "double")
-  expect_type(linelist$hosp_rounded, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "hospitalisation", "hosp_rounded")
+    c(colnames(ll), "hospitalisation")
   )
 })
 

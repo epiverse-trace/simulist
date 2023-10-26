@@ -99,7 +99,7 @@ NULL
   )
 
   # add hospitalisation and death dates
-  chain$hospitalisation_date <- chain$hosp_rounded + outbreak_start_date
+  chain$hospitalisation_date <- chain$hospitalisation + outbreak_start_date
   chain$death_date <- chain$death_rounded + outbreak_start_date
 
   linelist_cols <- c(
