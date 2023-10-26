@@ -43,6 +43,9 @@
     <loc>/reference/dot-create_linelist.html</loc>
   </url>
   <url>
+    <loc>/reference/dot-sim_utils.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
@@ -50,5 +53,8 @@
   </url>
   <url>
     <loc>/reference/sim_linelist.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sim_outbreak.html</loc>
   </url>
 </urlset>
