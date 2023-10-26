@@ -82,3 +82,48 @@ test_that("sim_outbreak works as expected with add_names = FALSE", {
       "date_first_contact", "date_last_contact", "was_case", "status")
   )
 })
+
+test_that("sim_outbreak works as expected with age-strat rates", {
+  age_dep_hosp_rate <- data.frame(
+    min_age = c(1, 5, 80),
+    max_age = c(5, 80, 90),
+    rate = c(0.1, 0.05, 0.2)
+  )
+  age_dep_hosp_death_rate <- data.frame(
+    min_age = c(1, 5, 80),
+    max_age = c(5, 80, 90),
+    rate = c(0.1, 0.05, 0.2)
+  )
+  age_dep_non_hosp_death_rate <- data.frame(
+    min_age = c(1, 5, 80),
+    max_age = c(5, 80, 90),
+    rate = c(0.05, 0.025, 0.1)
+  )
+  set.seed(1)
+  outbreak <- sim_outbreak(
+    R = 1.1,
+    serial_interval = serial_interval,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    contact_distribution = contact_distribution,
+    hosp_rate = age_dep_hosp_rate,
+    hosp_death_rate = age_dep_hosp_death_rate,
+    non_hosp_death_rate = age_dep_non_hosp_death_rate
+  )
+
+  expect_type(outbreak, type = "list")
+  expect_s3_class(outbreak$linelist, class = "data.frame")
+  expect_s3_class(outbreak$contacts, class = "data.frame")
+  expect_identical(dim(outbreak$linelist), c(42L, 9L))
+  expect_identical(dim(outbreak$contacts), c(177L, 8L))
+  expect_identical(
+    colnames(outbreak$linelist),
+    c("id", "case_name", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact")
+  )
+  expect_identical(
+    colnames(outbreak$contacts),
+    c("part_name", "contact_name", "cnt_age", "cnt_gender",
+      "date_first_contact", "date_last_contact", "was_case", "status")
+  )
+})
