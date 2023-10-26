@@ -102,20 +102,20 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id            case_name case_type gender age onset_date hospitalisation_date
-#> 1  1        Qais al-Wahab confirmed      m   1 2023-01-01                 <NA>
-#> 2  2    Hasana al-Baddour  probable      f  44 2023-01-01                 <NA>
-#> 3  3      Jasmine Masters  probable      f  34 2023-01-01                 <NA>
-#> 4  4 Joseph Fleischman Jr suspected      m  18 2023-01-01                 <NA>
-#> 5  5       Kirsten Nortey  probable      f  11 2023-01-03                 <NA>
-#> 6  6         Eulogio Lepe suspected      m   1 2023-01-01           2023-01-02
-#>   date_first_contact date_last_contact
-#> 1               <NA>              <NA>
-#> 2         2023-01-03        2023-01-04
-#> 3         2022-12-31        2023-01-03
-#> 4         2023-01-04        2023-01-07
-#> 5         2023-01-03        2023-01-03
-#> 6         2023-01-01        2023-01-04
+#>   id               case_name case_type gender age onset_date
+#> 1  1          Wajdi al-Matar  probable      m  69 2023-01-01
+#> 2  2           Brandon Meeks confirmed      m  14 2023-01-01
+#> 3  3       Darrien Fernandez confirmed      m  72 2023-01-02
+#> 4  4            Jalond Ramos  probable      m  66 2023-01-02
+#> 5  5    Rudy Sanchez Vergara  probable      m  24 2023-01-03
+#> 6  6 Abdul Jabbaar al-Koroma suspected      m  86 2023-01-02
+#>   hospitalisation_date date_first_contact date_last_contact
+#> 1                 <NA>               <NA>              <NA>
+#> 2           2023-01-08         2022-12-28        2023-01-02
+#> 3                 <NA>         2023-01-01        2023-01-04
+#> 4           2023-01-04         2023-01-01        2023-01-05
+#> 5                 <NA>         2022-12-29        2023-01-04
+#> 6           2023-01-04         2022-12-31        2023-01-04
 ```
 
 In this example, the line list is simulated using the default values
@@ -134,20 +134,20 @@ linelist <- sim_linelist(
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id            case_name case_type gender age onset_date hospitalisation_date
-#> 1  1 Kyle-Michael Maltese  probable      m  48 2019-12-01                 <NA>
-#> 2  2           Lynn Tzeng confirmed      f  60 2019-12-01           2019-12-05
-#> 3  3             Dylan Vo confirmed      m  87 2019-12-01                 <NA>
-#> 4  4        Colton Elfvin  probable      m  30 2019-12-03                 <NA>
-#> 5  5      Waleed Thompson suspected      m  25 2019-12-02                 <NA>
-#> 6  6         Michael Moss confirmed      m  46 2019-12-02                 <NA>
-#>   date_first_contact date_last_contact
-#> 1               <NA>              <NA>
-#> 2         2019-12-01        2019-12-03
-#> 3         2019-11-27        2019-12-03
-#> 4         2019-12-01        2019-12-04
-#> 5         2019-12-01        2019-12-02
-#> 6         2019-11-30        2019-12-03
+#>   id                      case_name case_type gender age onset_date
+#> 1  1                 Ghaazi al-Shad  probable      m   5 2019-12-01
+#> 2  2                    Uriel Vigil confirmed      m  38 2019-12-01
+#> 3  3                Azhaar al-Mussa suspected      m  21 2019-12-02
+#> 4  4               Kabeer el-Khatib suspected      m  22 2019-12-01
+#> 5  5 Dhipthika Rezaie-Khodabandelou  probable      f  52 2019-12-02
+#> 6  6                  Kalyn Lovejoy suspected      f  67 2019-12-03
+#>   hospitalisation_date date_first_contact date_last_contact
+#> 1                 <NA>               <NA>              <NA>
+#> 2                 <NA>         2019-11-29        2019-12-04
+#> 3                 <NA>         2019-11-26        2019-12-01
+#> 4                 <NA>         2019-11-28        2019-12-01
+#> 5                 <NA>         2019-11-30        2019-12-03
+#> 6                 <NA>         2019-12-03        2019-12-04
 ```
 
 To simulate a table of contacts we can reuse the serial interval from
@@ -170,20 +170,66 @@ contacts <- sim_contacts(
   contact_distribution = contact_distribution
 )
 head(contacts)
-#>        part_name        contact_name cnt_age cnt_gender date_first_contact
-#> 1   Tina Kennedy      Amber Carrillo       4          f         2023-01-02
-#> 2   Tina Kennedy    Alayna Weingardt      51          f         2023-01-03
-#> 3   Tina Kennedy Elizabeth Slovonsky      59          f         2023-01-05
-#> 4   Tina Kennedy   Nehemiah Franklin      59          m         2023-01-01
-#> 5   Tina Kennedy        Kiet Bennett      70          m         2023-01-05
-#> 6 Amber Carrillo         Kylie Enzer      27          f         2023-01-04
-#>   date_last_contact was_case         status
-#> 1        2023-01-02        Y           case
-#> 2        2023-01-03        Y           case
-#> 3        2023-01-06        Y           case
-#> 4        2023-01-03        N        unknown
-#> 5        2023-01-06        N under_followup
-#> 6        2023-01-06        Y           case
+#>          part_name          contact_name cnt_age cnt_gender date_first_contact
+#> 1 Macario Sandoval          David Torres      63          m         2022-12-29
+#> 2 Macario Sandoval     Dong Sung Abraham      84          m         2022-12-31
+#> 3 Macario Sandoval      Callie Lakkaraju      59          f         2022-12-29
+#> 4 Macario Sandoval Isaac Pinedo Carrillo      39          m         2022-12-31
+#> 5     David Torres   Aydee Luna Gonzalez      32          f         2022-12-28
+#> 6     David Torres             Ric Noble      74          m         2023-01-03
+#>   date_last_contact was_case           status
+#> 1        2023-01-03        Y             case
+#> 2        2023-01-02        N   under_followup
+#> 3        2023-01-04        N   under_followup
+#> 4        2023-01-04        N   under_followup
+#> 5        2023-01-03        Y             case
+#> 6        2023-01-05        N lost_to_followup
+```
+
+If both the line list and contacts table are required, they can be
+jointly simulated using the `sim_outbreak()` function. This uses the
+same inputs as `sim_linelist()` and `sim_contacts()` to produce a line
+list and contacts table of the same outbreak (the arguments also have
+the same default settings as the other functions).
+
+``` r
+outbreak <- sim_outbreak(
+  R = 1.1, 
+  serial_interval = serial_interval, 
+  onset_to_hosp = onset_to_hosp, 
+  onset_to_death = onset_to_death, 
+  contact_distribution = contact_distribution
+)
+head(outbreak$linelist)
+#>   id               case_name case_type gender age onset_date
+#> 1  1            Simon Garver confirmed      m  50 2023-01-01
+#> 2  2           Anthony Tomas suspected      m  78 2023-01-01
+#> 3  3 Abdul Maalik al-Mahdavi  probable      m  40 2023-01-02
+#> 4  4         Saabiqa al-Pour suspected      f   4 2023-01-02
+#> 5  5           Alexis Martin  probable      f  68 2023-01-02
+#> 6  6     Desiree Shackelford confirmed      f  82 2023-01-02
+#>   hospitalisation_date date_first_contact date_last_contact
+#> 1           2023-01-07               <NA>              <NA>
+#> 2                 <NA>         2023-01-06        2023-01-07
+#> 3                 <NA>         2023-01-01        2023-01-04
+#> 4                 <NA>         2022-12-28        2023-01-03
+#> 5           2023-01-03         2022-12-30        2023-01-03
+#> 6                 <NA>         2022-12-29        2023-01-04
+head(outbreak$contacts)
+#>      part_name            contact_name cnt_age cnt_gender date_first_contact
+#> 1 Simon Garver           Anthony Tomas      78          m         2023-01-06
+#> 2 Simon Garver Abdul Maalik al-Mahdavi      40          m         2023-01-01
+#> 3 Simon Garver          Katherine Smit      42          f         2022-12-31
+#> 4 Simon Garver          Judy Ragoschke       6          f         2023-01-02
+#> 5 Simon Garver         Zuhair al-Ishak      70          m         2023-01-01
+#> 6 Simon Garver          Donna Cummings      20          f         2022-12-31
+#>   date_last_contact was_case           status
+#> 1        2023-01-07        Y             case
+#> 2        2023-01-04        Y             case
+#> 3        2023-01-03        N   under_followup
+#> 4        2023-01-03        N   under_followup
+#> 5        2023-01-04        N lost_to_followup
+#> 6        2023-01-04        N lost_to_followup
 ```
 
 ## Help
