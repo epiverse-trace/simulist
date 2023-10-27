@@ -150,8 +150,6 @@ NULL
                         non_hosp_death_rate) {
   .data$deaths <- .data$time +
     epiparameter::generate(onset_to_death, nrow(.data))
-  # rounded for incidence2, could remove
-  .data$death_rounded <- round(.data$deaths, digits = 0)
 
   apply_death_rate <- function(.data, rate, hosp = TRUE) {
     if (is.numeric(hosp_death_rate)) {
@@ -160,7 +158,7 @@ NULL
         replace = FALSE,
         size = (1 - hosp_death_rate) * nrow(.data)
       )
-      .data$death_rounded[pop_sample] <- NA
+      .data$deaths[pop_sample] <- NA
     } else {
       for (i in seq_len(nrow(hosp_death_rate))) {
         if (i == nrow(hosp_death_rate)) {
@@ -186,7 +184,7 @@ NULL
           replace = FALSE,
           size = not_hosp_death_prob * length(age_group)
         )
-        .data$death_rounded[age_group_sample] <- NA
+        .data$deaths[age_group_sample] <- NA
       }
     }
     .data
