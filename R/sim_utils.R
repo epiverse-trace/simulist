@@ -48,7 +48,7 @@ NULL
   chain <- merge(chain, id_time, by = "infector", all.x = TRUE)
   chain <- chain[order(is.na(chain$infector), decreasing = TRUE), ]
   chain <- chain[col_order]
-  rownames(chain) <- NULL
+  row.names(chain) <- NULL
 
   chain <- .add_date_last_contact(
     .data = chain,
