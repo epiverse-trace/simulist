@@ -105,12 +105,10 @@ parameters.
 \details{
 For age-stratified hospitalised and death rates a \verb{<data.frame>}
 will need to be passed to the \code{hosp_rate} and/or \code{hosp_death_rate}
-arguments. This \verb{<data.frame>} should have three columns:
+arguments. This \verb{<data.frame>} should have two columns:
 \itemize{
-\item \code{min_age}: a column with one \code{numeric} per cell for the minimum age of
-the age group (inclusive).
-\item \code{max_age}: a column with one \code{numeric} per cell for the maximum age of
-the age group (exclusive).
+\item \code{age_limit}: a column with one \code{numeric} per cell for the lower bound
+(minimum) age of the age group (inclusive).
 \item \code{rate}: a column with one \code{numeric} per cell for the proportion
 (or probability) of hospitalisation for that age group. Should be between
 0 and 1.

@@ -5,11 +5,9 @@
 #'
 #' @details For age-stratified hospitalised and death rates a `<data.frame>`
 #' will need to be passed to the `hosp_rate` and/or `hosp_death_rate`
-#' arguments. This `<data.frame>` should have three columns:
-#' * `min_age`: a column with one `numeric` per cell for the minimum age of
-#' the age group (inclusive).
-#' * `max_age`: a column with one `numeric` per cell for the maximum age of
-#' the age group (exclusive).
+#' arguments. This `<data.frame>` should have two columns:
+#' * `age_limit`: a column with one `numeric` per cell for the lower bound
+#' (minimum) age of the age group (inclusive).
 #' * `rate`: a column with one `numeric` per cell for the proportion
 #' (or probability) of hospitalisation for that age group. Should be between
 #' 0 and 1.
@@ -96,8 +94,7 @@
 #' # 10% for under 5s
 #' # 5% for the rest
 #' age_dep_hosp_rate <- data.frame(
-#'   min_age = c(1, 5, 80),
-#'   max_age = c(5, 80, 90),
+#'   age_limit = c(1, 5, 80),
 #'   rate = c(0.1, 0.05, 0.2)
 #' )
 #' linelist <- sim_linelist(
