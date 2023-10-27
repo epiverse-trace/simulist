@@ -121,13 +121,7 @@ NULL
     .data$hospitalisation[pop_sample] <- NA
   } else {
     for (i in seq_len(nrow(hosp_rate))) {
-      if (i == nrow(hosp_rate)) {
-        # oldest age bracket has inclusive upper bound
-        age_bracket <- hosp_rate$min_age[i]:hosp_rate$max_age[i]
-      } else {
-        # remove last integer from bracket due to exclusive upper bound
-        age_bracket <- hosp_rate$min_age[i]:(hosp_rate$max_age[i] - 1)
-      }
+      age_bracket <- hosp_rate$min_age[i]:hosp_rate$max_age[i]
       age_group <- which(.data$age %in% age_bracket)
       not_hosp_prob <- 1 - hosp_rate$rate[i]
       age_group_sample <- sample(
@@ -161,14 +155,7 @@ NULL
       .data$deaths[pop_sample] <- NA
     } else {
       for (i in seq_len(nrow(hosp_death_rate))) {
-        if (i == nrow(hosp_death_rate)) {
-          # oldest age bracket has inclusive upper bound
-          age_bracket <- hosp_death_rate$min_age[i]:hosp_death_rate$max_age[i]
-        } else {
-          # remove last integer from bracket due to exclusive upper bound
-          age_bracket <-
-            hosp_death_rate$min_age[i]:(hosp_death_rate$max_age[i] - 1)
-        }
+        age_bracket <- hosp_death_rate$min_age[i]:hosp_death_rate$max_age[i]
         if (hosp) {
           age_group <- which(
             .data$age %in% age_bracket & !is.na(.data$hospitalisation)
@@ -240,7 +227,7 @@ NULL
   )
   .data <- .data[order(is.na(.data$infector_name), decreasing = TRUE), ]
   .data <- .data[col_order]
-  rownames(.data) <- NULL
+  row.names(.data) <- NULL
 
   # return named line list
   .data
