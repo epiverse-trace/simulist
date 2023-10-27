@@ -47,27 +47,25 @@ test_that(".create_linelist works for pre_deaths", {
 test_that(".create_linelist works for pre_names", {
   linelist <- .create_linelist(scenario = "pre_names")
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 16L))
+  expect_identical(dim(linelist), c(42L, 15L))
   expect_identical(
     colnames(linelist),
     c("n", "id", "infector", "generation", "time", "onset_date",
       "infector_time", "date_last_contact", "date_first_contact", "gender",
-      "age", "hospitalisation", "deaths", "death_rounded",
-      "hospitalisation_date", "death_date")
+      "age", "hospitalisation", "deaths", "hospitalisation_date", "death_date")
   )
 })
 
 test_that(".create_linelist works for pre_ct", {
   linelist <- .create_linelist(scenario = "pre_ct")
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 19L))
+  expect_identical(dim(linelist), c(42L, 18L))
   expect_identical(
     colnames(linelist),
     c("n", "id", "infector", "generation", "time", "onset_date",
       "infector_time", "date_last_contact", "date_first_contact", "gender",
-      "age", "hospitalisation", "deaths", "death_rounded",
-      "hospitalisation_date", "death_date", "case_name", "infector_name",
-      "case_type")
+      "age", "hospitalisation", "deaths", "hospitalisation_date", "death_date",
+      "case_name", "infector_name", "case_type")
   )
 })
 

@@ -213,11 +213,10 @@ test_that(".add_deaths works as expected", {
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$deaths, type = "double")
-  expect_type(linelist$death_rounded, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "deaths", "death_rounded")
+    c(colnames(ll), "deaths")
   )
 })
 
@@ -231,11 +230,10 @@ test_that(".add_deaths works as expected with different parameter", {
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$deaths, type = "double")
-  expect_type(linelist$death_rounded, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "deaths", "death_rounded")
+    c(colnames(ll), "deaths")
   )
 })
 
@@ -259,11 +257,10 @@ test_that(".add_deaths works as expected with age-strat rates", {
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$deaths, type = "double")
-  expect_type(linelist$death_rounded, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "deaths", "death_rounded")
+    c(colnames(ll), "deaths")
   )
 })
 
