@@ -297,3 +297,45 @@ citation("simulist")
 #> https://epiverse-trace.github.io/simulist/},
 #>   }
 ```
+
+## Related projects
+
+This project has some overlap with other R packages. Here we list these
+packages and provide a table of features and attributes that are present
+for each package to help decide which package is appropriate for each
+use-case.
+
+In some cases the packages are dedicated to simulating line list and
+other epidemiological data (e.g. {simulist}), in others the line list
+simulation is one part of a wider R package (e.g. {EpiNow}).
+
+If there is another package with this functionality missing from the
+list that should be added, or if a package included in this list has
+been updated and the table should reflect this please contribute by
+making an [issue](https://github.com/epiverse-trace/simulist/issues) or
+a [pull request](https://github.com/epiverse-trace/simulist/pulls).
+
+- [`{LLsim}`](https://github.com/jrcpulliam/LLsim) has the same
+  objective as `{simulist}`, to simualte realistic line list data.
+- [`{simulacr}`](https://github.com/reconhub/simulacr)
+- [`{epidict}`](https://github.com/R4EPI/epidict) is a package for data
+  dictionaries and generating epi data. Its `gen_data()` function can
+  simulate line list data.
+- [`{EpiNow}`](https://github.com/epiforecasts/EpiNow) is a now
+  deprecated R package that includes the `simulate_cases()` and
+  `generate_pseudo_linelist()` functions.
+
+|                                      | {simulist}    | {LLsim}     | {simulacr}     | {epidict}    | {EpiNow}       |
+|--------------------------------------|---------------|-------------|----------------|--------------|----------------|
+| Simulates line list                  | ✅            | ✅          | ✅             | ✅           | ✅             |
+| Simulates contacts                   | Lorem ipsum   | Sed do      | Ut enim        | Duis aute    | Cillum dolore  |
+| Parameterised with epi distributions | Lorem ipsum   | Sed do      | Ut enim        | Duis aute    | Cillum dolore  |
+| Actively maintained\*                | ✅            | Anim id     | ❌             | ❌           | ❌             |
+| Unit testing                         | ✅            | Duis aute   | ❌             | ✅           | ❌             |
+| Lorem ipsum                          | Cillum dolore | Ut enim     | Laboris nisi   | Duis aute    | Excepteur sint |
+| Interoperable with {epicontacts}     | ❌            | Ut enim     | Laboris nisi   | Duis aute    | Excepteur sint |
+| Explicit population size             | ❌            | Sed do      | Ut enim        | Duis aute    | Cillum dolore  |
+| On CRAN                              | ❌            | Lorem ipsum | Excepteur sint | Laboris nisi | Ut enim        |
+
+\* We define actively maintained as the respository having a commit to
+the main branch within the last 12 months
