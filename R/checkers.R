@@ -48,3 +48,50 @@
   # return rate data frame
   x
 }
+
+#' Check if `<data.frame>` defining age structure of population is correct
+#'
+#' @param x A `<data.frame>`.
+#'
+#' @return A `<data.frame>`, also called for error side-effects when input is
+#' invalid.
+#' @keywords internal
+.check_age_df <- function(x) {
+
+  # check input
+  stopifnot(
+    "column names should be 'age_range' & 'proportion'" =
+      setequal(c("age_range", "proportion"), colnames(x)),
+    "age range or proportion cannot be NA or NaN" =
+      !anyNA(x),
+    "proportions of each age bracket should sum to 1" =
+      all.equal(sum(x$proportion), 1),
+    "all age groups should be separated with a '-' (e.g. '1-5')" =
+      all(grepl(pattern = "-", x = x$age_range, fixed = TRUE))
+  )
+
+  # extract bounds and groups
+  age_bounds <- strsplit(x$age_range, split = "-", fixed = TRUE)
+  age_bounds <- lapply(age_bounds, as.numeric)
+  age_groups <- unlist(lapply(age_bounds, function(y) y[1]:y[2]))
+
+  # check age input
+  stopifnot(
+    "age groups should be non-overlapping" =
+      anyDuplicated(age_groups) == 0,
+    "age groups should be contiguous" =
+      all(min(age_groups):max(age_groups) %in% age_groups),
+    "age groups should include only positive integers" =
+      checkmate::test_integerish(unlist(age_bounds), lower = 0)
+  )
+
+  # add and sort data frames cols
+  x <- data.frame(
+    min_age = vapply(age_bounds, "[[", FUN.VALUE = numeric(1), 1),
+    max_age = vapply(age_bounds, "[[", FUN.VALUE = numeric(1), 2),
+    proportion = x$proportion
+  )
+
+  # return rate data frame
+  x
+}
