@@ -64,11 +64,24 @@ NULL
 
   # add random age and gender
   chain$gender <- sample(c("m", "f"), replace = TRUE, size = nrow(chain))
-  chain$age <- sample(
-    age_range[1]:age_range[2],
-    replace = TRUE,
-    size = nrow(chain)
-  )
+  if (is.data.frame(age_range)) {
+    age_groups <- apply(age_range, MARGIN = 1, function(x) x[1]:x[2])
+    sample_weight <- rep(age_range$proportion, times = lengths(age_groups))
+    # maybe normalise for vector length
+    # sample_weight <- unlist(lapply(sample_weight, function(y) y / length(y)))
+    chain$age <- sample(
+      unlist(age_groups),
+      size = nrow(chain),
+      replace = TRUE,
+      prob = sample_weight
+    )
+  } else {
+    chain$age <- sample(
+      age_range[1]:age_range[2],
+      size = nrow(chain),
+      replace = TRUE
+    )
+  }
 
   # return simulated line list
   chain
