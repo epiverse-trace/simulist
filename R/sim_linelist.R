@@ -135,7 +135,6 @@ sim_linelist <- function(R, # nolint cyclocomp
   checkmate::assert_logical(add_names, len = 1)
   checkmate::assert_logical(add_ct, len = 1)
   checkmate::assert_integerish(min_chain_size, lower = 1)
-  checkmate::assert_numeric(age_range, len = 2)
   checkmate::assert_numeric(case_type_probs, len = 3)
   checkmate::assert_names(
     names(case_type_probs),
@@ -153,7 +152,10 @@ sim_linelist <- function(R, # nolint cyclocomp
       is.data.frame(hosp_death_rate),
     "non_hosp_death_rate must be a single numeric or a data.frame" =
       is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
-      is.data.frame(non_hosp_death_rate)
+      is.data.frame(non_hosp_death_rate),
+    "age_range must be two numerics or a data.frame" =
+      is.numeric(age_range) && length(age_range) == 2 ||
+      is.data.frame(age_range)
   )
 
   if (is.data.frame(hosp_rate)) {
@@ -173,6 +175,9 @@ sim_linelist <- function(R, # nolint cyclocomp
       non_hosp_death_rate,
       age_range = age_range
     )
+  }
+  if (is.data.frame(age_range)) {
+    age_range <- .check_age_df(age_range)
   }
 
   chain <- .sim_bp_linelist(
