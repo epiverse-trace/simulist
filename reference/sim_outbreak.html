@@ -202,10 +202,8 @@ supplied</strong>.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>For age-stratified hospitalised and death rates a <code>&lt;data.frame&gt;</code>
 will need to be passed to the <code>hosp_rate</code> and/or <code>hosp_death_rate</code>
-arguments. This <code>&lt;data.frame&gt;</code> should have three columns:</p><ul><li><p><code>min_age</code>: a column with one <code>numeric</code> per cell for the minimum age of
-the age group (inclusive).</p></li>
-<li><p><code>max_age</code>: a column with one <code>numeric</code> per cell for the maximum age of
-the age group (exclusive).</p></li>
+arguments. This <code>&lt;data.frame&gt;</code> should have two columns:</p><ul><li><p><code>age_limit</code>: a column with one <code>numeric</code> per cell for the lower bound
+(minimum) age of the age group (inclusive).</p></li>
 <li><p><code>rate</code>: a column with one <code>numeric</code> per cell for the proportion
 (or probability) of hospitalisation for that age group. Should be between
 0 and 1.</p></li>

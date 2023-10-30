@@ -95,7 +95,7 @@
 <p>If you are unfamiliar with the {simulist} package or the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function <a href="simulist.html">Get Started vignette</a> is a great place to start.</p>
 </div>
 <p>This vignette will describe how to simulate a line list with age-stratified (or age-dependent) hospitalisation and death rates.</p>
-<p>There are three rates in {simulist}, specifically in the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function, that relate to hospitalisations and deaths:</p>
+<p>There are three rates in {simulist}, specifically in the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> functions, that relate to hospitalisations and deaths:</p>
 <ol style="list-style-type: decimal">
 <li>Hospitalisation rate (<code>hosp_rate</code>)</li>
 <li>Death rate in hospitals (<code>hosp_death_rate</code>)</li>
@@ -198,11 +198,11 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id        case_name case_type gender age onset_date hospitalisation_date</span></span>
 <span><span class="co">#&gt; 1  1  Aaida el-Hariri suspected      f  19 2023-01-01           2023-01-01</span></span>
-<span><span class="co">#&gt; 2  2    Shane Valadez confirmed      m  77 2023-01-01           2023-01-02</span></span>
+<span><span class="co">#&gt; 2  2    Shane Valadez confirmed      m  77 2023-01-01           2023-01-01</span></span>
 <span><span class="co">#&gt; 3  3  Kristhel Chavez confirmed      f  37 2023-01-01           2023-01-14</span></span>
-<span><span class="co">#&gt; 4  4  Tashena Vincent suspected      f  27 2023-01-07           2023-01-09</span></span>
+<span><span class="co">#&gt; 4  4  Tashena Vincent suspected      f  27 2023-01-07           2023-01-08</span></span>
 <span><span class="co">#&gt; 5  5    Gregory Aofia confirmed      m  73 2023-01-01           2023-01-01</span></span>
-<span><span class="co">#&gt; 6  6 Nyein Nyein Iese suspected      f  52 2023-01-07           2023-01-13</span></span>
+<span><span class="co">#&gt; 6  6 Nyein Nyein Iese suspected      f  52 2023-01-07           2023-01-12</span></span>
 <span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2         2023-01-04        2023-01-07</span></span>
@@ -215,7 +215,7 @@
 <div class="section level2">
 <h2 id="age-stratified-rates">Age-stratified rates<a class="anchor" aria-label="anchor" href="#age-stratified-rates"></a>
 </h2>
-<p>Now we can run age-stratified rates by creating a table (<code>&lt;data.frame&gt;</code>) which contains the lower and upper limits of the age groups and their respective rates.</p>
+<p>Now we can run age-stratified rates by creating a table (<code>&lt;data.frame&gt;</code>) which contains the lower limits of the age groups and their respective rates.</p>
 <p>In this example the hospitalisation rate will be:</p>
 <ul>
 <li>
@@ -225,18 +225,17 @@
 <li>
 <code>0.05</code> (or 5%) for the rest</li>
 </ul>
-<p>The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. The age groups are formed by their position in the input vectors. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is five and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table.</p>
+<p>The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table. The oldest age group stops at the upper age range given in the <code>age_range</code> argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  min_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
-<span>  max_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">80</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_hosp_rate</span></span>
-<span><span class="co">#&gt;   min_age max_age rate</span></span>
-<span><span class="co">#&gt; 1       1       5 0.10</span></span>
-<span><span class="co">#&gt; 2       5      80 0.05</span></span>
-<span><span class="co">#&gt; 3      80      90 0.20</span></span></code></pre></div>
+<span><span class="co">#&gt;   age_limit rate</span></span>
+<span><span class="co">#&gt; 1         1 0.10</span></span>
+<span><span class="co">#&gt; 2         5 0.05</span></span>
+<span><span class="co">#&gt; 3        80 0.20</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
@@ -249,7 +248,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id       case_name case_type gender age onset_date hospitalisation_date</span></span>
 <span><span class="co">#&gt; 1  1   Jennifer Chea confirmed      f  75 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2 Kelly Deardeuff confirmed      f  89 2023-01-01           2023-01-02</span></span>
+<span><span class="co">#&gt; 2  2 Kelly Deardeuff confirmed      f  89 2023-01-01           2023-01-01</span></span>
 <span><span class="co">#&gt; 3  3  Suhaib el-Kaba  probable      m  56 2023-01-01                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 4  4   Dustin Segall confirmed      m  35 2023-01-01                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 5  5  Kyle Patterson confirmed      m  15 2023-01-02                 &lt;NA&gt;</span></span>
@@ -262,21 +261,20 @@
 <span><span class="co">#&gt; 5         2022-12-28        2023-01-02</span></span>
 <span><span class="co">#&gt; 6         2023-01-04        2023-01-04</span></span></code></pre></div>
 </details><div class="alert alert-warning">
-<p>The minimum age of the youngest age group and the maximum age of the oldest age group must match the age range specified in the <code>age_range</code> argument of <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>. If it does not the function will error.</p>
+<p>The minimum age of the youngest age group must match the age range specified in the <code>age_range</code> argument of <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, and the largest age limit in the rate <code>&lt;data.frame&gt;</code> must not be older than the upper age range. If these conditions are not met the function will error.</p>
 <p>If the age-stratified rate table does not match the default (<code>c(1, 90)</code>), the <code>age_range</code> argument will need to be set to match.</p>
 </div>
-<p>For example, the default age range of the population is 1 to 90 (inclusive). In our example above, the lowest age group started at 1 and the oldest age group stopped at 90. This matches the default <code>age_range = c(1, 90)</code>. However, see here that if the oldest age bracket was up to 95 the function will not run.</p>
+<p>For example, the default age range of the population is 1 to 90 (inclusive). In our example above, the lowest age group started at 1 and the oldest age group stopped at 90. This matches the default <code>age_range = c(1, 90)</code>. However, see here that if the lower age limit exceeds the age range the function will not run.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  min_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
-<span>  max_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">80</span>, <span class="fl">95</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">95</span><span class="op">)</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_hosp_rate</span></span>
-<span><span class="co">#&gt;   min_age max_age rate</span></span>
-<span><span class="co">#&gt; 1       1       5 0.10</span></span>
-<span><span class="co">#&gt; 2       5      80 0.05</span></span>
-<span><span class="co">#&gt; 3      80      95 0.20</span></span>
+<span><span class="co">#&gt;   age_limit rate</span></span>
+<span><span class="co">#&gt; 1         1 0.10</span></span>
+<span><span class="co">#&gt; 2         5 0.05</span></span>
+<span><span class="co">#&gt; 3        95 0.20</span></span>
 <span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
@@ -285,12 +283,11 @@
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_rate <span class="op">=</span> <span class="va">age_dep_hosp_rate</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in .check_rate_df(hosp_rate, age_range = age_range): maximum age of the highest age group should match upper age range</span></span></code></pre></div>
-</details><p>In order to make this code run with the age-stratified hospitalisation rate given, the <code>age_range</code> can be adjusted.</p>
+<span><span class="co">#&gt; Error in .check_rate_df(hosp_rate, age_range = age_range): lower bound of oldest age group must be lower than highest age range</span></span></code></pre></div>
+</details><p>In order to make this code run with the age-stratified hospitalisation rate given, the <code>age_range</code> can be adjusted. Here the oldest age bracket is now 95 to 100 (<code>[95, 100]</code>).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  min_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
-<span>  max_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">80</span>, <span class="fl">95</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">95</span><span class="op">)</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -300,17 +297,17 @@
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_rate <span class="op">=</span> <span class="va">age_dep_hosp_rate</span>,</span>
-<span>  age_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">95</span><span class="op">)</span></span>
+<span>  age_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id            case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1         Alexander Ng confirmed      m  24 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2     Elizabeth Benson confirmed      f  94 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3      Akram al-Hosein suspected      m  74 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4         Treyvon Hall confirmed      m  62 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5    Hamaama al-Habeeb confirmed      f  41 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6 Christopher Martinez confirmed      m  58 2023-01-03                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   id           case_name case_type gender age onset_date hospitalisation_date</span></span>
+<span><span class="co">#&gt; 1  1          Jehu Ocloo confirmed      m  24 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2    Dominque Bartell  probable      f  94 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3 Robert Bautista III confirmed      m  74 2023-01-02           2023-01-05</span></span>
+<span><span class="co">#&gt; 4  4      Matthew Pineda confirmed      m  62 2023-01-02                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5       Shantia Horne suspected      f  41 2023-01-02                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6    Wolfgang Danskin confirmed      m  58 2023-01-03                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2         2023-01-05        2023-01-08</span></span>
@@ -322,15 +319,14 @@
 <p>Here are a couple of examples:</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_death_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  min_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
-<span>  max_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">80</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.1</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_hosp_death_rate</span></span>
-<span><span class="co">#&gt;   min_age max_age rate</span></span>
-<span><span class="co">#&gt; 1       1       5  0.3</span></span>
-<span><span class="co">#&gt; 2       5      80  0.1</span></span>
-<span><span class="co">#&gt; 3      80      90  0.6</span></span>
+<span><span class="co">#&gt;   age_limit rate</span></span>
+<span><span class="co">#&gt; 1         1  0.3</span></span>
+<span><span class="co">#&gt; 2         5  0.1</span></span>
+<span><span class="co">#&gt; 3        80  0.6</span></span>
 <span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
@@ -341,15 +337,14 @@
 <span><span class="op">)</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_non_hosp_death_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  min_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
-<span>  max_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">80</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_non_hosp_death_rate</span></span>
-<span><span class="co">#&gt;   min_age max_age rate</span></span>
-<span><span class="co">#&gt; 1       1       5 0.10</span></span>
-<span><span class="co">#&gt; 2       5      80 0.05</span></span>
-<span><span class="co">#&gt; 3      80      90 0.10</span></span>
+<span><span class="co">#&gt;   age_limit rate</span></span>
+<span><span class="co">#&gt; 1         1 0.10</span></span>
+<span><span class="co">#&gt; 2         5 0.05</span></span>
+<span><span class="co">#&gt; 3        80 0.10</span></span>
 <span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
@@ -361,18 +356,15 @@
 </details><p>Up until now these age-stratified tables have only been supplied to one rate. However, these can be supplied in the same simulation. In this case the hospitalisation rate, and death rates inside and outside of hospital, are all specified.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  min_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
-<span>  max_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">80</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_hosp_death_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  min_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
-<span>  max_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">80</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.1</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_non_hosp_death_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  min_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
-<span>  max_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">80</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -388,19 +380,19 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id             case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1          Darius Grant  probable      m  27 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2 Alexandria Wooldridge confirmed      f  56 2023-01-03                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3        Ashay Callbeck confirmed      m  55 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4          Shane Ockert suspected      m  33 2023-01-04                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5     Briana Quick Bear suspected      f  48 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6         Brady Conolty confirmed      m  53 2023-01-07                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 1  1     Jennifer Sandlian  probable      f  84 2023-01-01                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2 Khairiya el-Moghaddam  probable      f  59 2023-01-05                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3     Yannely Aguinaldo suspected      f  90 2023-01-05                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4         Lameke Little confirmed      m  77 2023-01-05                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5           John Acosta  probable      m  19 2023-01-06                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6     Malissa Bellinger  probable      f  40 2023-01-07                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2         2023-01-04        2023-01-07</span></span>
-<span><span class="co">#&gt; 3         2022-12-29        2023-01-01</span></span>
-<span><span class="co">#&gt; 4         2023-01-02        2023-01-04</span></span>
-<span><span class="co">#&gt; 5         2023-01-01        2023-01-04</span></span>
-<span><span class="co">#&gt; 6         2023-01-06        2023-01-07</span></span></code></pre></div>
+<span><span class="co">#&gt; 2         2023-01-02        2023-01-05</span></span>
+<span><span class="co">#&gt; 3         2023-01-04        2023-01-07</span></span>
+<span><span class="co">#&gt; 4         2023-01-08        2023-01-09</span></span>
+<span><span class="co">#&gt; 5         2023-01-07        2023-01-10</span></span>
+<span><span class="co">#&gt; 6         2023-01-07        2023-01-09</span></span></code></pre></div>
 </details>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
