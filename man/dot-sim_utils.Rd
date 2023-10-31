@@ -12,7 +12,7 @@ within \pkg{simulist}}
   serial_interval,
   outbreak_start_date,
   min_chain_size,
-  age_range,
+  population_age,
   config
 )
 
@@ -41,9 +41,9 @@ within \pkg{simulist}}
 the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
-\item{age_range}{A \code{numeric} vector with two elements. The first is the lower
-bound for the age range, and and the second is the upper bound for the age
-range (both inclusive, i.e. [lower, upper]).}
+\item{population_age}{A \code{numeric} vector with two elements. The first is
+the lower bound for the age range, and and the second is the upper bound
+for the age range (both inclusive, i.e. [lower, upper]).}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
 Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}

@@ -18,7 +18,7 @@ NULL
                              serial_interval,
                              outbreak_start_date,
                              min_chain_size,
-                             age_range,
+                             population_age,
                              config) {
   chain_size <- 0
   # condition on a minimum chain size
@@ -64,9 +64,9 @@ NULL
 
   # add random age and gender
   chain$gender <- sample(c("m", "f"), replace = TRUE, size = nrow(chain))
-  if (is.data.frame(age_range)) {
-    age_groups <- apply(age_range, MARGIN = 1, function(x) x[1]:x[2])
-    sample_weight <- rep(age_range$proportion, times = lengths(age_groups))
+  if (is.data.frame(population_age)) {
+    age_groups <- apply(population_age, MARGIN = 1, function(x) x[1]:x[2])
+    sample_weight <- rep(population_age$proportion, times = lengths(age_groups))
     # maybe normalise for vector length
     # sample_weight <- unlist(lapply(sample_weight, function(y) y / length(y)))
     chain$age <- sample(
@@ -77,7 +77,7 @@ NULL
     )
   } else {
     chain$age <- sample(
-      age_range[1]:age_range[2],
+      population_age[1]:population_age[2],
       size = nrow(chain),
       replace = TRUE
     )

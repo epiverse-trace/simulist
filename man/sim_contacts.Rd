@@ -10,7 +10,7 @@ sim_contacts(
   contact_distribution,
   outbreak_start_date = as.Date("2023-01-01"),
   min_chain_size = 10,
-  age_range = c(1, 90),
+  population_age = c(1, 90),
   contact_tracing_status_probs = c(under_followup = 0.7, lost_to_followup = 0.2, unknown
     = 0.1),
   config = create_config(),
@@ -33,9 +33,9 @@ to be infected or not infected.}
 the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
-\item{age_range}{A \code{numeric} vector with two elements. The first is the lower
-bound for the age range, and and the second is the upper bound for the age
-range (both inclusive, i.e. [lower, upper]).}
+\item{population_age}{A \code{numeric} vector with two elements. The first is
+the lower bound for the age range, and and the second is the upper bound
+for the age range (both inclusive, i.e. [lower, upper]).}
 
 \item{contact_tracing_status_probs}{A named \code{numeric} vector with the
 probability of each contact tracing status. The names of the vector must

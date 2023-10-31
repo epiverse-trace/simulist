@@ -41,9 +41,9 @@
 #' @param min_chain_size A single `numeric` defining the minimum chain size for
 #' the simulated outbreak. Default is `10`. This can be increased when the
 #' function should simulate a larger outbreak.
-#' @param age_range A `numeric` vector with two elements. The first is the lower
-#' bound for the age range, and and the second is the upper bound for the age
-#' range (both inclusive, i.e. \[lower, upper\]).
+#' @param population_age A `numeric` vector with two elements. The first is
+#' the lower bound for the age range, and and the second is the upper bound
+#' for the age range (both inclusive, i.e. \[lower, upper\]).
 #' @param case_type_probs A named `numeric` vector with the probability of
 #' each case type. The names of the vector must be `"suspected"`, `"probable"`,
 #' `"confirmed"`. Values of each case type must sum to one.
@@ -115,7 +115,7 @@ sim_linelist <- function(R, # nolint cyclocomp
                          add_names = TRUE,
                          add_ct = FALSE,
                          min_chain_size = 10,
-                         age_range = c(1, 90),
+                         population_age = c(1, 90),
                          case_type_probs = c(
                            suspected = 0.2,
                            probable = 0.3,
@@ -153,31 +153,31 @@ sim_linelist <- function(R, # nolint cyclocomp
     "non_hosp_death_rate must be a single numeric or a data.frame" =
       is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
       is.data.frame(non_hosp_death_rate),
-    "age_range must be two numerics or a data.frame" =
-      is.numeric(age_range) && length(age_range) == 2 ||
-      is.data.frame(age_range)
+    "population_age must be two numerics or a data.frame" =
+      is.numeric(population_age) && length(population_age) == 2 ||
+      is.data.frame(population_age)
   )
 
   if (is.data.frame(hosp_rate)) {
     hosp_rate <- .check_rate_df(
       hosp_rate,
-      age_range = age_range
+      age_range = population_age
     )
   }
   if (is.data.frame(hosp_death_rate)) {
     hosp_death_rate <- .check_rate_df(
       hosp_death_rate,
-      age_range = age_range
+      age_range = population_age
     )
   }
   if (is.data.frame(non_hosp_death_rate)) {
     non_hosp_death_rate <- .check_rate_df(
       non_hosp_death_rate,
-      age_range = age_range
+      age_range = population_age
     )
   }
-  if (is.data.frame(age_range)) {
-    age_range <- .check_age_df(age_range)
+  if (is.data.frame(population_age)) {
+    population_age <- .check_age_df(population_age)
   }
 
   chain <- .sim_bp_linelist(
@@ -185,7 +185,7 @@ sim_linelist <- function(R, # nolint cyclocomp
     serial_interval = serial_interval,
     outbreak_start_date = outbreak_start_date,
     min_chain_size = min_chain_size,
-    age_range = age_range,
+    population_age = population_age,
     config = config
   )
 

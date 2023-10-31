@@ -16,7 +16,7 @@ sim_linelist(
   add_names = TRUE,
   add_ct = FALSE,
   min_chain_size = 10,
-  age_range = c(1, 90),
+  population_age = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.3, confirmed = 0.5),
   config = create_config(),
   ...
@@ -62,9 +62,9 @@ of the line list. Default is \code{FALSE}.}
 the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
-\item{age_range}{A \code{numeric} vector with two elements. The first is the lower
-bound for the age range, and and the second is the upper bound for the age
-range (both inclusive, i.e. [lower, upper]).}
+\item{population_age}{A \code{numeric} vector with two elements. The first is
+the lower bound for the age range, and and the second is the upper bound
+for the age range (both inclusive, i.e. [lower, upper]).}
 
 \item{case_type_probs}{A named \code{numeric} vector with the probability of
 each case type. The names of the vector must be \code{"suspected"}, \code{"probable"},
