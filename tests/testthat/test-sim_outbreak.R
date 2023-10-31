@@ -124,3 +124,36 @@ test_that("sim_outbreak works as expected with age-strat rates", {
       "date_first_contact", "date_last_contact", "was_case", "status")
   )
 })
+
+test_that("sim_outbreak works as expected with age structure", {
+  age_struct <- data.frame(
+    age_range = c("1-4", "5-79", "80-90"),
+    proportion = c(0.1, 0.7, 0.2),
+    stringsAsFactors = FALSE
+  )
+  set.seed(1)
+  outbreak <- sim_outbreak(
+    R = 1.1,
+    serial_interval = serial_interval,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    contact_distribution = contact_distribution,
+    population_age = age_struct
+  )
+
+  expect_type(outbreak, type = "list")
+  expect_s3_class(outbreak$linelist, class = "data.frame")
+  expect_s3_class(outbreak$contacts, class = "data.frame")
+  expect_identical(dim(outbreak$linelist), c(42L, 9L))
+  expect_identical(dim(outbreak$contacts), c(177L, 8L))
+  expect_identical(
+    colnames(outbreak$linelist),
+    c("id", "case_name", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact")
+  )
+  expect_identical(
+    colnames(outbreak$contacts),
+    c("part_name", "contact_name", "cnt_age", "cnt_gender",
+      "date_first_contact", "date_last_contact", "was_case", "status")
+  )
+})
