@@ -12,6 +12,14 @@
 #' (or probability) of hospitalisation for that age group. Should be between
 #' 0 and 1.
 #'
+#' For an age structured population, a `<data.frame>` with two columns:
+#' * `age_range`: a column with characters specifying the lower and upper bound
+#'  of that age group, separated by a hyphen (-). Both bounds are inclusive
+#' (integers). For example, an age group of one to ten would be given as
+#' `"1-10"`.
+#' * `proportion`: a column with the proportion of the population that are in
+#' that age group. Proportions must sum to one.
+#'
 #'
 #' @param R A single `numeric` for the reproduction number.
 #' @param serial_interval An `<epidist>` object for the serial interval.
@@ -41,9 +49,13 @@
 #' @param min_chain_size A single `numeric` defining the minimum chain size for
 #' the simulated outbreak. Default is `10`. This can be increased when the
 #' function should simulate a larger outbreak.
-#' @param population_age A `numeric` vector with two elements. The first is
-#' the lower bound for the age range, and and the second is the upper bound
-#' for the age range (both inclusive, i.e. \[lower, upper\]).
+#' @param population_age Either a `numeric` vector with two elements or a
+#' `<data.frame>` with age structure in the population. Use a `numeric` vector
+#' to specific the age range of the population, the first element is the lower
+#' bound for the age range, and and the second is the upper bound for the age
+#' range (both inclusive, i.e. \[lower, upper\]). The `<data.frame>` with
+#' age groups and the proportion of the population in that group. See details
+#' and examples for more information.
 #' @param case_type_probs A named `numeric` vector with the probability of
 #' each case type. The names of the vector must be `"suspected"`, `"probable"`,
 #' `"confirmed"`. Values of each case type must sum to one.

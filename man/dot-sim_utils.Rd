@@ -41,9 +41,13 @@ within \pkg{simulist}}
 the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
-\item{population_age}{A \code{numeric} vector with two elements. The first is
-the lower bound for the age range, and and the second is the upper bound
-for the age range (both inclusive, i.e. [lower, upper]).}
+\item{population_age}{Either a \code{numeric} vector with two elements or a
+\verb{<data.frame>} with age structure in the population. Use a \code{numeric} vector
+to specific the age range of the population, the first element is the lower
+bound for the age range, and and the second is the upper bound for the age
+range (both inclusive, i.e. [lower, upper]). The \verb{<data.frame>} with
+age groups and the proportion of the population in that group. See details
+and examples for more information.}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
 Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
