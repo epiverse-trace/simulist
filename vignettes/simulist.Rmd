@@ -143,20 +143,7 @@ The names used in the line list are produced at random by the [{randomNames}](ht
 
 ## Population age
 
-By default `sim_linelist()` simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the `population_age` argument. Here we simulated an outbreak in a population with a population ranging from 5 to 75.
-
-```{r sim-linelist-age-range}
-linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
-  onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death,
-  population_age = c(5, 75)
-)
-head(linelist)
-```
-
-It is currently not possible to simulate with a non-uniform population age structure in {simulist}.
+For an overview of how a line list can be simulated with a uniform or structured population age distribution see the [vignette dedicated to this topic](age-struct-pop.html).
 
 ## Age-stratified hospitalisation and death rates
 
