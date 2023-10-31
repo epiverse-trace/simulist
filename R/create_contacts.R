@@ -48,11 +48,24 @@
     other_contacts[rep(row.names(other_contacts), contact_freq), ]
 
   # add random age and gender
-  other_contacts$cnt_age <- sample(
-    population_age[1]:population_age[2],
-    replace = TRUE,
-    size = nrow(other_contacts)
-  )
+  if (is.data.frame(population_age)) {
+    age_groups <- apply(population_age, MARGIN = 1, function(x) x[1]:x[2])
+    sample_weight <- rep(population_age$proportion, times = lengths(age_groups))
+    # maybe normalise for vector length
+    # sample_weight <- unlist(lapply(sample_weight, function(y) y / length(y)))
+    other_contacts$cnt_age <- sample(
+      unlist(age_groups),
+      size = nrow(other_contacts),
+      replace = TRUE,
+      prob = sample_weight
+    )
+  } else {
+    other_contacts$cnt_age <- sample(
+      population_age[1]:population_age[2],
+      size = nrow(other_contacts),
+      replace = TRUE
+    )
+  }
   other_contacts$cnt_gender <- sample(
     c("m", "f"),
     size = nrow(other_contacts),
