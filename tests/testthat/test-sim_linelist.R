@@ -164,6 +164,40 @@ test_that("sim_list works as expected with age-strat rates & age structure", {
   )
 })
 
+test_that("sim_list gives expected proportion of ages with age structure", {
+  age_struct <- data.frame(
+    age_range = c("1-4", "5-79", "80-90"),
+    proportion = c(0.2, 0.5, 0.3),
+    stringsAsFactors = FALSE
+  )
+  set.seed(1)
+  linelist <- sim_linelist(
+    R = 1.5,
+    serial_interval = serial_interval,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    population_age = age_struct
+  )
+
+  # as nrow -> Inf, sampled proportion -> age struct proportion
+  # arbitrary tol used but given approximation for correct proportion
+  expect_equal(
+    sum(linelist$age < 5) / (length(linelist$age)),
+    expected = 0.2,
+    tolerance = 0.1
+  )
+  expect_equal(
+    sum(linelist$age > 4 & linelist$age < 80) / (length(linelist$age)),
+    expected = 0.5,
+    tolerance = 0.1
+  )
+  expect_equal(
+    sum(linelist$age > 79) / (length(linelist$age)),
+    expected = 0.3,
+    tolerance = 0.1
+  )
+})
+
 test_that("sim_list works as expected with modified config", {
   set.seed(1)
   linelist <- sim_linelist(
