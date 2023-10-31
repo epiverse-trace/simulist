@@ -24,9 +24,13 @@ distribution. This is similar to the offspring distribution, but describes
 the heterogeneity of all contact patterns, including contacts that go on
 to be infected or not infected.}
 
-\item{population_age}{A \code{numeric} vector with two elements. The first is
-the lower bound for the age range, and and the second is the upper bound
-for the age range (both inclusive, i.e. [lower, upper]).}
+\item{population_age}{Either a \code{numeric} vector with two elements or a
+\verb{<data.frame>} with age structure in the population. Use a \code{numeric} vector
+to specific the age range of the population, the first element is the lower
+bound for the age range, and and the second is the upper bound for the age
+range (both inclusive, i.e. [lower, upper]). The \verb{<data.frame>} with
+age groups and the proportion of the population in that group. See details
+and examples for more information.}
 
 \item{contact_tracing_status_probs}{A named \code{numeric} vector with the
 probability of each contact tracing status. The names of the vector must

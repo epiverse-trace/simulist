@@ -70,9 +70,13 @@ of the line list. Default is \code{FALSE}.}
 the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
-\item{population_age}{A \code{numeric} vector with two elements. The first is
-the lower bound for the age range, and and the second is the upper bound
-for the age range (both inclusive, i.e. [lower, upper]).}
+\item{population_age}{Either a \code{numeric} vector with two elements or a
+\verb{<data.frame>} with age structure in the population. Use a \code{numeric} vector
+to specific the age range of the population, the first element is the lower
+bound for the age range, and and the second is the upper bound for the age
+range (both inclusive, i.e. [lower, upper]). The \verb{<data.frame>} with
+age groups and the proportion of the population in that group. See details
+and examples for more information.}
 
 \item{case_type_probs}{A named \code{numeric} vector with the probability of
 each case type. The names of the vector must be \code{"suspected"}, \code{"probable"},
@@ -112,6 +116,16 @@ arguments. This \verb{<data.frame>} should have two columns:
 \item \code{rate}: a column with one \code{numeric} per cell for the proportion
 (or probability) of hospitalisation for that age group. Should be between
 0 and 1.
+}
+
+For an age structured population, a \verb{<data.frame>} with two columns:
+\itemize{
+\item \code{age_range}: a column with characters specifying the lower and upper bound
+of that age group, separated by a hyphen (-). Both bounds are inclusive
+(integers). For example, an age group of one to ten would be given as
+\code{"1-10"}.
+\item \code{proportion}: a column with the proportion of the population that are in
+that age group. Proportions must sum to one.
 }
 }
 \examples{
