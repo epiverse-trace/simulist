@@ -67,8 +67,9 @@ NULL
   if (is.data.frame(population_age)) {
     age_groups <- apply(population_age, MARGIN = 1, function(x) x[1]:x[2])
     sample_weight <- rep(population_age$proportion, times = lengths(age_groups))
-    # maybe normalise for vector length
-    # sample_weight <- unlist(lapply(sample_weight, function(y) y / length(y)))
+    # normalise for vector length
+    sample_weight <- sample_weight /
+      rep(lengths(age_groups), times = lengths(age_groups))
     chain$age <- sample(
       unlist(age_groups),
       size = nrow(chain),
