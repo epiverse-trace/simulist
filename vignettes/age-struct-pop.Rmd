@@ -1,6 +1,10 @@
 ---
 title: "Age structured population"
-output: rmarkdown::html_vignette
+output: 
+  bookdown::html_vignette2:
+    code_folding: show
+pkgdown:
+  as_is: true
 vignette: >
   %\VignetteIndexEntry{Age structured population}
   %\VignetteEngine{knitr::rmarkdown}
@@ -80,7 +84,7 @@ head(linelist)
 
 We can plot the age distribution for individuals in the line list, binned into 5 year categories.
 
-```{r plot-age-range}
+```{r plot-age-range, class.source = 'fold-hide', fig.cap="Age distribution of individuals in a simulated line list sampled from a uniform distribution between 5 and 75.", fig.width = 8, fig.height = 5}
 ggplot(linelist[, c("gender", "age")]) +
   geom_histogram(
     mapping = aes(x = age),
@@ -124,7 +128,7 @@ head(linelist)
 
 Again we can plot the age distribution to see the age structure for individuals in the line list. Given the relative uniformity of the age structure specified it is not greatly different from the uniform age structure plotted above, other than having a higher upper age limit. The data is binned into 5 year categories and facetted by gender.
 
-```{r plot-age-struct}
+```{r plot-age-struct, class.source = 'fold-hide', fig.cap="Age distribution of line list cases facetted by gender.", fig.width = 8, fig.height = 5}
 ggplot(linelist[, c("gender", "age")]) +
   geom_histogram(
     mapping = aes(x = age),
@@ -174,7 +178,7 @@ head(linelist)
 ```
 A common and useful method for plotting age data is in the form of age pyramids. Here we partition the data by gender and plot the age distribution.
 
-```{r plot-age-struct-young}
+```{r plot-age-struct-young, class.source = 'fold-hide', fig.cap="Age pyramid for a simulated line list with an age structured population.", fig.width = 8, fig.height = 5}
 linelist_m <- subset(linelist, subset = gender == "m")
 age_cats_m <- as.data.frame(table(floor(linelist_m$age / 5) * 5))
 colnames(age_cats_m) <- c("AgeCat", "Population")
