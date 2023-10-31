@@ -90,7 +90,6 @@ sim_outbreak <- function(R,
   checkmate::assert_logical(add_names, len = 1)
   checkmate::assert_logical(add_ct, len = 1)
   checkmate::assert_integerish(min_chain_size, lower = 1)
-  checkmate::assert_numeric(population_age, len = 2)
   checkmate::assert_numeric(case_type_probs, len = 3)
   checkmate::assert_names(
     names(case_type_probs),
@@ -115,9 +114,21 @@ sim_outbreak <- function(R,
       is.data.frame(hosp_death_rate),
     "non_hosp_death_rate must be a single numeric or a data.frame" =
       is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
-      is.data.frame(non_hosp_death_rate)
+      is.data.frame(non_hosp_death_rate),
+    "population_age must be two numerics or a data.frame" =
+      is.numeric(population_age) && length(population_age) == 2 ||
+      is.data.frame(population_age)
   )
 
+  if (is.data.frame(population_age)) {
+    population_age <- .check_age_df(population_age)
+    age_range <- c(
+      min(population_age[, "min_age"]),
+      max(population_age[, "max_age"])
+    )
+  } else {
+    age_range <- population_age
+  }
   if (is.data.frame(hosp_rate)) {
     hosp_rate <- .check_rate_df(
       hosp_rate,
