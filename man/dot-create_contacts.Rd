@@ -8,7 +8,7 @@
   .data,
   outbreak_start_date,
   contact_distribution,
-  age_range,
+  population_age,
   contact_tracing_status_probs,
   config
 )
@@ -24,9 +24,9 @@ distribution. This is similar to the offspring distribution, but describes
 the heterogeneity of all contact patterns, including contacts that go on
 to be infected or not infected.}
 
-\item{age_range}{A \code{numeric} vector with two elements. The first is the lower
-bound for the age range, and and the second is the upper bound for the age
-range (both inclusive, i.e. [lower, upper]).}
+\item{population_age}{A \code{numeric} vector with two elements. The first is
+the lower bound for the age range, and and the second is the upper bound
+for the age range (both inclusive, i.e. [lower, upper]).}
 
 \item{contact_tracing_status_probs}{A named \code{numeric} vector with the
 probability of each contact tracing status. The names of the vector must

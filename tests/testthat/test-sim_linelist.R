@@ -123,7 +123,7 @@ test_that("sim_list works as expected with age structure", {
     serial_interval = serial_interval,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
-    age_range = age_struct
+    population_age = age_struct
   )
 
   expect_s3_class(linelist, class = "data.frame")

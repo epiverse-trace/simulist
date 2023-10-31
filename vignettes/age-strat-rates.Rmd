@@ -118,7 +118,7 @@ In this example the hospitalisation rate will be:
 * `0.1` (or 10%) for under 5s
 * `0.05` (or 5%) for the rest
 
-The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table. The oldest age group stops at the upper age range given in the `age_range` argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive).
+The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table. The oldest age group stops at the upper age range given in the `population_age` argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive).
 
 ```{r, make-hosp-rate-df}
 age_dep_hosp_rate <- data.frame(
@@ -142,13 +142,13 @@ head(linelist)
 
 ::: {.alert .alert-warning}
 
-The minimum age of the youngest age group must match the age range specified in the `age_range` argument of `sim_linelist()`, and the largest age limit in the rate `<data.frame>` must not be older than the upper age range. If these conditions are not met the function will error.
+The minimum age of the youngest age group must match the age range specified in the `population_age` argument of `sim_linelist()`, and the largest age limit in the rate `<data.frame>` must not be older than the upper age range. If these conditions are not met the function will error.
 
-If the age-stratified rate table does not match the default (`c(1, 90)`), the `age_range` argument will need to be set to match.
+If the age-stratified rate table does not match the default (`c(1, 90)`), the `population_age` argument will need to be set to match.
 
 :::
 
-For example, the default age range of the population is 1 to 90 (inclusive). In our example above, the lowest age group started at 1 and the oldest age group stopped at 90. This matches the default `age_range = c(1, 90)`. However, see here that if the lower age limit exceeds the age range the function will not run.
+For example, the default age range of the population is 1 to 90 (inclusive). In our example above, the lowest age group started at 1 and the oldest age group stopped at 90. This matches the default `population_age = c(1, 90)`. However, see here that if the lower age limit exceeds the age range the function will not run.
 
 ```{r, sim-age_strat_linelist-error, error=TRUE}
 age_dep_hosp_rate <- data.frame(
@@ -166,7 +166,7 @@ linelist <- sim_linelist(
 )
 ```
 
-In order to make this code run with the age-stratified hospitalisation rate given, the `age_range` can be adjusted. Here the oldest age bracket is now 95 to 100 (`[95, 100]`).
+In order to make this code run with the age-stratified hospitalisation rate given, the `population_age` can be adjusted. Here the oldest age bracket is now 95 to 100 (`[95, 100]`).
 
 ```{r, sim-age_strat-linelist-diff-age-range}
 age_dep_hosp_rate <- data.frame(
@@ -180,7 +180,7 @@ linelist <- sim_linelist(
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_rate = age_dep_hosp_rate,
-  age_range = c(1, 100)
+  population_age = c(1, 100)
 )
 
 head(linelist)

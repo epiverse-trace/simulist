@@ -41,7 +41,7 @@ sim_contacts <- function(R,
                          contact_distribution,
                          outbreak_start_date = as.Date("2023-01-01"),
                          min_chain_size = 10,
-                         age_range = c(1, 90),
+                         population_age = c(1, 90),
                          contact_tracing_status_probs = c(
                            under_followup = 0.7,
                            lost_to_followup = 0.2,
@@ -58,7 +58,7 @@ sim_contacts <- function(R,
   checkmate::assert_class(contact_distribution, classes = "epidist")
   checkmate::assert_date(outbreak_start_date)
   checkmate::assert_integerish(min_chain_size, lower = 1)
-  checkmate::assert_numeric(age_range, len = 2)
+  checkmate::assert_numeric(population_age, len = 2)
   checkmate::assert_numeric(contact_tracing_status_probs, len = 3)
   checkmate::assert_names(
     names(contact_tracing_status_probs),
@@ -75,7 +75,7 @@ sim_contacts <- function(R,
     serial_interval = serial_interval,
     outbreak_start_date = outbreak_start_date,
     min_chain_size = min_chain_size,
-    age_range = age_range,
+    population_age = population_age,
     config = config
   )
 
@@ -85,7 +85,7 @@ sim_contacts <- function(R,
     .data = chain,
     outbreak_start_date = outbreak_start_date,
     contact_distribution = contact_distribution,
-    age_range = age_range,
+    population_age = population_age,
     contact_tracing_status_probs = contact_tracing_status_probs,
     config = config
   )

@@ -65,7 +65,7 @@ sim_outbreak <- function(R,
                          add_names = TRUE,
                          add_ct = FALSE,
                          min_chain_size = 10,
-                         age_range = c(1, 90),
+                         population_age = c(1, 90),
                          case_type_probs = c(
                            suspected = 0.2,
                            probable = 0.3,
@@ -90,7 +90,7 @@ sim_outbreak <- function(R,
   checkmate::assert_logical(add_names, len = 1)
   checkmate::assert_logical(add_ct, len = 1)
   checkmate::assert_integerish(min_chain_size, lower = 1)
-  checkmate::assert_numeric(age_range, len = 2)
+  checkmate::assert_numeric(population_age, len = 2)
   checkmate::assert_numeric(case_type_probs, len = 3)
   checkmate::assert_names(
     names(case_type_probs),
@@ -121,19 +121,19 @@ sim_outbreak <- function(R,
   if (is.data.frame(hosp_rate)) {
     hosp_rate <- .check_rate_df(
       hosp_rate,
-      age_range = age_range
+      age_range = population_age
     )
   }
   if (is.data.frame(hosp_death_rate)) {
     hosp_death_rate <- .check_rate_df(
       hosp_death_rate,
-      age_range = age_range
+      age_range = population_age
     )
   }
   if (is.data.frame(non_hosp_death_rate)) {
     non_hosp_death_rate <- .check_rate_df(
       non_hosp_death_rate,
-      age_range = age_range
+      age_range = population_age
     )
   }
 
@@ -142,7 +142,7 @@ sim_outbreak <- function(R,
     serial_interval = serial_interval,
     outbreak_start_date = outbreak_start_date,
     min_chain_size = min_chain_size,
-    age_range = age_range,
+    population_age = population_age,
     config = config
   )
 
@@ -164,7 +164,7 @@ sim_outbreak <- function(R,
     .data = linelist$chain,
     outbreak_start_date = outbreak_start_date,
     contact_distribution = contact_distribution,
-    age_range = age_range,
+    population_age = population_age,
     contact_tracing_status_probs = contact_tracing_status_probs,
     config = config
   )

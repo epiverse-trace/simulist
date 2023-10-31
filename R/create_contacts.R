@@ -8,7 +8,7 @@
 .create_contacts <- function(.data,
                             outbreak_start_date,
                             contact_distribution,
-                            age_range,
+                            population_age,
                             contact_tracing_status_probs,
                             config) {
 
@@ -49,7 +49,7 @@
 
   # add random age and gender
   other_contacts$cnt_age <- sample(
-    age_range[1]:age_range[2],
+    population_age[1]:population_age[2],
     replace = TRUE,
     size = nrow(other_contacts)
   )
