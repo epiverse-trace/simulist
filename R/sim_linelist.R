@@ -158,26 +158,32 @@ sim_linelist <- function(R, # nolint cyclocomp
       is.data.frame(population_age)
   )
 
+  if (is.data.frame(population_age)) {
+    population_age <- .check_age_df(population_age)
+    age_range <- c(
+      min(population_age[, "min_age"]),
+      max(population_age[, "max_age"])
+    )
+  } else {
+    age_range <- population_age
+  }
   if (is.data.frame(hosp_rate)) {
     hosp_rate <- .check_rate_df(
       hosp_rate,
-      age_range = population_age
+      age_range = age_range
     )
   }
   if (is.data.frame(hosp_death_rate)) {
     hosp_death_rate <- .check_rate_df(
       hosp_death_rate,
-      age_range = population_age
+      age_range = age_range
     )
   }
   if (is.data.frame(non_hosp_death_rate)) {
     non_hosp_death_rate <- .check_rate_df(
       non_hosp_death_rate,
-      age_range = population_age
+      age_range = age_range
     )
-  }
-  if (is.data.frame(population_age)) {
-    population_age <- .check_age_df(population_age)
   }
 
   chain <- .sim_bp_linelist(
