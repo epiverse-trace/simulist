@@ -135,6 +135,35 @@ test_that("sim_list works as expected with age structure", {
   )
 })
 
+test_that("sim_list works as expected with age-strat rates & age structure", {
+  age_dep_hosp_rate <- data.frame(
+    age_limit = c(1, 5, 80),
+    rate = c(0.1, 0.05, 0.2)
+  )
+  age_struct <- data.frame(
+    age_range = c("1-4", "5-79", "80-90"),
+    proportion = c(0.1, 0.7, 0.2),
+    stringsAsFactors = FALSE
+  )
+  set.seed(1)
+  linelist <- sim_linelist(
+    R = 1.1,
+    serial_interval = serial_interval,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    hosp_rate = age_dep_hosp_rate,
+    population_age = age_struct
+  )
+
+  expect_s3_class(linelist, class = "data.frame")
+  expect_identical(dim(linelist), c(42L, 9L))
+  expect_identical(
+    colnames(linelist),
+    c("id", "case_name", "case_type", "gender", "age", "onset_date",
+      "hospitalisation_date", "date_first_contact", "date_last_contact")
+  )
+})
+
 test_that("sim_list works as expected with modified config", {
   set.seed(1)
   linelist <- sim_linelist(
