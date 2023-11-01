@@ -171,7 +171,7 @@ sim_outbreak <- function(R, # nolint cyclocomp
     config = config
   )
 
-  contacts <- .create_contacts(
+  contacts <- .sim_contacts(
     .data = linelist$chain,
     outbreak_start_date = outbreak_start_date,
     contact_distribution = contact_distribution,

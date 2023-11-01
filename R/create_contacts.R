@@ -5,12 +5,12 @@
 #'
 #' @return A contacts `<data.frame>`
 #' @keywords internal
-.create_contacts <- function(.data,
-                            outbreak_start_date,
-                            contact_distribution,
-                            population_age,
-                            contact_tracing_status_probs,
-                            config) {
+.sim_contacts <- function(.data,
+                          outbreak_start_date,
+                          contact_distribution,
+                          population_age,
+                          contact_tracing_status_probs,
+                          config) {
 
   if (!"infector_name" %in% colnames(.data)) {
     .data <- .add_names(.data = .data)
