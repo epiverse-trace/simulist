@@ -1,0 +1,155 @@
+---
+title: "Visualising simulated data"
+output: 
+  bookdown::html_vignette2:
+    code_folding: show
+pkgdown:
+  as_is: true
+vignette: >
+  %\VignetteIndexEntry{Visualising simulated data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette gives an overview of the ways to plot the line list data output from the `sim_linelist()` function.
+
+Plotting can be useful to identify certain transmission dynamics and patterns in the simulated data, or just to check that the simulated data looks as expected given how the simulation was parameterised.
+
+```{r setup}
+library(simulist)
+library(epiparameter)
+library(incidence2)
+```
+
+First we load the required delay distributions using the {epiparameter} package.
+
+```{r, read-delay-dists}
+serial_interval <- epidist(
+  disease = "COVID-19",
+  epi_dist = "serial interval",
+  prob_distribution = "gamma",
+  prob_distribution_params = c(shape = 1, scale = 1)
+)
+
+# get onset to hospital admission from {epiparameter} database
+onset_to_hosp <- epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to hospitalisation",
+  single_epidist = TRUE
+)
+
+# get onset to death from {epiparameter} database
+onset_to_death <- epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to death",
+  single_epidist = TRUE
+)
+```
+
+Setting the seed ensures we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
+
+```{r, set-seed}
+set.seed(1)
+```
+
+Using a simple line list simulation with the factory default settings:
+
+```{r sim-linelist} 
+linelist <- sim_linelist(
+  R = 1.3,
+  serial_interval = serial_interval,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death
+)
+```
+
+
+```{r num-cases, echo=FALSE}
+message("This line list contains ", nrow(linelist), " cases.")
+```
+
+## Visualising incidence of onset, hospitalisation and death
+
+::: {.alert .alert-info}
+
+This section of the vignette is heavily based upon examples given in the [Get Started vignette in the {incidence2} package](https://www.reconverse.org/incidence2/articles/incidence2.html). It is highly recommended to read the documentation supplied in the [{incidence2} package](https://CRAN.R-project.org/package=incidence2) to explore the full range of functionality.
+
+:::
+
+Currently {simulist} outputs dates that are not rounded to the nearest day, i.e. it can be half way through a day. This is not obvious as R prints dates to the nearest day by default, and only by removing the date class (using `unclass()`) can you see the decimals (as R stores dates internally as the number of days since 1970-01-01).
+
+We round the dates in our line list to the nearest day for this demonstration. 
+
+***Note*** storing dates as precise doubles and not as integer days may change in the near future.
+
+```{r round-dates}
+# incidence requires rounded dates to cumulate counts
+date_cols <- grepl(pattern = "date", x = colnames(linelist), fixed = TRUE)
+linelist[, date_cols] <- as.data.frame(lapply(linelist[, date_cols], round))
+```
+
+To visualise the number of cases with onset on a particular day, the {incidence2} package, and its dedicated class (`<incidence2>`) are used for handling and plotting this data.
+
+```{r create-incidence}
+# create incidence object
+daily <- incidence(x = linelist, date_index = "onset_date")
+```
+
+It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
+
+```{r, complete-dates, fig.cap="Daily incidence of cases from symptom onset including days with zero cases", fig.width = 8, fig.height = 5}
+# impute for days without cases
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+Alternatively, incidence can be plotting weekly:
+
+```{r plot-weekly, fig.cap="Weekly incidence of cases from symptom onset", fig.width = 8, fig.height = 5}
+weekly <- incidence(linelist, date_index = "onset_date", interval = "isoweek")
+plot(weekly)
+```
+
+In order to check differences between a group in the line list data, for example gender, the `<incidence2>` data object can be recreated, specifying which columns to group by.
+
+```{r, group-by-gender, fig.cap="Weekly incidence of cases from symptom onset facetted by gender", fig.width = 8, fig.height = 5}
+weekly <- incidence(
+  linelist,
+  date_index = "onset_date",
+  interval = "isoweek",
+  groups = "gender"
+)
+plot(weekly)
+```
+ 
+To visualise the onset and hospitalisation incidence in the same plot they can be jointly specified to the `date_index` argument of `incidence2::incidence()`. 
+ 
+```{r, plot-onset-hospitalisation, fig.cap="Daily incidence of cases from symptom onset and incidence of hospitalisations", fig.width = 8, fig.height = 5}
+daily <- incidence(
+  linelist,
+  date_index = c(
+    onset = "onset_date",
+    hospitalisation = "hospitalisation_date"
+  ),
+  groups = "gender"
+)
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+## Demographic data
+
+Please see the [Age structured population vignette](age-struct-pop.html) for examples of how to plot the distribution of ages within a line list data set, including age pyramids. 
+
+The plotting code in vignettes is hidden by default, click the Code button with arrow to reveal the plotting code.
+
+## Visualising other line list information
+
+If there are other aspects of line list data that can be plotted and you would like to them added to this vignette please make an [issue](https://github.com/epiverse-trace/simulist/issues) or [pull request](https://github.com/epiverse-trace/simulist/pulls).
