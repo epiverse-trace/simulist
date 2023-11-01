@@ -58,6 +58,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/age-strat-rates.html">Age-stratified hospitalisation and death rates</a>
+    <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
   </div>
 </li>
       </ul>
@@ -225,7 +226,7 @@
 <li>
 <code>0.05</code> (or 5%) for the rest</li>
 </ul>
-<p>The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table. The oldest age group stops at the upper age range given in the <code>age_range</code> argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive).</p>
+<p>The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table. The oldest age group stops at the upper age range given in the <code>population_age</code> argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
@@ -261,10 +262,10 @@
 <span><span class="co">#&gt; 5         2022-12-28        2023-01-02</span></span>
 <span><span class="co">#&gt; 6         2023-01-04        2023-01-04</span></span></code></pre></div>
 </details><div class="alert alert-warning">
-<p>The minimum age of the youngest age group must match the age range specified in the <code>age_range</code> argument of <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, and the largest age limit in the rate <code>&lt;data.frame&gt;</code> must not be older than the upper age range. If these conditions are not met the function will error.</p>
-<p>If the age-stratified rate table does not match the default (<code>c(1, 90)</code>), the <code>age_range</code> argument will need to be set to match.</p>
+<p>The minimum age of the youngest age group must match the age range specified in the <code>population_age</code> argument of <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, and the largest age limit in the rate <code>&lt;data.frame&gt;</code> must not be older than the upper age range. If these conditions are not met the function will error.</p>
+<p>If the age-stratified rate table does not match the default (<code>c(1, 90)</code>), the <code>population_age</code> argument will need to be set to match.</p>
 </div>
-<p>For example, the default age range of the population is 1 to 90 (inclusive). In our example above, the lowest age group started at 1 and the oldest age group stopped at 90. This matches the default <code>age_range = c(1, 90)</code>. However, see here that if the lower age limit exceeds the age range the function will not run.</p>
+<p>For example, the default age range of the population is 1 to 90 (inclusive). In our example above, the lowest age group started at 1 and the oldest age group stopped at 90. This matches the default <code>population_age = c(1, 90)</code>. However, see here that if the lower age limit exceeds the age range the function will not run.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">95</span><span class="op">)</span>,</span>
@@ -284,7 +285,7 @@
 <span>  hosp_rate <span class="op">=</span> <span class="va">age_dep_hosp_rate</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in .check_rate_df(hosp_rate, age_range = age_range): lower bound of oldest age group must be lower than highest age range</span></span></code></pre></div>
-</details><p>In order to make this code run with the age-stratified hospitalisation rate given, the <code>age_range</code> can be adjusted. Here the oldest age bracket is now 95 to 100 (<code>[95, 100]</code>).</p>
+</details><p>In order to make this code run with the age-stratified hospitalisation rate given, the <code>population_age</code> can be adjusted. Here the oldest age bracket is now 95 to 100 (<code>[95, 100]</code>).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">95</span><span class="op">)</span>,</span>
@@ -297,7 +298,7 @@
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_rate <span class="op">=</span> <span class="va">age_dep_hosp_rate</span>,</span>
-<span>  age_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>

@@ -38,6 +38,7 @@ code being repeated across several simulation functions."><meta property="og:ima
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/age-strat-rates.html">Age-stratified hospitalisation and death rates</a>
+    <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -74,7 +75,7 @@ code being repeated across several simulation functions.</p>
 <span>  <span class="va">serial_interval</span>,</span>
 <span>  <span class="va">outbreak_start_date</span>,</span>
 <span>  <span class="va">min_chain_size</span>,</span>
-<span>  <span class="va">age_range</span>,</span>
+<span>  <span class="va">population_age</span>,</span>
 <span>  <span class="va">config</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -113,10 +114,14 @@ the simulated outbreak. Default is <code>10</code>. This can be increased when t
 function should simulate a larger outbreak.</p></dd>
 
 
-<dt>age_range</dt>
-<dd><p>A <code>numeric</code> vector with two elements. The first is the lower
+<dt>population_age</dt>
+<dd><p>Either a <code>numeric</code> vector with two elements or a
+<code>&lt;data.frame&gt;</code> with age structure in the population. Use a <code>numeric</code> vector
+to specific the age range of the population, the first element is the lower
 bound for the age range, and and the second is the upper bound for the age
-range (both inclusive, i.e. [lower, upper]).</p></dd>
+range (both inclusive, i.e. [lower, upper]). The <code>&lt;data.frame&gt;</code> with
+age groups and the proportion of the population in that group. See details
+and examples for more information.</p></dd>
 
 
 <dt>config</dt>

@@ -13,6 +13,9 @@
     <loc>/articles/age-strat-rates.html</loc>
   </url>
   <url>
+    <loc>/articles/age-struct-pop.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
@@ -32,6 +35,9 @@
   </url>
   <url>
     <loc>/reference/dot-add_info.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-check_age_df.html</loc>
   </url>
   <url>
     <loc>/reference/dot-check_rate_df.html</loc>
