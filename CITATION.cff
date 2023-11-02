@@ -117,6 +117,7 @@ references:
     email: tim.taylor@hiddenelephants.co.uk
     orcid: https://orcid.org/0000-0002-8587-7113
   year: '2023'
+  version: '>= 2.1.0'
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
