@@ -163,13 +163,13 @@
 <span><span class="co">#&gt; 4  4     Belle Anderson confirmed      f   9 2023-01-01                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 5  5  Rafeeqa el-Sharaf confirmed      f  23 2023-01-04                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 6  6 Rasheeda al-Dallal confirmed      f  23 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2         2023-01-01        2023-01-03</span></span>
-<span><span class="co">#&gt; 3         2022-12-31        2023-01-01</span></span>
-<span><span class="co">#&gt; 4         2023-01-01        2023-01-06</span></span>
-<span><span class="co">#&gt; 5         2023-01-03        2023-01-07</span></span>
-<span><span class="co">#&gt; 6         2022-12-29        2023-01-03</span></span></code></pre></div>
+<span><span class="co">#&gt;   death_date date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-01        2023-01-03</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-31        2023-01-01</span></span>
+<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-01        2023-01-06</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-03        2023-01-07</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;         2022-12-29        2023-01-03</span></span></code></pre></div>
 </details><p>We can plot the age distribution for individuals in the line list, binned into 5 year categories.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gender"</span>, <span class="st">"age"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
@@ -223,13 +223,13 @@ Figure 1: Age distribution of individuals in a simulated line list sampled from 
 <span><span class="co">#&gt; 4  4        Eric Briones  probable      m  13 2023-01-01                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 5  5     Saahir el-Zaher  probable      m  38 2023-01-01                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 6  6      Shaafi al-Nagi confirmed      m  41 2023-01-04                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2         2023-01-05        2023-01-07</span></span>
-<span><span class="co">#&gt; 3         2022-12-29        2023-01-03</span></span>
-<span><span class="co">#&gt; 4         2023-01-02        2023-01-04</span></span>
-<span><span class="co">#&gt; 5         2023-01-01        2023-01-03</span></span>
-<span><span class="co">#&gt; 6         2023-01-03        2023-01-07</span></span></code></pre></div>
+<span><span class="co">#&gt;   death_date date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-05        2023-01-07</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-29        2023-01-03</span></span>
+<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-02        2023-01-04</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-01        2023-01-03</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-03        2023-01-07</span></span></code></pre></div>
 </details><p>Again we can plot the age distribution to see the age structure for individuals in the line list. Given the relative uniformity of the age structure specified it is not greatly different from the uniform age structure plotted above, other than having a higher upper age limit. The data is binned into 5 year categories and facetted by gender.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gender"</span>, <span class="st">"age"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
@@ -292,13 +292,13 @@ Figure 2: Age distribution of line list cases facetted by gender.
 <span><span class="co">#&gt; 4  4    Anthony Urdiales  probable      m   8 2023-01-04                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 5  5      Salena Cordova  probable      f   7 2023-01-05                 &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 6  6        Peter Teague confirmed      m  26 2023-01-06                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2         2023-01-01        2023-01-03</span></span>
-<span><span class="co">#&gt; 3         2022-12-30        2023-01-04</span></span>
-<span><span class="co">#&gt; 4         2023-01-05        2023-01-10</span></span>
-<span><span class="co">#&gt; 5         2023-01-03        2023-01-09</span></span>
-<span><span class="co">#&gt; 6         2022-12-30        2023-01-05</span></span></code></pre></div>
+<span><span class="co">#&gt;   death_date date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-01        2023-01-03</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-30        2023-01-04</span></span>
+<span><span class="co">#&gt; 4 2023-01-18         2023-01-05        2023-01-10</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-03        2023-01-09</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;         2022-12-30        2023-01-05</span></span></code></pre></div>
 </details><p>A common and useful method for plotting age data is in the form of age pyramids. Here we partition the data by gender and plot the age distribution.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist_m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">linelist</span>, subset <span class="op">=</span> <span class="va">gender</span> <span class="op">==</span> <span class="st">"m"</span><span class="op">)</span></span>

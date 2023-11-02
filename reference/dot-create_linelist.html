@@ -100,19 +100,43 @@ of the  line list <code>&lt;data.frame&gt;</code> are each stage of the simulati
 scenarios are before each function call, for example,
 <code>"pre_date_last_contact"</code> is the state of the line list prior to calling
 <code><a href="dot-add_date.html">.add_date_last_contact()</a></code>, and <code>"pre_names"</code> is the state of the line list
-prior to calling <code><a href="dot-add_info.html">.add_names()</a></code>.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="script-to-reproduce-data-">Script to reproduce data:<a class="anchor" aria-label="anchor" href="#script-to-reproduce-data-"></a></h2>
-    <p>set.seed(1)</p>
-<p>linelist &lt;- sim_linelist(
-R = 1.1,
-serial_interval = serial_interval,
-onset_to_hosp = onset_to_hosp,
-onset_to_death = onset_to_death,
-hosp_rate = 0.5,
-add_ct = TRUE
-)</p>
+prior to calling <code><a href="dot-add_info.html">.add_names()</a></code>.</p><div class="section">
+<h3 id="script-to-reproduce-data-">Script to reproduce data:<a class="anchor" aria-label="anchor" href="#script-to-reproduce-data-"></a></h3>
+
+
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load data required to simulate line list</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>serial_interval <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">epidist</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"COVID-19"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">epi_dist =</span> <span class="st">"serial interval"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob_distribution =</span> <span class="st">"gamma"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob_distribution_params =</span> <span class="fu">c</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">scale =</span> <span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># get onset to hospital admission from {epiparameter} database</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>onset_to_hosp <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">epidist_db</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"COVID-19"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">epi_dist =</span> <span class="st">"onset to hospitalisation"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">single_epidist =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># get onset to death from {epiparameter} database</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>onset_to_death <span class="ot">&lt;-</span> epiparameter<span class="sc">::</span><span class="fu">epidist_db</span>(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">disease =</span> <span class="st">"COVID-19"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">epi_dist =</span> <span class="st">"onset to death"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">single_epidist =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> <span class="fu">sim_linelist</span>(</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> <span class="fl">1.1</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">serial_interval =</span> serial_interval,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">onset_to_hosp =</span> onset_to_hosp,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">onset_to_death =</span> onset_to_death,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">hosp_rate =</span> <span class="fl">0.5</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">add_ct =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>)</span></code></pre><p></p></div>
+</div>
+
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
