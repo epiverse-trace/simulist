@@ -118,7 +118,7 @@ NULL
 
   linelist_cols <- c(
     "id", "case_type", "gender", "age", "onset_date", "hospitalisation_date",
-    "date_first_contact", "date_last_contact"
+    "death_date", "date_first_contact", "date_last_contact"
   )
 
   if (add_names) {
