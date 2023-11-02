@@ -83,28 +83,22 @@ This section of the vignette is heavily based upon examples given in the [Get St
 
 :::
 
-Currently {simulist} outputs dates that are not rounded to the nearest day, i.e. it can be half way through a day. This is not obvious as R prints dates to the nearest day by default, and only by removing the date class (using `unclass()`) can you see the decimals (as R stores dates internally as the number of days since 1970-01-01).
+To visualise the number of cases with onset on a particular day, the {incidence2} package, and its dedicated class (`<incidence2>`) are used for handling and plotting this data.
 
-We round the dates in our line list to the nearest day for this demonstration. 
+Currently {simulist} outputs dates that are not rounded to the nearest day, i.e. it can be half way through a day. This is not obvious as R prints dates to the nearest day by default, and only by removing the date class (using `unclass()`) can you see the decimals (as R stores dates internally as the number of days since 1970-01-01).
 
 ***Note*** storing dates as precise doubles and not as integer days may change in the near future.
 
-```{r round-dates}
-# incidence requires rounded dates to cumulate counts
-date_cols <- grepl(pattern = "date", x = colnames(linelist), fixed = TRUE)
-linelist[, date_cols] <- as.data.frame(lapply(linelist[, date_cols], round))
-```
-
-To visualise the number of cases with onset on a particular day, the {incidence2} package, and its dedicated class (`<incidence2>`) are used for handling and plotting this data.
+The `interval = "daily"` is required as {incidence2} requires rounded dates to aggregate cases per unit time and specifying the `interval` will do this automatically for us.
 
 ```{r create-incidence}
 # create incidence object
-daily <- incidence(x = linelist, date_index = "onset_date")
+daily <- incidence(x = linelist, date_index = "onset_date", interval = "daily")
 ```
 
 It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
 
-```{r, complete-dates, fig.cap="Daily incidence of cases from symptom onset including days with zero cases", fig.width = 8, fig.height = 5}
+```{r, complete-dates, fig.cap="Daily incidence of cases from symptom onset including days with zero cases.", fig.width = 8, fig.height = 5}
 # impute for days without cases
 daily <- complete_dates(daily)
 plot(daily)
@@ -119,7 +113,7 @@ plot(weekly)
 
 In order to check differences between a group in the line list data, for example gender, the `<incidence2>` data object can be recreated, specifying which columns to group by.
 
-```{r, group-by-gender, fig.cap="Weekly incidence of cases from symptom onset facetted by gender", fig.width = 8, fig.height = 5}
+```{r, group-by-gender, fig.cap="Weekly incidence of cases from symptom onset facetted by gender.", fig.width = 8, fig.height = 5}
 weekly <- incidence(
   linelist,
   date_index = "onset_date",
@@ -129,15 +123,17 @@ weekly <- incidence(
 plot(weekly)
 ```
  
-To visualise the onset and hospitalisation incidence in the same plot they can be jointly specified to the `date_index` argument of `incidence2::incidence()`. 
+To visualise the onset, hospitalisation and death incidence in the same plot they can be jointly specified to the `date_index` argument of `incidence2::incidence()`. 
  
-```{r, plot-onset-hospitalisation, fig.cap="Daily incidence of cases from symptom onset and incidence of hospitalisations", fig.width = 8, fig.height = 5}
+```{r, plot-onset-hospitalisation, fig.cap="Daily incidence of cases from symptom onset and incidence of hospitalisations and deaths.", fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
     onset = "onset_date",
-    hospitalisation = "hospitalisation_date"
+    hospitalisation = "hospitalisation_date",
+    death = "death_date"
   ),
+  interval = "daily",
   groups = "gender"
 )
 daily <- complete_dates(daily)
