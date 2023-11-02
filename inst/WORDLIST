@@ -7,7 +7,11 @@ CoV
 COVID
 Ct
 ct
+db
+dist
+epi
 Epi
+epidist
 epiparameter
 Epiverse
 facetted
@@ -23,8 +27,10 @@ Lifecycle
 linelist
 olds
 packagename
+params
 parameterised
 Poisson
+prob
 randomNames
 RECON
 resimulate
