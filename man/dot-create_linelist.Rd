@@ -34,18 +34,40 @@ scenarios are before each function call, for example,
 \code{"pre_date_last_contact"} is the state of the line list prior to calling
 \code{\link[=.add_date_last_contact]{.add_date_last_contact()}}, and \code{"pre_names"} is the state of the line list
 prior to calling \code{\link[=.add_names]{.add_names()}}.
-}
-\section{Script to reproduce data:}{
+\subsection{Script to reproduce data:}{
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# load data required to simulate line list
+serial_interval <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "serial interval",
+  prob_distribution = "gamma",
+  prob_distribution_params = c(shape = 1, scale = 1)
+)
+
+# get onset to hospital admission from \{epiparameter\} database
+onset_to_hosp <- epiparameter::epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to hospitalisation",
+  single_epidist = TRUE
+)
+
+# get onset to death from \{epiparameter\} database
+onset_to_death <- epiparameter::epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to death",
+  single_epidist = TRUE
+)
 set.seed(1)
 
 linelist <- sim_linelist(
-R = 1.1,
-serial_interval = serial_interval,
-onset_to_hosp = onset_to_hosp,
-onset_to_death = onset_to_death,
-hosp_rate = 0.5,
-add_ct = TRUE
+  R = 1.1,
+  serial_interval = serial_interval,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  hosp_rate = 0.5,
+  add_ct = TRUE
 )
+}\if{html}{\out{</div>}}
 }
-
+}
 \keyword{internal}

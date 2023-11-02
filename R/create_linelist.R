@@ -19,7 +19,29 @@
 #' [.add_date_last_contact()], and `"pre_names"` is the state of the line list
 #' prior to calling [.add_names()].
 #'
-#' # Script to reproduce data:
+#' ## Script to reproduce data:
+#' ```
+#' # load data required to simulate line list
+#' serial_interval <- epiparameter::epidist(
+#'   disease = "COVID-19",
+#'   epi_dist = "serial interval",
+#'   prob_distribution = "gamma",
+#'   prob_distribution_params = c(shape = 1, scale = 1)
+#' )
+#'
+#' # get onset to hospital admission from {epiparameter} database
+#' onset_to_hosp <- epiparameter::epidist_db(
+#'   disease = "COVID-19",
+#'   epi_dist = "onset to hospitalisation",
+#'   single_epidist = TRUE
+#' )
+#'
+#' # get onset to death from {epiparameter} database
+#' onset_to_death <- epiparameter::epidist_db(
+#'   disease = "COVID-19",
+#'   epi_dist = "onset to death",
+#'   single_epidist = TRUE
+#' )
 #' set.seed(1)
 #'
 #' linelist <- sim_linelist(
@@ -30,7 +52,7 @@
 #'   hosp_rate = 0.5,
 #'   add_ct = TRUE
 #' )
-#'
+#' ```
 #' @return A `<data.frame>`.
 #' @keywords internal
 .create_linelist <- function(scenario) {
