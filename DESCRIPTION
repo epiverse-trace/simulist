@@ -25,7 +25,7 @@ Imports:
     bpmodels,
     randomNames
 Suggests: 
-    incidence2,
+    incidence2 (>= 2.1.0),
     knitr,
     ggplot2,
     bookdown,
