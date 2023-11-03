@@ -133,3 +133,138 @@ test_that(".check_age_df fails as expected", {
     regexp = "age groups should be contiguous"
   )
 })
+
+suppressMessages({
+  serial_interval <- epiparameter::epidist(
+    disease = "COVID-19",
+    epi_dist = "serial interval",
+    prob_distribution = "gamma",
+    prob_distribution_params = c(shape = 1, scale = 1)
+  )
+
+  # get onset to hospital admission from {epiparameter} database
+  onset_to_hosp <- epiparameter::epidist_db(
+    disease = "COVID-19",
+    epi_dist = "onset to hospitalisation",
+    single_epidist = TRUE
+  )
+
+  # get onset to death from {epiparameter} database
+  onset_to_death <- epiparameter::epidist_db(
+    disease = "COVID-19",
+    epi_dist = "onset to death",
+    single_epidist = TRUE
+  )
+
+  contact_distribution <- epiparameter::epidist(
+    disease = "COVID-19",
+    epi_dist = "contact_distribution",
+    prob_distribution = "pois",
+    prob_distribution_params = c(l = 5)
+  )
+})
+
+test_that(".check_sim_input works as expected", {
+  chk <- .check_sim_input(
+    sim_type = "outbreak",
+    R = 1,
+    serial_interval = serial_interval,
+    outbreak_start_date = as.Date("2023-01-01"),
+    min_chain_size = 10,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    contact_distribution = contact_distribution,
+    add_names = TRUE,
+    add_ct = FALSE,
+    case_type_probs = c(
+      suspected = 0.2,
+      probable = 0.3,
+      confirmed = 0.5
+    ),
+    contact_tracing_status_probs = c(
+      under_followup = 0.7,
+      lost_to_followup = 0.2,
+      unknown = 0.1
+    ),
+    hosp_rate = 0.2,
+    hosp_death_rate = 0.5,
+    non_hosp_death_rate = 0.05,
+    population_age = c(1, 90)
+  )
+  expect_type(chk, type = "character")
+  expect_length(chk, n = 1)
+
+  chk <- .check_sim_input(
+    sim_type = "linelist",
+    R = 1,
+    serial_interval = serial_interval,
+    outbreak_start_date = as.Date("2023-01-01"),
+    min_chain_size = 10,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    add_names = TRUE,
+    add_ct = FALSE,
+    case_type_probs = c(
+      suspected = 0.2,
+      probable = 0.3,
+      confirmed = 0.5
+    ),
+    hosp_rate = 0.2,
+    hosp_death_rate = 0.5,
+    non_hosp_death_rate = 0.05,
+    population_age = c(1, 90)
+  )
+  expect_type(chk, type = "character")
+  expect_length(chk, n = 1)
+
+  chk <- .check_sim_input(
+    sim_type = "contacts",
+    R = 1,
+    serial_interval = serial_interval,
+    outbreak_start_date = as.Date("2023-01-01"),
+    min_chain_size = 10,
+    contact_distribution = contact_distribution,
+    contact_tracing_status_probs = c(
+      under_followup = 0.7,
+      lost_to_followup = 0.2,
+      unknown = 0.1
+    ),
+    population_age = c(1, 90)
+  )
+  expect_type(chk, type = "character")
+  expect_length(chk, n = 1)
+})
+
+test_that(".check_sim_input fails as expected", {
+  expect_error(
+    .check_sim_input(sim_type = "random"),
+    regexp = "(arg)*(should be one of)*(linelist)*(contacts)*(outbreak)"
+  )
+  expect_error(
+    .check_sim_input(sim_type = "outbreak", R = -1),
+    regexp = "(Assertion on)*(R)*(failed)"
+  )
+  expect_error(
+    .check_sim_input(sim_type = "outbreak", R = 1, serial_interval = list()),
+    regexp = "(Assertion on)*(serial_interval)*(failed)"
+  )
+  expect_error(
+    .check_sim_input(
+      sim_type = "outbreak",
+      R = 1,
+      serial_interval = serial_interval,
+      outbreak_start_date = "01-01-2023"
+    ),
+    regexp = "(Assertion on)*(outbreak_start_date)*(failed)"
+  )
+  expect_error(
+    .check_sim_input(
+      sim_type = "outbreak",
+      R = 1,
+      serial_interval = serial_interval,
+      outbreak_start_date = as.Date("2023-01-01"),
+      min_chain_size = "10"
+    ),
+    regexp = "(Assertion on)*(min_chain_size)*(failed)"
+  )
+})
