@@ -51,8 +51,8 @@ test_that("sim_outbreak works as expected", {
   )
   expect_identical(
     colnames(outbreak$contacts),
-    c("part_name", "contact_name", "cnt_age", "cnt_gender",
-      "date_first_contact", "date_last_contact", "was_case", "status")
+    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status")
   )
 })
 
@@ -80,8 +80,8 @@ test_that("sim_outbreak works as expected with add_names = FALSE", {
   )
   expect_identical(
     colnames(outbreak$contacts),
-    c("part_name", "contact_name", "cnt_age", "cnt_gender",
-      "date_first_contact", "date_last_contact", "was_case", "status")
+    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status")
   )
 })
 
@@ -123,8 +123,8 @@ test_that("sim_outbreak works as expected with age-strat rates", {
   )
   expect_identical(
     colnames(outbreak$contacts),
-    c("part_name", "contact_name", "cnt_age", "cnt_gender",
-      "date_first_contact", "date_last_contact", "was_case", "status")
+    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status")
   )
 })
 
@@ -157,7 +157,7 @@ test_that("sim_outbreak works as expected with age structure", {
   )
   expect_identical(
     colnames(outbreak$contacts),
-    c("part_name", "contact_name", "cnt_age", "cnt_gender",
-      "date_first_contact", "date_last_contact", "was_case", "status")
+    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status")
   )
 })
