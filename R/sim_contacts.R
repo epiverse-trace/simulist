@@ -52,22 +52,15 @@ sim_contacts <- function(R,
 
   chkDots(...)
 
-  # input checking
-  checkmate::assert_number(R, lower = 0)
-  checkmate::assert_class(serial_interval, classes = "epidist")
-  checkmate::assert_class(contact_distribution, classes = "epidist")
-  checkmate::assert_date(outbreak_start_date)
-  checkmate::assert_integerish(min_chain_size, lower = 1)
-  checkmate::assert_numeric(population_age, len = 2)
-  checkmate::assert_numeric(contact_tracing_status_probs, len = 3)
-  checkmate::assert_names(
-    names(contact_tracing_status_probs),
-    permutation.of = c("under_followup", "lost_to_followup", "unknown")
-  )
-
-  stopifnot(
-    "The values in the contact_tracing_status_probs vector must sum to 1" =
-      all.equal(sum(contact_tracing_status_probs), 1)
+  .check_sim_input(
+    sim_type = "contacts",
+    R = R,
+    serial_interval = serial_interval,
+    outbreak_start_date = outbreak_start_date,
+    min_chain_size = min_chain_size,
+    contact_distribution = contact_distribution,
+    contact_tracing_status_probs = contact_tracing_status_probs,
+    population_age = population_age
   )
 
   chain <- .sim_bp_linelist(

@@ -53,7 +53,7 @@
 #'   onset_to_death = onset_to_death,
 #'   contact_distribution = contact_distribution
 #' )
-sim_outbreak <- function(R, # nolint cyclocomp
+sim_outbreak <- function(R,
                          serial_interval,
                          onset_to_hosp,
                          onset_to_death,
@@ -80,44 +80,23 @@ sim_outbreak <- function(R, # nolint cyclocomp
                          ...) {
   chkDots(...)
 
-  # input checking
-  checkmate::assert_number(R, lower = 0)
-  checkmate::assert_class(serial_interval, classes = "epidist")
-  checkmate::assert_class(onset_to_hosp, classes = "epidist")
-  checkmate::assert_class(onset_to_death, classes = "epidist")
-  checkmate::assert_class(contact_distribution, classes = "epidist")
-  checkmate::assert_date(outbreak_start_date)
-  checkmate::assert_logical(add_names, len = 1)
-  checkmate::assert_logical(add_ct, len = 1)
-  checkmate::assert_integerish(min_chain_size, lower = 1)
-  checkmate::assert_numeric(case_type_probs, len = 3)
-  checkmate::assert_names(
-    names(case_type_probs),
-    permutation.of = c("suspected", "probable", "confirmed")
-  )
-  checkmate::assert_numeric(contact_tracing_status_probs, len = 3)
-  checkmate::assert_names(
-    names(contact_tracing_status_probs),
-    permutation.of = c("under_followup", "lost_to_followup", "unknown")
-  )
-
-  stopifnot(
-    "The values in the case_type_prob vector must sum to 1" =
-      sum(case_type_probs) == 1,
-    "The values in the contact_tracing_status_probs vector must sum to 1" =
-      all.equal(sum(contact_tracing_status_probs), 1),
-    "hosp_rate must be a single numeric or a data.frame" =
-      is.numeric(hosp_rate) && length(hosp_rate) == 1 ||
-      is.data.frame(hosp_rate),
-    "hosp_death_rate must be a single numeric or a data.frame" =
-      is.numeric(hosp_death_rate) && length(hosp_death_rate) == 1 ||
-      is.data.frame(hosp_death_rate),
-    "non_hosp_death_rate must be a single numeric or a data.frame" =
-      is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
-      is.data.frame(non_hosp_death_rate),
-    "population_age must be two numerics or a data.frame" =
-      is.numeric(population_age) && length(population_age) == 2 ||
-      is.data.frame(population_age)
+  .check_sim_input(
+    sim_type = "outbreak",
+    R = R,
+    serial_interval = serial_interval,
+    outbreak_start_date = outbreak_start_date,
+    min_chain_size = min_chain_size,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    contact_distribution = contact_distribution,
+    add_names = add_names,
+    add_ct = add_ct,
+    case_type_probs = case_type_probs,
+    contact_tracing_status_probs = contact_tracing_status_probs,
+    hosp_rate = hosp_rate,
+    hosp_death_rate = hosp_death_rate,
+    non_hosp_death_rate = non_hosp_death_rate,
+    population_age = population_age
   )
 
   if (is.data.frame(population_age)) {
