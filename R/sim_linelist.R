@@ -116,7 +116,7 @@
 #'   onset_to_death = onset_to_death,
 #'   hosp_rate = age_dep_hosp_rate
 #' )
-sim_linelist <- function(R, # nolint cyclocomp
+sim_linelist <- function(R,
                          serial_interval,
                          onset_to_hosp,
                          onset_to_death,
@@ -138,36 +138,21 @@ sim_linelist <- function(R, # nolint cyclocomp
 
   chkDots(...)
 
-  # input checking
-  checkmate::assert_number(R, lower = 0)
-  checkmate::assert_class(serial_interval, classes = "epidist")
-  checkmate::assert_class(onset_to_hosp, classes = "epidist")
-  checkmate::assert_class(onset_to_death, classes = "epidist")
-  checkmate::assert_date(outbreak_start_date)
-  checkmate::assert_logical(add_names, len = 1)
-  checkmate::assert_logical(add_ct, len = 1)
-  checkmate::assert_integerish(min_chain_size, lower = 1)
-  checkmate::assert_numeric(case_type_probs, len = 3)
-  checkmate::assert_names(
-    names(case_type_probs),
-    permutation.of = c("suspected", "probable", "confirmed")
-  )
-
-  stopifnot(
-    "The values in the case_type_prob vector must sum to 1" =
-      sum(case_type_probs) == 1,
-    "hosp_rate must be a single numeric or a data.frame" =
-      is.numeric(hosp_rate) && length(hosp_rate) == 1 ||
-      is.data.frame(hosp_rate),
-    "hosp_death_rate must be a single numeric or a data.frame" =
-      is.numeric(hosp_death_rate) && length(hosp_death_rate) == 1 ||
-      is.data.frame(hosp_death_rate),
-    "non_hosp_death_rate must be a single numeric or a data.frame" =
-      is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
-      is.data.frame(non_hosp_death_rate),
-    "population_age must be two numerics or a data.frame" =
-      is.numeric(population_age) && length(population_age) == 2 ||
-      is.data.frame(population_age)
+  .check_sim_input(
+    sim_type = "linelist",
+    R = R,
+    serial_interval = serial_interval,
+    outbreak_start_date = outbreak_start_date,
+    min_chain_size = min_chain_size,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    add_names = add_names,
+    add_ct = add_ct,
+    case_type_probs = case_type_probs,
+    hosp_rate = hosp_rate,
+    hosp_death_rate = hosp_death_rate,
+    non_hosp_death_rate = non_hosp_death_rate,
+    population_age = population_age
   )
 
   if (is.data.frame(population_age)) {
