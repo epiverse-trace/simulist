@@ -26,6 +26,7 @@ Plotting can be useful to identify certain transmission dynamics and patterns in
 library(simulist)
 library(epiparameter)
 library(incidence2)
+library(epicontacts)
 ```
 
 First we load the required delay distributions using the {epiparameter} package.
@@ -145,6 +146,79 @@ plot(daily)
 Please see the [Age structured population vignette](age-struct-pop.html) for examples of how to plot the distribution of ages within a line list data set, including age pyramids. 
 
 The plotting code in vignettes is hidden by default, click the Code button with arrow to reveal the plotting code.
+
+## Visualising contact data
+
+::: {.alert .alert-info}
+
+This section of the vignette is based upon examples from the [{epicontacts} R package documentation](https://www.repidemicsconsortium.org/epicontacts/index.html) and the examples provided in the [The Epidemiological R Handbook chapter on transmission chains](https://epirhandbook.com/en/transmission-chains.html). We recommend going to the documentation of the {epicontacts} R package to see the all plotting and data wrangling functionality.
+
+:::
+
+Just as we utilised the `<incidence2>` class from the {incidence2} package to handle and plot incidence data, we are going to use the `<epicontacts>` class from the {epicontacts} R package to handle and plot epidemiological contact data.
+
+::: {.alert .alert-success}
+
+The benefit of using {epicontacts} is the same as {incidence2}, in the fact that a default plotting method is supplied by the package.
+
+_Advanced_
+
+Additionally, for {epicontacts} there is access to network plotting from Javascript libraries via the {visnetwork} and {threejs} R packages.
+
+:::
+
+The {epicontacts} function `make_epicontacts()` requires both the line list and contact table, so we will run the `sim_outbreak()` function to produce both. We will use the same epidemiological delay distributions that we used to simulate a line list above. We need an extra distribution to simulate an outbreak, a contact distribution (see the documentation `?sim_outbreak` for more detail). We create this distribution using the {epiparameter} package.
+
+```{r, create-contact-dist}
+contact_distribution <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "contact_distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(l = 5)
+)
+```
+
+Now we can simulate an outbreak:
+
+```{r, sim-outbreak}
+set.seed(1)
+outbreak <- sim_outbreak(
+  R = 1.1,
+  serial_interval = serial_interval,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  contact_distribution = contact_distribution
+)
+head(outbreak$linelist)
+head(outbreak$contacts)
+```
+
+Using the line list and contacts data simulated we can create the `<epicontacts>` object.
+
+```{r, create-epicontacts}
+epicontacts <- make_epicontacts(
+  linelist = outbreak$linelist, 
+  contacts = outbreak$contacts, 
+  id = "case_name", 
+  from = "from", 
+  to = "to", 
+  directed = TRUE
+)
+```
+
+The `<epicontacts>` object comes with a custom printing feature to see the data.
+
+```{r, print-epicontacts}
+epicontacts
+```
+
+To plot the contact network we can use the plotting method that is supplied by epicontacts and will be automatically recognised if the {epicontacts} package is loaded (as done above with `library(epicontacts)`).
+
+```{r, plot-epicontacts}
+plot(epicontacts)
+```
+
+There is also the option to plot the contacts network in 3D using the `epicontacts::graph3D()`. 
 
 ## Visualising other line list information
 
