@@ -23,7 +23,7 @@
       "date_first_contact", "date_last_contact")
   )
   colnames(contact_investigation) <- c(
-    "infector", "part_name", "contact_name", "cnt_age", "cnt_gender",
+    "infector", "from", "to", "cnt_age", "cnt_gender",
     "date_first_contact", "date_last_contact"
   )
   contact_investigation <- contact_investigation[-1, ]
@@ -31,7 +31,7 @@
 
   other_contacts <- subset(.data, select = c("infector", "infector_time"))
   other_contacts <- other_contacts[-1, ]
-  other_contacts$part_name <- contact_investigation$part_name
+  other_contacts$from <- contact_investigation$from
   other_contacts <- subset(
     other_contacts,
     subset = !duplicated(other_contacts$infector)
@@ -74,7 +74,7 @@
   )
 
   #Add corresponding names acc to the gender V
-  other_contacts$contact_name <- randomNames::randomNames(
+  other_contacts$to <- randomNames::randomNames(
     which.names = "both",
     name.sep = " ",
     name.order = "first.last",
@@ -98,7 +98,7 @@
   other_contacts <- subset(
     other_contacts,
     select = c(
-      "infector", "part_name", "contact_name", "cnt_age", "cnt_gender",
+      "infector", "from", "to", "cnt_age", "cnt_gender",
       "date_first_contact", "date_last_contact"
     )
   )
