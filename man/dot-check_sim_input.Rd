@@ -96,7 +96,7 @@ called for its side-effects, which will error if the input is invalid.
 Check if arguments input to simulation function are valid
 }
 \details{
-Arguments that are used by all simulation function are required
+Arguments that are used by all simulation functions are required
 and not given a default value, for other arguments that are not inputs in
 all simulation functions a default of \code{NULL} is used.
 
