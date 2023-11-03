@@ -137,6 +137,12 @@
   checkmate::assert_date(outbreak_start_date)
   checkmate::assert_integerish(min_chain_size, lower = 1)
 
+  stopifnot(
+    "population_age must be two numerics or a data.frame" =
+      is.numeric(population_age) && length(population_age) == 2 ||
+      is.data.frame(population_age)
+  )
+
   if (sim_type == "linelist" || sim_type == "outbreak") {
     checkmate::assert_class(onset_to_hosp, classes = "epidist")
     checkmate::assert_class(onset_to_death, classes = "epidist")
@@ -159,10 +165,7 @@
         is.data.frame(hosp_death_rate),
       "non_hosp_death_rate must be a single numeric or a data.frame" =
         is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
-        is.data.frame(non_hosp_death_rate),
-      "population_age must be two numerics or a data.frame" =
-        is.numeric(population_age) && length(population_age) == 2 ||
-        is.data.frame(population_age)
+        is.data.frame(non_hosp_death_rate)
     )
   }
 
