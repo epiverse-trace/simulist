@@ -193,11 +193,11 @@ Using the line list and contacts data simulated we can create the `<epicontacts>
 
 ```{r, create-epicontacts}
 epicontacts <- make_epicontacts(
-  linelist = outbreak$linelist, 
-  contacts = outbreak$contacts, 
-  id = "case_name", 
-  from = "from", 
-  to = "to", 
+  linelist = outbreak$linelist,
+  contacts = outbreak$contacts,
+  id = "case_name",
+  from = "from",
+  to = "to",
   directed = TRUE
 )
 ```
