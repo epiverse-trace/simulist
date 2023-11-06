@@ -11,6 +11,7 @@ db
 dist
 epi
 Epi
+epicontacts
 epidist
 epiparameter
 Epiverse
@@ -39,4 +40,6 @@ sim
 st
 stochasticity
 svg
+threejs
+visNetwork
 yaml
