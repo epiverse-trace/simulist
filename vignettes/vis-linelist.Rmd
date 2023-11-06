@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette gives an overview of the ways to plot the line list data output from the `sim_linelist()` function.
+This vignette gives an overview of the ways to plot the line list and contacts data output from the `sim_linelist()` and `sim_outbreak()` functions.
 
 Plotting can be useful to identify certain transmission dynamics and patterns in the simulated data, or just to check that the simulated data looks as expected given how the simulation was parameterised.
 
@@ -95,7 +95,7 @@ daily <- incidence(x = linelist, date_index = "onset_date", interval = "daily")
 
 It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
 
-```{r, complete-dates, fig.cap="Daily incidence of cases from symptom onset including days with zero cases.", fig.width = 8, fig.height = 5}
+```{r, complete-dates, fig.cap="Figure 1: Daily incidence of cases from symptom onset including days with zero cases.", fig.width = 8, fig.height = 5}
 # impute for days without cases
 daily <- complete_dates(daily)
 plot(daily)
@@ -103,14 +103,14 @@ plot(daily)
 
 Alternatively, incidence can be plotting weekly:
 
-```{r plot-weekly, fig.cap="Weekly incidence of cases from symptom onset", fig.width = 8, fig.height = 5}
+```{r plot-weekly, fig.cap="Figure 2: Weekly incidence of cases from symptom onset", fig.width = 8, fig.height = 5}
 weekly <- incidence(linelist, date_index = "onset_date", interval = "isoweek")
 plot(weekly)
 ```
 
 In order to check differences between a group in the line list data, for example gender, the `<incidence2>` data object can be recreated, specifying which columns to group by.
 
-```{r, group-by-gender, fig.cap="Weekly incidence of cases from symptom onset facetted by gender.", fig.width = 8, fig.height = 5}
+```{r, group-by-gender, fig.cap="Figure 3: Weekly incidence of cases from symptom onset facetted by gender.", fig.width = 8, fig.height = 5}
 weekly <- incidence(
   linelist,
   date_index = "onset_date",
@@ -122,7 +122,7 @@ plot(weekly)
  
 To visualise the onset, hospitalisation and death incidence in the same plot they can be jointly specified to the `date_index` argument of `incidence2::incidence()`. 
  
-```{r, plot-onset-hospitalisation, fig.cap="Daily incidence of cases from symptom onset and incidence of hospitalisations and deaths.", fig.width = 8, fig.height = 5}
+```{r, plot-onset-hospitalisation, fig.cap="Figure 4: Daily incidence of cases from symptom onset and incidence of hospitalisations and deaths.", fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -159,11 +159,11 @@ The benefit of using {epicontacts} is the same as {incidence2}, in the fact that
 
 _Advanced_
 
-Additionally, for {epicontacts} there is access to network plotting from Javascript libraries via the {visnetwork} and {threejs} R packages.
+Additionally, {epicontacts} provides access to network plotting from Javascript libraries via the [{visNetwork}](https://CRAN.R-project.org/package=visNetwork) and [{threejs}](https://CRAN.R-project.org/package=threejs) R packages.
 
 :::
 
-The {epicontacts} function `make_epicontacts()` requires both the line list and contact table, so we will run the `sim_outbreak()` function to produce both. We will use the same epidemiological delay distributions that we used to simulate a line list above. We need an extra distribution to simulate an outbreak, a contact distribution (see the documentation `?sim_outbreak` for more detail). We create this distribution using the {epiparameter} package.
+The {epicontacts} function `make_epicontacts()` requires both the line list and contacts table, so we will run the `sim_outbreak()` function to produce both. We will use the same epidemiological delay distributions that we used to simulate a line list above. We need an extra distribution to simulate an outbreak, a contact distribution (see the documentation `?sim_outbreak` for more detail). We create this distribution using the {epiparameter} package.
 
 ```{r, create-contact-dist}
 contact_distribution <- epiparameter::epidist(
@@ -208,9 +208,15 @@ The `<epicontacts>` object comes with a custom printing feature to see the data.
 epicontacts
 ```
 
-To plot the contact network we can use the plotting method that is supplied by epicontacts and will be automatically recognised if the {epicontacts} package is loaded (as done above with `library(epicontacts)`).
+To plot the contact network we can use the plotting method that is supplied by {epicontacts} and will be automatically recognised if the {epicontacts} package is loaded (as done above with `library(epicontacts)`).
 
-```{r, plot-epicontacts}
+::: {.alert .alert-primary}
+
+If you are viewing this vignette on the web (or on a web browser) the graph below is interactive and will allow you to highlight individuals in the network using the dropdown menu, to zoom in and out of the plot by scrolling, and to move the network using the mouse to drag and drop.
+
+:::
+
+```{r, plot-epicontacts, fig.cap="Figure 5: Contact network from infectious disease outbreak. This includes all contacts, i.e. individuals that were infected and not infected"}
 plot(epicontacts)
 ```
 
