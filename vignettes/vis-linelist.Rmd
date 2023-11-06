@@ -159,7 +159,7 @@ The benefit of using {epicontacts} is the same as {incidence2}, in the fact that
 
 _Advanced_
 
-Additionally, {epicontacts} provides access to network plotting from Javascript libraries via the [{visNetwork}](https://CRAN.R-project.org/package=visNetwork) and [{threejs}](https://CRAN.R-project.org/package=threejs) R packages.
+Additionally, {epicontacts} provides access to network plotting from JavaScript libraries via the [{visNetwork}](https://CRAN.R-project.org/package=visNetwork) and [{threejs}](https://CRAN.R-project.org/package=threejs) R packages.
 
 :::
 
@@ -212,7 +212,7 @@ To plot the contact network we can use the plotting method that is supplied by {
 
 ::: {.alert .alert-primary}
 
-If you are viewing this vignette on the web (or on a web browser) the graph below is interactive and will allow you to highlight individuals in the network using the dropdown menu, to zoom in and out of the plot by scrolling, and to move the network using the mouse to drag and drop.
+If you are viewing this vignette on the web (or on a web browser) the graph below is interactive and will allow you to highlight individuals in the network using the drop-down menu, to zoom in and out of the plot by scrolling, and to move the network using the mouse to drag and drop.
 
 :::
 
