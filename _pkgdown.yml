@@ -1,3 +1,30 @@
 url: ~
 template:
   package: epiversetheme
+  bslib:
+    font_weight_base : 300
+
+development:
+  mode: auto
+
+reference:
+  - title: Simulation functions
+    desc: Functions to simulate disease outbreak data.
+    contents:
+    - starts_with("sim_")
+
+  - title: Helper functions
+    contents:
+    - create_config
+
+articles:
+- title: Package Vignettes
+  navbar: Package Vignettes
+  contents:
+  - age-strat-rates
+  - age-struct-pop
+  - vis-linelist
+- title: Developer Documentation
+  navbar: Developer Documentation
+  contents:
+  - design-principles
