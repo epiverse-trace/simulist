@@ -1,4 +1,6 @@
 apyramid
+bookdown
+bpmodels
 CMD
 codecov
 Codecov
@@ -23,9 +25,11 @@ implmented
 infector
 integerish
 io
+knitr
 lifecycle
 Lifecycle
 linelist
+MERS
 olds
 packagename
 params
@@ -34,12 +38,15 @@ Poisson
 prob
 randomNames
 RECON
+rmarkdown
 resimulate
 SARS
 sim
+socialmixr
 st
 stochasticity
 svg
+testthat
 threejs
 visNetwork
 yaml
