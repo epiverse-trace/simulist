@@ -90,7 +90,7 @@ The `interval = "daily"` is required as {incidence2} requires rounded dates to a
 
 ```{r create-incidence}
 # create incidence object
-daily <- incidence(x = linelist, date_index = "onset_date", interval = "daily")
+daily <- incidence(x = linelist, date_index = "date_onset", interval = "daily")
 ```
 
 It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
@@ -104,7 +104,7 @@ plot(daily)
 Alternatively, incidence can be plotting weekly:
 
 ```{r plot-weekly, fig.cap="Figure 2: Weekly incidence of cases from symptom onset", fig.width = 8, fig.height = 5}
-weekly <- incidence(linelist, date_index = "onset_date", interval = "isoweek")
+weekly <- incidence(linelist, date_index = "date_onset", interval = "isoweek")
 plot(weekly)
 ```
 
@@ -113,7 +113,7 @@ In order to check differences between a group in the line list data, for example
 ```{r, group-by-gender, fig.cap="Figure 3: Weekly incidence of cases from symptom onset facetted by gender.", fig.width = 8, fig.height = 5}
 weekly <- incidence(
   linelist,
-  date_index = "onset_date",
+  date_index = "date_onset",
   interval = "isoweek",
   groups = "gender"
 )
@@ -126,9 +126,9 @@ To visualise the onset, hospitalisation and death incidence in the same plot the
 daily <- incidence(
   linelist,
   date_index = c(
-    onset = "onset_date",
-    hospitalisation = "hospitalisation_date",
-    death = "death_date"
+    onset = "date_onset",
+    hospitalisation = "date_admission",
+    death = "date_death"
   ),
   interval = "daily",
   groups = "gender"

@@ -38,7 +38,7 @@ NULL
   names(chain)[names(chain) == "ancestor"] <- "infector"
 
   # add delays dates
-  chain$onset_date <- chain$time + outbreak_start_date
+  chain$date_onset <- chain$time + outbreak_start_date
 
   # add exposure date for cases
   id_time <- data.frame(infector = chain$id, infector_time = chain$time)
@@ -113,12 +113,12 @@ NULL
   )
 
   # add hospitalisation and death dates
-  chain$hospitalisation_date <- chain$hospitalisation + outbreak_start_date
-  chain$death_date <- chain$deaths + outbreak_start_date
+  chain$date_admission <- chain$hospitalisation + outbreak_start_date
+  chain$date_death <- chain$deaths + outbreak_start_date
 
   linelist_cols <- c(
-    "id", "case_type", "gender", "age", "onset_date", "hospitalisation_date",
-    "death_date", "date_first_contact", "date_last_contact"
+    "id", "case_type", "gender", "age", "date_onset", "date_admission",
+    "date_death", "date_first_contact", "date_last_contact"
   )
 
   if (add_names) {
