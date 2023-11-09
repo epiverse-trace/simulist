@@ -38,6 +38,8 @@ The simulation functions either return a `<data.frame>` or a `list` of `<data.fr
 
 - The use of a `config` argument in the simulation function is to reduce the number of arguments in the exported functions and provide as simple a user-interface as possible. The choice of what gets an argument in the function body and what is confined to `config` list is based on preconceived frequency of use, importance and technical detail. That is to say, settings that are unlikely to be changed by the user or if they are changed require an advanced understanding of the simulation model are placed within the `config`, and given default values with `create_config()`.
 
+- The column names of the line list data produced by `sim_linelist()` and `sim_outbreak()` matches the tag names used in the [{linelist} R package](https://CRAN.R-project.org/package=linelist) (an [Epiverse-TRACE R package](https://github.com/epiverse-trace)). This is for continuity of design more than any functional reason. The line list data from {simulist} functions is not tagged _sensu_ [{linelist} tagging](https://epiverse-trace.github.io/linelist/articles/linelist.html). There is an inconsistent use of _hospitalisation_ and _admission_; in the simulated line list it is `date_admission`, but internally the package uses hospitalisation (e.g. `.add_hospitalisation()`). This is because I think _hospitalisation_ is more descriptive but `date_admission` is used by {linelist}.
+
 ## Dependencies
 
 The aim is to restrict the number of dependencies to a minimal required set for ease of maintenance. The current hard dependencies are:
