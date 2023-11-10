@@ -57,7 +57,6 @@
 #' invalid.
 #' @keywords internal
 .check_age_df <- function(x) {
-
   # check input
   stopifnot(
     "column names should be 'age_range' & 'proportion'" =
@@ -140,7 +139,7 @@
   stopifnot(
     "population_age must be two numerics or a data.frame" =
       is.numeric(population_age) && length(population_age) == 2 ||
-      is.data.frame(population_age)
+        is.data.frame(population_age)
   )
 
   if (sim_type == "linelist" || sim_type == "outbreak") {
@@ -159,13 +158,13 @@
         sum(case_type_probs) == 1,
       "hosp_rate must be a single numeric or a data.frame" =
         is.numeric(hosp_rate) && length(hosp_rate) == 1 ||
-        is.data.frame(hosp_rate),
+          is.data.frame(hosp_rate),
       "hosp_death_rate must be a single numeric or a data.frame" =
         is.numeric(hosp_death_rate) && length(hosp_death_rate) == 1 ||
-        is.data.frame(hosp_death_rate),
+          is.data.frame(hosp_death_rate),
       "non_hosp_death_rate must be a single numeric or a data.frame" =
         is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
-        is.data.frame(non_hosp_death_rate)
+          is.data.frame(non_hosp_death_rate)
     )
   }
 

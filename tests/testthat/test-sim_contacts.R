@@ -26,8 +26,10 @@ test_that("sim_contacts works as expected", {
   expect_identical(dim(contacts), c(170L, 8L))
   expect_identical(
     colnames(contacts),
-    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
-      "date_last_contact", "was_case", "status")
+    c(
+      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status"
+    )
   )
 })
 
@@ -52,8 +54,10 @@ test_that("sim_contacts works as expected with modified config", {
   expect_identical(dim(contacts), c(178L, 8L))
   expect_identical(
     colnames(contacts),
-    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
-      "date_last_contact", "was_case", "status")
+    c(
+      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status"
+    )
   )
 })
 
@@ -72,8 +76,10 @@ test_that("sim_contacts works as expected with modified config parameters", {
   expect_identical(dim(contacts), c(170L, 8L)) # TODO check why nrow is diff
   expect_identical(
     colnames(contacts),
-    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
-      "date_last_contact", "was_case", "status")
+    c(
+      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status"
+    )
   )
 })
 

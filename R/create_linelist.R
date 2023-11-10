@@ -56,7 +56,6 @@
 #' @return A `<data.frame>`.
 #' @keywords internal
 .create_linelist <- function(scenario) {
-
   scenario <- match.arg(
     arg = scenario,
     choices = c(

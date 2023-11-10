@@ -223,7 +223,8 @@ NULL
   infector_names <- data.frame(id = .data$id, infector_name = .data$case_name)
   col_order <- c(colnames(.data), "infector_name")
   .data <- merge(
-    .data, infector_names, by.x = "infector", by.y = "id", all.x = TRUE
+    .data, infector_names,
+    by.x = "infector", by.y = "id", all.x = TRUE
   )
   .data <- .data[order(is.na(.data$infector_name), decreasing = TRUE), ]
   .data <- .data[col_order]

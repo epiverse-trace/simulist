@@ -49,7 +49,6 @@ sim_contacts <- function(R,
                          ),
                          config = create_config(),
                          ...) {
-
   chkDots(...)
 
   .check_sim_input(

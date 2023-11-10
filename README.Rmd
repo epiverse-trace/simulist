@@ -123,10 +123,10 @@ If both the line list and contacts table are required, they can be jointly simul
 
 ```{r, sim-outbreak}
 outbreak <- sim_outbreak(
-  R = 1.1, 
-  serial_interval = serial_interval, 
-  onset_to_hosp = onset_to_hosp, 
-  onset_to_death = onset_to_death, 
+  R = 1.1,
+  serial_interval = serial_interval,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
   contact_distribution = contact_distribution
 )
 head(outbreak$linelist)

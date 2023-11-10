@@ -45,14 +45,18 @@ test_that("sim_outbreak works as expected", {
   expect_identical(dim(outbreak$contacts), c(163L, 8L))
   expect_identical(
     colnames(outbreak$linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
   expect_identical(
     colnames(outbreak$contacts),
-    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
-      "date_last_contact", "was_case", "status")
+    c(
+      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status"
+    )
   )
 })
 
@@ -74,14 +78,18 @@ test_that("sim_outbreak works as expected with add_names = FALSE", {
   expect_identical(dim(outbreak$contacts), c(168L, 8L))
   expect_identical(
     colnames(outbreak$linelist),
-    c("id", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
   expect_identical(
     colnames(outbreak$contacts),
-    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
-      "date_last_contact", "was_case", "status")
+    c(
+      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status"
+    )
   )
 })
 
@@ -117,14 +125,18 @@ test_that("sim_outbreak works as expected with age-strat rates", {
   expect_identical(dim(outbreak$contacts), c(177L, 8L))
   expect_identical(
     colnames(outbreak$linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
   expect_identical(
     colnames(outbreak$contacts),
-    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
-      "date_last_contact", "was_case", "status")
+    c(
+      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status"
+    )
   )
 })
 
@@ -151,13 +163,17 @@ test_that("sim_outbreak works as expected with age structure", {
   expect_identical(dim(outbreak$contacts), c(177L, 8L))
   expect_identical(
     colnames(outbreak$linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
   expect_identical(
     colnames(outbreak$contacts),
-    c("from", "to", "cnt_age", "cnt_gender", "date_first_contact",
-      "date_last_contact", "was_case", "status")
+    c(
+      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "date_last_contact", "was_case", "status"
+    )
   )
 })

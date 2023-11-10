@@ -34,9 +34,11 @@ test_that("sim_list works as expected", {
   expect_identical(dim(linelist), c(42L, 10L))
   expect_identical(
     colnames(linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
 })
 
@@ -68,9 +70,11 @@ test_that("sim_list works as expected with age-strat rates", {
   expect_identical(dim(linelist), c(42L, 10L))
   expect_identical(
     colnames(linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
 })
 
@@ -88,9 +92,11 @@ test_that("sim_list works as expected with Ct", {
   expect_identical(dim(linelist), c(42L, 11L))
   expect_identical(
     colnames(linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact", "ct_value")
+      "date_last_contact", "ct_value"
+    )
   )
 })
 
@@ -108,9 +114,11 @@ test_that("sim_list works as expected with anonymous", {
   expect_identical(dim(linelist), c(42L, 9L))
   expect_identical(
     colnames(linelist),
-    c("id", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
 })
 
@@ -133,9 +141,11 @@ test_that("sim_list works as expected with age structure", {
   expect_identical(dim(linelist), c(42L, 10L))
   expect_identical(
     colnames(linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
 })
 
@@ -163,9 +173,11 @@ test_that("sim_list works as expected with age-strat rates & age structure", {
   expect_identical(dim(linelist), c(42L, 10L))
   expect_identical(
     colnames(linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
 })
 
@@ -220,9 +232,11 @@ test_that("sim_list works as expected with modified config", {
   expect_identical(dim(linelist), c(42L, 10L))
   expect_identical(
     colnames(linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
 })
 
@@ -242,9 +256,11 @@ test_that("sim_list works as expected with modified config parameters", {
   expect_identical(dim(linelist), c(42L, 10L))
   expect_identical(
     colnames(linelist),
-    c("id", "case_name", "case_type", "gender", "age", "date_onset",
+    c(
+      "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact")
+      "date_last_contact"
+    )
   )
 })
 

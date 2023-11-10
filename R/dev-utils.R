@@ -5,5 +5,4 @@ release_bullets <- function() { # nocov start
     "Run `goodpractice::gp()`",
     "Review [WORDLIST](https://docs.cran.dev/spelling#wordlist)"
   )
-
 } # nocov end
