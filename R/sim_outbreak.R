@@ -150,7 +150,7 @@ sim_outbreak <- function(R,
     config = config
   )
 
-  contacts <- .sim_contacts(
+  contacts <- .sim_contacts_tbl(
     .data = linelist$chain,
     outbreak_start_date = outbreak_start_date,
     contact_distribution = contact_distribution,
