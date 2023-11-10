@@ -74,7 +74,7 @@ sim_contacts <- function(R,
 
   chain <- .add_names(.data = chain)
 
-  contacts <- .sim_contacts(
+  contacts <- .sim_contacts_tbl(
     .data = chain,
     outbreak_start_date = outbreak_start_date,
     contact_distribution = contact_distribution,
