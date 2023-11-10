@@ -161,14 +161,14 @@
 <span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">75</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id          case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1       Erin Pingrey  probable      f  34 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2      Cheyenne Chow confirmed      f  42 2023-01-03           2023-01-03</span></span>
-<span><span class="co">#&gt; 3  3 Javier Lopez Colon  probable      m  21 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4     Belle Anderson confirmed      f   9 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5  Rafeeqa el-Sharaf confirmed      f  23 2023-01-04                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6 Rasheeda al-Dallal confirmed      f  23 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   death_date date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt;   id          case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1       Erin Pingrey  probable      f  34 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2      Cheyenne Chow confirmed      f  42 2023-01-03     2023-01-03</span></span>
+<span><span class="co">#&gt; 3  3 Javier Lopez Colon  probable      m  21 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4     Belle Anderson confirmed      f   9 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5  Rafeeqa el-Sharaf confirmed      f  23 2023-01-04           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6 Rasheeda al-Dallal confirmed      f  23 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_death date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-01        2023-01-03</span></span>
 <span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-31        2023-01-01</span></span>
@@ -221,14 +221,14 @@ Figure 1: Age distribution of individuals in a simulated line list sampled from 
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id           case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1 Cathi-Lee Gillespie  probable      f  10 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2       Brandon Jiron confirmed      m  82 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3   Preston Whitfield suspected      m  16 2023-01-02                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4        Eric Briones  probable      m  13 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5     Saahir el-Zaher  probable      m  38 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6      Shaafi al-Nagi confirmed      m  41 2023-01-04                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   death_date date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt;   id           case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1 Cathi-Lee Gillespie  probable      f  10 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2       Brandon Jiron confirmed      m  82 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3   Preston Whitfield suspected      m  16 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4        Eric Briones  probable      m  13 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5     Saahir el-Zaher  probable      m  38 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6      Shaafi al-Nagi confirmed      m  41 2023-01-04           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_death date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-05        2023-01-07</span></span>
 <span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-29        2023-01-03</span></span>
@@ -290,14 +290,14 @@ Figure 2: Age distribution of line list cases facetted by gender.
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id           case_name case_type gender age onset_date hospitalisation_date</span></span>
-<span><span class="co">#&gt; 1  1 Bridget Santistevan  probable      f  10 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2 Hysendra Villanueva suspected      f   8 2023-01-04                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3      Sara Contreras confirmed      f  10 2023-01-01                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4    Anthony Urdiales  probable      m   8 2023-01-04                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5      Salena Cordova  probable      f   7 2023-01-05                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6        Peter Teague confirmed      m  26 2023-01-06                 &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   death_date date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt;   id           case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1 Bridget Santistevan  probable      f  10 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2 Hysendra Villanueva suspected      f   8 2023-01-04           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3      Sara Contreras confirmed      f  10 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4    Anthony Urdiales  probable      m   8 2023-01-04           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5      Salena Cordova  probable      f   7 2023-01-05           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6        Peter Teague confirmed      m  26 2023-01-06           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_death date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-01        2023-01-03</span></span>
 <span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-30        2023-01-04</span></span>

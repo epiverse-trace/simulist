@@ -198,6 +198,18 @@ unlikely to be changed by the user or if they are changed require an
 advanced understanding of the simulation model are placed within the
 <code>config</code>, and given default values with
 <code><a href="../reference/create_config.html">create_config()</a></code>.</p></li>
+<li><p>The column names of the line list data produced by
+<code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> matches the
+tag names used in the <a href="https://CRAN.R-project.org/package=linelist" class="external-link">{linelist} R
+package</a> (an <a href="https://github.com/epiverse-trace" class="external-link">Epiverse-TRACE R package</a>).
+This is for continuity of design more than any functional reason. The
+line list data from {simulist} functions is not tagged <em>sensu</em> <a href="https://epiverse-trace.github.io/linelist/articles/linelist.html" class="external-link">{linelist}
+tagging</a>. There is an inconsistent use of <em>hospitalisation</em>
+and <em>admission</em>; in the simulated line list it is
+<code>date_admission</code>, but internally the package uses
+hospitalisation (e.g. <code><a href="../reference/dot-add_date.html">.add_hospitalisation()</a></code>). This is
+because I think <em>hospitalisation</em> is more descriptive but
+<code>date_admission</code> is used by {linelist}.</p></li>
 </ul>
 </div>
 <div class="section level2">
