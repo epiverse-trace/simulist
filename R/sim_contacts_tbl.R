@@ -11,7 +11,6 @@
                               population_age,
                               contact_tracing_status_probs,
                               config) {
-
   if (!"infector_name" %in% colnames(.data)) {
     .data <- .add_names(.data = .data)
   }
@@ -20,7 +19,8 @@
     .data,
     select = c(
       "infector", "infector_name", "case_name", "age", "gender",
-      "date_first_contact", "date_last_contact")
+      "date_first_contact", "date_last_contact"
+    )
   )
   colnames(contact_investigation) <- c(
     "infector", "from", "to", "cnt_age", "cnt_gender",
@@ -43,7 +43,7 @@
     nrow(other_contacts)
   )
 
-  #Multiply row by times specified in frequency column V
+  # Multiply row by times specified in frequency column V
   other_contacts <-
     other_contacts[rep(row.names(other_contacts), contact_freq), ]
 
@@ -73,7 +73,7 @@
     replace = TRUE
   )
 
-  #Add corresponding names acc to the gender V
+  # Add corresponding names acc to the gender V
   other_contacts$to <- randomNames::randomNames(
     which.names = "both",
     name.sep = " ",

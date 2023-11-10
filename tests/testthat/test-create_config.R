@@ -4,9 +4,11 @@ test_that("create_config works as expected with defaults", {
   expect_length(config, 6)
   expect_named(
     config,
-    c("last_contact_distribution", "last_contact_distribution_params",
+    c(
+      "last_contact_distribution", "last_contact_distribution_params",
       "first_contact_distribution", "first_contact_distribution_params",
-      "ct_distribution", "ct_distribution_params")
+      "ct_distribution", "ct_distribution_params"
+    )
   )
 })
 
@@ -16,9 +18,11 @@ test_that("create_config works as expected modifying element", {
   expect_length(config, 6)
   expect_named(
     config,
-    c("last_contact_distribution", "last_contact_distribution_params",
+    c(
+      "last_contact_distribution", "last_contact_distribution_params",
       "first_contact_distribution", "first_contact_distribution_params",
-      "ct_distribution", "ct_distribution_params")
+      "ct_distribution", "ct_distribution_params"
+    )
   )
   expect_identical(config$last_contact_distribution, "geom")
 })
@@ -30,9 +34,11 @@ test_that("create_config works as expected misspelling modifying element", {
   expect_length(config, 6)
   expect_named(
     config,
-    c("last_contact_distribution", "last_contact_distribution_params",
+    c(
+      "last_contact_distribution", "last_contact_distribution_params",
       "first_contact_distribution", "first_contact_distribution_params",
-      "ct_distribution", "ct_distribution_params")
+      "ct_distribution", "ct_distribution_params"
+    )
   )
   expect_identical(config$last_contact_distribution, "pois")
 })
