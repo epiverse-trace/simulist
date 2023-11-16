@@ -34,7 +34,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0)
 Remotes:
-    epiverse-trace/epiparameter@reexport_generics,
+    epiverse-trace/epiparameter,
     epiverse-trace/bpmodels
 Config/testthat/edition: 3
 Config/Needs/website:
