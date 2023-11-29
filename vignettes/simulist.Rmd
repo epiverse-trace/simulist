@@ -188,3 +188,21 @@ head(outbreak$contacts)
 ```
 
 `sim_outbreak()` has the same features as `sim_linelist()` and `sim_contacts()`, this includes simulating with age-stratified rates of hospitalisation and death, the probability of case types or contact tracing status can be modified.
+
+## Using functions for distributions instead of `<epidist>`
+
+It is possible to use an [anonymous function](https://en.wikipedia.org/wiki/Anonymous_function) instead of an `<epidist>` object when specifying the parameters of the delay and contact distributions. We recommend using the `<epidist>` objects but here outline the alternative approach.
+
+```{r, sim-outbreak-anon-func}
+outbreak <- sim_outbreak(
+  R = 1.1,
+  serial_interval = function(x) rgamma(n = x, shape = 2, scale = 2),
+  onset_to_hosp = function(x) rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
+  onset_to_death = function(x) rweibull(n = x, shape = 0.5, scale = 0.2),
+  contact_distribution = function(x) rnbinom(n = x, mu = 5, size = 0.5)
+)
+head(outbreak$linelist)
+head(outbreak$contacts)
+```
+
+The same approach of using anonymous functions can be used in `sim_linelist()` and `sim_contacts()`.
