@@ -38,10 +38,7 @@
   )
 
   # sample contact distribution for non-infected contacts
-  contact_freq <- epiparameter::generate(
-    contact_distribution,
-    nrow(other_contacts)
-  )
+  contact_freq <- contact_distribution(nrow(other_contacts))
 
   # Multiply row by times specified in frequency column V
   other_contacts <-
