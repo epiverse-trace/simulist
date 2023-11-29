@@ -184,3 +184,23 @@
 
   invisible(sim_type)
 }
+
+#' Check distribution function has n required arguments
+#'
+#' @param func A [function].
+#' @param n_req_args A single `numeric` specifying the number of required
+#' arguments.
+#'
+#' @return A `logical`.
+#' @keywords internal
+#' @noRd
+.check_func_req_args <- function(func, n_req_args = 1) {
+  checkmate::assert_function(func)
+  checkmate::assert_count(n_req_args, positive = TRUE)
+  # using formals(args(fn)) to allow checking args of builtin primitives
+  # for which formals(fn) would return NULL and cause the check to error
+  # errors non-informatively for specials such as `if`
+  checkmate::test_function(func) &&
+    sum(mapply(function(x, y) {
+      is.name(x) && y != "..."
+    }, formals(args(func)), names(formals(args(func))))) == n_req_args
