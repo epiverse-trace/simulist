@@ -132,7 +132,7 @@
   sim_type <- match.arg(sim_type)
 
   checkmate::assert_number(R, lower = 0)
-  checkmate::assert_class(serial_interval, classes = "epidist")
+  .check_func_req_args(serial_interval)
   checkmate::assert_date(outbreak_start_date)
   checkmate::assert_integerish(min_chain_size, lower = 1)
 
@@ -143,8 +143,8 @@
   )
 
   if (sim_type == "linelist" || sim_type == "outbreak") {
-    checkmate::assert_class(onset_to_hosp, classes = "epidist")
-    checkmate::assert_class(onset_to_death, classes = "epidist")
+    .check_func_req_args(onset_to_hosp)
+    .check_func_req_args(onset_to_death)
     checkmate::assert_logical(add_names, len = 1)
     checkmate::assert_logical(add_ct, len = 1)
     checkmate::assert_numeric(case_type_probs, len = 3)
@@ -169,7 +169,7 @@
   }
 
   if (sim_type == "contacts" || sim_type == "outbreak") {
-    checkmate::assert_class(contact_distribution, classes = "epidist")
+    .check_func_req_args(contact_distribution)
     checkmate::assert_numeric(contact_tracing_status_probs, len = 3)
     checkmate::assert_names(
       names(contact_tracing_status_probs),
@@ -204,3 +204,4 @@
     sum(mapply(function(x, y) {
       is.name(x) && y != "..."
     }, formals(args(func)), names(formals(args(func))))) == n_req_args
+}
