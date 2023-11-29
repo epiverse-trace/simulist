@@ -109,8 +109,7 @@ NULL
 .add_hospitalisation <- function(.data,
                                  onset_to_hosp,
                                  hosp_rate) {
-  .data$hospitalisation <- .data$time +
-    epiparameter::generate(onset_to_hosp, nrow(.data))
+  .data$hospitalisation <- .data$time + onset_to_hosp(nrow(.data))
 
   if (is.numeric(hosp_rate)) {
     pop_sample <- sample(
@@ -142,8 +141,7 @@ NULL
                         onset_to_death,
                         hosp_death_rate,
                         non_hosp_death_rate) {
-  .data$deaths <- .data$time +
-    epiparameter::generate(onset_to_death, nrow(.data))
+  .data$deaths <- .data$time + onset_to_death(nrow(.data))
 
   apply_death_rate <- function(.data, rate, hosp = TRUE) {
     if (is.numeric(hosp_death_rate)) {

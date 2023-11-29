@@ -27,7 +27,7 @@ NULL
       n = 1,
       offspring = "pois",
       stat = "size",
-      serial = function(x) epiparameter::generate(serial_interval, x),
+      serial = serial_interval,
       lambda = R,
       tree = TRUE,
       infinite = 1000
