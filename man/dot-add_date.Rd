@@ -34,16 +34,16 @@ given in the \code{distribution} argument.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object for the onset to hospitalisation
-delay distribution.}
+\item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
+the onset to hospitalisation delay distribution.}
 
 \item{hosp_rate}{Either a single \code{numeric} for the hospitalisation rate of
 everyone in the population, or a \verb{<data.frame>} with age specific
 hospitalisation rates. Default is 20\% hospitalisation (\code{0.2}) for the entire
 population. See details and examples for more information.}
 
-\item{onset_to_death}{An \verb{<epidist>} object for the onset to death delay
-distribution.}
+\item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
+the onset to death delay distribution.}
 
 \item{hosp_death_rate}{Either a single \code{numeric} for the death rate for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age

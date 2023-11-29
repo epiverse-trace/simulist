@@ -19,10 +19,10 @@ branching process simulation}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{contact_distribution}{An \verb{<epidist>} object for the contact
-distribution. This is similar to the offspring distribution, but describes
-the heterogeneity of all contact patterns, including contacts that go on
-to be infected or not infected.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is similar to the offspring distribution,
+but describes the heterogeneity of all contact patterns, including contacts
+that go on to be infected or not infected.}
 
 \item{population_age}{Either a \code{numeric} vector with two elements or a
 \verb{<data.frame>} with age structure in the population. Use a \code{numeric} vector

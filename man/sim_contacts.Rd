@@ -20,12 +20,13 @@ sim_contacts(
 \arguments{
 \item{R}{A single \code{numeric} for the reproduction number.}
 
-\item{serial_interval}{An \verb{<epidist>} object for the serial interval.}
+\item{serial_interval}{An \verb{<epidist>} object or anonymous function for
+the serial interval.}
 
-\item{contact_distribution}{An \verb{<epidist>} object for the contact
-distribution. This is similar to the offspring distribution, but describes
-the heterogeneity of all contact patterns, including contacts that go on
-to be infected or not infected.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is similar to the offspring distribution,
+but describes the heterogeneity of all contact patterns, including contacts
+that go on to be infected or not infected.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
