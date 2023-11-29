@@ -80,6 +80,14 @@ sim_outbreak <- function(R,
                          ...) {
   chkDots(...)
 
+  serial_interval <- as.function(serial_interval, func_type = "generate")
+  onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
+  onset_to_death <- as.function(onset_to_death, func_type = "generate")
+  contact_distribution <- as.function(
+    contact_distribution,
+    func_type = "generate"
+  )
+
   .check_sim_input(
     sim_type = "outbreak",
     R = R,

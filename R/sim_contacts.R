@@ -51,6 +51,12 @@ sim_contacts <- function(R,
                          ...) {
   chkDots(...)
 
+  serial_interval <- as.function(serial_interval, func_typ = "generate")
+  contact_distribution <- as.function(
+    contact_distribution,
+    func_type = "generate"
+  )
+
   .check_sim_input(
     sim_type = "contacts",
     R = R,

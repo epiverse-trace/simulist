@@ -137,6 +137,10 @@ sim_linelist <- function(R,
                          ...) {
   chkDots(...)
 
+  serial_interval <- as.function(serial_interval, func_type = "generate")
+  onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
+  onset_to_death <- as.function(onset_to_death, func_type = "generate")
+
   .check_sim_input(
     sim_type = "linelist",
     R = R,
