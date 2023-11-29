@@ -135,33 +135,33 @@ test_that(".check_age_df fails as expected", {
 })
 
 suppressMessages({
-  serial_interval <- epiparameter::epidist(
+  serial_interval <- as.function(epiparameter::epidist(
     disease = "COVID-19",
     epi_dist = "serial interval",
     prob_distribution = "gamma",
     prob_distribution_params = c(shape = 1, scale = 1)
-  )
+  ))
 
   # get onset to hospital admission from {epiparameter} database
-  onset_to_hosp <- epiparameter::epidist_db(
+  onset_to_hosp <- as.function(epiparameter::epidist_db(
     disease = "COVID-19",
     epi_dist = "onset to hospitalisation",
     single_epidist = TRUE
-  )
+  ))
 
   # get onset to death from {epiparameter} database
-  onset_to_death <- epiparameter::epidist_db(
+  onset_to_death <- as.function(epiparameter::epidist_db(
     disease = "COVID-19",
     epi_dist = "onset to death",
     single_epidist = TRUE
-  )
+  ))
 
-  contact_distribution <- epiparameter::epidist(
+  contact_distribution <- as.function(epiparameter::epidist(
     disease = "COVID-19",
     epi_dist = "contact_distribution",
     prob_distribution = "pois",
     prob_distribution_params = c(l = 5)
-  )
+  ))
 })
 
 test_that(".check_sim_input works as expected", {
