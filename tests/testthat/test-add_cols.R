@@ -1,17 +1,18 @@
 suppressMessages({
-  # get onset to hospital admission from {epiparameter} database
-  onset_to_hosp <- epiparameter::epidist_db(
+  # get onset to hospital admission from {epiparameter} database &
+  # convert to function
+  onset_to_hosp <- as.function(epiparameter::epidist_db(
     disease = "COVID-19",
     epi_dist = "onset to hospitalisation",
     single_epidist = TRUE
-  )
+  ))
 
   # get onset to death from {epiparameter} database
-  onset_to_death <- epiparameter::epidist_db(
+  onset_to_death <- as.function(epiparameter::epidist_db(
     disease = "COVID-19",
     epi_dist = "onset to death",
     single_epidist = TRUE
-  )
+  ))
 })
 
 test_that(".add_date_last_contact works as expected", {
