@@ -1,10 +1,10 @@
 #' Simulate contacts for an infectious disease outbreak
 #'
 #' @inheritParams sim_linelist
-#' @param contact_distribution An `<epidist>` object for the contact
-#' distribution. This is similar to the offspring distribution, but describes
-#' the heterogeneity of all contact patterns, including contacts that go on
-#' to be infected or not infected.
+#' @param contact_distribution An `<epidist>` object or anonymous function for
+#' the contact distribution. This is similar to the offspring distribution,
+#' but describes the heterogeneity of all contact patterns, including contacts
+#' that go on to be infected or not infected.
 #' @param contact_tracing_status_probs A named `numeric` vector with the
 #' probability of each contact tracing status. The names of the vector must
 #' be `"under_followup"`, `"lost_to_followup"`, `"unknown"`. Values of each

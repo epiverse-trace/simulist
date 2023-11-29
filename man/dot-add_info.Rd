@@ -20,12 +20,6 @@ is \code{pois}).}
 
 \item{...}{\link{dots} Extra arguments to be passed to the distribution function
 given in the \code{distribution} argument.}
-
-\item{onset_to_hosp}{An \verb{<epidist>} object with the onset to hospitalisation
-delay distribution.}
-
-\item{onset_to_death}{An \verb{<epidist>} object with the onset to death delay
-distribution.}
 }
 \value{
 A \verb{<data.frame>} with one more column than input into \code{.data}.

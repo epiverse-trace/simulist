@@ -22,11 +22,12 @@
 #'
 #'
 #' @param R A single `numeric` for the reproduction number.
-#' @param serial_interval An `<epidist>` object for the serial interval.
-#' @param onset_to_hosp An `<epidist>` object for the onset to hospitalisation
-#' delay distribution.
-#' @param onset_to_death An `<epidist>` object for the onset to death delay
-#' distribution.
+#' @param serial_interval An `<epidist>` object or anonymous function for
+#' the serial interval.
+#' @param onset_to_hosp An `<epidist>` object or anonymous function for
+#' the onset to hospitalisation delay distribution.
+#' @param onset_to_death An `<epidist>` object or anonymous function for
+#' the onset to death delay distribution.
 #' @param hosp_rate Either a single `numeric` for the hospitalisation rate of
 #' everyone in the population, or a `<data.frame>` with age specific
 #' hospitalisation rates. Default is 20% hospitalisation (`0.2`) for the entire

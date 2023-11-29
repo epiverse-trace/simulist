@@ -33,7 +33,8 @@ within \pkg{simulist}}
 \arguments{
 \item{R}{A single \code{numeric} for the reproduction number.}
 
-\item{serial_interval}{An \verb{<epidist>} object for the serial interval.}
+\item{serial_interval}{An \verb{<epidist>} object or anonymous function for
+the serial interval.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
@@ -52,11 +53,11 @@ and examples for more information.}
 \item{config}{A list of settings to adjust the randomly sampled delays and
 Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object for the onset to hospitalisation
-delay distribution.}
+\item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
+the onset to hospitalisation delay distribution.}
 
-\item{onset_to_death}{An \verb{<epidist>} object for the onset to death delay
-distribution.}
+\item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
+the onset to death delay distribution.}
 
 \item{hosp_rate}{Either a single \code{numeric} for the hospitalisation rate of
 everyone in the population, or a \verb{<data.frame>} with age specific

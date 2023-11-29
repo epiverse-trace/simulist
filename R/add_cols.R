@@ -192,10 +192,6 @@ NULL
 #' is `pois`).
 #' @param ... [dots] Extra arguments to be passed to the distribution function
 #' given in the `distribution` argument.
-#' @param onset_to_hosp An `<epidist>` object with the onset to hospitalisation
-#' delay distribution.
-#' @param onset_to_death An `<epidist>` object with the onset to death delay
-#' distribution.
 #'
 #' @name .add_info
 #'

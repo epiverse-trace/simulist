@@ -25,13 +25,14 @@ sim_linelist(
 \arguments{
 \item{R}{A single \code{numeric} for the reproduction number.}
 
-\item{serial_interval}{An \verb{<epidist>} object for the serial interval.}
+\item{serial_interval}{An \verb{<epidist>} object or anonymous function for
+the serial interval.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object for the onset to hospitalisation
-delay distribution.}
+\item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
+the onset to hospitalisation delay distribution.}
 
-\item{onset_to_death}{An \verb{<epidist>} object for the onset to death delay
-distribution.}
+\item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
+the onset to death delay distribution.}
 
 \item{hosp_rate}{Either a single \code{numeric} for the hospitalisation rate of
 everyone in the population, or a \verb{<data.frame>} with age specific

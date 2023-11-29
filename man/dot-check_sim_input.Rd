@@ -29,7 +29,8 @@ this function is being called within.}
 
 \item{R}{A single \code{numeric} for the reproduction number.}
 
-\item{serial_interval}{An \verb{<epidist>} object for the serial interval.}
+\item{serial_interval}{An \verb{<epidist>} object or anonymous function for
+the serial interval.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
@@ -37,16 +38,16 @@ this function is being called within.}
 the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object for the onset to hospitalisation
-delay distribution.}
+\item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
+the onset to hospitalisation delay distribution.}
 
-\item{onset_to_death}{An \verb{<epidist>} object for the onset to death delay
-distribution.}
+\item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
+the onset to death delay distribution.}
 
-\item{contact_distribution}{An \verb{<epidist>} object for the contact
-distribution. This is similar to the offspring distribution, but describes
-the heterogeneity of all contact patterns, including contacts that go on
-to be infected or not infected.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is similar to the offspring distribution,
+but describes the heterogeneity of all contact patterns, including contacts
+that go on to be infected or not infected.}
 
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
 of the line list. Default is \code{TRUE}.}
