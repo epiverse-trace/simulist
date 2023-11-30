@@ -33,11 +33,6 @@ test_that("sim_contacts works as expected", {
   )
 })
 
-
-
-
-
-
 test_that("sim_contacts works as expected with modified config", {
   set.seed(1)
   contacts <- sim_contacts(
