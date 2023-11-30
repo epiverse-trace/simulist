@@ -21,7 +21,7 @@ suppressMessages({
   )
 })
 
-test_that("sim_list works as expected", {
+test_that("sim_linelist works as expected", {
   set.seed(1)
   linelist <- sim_linelist(
     R = 1.1,
@@ -42,7 +42,7 @@ test_that("sim_list works as expected", {
   )
 })
 
-test_that("sim_list works as expected with age-strat rates", {
+test_that("sim_linelist works as expected with age-strat rates", {
   age_dep_hosp_rate <- data.frame(
     age_limit = c(1, 5, 80),
     rate = c(0.1, 0.05, 0.2)
@@ -78,7 +78,7 @@ test_that("sim_list works as expected with age-strat rates", {
   )
 })
 
-test_that("sim_list works as expected with Ct", {
+test_that("sim_linelist works as expected with Ct", {
   set.seed(1)
   linelist <- sim_linelist(
     R = 1.1,
@@ -100,7 +100,7 @@ test_that("sim_list works as expected with Ct", {
   )
 })
 
-test_that("sim_list works as expected with anonymous", {
+test_that("sim_linelist works as expected with anonymous", {
   set.seed(1)
   linelist <- sim_linelist(
     R = 1.1,
@@ -122,7 +122,7 @@ test_that("sim_list works as expected with anonymous", {
   )
 })
 
-test_that("sim_list works as expected with age structure", {
+test_that("sim_linelist works as expected with age structure", {
   age_struct <- data.frame(
     age_range = c("1-4", "5-79", "80-90"),
     proportion = c(0.1, 0.7, 0.2),
@@ -149,7 +149,7 @@ test_that("sim_list works as expected with age structure", {
   )
 })
 
-test_that("sim_list works as expected with age-strat rates & age structure", {
+test_that("sim_linelist works as expected with age-strat rates & age struct", {
   age_dep_hosp_rate <- data.frame(
     age_limit = c(1, 5, 80),
     rate = c(0.1, 0.05, 0.2)
@@ -181,7 +181,7 @@ test_that("sim_list works as expected with age-strat rates & age structure", {
   )
 })
 
-test_that("sim_list gives expected proportion of ages with age structure", {
+test_that("sim_linelist gives expected proportion of ages with age struct", {
   age_struct <- data.frame(
     age_range = c("1-4", "5-79", "80-90"),
     proportion = c(0.2, 0.5, 0.3),
@@ -215,7 +215,7 @@ test_that("sim_list gives expected proportion of ages with age structure", {
   )
 })
 
-test_that("sim_list works as expected with modified config", {
+test_that("sim_linelist works as expected with modified config", {
   set.seed(1)
   linelist <- sim_linelist(
     R = 1.1,
@@ -240,7 +240,7 @@ test_that("sim_list works as expected with modified config", {
   )
 })
 
-test_that("sim_list works as expected with modified config parameters", {
+test_that("sim_linelist works as expected with modified config parameters", {
   set.seed(1)
   linelist <- sim_linelist(
     R = 1.1,
@@ -264,7 +264,7 @@ test_that("sim_list works as expected with modified config parameters", {
   )
 })
 
-test_that("sim_list fails as expected with modified config", {
+test_that("sim_linelist fails as expected with modified config", {
   expect_error(
     sim_linelist(
       R = 1.1,
@@ -293,7 +293,7 @@ test_that("sim_list fails as expected with modified config", {
   )
 })
 
-test_that("sim_list fails as expected with empty config", {
+test_that("sim_linelist fails as expected with empty config", {
   expect_error(
     sim_linelist(
       R = 1.1,
