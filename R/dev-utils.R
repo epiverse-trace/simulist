@@ -3,6 +3,7 @@ release_bullets <- function() { # nocov start
 
   c(
     "Run `goodpractice::gp()`",
-    "Review [WORDLIST](https://docs.cran.dev/spelling#wordlist)"
+    "Review [WORDLIST](https://docs.cran.dev/spelling#wordlist)",
+    "Check if `# nolint` comments are still needed with recent lintr releases"
   )
 } # nocov end
