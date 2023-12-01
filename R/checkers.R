@@ -201,7 +201,7 @@
   # for which formals(fn) would return NULL and cause the check to error
   # errors non-informatively for specials such as `if`
   checkmate::test_function(func) &&
-    sum(mapply(function(x, y) {
+    sum(mapply(function(x, y) { # nolint undesirable function
       is.name(x) && y != "..."
     }, formals(args(func)), names(formals(args(func))))) == n_req_args
 }
