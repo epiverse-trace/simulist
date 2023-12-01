@@ -68,8 +68,8 @@ onset_to_hosp <- epiparameter::epidist_db(
   epi_dist = "onset to hospitalisation",
   single_epidist = TRUE
 )
-#> Using Linton NM, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov AR, Jung S,
-#> Yuan B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other
+#> Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan
+#> B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other
 #> Epidemiological Characteristics of 2019 Novel Coronavirus Infections
 #> with Right Truncation: A Statistical Analysis of Publicly Available
 #> Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
@@ -82,8 +82,8 @@ onset_to_death <- epiparameter::epidist_db(
   epi_dist = "onset to death",
   single_epidist = TRUE
 )
-#> Using Linton NM, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov AR, Jung S,
-#> Yuan B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other
+#> Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan
+#> B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other
 #> Epidemiological Characteristics of 2019 Novel Coronavirus Infections
 #> with Right Truncation: A Statistical Analysis of Publicly Available
 #> Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
@@ -102,20 +102,20 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id               case_name case_type gender age date_onset date_admission
-#> 1  1            Aliyah Bunck suspected      f  84 2023-01-01     2023-01-03
-#> 2  2             Rayel Roman confirmed      f  62 2023-01-01           <NA>
-#> 3  3            Alex Fuentes suspected      m  53 2023-01-01     2023-01-02
-#> 4  4        Nusaiba al-Wahab confirmed      f   6 2023-01-02           <NA>
-#> 5  5 Monica Alvarez Valentin  probable      f  86 2023-01-02           <NA>
-#> 6  6         Adelaide Weible confirmed      f  39 2023-01-02           <NA>
+#>   id             case_name case_type gender age date_onset date_admission
+#> 1  1       Iffat al-Jalali confirmed      f  59 2023-01-01     2023-01-01
+#> 2  2           Ishika West confirmed      f  58 2023-01-01           <NA>
+#> 3  3           Jaydan Wang confirmed      m  15 2023-01-01           <NA>
+#> 4  4         Laura Burnett confirmed      f  50 2023-01-01           <NA>
+#> 5  5     Donovan Jaramillo suspected      m  49 2023-01-01           <NA>
+#> 6  6 Audriana Solis Flores  probable      f  79 2023-01-01           <NA>
 #>   date_death date_first_contact date_last_contact
-#> 1       <NA>               <NA>              <NA>
-#> 2       <NA>         2022-12-30        2023-01-04
-#> 3 2023-01-26         2023-01-01        2023-01-04
-#> 4       <NA>         2023-01-01        2023-01-05
-#> 5 2023-01-19         2023-01-03        2023-01-04
-#> 6       <NA>         2023-01-05        2023-01-07
+#> 1 2023-01-27               <NA>              <NA>
+#> 2       <NA>         2022-12-31        2023-01-04
+#> 3       <NA>         2023-01-02        2023-01-04
+#> 4       <NA>         2022-12-31        2023-01-04
+#> 5 2023-01-16         2023-01-02        2023-01-05
+#> 6 2023-01-18         2023-01-05        2023-01-06
 ```
 
 In this example, the line list is simulated using the default values
@@ -134,20 +134,20 @@ linelist <- sim_linelist(
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id        case_name case_type gender age date_onset date_admission date_death
-#> 1  1  Melissa Moralez confirmed      f  41 2019-12-01           <NA>       <NA>
-#> 2  2      Lorna Gries suspected      f  72 2019-12-01           <NA>       <NA>
-#> 3  3   Saood el-Salik suspected      m  39 2019-12-01           <NA>       <NA>
-#> 4  4 Antonio Trujillo  probable      m  61 2019-12-02           <NA>       <NA>
-#> 5  5     Aaron Kimble confirmed      m   3 2019-12-01           <NA>       <NA>
-#> 6  6      Gage Declaw confirmed      m   6 2019-12-02           <NA> 2019-12-14
-#>   date_first_contact date_last_contact
-#> 1               <NA>              <NA>
-#> 2         2019-11-28        2019-12-03
-#> 3         2019-11-28        2019-12-01
-#> 4         2019-12-03        2019-12-06
-#> 5         2019-12-02        2019-12-03
-#> 6         2019-11-30        2019-12-04
+#>   id            case_name case_type gender age date_onset date_admission
+#> 1  1           Kevin Tong  probable      m  48 2019-12-01           <NA>
+#> 2  2     Widdad al-Jabbar  probable      f  19 2019-12-01           <NA>
+#> 3  3 Christopher Trujillo suspected      m  11 2019-12-01           <NA>
+#> 4  4           Tatse Peek  probable      m  82 2019-12-03           <NA>
+#> 5  5      Madeline Strope suspected      f  65 2019-12-02           <NA>
+#> 6  6         Umar al-Sala suspected      m  69 2019-12-01           <NA>
+#>   date_death date_first_contact date_last_contact
+#> 1       <NA>               <NA>              <NA>
+#> 2       <NA>         2019-12-01        2019-12-05
+#> 3       <NA>         2019-12-02        2019-12-05
+#> 4       <NA>         2019-11-29        2019-12-03
+#> 5       <NA>         2019-12-04        2019-12-06
+#> 6 2019-12-15         2019-12-02        2019-12-05
 ```
 
 To simulate a table of contacts we can reuse the serial interval from
@@ -170,20 +170,20 @@ contacts <- sim_contacts(
   contact_distribution = contact_distribution
 )
 head(contacts)
-#>         from               to cnt_age cnt_gender date_first_contact
-#> 1 Ryan Xiong     Fawz el-Noor      89          m         2023-01-03
-#> 2 Ryan Xiong      Oleta Knapp       2          f         2023-01-02
-#> 3 Ryan Xiong Yohana Bontrager      24          f         2022-12-31
-#> 4 Ryan Xiong Danyelle Dowdell       3          f         2023-01-03
-#> 5 Ryan Xiong Lorena Dominguez      66          f         2023-01-02
-#> 6 Ryan Xiong Jonathan Kercher      89          m         2023-01-03
-#>   date_last_contact was_case           status
-#> 1        2023-01-04        Y             case
-#> 2        2023-01-03        Y             case
-#> 3        2023-01-04        N   under_followup
-#> 4        2023-01-06        N lost_to_followup
-#> 5        2023-01-05        N lost_to_followup
-#> 6        2023-01-06        N   under_followup
+#>              from                  to cnt_age cnt_gender date_first_contact
+#> 1 Maria Celestino         Jose Valdez      61          m         2023-01-01
+#> 2 Maria Celestino    Elena De La Vega      72          f         2022-12-31
+#> 3 Maria Celestino Ma,Roof el-El-Sayed      47          m         2023-01-05
+#> 4 Maria Celestino       Vernaye Cross      77          f         2023-01-01
+#> 5 Maria Celestino       Victor Torres      43          m         2023-01-01
+#> 6 Maria Celestino        Carlee Quast      11          f         2023-01-06
+#>   date_last_contact was_case         status
+#> 1        2023-01-05        Y           case
+#> 2        2023-01-03        Y           case
+#> 3        2023-01-08        N under_followup
+#> 4        2023-01-03        N under_followup
+#> 5        2023-01-04        N under_followup
+#> 6        2023-01-09        N under_followup
 ```
 
 If both the line list and contacts table are required, they can be
@@ -201,35 +201,35 @@ outbreak <- sim_outbreak(
   contact_distribution = contact_distribution
 )
 head(outbreak$linelist)
-#>   id         case_name case_type gender age date_onset date_admission
-#> 1  1      Albert Brown suspected      m  78 2023-01-01           <NA>
-#> 2  2    Martin Menning  probable      m  32 2023-01-01           <NA>
-#> 3  3     Drayas Fenton  probable      m  85 2023-01-01           <NA>
-#> 4  4 Michael Wilkerson suspected      m  60 2023-01-02     2023-01-07
-#> 5  5    Essence Fadler  probable      f  86 2023-01-01           <NA>
-#> 6  6    Erika Trujillo confirmed      f  15 2023-01-02           <NA>
+#>   id              case_name case_type gender age date_onset date_admission
+#> 1  1          Chad Bhandary confirmed      m  77 2023-01-01     2023-01-01
+#> 2  2             Renae Robb  probable      f  27 2023-01-01           <NA>
+#> 3  3      Cristal Dominguez confirmed      f  45 2023-01-03           <NA>
+#> 4  4             Kushal Lee  probable      m  35 2023-01-03           <NA>
+#> 5  5      Jamaal el-Ishmael  probable      m  51 2023-01-04           <NA>
+#> 6  6 Ariunzaya Bhattacharya suspected      f  59 2023-01-06           <NA>
 #>   date_death date_first_contact date_last_contact
-#> 1 2023-01-23               <NA>              <NA>
-#> 2 2023-01-11         2022-12-31        2023-01-03
-#> 3       <NA>         2023-01-02        2023-01-07
-#> 4 2023-01-18         2022-12-28        2023-01-02
-#> 5 2023-01-12         2023-01-05        2023-01-05
-#> 6       <NA>         2023-01-02        2023-01-06
+#> 1       <NA>               <NA>              <NA>
+#> 2       <NA>         2023-01-01        2023-01-05
+#> 3       <NA>         2022-12-31        2023-01-02
+#> 4       <NA>         2023-01-01        2023-01-03
+#> 5       <NA>         2022-12-31        2023-01-05
+#> 6 2023-01-19         2023-01-07        2023-01-08
 head(outbreak$contacts)
-#>             from                to cnt_age cnt_gender date_first_contact
-#> 1   Albert Brown    Martin Menning      32          m         2022-12-31
-#> 2   Albert Brown     Drayas Fenton      85          m         2023-01-02
-#> 3   Albert Brown       Areli Vigil       6          f         2022-12-30
-#> 4   Albert Brown       Long Farley      25          m         2023-01-01
-#> 5   Albert Brown     Abigail Zagal      17          f         2023-01-03
-#> 6 Martin Menning Michael Wilkerson      60          m         2022-12-28
-#>   date_last_contact was_case         status
-#> 1        2023-01-03        Y           case
-#> 2        2023-01-07        Y           case
-#> 3        2023-01-03        N under_followup
-#> 4        2023-01-04        N under_followup
-#> 5        2023-01-05        N under_followup
-#> 6        2023-01-02        Y           case
+#>            from                to cnt_age cnt_gender date_first_contact
+#> 1 Chad Bhandary        Renae Robb      27          f         2023-01-01
+#> 2 Chad Bhandary  Fernando Spencer      43          m         2023-01-01
+#> 3 Chad Bhandary  Charles Mccreary      38          m         2023-01-07
+#> 4    Renae Robb Cristal Dominguez      45          f         2022-12-31
+#> 5    Renae Robb        Kushal Lee      35          m         2023-01-01
+#> 6    Renae Robb Challanne Arfsten      46          f         2023-01-04
+#>   date_last_contact was_case           status
+#> 1        2023-01-05        Y             case
+#> 2        2023-01-03        N lost_to_followup
+#> 3        2023-01-08        N   under_followup
+#> 4        2023-01-02        Y             case
+#> 5        2023-01-03        Y             case
+#> 6        2023-01-05        N   under_followup
 ```
 
 ## Help
