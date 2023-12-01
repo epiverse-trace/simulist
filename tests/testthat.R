@@ -9,4 +9,4 @@
 library(testthat)
 library(simulist)
 
-test_check("simulist")
+test_check("simulist", stop_on_warning = FALSE)
