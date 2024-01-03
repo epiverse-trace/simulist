@@ -25,7 +25,8 @@ Imports:
     checkmate,
     epiparameter,
     bpmodels,
-    randomNames
+    randomNames,
+    rlang
 Suggests: 
     incidence2 (>= 2.1.0),
     epicontacts (>= 1.1.3),
