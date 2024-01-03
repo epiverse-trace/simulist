@@ -80,14 +80,16 @@
   )
 
   # add contact dates
-  other_contacts <- .add_date_last_contact(
+  other_contacts <- .add_date_contact(
     .data = other_contacts,
-    outbreak_start_date = outbreak_start_date,
+    contact_type = "last",
     distribution = config$last_contact_distribution,
-    config$last_contact_distribution_params
+    config$last_contact_distribution_params,
+    outbreak_start_date = outbreak_start_date
   )
-  other_contacts <- .add_date_first_contact(
+  other_contacts <- .add_date_contact(
     .data = other_contacts,
+    contact_type = "first",
     distribution = config$first_contact_distribution,
     config$first_contact_distribution_params
   )

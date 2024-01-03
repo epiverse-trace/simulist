@@ -50,14 +50,16 @@ NULL
   chain <- chain[col_order]
   row.names(chain) <- NULL
 
-  chain <- .add_date_last_contact(
+  chain <- .add_date_contact(
     .data = chain,
-    outbreak_start_date = outbreak_start_date,
+    contact_type = "last",
     distribution = config$last_contact_distribution,
-    config$last_contact_distribution_params
+    config$last_contact_distribution_params,
+    outbreak_start_date = outbreak_start_date
   )
-  chain <- .add_date_first_contact(
+  chain <- .add_date_contact(
     .data = chain,
+    contact_type = "first",
     distribution = config$first_contact_distribution,
     config$first_contact_distribution_params
   )
