@@ -19,9 +19,9 @@
 #' arguments to accommodate these and the `config` argument keeps the function
 #' signature simpler and more readable.
 #'
-#'
-#' @param ... [dots] Named elements to replace default settings. Only if names
-#' match exactly are elements replaced.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
+#' default settings. Only if names match exactly are elements replaced,
+#' otherwise the function errors.
 #'
 #' @return A list of settings for [sim_linelist()]
 #' @export
