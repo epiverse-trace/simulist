@@ -91,7 +91,7 @@
 
 
 
-<script src="vis-linelist_files/htmlwidgets-1.6.3/htmlwidgets.js"></script><link href="vis-linelist_files/vis-9.1.0/vis-network.min.css" rel="stylesheet">
+<script src="vis-linelist_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="vis-linelist_files/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="vis-linelist_files/vis-9.1.0/vis-network.min.js"></script><script src="vis-linelist_files/visNetwork-binding-2.1.2/visNetwork.js"></script><link href="vis-linelist_files/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
@@ -113,7 +113,7 @@ looks as expected given how the simulation was parameterised.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/reconverse/incidence2" class="external-link">incidence2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: grates</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.repidemicsconsortium.org/epicontacts/" class="external-link">epicontacts</a></span><span class="op">)</span></span></code></pre></div>
 <p>First we load the required delay distributions using the
@@ -197,13 +197,13 @@ requires rounded dates to aggregate cases per unit time and specifying
 the <code>interval</code> will do this automatically for us.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create incidence object</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" class="external-link">incidence</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">linelist</span>, date_index <span class="op">=</span> <span class="st">"date_onset"</span>, interval <span class="op">=</span> <span class="st">"daily"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">linelist</span>, date_index <span class="op">=</span> <span class="st">"date_onset"</span>, interval <span class="op">=</span> <span class="st">"daily"</span><span class="op">)</span></span></code></pre></div>
 <p>It is possible that not every date had the onset of symptoms,
 resulting in some dates missing entries. This is taken care of by the
-<code><a href="https://rdrr.io/pkg/incidence2/man/complete_dates.html" class="external-link">complete_dates()</a></code> function in {incidence2}.</p>
+<code><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates()</a></code> function in {incidence2}.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># impute for days without cases</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
+<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="vis-linelist_files/figure-html/complete-dates-1.png" alt="Figure 1: Daily incidence of cases from symptom onset including days with zero cases." width="768"><p class="caption">
@@ -213,7 +213,7 @@ with zero cases.
 </div>
 <p>Alternatively, incidence can be plotting weekly:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">weekly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" class="external-link">incidence</a></span><span class="op">(</span><span class="va">linelist</span>, date_index <span class="op">=</span> <span class="st">"date_onset"</span>, interval <span class="op">=</span> <span class="st">"isoweek"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">weekly</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span><span class="va">linelist</span>, date_index <span class="op">=</span> <span class="st">"date_onset"</span>, interval <span class="op">=</span> <span class="st">"isoweek"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">weekly</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="vis-linelist_files/figure-html/plot-weekly-1.png" alt="Figure 2: Weekly incidence of cases from symptom onset" width="768"><p class="caption">
@@ -224,7 +224,7 @@ Figure 2: Weekly incidence of cases from symptom onset
 for example gender, the <code>&lt;incidence2&gt;</code> data object can
 be recreated, specifying which columns to group by.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">weekly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">weekly</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">"isoweek"</span>,</span>
@@ -239,9 +239,9 @@ gender.
 </div>
 <p>To visualise the onset, hospitalisation and death incidence in the
 same plot they can be jointly specified to the <code>date_index</code>
-argument of <code><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" class="external-link">incidence2::incidence()</a></code>.</p>
+argument of <code><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence2::incidence()</a></code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -251,7 +251,7 @@ argument of <code><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" cl
 <span>  interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
 <span>  groups <span class="op">=</span> <span class="st">"gender"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
+<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="vis-linelist_files/figure-html/plot-onset-hospitalisation-1.png" alt="Figure 4: Daily incidence of cases from symptom onset and incidence of hospitalisations and deaths." width="768"><p class="caption">
