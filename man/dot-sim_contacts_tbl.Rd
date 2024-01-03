@@ -15,7 +15,7 @@
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
-branching process simulation}
+branching process simulation.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 

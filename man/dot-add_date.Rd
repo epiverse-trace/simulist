@@ -2,19 +2,17 @@
 % Please edit documentation in R/add_cols.R
 \name{.add_date}
 \alias{.add_date}
-\alias{.add_date_first_contact}
-\alias{.add_date_last_contact}
+\alias{.add_date_contact}
 \alias{.add_hospitalisation}
 \alias{.add_deaths}
 \title{Add event date as column to infectious history \verb{<data.frame>}}
 \usage{
-.add_date_first_contact(.data, distribution = c("pois", "geom"), ...)
-
-.add_date_last_contact(
+.add_date_contact(
   .data,
-  outbreak_start_date,
+  contact_type = c("first", "last"),
   distribution = c("pois", "geom"),
-  ...
+  ...,
+  outbreak_start_date
 )
 
 .add_hospitalisation(.data, onset_to_hosp, hosp_rate)
@@ -23,7 +21,10 @@
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
-branching process simulation}
+branching process simulation.}
+
+\item{contact_type}{A \code{character} with the type of contact, either first
+contact (\code{"first"}), or last contact (\code{"last"}).}
 
 \item{distribution}{A \code{character} with the name of the distribution,
 following the base R convention for distribution naming (e.g. Poisson

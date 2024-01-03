@@ -32,8 +32,8 @@ of the  line list \verb{<data.frame>} are each stage of the simulation
 (\code{\link[=sim_linelist]{sim_linelist()}}) after setting the seed to 1 (\code{set.seed(1)}). The
 scenarios are before each function call, for example,
 \code{"pre_date_last_contact"} is the state of the line list prior to calling
-\code{\link[=.add_date_last_contact]{.add_date_last_contact()}}, and \code{"pre_names"} is the state of the line list
-prior to calling \code{\link[=.add_names]{.add_names()}}.
+\link{.add_date_contact(..., contact_type = "last")}, and \code{"pre_names"} is the
+state of the line list prior to calling \code{\link[=.add_names]{.add_names()}}.
 \subsection{Script to reproduce data:}{
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{# load data required to simulate line list
