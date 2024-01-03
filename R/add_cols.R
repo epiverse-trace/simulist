@@ -3,7 +3,9 @@
 #' @description The event date could be first contact, last contact or other.
 #'
 #' @param .data A `<data.frame>` containing the infectious history from a
-#' branching process simulation
+#' branching process simulation.
+#' @param contact_type A `character` with the type of contact, either first
+#' contact (`"first"`), or last contact (`"last"`).
 #' @param distribution A `character` with the name of the distribution,
 #' following the base R convention for distribution naming (e.g. Poisson
 #' is `pois`).
@@ -20,27 +22,35 @@
 #'
 NULL
 
-
 #' @name .add_date
-.add_date_first_contact <- function(.data,
-                                    distribution = c("pois", "geom"),
-                                    ...) {
+.add_date_contact <- function(.data,
+                              contact_type = c("first", "last"),
+                              distribution = c("pois", "geom"),
+                              ...,
+                              outbreak_start_date) {
+  contact_type <- match.arg(contact_type)
   distribution <- match.arg(distribution)
+
+  stopifnot(
+    "outbreak_start_date is only required for adding date of last contact" =
+      contact_type == "last" && !missing(outbreak_start_date) ||
+      contact_type == "first" && missing(outbreak_start_date)
+  )
 
   rdist <- switch(distribution,
     pois = stats::rpois,
     geom = stats::rgeom
   )
 
-  dist_params <- c(...)
-  if (length(dist_params) == 0) {
+  # c() over ...length() to ensure NULL is not counted by length
+  if (length(c(...)) == 0) {
     stop("Distribution parameters are missing, check config", call. = FALSE)
   }
 
   # name list elements with vec names to ensure arg matching in do.call
-  args <- c(nrow(.data), as.list(dist_params))
+  args <- c(nrow(.data), list(...))
 
-  tryCatch(
+  contact_delay <- tryCatch(
     error = function(cnd) {
       stop(
         "Incorrect parameterisation of distribution, check config",
@@ -53,53 +63,15 @@ NULL
         call. = FALSE
       )
     },
-    first_contact_delay <- do.call(rdist, args = args) # nolint implicit assignment
+    do.call(rdist, args = args)
   )
 
-  .data$date_first_contact <- .data$date_last_contact - first_contact_delay
-
-  # return data
-  .data
-}
-
-#' @name .add_date
-.add_date_last_contact <- function(.data,
-                                   outbreak_start_date,
-                                   distribution = c("pois", "geom"),
-                                   ...) {
-  distribution <- match.arg(distribution)
-
-  rdist <- switch(distribution,
-    pois = stats::rpois,
-    geom = stats::rgeom
-  )
-
-  dist_params <- c(...)
-  if (length(dist_params) == 0) {
-    stop("Distribution parameters are missing, check config", call. = FALSE)
+  if (contact_type == "first") {
+    .data$date_first_contact <- .data$date_last_contact - contact_delay
+  } else {
+    .data$date_last_contact <- .data$infector_time + contact_delay +
+      outbreak_start_date
   }
-
-  # name list elements with vec names to ensure arg matching in do.call
-  args <- c(nrow(.data), as.list(dist_params))
-
-  tryCatch(
-    error = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    },
-    warning = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    },
-    last_contact_delay <- do.call(rdist, args = args) # nolint implicit assignment
-  )
-
-  .data$date_last_contact <- .data$infector_time + last_contact_delay +
-    outbreak_start_date
 
   # return data
   .data
@@ -144,16 +116,16 @@ NULL
   .data$deaths <- .data$time + onset_to_death(nrow(.data))
 
   apply_death_rate <- function(.data, rate, hosp = TRUE) {
-    if (is.numeric(hosp_death_rate)) {
+    if (is.numeric(rate)) {
       pop_sample <- sample(
         seq_len(nrow(.data)),
         replace = FALSE,
-        size = (1 - hosp_death_rate) * nrow(.data)
+        size = (1 - rate) * nrow(.data)
       )
       .data$deaths[pop_sample] <- NA
     } else {
-      for (i in seq_len(nrow(hosp_death_rate))) {
-        age_bracket <- hosp_death_rate$min_age[i]:hosp_death_rate$max_age[i]
+      for (i in seq_len(nrow(rate))) {
+        age_bracket <- rate$min_age[i]:rate$max_age[i]
         if (hosp) {
           age_group <- which(
             .data$age %in% age_bracket & !is.na(.data$hospitalisation)
@@ -163,7 +135,7 @@ NULL
             .data$age %in% age_bracket & is.na(.data$hospitalisation)
           )
         }
-        not_hosp_death_prob <- 1 - hosp_death_rate$rate[i]
+        not_hosp_death_prob <- 1 - rate$rate[i]
         age_group_sample <- sample(
           age_group,
           replace = FALSE,
@@ -175,8 +147,8 @@ NULL
     .data
   }
 
-  .data <- apply_death_rate(.data, hosp_death_rate, hosp = TRUE)
-  .data <- apply_death_rate(.data, non_hosp_death_rate, hosp = FALSE)
+  .data <- apply_death_rate(.data, rate = hosp_death_rate, hosp = TRUE)
+  .data <- apply_death_rate(.data, rate = non_hosp_death_rate, hosp = FALSE)
 
   # return data
   .data
@@ -237,15 +209,15 @@ NULL
     lnorm = stats::rlnorm
   )
 
-  dist_params <- c(...)
-  if (length(dist_params) == 0) {
+  # c() over ...length() to ensure NULL is not counted by length
+  if (length(c(...)) == 0) {
     stop("Distribution parameters are missing, check config", call. = FALSE)
   }
 
   # name list elements with vec names to ensure arg matching in do.call
-  args <- c(n = 1, as.list(dist_params))
+  args <- c(n = 1, list(...))
 
-  tryCatch(
+  ct_value <- tryCatch(
     error = function(cnd) {
       stop(
         "Incorrect parameterisation of distribution, check config",
@@ -258,7 +230,7 @@ NULL
         call. = FALSE
       )
     },
-    ct_value <- do.call(rdist, args = args) # nolint implicit assignment
+    do.call(rdist, args = args)
   )
 
   .data$ct_value <- ifelse(
