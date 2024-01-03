@@ -35,8 +35,18 @@ create_config <- function(...) {
     ct_distribution_params = c(mean = 25, sd = 2)
   )
 
-  # replace default args if in dots (remove args not for sim_linelist)
-  args <- utils::modifyList(args, list(...)[...names() %in% names(args)])
+  # capture dynamic dots
+  dots <- rlang::dots_list(..., .ignore_empty = "none", .homonyms = "error")
+  dots_names <- names(dots)
+
+  # check arguments in dots match arg list
+  stopifnot(
+    "Incorrect argument names supplied to create_config" =
+    all(dots_names %in% names(args))
+  )
+
+  # replace default args if in dots
+  args <- utils::modifyList(args, dots)
 
   # return args list
   args
