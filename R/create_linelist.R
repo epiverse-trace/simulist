@@ -16,8 +16,8 @@
 #' ([sim_linelist()]) after setting the seed to 1 (`set.seed(1)`). The
 #' scenarios are before each function call, for example,
 #' `"pre_date_last_contact"` is the state of the line list prior to calling
-#' [.add_date_last_contact()], and `"pre_names"` is the state of the line list
-#' prior to calling [.add_names()].
+#' `.add_date_contact(..., contact_type = "last")`, and `"pre_names"` is the
+#' state of the line list prior to calling [.add_names()].
 #'
 #' ## Script to reproduce data:
 #' ```
