@@ -18,9 +18,9 @@
     "age limit or rate cannot be NA or NaN" =
       !anyNA(x),
     "rate should be between 0 and 1" =
-      min(x$rate) >= 0 & max(x$rate) <= 1,
+      min(x$rate) >= 0 && max(x$rate) <= 1,
     "age limit in rate data frame must be unique" =
-      !(anyDuplicated(x$age_limit) > 0)
+      anyDuplicated(x$age_limit) == 0
   )
 
   # order rate df on age_limit
@@ -138,7 +138,7 @@
 
   stopifnot(
     "population_age must be two numerics or a data.frame" =
-      is.numeric(population_age) && length(population_age) == 2 ||
+      checkmate::test_numeric(population_age, len = 2) ||
         is.data.frame(population_age)
   )
 
