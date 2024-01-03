@@ -7,8 +7,9 @@
 create_config(...)
 }
 \arguments{
-\item{...}{\link{dots} Named elements to replace default settings. Only if names
-match exactly are elements replaced.}
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named elements to replace
+default settings. Only if names match exactly are elements replaced,
+otherwise the function errors.}
 }
 \value{
 A list of settings for \code{\link[=sim_linelist]{sim_linelist()}}
