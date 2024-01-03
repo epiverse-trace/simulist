@@ -15,10 +15,11 @@ suppressMessages({
   ))
 })
 
-test_that(".add_date_last_contact works as expected", {
+test_that(".add_date_contact works as expected with contact_type = 'last'", {
   ll <- .create_linelist(scenario = "pre_date_last_contact")
-  linelist <- .add_date_last_contact(
+  linelist <- .add_date_contact(
     .data = ll,
+    contact_type = "last",
     outbreak_start_date = as.Date("2023-01-01"),
     distribution = "pois",
     lambda = 3
@@ -29,10 +30,25 @@ test_that(".add_date_last_contact works as expected", {
   expect_identical(colnames(linelist), c(colnames(ll), "date_last_contact"))
 })
 
-test_that(".add_date_last_contact works as expected with different parameter", {
-  ll <- .create_linelist(scenario = "pre_date_last_contact")
-  linelist <- .add_date_last_contact(
+test_that(".add_date_contact works as expected with contact_type = 'first'", {
+  ll <- .create_linelist(scenario = "pre_date_first_contact")
+  linelist <- .add_date_contact(
     .data = ll,
+    contact_type = "first",
+    distribution = "pois",
+    lambda = 3
+  )
+  expect_s3_class(linelist, class = "data.frame")
+  expect_s3_class(linelist$date_first_contact, class = "Date")
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
+  expect_identical(colnames(linelist), c(colnames(ll), "date_first_contact"))
+})
+
+test_that(".add_date_contact (last) works as expected with different param", {
+  ll <- .create_linelist(scenario = "pre_date_last_contact")
+  linelist <- .add_date_contact(
+    .data = ll,
+    contact_type = "last",
     outbreak_start_date = as.Date("2023-01-01"),
     distribution = "pois",
     lambda = 1
@@ -43,66 +59,11 @@ test_that(".add_date_last_contact works as expected with different parameter", {
   expect_identical(colnames(linelist), c(colnames(ll), "date_last_contact"))
 })
 
-test_that(".add_date_last_contact fails as expected", {
-  ll <- .create_linelist(scenario = "pre_date_last_contact")
-  expect_error(
-    .add_date_last_contact(
-      .data = ll,
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "nbinom",
-      size = 10,
-      prob = 0.5
-    ),
-    regexp = "(arg)*(should be)*(pois)"
-  )
-
-  expect_error(
-    .add_date_last_contact(
-      .data = ll,
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "pois"
-    ),
-    regexp = "Distribution parameters are missing, check config"
-  )
-
-  expect_error(
-    .add_date_last_contact(
-      .data = ll,
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "pois",
-      prob = 0.5
-    ),
-    regexp = "Incorrect parameterisation of distribution, check config"
-  )
-
-  expect_error(
-    .add_date_last_contact(
-      .data = ll,
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "pois",
-      lambda = NA
-    ),
-    regexp = "Incorrect parameterisation of distribution, check config"
-  )
-})
-
-test_that(".add_date_first_contact works as expected", {
+test_that(".add_date_contact (first) works as expected with different param", {
   ll <- .create_linelist(scenario = "pre_date_first_contact")
-  linelist <- .add_date_first_contact(
+  linelist <- .add_date_contact(
     .data = ll,
-    distribution = "pois",
-    lambda = 3
-  )
-  expect_s3_class(linelist, class = "data.frame")
-  expect_s3_class(linelist$date_first_contact, class = "Date")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
-  expect_identical(colnames(linelist), c(colnames(ll), "date_first_contact"))
-})
-
-test_that(".add_date_first_contact works as expected with different param", {
-  ll <- .create_linelist(scenario = "pre_date_first_contact")
-  linelist <- .add_date_first_contact(
-    .data = ll,
+    contact_type = "first",
     distribution = "pois",
     lambda = 1
   )
@@ -112,11 +73,13 @@ test_that(".add_date_first_contact works as expected with different param", {
   expect_identical(colnames(linelist), c(colnames(ll), "date_first_contact"))
 })
 
-test_that(".add_date_first_contact fails as expected", {
-  ll <- .create_linelist(scenario = "pre_date_first_contact")
+test_that(".add_date_contact fails as expected", {
+  ll <- .create_linelist(scenario = "pre_date_last_contact")
   expect_error(
-    .add_date_first_contact(
+    .add_date_contact(
       .data = ll,
+      contact_type = "last",
+      outbreak_start_date = as.Date("2023-01-01"),
       distribution = "nbinom",
       size = 10,
       prob = 0.5
@@ -125,16 +88,20 @@ test_that(".add_date_first_contact fails as expected", {
   )
 
   expect_error(
-    .add_date_first_contact(
+    .add_date_contact(
       .data = ll,
+      contact_type = "last",
+      outbreak_start_date = as.Date("2023-01-01"),
       distribution = "pois"
     ),
     regexp = "Distribution parameters are missing, check config"
   )
 
   expect_error(
-    .add_date_first_contact(
+    .add_date_contact(
       .data = ll,
+      contact_type = "last",
+      outbreak_start_date = as.Date("2023-01-01"),
       distribution = "pois",
       prob = 0.5
     ),
@@ -142,8 +109,10 @@ test_that(".add_date_first_contact fails as expected", {
   )
 
   expect_error(
-    .add_date_first_contact(
+    .add_date_contact(
       .data = ll,
+      contact_type = "last",
+      outbreak_start_date = as.Date("2023-01-01"),
       distribution = "pois",
       lambda = NA
     ),
