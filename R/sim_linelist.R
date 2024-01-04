@@ -137,9 +137,9 @@ sim_linelist <- function(R,
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
-      (is.function(serial_interval) || inherits(serial_interval, "epidist")) &&
-      (is.function(onset_to_hosp) || inherits(onset_to_hosp, "epidist")) &&
-      (is.function(onset_to_death) || inherits(onset_to_death, "epidist"))
+      inherits(serial_interval, c("function", "epidist")) &&
+      inherits(onset_to_hosp, c("function", "epidist")) &&
+      inherits(onset_to_death, c("function", "epidist"))
   )
   serial_interval <- as.function(serial_interval, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
