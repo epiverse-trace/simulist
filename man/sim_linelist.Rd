@@ -87,7 +87,7 @@ A line list \verb{<data.frame>}
 }
 \description{
 The line list is simulated using a branching process and
-parameterised with previously published epidemiological parameters.
+parameterised with user defined epidemiological parameters.
 }
 \details{
 For age-stratified hospitalised and death rates a \verb{<data.frame>}
@@ -141,6 +141,7 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death,
   hosp_rate = 0.5
 )
+head(linelist)
 
 # example with age-stratified hospitalisation rate
 # 20\% for over 80s
@@ -157,6 +158,7 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death,
   hosp_rate = age_dep_hosp_rate
 )
+head(linelist)
 }
 \author{
 Joshua W. Lambert, Carmen Tamayo

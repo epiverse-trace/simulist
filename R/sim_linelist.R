@@ -1,7 +1,7 @@
 #' Simulate a line list
 #'
 #' @description The line list is simulated using a branching process and
-#' parameterised with previously published epidemiological parameters.
+#' parameterised with user defined epidemiological parameters.
 #'
 #' @details For age-stratified hospitalised and death rates a `<data.frame>`
 #' will need to be passed to the `hosp_rate` and/or `hosp_death_rate`
@@ -101,6 +101,7 @@
 #'   onset_to_death = onset_to_death,
 #'   hosp_rate = 0.5
 #' )
+#' head(linelist)
 #'
 #' # example with age-stratified hospitalisation rate
 #' # 20% for over 80s
@@ -117,6 +118,7 @@
 #'   onset_to_death = onset_to_death,
 #'   hosp_rate = age_dep_hosp_rate
 #' )
+#' head(linelist)
 sim_linelist <- function(R,
                          serial_interval,
                          onset_to_hosp,
