@@ -51,6 +51,13 @@ sim_contacts <- function(R,
                          ...) {
   chkDots(...)
 
+  # check and convert distribution to func if needed before .check_sim_input()
+  stopifnot(
+    "Input delay distributions need to be either functions or <epidist>" =
+      (is.function(serial_interval) || inherits(serial_interval, "epidist")) &&
+      (is.function(contact_distribution) ||
+         inherits(contact_distribution, "epidist"))
+  )
   serial_interval <- as.function(serial_interval, func_typ = "generate")
   contact_distribution <- as.function(
     contact_distribution,

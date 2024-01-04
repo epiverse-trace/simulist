@@ -80,6 +80,15 @@ sim_outbreak <- function(R,
                          ...) {
   chkDots(...)
 
+  # check and convert distribution to func if needed before .check_sim_input()
+  stopifnot(
+    "Input delay distributions need to be either functions or <epidist>" =
+      (is.function(serial_interval) || inherits(serial_interval, "epidist")) &&
+      (is.function(onset_to_hosp) || inherits(onset_to_hosp, "epidist")) &&
+      (is.function(onset_to_death) || inherits(onset_to_death, "epidist")) &&
+      (is.function(contact_distribution) ||
+         inherits(contact_distribution, "epidist"))
+  )
   serial_interval <- as.function(serial_interval, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")
