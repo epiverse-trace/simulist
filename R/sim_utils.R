@@ -21,6 +21,7 @@ NULL
                              population_age,
                              config) {
   chain_size <- 0
+  max_iter <- 0L
   # condition on a minimum chain size
   while (chain_size < min_outbreak_size) {
     chain <- bpmodels::chain_sim(
@@ -33,6 +34,14 @@ NULL
       infinite = 1000
     )
     chain_size <- max(chain$id)
+    max_iter <- max_iter + 1L
+    if (max_iter >= 1e4) {
+      stop(
+        "Exceeded maximum number of iterations for simulating outbreak. \n",
+        "Change input parameters or min_outbreak_size.",
+        call. = FALSE
+      )
+    }
   }
 
   names(chain)[names(chain) == "ancestor"] <- "infector"
