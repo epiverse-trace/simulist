@@ -13,8 +13,7 @@ sim_contacts(
   population_age = c(1, 90),
   contact_tracing_status_probs = c(under_followup = 0.7, lost_to_followup = 0.2, unknown
     = 0.1),
-  config = create_config(),
-  ...
+  config = create_config()
 )
 }
 \arguments{
@@ -49,10 +48,6 @@ contact tracing status must sum to one.}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
 Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
-
-\item{...}{\link{dots} Extra arguments to be passed to other functions.
-\strong{Currently not used and will return a warning if extra arguments are
-supplied}.}
 }
 \value{
 A contacts \verb{<data.frame>}

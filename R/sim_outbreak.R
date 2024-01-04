@@ -76,10 +76,7 @@ sim_outbreak <- function(R,
                            lost_to_followup = 0.2,
                            unknown = 0.1
                          ),
-                         config = create_config(),
-                         ...) {
-  chkDots(...)
-
+                         config = create_config()) {
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =

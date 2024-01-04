@@ -62,9 +62,6 @@
 #' `"confirmed"`. Values of each case type must sum to one.
 #' @param config A list of settings to adjust the randomly sampled delays and
 #' Ct values (if `add_ct = TRUE`). See [create_config()] for more information.
-#' @param ... [dots] Extra arguments to be passed to other functions.
-#' **Currently not used and will return a warning if extra arguments are
-#' supplied**.
 #'
 #' @return A line list `<data.frame>`
 #' @export
@@ -136,10 +133,7 @@ sim_linelist <- function(R,
                            probable = 0.3,
                            confirmed = 0.5
                          ),
-                         config = create_config(),
-                         ...) {
-  chkDots(...)
-
+                         config = create_config()) {
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
