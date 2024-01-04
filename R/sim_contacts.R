@@ -55,7 +55,7 @@ sim_contacts <- function(R,
       (is.function(contact_distribution) ||
          inherits(contact_distribution, "epidist"))
   )
-  serial_interval <- as.function(serial_interval, func_typ = "generate")
+  serial_interval <- as.function(serial_interval, func_type = "generate")
   contact_distribution <- as.function(
     contact_distribution,
     func_type = "generate"
