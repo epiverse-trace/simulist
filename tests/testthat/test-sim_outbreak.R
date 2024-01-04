@@ -41,14 +41,14 @@ test_that("sim_outbreak works as expected", {
   expect_type(outbreak, type = "list")
   expect_s3_class(outbreak$linelist, class = "data.frame")
   expect_s3_class(outbreak$contacts, class = "data.frame")
-  expect_identical(dim(outbreak$linelist), c(42L, 10L))
-  expect_identical(dim(outbreak$contacts), c(168L, 8L))
+  expect_identical(dim(outbreak$linelist), c(42L, 11L))
+  expect_identical(dim(outbreak$contacts), c(172L, 8L))
   expect_identical(
     colnames(outbreak$linelist),
     c(
       "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact"
+      "date_last_contact", "ct_value"
     )
   )
   expect_identical(
@@ -74,14 +74,14 @@ test_that("sim_outbreak works as expected with add_names = FALSE", {
   expect_type(outbreak, type = "list")
   expect_s3_class(outbreak$linelist, class = "data.frame")
   expect_s3_class(outbreak$contacts, class = "data.frame")
-  expect_identical(dim(outbreak$linelist), c(42L, 9L))
+  expect_identical(dim(outbreak$linelist), c(42L, 10L))
   expect_identical(dim(outbreak$contacts), c(170L, 8L))
   expect_identical(
     colnames(outbreak$linelist),
     c(
       "id", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact"
+      "date_last_contact", "ct_value"
     )
   )
   expect_identical(
@@ -121,14 +121,14 @@ test_that("sim_outbreak works as expected with age-strat rates", {
   expect_type(outbreak, type = "list")
   expect_s3_class(outbreak$linelist, class = "data.frame")
   expect_s3_class(outbreak$contacts, class = "data.frame")
-  expect_identical(dim(outbreak$linelist), c(42L, 10L))
-  expect_identical(dim(outbreak$contacts), c(168L, 8L))
+  expect_identical(dim(outbreak$linelist), c(42L, 11L))
+  expect_identical(dim(outbreak$contacts), c(173L, 8L))
   expect_identical(
     colnames(outbreak$linelist),
     c(
       "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact"
+      "date_last_contact", "ct_value"
     )
   )
   expect_identical(
@@ -159,14 +159,14 @@ test_that("sim_outbreak works as expected with age structure", {
   expect_type(outbreak, type = "list")
   expect_s3_class(outbreak$linelist, class = "data.frame")
   expect_s3_class(outbreak$contacts, class = "data.frame")
-  expect_identical(dim(outbreak$linelist), c(42L, 10L))
-  expect_identical(dim(outbreak$contacts), c(176L, 8L))
+  expect_identical(dim(outbreak$linelist), c(42L, 11L))
+  expect_identical(dim(outbreak$contacts), c(175L, 8L))
   expect_identical(
     colnames(outbreak$linelist),
     c(
       "id", "case_name", "case_type", "gender", "age", "date_onset",
       "date_admission", "date_death", "date_first_contact",
-      "date_last_contact"
+      "date_last_contact", "ct_value"
     )
   )
   expect_identical(
