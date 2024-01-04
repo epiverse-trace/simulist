@@ -126,7 +126,7 @@
   )
 
   # remove infector col
-  contact_investigation <- contact_investigation[, -1]
+  contact_investigation$infector <- NULL
 
   # return contacts
   contact_investigation
