@@ -305,3 +305,16 @@ test_that("sim_linelist fails as expected with empty config", {
     regexp = "Distribution parameters are missing, check config"
   )
 })
+
+test_that("sim_linelist fails as expected exceeding max iter for bpmodel", {
+  set.seed(1)
+  expect_error(
+    sim_linelist(
+      R = 0.2,
+      serial_interval = serial_interval,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death
+    ),
+    regexp = "(Exceeded maximum number of iterations for simulating outbreak)"
+  )
+})
