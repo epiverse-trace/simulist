@@ -101,7 +101,7 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
-To simulate a table of contacts of cases (i.e. to reflect a contact tracing dataset) we can use the same serial interval defined for the example above. We additionally need a contact distribution, which represents the probability that each person in the population will be a given number of contacts on a given day.
+To simulate a table of contacts of cases (i.e. to reflect a contact tracing dataset) we can use the same serial interval defined for the example above. We additionally need a contact distribution, which represents the probability that each person that infected an individual, also had a given number of contacts that did not become infected.
 
 ```{r, sim-contacts}
 contact_distribution <- epiparameter::epidist(
