@@ -107,9 +107,9 @@ The way {simulist} assigns case types is by pasting case types onto existing cas
 
 The reproduction number has a strong influence on the size of an outbreak. However, the {simulist} package generates line list data using a stochastic algorithm, so even when $R < 1$ it can produce a substantial outbreak by chance, or an $R >> 1$ will sometimes not produce a vast epidemic in one simulation (i.e. one replicate) due to the stochasticity. 
 
-When requiring a minimum outbreak size we can specify the `min_chain_size` argument in `sim_linelist()`. By default this is set to 10. This means that the simulation will not return a line list until the conditioning has been met. In other words, the simulation will resimulate a branching process model until an outbreak infects at least 10 people.
+When requiring a minimum outbreak size we can specify the `min_outbreak_size` argument in `sim_linelist()`. By default this is set to 10. This means that the simulation will not return a line list until the conditioning has been met. In other words, the simulation will resimulate a branching process model until an outbreak infects at least 10 people.
 
-When requiring a line list that represents a large outbreak, such as the COVID-19 outbreak, setting the `min_chain_size` to a larger number guarantees a line list of at least that size. Here we simulate a line list requiring at least 250 cases.
+When requiring a line list that represents a large outbreak, such as the COVID-19 outbreak, setting the `min_outbreak_size` to a larger number guarantees a line list of at least that size. Here we simulate a line list requiring at least 250 cases.
 
 ```{r, sim-large-linelist}
 linelist <- sim_linelist(
@@ -117,12 +117,12 @@ linelist <- sim_linelist(
   serial_interval = serial_interval,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  min_chain_size = 250
+  min_outbreak_size = 250
 )
 head(linelist)
 ```
 
-The amount of time the simulation takes can be determined by the reproduction number (`R`) and the minimum outbreak size (`min_chain_size`). If the `min_outbreak_size` is large, for example hundreds or thousands of cases, and the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.
+The amount of time the simulation takes can be determined by the reproduction number (`R`) and the minimum outbreak size (`min_outbreak_size`). If the `min_outbreak_size` is large, for example hundreds or thousands of cases, and the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.
 
 ## Anonymous line list
 

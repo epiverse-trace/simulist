@@ -117,7 +117,7 @@
                              R,
                              serial_interval,
                              outbreak_start_date,
-                             min_chain_size,
+                             min_outbreak_size,
                              onset_to_hosp = NULL,
                              onset_to_death = NULL,
                              contact_distribution = NULL,
@@ -134,7 +134,7 @@
   checkmate::assert_number(R, lower = 0)
   .check_func_req_args(serial_interval)
   checkmate::assert_date(outbreak_start_date)
-  checkmate::assert_integerish(min_chain_size, lower = 1)
+  checkmate::assert_integerish(min_outbreak_size, lower = 1)
 
   stopifnot(
     "population_age must be two numerics or a data.frame" =

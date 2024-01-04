@@ -17,12 +17,12 @@ NULL
 .sim_bp_linelist <- function(R,
                              serial_interval,
                              outbreak_start_date,
-                             min_chain_size,
+                             min_outbreak_size,
                              population_age,
                              config) {
   chain_size <- 0
   # condition on a minimum chain size
-  while (chain_size < min_chain_size) {
+  while (chain_size < min_outbreak_size) {
     chain <- bpmodels::chain_sim(
       n = 1,
       offspring = "pois",

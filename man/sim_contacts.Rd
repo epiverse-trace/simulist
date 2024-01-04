@@ -9,7 +9,7 @@ sim_contacts(
   serial_interval,
   contact_distribution,
   outbreak_start_date = as.Date("2023-01-01"),
-  min_chain_size = 10,
+  min_outbreak_size = 10,
   population_age = c(1, 90),
   contact_tracing_status_probs = c(under_followup = 0.7, lost_to_followup = 0.2, unknown
     = 0.1),
@@ -30,8 +30,8 @@ that go on to be infected or not infected.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{min_chain_size}{A single \code{numeric} defining the minimum chain size for
-the simulated outbreak. Default is \code{10}. This can be increased when the
+\item{min_outbreak_size}{A single \code{numeric} defining the minimum chain size
+for the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
 \item{population_age}{Either a \code{numeric} vector with two elements or a
