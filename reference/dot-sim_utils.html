@@ -83,7 +83,7 @@ code being repeated across several simulation functions.</p>
 <span>  <span class="va">R</span>,</span>
 <span>  <span class="va">serial_interval</span>,</span>
 <span>  <span class="va">outbreak_start_date</span>,</span>
-<span>  <span class="va">min_chain_size</span>,</span>
+<span>  <span class="va">min_outbreak_size</span>,</span>
 <span>  <span class="va">population_age</span>,</span>
 <span>  <span class="va">config</span></span>
 <span><span class="op">)</span></span>
@@ -118,9 +118,9 @@ the serial interval.</p></dd>
 <dd><p>A <code>date</code> for the start of the outbreak.</p></dd>
 
 
-<dt>min_chain_size</dt>
-<dd><p>A single <code>numeric</code> defining the minimum chain size for
-the simulated outbreak. Default is <code>10</code>. This can be increased when the
+<dt>min_outbreak_size</dt>
+<dd><p>A single <code>numeric</code> defining the minimum chain size
+for the simulated outbreak. Default is <code>10</code>. This can be increased when the
 function should simulate a larger outbreak.</p></dd>
 
 
@@ -179,7 +179,7 @@ of the line list. Default is <code>TRUE</code>.</p></dd>
 
 <dt>add_ct</dt>
 <dd><p>A <code>logical</code> boolean for whether to add Ct values to each row
-of the line list. Default is <code>FALSE</code>.</p></dd>
+of the line list. Default is <code>TRUE</code>.</p></dd>
 
 
 <dt>case_type_probs</dt>
