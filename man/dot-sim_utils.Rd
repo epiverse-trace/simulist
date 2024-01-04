@@ -11,7 +11,7 @@ within \pkg{simulist}}
   R,
   serial_interval,
   outbreak_start_date,
-  min_chain_size,
+  min_outbreak_size,
   population_age,
   config
 )
@@ -38,8 +38,8 @@ the serial interval.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{min_chain_size}{A single \code{numeric} defining the minimum chain size for
-the simulated outbreak. Default is \code{10}. This can be increased when the
+\item{min_outbreak_size}{A single \code{numeric} defining the minimum chain size
+for the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
 \item{population_age}{Either a \code{numeric} vector with two elements or a

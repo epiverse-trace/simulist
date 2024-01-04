@@ -9,7 +9,7 @@
   R,
   serial_interval,
   outbreak_start_date,
-  min_chain_size,
+  min_outbreak_size,
   onset_to_hosp = NULL,
   onset_to_death = NULL,
   contact_distribution = NULL,
@@ -34,8 +34,8 @@ the serial interval.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{min_chain_size}{A single \code{numeric} defining the minimum chain size for
-the simulated outbreak. Default is \code{10}. This can be increased when the
+\item{min_outbreak_size}{A single \code{numeric} defining the minimum chain size
+for the simulated outbreak. Default is \code{10}. This can be increased when the
 function should simulate a larger outbreak.}
 
 \item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for

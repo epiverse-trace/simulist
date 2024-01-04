@@ -170,7 +170,7 @@ test_that(".check_sim_input works as expected", {
     R = 1,
     serial_interval = serial_interval,
     outbreak_start_date = as.Date("2023-01-01"),
-    min_chain_size = 10,
+    min_outbreak_size = 10,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     contact_distribution = contact_distribution,
@@ -199,7 +199,7 @@ test_that(".check_sim_input works as expected", {
     R = 1,
     serial_interval = serial_interval,
     outbreak_start_date = as.Date("2023-01-01"),
-    min_chain_size = 10,
+    min_outbreak_size = 10,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     add_names = TRUE,
@@ -222,7 +222,7 @@ test_that(".check_sim_input works as expected", {
     R = 1,
     serial_interval = serial_interval,
     outbreak_start_date = as.Date("2023-01-01"),
-    min_chain_size = 10,
+    min_outbreak_size = 10,
     contact_distribution = contact_distribution,
     contact_tracing_status_probs = c(
       under_followup = 0.7,
@@ -263,8 +263,8 @@ test_that(".check_sim_input fails as expected", {
       R = 1,
       serial_interval = serial_interval,
       outbreak_start_date = as.Date("2023-01-01"),
-      min_chain_size = "10"
+      min_outbreak_size = "10"
     ),
-    regexp = "(Assertion on)*(min_chain_size)*(failed)"
+    regexp = "(Assertion on)*(min_outbreak_size)*(failed)"
   )
 })

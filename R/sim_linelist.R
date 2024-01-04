@@ -47,8 +47,8 @@
 #' of the line list. Default is `TRUE`.
 #' @param add_ct A `logical` boolean for whether to add Ct values to each row
 #' of the line list. Default is `TRUE`.
-#' @param min_chain_size A single `numeric` defining the minimum chain size for
-#' the simulated outbreak. Default is `10`. This can be increased when the
+#' @param min_outbreak_size A single `numeric` defining the minimum chain size
+#' for the simulated outbreak. Default is `10`. This can be increased when the
 #' function should simulate a larger outbreak.
 #' @param population_age Either a `numeric` vector with two elements or a
 #' `<data.frame>` with age structure in the population. Use a `numeric` vector
@@ -129,7 +129,7 @@ sim_linelist <- function(R,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
                          add_ct = TRUE,
-                         min_chain_size = 10,
+                         min_outbreak_size = 10,
                          population_age = c(1, 90),
                          case_type_probs = c(
                            suspected = 0.2,
@@ -156,7 +156,7 @@ sim_linelist <- function(R,
     R = R,
     serial_interval = serial_interval,
     outbreak_start_date = outbreak_start_date,
-    min_chain_size = min_chain_size,
+    min_outbreak_size = min_outbreak_size,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     add_names = add_names,
@@ -200,7 +200,7 @@ sim_linelist <- function(R,
     R = R,
     serial_interval = serial_interval,
     outbreak_start_date = outbreak_start_date,
-    min_chain_size = min_chain_size,
+    min_outbreak_size = min_outbreak_size,
     population_age = population_age,
     config = config
   )
