@@ -64,8 +64,7 @@ linelist <- sim_linelist(
   serial_interval = serial_interval,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  hosp_rate = 0.5,
-  add_ct = TRUE
+  hosp_rate = 0.5
 )
 }\if{html}{\out{</div>}}
 }

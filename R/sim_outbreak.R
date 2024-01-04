@@ -63,7 +63,7 @@ sim_outbreak <- function(R,
                          non_hosp_death_rate = 0.05,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
-                         add_ct = FALSE,
+                         add_ct = TRUE,
                          min_chain_size = 10,
                          population_age = c(1, 90),
                          case_type_probs = c(

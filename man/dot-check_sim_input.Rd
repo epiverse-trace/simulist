@@ -53,7 +53,7 @@ that go on to be infected or not infected.}
 of the line list. Default is \code{TRUE}.}
 
 \item{add_ct}{A \code{logical} boolean for whether to add Ct values to each row
-of the line list. Default is \code{FALSE}.}
+of the line list. Default is \code{TRUE}.}
 
 \item{case_type_probs}{A named \code{numeric} vector with the probability of
 each case type. The names of the vector must be \code{"suspected"}, \code{"probable"},

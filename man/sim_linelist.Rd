@@ -14,7 +14,7 @@ sim_linelist(
   non_hosp_death_rate = 0.05,
   outbreak_start_date = as.Date("2023-01-01"),
   add_names = TRUE,
-  add_ct = FALSE,
+  add_ct = TRUE,
   min_chain_size = 10,
   population_age = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.3, confirmed = 0.5),
@@ -57,7 +57,7 @@ for more information.}
 of the line list. Default is \code{TRUE}.}
 
 \item{add_ct}{A \code{logical} boolean for whether to add Ct values to each row
-of the line list. Default is \code{FALSE}.}
+of the line list. Default is \code{TRUE}.}
 
 \item{min_chain_size}{A single \code{numeric} defining the minimum chain size for
 the simulated outbreak. Default is \code{10}. This can be increased when the
