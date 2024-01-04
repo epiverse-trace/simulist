@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-`{simulist}` is an R package to simulate infectious disease outbreak data, including line lists and contacts.
+`{simulist}` is an R package to simulate individual-level infectious disease outbreak data, including line lists and contact tracing data. It can often be useful to have synthetic datasets like these available when demonstrating outbreak analytics techniques or testing new analysis methods.
 
 `{simulist}` is developed at the [Centre for the Mathematical Modelling of Infectious Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases) at the [London School of Hygiene and Tropical Medicine](https://www.lshtm.ac.uk/) as part of [Epiverse-TRACE](https://data.org/initiatives/epiverse/).
 
@@ -49,7 +49,7 @@ library(simulist)
 library(epiparameter)
 ```
 
-The line list simulation requires a serial interval, onset-to-hospitalisation delay, and onset-to-death delay. We can load these load these from the library of epidemiological parameters in the `{epiparameter}` R package, or if these are not available, such as the serial interval for COVID-19 we can create them ourselves.
+The line list simulation requires that we define a serial interval, onset-to-hospitalisation delay, and onset-to-death delay. We can load these from the library of epidemiological parameters in the `{epiparameter}` R package if available, or if these are not in the database yet (such as the serial interval for COVID-19) we can define them ourselves.
 
 ```{r create-epidists}
 # create COVID-19 serial interval
@@ -75,7 +75,7 @@ onset_to_death <- epiparameter::epidist_db(
 )
 ```
 
-To simulate a line list for COVID-19 with an assumed reproduction number (`R`) of 1.1 we use the `sim_linelist()` function.
+To simulate a line list for COVID-19 with an assumed reproduction number (`R`) of 1.1 we use the `sim_linelist()` function. Using a reproduction number greater than one means we will likely get a reasonably sized outbreak (10 - 1000 cases, varying due to the stochastic simulation). _Do not set the reproduction number too high (e.g. >5) as the outbreak can become extremely large_.
 
 ```{r sim-linelist}
 linelist <- sim_linelist(
@@ -87,7 +87,7 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
-In this example, the line list is simulated using the default values (see `?sim_linelist`). The default hospitalisation rate is 0.2 (or 20% of individual infected become hospitalised) and the start date of the outbreak is 1st January 2023. To modify either of these to make them more realistic we can specify them.
+In this example, the line list is simulated using the default values (see `?sim_linelist`). The default hospitalisation risk is assumed to be 0.2 (i.e. there is a 20% probability an infected individual becomes hospitalised) and the start date of the outbreak is 1st January 2023. To modify either of these, we can specify them in the function.
 
 ```{r sim-linelist-diff-args}
 linelist <- sim_linelist(
@@ -101,7 +101,7 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
-To simulate a table of contacts we can reuse the serial interval from the example above, and we additionally need a contact distribution. This distribution represents the variability in number of contacts that each person in the population has.
+To simulate a table of contacts of cases (i.e. to reflect a contact tracing dataset) we can use the same serial interval defined for the example above. We additionally need a contact distribution, which represents the probability that each person in the population will be a given number of contacts on a given day.
 
 ```{r, sim-contacts}
 contact_distribution <- epiparameter::epidist(
