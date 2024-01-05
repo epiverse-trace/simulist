@@ -30,7 +30,7 @@ There are three rates in {simulist}, specifically in the `sim_linelist()` and `s
 2. Death rate in hospitals (`hosp_death_rate`)
 3. Death rate outside of hospitals (`non_hosp_death_rate`)
 
-The default for `sim_lineslist()` is a `0.2` (or 20%) hospitalisation rate for individuals infected, `0.5` (or 50%) death rate for hospitalised individuals, and `0.05` (or 5%) death rate for infected individuals outside of hospitals. These default rates are applied to all age groups in the populations. 
+The default for `sim_linelist()` is a `0.2` (or 20%) hospitalisation rate for individuals infected, `0.5` (or 50%) death rate for hospitalised individuals, and `0.05` (or 5%) death rate for infected individuals outside of hospitals. These default rates are applied to all age groups in the populations. 
 
 However, it may be unrealistic to assume that the probability an infected person is admitted to hospital or dies is independent of their age. For many diseases, young children or elderly individuals are at higher risk of being hospitalised and having adverse outcomes.
 
@@ -92,7 +92,7 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
-We can run another simulation and change these rates. Still the rates are applied to the entire population. In this scenario the probability of being hospitalised if infected is higher, but the mortality rate for both hospitalised and non-hospitalised groups is lower.
+We can run another simulation and change the hospitalisation and death rates, inside and outside the hospital, still applied to the entire population. In this scenario the probability of being hospitalised if infected is higher, but the mortality rate for both hospitalised and non-hospitalised groups is lower.
 
 ```{r, sim-linelist-diff-rates}
 linelist <- sim_linelist(
@@ -108,17 +108,17 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
-## Age-stratified rates
+## Age-stratified hospitalisation and death rates
 
-Now we can run age-stratified rates by creating a table (`<data.frame>`) which contains the lower limits of the age groups and their respective rates.
+To define age-stratified rates, we must create a table (`<data.frame>`) which contains the lower limits of the age groups and their respective rates.
 
 In this example the hospitalisation rate will be:
 
-* `0.2` (or 20%) for over 80s
-* `0.1` (or 10%) for under 5s
-* `0.05` (or 5%) for the rest
+* `0.2` (or 20%) for those aged 80 years or older
+* `0.1` (or 10%) for those younger than 5 years
+* `0.05` (or 5%) for the remaining age group
 
-The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table. The oldest age group stops at the upper age range given in the `population_age` argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive).
+The oldest age group stops at the upper age range given in the `population_age` argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive). The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table.
 
 ```{r, make-hosp-rate-df}
 age_dep_hosp_rate <- data.frame(
@@ -186,7 +186,7 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
-Exactly the same method of age-stratified rates applies to death rates. First create the `<date.frame>` with the age groups and their respective, in this case, death rates, and then supply this to either the `hosp_death_rate` or `non_hosp_death_rate` arguments, or both.
+Exactly the same method of age-stratified rates applies to death rates. First create the `<data.frame>` with the age groups and their respective, in this case, death rates, and then supply this to either the `hosp_death_rate` or `non_hosp_death_rate` arguments, to define the death rates in and outside the hospital, respectively, or both.
 
 Here are a couple of examples:
 
