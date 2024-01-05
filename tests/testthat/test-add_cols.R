@@ -16,7 +16,7 @@ suppressMessages({
 })
 
 test_that(".add_date_contact works as expected with contact_type = 'last'", {
-  ll <- .create_linelist(scenario = "pre_date_last_contact")
+  ll <- readRDS(file = file.path("testdata", "pre_date_last_contact.rds"))
   linelist <- .add_date_contact(
     .data = ll,
     contact_type = "last",
@@ -31,7 +31,7 @@ test_that(".add_date_contact works as expected with contact_type = 'last'", {
 })
 
 test_that(".add_date_contact works as expected with contact_type = 'first'", {
-  ll <- .create_linelist(scenario = "pre_date_first_contact")
+  ll <- readRDS(file.path("testdata", "pre_date_first_contact.rds"))
   linelist <- .add_date_contact(
     .data = ll,
     contact_type = "first",
@@ -45,7 +45,7 @@ test_that(".add_date_contact works as expected with contact_type = 'first'", {
 })
 
 test_that(".add_date_contact (last) works as expected with different param", {
-  ll <- .create_linelist(scenario = "pre_date_last_contact")
+  ll <- readRDS(file.path("testdata", "pre_date_last_contact.rds"))
   linelist <- .add_date_contact(
     .data = ll,
     contact_type = "last",
@@ -60,7 +60,7 @@ test_that(".add_date_contact (last) works as expected with different param", {
 })
 
 test_that(".add_date_contact (first) works as expected with different param", {
-  ll <- .create_linelist(scenario = "pre_date_first_contact")
+  ll <- readRDS(file.path("testdata", "pre_date_first_contact.rds"))
   linelist <- .add_date_contact(
     .data = ll,
     contact_type = "first",
@@ -74,7 +74,7 @@ test_that(".add_date_contact (first) works as expected with different param", {
 })
 
 test_that(".add_date_contact fails as expected", {
-  ll <- .create_linelist(scenario = "pre_date_last_contact")
+  ll <- readRDS(file.path("testdata", "pre_date_last_contact.rds"))
   expect_error(
     .add_date_contact(
       .data = ll,
@@ -121,7 +121,7 @@ test_that(".add_date_contact fails as expected", {
 })
 
 test_that(".add_hospitalisation works as expected", {
-  ll <- .create_linelist(scenario = "pre_hospitalisation")
+  ll <- readRDS(file.path("testdata", "pre_hospitalisation.rds"))
   linelist <- .add_hospitalisation(
     .data = ll,
     onset_to_hosp = onset_to_hosp,
@@ -137,7 +137,7 @@ test_that(".add_hospitalisation works as expected", {
 })
 
 test_that(".add_hospitalisation works as expected with different parameter", {
-  ll <- .create_linelist(scenario = "pre_hospitalisation")
+  ll <- readRDS(file.path("testdata", "pre_hospitalisation.rds"))
   linelist <- .add_hospitalisation(
     .data = ll,
     onset_to_hosp = onset_to_hosp,
@@ -153,7 +153,7 @@ test_that(".add_hospitalisation works as expected with different parameter", {
 })
 
 test_that(".add_hospitalisation works as expected with age-strat rates", {
-  ll <- .create_linelist(scenario = "pre_hospitalisation")
+  ll <- readRDS(file.path("testdata", "pre_hospitalisation.rds"))
   age_dep_hosp_rate <- data.frame(
     min_age = c(1, 5, 80),
     max_age = c(4, 79, 90),
@@ -174,7 +174,7 @@ test_that(".add_hospitalisation works as expected with age-strat rates", {
 })
 
 test_that(".add_deaths works as expected", {
-  ll <- .create_linelist(scenario = "pre_death")
+  ll <- readRDS(file.path("testdata", "pre_death.rds"))
   linelist <- .add_deaths(
     .data = ll,
     onset_to_death = onset_to_death,
@@ -191,7 +191,7 @@ test_that(".add_deaths works as expected", {
 })
 
 test_that(".add_deaths works as expected with different parameter", {
-  ll <- .create_linelist(scenario = "pre_death")
+  ll <- readRDS(file.path("testdata", "pre_death.rds"))
   linelist <- .add_deaths(
     .data = ll,
     onset_to_death = onset_to_death,
@@ -208,7 +208,7 @@ test_that(".add_deaths works as expected with different parameter", {
 })
 
 test_that(".add_deaths works as expected with age-strat rates", {
-  ll <- .create_linelist(scenario = "pre_death")
+  ll <- readRDS(file.path("testdata", "pre_death.rds"))
   age_dep_hosp_death_rate <- data.frame(
     min_age = c(1, 5, 80),
     max_age = c(4, 79, 90),
@@ -235,7 +235,7 @@ test_that(".add_deaths works as expected with age-strat rates", {
 })
 
 test_that(".add_names works as expected", {
-  ll <- .create_linelist(scenario = "pre_names")
+  ll <- readRDS(file.path("testdata", "pre_names.rds"))
   linelist <- .add_names(.data = ll)
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$case_name, type = "character")
@@ -248,7 +248,7 @@ test_that(".add_names works as expected", {
 })
 
 test_that(".add_ct works as expected", {
-  ll <- .create_linelist(scenario = "pre_ct")
+  ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   linelist <- .add_ct(.data = ll, distribution = "norm", mean = 3, sd = 0.5)
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$ct_value, type = "double")
@@ -257,7 +257,7 @@ test_that(".add_ct works as expected", {
 })
 
 test_that(".add_ct works as expected with different parameter", {
-  ll <- .create_linelist(scenario = "pre_ct")
+  ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   linelist <- .add_ct(.data = ll, distribution = "norm", mean = 1, sd = 2)
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$ct_value, type = "double")
@@ -266,7 +266,7 @@ test_that(".add_ct works as expected with different parameter", {
 })
 
 test_that(".add_ct fails as expected", {
-  ll <- .create_linelist(scenario = "pre_ct")
+  ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   expect_error(
     .add_ct(.data = ll, distribution = "gamma", shape = 1, scale = 1),
     regexp = "(arg)*(should be)*(norm)*(lnorm)"
