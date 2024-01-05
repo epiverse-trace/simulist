@@ -255,20 +255,20 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span>  hosp_rate <span class="op">=</span> <span class="fl">0.5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id            case_name case_type gender age date_onset date_admission</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1      Darren Dimiceli suspected      m  57 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2       Brittney Reyes confirmed      f  53 2023-01-01     2023-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3 Cameron Saunders III  probable      m  28 2023-01-02     2023-01-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4         Tucker Lokay  probable      m  33 2023-01-02     2023-01-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5       Jennifer Wells suspected      f  86 2023-01-01     2023-01-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6      Wajeeb el-Laham confirmed      m  37 2023-01-02     2023-01-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id          case_name case_type gender age date_onset date_admission</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1 Cherryl May Mishra confirmed      f  40 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2     Silmi el-Sarah confirmed      m  19 2023-01-02     2023-01-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3  Chelsea Wojtowick suspected      f  48 2023-01-04           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4    Muntaha al-Khan suspected      f  45 2023-01-03     2023-01-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5      Taylor Hering  probable      m  78 2023-01-04           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6         Irene Lane confirmed      f   8 2023-01-03     2023-01-06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date_death date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;         2023-01-03        2023-01-05     26.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2023-01-02        2023-01-05       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2023-01-01        2023-01-05       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;         2022-12-29        2023-01-02       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2023-01-03        2023-01-06     26.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     26.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;         2022-12-31        2023-01-03     26.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2023-01-02        2023-01-04       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2023-01-05        2023-01-08       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;         2023-01-02        2023-01-06       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2023-01-01        2023-01-05     26.4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with age-stratified hospitalisation rate</span></span></span>
 <span class="r-in"><span><span class="co"># 20% for over 80s</span></span></span>
@@ -286,20 +286,20 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span>  hosp_rate <span class="op">=</span> <span class="va">age_dep_hosp_rate</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id       case_name case_type gender age date_onset date_admission date_death</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1   Shania Miller confirmed      f  19 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2   Geralynn Ford  probable      f  20 2023-01-02           &lt;NA&gt; 2023-01-18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3   Lance Salazar confirmed      m  63 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4 Zachary Demolli  probable      m  11 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5    Jastina Dang confirmed      f  31 2023-01-02           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6  Caitlin Chavez suspected      f  89 2023-01-02           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               &lt;NA&gt;              &lt;NA&gt;     24.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         2023-01-05        2023-01-07       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         2023-01-05        2023-01-06     24.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         2022-12-29        2023-01-03       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         2023-01-03        2023-01-04     24.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         2023-01-02        2023-01-03       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id           case_name case_type gender age date_onset date_admission</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1        Luis Montoya suspected      m  89 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 Manaahil al-Mahdavi  probable      f  36 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3   Rumaana al-Moradi suspected      f  66 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4      Angel Williams suspected      m  55 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5        Ashley Hypio suspected      f  44 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6         Jade Godwin suspected      f  31 2023-01-01     2023-01-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date_death date_first_contact date_last_contact ct_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;         2022-12-28        2023-01-02       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2023-01-04        2023-01-05       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2022-12-30        2023-01-05       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;         2023-01-08        2023-01-10       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2023-01-01        2023-01-06       NA</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
