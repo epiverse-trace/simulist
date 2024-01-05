@@ -18,18 +18,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-This is an introductory vignette to the {simulist} R package. {simulist} simulates epidemiological data, either a line list, to provide a row-by-row account of cases in an infectious disease outbreak, or a contacts table, to provide a history of which individuals were in contact with which others.
+This is an introductory vignette to the {simulist} R package. {simulist} simulates two types of common epidemiological data collected during infectious disease outbreaks: 1) a line list, which provides individual-level descriptions of cases in an outbreak; 2) a contact dataset, which provides details of which others individuals were in contact with each of the cases.
 
 The main function in the {simulist} package is `sim_linelist()`. This functions takes in arguments that control the dynamics of the outbreak, such as the serial interval, and outputs a line list table (`<data.frame>`) with case information for each infected individual.
 
-For this introduction we will simulate a line list for a COVID-19 (SARS-CoV-2) outbreak. This will require two R packages: {simulist}, to produce the line list, and {epiparameter} to provide epidemiological parameters, such as onset-to-death delays.
+For this introduction we will simulate a line list for the early stages of a COVID-19 (SARS-CoV-2) outbreak. This will require two R packages: {simulist}, to produce the line list, and {epiparameter} to provide epidemiological parameters, such as onset-to-death delays.
 
 ```{r setup}
 library(simulist)
 library(epiparameter)
 ```
 
-First we load in some data that is required for the line list simulation. Data on epidemiological parameters and distributions is read from the {epiparameter} R package.
+First we load in some data that is required for the line list simulation. Data on epidemiological parameters and distributions are read from the {epiparameter} R package.
 
 ```{r read-epidist}
 # get serial interval from {epiparameter} database
@@ -70,7 +70,7 @@ head(linelist)
 
 ## Case type 
 
-In the midst of an infectious disease outbreak it may not be possible to confirm every case. A confirmed case is usually done via a diagnostic test which may or may not need to be carried out in the laboratory. There are several reasons why a case may not be confirmed, one example is limited testing capacity, especially in fast growing epidemics. The other categories for cases are: probable and suspected. Probable cases are those that show clinical evidence for the disease but have not, or cannot, be confirmed by a diagnostic test. Suspected cases are those that are possibly infected but do not show clear clinical or epidemiological evidence, nor has a diagnostic test been performed.
+During an infectious disease outbreak it may not be possible to confirm every infection as a case. A confirmed case is typically defined via a diagnostic test. There are several reasons why a case may not be confirmed, including limited testing capacity and mild or non-specific early symptoms, especially in fast growing epidemics. We therefore include two other categories for cases: probable and suspected. For example, probable cases may those that show clinical evidence for the disease but have not, or cannot, be confirmed by a diagnostic test. Suspected cases are those that are possibly infected but do not show clear clinical or epidemiological evidence, nor has a diagnostic test been performed. Hence the distribution of suspected/probable/confirmed will depend on the pathogen characteristics, outbreak-specific definitions, and resources available.
 
 The line list output from the {simulist} simulation contains a column (`case_type`) with the type of case. 
 
