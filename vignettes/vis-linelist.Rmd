@@ -67,10 +67,7 @@ linelist <- sim_linelist(
 )
 ```
 
-
-```{r num-cases, echo=FALSE}
-message("This line list contains ", nrow(linelist), " cases.")
-```
+This line list contains `r nrow(linelist)` cases.
 
 ## Visualising incidence of onset, hospitalisation and death
 
