@@ -34,7 +34,7 @@ library(epiparameter)
 library(ggplot2)
 ```
 
-First we load the requested delay distributions using the {epiparameter} package.
+First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the serial interval is manually defined as it is not yet available from the {epiparameter} database.
 
 ```{r, read-delay-dists}
 serial_interval <- epidist(
