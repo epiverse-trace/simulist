@@ -111,7 +111,7 @@
 <li>Death rate in hospitals (<code>hosp_death_rate</code>)</li>
 <li>Death rate outside of hospitals (<code>non_hosp_death_rate</code>)</li>
 </ol>
-<p>The default for <code>sim_lineslist()</code> is a <code>0.2</code> (or 20%) hospitalisation rate for individuals infected, <code>0.5</code> (or 50%) death rate for hospitalised individuals, and <code>0.05</code> (or 5%) death rate for infected individuals outside of hospitals. These default rates are applied to all age groups in the populations.</p>
+<p>The default for <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> is a <code>0.2</code> (or 20%) hospitalisation rate for individuals infected, <code>0.5</code> (or 50%) death rate for hospitalised individuals, and <code>0.05</code> (or 5%) death rate for infected individuals outside of hospitals. These default rates are applied to all age groups in the populations.</p>
 <p>However, it may be unrealistic to assume that the probability an infected person is admitted to hospital or dies is independent of their age. For many diseases, young children or elderly individuals are at higher risk of being hospitalised and having adverse outcomes.</p>
 <p>The <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function can accommodate age-stratified rates by accepting a <code>&lt;data.frame&gt;</code> instead of a single rate for the entire population.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -193,7 +193,7 @@
 <span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-02        2023-01-05       NA</span></span>
 <span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-06        2023-01-07       NA</span></span>
 <span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-05        2023-01-07       NA</span></span></code></pre></div>
-</details><p>We can run another simulation and change these rates. Still the rates are applied to the entire population. In this scenario the probability of being hospitalised if infected is higher, but the mortality rate for both hospitalised and non-hospitalised groups is lower.</p>
+</details><p>We can run another simulation and change the hospitalisation and death rates, inside and outside the hospital, still applied to the entire population. In this scenario the probability of being hospitalised if infected is higher, but the mortality rate for both hospitalised and non-hospitalised groups is lower.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
@@ -223,19 +223,19 @@
 </details>
 </div>
 <div class="section level2">
-<h2 id="age-stratified-rates">Age-stratified rates<a class="anchor" aria-label="anchor" href="#age-stratified-rates"></a>
+<h2 id="age-stratified-hospitalisation-and-death-rates">Age-stratified hospitalisation and death rates<a class="anchor" aria-label="anchor" href="#age-stratified-hospitalisation-and-death-rates"></a>
 </h2>
-<p>Now we can run age-stratified rates by creating a table (<code>&lt;data.frame&gt;</code>) which contains the lower limits of the age groups and their respective rates.</p>
+<p>To define age-stratified rates, we must create a table (<code>&lt;data.frame&gt;</code>) which contains the lower limits of the age groups and their respective rates.</p>
 <p>In this example the hospitalisation rate will be:</p>
 <ul>
 <li>
-<code>0.2</code> (or 20%) for over 80s</li>
+<code>0.2</code> (or 20%) for those aged 80 years or older</li>
 <li>
-<code>0.1</code> (or 10%) for under 5s</li>
+<code>0.1</code> (or 10%) for those younger than 5 years</li>
 <li>
-<code>0.05</code> (or 5%) for the rest</li>
+<code>0.05</code> (or 5%) for the remaining age group</li>
 </ul>
-<p>The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table. The oldest age group stops at the upper age range given in the <code>population_age</code> argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive).</p>
+<p>The oldest age group stops at the upper age range given in the <code>population_age</code> argument. The default upper age range in 90, so in this example the oldest age bracket will be 80-90 (inclusive). The minimum age of each age group is inclusive, and the maximum age of each age group is exclusive, except the oldest age group which is inclusive of the minimum and maximum age. In this example the first age group is the first element of each vector, so the minimum age is 1, maximum age is four (as the next age group starts at five), and the hospitalisation rate for that group is 0.1. Each age group forms a row in the table.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
@@ -325,7 +325,7 @@
 <span><span class="co">#&gt; 4       &lt;NA&gt;         2022-12-30        2023-01-03       NA</span></span>
 <span><span class="co">#&gt; 5       &lt;NA&gt;         2022-12-31        2023-01-05     27.5</span></span>
 <span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-01        2023-01-03     27.5</span></span></code></pre></div>
-</details><p>Exactly the same method of age-stratified rates applies to death rates. First create the <code>&lt;date.frame&gt;</code> with the age groups and their respective, in this case, death rates, and then supply this to either the <code>hosp_death_rate</code> or <code>non_hosp_death_rate</code> arguments, or both.</p>
+</details><p>Exactly the same method of age-stratified rates applies to death rates. First create the <code>&lt;data.frame&gt;</code> with the age groups and their respective, in this case, death rates, and then supply this to either the <code>hosp_death_rate</code> or <code>non_hosp_death_rate</code> arguments, to define the death rates in and outside the hospital, respectively, or both.</p>
 <p>Here are a couple of examples:</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_death_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
