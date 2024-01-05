@@ -169,7 +169,7 @@ settings:</p>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; This line list contains 1197 cases.</span></span></code></pre>
+<p>This line list contains 1197 cases.</p>
 <div class="section level2">
 <h2 id="visualising-incidence-of-onset-hospitalisation-and-death">Visualising incidence of onset, hospitalisation and death<a class="anchor" aria-label="anchor" href="#visualising-incidence-of-onset-hospitalisation-and-death"></a>
 </h2>
@@ -195,13 +195,13 @@ not as integer days may change in the near future.</p>
 <p>The <code>interval = "daily"</code> is required as {incidence2}
 requires rounded dates to aggregate cases per unit time and specifying
 the <code>interval</code> will do this automatically for us.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create incidence object</span></span>
 <span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">linelist</span>, date_index <span class="op">=</span> <span class="st">"date_onset"</span>, interval <span class="op">=</span> <span class="st">"daily"</span><span class="op">)</span></span></code></pre></div>
 <p>It is possible that not every date had the onset of symptoms,
 resulting in some dates missing entries. This is taken care of by the
 <code><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates()</a></code> function in {incidence2}.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># impute for days without cases</span></span>
 <span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
@@ -212,7 +212,7 @@ with zero cases.
 </p>
 </div>
 <p>Alternatively, incidence can be plotting weekly:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weekly</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span><span class="va">linelist</span>, date_index <span class="op">=</span> <span class="st">"date_onset"</span>, interval <span class="op">=</span> <span class="st">"isoweek"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">weekly</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -223,7 +223,7 @@ Figure 2: Weekly incidence of cases from symptom onset
 <p>In order to check differences between a group in the line list data,
 for example gender, the <code>&lt;incidence2&gt;</code> data object can
 be recreated, specifying which columns to group by.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weekly</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -240,7 +240,7 @@ gender.
 <p>To visualise the onset, hospitalisation and death incidence in the
 same plot they can be jointly specified to the <code>date_index</code>
 argument of <code><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence2::incidence()</a></code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -300,7 +300,7 @@ list above. We need an extra distribution to simulate an outbreak, a
 contact distribution (see the documentation <code><a href="../reference/sim_outbreak.html">?sim_outbreak</a></code>
 for more detail). We create this distribution using the {epiparameter}
 package.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"contact_distribution"</span>,</span>
@@ -309,7 +309,7 @@ package.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span></code></pre></div>
 <p>Now we can simulate an outbreak:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_outbreak.html">sim_outbreak</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span>
@@ -350,7 +350,7 @@ package.</p>
 <span><span class="co">#&gt; 6        2023-01-02        Y             case</span></span></code></pre></div>
 <p>Using the line list and contacts data simulated we can create the
 <code>&lt;epicontacts&gt;</code> object.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epicontacts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.repidemicsconsortium.org/epicontacts/reference/make_epicontacts.html" class="external-link">make_epicontacts</a></span><span class="op">(</span></span>
 <span>  linelist <span class="op">=</span> <span class="va">outbreak</span><span class="op">$</span><span class="va">linelist</span>,</span>
 <span>  contacts <span class="op">=</span> <span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span>,</span>
@@ -361,7 +361,7 @@ package.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>The <code>&lt;epicontacts&gt;</code> object comes with a custom
 printing feature to see the data.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epicontacts</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; /// Epidemiological Contacts //</span></span>
@@ -422,7 +422,7 @@ in the network using the drop-down menu, to zoom in and out of the plot
 by scrolling, and to move the network using the mouse to drag and
 drop.</p>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">epicontacts</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <div id="htmlwidget-a9cd2235b5ed67ec437f" style="width:90%;height:700px;" class="visNetwork html-widget"></div>
