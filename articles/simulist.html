@@ -101,13 +101,13 @@
 
     
     
-<p>This is an introductory vignette to the {simulist} R package. {simulist} simulates epidemiological data, either a line list, to provide a row-by-row account of cases in an infectious disease outbreak, or a contacts table, to provide a history of which individuals were in contact with which others.</p>
+<p>This is an introductory vignette to the {simulist} R package. {simulist} simulates two types of common epidemiological data collected during infectious disease outbreaks: 1) a line list, which provides individual-level descriptions of cases in an outbreak; 2) a contact dataset, which provides details of which others individuals were in contact with each of the cases.</p>
 <p>The main function in the {simulist} package is <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>. This functions takes in arguments that control the dynamics of the outbreak, such as the serial interval, and outputs a line list table (<code>&lt;data.frame&gt;</code>) with case information for each infected individual.</p>
-<p>For this introduction we will simulate a line list for a COVID-19 (SARS-CoV-2) outbreak. This will require two R packages: {simulist}, to produce the line list, and {epiparameter} to provide epidemiological parameters, such as onset-to-death delays.</p>
+<p>For this introduction we will simulate a line list for the early stages of a COVID-19 (SARS-CoV-2) outbreak. This will require two R packages: {simulist}, to produce the line list, and {epiparameter} to provide epidemiological parameters, such as onset-to-death delays.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a></span><span class="op">)</span></span></code></pre></div>
-</details><p>First we load in some data that is required for the line list simulation. Data on epidemiological parameters and distributions is read from the {epiparameter} R package.</p>
+</details><p>First we load in some data that is required for the line list simulation. Data on epidemiological parameters and distributions are read from the {epiparameter} R package.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get serial interval from {epiparameter} database</span></span>
 <span></span>
@@ -155,24 +155,24 @@
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id           case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1     Shelby Whiteman confirmed      f  41 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2        Xavier Duran suspected      m  14 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3       Summer Keller suspected      f  68 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4       Brandon Yates confirmed      m  10 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5 Sarah Robles Avalos  probable      f  23 2023-01-03           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6        Nikko Chavez confirmed      m  17 2023-01-03     2023-01-14</span></span>
+<span><span class="co">#&gt;   id         case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1     Carmeal Buice confirmed      f   9 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2 Anastasia Fancher  probable      f  36 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3    Jazmine Mcafee confirmed      f  51 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4    Shontrell Wade  probable      m  76 2023-01-05           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5     Khairi el-Din confirmed      m  35 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6 Naqiyya el-Husain confirmed      f  60 2023-01-04     2023-01-05</span></span>
 <span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.5</span></span>
-<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-01        2023-01-02       NA</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-30        2023-01-02       NA</span></span>
-<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-01        2023-01-03     24.5</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2022-12-31        2023-01-02       NA</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-04        2023-01-05     24.5</span></span></code></pre></div>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.3</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-04        2023-01-06       NA</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2023-01-05        2023-01-06     25.3</span></span>
+<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-01        2023-01-04       NA</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-05        2023-01-06     25.3</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-04        2023-01-05     25.3</span></span></code></pre></div>
 </details><div class="section level2">
 <h2 id="case-type">Case type<a class="anchor" aria-label="anchor" href="#case-type"></a>
 </h2>
-<p>In the midst of an infectious disease outbreak it may not be possible to confirm every case. A confirmed case is usually done via a diagnostic test which may or may not need to be carried out in the laboratory. There are several reasons why a case may not be confirmed, one example is limited testing capacity, especially in fast growing epidemics. The other categories for cases are: probable and suspected. Probable cases are those that show clinical evidence for the disease but have not, or cannot, be confirmed by a diagnostic test. Suspected cases are those that are possibly infected but do not show clear clinical or epidemiological evidence, nor has a diagnostic test been performed.</p>
+<p>During an infectious disease outbreak it may not be possible to confirm every infection as a case. A confirmed case is typically defined via a diagnostic test. There are several reasons why a case may not be confirmed, including limited testing capacity and mild or non-specific early symptoms, especially in fast growing epidemics. We therefore include two other categories for cases: probable and suspected. For example, probable cases may those that show clinical evidence for the disease but have not, or cannot, be confirmed by a diagnostic test. Suspected cases are those that are possibly infected but do not show clear clinical or epidemiological evidence, nor has a diagnostic test been performed. Hence the distribution of suspected/probable/confirmed will depend on the pathogen characteristics, outbreak-specific definitions, and resources available.</p>
 <p>The line list output from the {simulist} simulation contains a column (<code>case_type</code>) with the type of case.</p>
 <p>{simulist} can simulate varying probabilities of each case being suspected, probable or confirmed. By default the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function uses probabilities of <code>suspected = 0.2</code>, <code>probable = 0.3</code> and <code>confirmed = 0.5</code>.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -183,20 +183,20 @@
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id          case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1     Hunter Palmier confirmed      f  85 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2          So Min Vo  probable      f  25 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3    Sebastian Roehl confirmed      m  76 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 4  4       Kody Hammond  probable      m  41 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5 Francisco Carranco confirmed      m  13 2023-01-03           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6    Aaron Archuleta confirmed      m   9 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.1</span></span>
-<span><span class="co">#&gt; 2 2023-01-24         2023-01-01        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-31        2023-01-03     25.1</span></span>
-<span><span class="co">#&gt; 4       &lt;NA&gt;         2022-12-31        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2022-12-31        2023-01-03     25.1</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-02        2023-01-06     25.1</span></span></code></pre></div>
+<span><span class="co">#&gt;   id        case_name case_type gender age date_onset date_admission date_death</span></span>
+<span><span class="co">#&gt; 1  1    Nathan Bright  probable      m  82 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2    Miranda Vigil confirmed      f   2 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3 Alexander Foster  probable      m  74 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4   Taaha al-Kader  probable      m  21 2023-01-03     2023-01-03       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5 Miqdaad al-Elbaz  probable      m  24 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6     Hunter Myers confirmed      m  89 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
+<span><span class="co">#&gt; 2         2023-01-02        2023-01-05     25.3</span></span>
+<span><span class="co">#&gt; 3         2022-12-30        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 4         2022-12-29        2023-01-03       NA</span></span>
+<span><span class="co">#&gt; 5         2023-01-01        2023-01-04       NA</span></span>
+<span><span class="co">#&gt; 6         2023-01-02        2023-01-06     25.3</span></span></code></pre></div>
 </details><p>To alter these probabilities, supply a named vector to the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> argument <code>case_type_probs</code>. The vector should contain three numbers, with the names <code>suspected</code>, <code>probable</code> and <code>confirmed</code>, with the numbers summing to one. Here we change the values to simulate an outbreak in which the proportion of cases confirmed by laboratory testing is high.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
@@ -207,20 +207,20 @@
 <span>  case_type_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>suspected <span class="op">=</span> <span class="fl">0.05</span>, probable <span class="op">=</span> <span class="fl">0.05</span>, confirmed <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id       case_name case_type gender age date_onset date_admission date_death</span></span>
-<span><span class="co">#&gt; 1  1    Taylor Reese confirmed      f  57 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2     Kineta Watt confirmed      f  16 2023-01-02     2023-01-02       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3 Qaaida al-Javed confirmed      f  69 2023-01-01     2023-01-09       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4      Iniki Tran confirmed      m  71 2023-01-02           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5    Coral Truong confirmed      f  71 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6 Brenden Colunga confirmed      m   5 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;     25.3</span></span>
-<span><span class="co">#&gt; 2         2022-12-27        2023-01-02     25.3</span></span>
-<span><span class="co">#&gt; 3         2022-12-30        2023-01-03     25.3</span></span>
-<span><span class="co">#&gt; 4         2022-12-29        2023-01-03     25.3</span></span>
-<span><span class="co">#&gt; 5         2022-12-30        2023-01-06     25.3</span></span>
-<span><span class="co">#&gt; 6         2023-01-04        2023-01-05     25.3</span></span></code></pre></div>
+<span><span class="co">#&gt;   id         case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1     Nawaar el-Ali confirmed      m  45 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2       Mark Nguyen confirmed      m  69 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3     Eduardo Vigil confirmed      m  79 2023-01-03           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4       Tejon Sharp confirmed      m  34 2023-01-03           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5 Halie Baumgardner confirmed      f  50 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6       Jake Melton confirmed      m  42 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.4</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-02        2023-01-03     24.4</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-30        2023-01-04     24.4</span></span>
+<span><span class="co">#&gt; 4 2023-01-14         2023-01-02        2023-01-04     24.4</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2022-12-30        2023-01-04     24.4</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-03        2023-01-05     24.4</span></span></code></pre></div>
 </details><p>It is also possible to set one of these categories to <code>1</code>, in which case every case will be of that type.</p>
 <p>The way {simulist} assigns case types is by pasting case types onto existing case data. Thus, it could be viewed that the true underlying data is that all cases in the simulation are confirmed, but that there is a lack of information in some cases. There are no cases in the output line list that are incorrectly attributed as probable or suspected that have not been infected. That is to say, all individuals in the line list, whatever their case type, are infected during the outbreak.</p>
 </div>
@@ -239,20 +239,20 @@
 <span>  min_outbreak_size <span class="op">=</span> <span class="fl">250</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1     Samara Greene confirmed      f  30 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2    Hamna el-Galla confirmed      f  59 2023-01-04           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3 Jennifer Varghese  probable      f  44 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4     Maria Pomeroy  probable      f   9 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5         Joanna Wu confirmed      f  31 2023-01-03           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6      Duncan Wolff suspected      m  80 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.5</span></span>
-<span><span class="co">#&gt; 2       &lt;NA&gt;         2022-12-31        2023-01-01     25.5</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2023-01-04        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 4       &lt;NA&gt;         2022-12-30        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-03        2023-01-06     25.5</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-01        2023-01-03       NA</span></span></code></pre></div>
+<span><span class="co">#&gt;   id        case_name case_type gender age date_onset date_admission date_death</span></span>
+<span><span class="co">#&gt; 1  1  Delanie Carlson suspected      f  51 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2     James Yeager confirmed      m   3 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3  Kaatima el-Naim confirmed      f  16 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4 Nabeeha el-Shafi confirmed      f  38 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5   Kyndra Navarro confirmed      f   2 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6        Stefan Lo suspected      m  16 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
+<span><span class="co">#&gt; 2         2023-01-03        2023-01-04       23</span></span>
+<span><span class="co">#&gt; 3         2023-01-04        2023-01-05       23</span></span>
+<span><span class="co">#&gt; 4         2023-01-03        2023-01-05       23</span></span>
+<span><span class="co">#&gt; 5         2023-01-05        2023-01-08       23</span></span>
+<span><span class="co">#&gt; 6         2022-12-26        2023-01-01       NA</span></span></code></pre></div>
 </details><p>The amount of time the simulation takes can be determined by the reproduction number (<code>R</code>) and the minimum outbreak size (<code>min_outbreak_size</code>). If the <code>min_outbreak_size</code> is large, for example hundreds or thousands of cases, and the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.</p>
 </div>
 <div class="section level2">
@@ -269,19 +269,19 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id case_type gender age date_onset date_admission date_death</span></span>
-<span><span class="co">#&gt; 1  1 suspected      f  28 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2 confirmed      f   9 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3  probable      m  67 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4 confirmed      f  81 2023-01-03     2023-01-03       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5 confirmed      m  71 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6  probable      f  55 2023-01-05           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 1  1 confirmed      f  75 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2 confirmed      m  76 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3 suspected      m  22 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4 confirmed      f  16 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5  probable      m  58 2023-01-02           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6 confirmed      f   9 2023-01-05           &lt;NA&gt;       &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2         2023-01-01        2023-01-02     24.8</span></span>
-<span><span class="co">#&gt; 3         2023-01-05        2023-01-06       NA</span></span>
-<span><span class="co">#&gt; 4         2023-01-05        2023-01-07     24.8</span></span>
-<span><span class="co">#&gt; 5         2022-12-31        2023-01-06     24.8</span></span>
-<span><span class="co">#&gt; 6         2022-12-31        2023-01-04       NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;     25.8</span></span>
+<span><span class="co">#&gt; 2         2022-12-27        2023-01-03     25.8</span></span>
+<span><span class="co">#&gt; 3         2022-12-31        2023-01-03       NA</span></span>
+<span><span class="co">#&gt; 4         2023-01-06        2023-01-07     25.8</span></span>
+<span><span class="co">#&gt; 5         2023-01-01        2023-01-03       NA</span></span>
+<span><span class="co">#&gt; 6         2023-01-01        2023-01-03     25.8</span></span></code></pre></div>
 </details><p>The names used in the line list are produced at random by the <a href="https://CRAN.R-project.org/package=randomNames" class="external-link">{randomNames}</a> R package. Therefore, even when <code>add_names = TRUE</code> there is no personal data of real individuals being produced or shared.</p>
 </div>
 <div class="section level2">
@@ -313,20 +313,20 @@
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">contacts</span><span class="op">)</span></span>
-<span><span class="co">#&gt;          from               to cnt_age cnt_gender date_first_contact</span></span>
-<span><span class="co">#&gt; 1 Kayla Cross    Brittnay Diaz      47          f         2023-01-01</span></span>
-<span><span class="co">#&gt; 2 Kayla Cross     Leroy Thomas      61          m         2023-01-03</span></span>
-<span><span class="co">#&gt; 3 Kayla Cross  Sergio Arellano      13          m         2022-12-31</span></span>
-<span><span class="co">#&gt; 4 Kayla Cross      Nicolas Mix      13          m         2023-01-02</span></span>
-<span><span class="co">#&gt; 5 Kayla Cross Bassil al-Ahmadi      10          m         2023-01-04</span></span>
-<span><span class="co">#&gt; 6 Kayla Cross  Elijah Trujillo      63          m         2023-01-02</span></span>
-<span><span class="co">#&gt;   date_last_contact was_case         status</span></span>
-<span><span class="co">#&gt; 1        2023-01-03        Y           case</span></span>
-<span><span class="co">#&gt; 2        2023-01-06        Y           case</span></span>
-<span><span class="co">#&gt; 3        2023-01-05        N under_followup</span></span>
-<span><span class="co">#&gt; 4        2023-01-03        N under_followup</span></span>
-<span><span class="co">#&gt; 5        2023-01-06        N under_followup</span></span>
-<span><span class="co">#&gt; 6        2023-01-03        N under_followup</span></span></code></pre></div>
+<span><span class="co">#&gt;       from                to cnt_age cnt_gender date_first_contact</span></span>
+<span><span class="co">#&gt; 1 Caleb Ho        Yienkha Ng      67          f         2023-01-05</span></span>
+<span><span class="co">#&gt; 2 Caleb Ho Mujahid el-Mannan      57          m         2022-12-31</span></span>
+<span><span class="co">#&gt; 3 Caleb Ho    Jessica Lupton      31          f         2022-12-29</span></span>
+<span><span class="co">#&gt; 4 Caleb Ho   Tianna Hemenway      84          f         2023-01-05</span></span>
+<span><span class="co">#&gt; 5 Caleb Ho      Issiah Mccoy      22          m         2022-12-29</span></span>
+<span><span class="co">#&gt; 6 Caleb Ho Jonathan Brunswig      82          m         2023-01-01</span></span>
+<span><span class="co">#&gt;   date_last_contact was_case           status</span></span>
+<span><span class="co">#&gt; 1        2023-01-06        Y             case</span></span>
+<span><span class="co">#&gt; 2        2023-01-06        N lost_to_followup</span></span>
+<span><span class="co">#&gt; 3        2023-01-03        N   under_followup</span></span>
+<span><span class="co">#&gt; 4        2023-01-06        N          unknown</span></span>
+<span><span class="co">#&gt; 5        2023-01-03        N lost_to_followup</span></span>
+<span><span class="co">#&gt; 6        2023-01-05        N   under_followup</span></span></code></pre></div>
 </details>
 </div>
 <div class="section level2">
@@ -343,35 +343,35 @@
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id           case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1      Lizbeth Olvera suspected      f  67 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2      Jairo Martinez  probable      m   5 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3 Christopher Hoeland confirmed      m  54 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4       Gavin Moquino confirmed      m  43 2023-01-01     2023-01-05</span></span>
-<span><span class="co">#&gt; 5  5     Gabriella Ortiz suspected      f   3 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6      Fuaada al-Omar confirmed      f  56 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-05        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-31        2023-01-03     26.4</span></span>
-<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-04        2023-01-05     26.4</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-01        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2022-12-30        2023-01-02     26.4</span></span>
+<span><span class="co">#&gt;   id      case_name case_type gender age date_onset date_admission date_death</span></span>
+<span><span class="co">#&gt; 1  1   Tessa Ertelt confirmed      f  70 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2  Rachael Quach confirmed      f  57 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3  Erik Testroet confirmed      m   8 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4 Joseph Schmunk confirmed      m  14 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5   Unique Lopez suspected      f  63 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6  Mayra Padilla  probable      f  65 2023-01-02     2023-01-03       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;     25.4</span></span>
+<span><span class="co">#&gt; 2         2023-01-02        2023-01-04     25.4</span></span>
+<span><span class="co">#&gt; 3         2023-01-05        2023-01-06     25.4</span></span>
+<span><span class="co">#&gt; 4         2022-12-28        2023-01-01     25.4</span></span>
+<span><span class="co">#&gt; 5         2022-12-31        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 6         2023-01-01        2023-01-04       NA</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span><span class="op">)</span></span>
-<span><span class="co">#&gt;             from                   to cnt_age cnt_gender date_first_contact</span></span>
-<span><span class="co">#&gt; 1 Lizbeth Olvera       Jairo Martinez       5          m         2023-01-05</span></span>
-<span><span class="co">#&gt; 2 Lizbeth Olvera  Christopher Hoeland      54          m         2022-12-31</span></span>
-<span><span class="co">#&gt; 3 Lizbeth Olvera   Sterling Anggraito      89          m         2022-12-30</span></span>
-<span><span class="co">#&gt; 4 Lizbeth Olvera Nelly Maria Escobedo      11          f         2022-12-31</span></span>
-<span><span class="co">#&gt; 5 Lizbeth Olvera       William Sappey      29          m         2022-12-29</span></span>
-<span><span class="co">#&gt; 6 Lizbeth Olvera         Matias Cloud      58          m         2022-12-31</span></span>
-<span><span class="co">#&gt;   date_last_contact was_case         status</span></span>
-<span><span class="co">#&gt; 1        2023-01-05        Y           case</span></span>
-<span><span class="co">#&gt; 2        2023-01-03        Y           case</span></span>
-<span><span class="co">#&gt; 3        2023-01-03        N under_followup</span></span>
-<span><span class="co">#&gt; 4        2023-01-05        N under_followup</span></span>
-<span><span class="co">#&gt; 5        2023-01-03        N under_followup</span></span>
-<span><span class="co">#&gt; 6        2023-01-02        N under_followup</span></span></code></pre></div>
+<span><span class="co">#&gt;            from               to cnt_age cnt_gender date_first_contact</span></span>
+<span><span class="co">#&gt; 1  Tessa Ertelt    Rachael Quach      57          f         2023-01-02</span></span>
+<span><span class="co">#&gt; 2  Tessa Ertelt Mamdooh al-Tawil      44          m         2022-12-31</span></span>
+<span><span class="co">#&gt; 3 Rachael Quach    Erik Testroet       8          m         2023-01-05</span></span>
+<span><span class="co">#&gt; 4 Rachael Quach   Joseph Schmunk      14          m         2022-12-28</span></span>
+<span><span class="co">#&gt; 5 Rachael Quach Catrina Pavisook      26          f         2022-12-31</span></span>
+<span><span class="co">#&gt; 6 Rachael Quach    Claudia Ortiz      51          f         2023-01-03</span></span>
+<span><span class="co">#&gt;   date_last_contact was_case           status</span></span>
+<span><span class="co">#&gt; 1        2023-01-04        Y             case</span></span>
+<span><span class="co">#&gt; 2        2023-01-02        N lost_to_followup</span></span>
+<span><span class="co">#&gt; 3        2023-01-06        Y             case</span></span>
+<span><span class="co">#&gt; 4        2023-01-01        Y             case</span></span>
+<span><span class="co">#&gt; 5        2023-01-02        N   under_followup</span></span>
+<span><span class="co">#&gt; 6        2023-01-04        N   under_followup</span></span></code></pre></div>
 </details><p><code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> has the same features as <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code>, this includes simulating with age-stratified rates of hospitalisation and death, the probability of case types or contact tracing status can be modified.</p>
 </div>
 <div class="section level2">
@@ -387,35 +387,35 @@
 <span>  contact_distribution <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/NegBinomial.html" class="external-link">rnbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, mu <span class="op">=</span> <span class="fl">5</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id        case_name case_type gender age date_onset date_admission date_death</span></span>
-<span><span class="co">#&gt; 1  1 Shaahida el-Pour suspected      f  30 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2    Takara Burton  probable      f  76 2023-01-02           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3 Hiba el-Farooqui confirmed      f  43 2023-01-13           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4    Austin Teague  probable      m   6 2023-01-05           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5    Caitlin Young confirmed      f  19 2023-01-20           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6 Shafeeqa al-Abad suspected      f  39 2023-01-14           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2         2023-01-02        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 3         2022-12-29        2023-01-04     27.1</span></span>
-<span><span class="co">#&gt; 4         2023-01-03        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 5         2023-01-09        2023-01-14     27.1</span></span>
-<span><span class="co">#&gt; 6         2023-01-17        2023-01-20       NA</span></span>
+<span><span class="co">#&gt;   id              case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1       Jalaal al-Farhat confirmed      m  54 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2      Christian Kennedy  probable      m  23 2023-01-04           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3     Jonathan Rosendale  probable      m   6 2023-01-07           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4       Maimoona el-Fahs  probable      f  79 2023-01-08           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5 Raelena Vazquez-Rangel suspected      f   7 2023-01-05           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6       Rifaah el-Hosein suspected      m  47 2023-01-11     2023-01-15</span></span>
+<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.7</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-06        2023-01-08       NA</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2023-01-05        2023-01-09       NA</span></span>
+<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-04        2023-01-08       NA</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-07        2023-01-09       NA</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-10        2023-01-11       NA</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span><span class="op">)</span></span>
-<span><span class="co">#&gt;               from             to cnt_age cnt_gender date_first_contact</span></span>
-<span><span class="co">#&gt; 1 Shaahida el-Pour  Takara Burton      76          f         2023-01-02</span></span>
-<span><span class="co">#&gt; 2 Shaahida el-Pour  Kristy Orozco      16          f         2023-01-03</span></span>
-<span><span class="co">#&gt; 3 Shaahida el-Pour    Brook Noble      75          f         2022-12-30</span></span>
-<span><span class="co">#&gt; 4 Shaahida el-Pour      Ty Duling      13          m         2023-01-02</span></span>
-<span><span class="co">#&gt; 5 Shaahida el-Pour  Keauna Patton      34          f         2022-12-29</span></span>
-<span><span class="co">#&gt; 6 Shaahida el-Pour Samantha Platt      12          f         2023-01-03</span></span>
-<span><span class="co">#&gt;   date_last_contact was_case           status</span></span>
-<span><span class="co">#&gt; 1        2023-01-05        Y             case</span></span>
-<span><span class="co">#&gt; 2        2023-01-05        N   under_followup</span></span>
-<span><span class="co">#&gt; 3        2023-01-02        N   under_followup</span></span>
-<span><span class="co">#&gt; 4        2023-01-06        N lost_to_followup</span></span>
-<span><span class="co">#&gt; 5        2023-01-02        N   under_followup</span></span>
-<span><span class="co">#&gt; 6        2023-01-04        N lost_to_followup</span></span></code></pre></div>
+<span><span class="co">#&gt;               from                to cnt_age cnt_gender date_first_contact</span></span>
+<span><span class="co">#&gt; 1 Jalaal al-Farhat Christian Kennedy      23          m         2023-01-06</span></span>
+<span><span class="co">#&gt; 2 Jalaal al-Farhat        Kyrie Kois      35          f         2023-01-03</span></span>
+<span><span class="co">#&gt; 3 Jalaal al-Farhat    Erin Tarantino      12          f         2022-12-31</span></span>
+<span><span class="co">#&gt; 4 Jalaal al-Farhat       Isaiah Reed      53          m         2023-01-04</span></span>
+<span><span class="co">#&gt; 5 Jalaal al-Farhat Hamdaan al-Madani      24          m         2022-12-31</span></span>
+<span><span class="co">#&gt; 6 Jalaal al-Farhat       Binh Gruber      11          f         2023-01-07</span></span>
+<span><span class="co">#&gt;   date_last_contact was_case         status</span></span>
+<span><span class="co">#&gt; 1        2023-01-08        Y           case</span></span>
+<span><span class="co">#&gt; 2        2023-01-05        N under_followup</span></span>
+<span><span class="co">#&gt; 3        2023-01-03        N under_followup</span></span>
+<span><span class="co">#&gt; 4        2023-01-06        N        unknown</span></span>
+<span><span class="co">#&gt; 5        2023-01-04        N under_followup</span></span>
+<span><span class="co">#&gt; 6        2023-01-11        N under_followup</span></span></code></pre></div>
 </details><p>The same approach of using anonymous functions can be used in <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
