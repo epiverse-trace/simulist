@@ -38,8 +38,7 @@ the onset to death delay distribution.}
 
 \item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
 the contact distribution. This is similar to the offspring distribution,
-but describes the heterogeneity of all contact patterns, including contacts
-that go on to be infected or not infected.}
+but describes the heterogeneity of contacts that are not infected.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
