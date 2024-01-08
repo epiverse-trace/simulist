@@ -10,9 +10,9 @@ sim_outbreak(
   onset_to_hosp,
   onset_to_death,
   contact_distribution,
-  hosp_rate = 0.2,
-  hosp_death_rate = 0.5,
-  non_hosp_death_rate = 0.05,
+  hosp_risk = 0.2,
+  hosp_death_risk = 0.5,
+  non_hosp_death_risk = 0.05,
   outbreak_start_date = as.Date("2023-01-01"),
   add_names = TRUE,
   add_ct = TRUE,
@@ -41,20 +41,20 @@ the contact distribution. This is similar to the offspring distribution,
 but describes the heterogeneity of all contact patterns, including contacts
 that go on to be infected or not infected.}
 
-\item{hosp_rate}{Either a single \code{numeric} for the hospitalisation rate of
+\item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
-hospitalisation rates. Default is 20\% hospitalisation (\code{0.2}) for the entire
+hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entire
 population. See details and examples for more information.}
 
-\item{hosp_death_rate}{Either a single \code{numeric} for the death rate for
+\item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
-specific hospitalised death rates. Default is 50\% death rate in hospitals
+specific hospitalised death risks Default is 50\% death risk in hospitals
 (\code{0.5}) for the entire population. See details and examples for more
 information.}
 
-\item{non_hosp_death_rate}{Either a single \code{numeric} for the death rate for
+\item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
-specific death rates outside of hospitals. Default is 5\% death rate outside
+specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. See details and examples
 for more information.}
 
@@ -103,13 +103,13 @@ process and parameterised with previously published epidemiological
 parameters.
 }
 \details{
-For age-stratified hospitalised and death rates a \verb{<data.frame>}
-will need to be passed to the \code{hosp_rate} and/or \code{hosp_death_rate}
+For age-stratified hospitalised and death risks a \verb{<data.frame>}
+will need to be passed to the \code{hosp_risk} and/or \code{hosp_death_risk}
 arguments. This \verb{<data.frame>} should have two columns:
 \itemize{
 \item \code{age_limit}: a column with one \code{numeric} per cell for the lower bound
 (minimum) age of the age group (inclusive).
-\item \code{rate}: a column with one \code{numeric} per cell for the proportion
+\item \code{risk}: a column with one \code{numeric} per cell for the proportion
 (or probability) of hospitalisation for that age group. Should be between
 0 and 1.
 }

@@ -80,21 +80,21 @@ NULL
 #' @name .add_date
 .add_hospitalisation <- function(.data,
                                  onset_to_hosp,
-                                 hosp_rate) {
+                                 hosp_risk) {
   .data$hospitalisation <- .data$time + onset_to_hosp(nrow(.data))
 
-  if (is.numeric(hosp_rate)) {
+  if (is.numeric(hosp_risk)) {
     pop_sample <- sample(
       seq_len(nrow(.data)),
       replace = FALSE,
-      size = (1 - hosp_rate) * nrow(.data)
+      size = (1 - hosp_risk) * nrow(.data)
     )
     .data$hospitalisation[pop_sample] <- NA
   } else {
-    for (i in seq_len(nrow(hosp_rate))) {
-      age_bracket <- hosp_rate$min_age[i]:hosp_rate$max_age[i]
+    for (i in seq_len(nrow(hosp_risk))) {
+      age_bracket <- hosp_risk$min_age[i]:hosp_risk$max_age[i]
       age_group <- which(.data$age %in% age_bracket)
-      not_hosp_prob <- 1 - hosp_rate$rate[i]
+      not_hosp_prob <- 1 - hosp_risk$risk[i]
       age_group_sample <- sample(
         age_group,
         replace = FALSE,
@@ -111,21 +111,21 @@ NULL
 #' @name .add_date
 .add_deaths <- function(.data,
                         onset_to_death,
-                        hosp_death_rate,
-                        non_hosp_death_rate) {
+                        hosp_death_risk,
+                        non_hosp_death_risk) {
   .data$deaths <- .data$time + onset_to_death(nrow(.data))
 
-  apply_death_rate <- function(.data, rate, hosp = TRUE) {
-    if (is.numeric(rate)) {
+  apply_death_risk <- function(.data, risk, hosp = TRUE) {
+    if (is.numeric(risk)) {
       pop_sample <- sample(
         seq_len(nrow(.data)),
         replace = FALSE,
-        size = (1 - rate) * nrow(.data)
+        size = (1 - risk) * nrow(.data)
       )
       .data$deaths[pop_sample] <- NA
     } else {
-      for (i in seq_len(nrow(rate))) {
-        age_bracket <- rate$min_age[i]:rate$max_age[i]
+      for (i in seq_len(nrow(risk))) {
+        age_bracket <- risk$min_age[i]:risk$max_age[i]
         if (hosp) {
           age_group <- which(
             .data$age %in% age_bracket & !is.na(.data$hospitalisation)
@@ -135,7 +135,7 @@ NULL
             .data$age %in% age_bracket & is.na(.data$hospitalisation)
           )
         }
-        not_hosp_death_prob <- 1 - rate$rate[i]
+        not_hosp_death_prob <- 1 - risk$risk[i]
         age_group_sample <- sample(
           age_group,
           replace = FALSE,
@@ -147,8 +147,8 @@ NULL
     .data
   }
 
-  .data <- apply_death_rate(.data, rate = hosp_death_rate, hosp = TRUE)
-  .data <- apply_death_rate(.data, rate = non_hosp_death_rate, hosp = FALSE)
+  .data <- apply_death_risk(.data, risk = hosp_death_risk, hosp = TRUE)
+  .data <- apply_death_risk(.data, risk = non_hosp_death_risk, hosp = FALSE)
 
   # return data
   .data

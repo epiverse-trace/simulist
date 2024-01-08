@@ -42,18 +42,18 @@ test_that("sim_linelist works as expected", {
   )
 })
 
-test_that("sim_linelist works as expected with age-strat rates", {
-  age_dep_hosp_rate <- data.frame(
+test_that("sim_linelist works as expected with age-strat risks", {
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
-  age_dep_hosp_death_rate <- data.frame(
+  age_dep_hosp_death_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
-  age_dep_non_hosp_death_rate <- data.frame(
+  age_dep_non_hosp_death_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(0.05, 0.025, 0.1)
+    risk = c(0.05, 0.025, 0.1)
   )
   set.seed(1)
   linelist <- sim_linelist(
@@ -61,9 +61,9 @@ test_that("sim_linelist works as expected with age-strat rates", {
     serial_interval = serial_interval,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
-    hosp_rate = age_dep_hosp_rate,
-    hosp_death_rate = age_dep_hosp_death_rate,
-    non_hosp_death_rate = age_dep_non_hosp_death_rate
+    hosp_risk = age_dep_hosp_risk,
+    hosp_death_risk = age_dep_hosp_death_risk,
+    non_hosp_death_risk = age_dep_non_hosp_death_risk
   )
 
   expect_s3_class(linelist, class = "data.frame")
@@ -149,10 +149,10 @@ test_that("sim_linelist works as expected with age structure", {
   )
 })
 
-test_that("sim_linelist works as expected with age-strat rates & age struct", {
-  age_dep_hosp_rate <- data.frame(
+test_that("sim_linelist works as expected with age-strat risks & age struct", {
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
   age_struct <- data.frame(
     age_range = c("1-4", "5-79", "80-90"),
@@ -165,7 +165,7 @@ test_that("sim_linelist works as expected with age-strat rates & age struct", {
     serial_interval = serial_interval,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
-    hosp_rate = age_dep_hosp_rate,
+    hosp_risk = age_dep_hosp_risk,
     population_age = age_struct
   )
 

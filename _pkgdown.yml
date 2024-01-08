@@ -21,7 +21,7 @@ articles:
 - title: Package Vignettes
   navbar: Package Vignettes
   contents:
-  - age-strat-rates
+  - age-strat-risks
   - age-struct-pop
   - vis-linelist
 - title: Developer Documentation

@@ -95,7 +95,7 @@ linelist <- sim_linelist(
   serial_interval = serial_interval,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  hosp_rate = 0.01,
+  hosp_risk = 0.01,
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)

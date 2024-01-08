@@ -145,9 +145,9 @@ The names used in the line list are produced at random by the [{randomNames}](ht
 
 For an overview of how a line list can be simulated with a uniform or structured population age distribution see the [vignette dedicated to this topic](age-struct-pop.html).
 
-## Age-stratified hospitalisation and death rates
+## Age-stratified hospitalisation and death risks
 
-For an overview of how a line list can be simulated with age-stratified (or age-dependent) hospitalisation and death rates see the [vignette dedicated to this topic](age-strat-rates.html).
+For an overview of how a line list can be simulated with age-stratified (or age-dependent) hospitalisation and death risks see the [vignette dedicated to this topic](age-strat-risks.html).
 
 ## Simulate contacts table
 
@@ -187,7 +187,7 @@ head(outbreak$linelist)
 head(outbreak$contacts)
 ```
 
-`sim_outbreak()` has the same features as `sim_linelist()` and `sim_contacts()`, this includes simulating with age-stratified rates of hospitalisation and death, the probability of case types or contact tracing status can be modified.
+`sim_outbreak()` has the same features as `sim_linelist()` and `sim_contacts()`, this includes simulating with age-stratified risks of hospitalisation and death, the probability of case types or contact tracing status can be modified.
 
 ## Using functions for distributions instead of `<epidist>`
 
