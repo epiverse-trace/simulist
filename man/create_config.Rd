@@ -39,3 +39,13 @@ setting. Therefore it is not worth increasing the number of \code{\link[=sim_lin
 arguments to accommodate these and the \code{config} argument keeps the function
 signature simpler and more readable.
 }
+\examples{
+# example with default configuration
+create_config()
+
+# example with customised Ct distribution
+create_config(
+  ct_distribution = "lnorm",
+  ct_distribution_params = c(meanlog = 2, sdlog = 1)
+)
+}
