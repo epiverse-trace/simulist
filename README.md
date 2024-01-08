@@ -111,19 +111,19 @@ linelist <- sim_linelist(
 )
 head(linelist)
 #>   id        case_name case_type gender age date_onset date_admission date_death
-#> 1  1    Justin Murphy suspected      m   8 2023-01-01           <NA>       <NA>
-#> 2  2 Mahmood al-Badie confirmed      m  66 2023-01-02           <NA>       <NA>
-#> 3  3      Hannah Dice suspected      f  81 2023-01-01           <NA>       <NA>
-#> 4  4         Simey Vu confirmed      f  55 2023-01-02           <NA>       <NA>
-#> 5  5      Ira Francis confirmed      m  26 2023-01-03           <NA>       <NA>
-#> 6  6    Jacob Sumners  probable      m  13 2023-01-03           <NA>       <NA>
+#> 1  1 Hamdi el-Abdalla confirmed      m  76 2023-01-01           <NA>       <NA>
+#> 2  2     Tosha Aragon suspected      f  50 2023-01-02           <NA>       <NA>
+#> 3  3         May Chen  probable      f   7 2023-01-03     2023-01-14       <NA>
+#> 4  4    Ellen Tremmel confirmed      f  25 2023-01-02           <NA>       <NA>
+#> 5  5  Nathaniel Beard suspected      m  38 2023-01-03           <NA>       <NA>
+#> 6  6     Amanda Silas  probable      f  66 2023-01-03           <NA>       <NA>
 #>   date_first_contact date_last_contact ct_value
-#> 1               <NA>              <NA>       NA
-#> 2         2022-12-31        2023-01-02     22.7
-#> 3         2023-01-01        2023-01-03       NA
-#> 4         2023-01-01        2023-01-04     22.7
-#> 5         2023-01-02        2023-01-06     22.7
-#> 6         2023-01-03        2023-01-06       NA
+#> 1               <NA>              <NA>     23.4
+#> 2         2023-01-01        2023-01-05       NA
+#> 3         2023-01-02        2023-01-04       NA
+#> 4         2023-01-02        2023-01-04     23.4
+#> 5         2023-01-01        2023-01-03       NA
+#> 6         2023-01-04        2023-01-06       NA
 ```
 
 In this example, the line list is simulated using the default values
@@ -138,24 +138,24 @@ linelist <- sim_linelist(
   serial_interval = serial_interval,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  hosp_rate = 0.01,
+  hosp_risk = 0.01,
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id               case_name case_type gender age date_onset date_admission
-#> 1  1 Cheyenne Espino Aguilar  probable      f   5 2019-12-01           <NA>
-#> 2  2         Muhjar al-Nawaz confirmed      f  37 2019-12-01           <NA>
-#> 3  3          Crystal Spleen  probable      f  41 2019-12-01           <NA>
-#> 4  4          Nohemy Montano suspected      f  36 2019-12-01           <NA>
-#> 5  5            Malik Fuller suspected      m   5 2019-12-01           <NA>
-#> 6  6            Lavelle Snow  probable      m  86 2019-12-01           <NA>
+#>   id         case_name case_type gender age date_onset date_admission
+#> 1  1 Shalamar Robinson confirmed      f  14 2019-12-01           <NA>
+#> 2  2     Billye Coyhis confirmed      f  23 2019-12-01           <NA>
+#> 3  3  Gregory Williams  probable      m  55 2019-12-01           <NA>
+#> 4  4 Adrianna Martinez confirmed      f  11 2019-12-02           <NA>
+#> 5  5 Ashley Dillingham suspected      f  62 2019-12-03           <NA>
+#> 6  6       Jaime Quirk  probable      m   5 2019-12-01           <NA>
 #>   date_death date_first_contact date_last_contact ct_value
-#> 1 2019-12-26               <NA>              <NA>       NA
-#> 2       <NA>         2019-12-01        2019-12-08     26.3
-#> 3       <NA>         2019-12-02        2019-12-04       NA
-#> 4       <NA>         2019-12-02        2019-12-05       NA
-#> 5       <NA>         2019-11-29        2019-12-03       NA
-#> 6       <NA>         2019-12-01        2019-12-04       NA
+#> 1       <NA>               <NA>              <NA>     25.9
+#> 2       <NA>         2019-12-04        2019-12-05     25.9
+#> 3       <NA>         2019-11-29        2019-12-02       NA
+#> 4       <NA>         2019-12-01        2019-12-03     25.9
+#> 5       <NA>         2019-11-30        2019-12-04       NA
+#> 6       <NA>         2019-11-29        2019-12-02       NA
 ```
 
 To simulate a table of contacts of cases (i.e. to reflect a contact
@@ -179,20 +179,20 @@ contacts <- sim_contacts(
   contact_distribution = contact_distribution
 )
 head(contacts)
-#>             from              to cnt_age cnt_gender date_first_contact
-#> 1 Lauren Gurreri   Raeanna Riley       9          f         2022-12-30
-#> 2 Lauren Gurreri     Breann Huff      53          f         2023-01-04
-#> 3 Lauren Gurreri Talaal el-Attar      83          m         2023-01-01
-#> 4 Lauren Gurreri Austin Martinez      47          m         2022-12-29
-#> 5 Lauren Gurreri    Theodora Fox      37          f         2022-12-30
-#> 6 Lauren Gurreri Ashleigh Reiter      89          f         2023-01-01
-#>   date_last_contact was_case           status
-#> 1        2023-01-04        Y             case
-#> 2        2023-01-05        Y             case
-#> 3        2023-01-04        Y             case
-#> 4        2023-01-02        N   under_followup
-#> 5        2023-01-03        N   under_followup
-#> 6        2023-01-03        N lost_to_followup
+#>               from                      to cnt_age cnt_gender
+#> 1 Benton Fernandez        Scotland Landers      42          m
+#> 2 Benton Fernandez              Anna Zahir      83          f
+#> 3 Benton Fernandez             Dennis Mars      46          m
+#> 4 Benton Fernandez              Zvi Castle      73          f
+#> 5 Benton Fernandez              Erick Leon      58          m
+#> 6 Benton Fernandez Casady Parlin-Three Sti      30          f
+#>   date_first_contact date_last_contact was_case           status
+#> 1         2022-12-29        2023-01-04        Y             case
+#> 2         2023-01-02        2023-01-02        Y             case
+#> 3         2023-01-01        2023-01-04        N          unknown
+#> 4         2023-01-04        2023-01-05        N lost_to_followup
+#> 5         2023-01-03        2023-01-06        N lost_to_followup
+#> 6         2023-01-02        2023-01-04        N   under_followup
 ```
 
 If both the line list and contacts table are required, they can be
@@ -210,35 +210,35 @@ outbreak <- sim_outbreak(
   contact_distribution = contact_distribution
 )
 head(outbreak$linelist)
-#>   id                  case_name case_type gender age date_onset date_admission
-#> 1  1                Celsa Davis  probable      f  86 2023-01-01     2023-01-06
-#> 2  2 Tatyanna Yarbrough-Montoya suspected      f  56 2023-01-01     2023-01-01
-#> 3  3              Erika Cordova suspected      f  84 2023-01-01           <NA>
-#> 4  4           Nakheel al-Amara confirmed      f  48 2023-01-01           <NA>
-#> 5  5             Ayanna Roberts  probable      f  65 2023-01-01           <NA>
-#> 6  6            Matthew Apodaca confirmed      m  11 2023-01-02           <NA>
+#>   id             case_name case_type gender age date_onset date_admission
+#> 1  1            Kevin Shah confirmed      m  37 2023-01-01           <NA>
+#> 2  2       Alexandra Clark confirmed      f  45 2023-01-02           <NA>
+#> 3  3         Faalih el-Dia confirmed      m  11 2023-01-06     2023-01-07
+#> 4  4     Crystal O'Donnell suspected      f  34 2023-01-02           <NA>
+#> 5  5           Austin Diaz confirmed      m  13 2023-01-02     2023-01-21
+#> 6  6 Tristin Clinkingbeard confirmed      m  38 2023-01-06     2023-01-10
 #>   date_death date_first_contact date_last_contact ct_value
-#> 1       <NA>               <NA>              <NA>       NA
-#> 2       <NA>         2023-01-02        2023-01-03       NA
-#> 3       <NA>         2022-12-29        2023-01-02       NA
-#> 4       <NA>         2023-01-02        2023-01-06     25.4
-#> 5       <NA>         2022-12-30        2023-01-03       NA
-#> 6       <NA>         2022-12-29        2023-01-02     25.4
+#> 1       <NA>               <NA>              <NA>     26.5
+#> 2       <NA>         2023-01-03        2023-01-05     26.5
+#> 3       <NA>         2022-12-29        2023-01-03     26.5
+#> 4       <NA>         2023-01-02        2023-01-03       NA
+#> 5       <NA>         2023-01-04        2023-01-06     26.5
+#> 6       <NA>         2023-01-08        2023-01-09     26.5
 head(outbreak$contacts)
-#>                         from                         to cnt_age cnt_gender
-#> 1                Celsa Davis Tatyanna Yarbrough-Montoya      56          f
-#> 2                Celsa Davis              Erika Cordova      84          f
-#> 3                Celsa Davis         Mawzoona al-Vaziri      71          f
-#> 4                Celsa Davis            Masood al-Ramin      82          m
-#> 5                Celsa Davis            Akshitsinh Vang      16          m
-#> 6 Tatyanna Yarbrough-Montoya           Nakheel al-Amara      48          f
-#>   date_first_contact date_last_contact was_case         status
-#> 1         2023-01-02        2023-01-03        Y           case
-#> 2         2022-12-29        2023-01-02        Y           case
-#> 3         2023-01-01        2023-01-03        N under_followup
-#> 4         2023-01-01        2023-01-03        N under_followup
-#> 5         2023-01-05        2023-01-08        N under_followup
-#> 6         2023-01-02        2023-01-06        Y           case
+#>         from               to cnt_age cnt_gender date_first_contact
+#> 1 Kevin Shah  Alexandra Clark      45          f         2023-01-03
+#> 2 Kevin Shah    Faalih el-Dia      11          m         2022-12-29
+#> 3 Kevin Shah   Myranda Gleitz      77          f         2023-01-02
+#> 4 Kevin Shah        Kento Nay      21          m         2023-01-04
+#> 5 Kevin Shah Gabriel Cardenas      59          m         2023-01-04
+#> 6 Kevin Shah     Ileana Ponce      24          f         2022-12-29
+#>   date_last_contact was_case         status
+#> 1        2023-01-05        Y           case
+#> 2        2023-01-03        Y           case
+#> 3        2023-01-04        N under_followup
+#> 4        2023-01-07        N under_followup
+#> 5        2023-01-07        N        unknown
+#> 6        2023-01-03        N under_followup
 ```
 
 ## Help
