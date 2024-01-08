@@ -21,6 +21,8 @@ BugReports: https://github.com/epiverse-trace/simulist/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Depends: 
+    R (>= 3.6.0)
 Imports:
     stats,
     checkmate,
