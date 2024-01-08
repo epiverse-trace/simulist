@@ -25,6 +25,16 @@
 #'
 #' @return A list of settings for [sim_linelist()]
 #' @export
+#'
+#' @examples
+#' # example with default configuration
+#' create_config()
+#'
+#' # example with customised Ct distribution
+#' create_config(
+#'   ct_distribution = "lnorm",
+#'   ct_distribution_params = c(meanlog = 2, sdlog = 1)
+#' )
 create_config <- function(...) {
   args <- list(
     last_contact_distribution = "pois",
