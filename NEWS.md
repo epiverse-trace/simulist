@@ -1,3 +1,5 @@
+# simulist (development version)
+
 # simulist 0.1.0
 
 Initial release of _simulist_, an R package containing tools to simulate epidemiological data such as line lists and contact tables.

@@ -1,6 +1,6 @@
 Package: simulist
 Title: Tools to Simulate Line List and Contacts Data
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: c(
     person(given = "Joshua W.", family = "Lambert", email = "joshua.lambert@lshtm.ac.uk", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "https://orcid.org/0000-0001-5218-3046")),
