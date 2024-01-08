@@ -8,7 +8,7 @@ message: 'To cite package "simulist" in publications use:'
 type: software
 license: MIT
 title: 'simulist: Tools to Simulate Line List and Contacts Data'
-version: 0.0.0.9000
+version: 0.1.0
 abstract: Tools to simulate raw case data for an epidemic in the form of line lists
   and contacts using a branching process.
 authors:
