@@ -36,6 +36,18 @@ keywords:
 - r-package
 references:
 - type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2024'
+  institution:
+    name: R Foundation for Statistical Computing
+  version: '>= 3.6.0'
+- type: software
   title: stats
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
