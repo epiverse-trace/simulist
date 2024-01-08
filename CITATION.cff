@@ -7,11 +7,10 @@ cff-version: 1.2.0
 message: 'To cite package "simulist" in publications use:'
 type: software
 license: MIT
-title: 'simulist: Tools to Simulated Line list Data'
+title: 'simulist: Tools to Simulate Line List and Contacts Data'
 version: 0.0.0.9000
-abstract: Provide tools to simulate raw case data for an epidemic in the form of line
-  lists, using model outputs, such as compartmental models, branching processes, or
-  network models.
+abstract: Tools to simulate raw case data for an epidemic in the form of line lists
+  and contacts using a branching process.
 authors:
 - family-names: Lambert
   given-names: Joshua W.
