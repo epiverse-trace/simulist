@@ -24,8 +24,7 @@ the serial interval.}
 
 \item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
 the contact distribution. This is similar to the offspring distribution,
-but describes the heterogeneity of all contact patterns, including contacts
-that go on to be infected or not infected.}
+but describes the heterogeneity of contacts that are not infected.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 

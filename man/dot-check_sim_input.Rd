@@ -46,8 +46,7 @@ the onset to death delay distribution.}
 
 \item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
 the contact distribution. This is similar to the offspring distribution,
-but describes the heterogeneity of all contact patterns, including contacts
-that go on to be infected or not infected.}
+but describes the heterogeneity of contacts that are not infected.}
 
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
 of the line list. Default is \code{TRUE}.}
