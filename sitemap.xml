@@ -10,7 +10,7 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/articles/age-strat-rates.html</loc>
+    <loc>/articles/age-strat-risks.html</loc>
   </url>
   <url>
     <loc>/articles/age-struct-pop.html</loc>
@@ -49,7 +49,7 @@
     <loc>/reference/dot-check_age_df.html</loc>
   </url>
   <url>
-    <loc>/reference/dot-check_rate_df.html</loc>
+    <loc>/reference/dot-check_risk_df.html</loc>
   </url>
   <url>
     <loc>/reference/dot-check_sim_input.html</loc>

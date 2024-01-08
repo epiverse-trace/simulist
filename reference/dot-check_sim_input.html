@@ -35,7 +35,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
-    <a class="dropdown-item" href="../articles/age-strat-rates.html">Age-stratified hospitalisation and death rates</a>
+    <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
@@ -86,9 +86,9 @@
 <span>  add_ct <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  case_type_probs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  contact_tracing_status_probs <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hosp_rate <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hosp_death_rate <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  non_hosp_death_rate <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hosp_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hosp_death_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  non_hosp_death_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  population_age <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -159,25 +159,25 @@ be <code>"under_followup"</code>, <code>"lost_to_followup"</code>, <code>"unknow
 contact tracing status must sum to one.</p></dd>
 
 
-<dt>hosp_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the hospitalisation rate of
+<dt>hosp_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the hospitalisation risk of
 everyone in the population, or a <code>&lt;data.frame&gt;</code> with age specific
-hospitalisation rates. Default is 20% hospitalisation (<code>0.2</code>) for the entire
+hospitalisation risks Default is 20% hospitalisation (<code>0.2</code>) for the entire
 population. See details and examples for more information.</p></dd>
 
 
-<dt>hosp_death_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the death rate for
+<dt>hosp_death_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the death risk for
 hospitalised individuals across the population, or a <code>&lt;data.frame&gt;</code> with age
-specific hospitalised death rates. Default is 50% death rate in hospitals
+specific hospitalised death risks Default is 50% death risk in hospitals
 (<code>0.5</code>) for the entire population. See details and examples for more
 information.</p></dd>
 
 
-<dt>non_hosp_death_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the death rate for
+<dt>non_hosp_death_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the death risk for
 outside of hospitals across the population, or a <code>&lt;data.frame&gt;</code> with age
-specific death rates outside of hospitals. Default is 5% death rate outside
+specific death risks outside of hospitals. Default is 5% death risk outside
 of hospitals  (<code>0.05</code>) for the entire population. See details and examples
 for more information.</p></dd>
 

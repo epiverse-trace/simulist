@@ -39,7 +39,7 @@ parameters."><meta property="og:image" content="/logo.svg"><!-- mathjax --><scri
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
-    <a class="dropdown-item" href="../articles/age-strat-rates.html">Age-stratified hospitalisation and death rates</a>
+    <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
@@ -85,9 +85,9 @@ parameters.</p>
 <span>  <span class="va">onset_to_hosp</span>,</span>
 <span>  <span class="va">onset_to_death</span>,</span>
 <span>  <span class="va">contact_distribution</span>,</span>
-<span>  hosp_rate <span class="op">=</span> <span class="fl">0.2</span>,</span>
-<span>  hosp_death_rate <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  non_hosp_death_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  hosp_risk <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  hosp_death_risk <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  non_hosp_death_risk <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  outbreak_start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-01-01"</span><span class="op">)</span>,</span>
 <span>  add_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_ct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -128,25 +128,25 @@ but describes the heterogeneity of all contact patterns, including contacts
 that go on to be infected or not infected.</p></dd>
 
 
-<dt>hosp_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the hospitalisation rate of
+<dt>hosp_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the hospitalisation risk of
 everyone in the population, or a <code>&lt;data.frame&gt;</code> with age specific
-hospitalisation rates. Default is 20% hospitalisation (<code>0.2</code>) for the entire
+hospitalisation risks Default is 20% hospitalisation (<code>0.2</code>) for the entire
 population. See details and examples for more information.</p></dd>
 
 
-<dt>hosp_death_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the death rate for
+<dt>hosp_death_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the death risk for
 hospitalised individuals across the population, or a <code>&lt;data.frame&gt;</code> with age
-specific hospitalised death rates. Default is 50% death rate in hospitals
+specific hospitalised death risks Default is 50% death risk in hospitals
 (<code>0.5</code>) for the entire population. See details and examples for more
 information.</p></dd>
 
 
-<dt>non_hosp_death_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the death rate for
+<dt>non_hosp_death_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the death risk for
 outside of hospitals across the population, or a <code>&lt;data.frame&gt;</code> with age
-specific death rates outside of hospitals. Default is 5% death rate outside
+specific death risks outside of hospitals. Default is 5% death risk outside
 of hospitals  (<code>0.05</code>) for the entire population. See details and examples
 for more information.</p></dd>
 
@@ -208,11 +208,11 @@ Ct values (if <code>add_ct = TRUE</code>). See <code><a href="create_config.html
 </ol></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>For age-stratified hospitalised and death rates a <code>&lt;data.frame&gt;</code>
-will need to be passed to the <code>hosp_rate</code> and/or <code>hosp_death_rate</code>
+    <p>For age-stratified hospitalised and death risks a <code>&lt;data.frame&gt;</code>
+will need to be passed to the <code>hosp_risk</code> and/or <code>hosp_death_risk</code>
 arguments. This <code>&lt;data.frame&gt;</code> should have two columns:</p><ul><li><p><code>age_limit</code>: a column with one <code>numeric</code> per cell for the lower bound
 (minimum) age of the age group (inclusive).</p></li>
-<li><p><code>rate</code>: a column with one <code>numeric</code> per cell for the proportion
+<li><p><code>risk</code>: a column with one <code>numeric</code> per cell for the proportion
 (or probability) of hospitalisation for that age group. Should be between
 0 and 1.</p></li>
 </ul><p>For an age structured population, a <code>&lt;data.frame&gt;</code> with two columns:</p><ul><li><p><code>age_range</code>: a column with characters specifying the lower and upper bound

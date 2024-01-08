@@ -59,7 +59,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
-    <a class="dropdown-item" href="../articles/age-strat-rates.html">Age-stratified hospitalisation and death rates</a>
+    <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
@@ -136,12 +136,12 @@ well-known data structure makes it easy to understand for users.</p>
 <h2 id="design-decisions">Design decisions<a class="anchor" aria-label="anchor" href="#design-decisions"></a>
 </h2>
 <ul>
-<li><p>When using age-stratified rates of hospitalisation and deaths
-(see <a href="age-strat-rates.html">Age-stratified hospitalisation and
-death rates vignette</a> for details) there is an interaction between
+<li><p>When using age-stratified risks of hospitalisation and deaths
+(see <a href="age-strat-risks.html">Age-stratified hospitalisation and
+death risks vignette</a> for details) there is an interaction between
 function arguments. The <code>&lt;data.frame&gt;</code> that defines the
-age-stratification in <code>hosp_rate</code>,
-<code>hosp_death_rate</code> and <code>non_hosp_death_rate</code>
+age-stratification in <code>hosp_risk</code>,
+<code>hosp_death_risk</code> and <code>non_hosp_death_risk</code>
 arguments gives the lower bound of the age groups. The upper bound of
 the age groups is derived from the next lower bound, but the upper bound
 oldest age group is defined by the upper age given to the
@@ -152,7 +152,7 @@ Tidy Design book</a>), however, the interaction does not change the
 interpretation of each argument which would be more convoluted. This
 design decision was taken when we changed the structure of the
 <code>&lt;data.frame&gt;</code> accepted as input to the
-<code>*_rate</code> arguments from having two columns for a lower and
+<code>*_risk</code> arguments from having two columns for a lower and
 upper age limit, to a single column of lower age bounds. This change was
 made in <a href="https://github.com/epiverse-trace/simulist/pull/14" class="external-link">pull request
 #14</a> and follows the design of <a href="https://github.com/epiforecasts/socialmixr/blob/main/R/contact_matrix.r" class="external-link">{socialmixr}</a>

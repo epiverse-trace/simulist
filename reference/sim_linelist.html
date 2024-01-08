@@ -37,7 +37,7 @@ parameterised with user defined epidemiological parameters."><meta property="og:
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
-    <a class="dropdown-item" href="../articles/age-strat-rates.html">Age-stratified hospitalisation and death rates</a>
+    <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
@@ -81,9 +81,9 @@ parameterised with user defined epidemiological parameters.</p>
 <span>  <span class="va">serial_interval</span>,</span>
 <span>  <span class="va">onset_to_hosp</span>,</span>
 <span>  <span class="va">onset_to_death</span>,</span>
-<span>  hosp_rate <span class="op">=</span> <span class="fl">0.2</span>,</span>
-<span>  hosp_death_rate <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  non_hosp_death_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  hosp_risk <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  hosp_death_risk <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  non_hosp_death_risk <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  outbreak_start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-01-01"</span><span class="op">)</span>,</span>
 <span>  add_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_ct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -115,25 +115,25 @@ the onset to hospitalisation delay distribution.</p></dd>
 the onset to death delay distribution.</p></dd>
 
 
-<dt>hosp_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the hospitalisation rate of
+<dt>hosp_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the hospitalisation risk of
 everyone in the population, or a <code>&lt;data.frame&gt;</code> with age specific
-hospitalisation rates. Default is 20% hospitalisation (<code>0.2</code>) for the entire
+hospitalisation risks Default is 20% hospitalisation (<code>0.2</code>) for the entire
 population. See details and examples for more information.</p></dd>
 
 
-<dt>hosp_death_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the death rate for
+<dt>hosp_death_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the death risk for
 hospitalised individuals across the population, or a <code>&lt;data.frame&gt;</code> with age
-specific hospitalised death rates. Default is 50% death rate in hospitals
+specific hospitalised death risks Default is 50% death risk in hospitals
 (<code>0.5</code>) for the entire population. See details and examples for more
 information.</p></dd>
 
 
-<dt>non_hosp_death_rate</dt>
-<dd><p>Either a single <code>numeric</code> for the death rate for
+<dt>non_hosp_death_risk</dt>
+<dd><p>Either a single <code>numeric</code> for the death risk for
 outside of hospitals across the population, or a <code>&lt;data.frame&gt;</code> with age
-specific death rates outside of hospitals. Default is 5% death rate outside
+specific death risks outside of hospitals. Default is 5% death risk outside
 of hospitals  (<code>0.05</code>) for the entire population. See details and examples
 for more information.</p></dd>
 
@@ -189,11 +189,11 @@ Ct values (if <code>add_ct = TRUE</code>). See <code><a href="create_config.html
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>For age-stratified hospitalised and death rates a <code>&lt;data.frame&gt;</code>
-will need to be passed to the <code>hosp_rate</code> and/or <code>hosp_death_rate</code>
+    <p>For age-stratified hospitalised and death risks a <code>&lt;data.frame&gt;</code>
+will need to be passed to the <code>hosp_risk</code> and/or <code>hosp_death_risk</code>
 arguments. This <code>&lt;data.frame&gt;</code> should have two columns:</p><ul><li><p><code>age_limit</code>: a column with one <code>numeric</code> per cell for the lower bound
 (minimum) age of the age group (inclusive).</p></li>
-<li><p><code>rate</code>: a column with one <code>numeric</code> per cell for the proportion
+<li><p><code>risk</code>: a column with one <code>numeric</code> per cell for the proportion
 (or probability) of hospitalisation for that age group. Should be between
 0 and 1.</p></li>
 </ul><p>For an age structured population, a <code>&lt;data.frame&gt;</code> with two columns:</p><ul><li><p><code>age_range</code>: a column with characters specifying the lower and upper bound
@@ -246,60 +246,60 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Case Data.” _Journal of Clinical Medicine_. doi:10.3390/jcm9020538</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> &lt;https://doi.org/10.3390/jcm9020538&gt;.. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> To retrieve the short citation use the 'get_citation' function</span>
-<span class="r-in"><span><span class="co"># example with single hospitalisation rate for entire population</span></span></span>
+<span class="r-in"><span><span class="co"># example with single hospitalisation risk for entire population</span></span></span>
 <span class="r-in"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">sim_linelist</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span></span>
 <span class="r-in"><span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span></span>
 <span class="r-in"><span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span></span>
 <span class="r-in"><span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span></span>
-<span class="r-in"><span>  hosp_rate <span class="op">=</span> <span class="fl">0.5</span></span></span>
+<span class="r-in"><span>  hosp_risk <span class="op">=</span> <span class="fl">0.5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id            case_name case_type gender age date_onset date_admission</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1     Joshua Singleton  probable      m  88 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2           Vivian Lee confirmed      f  40 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3 Jahniqua Voss-Parris suspected      f  52 2023-01-04           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4      Macey Nicolelli confirmed      m   1 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5          Wyatt Tovar confirmed      m  53 2023-01-01     2023-01-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6       Ronny Espinoza  probable      m  23 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id           case_name case_type gender age date_onset date_admission</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1         Alaric Tran confirmed      m  18 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2         Megan Sloan confirmed      f  39 2023-01-01     2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3          Cory Moore confirmed      m   1 2023-01-01     2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4      Dah'Som Draper suspected      m  42 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5 Ramziyya el-Mohamad confirmed      f  26 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6    Morgan Hiromitsu confirmed      m  66 2023-01-03     2023-01-05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date_death date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;         2023-01-02        2023-01-04     25.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2023-01-02        2023-01-04       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2023-01-01        2023-01-03     25.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;         2023-01-02        2023-01-03     25.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2022-12-31        2023-01-03       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;         2022-12-30        2023-01-03     25.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2022-12-30        2023-01-02     25.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2023-01-03        2023-01-04       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;         2022-12-31        2023-01-03     25.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2022-12-29        2023-01-02     25.5</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># example with age-stratified hospitalisation rate</span></span></span>
+<span class="r-in"><span><span class="co"># example with age-stratified hospitalisation risk</span></span></span>
 <span class="r-in"><span><span class="co"># 20% for over 80s</span></span></span>
 <span class="r-in"><span><span class="co"># 10% for under 5s</span></span></span>
 <span class="r-in"><span><span class="co"># 5% for the rest</span></span></span>
-<span class="r-in"><span><span class="va">age_dep_hosp_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">age_dep_hosp_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">sim_linelist</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span></span>
 <span class="r-in"><span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span></span>
 <span class="r-in"><span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span></span>
 <span class="r-in"><span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span></span>
-<span class="r-in"><span>  hosp_rate <span class="op">=</span> <span class="va">age_dep_hosp_rate</span></span></span>
+<span class="r-in"><span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id       case_name case_type gender age date_onset date_admission date_death</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1    Aurelio Maes suspected      m  22 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2  Adella Ramirez confirmed      f  47 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3  Cheyenne Stone  probable      f  11 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4  Suhaad el-Azer  probable      f  69 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5 Joshua Arellano confirmed      m   1 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6   Briley Stokes  probable      f  58 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               &lt;NA&gt;              &lt;NA&gt;       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         2023-01-02        2023-01-04     23.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         2022-12-30        2023-01-04       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         2023-01-01        2023-01-04       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         2023-01-06        2023-01-06     23.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         2022-12-31        2023-01-04       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id         case_name case_type gender age date_onset date_admission</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1     Daif al-Zaman suspected      m  68 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2    Thomas Teeters confirmed      m  87 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3    Cheyenne Jelly confirmed      f  28 2023-01-02           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4      Macsen Geist confirmed      f  22 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5 Beatrice Thompson  probable      f  56 2023-01-02           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6 Naseefa el-Kassem suspected      f  21 2023-01-10           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date_death date_first_contact date_last_contact ct_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;         2022-12-30        2023-01-02     25.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2023-01-02        2023-01-06     25.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2023-01-03        2023-01-03     25.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;         2023-01-05        2023-01-07       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2022-12-30        2023-01-03       NA</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
