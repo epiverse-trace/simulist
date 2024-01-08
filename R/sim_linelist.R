@@ -3,12 +3,12 @@
 #' @description The line list is simulated using a branching process and
 #' parameterised with user defined epidemiological parameters.
 #'
-#' @details For age-stratified hospitalised and death rates a `<data.frame>`
-#' will need to be passed to the `hosp_rate` and/or `hosp_death_rate`
+#' @details For age-stratified hospitalised and death risks a `<data.frame>`
+#' will need to be passed to the `hosp_risk` and/or `hosp_death_risk`
 #' arguments. This `<data.frame>` should have two columns:
 #' * `age_limit`: a column with one `numeric` per cell for the lower bound
 #' (minimum) age of the age group (inclusive).
-#' * `rate`: a column with one `numeric` per cell for the proportion
+#' * `risk`: a column with one `numeric` per cell for the proportion
 #' (or probability) of hospitalisation for that age group. Should be between
 #' 0 and 1.
 #'
@@ -28,18 +28,18 @@
 #' the onset to hospitalisation delay distribution.
 #' @param onset_to_death An `<epidist>` object or anonymous function for
 #' the onset to death delay distribution.
-#' @param hosp_rate Either a single `numeric` for the hospitalisation rate of
+#' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
-#' hospitalisation rates. Default is 20% hospitalisation (`0.2`) for the entire
+#' hospitalisation risks Default is 20% hospitalisation (`0.2`) for the entire
 #' population. See details and examples for more information.
-#' @param hosp_death_rate Either a single `numeric` for the death rate for
+#' @param hosp_death_risk Either a single `numeric` for the death risk for
 #' hospitalised individuals across the population, or a `<data.frame>` with age
-#' specific hospitalised death rates. Default is 50% death rate in hospitals
+#' specific hospitalised death risks Default is 50% death risk in hospitals
 #' (`0.5`) for the entire population. See details and examples for more
 #' information.
-#' @param non_hosp_death_rate Either a single `numeric` for the death rate for
+#' @param non_hosp_death_risk Either a single `numeric` for the death risk for
 #' outside of hospitals across the population, or a `<data.frame>` with age
-#' specific death rates outside of hospitals. Default is 5% death rate outside
+#' specific death risks outside of hospitals. Default is 5% death risk outside
 #' of hospitals  (`0.05`) for the entire population. See details and examples
 #' for more information.
 #' @param outbreak_start_date A `date` for the start of the outbreak.
@@ -90,39 +90,39 @@
 #'   epi_dist = "onset to death",
 #'   single_epidist = TRUE
 #' )
-#' # example with single hospitalisation rate for entire population
+#' # example with single hospitalisation risk for entire population
 #' linelist <- sim_linelist(
 #'   R = 1.1,
 #'   serial_interval = serial_interval,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death,
-#'   hosp_rate = 0.5
+#'   hosp_risk = 0.5
 #' )
 #' head(linelist)
 #'
-#' # example with age-stratified hospitalisation rate
+#' # example with age-stratified hospitalisation risk
 #' # 20% for over 80s
 #' # 10% for under 5s
 #' # 5% for the rest
-#' age_dep_hosp_rate <- data.frame(
+#' age_dep_hosp_risk <- data.frame(
 #'   age_limit = c(1, 5, 80),
-#'   rate = c(0.1, 0.05, 0.2)
+#'   risk = c(0.1, 0.05, 0.2)
 #' )
 #' linelist <- sim_linelist(
 #'   R = 1.1,
 #'   serial_interval = serial_interval,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death,
-#'   hosp_rate = age_dep_hosp_rate
+#'   hosp_risk = age_dep_hosp_risk
 #' )
 #' head(linelist)
 sim_linelist <- function(R,
                          serial_interval,
                          onset_to_hosp,
                          onset_to_death,
-                         hosp_rate = 0.2,
-                         hosp_death_rate = 0.5,
-                         non_hosp_death_rate = 0.05,
+                         hosp_risk = 0.2,
+                         hosp_death_risk = 0.5,
+                         non_hosp_death_risk = 0.05,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
                          add_ct = TRUE,
@@ -156,9 +156,9 @@ sim_linelist <- function(R,
     add_names = add_names,
     add_ct = add_ct,
     case_type_probs = case_type_probs,
-    hosp_rate = hosp_rate,
-    hosp_death_rate = hosp_death_rate,
-    non_hosp_death_rate = non_hosp_death_rate,
+    hosp_risk = hosp_risk,
+    hosp_death_risk = hosp_death_risk,
+    non_hosp_death_risk = non_hosp_death_risk,
     population_age = population_age
   )
 
@@ -171,21 +171,21 @@ sim_linelist <- function(R,
   } else {
     age_range <- population_age
   }
-  if (is.data.frame(hosp_rate)) {
-    hosp_rate <- .check_rate_df(
-      hosp_rate,
+  if (is.data.frame(hosp_risk)) {
+    hosp_risk <- .check_risk_df(
+      hosp_risk,
       age_range = age_range
     )
   }
-  if (is.data.frame(hosp_death_rate)) {
-    hosp_death_rate <- .check_rate_df(
-      hosp_death_rate,
+  if (is.data.frame(hosp_death_risk)) {
+    hosp_death_risk <- .check_risk_df(
+      hosp_death_risk,
       age_range = age_range
     )
   }
-  if (is.data.frame(non_hosp_death_rate)) {
-    non_hosp_death_rate <- .check_rate_df(
-      non_hosp_death_rate,
+  if (is.data.frame(non_hosp_death_risk)) {
+    non_hosp_death_risk <- .check_risk_df(
+      non_hosp_death_risk,
       age_range = age_range
     )
   }
@@ -203,9 +203,9 @@ sim_linelist <- function(R,
     chain = chain,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
-    hosp_rate = hosp_rate,
-    hosp_death_rate = hosp_death_rate,
-    non_hosp_death_rate = non_hosp_death_rate,
+    hosp_risk = hosp_risk,
+    hosp_death_risk = hosp_death_risk,
+    non_hosp_death_risk = non_hosp_death_risk,
     outbreak_start_date = outbreak_start_date,
     add_names = add_names,
     add_ct = add_ct,

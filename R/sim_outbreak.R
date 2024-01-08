@@ -58,9 +58,9 @@ sim_outbreak <- function(R,
                          onset_to_hosp,
                          onset_to_death,
                          contact_distribution,
-                         hosp_rate = 0.2,
-                         hosp_death_rate = 0.5,
-                         non_hosp_death_rate = 0.05,
+                         hosp_risk = 0.2,
+                         hosp_death_risk = 0.5,
+                         non_hosp_death_risk = 0.05,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
                          add_ct = TRUE,
@@ -106,9 +106,9 @@ sim_outbreak <- function(R,
     add_ct = add_ct,
     case_type_probs = case_type_probs,
     contact_tracing_status_probs = contact_tracing_status_probs,
-    hosp_rate = hosp_rate,
-    hosp_death_rate = hosp_death_rate,
-    non_hosp_death_rate = non_hosp_death_rate,
+    hosp_risk = hosp_risk,
+    hosp_death_risk = hosp_death_risk,
+    non_hosp_death_risk = non_hosp_death_risk,
     population_age = population_age
   )
 
@@ -121,21 +121,21 @@ sim_outbreak <- function(R,
   } else {
     age_range <- population_age
   }
-  if (is.data.frame(hosp_rate)) {
-    hosp_rate <- .check_rate_df(
-      hosp_rate,
+  if (is.data.frame(hosp_risk)) {
+    hosp_risk <- .check_risk_df(
+      hosp_risk,
       age_range = age_range
     )
   }
-  if (is.data.frame(hosp_death_rate)) {
-    hosp_death_rate <- .check_rate_df(
-      hosp_death_rate,
+  if (is.data.frame(hosp_death_risk)) {
+    hosp_death_risk <- .check_risk_df(
+      hosp_death_risk,
       age_range = age_range
     )
   }
-  if (is.data.frame(non_hosp_death_rate)) {
-    non_hosp_death_rate <- .check_rate_df(
-      non_hosp_death_rate,
+  if (is.data.frame(non_hosp_death_risk)) {
+    non_hosp_death_risk <- .check_risk_df(
+      non_hosp_death_risk,
       age_range = age_range
     )
   }
@@ -153,9 +153,9 @@ sim_outbreak <- function(R,
     chain = chain,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
-    hosp_rate = hosp_rate,
-    hosp_death_rate = hosp_death_rate,
-    non_hosp_death_rate = non_hosp_death_rate,
+    hosp_risk = hosp_risk,
+    hosp_death_risk = hosp_death_risk,
+    non_hosp_death_risk = non_hosp_death_risk,
     outbreak_start_date = outbreak_start_date,
     add_names = add_names,
     add_ct = add_ct,

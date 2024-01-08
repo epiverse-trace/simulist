@@ -1,4 +1,4 @@
-#' Check if `<data.frame>` defining age-stratified hospitalisation or death rate
+#' Check if `<data.frame>` defining age-stratified hospitalisation or death risk
 #' is correct
 #'
 #' @param x A `<data.frame>`.
@@ -6,35 +6,35 @@
 #' @return A `<data.frame>`, also called for error side-effects when input is
 #' invalid.
 #' @keywords internal
-.check_rate_df <- function(x, age_range) {
+.check_risk_df <- function(x, age_range) {
   # check input
   stopifnot(
-    "column names should be 'age_limit' & 'rate'" =
-      setequal(c("age_limit", "rate"), colnames(x)),
+    "column names should be 'age_limit' & 'risk'" =
+      setequal(c("age_limit", "risk"), colnames(x)),
     "minimum age of lowest age group should match lower age range" =
       age_range[1] == min(x$age_limit),
     "lower bound of oldest age group must be lower than highest age range" =
       age_range[2] > max(x$age_limit),
-    "age limit or rate cannot be NA or NaN" =
+    "age limit or risk cannot be NA or NaN" =
       !anyNA(x),
-    "rate should be between 0 and 1" =
-      min(x$rate) >= 0 && max(x$rate) <= 1,
-    "age limit in rate data frame must be unique" =
+    "risk should be between 0 and 1" =
+      min(x$risk) >= 0 && max(x$risk) <= 1,
+    "age limit in risk data frame must be unique" =
       anyDuplicated(x$age_limit) == 0
   )
 
-  # order rate df on age_limit
+  # order risk df on age_limit
   x <- x[order(x$age_limit), ]
 
-  # format rate data frame
+  # format risk data frame
   age_range_ <- age_range[1]:age_range[2]
   # findInterval inclusive/exclusive bound rules match age bracket
   age_groups <- unname(split(age_range_, findInterval(age_range_, x$age_limit)))
 
   # add and sort data frames cols
   x$max_age <- vapply(age_groups, max, FUN.VALUE = numeric(1))
-  colnames(x) <- c("min_age", "rate", "max_age")
-  x <- x[, c("min_age", "max_age", "rate")]
+  colnames(x) <- c("min_age", "risk", "max_age")
+  x <- x[, c("min_age", "max_age", "risk")]
 
   # add informative row names
   row.names(x) <- paste0(
@@ -45,7 +45,7 @@
     "[", x$min_age[nrow(x)], ",", x$max_age[nrow(x)], "]"
   )
 
-  # return rate data frame
+  # return risk data frame
   x
 }
 
@@ -91,7 +91,7 @@
     proportion = x$proportion
   )
 
-  # return rate data frame
+  # return age data frame
   x
 }
 
@@ -125,9 +125,9 @@
                              add_ct = NULL,
                              case_type_probs = NULL,
                              contact_tracing_status_probs = NULL,
-                             hosp_rate = NULL,
-                             hosp_death_rate = NULL,
-                             non_hosp_death_rate = NULL,
+                             hosp_risk = NULL,
+                             hosp_death_risk = NULL,
+                             non_hosp_death_risk = NULL,
                              population_age = NULL) {
   sim_type <- match.arg(sim_type)
 
@@ -156,15 +156,15 @@
     stopifnot(
       "The values in the case_type_prob vector must sum to 1" =
         sum(case_type_probs) == 1,
-      "hosp_rate must be a single numeric or a data.frame" =
-        is.numeric(hosp_rate) && length(hosp_rate) == 1 ||
-          is.data.frame(hosp_rate),
-      "hosp_death_rate must be a single numeric or a data.frame" =
-        is.numeric(hosp_death_rate) && length(hosp_death_rate) == 1 ||
-          is.data.frame(hosp_death_rate),
-      "non_hosp_death_rate must be a single numeric or a data.frame" =
-        is.numeric(non_hosp_death_rate) && length(non_hosp_death_rate) == 1 ||
-          is.data.frame(non_hosp_death_rate)
+      "hosp_risk must be a single numeric or a data.frame" =
+        is.numeric(hosp_risk) && length(hosp_risk) == 1 ||
+          is.data.frame(hosp_risk),
+      "hosp_death_risk must be a single numeric or a data.frame" =
+        is.numeric(hosp_death_risk) && length(hosp_death_risk) == 1 ||
+          is.data.frame(hosp_death_risk),
+      "non_hosp_death_risk must be a single numeric or a data.frame" =
+        is.numeric(non_hosp_death_risk) && length(non_hosp_death_risk) == 1 ||
+          is.data.frame(non_hosp_death_risk)
     )
   }
 

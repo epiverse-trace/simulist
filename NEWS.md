@@ -10,7 +10,7 @@ Initial release of _simulist_, an R package containing tools to simulate epidemi
   - `sim_outbreak()`: simulate both line list and contacts data
 * Four general vignettes
   - Get Started vignette (`simulist.Rmd`)
-  - Age-stratified hospitalisation and death rates vignette (`age-strat-rates.Rmd`)
+  - Age-stratified hospitalisation and death risks vignette (`age-strat-risks.Rmd`)
   - Age structured population vignette (`age-struct-pop.Rmd`)
   - Visualising simulated data (`vis-linelist.Rmd`)
 

@@ -9,9 +9,9 @@ sim_linelist(
   serial_interval,
   onset_to_hosp,
   onset_to_death,
-  hosp_rate = 0.2,
-  hosp_death_rate = 0.5,
-  non_hosp_death_rate = 0.05,
+  hosp_risk = 0.2,
+  hosp_death_risk = 0.5,
+  non_hosp_death_risk = 0.05,
   outbreak_start_date = as.Date("2023-01-01"),
   add_names = TRUE,
   add_ct = TRUE,
@@ -33,20 +33,20 @@ the onset to hospitalisation delay distribution.}
 \item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
 the onset to death delay distribution.}
 
-\item{hosp_rate}{Either a single \code{numeric} for the hospitalisation rate of
+\item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
-hospitalisation rates. Default is 20\% hospitalisation (\code{0.2}) for the entire
+hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entire
 population. See details and examples for more information.}
 
-\item{hosp_death_rate}{Either a single \code{numeric} for the death rate for
+\item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
-specific hospitalised death rates. Default is 50\% death rate in hospitals
+specific hospitalised death risks Default is 50\% death risk in hospitals
 (\code{0.5}) for the entire population. See details and examples for more
 information.}
 
-\item{non_hosp_death_rate}{Either a single \code{numeric} for the death rate for
+\item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
-specific death rates outside of hospitals. Default is 5\% death rate outside
+specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. See details and examples
 for more information.}
 
@@ -85,13 +85,13 @@ The line list is simulated using a branching process and
 parameterised with user defined epidemiological parameters.
 }
 \details{
-For age-stratified hospitalised and death rates a \verb{<data.frame>}
-will need to be passed to the \code{hosp_rate} and/or \code{hosp_death_rate}
+For age-stratified hospitalised and death risks a \verb{<data.frame>}
+will need to be passed to the \code{hosp_risk} and/or \code{hosp_death_risk}
 arguments. This \verb{<data.frame>} should have two columns:
 \itemize{
 \item \code{age_limit}: a column with one \code{numeric} per cell for the lower bound
 (minimum) age of the age group (inclusive).
-\item \code{rate}: a column with one \code{numeric} per cell for the proportion
+\item \code{risk}: a column with one \code{numeric} per cell for the proportion
 (or probability) of hospitalisation for that age group. Should be between
 0 and 1.
 }
@@ -128,30 +128,30 @@ onset_to_death <- epiparameter::epidist_db(
   epi_dist = "onset to death",
   single_epidist = TRUE
 )
-# example with single hospitalisation rate for entire population
+# example with single hospitalisation risk for entire population
 linelist <- sim_linelist(
   R = 1.1,
   serial_interval = serial_interval,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  hosp_rate = 0.5
+  hosp_risk = 0.5
 )
 head(linelist)
 
-# example with age-stratified hospitalisation rate
+# example with age-stratified hospitalisation risk
 # 20\% for over 80s
 # 10\% for under 5s
 # 5\% for the rest
-age_dep_hosp_rate <- data.frame(
+age_dep_hosp_risk <- data.frame(
   age_limit = c(1, 5, 80),
-  rate = c(0.1, 0.05, 0.2)
+  risk = c(0.1, 0.05, 0.2)
 )
 linelist <- sim_linelist(
   R = 1.1,
   serial_interval = serial_interval,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  hosp_rate = age_dep_hosp_rate
+  hosp_risk = age_dep_hosp_risk
 )
 head(linelist)
 }

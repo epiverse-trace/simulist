@@ -103,9 +103,9 @@ NULL
 .sim_clinical_linelist <- function(chain,
                                    onset_to_hosp,
                                    onset_to_death,
-                                   hosp_rate,
-                                   hosp_death_rate,
-                                   non_hosp_death_rate,
+                                   hosp_risk,
+                                   hosp_death_risk,
+                                   non_hosp_death_risk,
                                    outbreak_start_date,
                                    add_names,
                                    add_ct,
@@ -114,13 +114,13 @@ NULL
   chain <- .add_hospitalisation(
     .data = chain,
     onset_to_hosp = onset_to_hosp,
-    hosp_rate = hosp_rate
+    hosp_risk = hosp_risk
   )
   chain <- .add_deaths(
     .data = chain,
     onset_to_death = onset_to_death,
-    hosp_death_rate = hosp_death_rate,
-    non_hosp_death_rate = non_hosp_death_rate
+    hosp_death_risk = hosp_death_risk,
+    non_hosp_death_risk = non_hosp_death_risk
   )
 
   # add hospitalisation and death dates

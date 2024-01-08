@@ -1,72 +1,72 @@
-test_that(".check_rate_df works as expected", {
-  age_dep_hosp_rate <- data.frame(
+test_that(".check_risk_df works as expected", {
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
-  age_dep_hosp_rate <- .check_rate_df(age_dep_hosp_rate, age_range = c(1, 90))
-  expect_s3_class(age_dep_hosp_rate, class = "data.frame")
-  expect_identical(dim(age_dep_hosp_rate), c(3L, 3L))
-  expect_identical(colnames(age_dep_hosp_rate), c("min_age", "max_age", "rate"))
+  age_dep_hosp_risk <- .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90))
+  expect_s3_class(age_dep_hosp_risk, class = "data.frame")
+  expect_identical(dim(age_dep_hosp_risk), c(3L, 3L))
+  expect_identical(colnames(age_dep_hosp_risk), c("min_age", "max_age", "risk"))
   expect_identical(
-    row.names(age_dep_hosp_rate),
+    row.names(age_dep_hosp_risk),
     c("[1,5)", "[5,80)", "[80,90]")
   )
 })
 
-test_that(".check_rate_df fails as expected", {
-  age_dep_hosp_rate <- data.frame(
+test_that(".check_risk_df fails as expected", {
+  age_dep_hosp_risk <- data.frame(
     age_min = c(1, 5, 80),
-    hosp_rate = c(0.1, 0.05, 0.2)
+    hosp_risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_rate_df(age_dep_hosp_rate, age_range = c(1, 91)),
-    regexp = "column names should be 'age_limit' & 'rate'"
+    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 91)),
+    regexp = "column names should be 'age_limit' & 'risk'"
   )
 
-  age_dep_hosp_rate <- data.frame(
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(2, 5, 80),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_rate_df(age_dep_hosp_rate, age_range = c(1, 90)),
+    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
     regexp = "minimum age of lowest age group should match lower age range"
   )
 
-  age_dep_hosp_rate <- data.frame(
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 5, 90),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_rate_df(age_dep_hosp_rate, age_range = c(1, 90)),
+    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
     regexp =
       "lower bound of oldest age group must be lower than highest age range"
   )
 
-  age_dep_hosp_rate <- data.frame(
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(-0.1, 0.5, 1.1)
+    risk = c(-0.1, 0.5, 1.1)
   )
   expect_error(
-    .check_rate_df(age_dep_hosp_rate, age_range = c(1, 90)),
-    regexp = "rate should be between 0 and 1"
+    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
+    regexp = "risk should be between 0 and 1"
   )
 
-  age_dep_hosp_rate <- data.frame(
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 5, 5),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_rate_df(age_dep_hosp_rate, age_range = c(1, 90)),
-    regexp = "age limit in rate data frame must be unique"
+    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
+    regexp = "age limit in risk data frame must be unique"
   )
 
-  age_dep_hosp_rate <- data.frame(
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 10, 80),
-    rate = c(0.1, 0.05, NA)
+    risk = c(0.1, 0.05, NA)
   )
   expect_error(
-    .check_rate_df(age_dep_hosp_rate, age_range = c(1, 90)),
-    regexp = "age limit or rate cannot be NA or NaN"
+    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
+    regexp = "age limit or risk cannot be NA or NaN"
   )
 })
 
@@ -186,9 +186,9 @@ test_that(".check_sim_input works as expected", {
       lost_to_followup = 0.2,
       unknown = 0.1
     ),
-    hosp_rate = 0.2,
-    hosp_death_rate = 0.5,
-    non_hosp_death_rate = 0.05,
+    hosp_risk = 0.2,
+    hosp_death_risk = 0.5,
+    non_hosp_death_risk = 0.05,
     population_age = c(1, 90)
   )
   expect_type(chk, type = "character")
@@ -209,9 +209,9 @@ test_that(".check_sim_input works as expected", {
       probable = 0.3,
       confirmed = 0.5
     ),
-    hosp_rate = 0.2,
-    hosp_death_rate = 0.5,
-    non_hosp_death_rate = 0.05,
+    hosp_risk = 0.2,
+    hosp_death_risk = 0.5,
+    non_hosp_death_risk = 0.05,
     population_age = c(1, 90)
   )
   expect_type(chk, type = "character")

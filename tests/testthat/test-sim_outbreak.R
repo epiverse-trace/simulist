@@ -93,18 +93,18 @@ test_that("sim_outbreak works as expected with add_names = FALSE", {
   )
 })
 
-test_that("sim_outbreak works as expected with age-strat rates", {
-  age_dep_hosp_rate <- data.frame(
+test_that("sim_outbreak works as expected with age-strat risks", {
+  age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
-  age_dep_hosp_death_rate <- data.frame(
+  age_dep_hosp_death_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(0.1, 0.05, 0.2)
+    risk = c(0.1, 0.05, 0.2)
   )
-  age_dep_non_hosp_death_rate <- data.frame(
+  age_dep_non_hosp_death_risk <- data.frame(
     age_limit = c(1, 5, 80),
-    rate = c(0.05, 0.025, 0.1)
+    risk = c(0.05, 0.025, 0.1)
   )
   set.seed(1)
   outbreak <- sim_outbreak(
@@ -113,9 +113,9 @@ test_that("sim_outbreak works as expected with age-strat rates", {
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     contact_distribution = contact_distribution,
-    hosp_rate = age_dep_hosp_rate,
-    hosp_death_rate = age_dep_hosp_death_rate,
-    non_hosp_death_rate = age_dep_non_hosp_death_rate
+    hosp_risk = age_dep_hosp_risk,
+    hosp_death_risk = age_dep_hosp_death_risk,
+    non_hosp_death_risk = age_dep_non_hosp_death_risk
   )
 
   expect_type(outbreak, type = "list")

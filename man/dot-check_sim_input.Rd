@@ -17,9 +17,9 @@
   add_ct = NULL,
   case_type_probs = NULL,
   contact_tracing_status_probs = NULL,
-  hosp_rate = NULL,
-  hosp_death_rate = NULL,
-  non_hosp_death_rate = NULL,
+  hosp_risk = NULL,
+  hosp_death_risk = NULL,
+  non_hosp_death_risk = NULL,
   population_age = NULL
 )
 }
@@ -64,20 +64,20 @@ probability of each contact tracing status. The names of the vector must
 be \code{"under_followup"}, \code{"lost_to_followup"}, \code{"unknown"}. Values of each
 contact tracing status must sum to one.}
 
-\item{hosp_rate}{Either a single \code{numeric} for the hospitalisation rate of
+\item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
-hospitalisation rates. Default is 20\% hospitalisation (\code{0.2}) for the entire
+hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entire
 population. See details and examples for more information.}
 
-\item{hosp_death_rate}{Either a single \code{numeric} for the death rate for
+\item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
-specific hospitalised death rates. Default is 50\% death rate in hospitals
+specific hospitalised death risks Default is 50\% death risk in hospitals
 (\code{0.5}) for the entire population. See details and examples for more
 information.}
 
-\item{non_hosp_death_rate}{Either a single \code{numeric} for the death rate for
+\item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
-specific death rates outside of hospitals. Default is 5\% death rate outside
+specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. See details and examples
 for more information.}
 
