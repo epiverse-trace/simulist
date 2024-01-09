@@ -111,20 +111,20 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id        case_name case_type gender age date_onset date_admission date_death
-#> 1  1 Hamdi el-Abdalla confirmed      m  76 2023-01-01           <NA>       <NA>
-#> 2  2     Tosha Aragon suspected      f  50 2023-01-02           <NA>       <NA>
-#> 3  3         May Chen  probable      f   7 2023-01-03     2023-01-14       <NA>
-#> 4  4    Ellen Tremmel confirmed      f  25 2023-01-02           <NA>       <NA>
-#> 5  5  Nathaniel Beard suspected      m  38 2023-01-03           <NA>       <NA>
-#> 6  6     Amanda Silas  probable      f  66 2023-01-03           <NA>       <NA>
-#>   date_first_contact date_last_contact ct_value
-#> 1               <NA>              <NA>     23.4
-#> 2         2023-01-01        2023-01-05       NA
-#> 3         2023-01-02        2023-01-04       NA
-#> 4         2023-01-02        2023-01-04     23.4
-#> 5         2023-01-01        2023-01-03       NA
-#> 6         2023-01-04        2023-01-06       NA
+#>   id              case_name case_type gender age date_onset date_admission
+#> 1  1            Sable Mills  probable      f  25 2023-01-01           <NA>
+#> 2  2        Dallin Boulware  probable      m   6 2023-01-04           <NA>
+#> 3  3            Luke Lovato  probable      m  69 2023-01-04           <NA>
+#> 4  4              Andrew Ho confirmed      m  72 2023-01-05           <NA>
+#> 5  5         Deanna Wallace suspected      f   7 2023-01-05           <NA>
+#> 6  6 Abdur Rasheed el-Aboud suspected      m  18 2023-01-05           <NA>
+#>   date_death date_first_contact date_last_contact ct_value
+#> 1       <NA>               <NA>              <NA>       NA
+#> 2       <NA>         2023-01-04        2023-01-04       NA
+#> 3       <NA>         2023-01-03        2023-01-04       NA
+#> 4       <NA>         2023-01-01        2023-01-05     22.7
+#> 5       <NA>         2023-01-09        2023-01-12       NA
+#> 6       <NA>         2023-01-06        2023-01-07       NA
 ```
 
 In this example, the line list is simulated using the default values
@@ -143,20 +143,20 @@ linelist <- sim_linelist(
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id         case_name case_type gender age date_onset date_admission
-#> 1  1 Shalamar Robinson confirmed      f  14 2019-12-01           <NA>
-#> 2  2     Billye Coyhis confirmed      f  23 2019-12-01           <NA>
-#> 3  3  Gregory Williams  probable      m  55 2019-12-01           <NA>
-#> 4  4 Adrianna Martinez confirmed      f  11 2019-12-02           <NA>
-#> 5  5 Ashley Dillingham suspected      f  62 2019-12-03           <NA>
-#> 6  6       Jaime Quirk  probable      m   5 2019-12-01           <NA>
+#>   id            case_name case_type gender age date_onset date_admission
+#> 1  1 Christopher Martinez confirmed      m  67 2019-12-01           <NA>
+#> 2  2        Yesenia Coker suspected      f  59 2019-12-02           <NA>
+#> 3  3     Brianna Johnston  probable      f  62 2019-12-04           <NA>
+#> 4  4         Autumn Laner confirmed      f  69 2019-12-03           <NA>
+#> 5  5         Katie Holeso suspected      f  86 2019-12-04           <NA>
+#> 6  6      Margarita Hedin suspected      f  83 2019-12-05           <NA>
 #>   date_death date_first_contact date_last_contact ct_value
-#> 1       <NA>               <NA>              <NA>     25.9
-#> 2       <NA>         2019-12-04        2019-12-05     25.9
-#> 3       <NA>         2019-11-29        2019-12-02       NA
-#> 4       <NA>         2019-12-01        2019-12-03     25.9
-#> 5       <NA>         2019-11-30        2019-12-04       NA
-#> 6       <NA>         2019-11-29        2019-12-02       NA
+#> 1       <NA>               <NA>              <NA>     25.3
+#> 2       <NA>         2019-11-28        2019-12-01       NA
+#> 3       <NA>         2019-11-30        2019-12-02       NA
+#> 4       <NA>         2019-11-29        2019-12-07     25.3
+#> 5       <NA>         2019-12-01        2019-12-05       NA
+#> 6       <NA>         2019-12-01        2019-12-05       NA
 ```
 
 To simulate a table of contacts of cases (i.e. to reflect a contact
@@ -180,20 +180,20 @@ contacts <- sim_contacts(
   contact_distribution = contact_distribution
 )
 head(contacts)
-#>               from                      to cnt_age cnt_gender
-#> 1 Benton Fernandez        Scotland Landers      42          m
-#> 2 Benton Fernandez              Anna Zahir      83          f
-#> 3 Benton Fernandez             Dennis Mars      46          m
-#> 4 Benton Fernandez              Zvi Castle      73          f
-#> 5 Benton Fernandez              Erick Leon      58          m
-#> 6 Benton Fernandez Casady Parlin-Three Sti      30          f
-#>   date_first_contact date_last_contact was_case           status
-#> 1         2022-12-29        2023-01-04        Y             case
-#> 2         2023-01-02        2023-01-02        Y             case
-#> 3         2023-01-01        2023-01-04        N          unknown
-#> 4         2023-01-04        2023-01-05        N lost_to_followup
-#> 5         2023-01-03        2023-01-06        N lost_to_followup
-#> 6         2023-01-02        2023-01-04        N   under_followup
+#>             from                 to cnt_age cnt_gender date_first_contact
+#> 1 Amanda Carlson       Emilio Lopez      22          m         2022-12-29
+#> 2 Amanda Carlson    Melissa Vasquez      66          f         2022-12-28
+#> 3 Amanda Carlson    Jasper Crummett      88          m         2023-01-05
+#> 4 Amanda Carlson Michael Candelarie      11          m         2022-12-31
+#> 5   Emilio Lopez     Sheniqua Wyatt      19          f         2023-01-05
+#> 6   Emilio Lopez        Nalei Myers      46          f         2023-01-04
+#>   date_last_contact was_case         status
+#> 1        2023-01-01        Y           case
+#> 2        2023-01-02        Y           case
+#> 3        2023-01-09        N under_followup
+#> 4        2023-01-02        N under_followup
+#> 5        2023-01-08        Y           case
+#> 6        2023-01-05        N under_followup
 ```
 
 If both the line list and contacts table are required, they can be
@@ -211,35 +211,35 @@ outbreak <- sim_outbreak(
   contact_distribution = contact_distribution
 )
 head(outbreak$linelist)
-#>   id             case_name case_type gender age date_onset date_admission
-#> 1  1            Kevin Shah confirmed      m  37 2023-01-01           <NA>
-#> 2  2       Alexandra Clark confirmed      f  45 2023-01-02           <NA>
-#> 3  3         Faalih el-Dia confirmed      m  11 2023-01-06     2023-01-07
-#> 4  4     Crystal O'Donnell suspected      f  34 2023-01-02           <NA>
-#> 5  5           Austin Diaz confirmed      m  13 2023-01-02     2023-01-21
-#> 6  6 Tristin Clinkingbeard confirmed      m  38 2023-01-06     2023-01-10
-#>   date_death date_first_contact date_last_contact ct_value
-#> 1       <NA>               <NA>              <NA>     26.5
-#> 2       <NA>         2023-01-03        2023-01-05     26.5
-#> 3       <NA>         2022-12-29        2023-01-03     26.5
-#> 4       <NA>         2023-01-02        2023-01-03       NA
-#> 5       <NA>         2023-01-04        2023-01-06     26.5
-#> 6       <NA>         2023-01-08        2023-01-09     26.5
+#>   id        case_name case_type gender age date_onset date_admission date_death
+#> 1  1   Calvin Anicete  probable      m   9 2023-01-01     2023-01-01       <NA>
+#> 2  2    Karla Salcido suspected      f  26 2023-01-01           <NA>       <NA>
+#> 3  3 Mitchell Jackson  probable      m  48 2023-01-01           <NA>       <NA>
+#> 4  4 Steffano Moseley confirmed      m  51 2023-01-01           <NA>       <NA>
+#> 5  5          Mai Kim  probable      f  35 2023-01-01           <NA>       <NA>
+#> 6  6    Devante Mayes  probable      m  39 2023-01-01           <NA>       <NA>
+#>   date_first_contact date_last_contact ct_value
+#> 1               <NA>              <NA>       NA
+#> 2         2023-01-02        2023-01-03       NA
+#> 3         2023-01-02        2023-01-04       NA
+#> 4         2023-01-03        2023-01-04     24.7
+#> 5         2023-01-05        2023-01-05       NA
+#> 6         2023-01-01        2023-01-02       NA
 head(outbreak$contacts)
-#>         from               to cnt_age cnt_gender date_first_contact
-#> 1 Kevin Shah  Alexandra Clark      45          f         2023-01-03
-#> 2 Kevin Shah    Faalih el-Dia      11          m         2022-12-29
-#> 3 Kevin Shah   Myranda Gleitz      77          f         2023-01-02
-#> 4 Kevin Shah        Kento Nay      21          m         2023-01-04
-#> 5 Kevin Shah Gabriel Cardenas      59          m         2023-01-04
-#> 6 Kevin Shah     Ileana Ponce      24          f         2022-12-29
+#>             from                   to cnt_age cnt_gender date_first_contact
+#> 1 Calvin Anicete        Karla Salcido      26          f         2023-01-02
+#> 2 Calvin Anicete     Mitchell Jackson      48          m         2023-01-02
+#> 3 Calvin Anicete     Steffano Moseley      51          m         2023-01-03
+#> 4 Calvin Anicete              Mai Kim      35          f         2023-01-05
+#> 5 Calvin Anicete Elizabeth Blackwater      89          f         2023-01-05
+#> 6 Calvin Anicete     Nathaniel Wagner      37          m         2023-01-07
 #>   date_last_contact was_case         status
-#> 1        2023-01-05        Y           case
-#> 2        2023-01-03        Y           case
-#> 3        2023-01-04        N under_followup
-#> 4        2023-01-07        N under_followup
-#> 5        2023-01-07        N        unknown
-#> 6        2023-01-03        N under_followup
+#> 1        2023-01-03        Y           case
+#> 2        2023-01-04        Y           case
+#> 3        2023-01-04        Y           case
+#> 4        2023-01-05        Y           case
+#> 5        2023-01-08        N under_followup
+#> 6        2023-01-08        N under_followup
 ```
 
 ## Help
@@ -266,19 +266,16 @@ By contributing to this project, you agree to abide by its terms.
 citation("simulist")
 #> To cite package 'simulist' in publications use:
 #> 
-#>   Lambert J, Tamayo C (2024). _simulist: Tools to Simulated Line list
-#>   Data_. R package version 0.0.0.9000,
-#>   https://epiverse-trace.github.io/simulist/,
-#>   <https://github.com/epiverse-trace/simulist>.
+#>   Lambert J, Tamayo C (NULL). _simulist: Tools to Simulate Line List
+#>   and Contacts Data_. doi:10.5281/zenodo.10471458
+#>   <https://doi.org/10.5281/zenodo.10471458>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {simulist: Tools to Simulated Line list Data},
+#>     title = {simulist: Tools to Simulate Line List and Contacts Data},
 #>     author = {Joshua W. Lambert and Carmen Tamayo},
-#>     year = {2024},
-#>     note = {R package version 0.0.0.9000, 
-#> https://epiverse-trace.github.io/simulist/},
-#>     url = {https://github.com/epiverse-trace/simulist},
+#>     year = {NULL},
+#>     doi = {10.5281/zenodo.10471458},
 #>   }
 ```
