@@ -9,6 +9,7 @@ type: software
 license: MIT
 title: 'simulist: Tools to Simulate Line List and Contacts Data'
 version: 0.1.0.9000
+doi: 10.5281/zenodo.10471458
 abstract: Tools to simulate raw case data for an epidemic in the form of line lists
   and contacts using a branching process.
 authors:
@@ -20,6 +21,24 @@ authors:
   given-names: Carmen
   email: carmen.tamayo-cuartero@lshtm.ac.uk
   orcid: https://orcid.org/0000-0003-4184-2864
+preferred-citation:
+  type: manual
+  title: 'simulist: Tools to Simulate Line List and Contacts Data'
+  authors:
+  - family-names: Lambert
+    given-names: Joshua W.
+    email: joshua.lambert@lshtm.ac.uk
+    orcid: https://orcid.org/0000-0001-5218-3046
+  - family-names: Tamayo
+    given-names: Carmen
+    email: carmen.tamayo-cuartero@lshtm.ac.uk
+    orcid: https://orcid.org/0000-0003-4184-2864
+  year: '2024'
+  doi: 10.5281/zenodo.10471458
+  url: https://github.com/epiverse-trace/simulist
+  identifiers:
+  - type: url
+    value: https://epiverse-trace.github.io/simulist/
 repository-code: https://github.com/epiverse-trace/simulist
 url: https://epiverse-trace.github.io/simulist/
 contact:
@@ -303,3 +322,6 @@ references:
     email: hadley@posit.co
   year: '2024'
   version: '>= 3.0.0'
+identifiers:
+- type: url
+  value: https://epiverse-trace.github.io/simulist/
