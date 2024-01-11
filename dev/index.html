@@ -164,20 +164,20 @@
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id        case_name case_type gender age date_onset date_admission date_death</span></span>
-<span><span class="co">#&gt; 1  1 Hamdi el-Abdalla confirmed      m  76 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2     Tosha Aragon suspected      f  50 2023-01-02           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3         May Chen  probable      f   7 2023-01-03     2023-01-14       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4    Ellen Tremmel confirmed      f  25 2023-01-02           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5  Nathaniel Beard suspected      m  38 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6     Amanda Silas  probable      f  66 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;     23.4</span></span>
-<span><span class="co">#&gt; 2         2023-01-01        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 3         2023-01-02        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 4         2023-01-02        2023-01-04     23.4</span></span>
-<span><span class="co">#&gt; 5         2023-01-01        2023-01-03       NA</span></span>
-<span><span class="co">#&gt; 6         2023-01-04        2023-01-06       NA</span></span></code></pre></div>
+<span><span class="co">#&gt;   id          case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1      Paul Reynolds confirmed      m   5 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2       Kayla Martin suspected      f   6 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3   Christian Oberai confirmed      m  59 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4 Alexander Anderson confirmed      m  90 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5     Matthew Bodine  probable      m  38 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6    Randa al-Mansur  probable      f   5 2023-01-02     2023-01-11</span></span>
+<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.4</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;         2022-12-31        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2023-01-01        2023-01-03     25.4</span></span>
+<span><span class="co">#&gt; 4       &lt;NA&gt;         2022-12-29        2023-01-05     25.4</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2022-12-29        2023-01-04       NA</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-04        2023-01-06       NA</span></span></code></pre></div>
 <p>In this example, the line list is simulated using the default values (see <code><a href="reference/sim_linelist.html">?sim_linelist</a></code>). The default hospitalisation risk is assumed to be 0.2 (i.e. there is a 20% probability an infected individual becomes hospitalised) and the start date of the outbreak is 1st January 2023. To modify either of these, we can specify them in the function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
@@ -189,20 +189,20 @@
 <span>  outbreak_start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2019-12-01"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1 Shalamar Robinson confirmed      f  14 2019-12-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2     Billye Coyhis confirmed      f  23 2019-12-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3  Gregory Williams  probable      m  55 2019-12-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4 Adrianna Martinez confirmed      f  11 2019-12-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5 Ashley Dillingham suspected      f  62 2019-12-03           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6       Jaime Quirk  probable      m   5 2019-12-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.9</span></span>
-<span><span class="co">#&gt; 2       &lt;NA&gt;         2019-12-04        2019-12-05     25.9</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2019-11-29        2019-12-02       NA</span></span>
-<span><span class="co">#&gt; 4       &lt;NA&gt;         2019-12-01        2019-12-03     25.9</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2019-11-30        2019-12-04       NA</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2019-11-29        2019-12-02       NA</span></span></code></pre></div>
+<span><span class="co">#&gt;   id       case_name case_type gender age date_onset date_admission date_death</span></span>
+<span><span class="co">#&gt; 1  1   Sabrina Jones confirmed      f  90 2019-12-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2    Ariel Aragon  probable      f  81 2019-12-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3 Shandon Roberts confirmed      m  44 2019-12-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  4 Nathan Martinez confirmed      m  43 2019-12-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5     Maria Downs suspected      f  62 2019-12-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6    Andre Turner suspected      m  49 2019-12-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;     24.5</span></span>
+<span><span class="co">#&gt; 2         2019-12-03        2019-12-06       NA</span></span>
+<span><span class="co">#&gt; 3         2019-12-02        2019-12-04     24.5</span></span>
+<span><span class="co">#&gt; 4         2019-12-01        2019-12-04     24.5</span></span>
+<span><span class="co">#&gt; 5         2019-12-06        2019-12-08       NA</span></span>
+<span><span class="co">#&gt; 6         2019-12-02        2019-12-05       NA</span></span></code></pre></div>
 <p>To simulate a table of contacts of cases (i.e. to reflect a contact tracing dataset) we can use the same serial interval defined for the example above. We additionally need a contact distribution, which represents the probability that each person that infected an individual, also had a given number of contacts that did not become infected.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
@@ -219,20 +219,20 @@
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">contacts</span><span class="op">)</span></span>
-<span><span class="co">#&gt;               from                      to cnt_age cnt_gender</span></span>
-<span><span class="co">#&gt; 1 Benton Fernandez        Scotland Landers      42          m</span></span>
-<span><span class="co">#&gt; 2 Benton Fernandez              Anna Zahir      83          f</span></span>
-<span><span class="co">#&gt; 3 Benton Fernandez             Dennis Mars      46          m</span></span>
-<span><span class="co">#&gt; 4 Benton Fernandez              Zvi Castle      73          f</span></span>
-<span><span class="co">#&gt; 5 Benton Fernandez              Erick Leon      58          m</span></span>
-<span><span class="co">#&gt; 6 Benton Fernandez Casady Parlin-Three Sti      30          f</span></span>
-<span><span class="co">#&gt;   date_first_contact date_last_contact was_case           status</span></span>
-<span><span class="co">#&gt; 1         2022-12-29        2023-01-04        Y             case</span></span>
-<span><span class="co">#&gt; 2         2023-01-02        2023-01-02        Y             case</span></span>
-<span><span class="co">#&gt; 3         2023-01-01        2023-01-04        N          unknown</span></span>
-<span><span class="co">#&gt; 4         2023-01-04        2023-01-05        N lost_to_followup</span></span>
-<span><span class="co">#&gt; 5         2023-01-03        2023-01-06        N lost_to_followup</span></span>
-<span><span class="co">#&gt; 6         2023-01-02        2023-01-04        N   under_followup</span></span></code></pre></div>
+<span><span class="co">#&gt;              from               to cnt_age cnt_gender date_first_contact</span></span>
+<span><span class="co">#&gt; 1 Waseema el-Huda     Haasini Dinh      62          f         2022-12-30</span></span>
+<span><span class="co">#&gt; 2 Waseema el-Huda Jahlisha Eckhart       6          f         2023-01-02</span></span>
+<span><span class="co">#&gt; 3 Waseema el-Huda    Sofya Brabson       1          f         2022-12-27</span></span>
+<span><span class="co">#&gt; 4 Waseema el-Huda      Eoin Acosta      67          m         2022-12-30</span></span>
+<span><span class="co">#&gt; 5 Waseema el-Huda      Mandeep Cha      37          m         2023-01-03</span></span>
+<span><span class="co">#&gt; 6 Waseema el-Huda     Brianna Dock      21          f         2023-01-03</span></span>
+<span><span class="co">#&gt;   date_last_contact was_case         status</span></span>
+<span><span class="co">#&gt; 1        2023-01-04        Y           case</span></span>
+<span><span class="co">#&gt; 2        2023-01-04        Y           case</span></span>
+<span><span class="co">#&gt; 3        2023-01-01        N under_followup</span></span>
+<span><span class="co">#&gt; 4        2023-01-03        N under_followup</span></span>
+<span><span class="co">#&gt; 5        2023-01-08        N under_followup</span></span>
+<span><span class="co">#&gt; 6        2023-01-05        N        unknown</span></span></code></pre></div>
 <p>If both the line list and contacts table are required, they can be jointly simulated using the <code><a href="reference/sim_outbreak.html">sim_outbreak()</a></code> function. This uses the same inputs as <code><a href="reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="reference/sim_contacts.html">sim_contacts()</a></code> to produce a line list and contacts table of the same outbreak (the arguments also have the same default settings as the other functions).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_outbreak.html">sim_outbreak</a></span><span class="op">(</span></span>
@@ -243,35 +243,35 @@
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id             case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1            Kevin Shah confirmed      m  37 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2       Alexandra Clark confirmed      f  45 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3         Faalih el-Dia confirmed      m  11 2023-01-06     2023-01-07</span></span>
-<span><span class="co">#&gt; 4  4     Crystal O'Donnell suspected      f  34 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5           Austin Diaz confirmed      m  13 2023-01-02     2023-01-21</span></span>
-<span><span class="co">#&gt; 6  6 Tristin Clinkingbeard confirmed      m  38 2023-01-06     2023-01-10</span></span>
+<span><span class="co">#&gt;   id          case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1   Uqbah al-Sultana confirmed      m  41 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  2  Ulises Mora-Rojas  probable      m  41 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3 Katherine Galambos  probable      f  41 2023-01-02     2023-01-03</span></span>
+<span><span class="co">#&gt; 4  4         Annie Doak  probable      f  63 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5          Erika Yin confirmed      f  89 2023-01-02     2023-01-02</span></span>
+<span><span class="co">#&gt; 6  6  Casey Borcherding confirmed      f  47 2023-01-01           &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     26.5</span></span>
-<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-03        2023-01-05     26.5</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-29        2023-01-03     26.5</span></span>
-<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-02        2023-01-03       NA</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-04        2023-01-06     26.5</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-08        2023-01-09     26.5</span></span>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       26</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;         2022-12-31        2023-01-04       NA</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2023-01-01        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 4       &lt;NA&gt;         2022-12-27        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2022-12-31        2023-01-05       26</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-04        2023-01-05       26</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span><span class="op">)</span></span>
-<span><span class="co">#&gt;         from               to cnt_age cnt_gender date_first_contact</span></span>
-<span><span class="co">#&gt; 1 Kevin Shah  Alexandra Clark      45          f         2023-01-03</span></span>
-<span><span class="co">#&gt; 2 Kevin Shah    Faalih el-Dia      11          m         2022-12-29</span></span>
-<span><span class="co">#&gt; 3 Kevin Shah   Myranda Gleitz      77          f         2023-01-02</span></span>
-<span><span class="co">#&gt; 4 Kevin Shah        Kento Nay      21          m         2023-01-04</span></span>
-<span><span class="co">#&gt; 5 Kevin Shah Gabriel Cardenas      59          m         2023-01-04</span></span>
-<span><span class="co">#&gt; 6 Kevin Shah     Ileana Ponce      24          f         2022-12-29</span></span>
+<span><span class="co">#&gt;               from                 to cnt_age cnt_gender date_first_contact</span></span>
+<span><span class="co">#&gt; 1 Uqbah al-Sultana  Ulises Mora-Rojas      41          m         2022-12-31</span></span>
+<span><span class="co">#&gt; 2 Uqbah al-Sultana Katherine Galambos      41          f         2023-01-01</span></span>
+<span><span class="co">#&gt; 3 Uqbah al-Sultana   Alexander Foster       2          m         2023-01-06</span></span>
+<span><span class="co">#&gt; 4 Uqbah al-Sultana Daniel Ordaz-Lopez       2          m         2023-01-03</span></span>
+<span><span class="co">#&gt; 5 Uqbah al-Sultana   Intisaar al-Saah      74          f         2023-01-02</span></span>
+<span><span class="co">#&gt; 6 Uqbah al-Sultana     Alondra Juarez      23          f         2022-12-31</span></span>
 <span><span class="co">#&gt;   date_last_contact was_case         status</span></span>
-<span><span class="co">#&gt; 1        2023-01-05        Y           case</span></span>
-<span><span class="co">#&gt; 2        2023-01-03        Y           case</span></span>
-<span><span class="co">#&gt; 3        2023-01-04        N under_followup</span></span>
-<span><span class="co">#&gt; 4        2023-01-07        N under_followup</span></span>
-<span><span class="co">#&gt; 5        2023-01-07        N        unknown</span></span>
-<span><span class="co">#&gt; 6        2023-01-03        N under_followup</span></span></code></pre></div>
+<span><span class="co">#&gt; 1        2023-01-04        Y           case</span></span>
+<span><span class="co">#&gt; 2        2023-01-02        Y           case</span></span>
+<span><span class="co">#&gt; 3        2023-01-08        N under_followup</span></span>
+<span><span class="co">#&gt; 4        2023-01-03        N under_followup</span></span>
+<span><span class="co">#&gt; 5        2023-01-04        N under_followup</span></span>
+<span><span class="co">#&gt; 6        2023-01-07        N under_followup</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="help">Help<a class="anchor" aria-label="anchor" href="#help"></a>
@@ -295,20 +295,20 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"simulist"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite package 'simulist' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Lambert J, Tamayo C (2024). _simulist: Tools to Simulated Line list</span></span>
-<span><span class="co">#&gt;   Data_. R package version 0.0.0.9000,</span></span>
-<span><span class="co">#&gt;   https://epiverse-trace.github.io/simulist/,</span></span>
-<span><span class="co">#&gt;   &lt;https://github.com/epiverse-trace/simulist&gt;.</span></span>
+<span><span class="co">#&gt;   Lambert J, Tamayo C (2024). _simulist: Tools to Simulate Line List</span></span>
+<span><span class="co">#&gt;   and Contacts Data_. doi:10.5281/zenodo.10471458</span></span>
+<span><span class="co">#&gt;   &lt;https://doi.org/10.5281/zenodo.10471458&gt;,</span></span>
+<span><span class="co">#&gt;   &lt;https://github.com/epiverse-trace/simulist,https://epiverse-trace.github.io/simulist/&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   @Manual{,</span></span>
-<span><span class="co">#&gt;     title = {simulist: Tools to Simulated Line list Data},</span></span>
+<span><span class="co">#&gt;     title = {simulist: Tools to Simulate Line List and Contacts Data},</span></span>
 <span><span class="co">#&gt;     author = {Joshua W. Lambert and Carmen Tamayo},</span></span>
 <span><span class="co">#&gt;     year = {2024},</span></span>
-<span><span class="co">#&gt;     note = {R package version 0.0.0.9000, </span></span>
+<span><span class="co">#&gt;     doi = {10.5281/zenodo.10471458},</span></span>
+<span><span class="co">#&gt;     url = {https://github.com/epiverse-trace/simulist,</span></span>
 <span><span class="co">#&gt; https://epiverse-trace.github.io/simulist/},</span></span>
-<span><span class="co">#&gt;     url = {https://github.com/epiverse-trace/simulist},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 </div>
@@ -362,6 +362,7 @@
 <li><a href="https://github.com/epiverse-trace/simulist/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/epiverse-trace/simulist/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/epiverse-trace/simulist?branch=main" class="external-link"><img src="https://codecov.io/gh/epiverse-trace/simulist/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.10471459" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10471459.svg" alt="DOI"></a></li>
 </ul>
 </div>
 
