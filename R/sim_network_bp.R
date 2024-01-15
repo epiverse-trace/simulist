@@ -56,13 +56,14 @@
   chain_size <- 1L
   chain_length <- 1L
   ancestor_idx <- 1L
+  prev_ancestors <- 1L
 
   # run loop until no more individuals are sampled
   while (next_gen_size > 0) {
     # sample contact distribution with preferential attachment
     q <- dpois(0:100 + 1, lambda = mean_contacts) * (0:100 + 1)
     q <- q / sum(q)
-    contacts <- sample(0:100, size = 1, prob = q)
+    contacts <- sample(0:100, size = next_gen_size, prob = q)
 
     # add contacts if sampled
     if (sum(contacts) > 0L) {
@@ -80,22 +81,20 @@
 
           ancestor_vec_idx <-
             which.min(ancestor):(which.min(ancestor) + contacts[i] - 1)
-          ancestor[ancestor_vec_idx] <- ancestor_idx
+          ancestor[ancestor_vec_idx] <- ancestor_idx[i]
 
           # sample infected contacts
-          infect <- runif(contacts[i], min = 0, max = 1) < prob_infect
+          infect <- rbinom(n = contacts[i], size = 1, prob = prob_infect)
           infected[generation_vec_idx] <- as.numeric(infect)
 
           # add delay time
           time[generation_vec_idx] <-
             contact_interval(length(generation_vec_idx)) +
-            time[which(ancestor == ancestor_idx)]
-
-          ancestor_idx <- ancestor_idx + min(which(infect), 1)
-        } else {
-          ancestor_idx <- ancestor_idx + 1L
+            time[which(ancestor == ancestor_idx[i])]
         }
       }
+      ancestor_idx <- setdiff(which(infected == 1), prev_ancestors)
+      prev_ancestors <- c(prev_ancestors, ancestor_idx)
       next_gen_size <- sum(infected[which(generation == max(generation))])
     } else {
       next_gen_size <- 0L
