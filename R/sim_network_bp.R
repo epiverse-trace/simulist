@@ -68,7 +68,7 @@
     # add contacts if sampled
     if (sum(contacts) > 0L) {
       chain_size <- chain_size + sum(contacts)
-      chain_length <- chain_length + min(1L, contacts)
+      chain_length <- chain_length + any(contacts >= 1L)
       chain_generation <- chain_generation + 1L
 
       for (i in seq_along(contacts)) {
