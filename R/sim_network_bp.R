@@ -37,7 +37,6 @@
   contact_interval <- as.function(contact_interval, func_type = "generate")
 
   # initialise data object
-  id <- 1:1e5
   ancestor <- vector(mode = "integer", 1e5)
   generation <- vector(mode = "integer", 1e5)
   infected <- vector(mode = "integer", 1e5)
@@ -79,6 +78,14 @@
           vec_idx <-
             which.min(generation):(which.min(generation) + contacts[i] - 1)
 
+          # grow vectors if idx exceeds length
+          if (max(vec_idx) > length(generation)) {
+            ancestor <- c(ancestor, vector(mode = "integer", 1e5))
+            generation <- c(generation, vector(mode = "integer", 1e5))
+            infected <- c(infected, vector(mode = "integer", 1e5))
+            time <- c(time, vector(mode = "double", 1e5))
+          }
+
           generation[vec_idx] <- chain_generation
           ancestor[vec_idx] <- ancestor_idx[i]
 
@@ -103,7 +110,7 @@
   generation <- generation[generation != 0]
 
   # remove unused IDs
-  id <- id[seq_along(generation)]
+  id <- seq_along(generation)
   infected <- infected[seq_along(generation)]
   infected <- ifelse(test = infected, yes = "infected", no = "contact")
   time <- time[seq_along(generation)]
