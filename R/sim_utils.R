@@ -14,26 +14,23 @@
 NULL
 
 #' @name .sim_utils
-.sim_bp_linelist <- function(R,
-                             serial_interval,
+.sim_bp_linelist <- function(mean_contacts,
+                             contact_interval,
+                             prob_infect,
                              outbreak_start_date,
                              min_outbreak_size,
                              population_age,
                              config) {
-  chain_size <- 0
+  outbreak_size <- 0
   max_iter <- 0L
   # condition on a minimum chain size
-  while (chain_size < min_outbreak_size) {
-    chain <- bpmodels::chain_sim(
-      n = 1,
-      offspring = "pois",
-      stat = "size",
-      serial = serial_interval,
-      lambda = R,
-      tree = TRUE,
-      infinite = 1000
+  while (outbreak_size < min_outbreak_size) {
+    chain <- .sim_network_bp(
+      mean_contacts = mean_contacts,
+      contact_interval = contact_interval,
+      prob_infect = prob_infect
     )
-    chain_size <- max(chain$id)
+    outbreak_size <- sum(chain$infected == "infected")
     max_iter <- max_iter + 1L
     if (max_iter >= 1e4) {
       stop(
@@ -138,9 +135,9 @@ NULL
   }
 
   # add confirmed, probable, suspected case types
-  chain$case_type <- sample(
+  chain$case_type[chain$infected == "infected"] <- sample(
     x = names(case_type_probs),
-    size = nrow(chain),
+    size = sum(chain$infected == "infected"),
     replace = TRUE,
     prob = case_type_probs
   )
