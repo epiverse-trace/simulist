@@ -81,13 +81,16 @@ NULL
 .add_hospitalisation <- function(.data,
                                  onset_to_hosp,
                                  hosp_risk) {
-  .data$hospitalisation <- .data$time + onset_to_hosp(nrow(.data))
+  infected_idx <- .data$infected == "infected"
+  num_infected <- sum(infected_idx)
+  .data$hospitalisation <- NA_real_
+  .data$hospitalisation[infected_idx] <- .data$time[infected_idx] + onset_to_hosp(num_infected)
 
   if (is.numeric(hosp_risk)) {
     pop_sample <- sample(
-      seq_len(nrow(.data)),
+      which(infected_idx),
       replace = FALSE,
-      size = (1 - hosp_risk) * nrow(.data)
+      size = (1 - hosp_risk) * num_infected
     )
     .data$hospitalisation[pop_sample] <- NA
   } else {
@@ -113,14 +116,17 @@ NULL
                         onset_to_death,
                         hosp_death_risk,
                         non_hosp_death_risk) {
-  .data$deaths <- .data$time + onset_to_death(nrow(.data))
+  infected_idx <- .data$infected == "infected"
+  num_infected <- sum(infected_idx)
+  .data$deaths <- NA_real_
+  .data$deaths[infected_idx] <- .data$time[infected_idx] + onset_to_death(num_infected)
 
   apply_death_risk <- function(.data, risk, hosp = TRUE) {
     if (is.numeric(risk)) {
       pop_sample <- sample(
-        seq_len(nrow(.data)),
+        which(infected_idx),
         replace = FALSE,
-        size = (1 - risk) * nrow(.data)
+        size = (1 - risk) * num_infected
       )
       .data$deaths[pop_sample] <- NA
     } else {
