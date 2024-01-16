@@ -93,7 +93,7 @@
       }
       ancestor_idx <- setdiff(which(infected == 1), prev_ancestors)
       prev_ancestors <- c(prev_ancestors, ancestor_idx)
-      next_gen_size <- sum(infected[which(generation == max(generation))])
+      next_gen_size <- length(ancestor_idx)
     } else {
       next_gen_size <- 0L
     }
