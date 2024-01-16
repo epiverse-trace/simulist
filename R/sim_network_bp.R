@@ -24,17 +24,6 @@
 #' @return A `<data.frame>` with the contact and transmission chain data.
 #' @keywords internal
 .sim_network_bp <- function(mean_contacts, contact_interval, prob_infect) {
-  # input checking
-  stopifnot(
-    "Input delay distributions need to be either functions or <epidist>" =
-      inherits(contact_interval, c("function", "epidist"))
-
-  )
-  checkmate::assert_number(prob_infect, lower = 0, upper = 1)
-  checkmate::assert_number(mean_contacts, lower = 1, upper = 50)
-
-  # convert distribution to func if needed
-  contact_interval <- as.function(contact_interval, func_type = "generate")
 
   # initialise data object
   ancestor <- vector(mode = "integer", 1e5)
