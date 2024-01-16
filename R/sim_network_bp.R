@@ -63,7 +63,7 @@
     # sample contact distribution with preferential attachment
     q <- dpois(0:100 + 1, lambda = mean_contacts) * (0:100 + 1)
     q <- q / sum(q)
-    contacts <- sample(0:100, size = next_gen_size, prob = q)
+    contacts <- sample(0:100, size = next_gen_size, replace = TRUE, prob = q)
 
     # add contacts if sampled
     if (sum(contacts) > 0L) {
