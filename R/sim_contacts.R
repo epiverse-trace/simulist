@@ -32,11 +32,11 @@
 #'
 #' contacts <- sim_contacts(
 #'   R = 1.1,
-#'   serial_interval = serial_interval,
-#'   contact_distribution = contact_distribution
+#'   serial_interval = serial_interval
 #' )
-sim_contacts <- function(R,
-                         serial_interval,
+sim_contacts <- function(mean_contacts,
+                         contact_interval,
+                         prob_infect,
                          contact_distribution,
                          outbreak_start_date = as.Date("2023-01-01"),
                          min_outbreak_size = 10,
@@ -50,10 +50,10 @@ sim_contacts <- function(R,
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
-      inherits(serial_interval, c("function", "epidist")) &&
+      inherits(contact_interval, c("function", "epidist")) &&
       inherits(contact_distribution, c("function", "epidist"))
   )
-  serial_interval <- as.function(serial_interval, func_type = "generate")
+  contact_interval <- as.function(serial_interval, func_type = "generate")
   contact_distribution <- as.function(
     contact_distribution,
     func_type = "generate"
@@ -61,18 +61,19 @@ sim_contacts <- function(R,
 
   .check_sim_input(
     sim_type = "contacts",
-    R = R,
-    serial_interval = serial_interval,
+    mean_contacts = mean_contacts,
+    contact_interval = contact_interval,
+    prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     min_outbreak_size = min_outbreak_size,
-    contact_distribution = contact_distribution,
     contact_tracing_status_probs = contact_tracing_status_probs,
     population_age = population_age
   )
 
   chain <- .sim_bp_linelist(
-    R = R,
-    serial_interval = serial_interval,
+    mean_contacts = mean_contacts,
+    contact_interval = contact_interval,
+    prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     min_outbreak_size = min_outbreak_size,
     population_age = population_age,
@@ -83,11 +84,7 @@ sim_contacts <- function(R,
 
   contacts <- .sim_contacts_tbl(
     .data = chain,
-    outbreak_start_date = outbreak_start_date,
-    contact_distribution = contact_distribution,
-    population_age = population_age,
-    contact_tracing_status_probs = contact_tracing_status_probs,
-    config = config
+    contact_tracing_status_probs = contact_tracing_status_probs
   )
 
   # return line list

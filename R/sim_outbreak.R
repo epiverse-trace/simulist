@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' # load data required to simulate outbreak data
-#' serial_interval <- epiparameter::epidist(
+#' contact_interval <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "serial interval",
 #'   prob_distribution = "gamma",
@@ -48,13 +48,13 @@
 #'
 #' outbreak <- sim_outbreak(
 #'   R = 1.1,
-#'   serial_interval = serial_interval,
+#'   contact_interval = contact_interval,
 #'   onset_to_hosp = onset_to_hosp,
-#'   onset_to_death = onset_to_death,
-#'   contact_distribution = contact_distribution
+#'   onset_to_death = onset_to_death
 #' )
-sim_outbreak <- function(R,
-                         serial_interval,
+sim_outbreak <- function(mean_contacts,
+                         contact_interval,
+                         prob_infect,
                          onset_to_hosp,
                          onset_to_death,
                          contact_distribution,
@@ -80,12 +80,12 @@ sim_outbreak <- function(R,
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
-      inherits(serial_interval, c("function", "epidist")) &&
+      inherits(contact_interval, c("function", "epidist")) &&
       inherits(onset_to_hosp, c("function", "epidist")) &&
       inherits(onset_to_death, c("function", "epidist")) &&
       inherits(contact_distribution, c("function", "epidist"))
   )
-  serial_interval <- as.function(serial_interval, func_type = "generate")
+  contact_interval <- as.function(contact_interval, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")
   contact_distribution <- as.function(
@@ -95,8 +95,9 @@ sim_outbreak <- function(R,
 
   .check_sim_input(
     sim_type = "outbreak",
-    R = R,
-    serial_interval = serial_interval,
+    mean_contacts = mean_contacts,
+    contact_interval = contact_interval,
+    prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     min_outbreak_size = min_outbreak_size,
     onset_to_hosp = onset_to_hosp,
@@ -141,8 +142,9 @@ sim_outbreak <- function(R,
   }
 
   chain <- .sim_bp_linelist(
-    R = R,
-    serial_interval = serial_interval,
+    mean_contacts = mean_contacts,
+    contact_interval = contact_interval,
+    prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     min_outbreak_size = min_outbreak_size,
     population_age = population_age,
@@ -165,11 +167,7 @@ sim_outbreak <- function(R,
 
   contacts <- .sim_contacts_tbl(
     .data = linelist$chain,
-    outbreak_start_date = outbreak_start_date,
-    contact_distribution = contact_distribution,
-    population_age = population_age,
-    contact_tracing_status_probs = contact_tracing_status_probs,
-    config = config
+    contact_tracing_status_probs = contact_tracing_status_probs
   )
 
   chain <- linelist$chain[, linelist$cols]
