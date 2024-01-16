@@ -75,22 +75,20 @@
 
         if (contacts[i] > 0) {
 
-          generation_vec_idx <-
+          # vec index can be which.min of either generation or ancestor vec
+          vec_idx <-
             which.min(generation):(which.min(generation) + contacts[i] - 1)
-          generation[generation_vec_idx] <- chain_generation
 
-          ancestor_vec_idx <-
-            which.min(ancestor):(which.min(ancestor) + contacts[i] - 1)
-          ancestor[ancestor_vec_idx] <- ancestor_idx[i]
+          generation[vec_idx] <- chain_generation
+          ancestor[vec_idx] <- ancestor_idx[i]
 
           # sample infected contacts
           infect <- rbinom(n = contacts[i], size = 1, prob = prob_infect)
-          infected[generation_vec_idx] <- as.numeric(infect)
+          infected[vec_idx] <- as.numeric(infect)
 
-          # add delay time
-          time[generation_vec_idx] <-
-            contact_interval(length(generation_vec_idx)) +
-            time[which(ancestor == ancestor_idx[i])]
+          # add delay time, removing first element of ancestor time as it is NA
+          time[vec_idx] <- contact_interval(length(vec_idx)) +
+            time[ancestor == ancestor_idx[i]][-1]
         }
       }
       ancestor_idx <- setdiff(which(infected == 1), prev_ancestors)
