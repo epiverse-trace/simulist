@@ -116,8 +116,9 @@
 #'   hosp_risk = age_dep_hosp_risk
 #' )
 #' head(linelist)
-sim_linelist <- function(R,
-                         serial_interval,
+sim_linelist <- function(mean_contacts,
+                         contact_interval,
+                         prob_infect,
                          onset_to_hosp,
                          onset_to_death,
                          hosp_risk = 0.2,
@@ -137,18 +138,19 @@ sim_linelist <- function(R,
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
-      inherits(serial_interval, c("function", "epidist")) &&
+      inherits(contact_interval, c("function", "epidist")) &&
       inherits(onset_to_hosp, c("function", "epidist")) &&
       inherits(onset_to_death, c("function", "epidist"))
   )
-  serial_interval <- as.function(serial_interval, func_type = "generate")
+  contact_interval <- as.function(contact_interval, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")
 
   .check_sim_input(
     sim_type = "linelist",
-    R = R,
-    serial_interval = serial_interval,
+    mean_contacts = mean_contacts,
+    contact_interval = contact_interval,
+    prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     min_outbreak_size = min_outbreak_size,
     onset_to_hosp = onset_to_hosp,
@@ -191,8 +193,9 @@ sim_linelist <- function(R,
   }
 
   chain <- .sim_bp_linelist(
-    R = R,
-    serial_interval = serial_interval,
+    mean_contacts = mean_contacts,
+    contact_interval = contact_interval,
+    prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     min_outbreak_size = min_outbreak_size,
     population_age = population_age,
@@ -213,6 +216,7 @@ sim_linelist <- function(R,
     config = config
   )
 
+  linelist$chain <- linelist$chain[linelist$chain$infected == "infected", ]
   chain <- linelist$chain[, linelist$cols]
 
   # return line list
