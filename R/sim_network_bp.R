@@ -37,11 +37,11 @@
   contact_interval <- as.function(contact_interval, func_type = "generate")
 
   # initialise data object
-  id <- 1:100
-  ancestor <- vector(mode = "integer", 100)
-  generation <- vector(mode = "integer", 100)
-  infected <- vector(mode = "integer", 100)
-  time <- vector(mode = "double", 100)
+  id <- 1:1e5
+  ancestor <- vector(mode = "integer", 1e5)
+  generation <- vector(mode = "integer", 1e5)
+  infected <- vector(mode = "integer", 1e5)
+  time <- vector(mode = "double", 1e5)
 
   # store initial individual
   ancestor[1] <- NA_integer_
