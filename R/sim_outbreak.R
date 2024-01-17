@@ -157,6 +157,7 @@ sim_outbreak <- function(mean_contacts,
     contact_tracing_status_probs = contact_tracing_status_probs
   )
 
+  linelist$chain <- linelist$chain[linelist$chain$infected == "infected", ]
   chain <- linelist$chain[, linelist$cols]
 
   # return outbreak data
