@@ -1,33 +1,26 @@
 suppressMessages({
-  serial_interval <- epiparameter::epidist(
+  contact_interval <- epiparameter::epidist(
     disease = "COVID-19",
-    epi_dist = "serial interval",
+    epi_dist = "contact interval",
     prob_distribution = "gamma",
     prob_distribution_params = c(shape = 1, scale = 1)
-  )
-
-  contact_distribution <- epiparameter::epidist(
-    disease = "COVID-19",
-    epi_dist = "contact_distribution",
-    prob_distribution = "pois",
-    prob_distribution_params = c(l = 5)
   )
 })
 
 test_that("sim_contacts works as expected", {
   set.seed(1)
   contacts <- sim_contacts(
-    R = 1.1,
-    serial_interval = serial_interval,
-    contact_distribution = contact_distribution
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5
   )
 
   expect_s3_class(contacts, class = "data.frame")
-  expect_identical(dim(contacts), c(170L, 8L))
+  expect_identical(dim(contacts), c(35L, 8L))
   expect_identical(
     colnames(contacts),
     c(
-      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "from", "to", "age", "gender", "date_first_contact",
       "date_last_contact", "was_case", "status"
     )
   )
@@ -36,9 +29,9 @@ test_that("sim_contacts works as expected", {
 test_that("sim_contacts works as expected with modified config", {
   set.seed(1)
   contacts <- sim_contacts(
-    R = 1.1,
-    serial_interval = serial_interval,
-    contact_distribution = contact_distribution,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     config = create_config(
       last_contact_distribution = "geom",
       last_contact_distribution_params = c(prob = 0.5)
@@ -46,11 +39,11 @@ test_that("sim_contacts works as expected with modified config", {
   )
 
   expect_s3_class(contacts, class = "data.frame")
-  expect_identical(dim(contacts), c(178L, 8L))
+  expect_identical(dim(contacts), c(35L, 8L))
   expect_identical(
     colnames(contacts),
     c(
-      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "from", "to", "age", "gender", "date_first_contact",
       "date_last_contact", "was_case", "status"
     )
   )
@@ -59,20 +52,20 @@ test_that("sim_contacts works as expected with modified config", {
 test_that("sim_contacts works as expected with modified config parameters", {
   set.seed(1)
   contacts <- sim_contacts(
-    R = 1.1,
-    serial_interval = serial_interval,
-    contact_distribution = contact_distribution,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     config = create_config(
       last_contact_distribution_params = c(lambda = 5)
     )
   )
 
   expect_s3_class(contacts, class = "data.frame")
-  expect_identical(dim(contacts), c(170L, 8L)) # TODO check why nrow is diff
+  expect_identical(dim(contacts), c(35L, 8L))
   expect_identical(
     colnames(contacts),
     c(
-      "from", "to", "cnt_age", "cnt_gender", "date_first_contact",
+      "from", "to", "age", "gender", "date_first_contact",
       "date_last_contact", "was_case", "status"
     )
   )
@@ -81,9 +74,9 @@ test_that("sim_contacts works as expected with modified config parameters", {
 test_that("sim_contacts fails as expected with modified config", {
   expect_error(
     sim_contacts(
-      R = 1.1,
-      serial_interval = serial_interval,
-      contact_distribution = contact_distribution,
+      mean_contacts = 2,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
       config = create_config(
         last_contact_distribution = "geom"
       )
@@ -95,9 +88,9 @@ test_that("sim_contacts fails as expected with modified config", {
 test_that("sim_contacts fails as expected with empty config", {
   expect_error(
     sim_contacts(
-      R = 1.1,
-      serial_interval = serial_interval,
-      contact_distribution = contact_distribution,
+      mean_contacts = 2,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
       config = list()
     ),
     regexp = "Distribution parameters are missing, check config"
