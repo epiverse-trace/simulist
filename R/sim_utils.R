@@ -32,7 +32,7 @@ NULL
     )
     outbreak_size <- sum(chain$infected == "infected")
     max_iter <- max_iter + 1L
-    if (max_iter >= 1e4) {
+    if (max_iter >= 1e3) {
       stop(
         "Exceeded maximum number of iterations for simulating outbreak. \n",
         "Change input parameters or min_outbreak_size.",
