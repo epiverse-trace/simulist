@@ -8,8 +8,9 @@
 within \pkg{simulist}}
 \usage{
 .sim_bp_linelist(
-  R,
-  serial_interval,
+  mean_contacts,
+  contact_interval,
+  prob_infect,
   outbreak_start_date,
   min_outbreak_size,
   population_age,
@@ -31,10 +32,17 @@ within \pkg{simulist}}
 )
 }
 \arguments{
-\item{R}{A single \code{numeric} for the reproduction number.}
+\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
+infection.}
 
-\item{serial_interval}{An \verb{<epidist>} object or anonymous function for
-the serial interval.}
+\item{contact_interval}{An \verb{<epidist>} object or anonymous function for
+the contact interval. This is analogous to the serial interval or generation
+time, but gives the time interval between someone being infected/infectious
+(in the simulation the latency period is assumed to be zero) and having
+contact with another individual.}
+
+\item{prob_infect}{A single \code{numeric} for the probability of a contact
+being infected.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 

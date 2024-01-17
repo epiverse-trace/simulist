@@ -4,40 +4,16 @@
 \alias{.sim_contacts_tbl}
 \title{Create contacts table}
 \usage{
-.sim_contacts_tbl(
-  .data,
-  outbreak_start_date,
-  contact_distribution,
-  population_age,
-  contact_tracing_status_probs,
-  config
-)
+.sim_contacts_tbl(.data, contact_tracing_status_probs)
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
 branching process simulation.}
 
-\item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
-
-\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
-the contact distribution. This is similar to the offspring distribution,
-but describes the heterogeneity of contacts that are not infected.}
-
-\item{population_age}{Either a \code{numeric} vector with two elements or a
-\verb{<data.frame>} with age structure in the population. Use a \code{numeric} vector
-to specific the age range of the population, the first element is the lower
-bound for the age range, and and the second is the upper bound for the age
-range (both inclusive, i.e. [lower, upper]). The \verb{<data.frame>} with
-age groups and the proportion of the population in that group. See details
-and examples for more information.}
-
 \item{contact_tracing_status_probs}{A named \code{numeric} vector with the
 probability of each contact tracing status. The names of the vector must
 be \code{"under_followup"}, \code{"lost_to_followup"}, \code{"unknown"}. Values of each
 contact tracing status must sum to one.}
-
-\item{config}{A list of settings to adjust the randomly sampled delays and
-Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
 }
 \value{
 A contacts \verb{<data.frame>}

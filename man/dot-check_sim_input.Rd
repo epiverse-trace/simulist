@@ -6,13 +6,13 @@
 \usage{
 .check_sim_input(
   sim_type = c("linelist", "contacts", "outbreak"),
-  R,
-  serial_interval,
+  mean_contacts,
+  contact_interval,
+  prob_infect,
   outbreak_start_date,
   min_outbreak_size,
   onset_to_hosp = NULL,
   onset_to_death = NULL,
-  contact_distribution = NULL,
   add_names = NULL,
   add_ct = NULL,
   case_type_probs = NULL,
@@ -27,10 +27,17 @@
 \item{sim_type}{A \code{character} string specifying which simulation function
 this function is being called within.}
 
-\item{R}{A single \code{numeric} for the reproduction number.}
+\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
+infection.}
 
-\item{serial_interval}{An \verb{<epidist>} object or anonymous function for
-the serial interval.}
+\item{contact_interval}{An \verb{<epidist>} object or anonymous function for
+the contact interval. This is analogous to the serial interval or generation
+time, but gives the time interval between someone being infected/infectious
+(in the simulation the latency period is assumed to be zero) and having
+contact with another individual.}
+
+\item{prob_infect}{A single \code{numeric} for the probability of a contact
+being infected.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
@@ -43,10 +50,6 @@ the onset to hospitalisation delay distribution.}
 
 \item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
 the onset to death delay distribution.}
-
-\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
-the contact distribution. This is similar to the offspring distribution,
-but describes the heterogeneity of contacts that are not infected.}
 
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
 of the line list. Default is \code{TRUE}.}
