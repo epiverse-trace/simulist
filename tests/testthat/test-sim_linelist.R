@@ -1,7 +1,7 @@
 suppressMessages({
-  serial_interval <- epiparameter::epidist(
+  contact_interval <- epiparameter::epidist(
     disease = "COVID-19",
-    epi_dist = "serial interval",
+    epi_dist = "contact interval",
     prob_distribution = "gamma",
     prob_distribution_params = c(shape = 1, scale = 1)
   )
@@ -24,14 +24,15 @@ suppressMessages({
 test_that("sim_linelist works as expected", {
   set.seed(1)
   linelist <- sim_linelist(
-    R = 1.1,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 11L))
+  expect_identical(dim(linelist), c(17L, 11L))
   expect_identical(
     colnames(linelist),
     c(
@@ -57,8 +58,9 @@ test_that("sim_linelist works as expected with age-strat risks", {
   )
   set.seed(1)
   linelist <- sim_linelist(
-    R = 1.1,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     hosp_risk = age_dep_hosp_risk,
@@ -67,7 +69,7 @@ test_that("sim_linelist works as expected with age-strat risks", {
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 11L))
+  expect_identical(dim(linelist), c(17L, 11L))
   expect_identical(
     colnames(linelist),
     c(
@@ -81,15 +83,16 @@ test_that("sim_linelist works as expected with age-strat risks", {
 test_that("sim_linelist works as expected without Ct", {
   set.seed(1)
   linelist <- sim_linelist(
-    R = 1.1,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     add_ct = FALSE
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 10L))
+  expect_identical(dim(linelist), c(17L, 10L))
   expect_identical(
     colnames(linelist),
     c(
@@ -103,15 +106,16 @@ test_that("sim_linelist works as expected without Ct", {
 test_that("sim_linelist works as expected with anonymous", {
   set.seed(1)
   linelist <- sim_linelist(
-    R = 1.1,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     add_names = FALSE
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 10L))
+  expect_identical(dim(linelist), c(17L, 10L))
   expect_identical(
     colnames(linelist),
     c(
@@ -130,15 +134,16 @@ test_that("sim_linelist works as expected with age structure", {
   )
   set.seed(1)
   linelist <- sim_linelist(
-    R = 1.1,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     population_age = age_struct
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 11L))
+  expect_identical(dim(linelist), c(17L, 11L))
   expect_identical(
     colnames(linelist),
     c(
@@ -161,8 +166,9 @@ test_that("sim_linelist works as expected with age-strat risks & age struct", {
   )
   set.seed(1)
   linelist <- sim_linelist(
-    R = 1.1,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     hosp_risk = age_dep_hosp_risk,
@@ -170,7 +176,7 @@ test_that("sim_linelist works as expected with age-strat risks & age struct", {
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 11L))
+  expect_identical(dim(linelist), c(17L, 11L))
   expect_identical(
     colnames(linelist),
     c(
@@ -187,10 +193,11 @@ test_that("sim_linelist gives expected proportion of ages with age struct", {
     proportion = c(0.2, 0.5, 0.3),
     stringsAsFactors = FALSE
   )
-  set.seed(1)
+  set.seed(3)
   linelist <- sim_linelist(
-    R = 1.5,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     population_age = age_struct
@@ -218,8 +225,9 @@ test_that("sim_linelist gives expected proportion of ages with age struct", {
 test_that("sim_linelist works as expected with modified config", {
   set.seed(1)
   linelist <- sim_linelist(
-    R = 1.1,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     config = create_config(
@@ -229,7 +237,7 @@ test_that("sim_linelist works as expected with modified config", {
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 11L))
+  expect_identical(dim(linelist), c(17L, 11L))
   expect_identical(
     colnames(linelist),
     c(
@@ -243,8 +251,9 @@ test_that("sim_linelist works as expected with modified config", {
 test_that("sim_linelist works as expected with modified config parameters", {
   set.seed(1)
   linelist <- sim_linelist(
-    R = 1.1,
-    serial_interval = serial_interval,
+    mean_contacts = 2,
+    contact_interval = contact_interval,
+    prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     config = create_config(
@@ -253,7 +262,7 @@ test_that("sim_linelist works as expected with modified config parameters", {
   )
 
   expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(42L, 11L))
+  expect_identical(dim(linelist), c(17L, 11L))
   expect_identical(
     colnames(linelist),
     c(
@@ -267,8 +276,9 @@ test_that("sim_linelist works as expected with modified config parameters", {
 test_that("sim_linelist fails as expected with modified config", {
   expect_error(
     sim_linelist(
-      R = 1.1,
-      serial_interval = serial_interval,
+      mean_contacts = 2,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
@@ -280,8 +290,9 @@ test_that("sim_linelist fails as expected with modified config", {
 
   expect_error(
     sim_linelist(
-      R = 1.1,
-      serial_interval = serial_interval,
+      mean_contacts = 2,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       add_ct = TRUE,
@@ -296,8 +307,9 @@ test_that("sim_linelist fails as expected with modified config", {
 test_that("sim_linelist fails as expected with empty config", {
   expect_error(
     sim_linelist(
-      R = 1.1,
-      serial_interval = serial_interval,
+      mean_contacts = 2,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = list()
@@ -306,12 +318,13 @@ test_that("sim_linelist fails as expected with empty config", {
   )
 })
 
-test_that("sim_linelist fails as expected exceeding max iter for bpmodel", {
+test_that("sim_linelist fails as expected exceeding max iter for bp model", {
   set.seed(1)
   expect_error(
     sim_linelist(
-      R = 0.2,
-      serial_interval = serial_interval,
+      mean_contacts = 1,
+      contact_interval = contact_interval,
+      prob_infect = 0.1,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death
     ),
