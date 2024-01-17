@@ -21,9 +21,15 @@
 #' that age group. Proportions must sum to one.
 #'
 #'
-#' @param R A single `numeric` for the reproduction number.
-#' @param serial_interval An `<epidist>` object or anonymous function for
-#' the serial interval.
+#' @param mean_contacts A single `numeric` for the mean number of contacts per
+#' infection.
+#' @param contact_interval An `<epidist>` object or anonymous function for
+#' the contact interval. This is analogous to the serial interval or generation
+#' time, but gives the time interval between someone being infected/infectious
+#' (in the simulation the latency period is assumed to be zero) and having
+#' contact with another individual.
+#' @param prob_infect A single `numeric` for the probability of a contact
+#' being infected.
 #' @param onset_to_hosp An `<epidist>` object or anonymous function for
 #' the onset to hospitalisation delay distribution.
 #' @param onset_to_death An `<epidist>` object or anonymous function for
