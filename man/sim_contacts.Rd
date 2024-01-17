@@ -5,9 +5,9 @@
 \title{Simulate contacts for an infectious disease outbreak}
 \usage{
 sim_contacts(
-  R,
-  serial_interval,
-  contact_distribution,
+  mean_contacts,
+  contact_interval,
+  prob_infect,
   outbreak_start_date = as.Date("2023-01-01"),
   min_outbreak_size = 10,
   population_age = c(1, 90),
@@ -17,14 +17,17 @@ sim_contacts(
 )
 }
 \arguments{
-\item{R}{A single \code{numeric} for the reproduction number.}
+\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
+infection.}
 
-\item{serial_interval}{An \verb{<epidist>} object or anonymous function for
-the serial interval.}
+\item{contact_interval}{An \verb{<epidist>} object or anonymous function for
+the contact interval. This is analogous to the serial interval or generation
+time, but gives the time interval between someone being infected/infectious
+(in the simulation the latency period is assumed to be zero) and having
+contact with another individual.}
 
-\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
-the contact distribution. This is similar to the offspring distribution,
-but describes the heterogeneity of contacts that are not infected.}
+\item{prob_infect}{A single \code{numeric} for the probability of a contact
+being infected.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
@@ -72,8 +75,7 @@ contact_distribution <- epiparameter::epidist(
 
 contacts <- sim_contacts(
   R = 1.1,
-  serial_interval = serial_interval,
-  contact_distribution = contact_distribution
+  serial_interval = serial_interval
 )
 }
 \author{

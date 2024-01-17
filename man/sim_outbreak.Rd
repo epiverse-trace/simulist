@@ -5,11 +5,11 @@
 \title{Simulate a line list and a contacts table}
 \usage{
 sim_outbreak(
-  R,
-  serial_interval,
+  mean_contacts,
+  contact_interval,
+  prob_infect,
   onset_to_hosp,
   onset_to_death,
-  contact_distribution,
   hosp_risk = 0.2,
   hosp_death_risk = 0.5,
   non_hosp_death_risk = 0.05,
@@ -25,20 +25,23 @@ sim_outbreak(
 )
 }
 \arguments{
-\item{R}{A single \code{numeric} for the reproduction number.}
+\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
+infection.}
 
-\item{serial_interval}{An \verb{<epidist>} object or anonymous function for
-the serial interval.}
+\item{contact_interval}{An \verb{<epidist>} object or anonymous function for
+the contact interval. This is analogous to the serial interval or generation
+time, but gives the time interval between someone being infected/infectious
+(in the simulation the latency period is assumed to be zero) and having
+contact with another individual.}
+
+\item{prob_infect}{A single \code{numeric} for the probability of a contact
+being infected.}
 
 \item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
 the onset to hospitalisation delay distribution.}
 
 \item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
 the onset to death delay distribution.}
-
-\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
-the contact distribution. This is similar to the offspring distribution,
-but describes the heterogeneity of contacts that are not infected.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
@@ -125,7 +128,7 @@ that age group. Proportions must sum to one.
 }
 \examples{
 # load data required to simulate outbreak data
-serial_interval <- epiparameter::epidist(
+contact_interval <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "serial interval",
   prob_distribution = "gamma",
@@ -155,10 +158,9 @@ contact_distribution <- epiparameter::epidist(
 
 outbreak <- sim_outbreak(
   R = 1.1,
-  serial_interval = serial_interval,
+  contact_interval = contact_interval,
   onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death,
-  contact_distribution = contact_distribution
+  onset_to_death = onset_to_death
 )
 }
 \author{
