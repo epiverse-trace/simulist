@@ -20,16 +20,15 @@
 #' * `proportion`: a column with the proportion of the population that are in
 #' that age group. Proportions must sum to one.
 #'
-#'
 #' @param mean_contacts A single `numeric` for the mean number of contacts per
 #' infection.
 #' @param contact_interval An `<epidist>` object or anonymous function for
 #' the contact interval. This is analogous to the serial interval or generation
-#' time, but gives the time interval between someone being infected/infectious
-#' (in the simulation the latency period is assumed to be zero) and having
-#' contact with another individual.
-#' @param prob_infect A single `numeric` for the probability of a contact
-#' being infected.
+#' time, but defines the time interval between an individual being
+#' infected/infectious (in the simulation the latency period is assumed to be
+#' zero) and having contact with another susceptible individual.
+#' @param prob_infect A single `numeric` for the probability of a secondary
+#' contact being infected by an infected primary contact.
 #' @param onset_to_hosp An `<epidist>` object or anonymous function for
 #' the onset to hospitalisation delay distribution.
 #' @param onset_to_death An `<epidist>` object or anonymous function for
@@ -76,9 +75,9 @@
 #'
 #' @examples
 #' # load data required to simulate line list
-#' serial_interval <- epiparameter::epidist(
+#' contact_interval <- epiparameter::epidist(
 #'   disease = "COVID-19",
-#'   epi_dist = "serial interval",
+#'   epi_dist = "contact interval",
 #'   prob_distribution = "gamma",
 #'   prob_distribution_params = c(shape = 1, scale = 1)
 #' )
@@ -98,8 +97,9 @@
 #' )
 #' # example with single hospitalisation risk for entire population
 #' linelist <- sim_linelist(
-#'   R = 1.1,
-#'   serial_interval = serial_interval,
+#'   mean_contacts = 2,
+#'   contact_interval = contact_interval,
+#'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death,
 #'   hosp_risk = 0.5
@@ -115,8 +115,9 @@
 #'   risk = c(0.1, 0.05, 0.2)
 #' )
 #' linelist <- sim_linelist(
-#'   R = 1.1,
-#'   serial_interval = serial_interval,
+#'   mean_contacts = 2,
+#'   contact_interval = contact_interval,
+#'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death,
 #'   hosp_risk = age_dep_hosp_risk

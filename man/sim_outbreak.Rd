@@ -30,12 +30,12 @@ infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation
-time, but gives the time interval between someone being infected/infectious
-(in the simulation the latency period is assumed to be zero) and having
-contact with another individual.}
+time, but defines the time interval between an individual being
+infected/infectious (in the simulation the latency period is assumed to be
+zero) and having contact with another susceptible individual.}
 
-\item{prob_infect}{A single \code{numeric} for the probability of a contact
-being infected.}
+\item{prob_infect}{A single \code{numeric} for the probability of a secondary
+contact being infected by an infected primary contact.}
 
 \item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
 the onset to hospitalisation delay distribution.}
@@ -149,16 +149,10 @@ onset_to_death <- epiparameter::epidist_db(
   single_epidist = TRUE
 )
 
-contact_distribution <- epiparameter::epidist(
-  disease = "COVID-19",
-  epi_dist = "contact_distribution",
-  prob_distribution = "pois",
-  prob_distribution_params = c(l = 5)
-)
-
 outbreak <- sim_outbreak(
-  R = 1.1,
+  mean_contacts = 2,
   contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )

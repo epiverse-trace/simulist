@@ -8,16 +8,17 @@ infection for each contact}
 .sim_network_bp(mean_contacts, contact_interval, prob_infect)
 }
 \arguments{
-\item{mean_contacts}{A \code{numeric} for the mean number of contacts across the
-population.}
+\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
+infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
-the contact interval. The contact interval is similar to the generation time
-or serial interval, but describes the time between becoming infected by a
-contact and contacting another susceptible individual.}
+the contact interval. This is analogous to the serial interval or generation
+time, but defines the time interval between an individual being
+infected/infectious (in the simulation the latency period is assumed to be
+zero) and having contact with another susceptible individual.}
 
-\item{prob_infect}{A \code{numeric} for the probability of a secondary contact
-being infected by an infected primary contact.}
+\item{prob_infect}{A single \code{numeric} for the probability of a secondary
+contact being infected by an infected primary contact.}
 }
 \value{
 A \verb{<data.frame>} with the contact and transmission chain data.

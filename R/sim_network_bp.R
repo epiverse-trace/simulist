@@ -17,14 +17,7 @@
 #' of contacts. The plus one is because one of the contacts was "used" to
 #' infect the person.
 #'
-#' @param mean_contacts A `numeric` for the mean number of contacts across the
-#' population.
-#' @param contact_interval An `<epidist>` object or anonymous function for
-#' the contact interval. The contact interval is similar to the generation time
-#' or serial interval, but describes the time between becoming infected by a
-#' contact and contacting another susceptible individual.
-#' @param prob_infect A `numeric` for the probability of a secondary contact
-#' being infected by an infected primary contact.
+#' @inheritParams sim_linelist
 #'
 #' @return A `<data.frame>` with the contact and transmission chain data.
 #' @keywords internal
