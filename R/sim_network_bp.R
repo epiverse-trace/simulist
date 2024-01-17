@@ -9,8 +9,13 @@
 #' by the contact interval function.
 #'
 #' @details
-#' Preferential attachment ...
-#'
+#' The contact distribution sampled takes the network effect
+#' \eqn{q(n) ~ (n + 1)p(n + 1)} where \eqn{p(n)} is the probability density function
+#' of a distribution, e.g., Poisson or Negative binomial. That is to say, the
+#' probability of having choosing a contact at random by following up a
+#' contact chooses individuals with a probability proportional to their number
+#' of contacts. The plus one is because one of the contacts was "used" to
+#' infect the person.
 #'
 #' @param mean_contacts A `numeric` for the mean number of contacts across the
 #' population.
@@ -48,7 +53,7 @@
 
   # run loop until no more individuals are sampled
   while (next_gen_size > 0) {
-    # sample contact distribution with preferential attachment
+    # sample contact distribution
     q <- dpois(0:100 + 1, lambda = mean_contacts) * (0:100 + 1)
     q <- q / sum(q)
     contacts <- sample(0:100, size = next_gen_size, replace = TRUE, prob = q)
