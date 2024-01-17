@@ -170,7 +170,6 @@
   }
 
   if (sim_type == "contacts" || sim_type == "outbreak") {
-    .check_func_req_args(contact_distribution)
     checkmate::assert_numeric(contact_tracing_status_probs, len = 3)
     checkmate::assert_names(
       names(contact_tracing_status_probs),

@@ -57,7 +57,6 @@ sim_outbreak <- function(mean_contacts,
                          prob_infect,
                          onset_to_hosp,
                          onset_to_death,
-                         contact_distribution,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,
                          non_hosp_death_risk = 0.05,
@@ -82,16 +81,11 @@ sim_outbreak <- function(mean_contacts,
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(contact_interval, c("function", "epidist")) &&
       inherits(onset_to_hosp, c("function", "epidist")) &&
-      inherits(onset_to_death, c("function", "epidist")) &&
-      inherits(contact_distribution, c("function", "epidist"))
+      inherits(onset_to_death, c("function", "epidist"))
   )
   contact_interval <- as.function(contact_interval, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")
-  contact_distribution <- as.function(
-    contact_distribution,
-    func_type = "generate"
-  )
 
   .check_sim_input(
     sim_type = "outbreak",
@@ -102,7 +96,6 @@ sim_outbreak <- function(mean_contacts,
     min_outbreak_size = min_outbreak_size,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
-    contact_distribution = contact_distribution,
     add_names = add_names,
     add_ct = add_ct,
     case_type_probs = case_type_probs,
