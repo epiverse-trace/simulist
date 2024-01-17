@@ -48,7 +48,7 @@ sim_contacts <- function(mean_contacts,
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(contact_interval, c("function", "epidist"))
   )
-  contact_interval <- as.function(serial_interval, func_type = "generate")
+  contact_interval <- as.function(contact_interval, func_type = "generate")
 
   .check_sim_input(
     sim_type = "contacts",
