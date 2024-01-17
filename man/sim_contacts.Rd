@@ -22,12 +22,12 @@ infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation
-time, but gives the time interval between someone being infected/infectious
-(in the simulation the latency period is assumed to be zero) and having
-contact with another individual.}
+time, but defines the time interval between an individual being
+infected/infectious (in the simulation the latency period is assumed to be
+zero) and having contact with another susceptible individual.}
 
-\item{prob_infect}{A single \code{numeric} for the probability of a contact
-being infected.}
+\item{prob_infect}{A single \code{numeric} for the probability of a secondary
+contact being infected by an infected primary contact.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
@@ -59,23 +59,17 @@ Simulate contacts for an infectious disease outbreak
 }
 \examples{
 # load data required to simulate contacts
-serial_interval <- epiparameter::epidist(
+contact_interval <- epiparameter::epidist(
   disease = "COVID-19",
-  epi_dist = "serial interval",
+  epi_dist = "contact interval",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
 
-contact_distribution <- epiparameter::epidist(
-  disease = "COVID-19",
-  epi_dist = "contact_distribution",
-  prob_distribution = "pois",
-  prob_distribution_params = c(l = 5)
-)
-
 contacts <- sim_contacts(
-  R = 1.1,
-  serial_interval = serial_interval
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5
 )
 }
 \author{

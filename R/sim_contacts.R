@@ -13,23 +13,17 @@
 #'
 #' @examples
 #' # load data required to simulate contacts
-#' serial_interval <- epiparameter::epidist(
+#' contact_interval <- epiparameter::epidist(
 #'   disease = "COVID-19",
-#'   epi_dist = "serial interval",
+#'   epi_dist = "contact interval",
 #'   prob_distribution = "gamma",
 #'   prob_distribution_params = c(shape = 1, scale = 1)
 #' )
 #'
-#' contact_distribution <- epiparameter::epidist(
-#'   disease = "COVID-19",
-#'   epi_dist = "contact_distribution",
-#'   prob_distribution = "pois",
-#'   prob_distribution_params = c(l = 5)
-#' )
-#'
 #' contacts <- sim_contacts(
-#'   R = 1.1,
-#'   serial_interval = serial_interval
+#'   mean_contacts = 2,
+#'   contact_interval = contact_interval,
+#'   prob_infect = 0.5
 #' )
 sim_contacts <- function(mean_contacts,
                          contact_interval,

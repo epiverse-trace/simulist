@@ -37,12 +37,12 @@ infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation
-time, but gives the time interval between someone being infected/infectious
-(in the simulation the latency period is assumed to be zero) and having
-contact with another individual.}
+time, but defines the time interval between an individual being
+infected/infectious (in the simulation the latency period is assumed to be
+zero) and having contact with another susceptible individual.}
 
-\item{prob_infect}{A single \code{numeric} for the probability of a contact
-being infected.}
+\item{prob_infect}{A single \code{numeric} for the probability of a secondary
+contact being infected by an infected primary contact.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 

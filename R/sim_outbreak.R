@@ -39,16 +39,10 @@
 #'   single_epidist = TRUE
 #' )
 #'
-#' contact_distribution <- epiparameter::epidist(
-#'   disease = "COVID-19",
-#'   epi_dist = "contact_distribution",
-#'   prob_distribution = "pois",
-#'   prob_distribution_params = c(l = 5)
-#' )
-#'
 #' outbreak <- sim_outbreak(
-#'   R = 1.1,
+#'   mean_contacts = 2,
 #'   contact_interval = contact_interval,
+#'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death
 #' )
