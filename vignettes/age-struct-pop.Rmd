@@ -24,7 +24,7 @@ If you are unfamiliar with the {simulist} package or the `sim_linelist()` functi
 
 This vignette describes how to simulate a line list with either a uniform or non-uniform distribution of ages within the population. This population age structure may either describe the population of a region as a whole, or specifically which age groups are more likely to become infected than others, for instance because they have more social contacts.
 
-The {simulist} package uses a [branching process](https://epiverse-trace.github.io/bpmodels/reference/chain_sim.html) which is independent of population age structure to simulate the line list, and then {simulist} _paints_ the demographic information onto the infected individuals (and in the case of `sim_outbreak()` or `sim_contacts()` the contacts of infected individuals). In other words, once the cases in the line list have been simulated the ages are assigned to each individual post hoc, specified by the age range, and age structure, if supplied.
+The {simulist} package uses a branching process (using a random network model of contacts), which is independent of population age structure to simulate the line list, and then {simulist} _paints_ the demographic information onto the infected individuals (and in the case of `sim_outbreak()` or `sim_contacts()` the contacts of infected individuals). In other words, once the cases in the line list have been simulated the ages are assigned to each individual post hoc, specified by the age range, and age structure, if supplied.
 
 The age range and age structure for the simulation functions (`sim_*()`) in {simulist} is controlled by the `population_age` argument. The default age structure in {simulist} is a uniform structure between a lower and upper age range. The `sim_linelist()` function (and other `sim_*()` functions) can accept a `<data.frame>` instead of the `numeric` vector to specify the age structure for specified age groups. This feature can be especially useful when wanting to simulate an outbreak in a region with a heavily non-uniform age structure, [for example younger populations such as Nigeria, or older populations such as Japan](https://ourworldindata.org/age-structure). 
 
@@ -37,9 +37,9 @@ library(ggplot2)
 First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the serial interval is manually defined as it is not yet available from the {epiparameter} database.
 
 ```{r, read-delay-dists}
-serial_interval <- epidist(
+contact_interval <- epidist(
   disease = "COVID-19",
-  epi_dist = "serial interval",
+  epi_dist = "contact interval",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
@@ -69,15 +69,19 @@ set.seed(1)
 
 By default `sim_linelist()` simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the `population_age` argument. Here we simulated an outbreak in a population with a population ranging from 5 to 75 (inclusive, `[5,75]`).
 
-***Note***: all ages are assumed to be in the unit of years and need to be integers (or at least ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if stored as double)
+***Note***: all ages are assumed to be in the unit of years and need to be integers (or at least ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if stored as double).
+
+All simulations in this vignette condition the simulation to have a minimum outbreak size (`min_outbreak_size`) of 100 cases to clearly visualise the distribution of ages.
 
 ```{r sim-linelist-age-range}
 linelist <- sim_linelist(
-  R = 1.3,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  population_age = c(5, 75)
+  population_age = c(5, 75),
+  min_outbreak_size = 100
 )
 head(linelist)
 ```
@@ -116,11 +120,13 @@ age_struct
 
 ```{r, sim-age-struct-linelist}
 linelist <- sim_linelist(
-  R = 1.3,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  population_age = age_struct
+  population_age = age_struct,
+  min_outbreak_size = 100
 )
 
 head(linelist)
@@ -167,11 +173,13 @@ age_struct
 
 ```{r, sim-age-struct-linelist-young}
 linelist <- sim_linelist(
-  R = 1.3,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  population_age = age_struct
+  population_age = age_struct,
+  min_outbreak_size = 100
 )
 
 head(linelist)
