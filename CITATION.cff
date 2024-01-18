@@ -105,26 +105,6 @@ references:
     orcid: https://orcid.org/0000-0001-8814-9421
   year: '2024'
 - type: software
-  title: bpmodels
-  abstract: 'bpmodels: Simulating and Analysing Transmission Chain Statistics using
-    Branching Process Models'
-  notes: Imports
-  url: https://epiverse-trace.github.io/bpmodels/
-  authors:
-  - family-names: Azam
-    given-names: James M.
-    email: james.azam@lshtm.ac.uk
-    orcid: https://orcid.org/0000-0001-5782-7330
-  - family-names: Finger
-    given-names: Flavio
-    email: flavio.finger@epicentre.msf.org
-    orcid: https://orcid.org/0000-0002-8613-5170
-  - family-names: Funk
-    given-names: Sebastian
-    email: sebastian.funk@lshtm.ac.uk
-    orcid: https://orcid.org/0000-0002-2842-3406
-  year: '2024'
-- type: software
   title: randomNames
   abstract: 'randomNames: Generate Random Given and Surnames'
   notes: Imports
