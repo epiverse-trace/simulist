@@ -28,11 +28,11 @@ library(epicontacts)
 First we load the required delay distributions using the {epiparameter} package.
 
 ```{r, read-delay-dists}
-serial_interval <- epidist(
+contact_interval <- epidist(
   disease = "COVID-19",
-  epi_dist = "serial interval",
+  epi_dist = "contact interval",
   prob_distribution = "gamma",
-  prob_distribution_params = c(shape = 1, scale = 1)
+  prob_distribution_params = c(shape = 3, scale = 2)
 )
 
 # get onset to hospital admission from {epiparameter} database
@@ -53,17 +53,19 @@ onset_to_death <- epidist_db(
 Setting the seed ensures we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
 
 ```{r, set-seed}
-set.seed(1)
+set.seed(123)
 ```
 
 Using a simple line list simulation with the factory default settings:
 
 ```{r sim-linelist} 
 linelist <- sim_linelist(
-  R = 1.3,
-  serial_interval = serial_interval,
+  mean_contacts = 3,
+  contact_interval = contact_interval,
+  prob_infect = 0.33,
   onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death
+  onset_to_death = onset_to_death, 
+  min_outbreak_size = 500
 )
 ```
 
@@ -160,27 +162,16 @@ Additionally, {epicontacts} provides access to network plotting from JavaScript 
 
 :::
 
-The {epicontacts} function `make_epicontacts()` requires both the line list and contacts table, so we will run the `sim_outbreak()` function to produce both. We will use the same epidemiological delay distributions that we used to simulate a line list above. We need an extra distribution to simulate an outbreak, a contact distribution (see the documentation `?sim_outbreak` for more detail). We create this distribution using the {epiparameter} package.
-
-```{r, create-contact-dist}
-contact_distribution <- epiparameter::epidist(
-  disease = "COVID-19",
-  epi_dist = "contact_distribution",
-  prob_distribution = "pois",
-  prob_distribution_params = c(l = 5)
-)
-```
-
-Now we can simulate an outbreak:
+The {epicontacts} function `make_epicontacts()` requires both the line list and contacts table, so we will run the `sim_outbreak()` function to produce both. We will use the same epidemiological delay distributions that we used to simulate a line list above.
 
 ```{r, sim-outbreak}
 set.seed(1)
 outbreak <- sim_outbreak(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death,
-  contact_distribution = contact_distribution
+  onset_to_death = onset_to_death
 )
 head(outbreak$linelist)
 head(outbreak$contacts)

@@ -44,9 +44,9 @@ library(epiparameter)
 Here is an example that uses the default hospitalisation and death risks (inside and outside of hospital). First we load the requested delay distributions using the {epiparameter} package.
 
 ```{r, read-delay-dists}
-serial_interval <- epidist(
+contact_interval <- epidist(
   disease = "COVID-19",
-  epi_dist = "serial interval",
+  epi_dist = "contact interval",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
@@ -82,8 +82,9 @@ Simulate a line list with population-wide default risks:
 
 ```{r, sim-linelist}
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
@@ -96,8 +97,9 @@ We can run another simulation and change the hospitalisation and death risks, in
 
 ```{r, sim-linelist-diff-risks}
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = 0.4,
@@ -130,8 +132,9 @@ age_dep_hosp_risk
 
 ```{r, sim-age-strat-linelist}
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = age_dep_hosp_risk
@@ -158,8 +161,9 @@ age_dep_hosp_risk <- data.frame(
 age_dep_hosp_risk
 
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = age_dep_hosp_risk
@@ -175,8 +179,9 @@ age_dep_hosp_risk <- data.frame(
 )
 
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = age_dep_hosp_risk,
@@ -198,8 +203,9 @@ age_dep_hosp_death_risk <- data.frame(
 age_dep_hosp_death_risk
 
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_death_risk = age_dep_hosp_death_risk
@@ -214,8 +220,9 @@ age_dep_non_hosp_death_risk <- data.frame(
 age_dep_non_hosp_death_risk
 
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   non_hosp_death_risk = age_dep_non_hosp_death_risk
@@ -239,8 +246,9 @@ age_dep_non_hosp_death_risk <- data.frame(
 )
 
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = age_dep_hosp_risk,
