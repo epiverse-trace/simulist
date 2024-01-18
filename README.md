@@ -50,18 +50,18 @@ library(simulist)
 library(epiparameter)
 ```
 
-The line list simulation requires that we define a serial interval,
+The line list simulation requires that we define a contact interval,
 onset-to-hospitalisation delay, and onset-to-death delay. We can load
 these from the library of epidemiological parameters in the
 `{epiparameter}` R package if available, or if these are not in the
-database yet (such as the serial interval for COVID-19) we can define
+database yet (such as the contact interval for COVID-19) we can define
 them ourselves.
 
 ``` r
-# create COVID-19 serial interval
-serial_interval <- epiparameter::epidist(
+# create COVID-19 contact interval
+contact_interval <- epiparameter::epidist(
   disease = "COVID-19",
-  epi_dist = "serial interval",
+  epi_dist = "contact interval",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
@@ -96,35 +96,40 @@ onset_to_death <- epiparameter::epidist_db(
 #> To retrieve the short citation use the 'get_citation' function
 ```
 
-To simulate a line list for COVID-19 with an assumed reproduction number
-(`R`) of 1.1 we use the `sim_linelist()` function. Using a reproduction
-number greater than one means we will likely get a reasonably sized
-outbreak (10 - 1000 cases, varying due to the stochastic simulation).
-*Do not set the reproduction number too high (e.g. \>5) as the outbreak
-can become extremely large*.
+To simulate a line list for COVID-19 with an assumed average number of
+contacts of 2 and a probability of infection per contact of 0.5, we use
+the `sim_linelist()` function. The mean number of contacts and
+probability of infection determine the outbreak reproduction number, if
+the resulting reproduction number is around one it means we will likely
+get a reasonably sized outbreak (10 - 1000 cases, varying due to the
+stochastic simulation). *Take care when setting the mean number of
+contacts and the probability of infection, as this can lead to the
+outbreak becoming extremely large*.
 
 ``` r
+set.seed(1)
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id          case_name case_type gender age date_onset date_admission
-#> 1  1      Paul Reynolds confirmed      m   5 2023-01-01           <NA>
-#> 2  2       Kayla Martin suspected      f   6 2023-01-01           <NA>
-#> 3  3   Christian Oberai confirmed      m  59 2023-01-02           <NA>
-#> 4  4 Alexander Anderson confirmed      m  90 2023-01-01           <NA>
-#> 5  5     Matthew Bodine  probable      m  38 2023-01-02           <NA>
-#> 6  6    Randa al-Mansur  probable      f   5 2023-01-02     2023-01-11
+#>   id         case_name case_type gender age date_onset date_admission
+#> 1  1 Sabeeha el-Hannan  probable      f  28 2023-01-01           <NA>
+#> 2  2    Jaedyn Robbins confirmed      f  62 2023-01-02     2023-01-02
+#> 5  5          Young Vu confirmed      m  42 2023-01-01           <NA>
+#> 6  6      Alyssa Gloyd  probable      f  60 2023-01-01           <NA>
+#> 8  8   Sebastian Boden  probable      m  28 2023-01-02     2023-01-03
+#> 9  9  Sierra Hernandez suspected      f  78 2023-01-01           <NA>
 #>   date_death date_first_contact date_last_contact ct_value
-#> 1       <NA>               <NA>              <NA>     25.4
-#> 2       <NA>         2022-12-31        2023-01-02       NA
-#> 3       <NA>         2023-01-01        2023-01-03     25.4
-#> 4       <NA>         2022-12-29        2023-01-05     25.4
-#> 5       <NA>         2022-12-29        2023-01-04       NA
-#> 6       <NA>         2023-01-04        2023-01-06       NA
+#> 1       <NA>               <NA>              <NA>       NA
+#> 2       <NA>         2023-01-02        2023-01-05     25.1
+#> 5       <NA>         2023-01-03        2023-01-04     25.1
+#> 6       <NA>         2023-01-02        2023-01-04       NA
+#> 8       <NA>         2023-01-01        2023-01-03       NA
+#> 9       <NA>         2022-12-29        2023-01-04       NA
 ```
 
 In this example, the line list is simulated using the default values
@@ -135,65 +140,56 @@ modify either of these, we can specify them in the function.
 
 ``` r
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = 0.01,
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id       case_name case_type gender age date_onset date_admission date_death
-#> 1  1   Sabrina Jones confirmed      f  90 2019-12-01           <NA>       <NA>
-#> 2  2    Ariel Aragon  probable      f  81 2019-12-01           <NA>       <NA>
-#> 3  3 Shandon Roberts confirmed      m  44 2019-12-03           <NA>       <NA>
-#> 4  4 Nathan Martinez confirmed      m  43 2019-12-01           <NA>       <NA>
-#> 5  5     Maria Downs suspected      f  62 2019-12-03           <NA>       <NA>
-#> 6  6    Andre Turner suspected      m  49 2019-12-01           <NA>       <NA>
-#>   date_first_contact date_last_contact ct_value
-#> 1               <NA>              <NA>     24.5
-#> 2         2019-12-03        2019-12-06       NA
-#> 3         2019-12-02        2019-12-04     24.5
-#> 4         2019-12-01        2019-12-04     24.5
-#> 5         2019-12-06        2019-12-08       NA
-#> 6         2019-12-02        2019-12-05       NA
+#>   id              case_name case_type gender age date_onset date_admission
+#> 1  1 Aaren-Matthew Deguzman  probable      m  65 2019-12-01           <NA>
+#> 2  2      Thaamira el-Yusuf confirmed      f  61 2019-12-01           <NA>
+#> 3  3         Hector Hickman suspected      m  56 2019-12-01           <NA>
+#> 4  4     Zuhriyaa al-Saleem  probable      f  36 2019-12-01           <NA>
+#> 5  5            Chisa Xiong confirmed      f  20 2019-12-01           <NA>
+#> 6  6     Tre-Shawn Williams confirmed      m  85 2019-12-02     2019-12-06
+#>   date_death date_first_contact date_last_contact ct_value
+#> 1       <NA>               <NA>              <NA>       NA
+#> 2       <NA>         2019-11-26        2019-12-06     25.3
+#> 3       <NA>         2019-11-28        2019-12-03       NA
+#> 4       <NA>         2019-11-28        2019-12-02       NA
+#> 5       <NA>         2019-11-28        2019-12-02     25.3
+#> 6       <NA>         2019-12-01        2019-12-04     25.3
 ```
 
 To simulate a table of contacts of cases (i.e. to reflect a contact
-tracing dataset) we can use the same serial interval defined for the
-example above. We additionally need a contact distribution, which
-represents the probability that each person that infected an individual,
-also had a given number of contacts that did not become infected.
+tracing dataset) we can use the same parameters defined for the example
+above.
 
 ``` r
-contact_distribution <- epiparameter::epidist(
-  disease = "COVID-19",
-  epi_dist = "contact_distribution",
-  prob_distribution = "pois",
-  prob_distribution_params = c(l = 5)
-)
-#> Citation cannot be created as author, year, journal or title is missing
-
 contacts <- sim_contacts(
-  R = 1.1,
-  serial_interval = serial_interval,
-  contact_distribution = contact_distribution
+  mean_contacts = 2, 
+  contact_interval = contact_interval, 
+  prob_infect = 0.5
 )
 head(contacts)
-#>              from               to cnt_age cnt_gender date_first_contact
-#> 1 Waseema el-Huda     Haasini Dinh      62          f         2022-12-30
-#> 2 Waseema el-Huda Jahlisha Eckhart       6          f         2023-01-02
-#> 3 Waseema el-Huda    Sofya Brabson       1          f         2022-12-27
-#> 4 Waseema el-Huda      Eoin Acosta      67          m         2022-12-30
-#> 5 Waseema el-Huda      Mandeep Cha      37          m         2023-01-03
-#> 6 Waseema el-Huda     Brianna Dock      21          f         2023-01-03
+#>             from               to age gender date_first_contact
+#> 2  James Padilla   Miranda Blanco  69      f         2022-12-31
+#> 3  James Padilla      Allan Bunge  83      m         2023-01-05
+#> 4    Allan Bunge   Nicholas Rabia  18      m         2023-01-02
+#> 5    Allan Bunge Unais al-Shabazz  85      m         2023-01-04
+#> 6 Nicholas Rabia    Apiluck Chong  84      m         2022-12-30
+#> 7 Nicholas Rabia     Rachel Tyler  90      f         2023-01-02
 #>   date_last_contact was_case         status
-#> 1        2023-01-04        Y           case
-#> 2        2023-01-04        Y           case
-#> 3        2023-01-01        N under_followup
-#> 4        2023-01-03        N under_followup
-#> 5        2023-01-08        N under_followup
-#> 6        2023-01-05        N        unknown
+#> 2        2023-01-03        N        unknown
+#> 3        2023-01-05        Y           case
+#> 4        2023-01-05        Y           case
+#> 5        2023-01-06        Y           case
+#> 6        2023-01-02        N under_followup
+#> 7        2023-01-04        Y           case
 ```
 
 If both the line list and contacts table are required, they can be
@@ -204,42 +200,42 @@ the same default settings as the other functions).
 
 ``` r
 outbreak <- sim_outbreak(
-  R = 1.1,
-  serial_interval = serial_interval,
+  mean_contacts = 2,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death,
-  contact_distribution = contact_distribution
+  onset_to_death = onset_to_death
 )
 head(outbreak$linelist)
-#>   id          case_name case_type gender age date_onset date_admission
-#> 1  1   Uqbah al-Sultana confirmed      m  41 2023-01-01           <NA>
-#> 2  2  Ulises Mora-Rojas  probable      m  41 2023-01-01           <NA>
-#> 3  3 Katherine Galambos  probable      f  41 2023-01-02     2023-01-03
-#> 4  4         Annie Doak  probable      f  63 2023-01-01           <NA>
-#> 5  5          Erika Yin confirmed      f  89 2023-01-02     2023-01-02
-#> 6  6  Casey Borcherding confirmed      f  47 2023-01-01           <NA>
-#>   date_death date_first_contact date_last_contact ct_value
-#> 1       <NA>               <NA>              <NA>       26
-#> 2       <NA>         2022-12-31        2023-01-04       NA
-#> 3       <NA>         2023-01-01        2023-01-02       NA
-#> 4       <NA>         2022-12-27        2023-01-02       NA
-#> 5       <NA>         2022-12-31        2023-01-05       26
-#> 6       <NA>         2023-01-04        2023-01-05       26
+#>    id           case_name case_type gender age date_onset date_admission
+#> 1   1   Katherin Trancoso confirmed      f   2 2023-01-01           <NA>
+#> 4   4        E-Shaw Allen confirmed      f  47 2023-01-01           <NA>
+#> 5   5     Madison Moltrer suspected      f   8 2023-01-01           <NA>
+#> 8   8 Christopher Richter confirmed      m  18 2023-01-02     2023-01-08
+#> 11 11      Elias Mckenzie confirmed      m   4 2023-01-01           <NA>
+#> 12 12       Elaine Nguyen confirmed      f  60 2023-01-02           <NA>
+#>    date_death date_first_contact date_last_contact ct_value
+#> 1        <NA>               <NA>              <NA>     24.5
+#> 4        <NA>         2023-01-02        2023-01-06     24.5
+#> 5        <NA>         2022-12-31        2023-01-03       NA
+#> 8        <NA>         2023-01-02        2023-01-03     24.5
+#> 11       <NA>         2023-01-04        2023-01-06     24.5
+#> 12       <NA>         2023-01-07        2023-01-09     24.5
 head(outbreak$contacts)
-#>               from                 to cnt_age cnt_gender date_first_contact
-#> 1 Uqbah al-Sultana  Ulises Mora-Rojas      41          m         2022-12-31
-#> 2 Uqbah al-Sultana Katherine Galambos      41          f         2023-01-01
-#> 3 Uqbah al-Sultana   Alexander Foster       2          m         2023-01-06
-#> 4 Uqbah al-Sultana Daniel Ordaz-Lopez       2          m         2023-01-03
-#> 5 Uqbah al-Sultana   Intisaar al-Saah      74          f         2023-01-02
-#> 6 Uqbah al-Sultana     Alondra Juarez      23          f         2022-12-31
-#>   date_last_contact was_case         status
-#> 1        2023-01-04        Y           case
-#> 2        2023-01-02        Y           case
-#> 3        2023-01-08        N under_followup
-#> 4        2023-01-03        N under_followup
-#> 5        2023-01-04        N under_followup
-#> 6        2023-01-07        N under_followup
+#>                from                to age gender date_first_contact
+#> 2 Katherin Trancoso      David Mcafee  46      m         2023-01-02
+#> 3 Katherin Trancoso Firdaus al-Hamidi  68      f         2022-12-30
+#> 4 Katherin Trancoso      E-Shaw Allen  47      f         2023-01-02
+#> 5 Katherin Trancoso   Madison Moltrer   8      f         2022-12-31
+#> 6      E-Shaw Allen       Tyko Pahang  24      m         2023-01-05
+#> 7   Madison Moltrer   Bryan Rodriguez  67      m         2022-12-31
+#>   date_last_contact was_case           status
+#> 2        2023-01-02        N lost_to_followup
+#> 3        2023-01-02        N   under_followup
+#> 4        2023-01-06        Y             case
+#> 5        2023-01-03        Y             case
+#> 6        2023-01-05        N lost_to_followup
+#> 7        2023-01-02        N   under_followup
 ```
 
 ## Help
