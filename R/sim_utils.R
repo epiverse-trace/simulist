@@ -20,6 +20,7 @@ NULL
                              outbreak_start_date,
                              min_outbreak_size,
                              population_age,
+                             add_names,
                              config) {
   outbreak_size <- 0
   max_iter <- 0L
@@ -28,7 +29,8 @@ NULL
     chain <- .sim_network_bp(
       mean_contacts = mean_contacts,
       contact_interval = contact_interval,
-      prob_infect = prob_infect
+      prob_infect = prob_infect,
+      add_names = add_names
     )
     outbreak_size <- sum(chain$infected == "infected")
     max_iter <- max_iter + 1L

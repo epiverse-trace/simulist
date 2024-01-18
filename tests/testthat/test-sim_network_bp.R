@@ -14,7 +14,8 @@ test_that(".sim_network_bp works as expected", {
   res <- .sim_network_bp(
     mean_contacts = 2,
     contact_interval = contact_interval,
-    prob_infect = 0.5
+    prob_infect = 0.5,
+    add_names = TRUE
   )
   expect_s3_class(res, class = "data.frame")
   expect_identical(dim(res), c(10L, 5L))
@@ -29,7 +30,8 @@ test_that(".sim_network_bp works as expected with no contacts", {
   res <- .sim_network_bp(
     mean_contacts = 1,
     contact_interval = contact_interval,
-    prob_infect = 0.5
+    prob_infect = 0.5,
+    add_names = TRUE
   )
   expect_s3_class(res, class = "data.frame")
   expect_identical(dim(res), c(1L, 5L))
