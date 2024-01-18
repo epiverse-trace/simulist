@@ -27,7 +27,6 @@ Imports:
     stats,
     checkmate,
     epiparameter,
-    bpmodels,
     randomNames,
     rlang
 Suggests: 
@@ -40,8 +39,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0)
 Remotes:
-    epiverse-trace/epiparameter,
-    epiverse-trace/bpmodels
+    epiverse-trace/epiparameter
 Config/testthat/edition: 3
 Config/Needs/website:
     epiverse-trace/epiversetheme
