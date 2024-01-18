@@ -21,7 +21,10 @@
 #'
 #' @return A `<data.frame>` with the contact and transmission chain data.
 #' @keywords internal
-.sim_network_bp <- function(mean_contacts, contact_interval, prob_infect) {
+.sim_network_bp <- function(mean_contacts,
+                            contact_interval,
+                            prob_infect,
+                            add_names) {
 
   # initialise data object
   ancestor <- vector(mode = "integer", 1e5)
@@ -47,7 +50,7 @@
   # run loop until no more individuals are sampled
   while (next_gen_size > 0) {
     # sample contact distribution
-    q <- dpois(0:100 + 1, lambda = mean_contacts) * (0:100 + 1)
+    q <- stats::dpois(0:100 + 1, lambda = mean_contacts) * (0:100 + 1)
     q <- q / sum(q)
     contacts <- sample(0:100, size = next_gen_size, replace = TRUE, prob = q)
 
@@ -56,6 +59,16 @@
       chain_size <- chain_size + sum(contacts)
       chain_length <- chain_length + any(contacts >= 1L)
       chain_generation <- chain_generation + 1L
+
+      if (add_names && chain_size > 5180) {
+        warning(
+          "Returning early as total number of contacts exceeds number of names ",
+          "available from {randomNames}. \n If you want to simulate a larger ",
+          "line lists set add_names = FALSE",
+          call. = FALSE
+        )
+        break
+      }
 
       for (i in seq_along(contacts)) {
 
@@ -77,7 +90,7 @@
           ancestor[vec_idx] <- ancestor_idx[i]
 
           # sample infected contacts
-          infect <- rbinom(n = contacts[i], size = 1, prob = prob_infect)
+          infect <- stats::rbinom(n = contacts[i], size = 1, prob = prob_infect)
           infected[vec_idx] <- as.numeric(infect)
 
           # add delay time, removing first element of ancestor time as it is NA

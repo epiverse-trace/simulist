@@ -62,6 +62,7 @@ sim_contacts <- function(mean_contacts,
     outbreak_start_date = outbreak_start_date,
     min_outbreak_size = min_outbreak_size,
     population_age = population_age,
+    add_names = TRUE,
     config = config
   )
 

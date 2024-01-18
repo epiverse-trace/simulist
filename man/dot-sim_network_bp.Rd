@@ -5,7 +5,7 @@
 \title{Simulate a random network branching process model with a probability of
 infection for each contact}
 \usage{
-.sim_network_bp(mean_contacts, contact_interval, prob_infect)
+.sim_network_bp(mean_contacts, contact_interval, prob_infect, add_names)
 }
 \arguments{
 \item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
@@ -19,6 +19,9 @@ zero) and having contact with another susceptible individual.}
 
 \item{prob_infect}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
+
+\item{add_names}{A \code{logical} boolean for whether to add names to each row
+of the line list. Default is \code{TRUE}.}
 }
 \value{
 A \verb{<data.frame>} with the contact and transmission chain data.
