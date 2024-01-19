@@ -13,6 +13,13 @@
 #'
 #' @examples
 #' # load data required to simulate contacts
+#' contact_distribution <- epiparameter::epidist(
+#'   disease = "COVID-19",
+#'   epi_dist = "contact distribution",
+#'   prob_distribution = "pois",
+#'   prob_distribution_params = c(mean = 2)
+#' )
+#'
 #' contact_interval <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "contact interval",
@@ -21,11 +28,11 @@
 #' )
 #'
 #' contacts <- sim_contacts(
-#'   mean_contacts = 2,
+#'   contact_distribution = contact_distribution,
 #'   contact_interval = contact_interval,
 #'   prob_infect = 0.5
 #' )
-sim_contacts <- function(mean_contacts,
+sim_contacts <- function(contact_distribution,
                          contact_interval,
                          prob_infect,
                          outbreak_start_date = as.Date("2023-01-01"),
@@ -42,11 +49,12 @@ sim_contacts <- function(mean_contacts,
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(contact_interval, c("function", "epidist"))
   )
+  contact_distribution <- as.function(contact_distribution, func_type = "density")
   contact_interval <- as.function(contact_interval, func_type = "generate")
 
   .check_sim_input(
     sim_type = "contacts",
-    mean_contacts = mean_contacts,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
@@ -56,7 +64,7 @@ sim_contacts <- function(mean_contacts,
   )
 
   chain <- .sim_bp_linelist(
-    mean_contacts = mean_contacts,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,

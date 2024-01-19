@@ -5,11 +5,13 @@
 \title{Simulate a random network branching process model with a probability of
 infection for each contact}
 \usage{
-.sim_network_bp(mean_contacts, contact_interval, prob_infect, add_names)
+.sim_network_bp(contact_distribution, contact_interval, prob_infect, add_names)
 }
 \arguments{
-\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
-infection.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is any discrete density function that
+produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
+number of contacts per infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation

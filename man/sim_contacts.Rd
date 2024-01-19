@@ -5,7 +5,7 @@
 \title{Simulate contacts for an infectious disease outbreak}
 \usage{
 sim_contacts(
-  mean_contacts,
+  contact_distribution,
   contact_interval,
   prob_infect,
   outbreak_start_date = as.Date("2023-01-01"),
@@ -17,8 +17,10 @@ sim_contacts(
 )
 }
 \arguments{
-\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
-infection.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is any discrete density function that
+produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
+number of contacts per infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation
@@ -59,6 +61,13 @@ Simulate contacts for an infectious disease outbreak
 }
 \examples{
 # load data required to simulate contacts
+contact_distribution <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 2)
+)
+
 contact_interval <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "contact interval",
@@ -67,7 +76,7 @@ contact_interval <- epiparameter::epidist(
 )
 
 contacts <- sim_contacts(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.5
 )

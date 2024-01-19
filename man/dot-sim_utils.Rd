@@ -8,7 +8,7 @@
 within \pkg{simulist}}
 \usage{
 .sim_bp_linelist(
-  mean_contacts,
+  contact_distribution,
   contact_interval,
   prob_infect,
   outbreak_start_date,
@@ -33,8 +33,10 @@ within \pkg{simulist}}
 )
 }
 \arguments{
-\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
-infection.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is any discrete density function that
+produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
+number of contacts per infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation

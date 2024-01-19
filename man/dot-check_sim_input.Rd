@@ -6,7 +6,7 @@
 \usage{
 .check_sim_input(
   sim_type = c("linelist", "contacts", "outbreak"),
-  mean_contacts,
+  contact_distribution,
   contact_interval,
   prob_infect,
   outbreak_start_date,
@@ -27,8 +27,10 @@
 \item{sim_type}{A \code{character} string specifying which simulation function
 this function is being called within.}
 
-\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
-infection.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is any discrete density function that
+produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
+number of contacts per infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation

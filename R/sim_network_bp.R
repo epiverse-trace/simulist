@@ -21,7 +21,7 @@
 #'
 #' @return A `<data.frame>` with the contact and transmission chain data.
 #' @keywords internal
-.sim_network_bp <- function(mean_contacts,
+.sim_network_bp <- function(contact_distribution,
                             contact_interval,
                             prob_infect,
                             add_names) {
@@ -49,8 +49,8 @@
 
   # run loop until no more individuals are sampled
   while (next_gen_size > 0) {
-    # sample contact distribution
-    q <- stats::dpois(0:100 + 1, lambda = mean_contacts) * (0:100 + 1)
+    # sample contact distribution (excess degree distribution)
+    q <- contact_distribution(0:100 + 1) * (0:100 + 1)
     q <- q / sum(q)
     contacts <- sample(0:100, size = next_gen_size, replace = TRUE, prob = q)
 

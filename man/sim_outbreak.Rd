@@ -5,7 +5,7 @@
 \title{Simulate a line list and a contacts table}
 \usage{
 sim_outbreak(
-  mean_contacts,
+  contact_distribution,
   contact_interval,
   prob_infect,
   onset_to_hosp,
@@ -25,8 +25,10 @@ sim_outbreak(
 )
 }
 \arguments{
-\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
-infection.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is any discrete density function that
+produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
+number of contacts per infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation
@@ -128,6 +130,13 @@ that age group. Proportions must sum to one.
 }
 \examples{
 # load data required to simulate outbreak data
+contact_distribution <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 2)
+)
+
 contact_interval <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "serial interval",
@@ -150,7 +159,7 @@ onset_to_death <- epiparameter::epidist_db(
 )
 
 outbreak <- sim_outbreak(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,

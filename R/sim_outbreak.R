@@ -18,6 +18,13 @@
 #'
 #' @examples
 #' # load data required to simulate outbreak data
+#' contact_distribution <- epiparameter::epidist(
+#'   disease = "COVID-19",
+#'   epi_dist = "contact distribution",
+#'   prob_distribution = "pois",
+#'   prob_distribution_params = c(mean = 2)
+#' )
+#'
 #' contact_interval <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "serial interval",
@@ -40,13 +47,13 @@
 #' )
 #'
 #' outbreak <- sim_outbreak(
-#'   mean_contacts = 2,
+#'   contact_distribution = contact_distribution,
 #'   contact_interval = contact_interval,
 #'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death
 #' )
-sim_outbreak <- function(mean_contacts,
+sim_outbreak <- function(contact_distribution,
                          contact_interval,
                          prob_infect,
                          onset_to_hosp,
@@ -73,17 +80,19 @@ sim_outbreak <- function(mean_contacts,
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
+      inherits(contact_distribution, c("function", "epidist")) &&
       inherits(contact_interval, c("function", "epidist")) &&
       inherits(onset_to_hosp, c("function", "epidist")) &&
       inherits(onset_to_death, c("function", "epidist"))
   )
+  contact_distribution <- as.function(contact_distribution, func_type = "density")
   contact_interval <- as.function(contact_interval, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")
 
   .check_sim_input(
     sim_type = "outbreak",
-    mean_contacts = mean_contacts,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
@@ -129,7 +138,7 @@ sim_outbreak <- function(mean_contacts,
   }
 
   chain <- .sim_bp_linelist(
-    mean_contacts = mean_contacts,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,

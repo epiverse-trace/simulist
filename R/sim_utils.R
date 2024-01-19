@@ -14,7 +14,7 @@
 NULL
 
 #' @name .sim_utils
-.sim_bp_linelist <- function(mean_contacts,
+.sim_bp_linelist <- function(contact_distribution,
                              contact_interval,
                              prob_infect,
                              outbreak_start_date,
@@ -27,7 +27,7 @@ NULL
   # condition on a minimum chain size
   while (outbreak_size < min_outbreak_size) {
     chain <- .sim_network_bp(
-      mean_contacts = mean_contacts,
+      contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = prob_infect,
       add_names = add_names

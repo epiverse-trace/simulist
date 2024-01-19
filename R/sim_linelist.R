@@ -20,8 +20,10 @@
 #' * `proportion`: a column with the proportion of the population that are in
 #' that age group. Proportions must sum to one.
 #'
-#' @param mean_contacts A single `numeric` for the mean number of contacts per
-#' infection.
+#' @param contact_distribution An `<epidist>` object or anonymous function for
+#' the contact distribution. This is any discrete density function that
+#' produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
+#' number of contacts per infection.
 #' @param contact_interval An `<epidist>` object or anonymous function for
 #' the contact interval. This is analogous to the serial interval or generation
 #' time, but defines the time interval between an individual being
@@ -75,6 +77,13 @@
 #'
 #' @examples
 #' # load data required to simulate line list
+#' contact_distribution <- epiparameter::epidist(
+#'   disease = "COVID-19",
+#'   epi_dist = "contact distribution",
+#'   prob_distribution = "pois",
+#'   prob_distribution_params = c(mean = 2)
+#' )
+#'
 #' contact_interval <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "contact interval",
@@ -97,7 +106,7 @@
 #' )
 #' # example with single hospitalisation risk for entire population
 #' linelist <- sim_linelist(
-#'   mean_contacts = 2,
+#'   contact_distribution = contact_distribution,
 #'   contact_interval = contact_interval,
 #'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
@@ -115,7 +124,7 @@
 #'   risk = c(0.1, 0.05, 0.2)
 #' )
 #' linelist <- sim_linelist(
-#'   mean_contacts = 2,
+#'   contact_distribution = contact_distribution,
 #'   contact_interval = contact_interval,
 #'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
@@ -123,7 +132,7 @@
 #'   hosp_risk = age_dep_hosp_risk
 #' )
 #' head(linelist)
-sim_linelist <- function(mean_contacts,
+sim_linelist <- function(contact_distribution,
                          contact_interval,
                          prob_infect,
                          onset_to_hosp,
@@ -145,17 +154,19 @@ sim_linelist <- function(mean_contacts,
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
+      inherits(contact_distribution, c("function", "epidist")) &&
       inherits(contact_interval, c("function", "epidist")) &&
       inherits(onset_to_hosp, c("function", "epidist")) &&
       inherits(onset_to_death, c("function", "epidist"))
   )
+  contact_distribution <- as.function(contact_distribution, func_type = "density")
   contact_interval <- as.function(contact_interval, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")
 
   .check_sim_input(
     sim_type = "linelist",
-    mean_contacts = mean_contacts,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
@@ -200,7 +211,7 @@ sim_linelist <- function(mean_contacts,
   }
 
   chain <- .sim_bp_linelist(
-    mean_contacts = mean_contacts,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
