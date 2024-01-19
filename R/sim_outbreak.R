@@ -85,7 +85,9 @@ sim_outbreak <- function(contact_distribution,
       inherits(onset_to_hosp, c("function", "epidist")) &&
       inherits(onset_to_death, c("function", "epidist"))
   )
-  contact_distribution <- as.function(contact_distribution, func_type = "density")
+  contact_distribution <- as.function(
+    contact_distribution, func_type = "density"
+  )
   contact_interval <- as.function(contact_interval, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")

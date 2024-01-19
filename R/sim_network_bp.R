@@ -10,12 +10,12 @@
 #'
 #' @details
 #' The contact distribution sampled takes the network effect
-#' \eqn{q(n) ~ (n + 1)p(n + 1)} where \eqn{p(n)} is the probability density function
-#' of a distribution, e.g., Poisson or Negative binomial. That is to say, the
-#' probability of having choosing a contact at random by following up a
-#' contact chooses individuals with a probability proportional to their number
-#' of contacts. The plus one is because one of the contacts was "used" to
-#' infect the person.
+#' \eqn{q(n) \sim (n + 1)p(n + 1)} where \eqn{p(n)} is the probability
+#' density function of a distribution, e.g., Poisson or Negative binomial.
+#' That is to say, the probability of having choosing a contact at random by
+#' following up a contact chooses individuals with a probability proportional
+#' to their number of contacts. The plus one is because one of the contacts
+#' was "used" to infect the person.
 #'
 #' @inheritParams sim_linelist
 #'
@@ -62,9 +62,9 @@
 
       if (add_names && chain_size > 5180) {
         warning(
-          "Returning early as total number of contacts exceeds number of names ",
-          "available from {randomNames}. \n If you want to simulate a larger ",
-          "line lists set add_names = FALSE",
+          "Returning early as total number of contacts exceeds number of ",
+          "names available from {randomNames}. \n If you want to simulate ",
+          "a larger line lists set add_names = FALSE",
           call. = FALSE
         )
         break
