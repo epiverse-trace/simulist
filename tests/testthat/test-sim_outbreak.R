@@ -1,4 +1,11 @@
 suppressMessages({
+  contact_distribution <- epiparameter::epidist(
+    disease = "COVID-19",
+    epi_dist = "contact distribution",
+    prob_distribution = "pois",
+    prob_distribution_params = c(mean = 2)
+  )
+
   contact_interval <- epiparameter::epidist(
     disease = "COVID-19",
     epi_dist = "contact interval",
@@ -24,7 +31,7 @@ suppressMessages({
 test_that("sim_outbreak works as expected", {
   set.seed(1)
   outbreak <- sim_outbreak(
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
@@ -56,7 +63,7 @@ test_that("sim_outbreak works as expected", {
 test_that("sim_outbreak works as expected with add_names = FALSE", {
   set.seed(1)
   outbreak <- sim_outbreak(
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
@@ -101,7 +108,7 @@ test_that("sim_outbreak works as expected with age-strat risks", {
   )
   set.seed(1)
   outbreak <- sim_outbreak(
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
@@ -141,7 +148,7 @@ test_that("sim_outbreak works as expected with age structure", {
   )
   set.seed(1)
   outbreak <- sim_outbreak(
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,

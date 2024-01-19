@@ -1,4 +1,11 @@
 suppressMessages({
+  contact_distribution <- epiparameter::epidist(
+    disease = "COVID-19",
+    epi_dist = "contact distribution",
+    prob_distribution = "pois",
+    prob_distribution_params = c(mean = 2)
+  )
+
   contact_interval <- epiparameter::epidist(
     disease = "COVID-19",
     epi_dist = "contact interval",
@@ -10,7 +17,7 @@ suppressMessages({
 test_that("sim_contacts works as expected", {
   set.seed(1)
   contacts <- sim_contacts(
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5
   )
@@ -29,7 +36,7 @@ test_that("sim_contacts works as expected", {
 test_that("sim_contacts works as expected with modified config", {
   set.seed(1)
   contacts <- sim_contacts(
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     config = create_config(
@@ -52,7 +59,7 @@ test_that("sim_contacts works as expected with modified config", {
 test_that("sim_contacts works as expected with modified config parameters", {
   set.seed(1)
   contacts <- sim_contacts(
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     config = create_config(
@@ -74,7 +81,7 @@ test_that("sim_contacts works as expected with modified config parameters", {
 test_that("sim_contacts fails as expected with modified config", {
   expect_error(
     sim_contacts(
-      mean_contacts = 2,
+      contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = 0.5,
       config = create_config(
@@ -88,7 +95,7 @@ test_that("sim_contacts fails as expected with modified config", {
 test_that("sim_contacts fails as expected with empty config", {
   expect_error(
     sim_contacts(
-      mean_contacts = 2,
+      contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = 0.5,
       config = list()
