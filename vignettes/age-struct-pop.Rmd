@@ -38,9 +38,9 @@ First we load the requested delay distributions using the {epiparameter} package
 
 ```{r, read-delay-dists}
 contact_distribution <- epidist(
-  disease = "COVID-19", 
-  epi_dist = "contact distribution", 
-  prob_distribution = "pois", 
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
   prob_distribution_params = c(mean = 2)
 )
 

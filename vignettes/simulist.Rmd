@@ -34,9 +34,9 @@ First we load in some data that is required for the line list simulation. Data o
 ```{r read-epidist}
 # create contact distribution (not available from {epiparameter} database)
 contact_distribution <- epidist(
-  disease = "COVID-19", 
-  epi_dist = "contact distribution", 
-  prob_distribution = "pois", 
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
   prob_distribution_params = c(mean = 2)
 )
 
@@ -174,7 +174,7 @@ To simulate a contacts table, the `sim_contacts()` function can be used. This re
 ```{r, sim-contacts}
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval, 
+  contact_interval = contact_interval,
   prob_infect = 0.5)
 head(contacts)
 ```
@@ -188,9 +188,9 @@ In order to simulate a line list and a contacts table of the same outbreak the `
 ```{r, sim-outbreak}
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval, 
-  prob_infect = 0.5, 
-  onset_to_hosp = onset_to_hosp, 
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
+  onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
 head(outbreak$linelist)

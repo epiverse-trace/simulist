@@ -29,9 +29,9 @@ First we load the required delay distributions using the {epiparameter} package.
 
 ```{r, read-delay-dists}
 contact_distribution <- epidist(
-  disease = "COVID-19", 
-  epi_dist = "contact distribution", 
-  prob_distribution = "pois", 
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
   prob_distribution_params = c(mean = 3)
 )
 
@@ -71,7 +71,7 @@ linelist <- sim_linelist(
   contact_interval = contact_interval,
   prob_infect = 0.33,
   onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death, 
+  onset_to_death = onset_to_death,
   min_outbreak_size = 500
 )
 ```
@@ -173,9 +173,9 @@ The {epicontacts} function `make_epicontacts()` requires both the line list and 
 
 ```{r, contact-distribution}
 contact_distribution <- epidist(
-  disease = "COVID-19", 
-  epi_dist = "contact distribution", 
-  prob_distribution = "pois", 
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
   prob_distribution_params = c(mean = 2)
 )
 ```
