@@ -5,7 +5,7 @@
 \title{Simulate a line list}
 \usage{
 sim_linelist(
-  mean_contacts,
+  contact_distribution,
   contact_interval,
   prob_infect,
   onset_to_hosp,
@@ -23,8 +23,10 @@ sim_linelist(
 )
 }
 \arguments{
-\item{mean_contacts}{A single \code{numeric} for the mean number of contacts per
-infection.}
+\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
+the contact distribution. This is any discrete density function that
+produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
+number of contacts per infection.}
 
 \item{contact_interval}{An \verb{<epidist>} object or anonymous function for
 the contact interval. This is analogous to the serial interval or generation
@@ -116,6 +118,13 @@ that age group. Proportions must sum to one.
 }
 \examples{
 # load data required to simulate line list
+contact_distribution <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 2)
+)
+
 contact_interval <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "contact interval",
@@ -138,7 +147,7 @@ onset_to_death <- epiparameter::epidist_db(
 )
 # example with single hospitalisation risk for entire population
 linelist <- sim_linelist(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
@@ -156,7 +165,7 @@ age_dep_hosp_risk <- data.frame(
   risk = c(0.1, 0.05, 0.2)
 )
 linelist <- sim_linelist(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,

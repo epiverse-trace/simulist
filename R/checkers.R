@@ -114,7 +114,7 @@
 #' called for its side-effects, which will error if the input is invalid.
 #' @keywords internal
 .check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"), # nolint cyclocomp_linter
-                             mean_contacts,
+                             contact_distribution,
                              contact_interval,
                              prob_infect,
                              outbreak_start_date,
@@ -132,7 +132,7 @@
   sim_type <- match.arg(sim_type)
 
   checkmate::assert_number(prob_infect, lower = 0, upper = 1)
-  checkmate::assert_number(mean_contacts, lower = 1)
+  .check_func_req_args(contact_distribution)
   .check_func_req_args(contact_interval)
   checkmate::assert_date(outbreak_start_date)
   checkmate::assert_integerish(min_outbreak_size, lower = 1)
