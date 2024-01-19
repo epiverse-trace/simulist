@@ -135,6 +135,13 @@ test_that(".check_age_df fails as expected", {
 })
 
 suppressMessages({
+  contact_distribution <- as.function(epiparameter::epidist(
+    disease = "COVID-19",
+    epi_dist = "contact distribution",
+    prob_distribution = "pois",
+    prob_distribution_params = c(mean = 2)
+  ))
+
   contact_interval <- as.function(epiparameter::epidist(
     disease = "COVID-19",
     epi_dist = "contact interval",
@@ -160,7 +167,7 @@ suppressMessages({
 test_that(".check_sim_input works as expected", {
   chk <- .check_sim_input(
     sim_type = "outbreak",
-    mean_contacts = 1,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     outbreak_start_date = as.Date("2023-01-01"),
@@ -189,7 +196,7 @@ test_that(".check_sim_input works as expected", {
 
   chk <- .check_sim_input(
     sim_type = "linelist",
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     outbreak_start_date = as.Date("2023-01-01"),
@@ -213,7 +220,7 @@ test_that(".check_sim_input works as expected", {
 
   chk <- .check_sim_input(
     sim_type = "contacts",
-    mean_contacts = 2,
+    contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = 0.5,
     outbreak_start_date = as.Date("2023-01-01"),
@@ -235,17 +242,17 @@ test_that(".check_sim_input fails as expected", {
     regexp = "(arg)*(should be one of)*(linelist)*(contacts)*(outbreak)"
   )
   expect_error(
-    .check_sim_input(sim_type = "outbreak", mean_contacts = 0, prob_infect = 0.5),
-    regexp = "(Assertion on)*(mean_contacts)*(failed)"
+    .check_sim_input(sim_type = "outbreak", contact_distribution = list(), prob_infect = 0.5),
+    regexp = "(Assertion on)*(contact_distribution)*(failed)"
   )
   expect_error(
-    .check_sim_input(sim_type = "outbreak", mean_contacts = 2, contact_interval = list(), prob_infect = 0.5),
+    .check_sim_input(sim_type = "outbreak", contact_distribution = contact_distribution, contact_interval = list(), prob_infect = 0.5),
     regexp = "(Assertion on)*(contact_interval)*(failed)"
   )
   expect_error(
     .check_sim_input(
       sim_type = "outbreak",
-      mean_contacts = 2,
+      contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = 0.5,
       outbreak_start_date = "01-01-2023"
@@ -255,7 +262,7 @@ test_that(".check_sim_input fails as expected", {
   expect_error(
     .check_sim_input(
       sim_type = "outbreak",
-      mean_contacts = 2,
+      contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = 0.5,
       outbreak_start_date = as.Date("2023-01-01"),
