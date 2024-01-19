@@ -28,6 +28,13 @@ library(epicontacts)
 First we load the required delay distributions using the {epiparameter} package.
 
 ```{r, read-delay-dists}
+contact_distribution <- epidist(
+  disease = "COVID-19", 
+  epi_dist = "contact distribution", 
+  prob_distribution = "pois", 
+  prob_distribution_params = c(mean = 3)
+)
+
 contact_interval <- epidist(
   disease = "COVID-19",
   epi_dist = "contact interval",
@@ -60,7 +67,7 @@ Using a simple line list simulation with the factory default settings:
 
 ```{r sim-linelist} 
 linelist <- sim_linelist(
-  mean_contacts = 3,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.33,
   onset_to_hosp = onset_to_hosp,
@@ -162,12 +169,21 @@ Additionally, {epicontacts} provides access to network plotting from JavaScript 
 
 :::
 
-The {epicontacts} function `make_epicontacts()` requires both the line list and contacts table, so we will run the `sim_outbreak()` function to produce both. We will use the same epidemiological delay distributions that we used to simulate a line list above.
+The {epicontacts} function `make_epicontacts()` requires both the line list and contacts table, so we will run the `sim_outbreak()` function to produce both. We will use the same epidemiological delay distributions that we used to simulate a line list above, but reduce the mean number of contacts in the contact distribution to 2.
+
+```{r, contact-distribution}
+contact_distribution <- epidist(
+  disease = "COVID-19", 
+  epi_dist = "contact distribution", 
+  prob_distribution = "pois", 
+  prob_distribution_params = c(mean = 2)
+)
+```
 
 ```{r, sim-outbreak}
 set.seed(1)
 outbreak <- sim_outbreak(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,

@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 If you are unfamiliar with the {simulist} package or the `sim_linelist()` function [Get Started vignette](simulist.html) is a great place to start.
 :::
 
-This vignette describes how to simulate a line list with either a uniform or non-uniform distribution of ages within the population. This population age structure may either describe the population of a region as a whole, or specifically which age groups are more likely to become infected than others, for instance because they have more social contacts.
+This vignette describes how to simulate a line list with either a uniform or non-uniform distribution of ages within the population. This population age structure may either describe the population of a region as a whole, or specifically which age groups are more likely to become infected than others.
 
 The {simulist} package uses a branching process (using a random network model of contacts), which is independent of population age structure to simulate the line list, and then {simulist} _paints_ the demographic information onto the infected individuals (and in the case of `sim_outbreak()` or `sim_contacts()` the contacts of infected individuals). In other words, once the cases in the line list have been simulated the ages are assigned to each individual post hoc, specified by the age range, and age structure, if supplied.
 
@@ -34,9 +34,16 @@ library(epiparameter)
 library(ggplot2)
 ```
 
-First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the serial interval is manually defined as it is not yet available from the {epiparameter} database.
+First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the contact distribution and the contact interval are manually defined as they are not yet available from the {epiparameter} database.
 
 ```{r, read-delay-dists}
+contact_distribution <- epidist(
+  disease = "COVID-19", 
+  epi_dist = "contact distribution", 
+  prob_distribution = "pois", 
+  prob_distribution_params = c(mean = 2)
+)
+
 contact_interval <- epidist(
   disease = "COVID-19",
   epi_dist = "contact interval",
@@ -67,7 +74,7 @@ set.seed(1)
 
 ## Uniform population age
 
-By default `sim_linelist()` simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the `population_age` argument. Here we simulated an outbreak in a population with a population ranging from 5 to 75 (inclusive, `[5,75]`).
+By default `sim_linelist()` simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the `population_age` argument. Here we simulate an outbreak in a population with a population ranging from 5 to 75 (inclusive, `[5,75]`).
 
 ***Note***: all ages are assumed to be in the unit of years and need to be integers (or at least ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if stored as double).
 
@@ -75,7 +82,7 @@ All simulations in this vignette condition the simulation to have a minimum outb
 
 ```{r sim-linelist-age-range}
 linelist <- sim_linelist(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
@@ -120,7 +127,7 @@ age_struct
 
 ```{r, sim-age-struct-linelist}
 linelist <- sim_linelist(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
@@ -173,7 +180,7 @@ age_struct
 
 ```{r, sim-age-struct-linelist-young}
 linelist <- sim_linelist(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
