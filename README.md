@@ -50,14 +50,23 @@ library(simulist)
 library(epiparameter)
 ```
 
-The line list simulation requires that we define a contact interval,
-onset-to-hospitalisation delay, and onset-to-death delay. We can load
-these from the library of epidemiological parameters in the
-`{epiparameter}` R package if available, or if these are not in the
-database yet (such as the contact interval for COVID-19) we can define
-them ourselves.
+The line list simulation requires that we define a contact distribution,
+contact interval, onset-to-hospitalisation delay, and onset-to-death
+delay. We can load these from the library of epidemiological parameters
+in the `{epiparameter}` R package if available, or if these are not in
+the database yet (such as the contact interval for COVID-19) we can
+define them ourselves.
 
 ``` r
+# create COVID-19 contact distribution
+contact_distribution <- epiparameter::epidist(
+  disease = "COVID-19", 
+  epi_dist = "contact distribution", 
+  prob_distribution = "pois", 
+  prob_distribution_params = c(mean = 2)
+)
+#> Citation cannot be created as author, year, journal or title is missing
+
 # create COVID-19 contact interval
 contact_interval <- epiparameter::epidist(
   disease = "COVID-19",
@@ -96,20 +105,20 @@ onset_to_death <- epiparameter::epidist_db(
 #> To retrieve the short citation use the 'get_citation' function
 ```
 
-To simulate a line list for COVID-19 with an assumed average number of
-contacts of 2 and a probability of infection per contact of 0.5, we use
-the `sim_linelist()` function. The mean number of contacts and
-probability of infection determine the outbreak reproduction number, if
-the resulting reproduction number is around one it means we will likely
-get a reasonably sized outbreak (10 - 1000 cases, varying due to the
-stochastic simulation). *Take care when setting the mean number of
-contacts and the probability of infection, as this can lead to the
-outbreak becoming extremely large*.
+To simulate a line list for COVID-19 with an Poisson contact
+distribution with a mean number of contacts of 2 and a probability of
+infection per contact of 0.5, we use the `sim_linelist()` function. The
+mean number of contacts and probability of infection determine the
+outbreak reproduction number, if the resulting reproduction number is
+around one it means we will likely get a reasonably sized outbreak (10 -
+1,000 cases, varying due to the stochastic simulation). *Take care when
+setting the mean number of contacts and the probability of infection, as
+this can lead to the outbreak becoming extremely large*.
 
 ``` r
 set.seed(1)
 linelist <- sim_linelist(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
@@ -140,7 +149,7 @@ modify either of these, we can specify them in the function.
 
 ``` r
 linelist <- sim_linelist(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
@@ -171,7 +180,7 @@ above.
 
 ``` r
 contacts <- sim_contacts(
-  mean_contacts = 2, 
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval, 
   prob_infect = 0.5
 )
@@ -200,7 +209,7 @@ the same default settings as the other functions).
 
 ``` r
 outbreak <- sim_outbreak(
-  mean_contacts = 2,
+  contact_distribution = contact_distribution,
   contact_interval = contact_interval,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
