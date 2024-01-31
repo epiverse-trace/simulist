@@ -45,7 +45,7 @@ test_that(".sim_network_bp works as expected with no contacts", {
       )
     )
   )
-  set.seed(4)
+  set.seed(1)
   res <- .sim_network_bp(
     contact_distribution = contact_distribution,
     contact_interval = contact_interval,
