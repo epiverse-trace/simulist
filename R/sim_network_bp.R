@@ -50,9 +50,9 @@
   # run loop until no more individuals are sampled
   while (next_gen_size > 0) {
     # sample contact distribution (excess degree distribution)
-    q <- contact_distribution(0:100 + 1) * (0:100 + 1)
+    q <- contact_distribution(0:1e4 + 1) * (0:1e4 + 1)
     q <- q / sum(q)
-    contacts <- sample(0:100, size = next_gen_size, replace = TRUE, prob = q)
+    contacts <- sample(0:1e4, size = next_gen_size, replace = TRUE, prob = q)
 
     # add contacts if sampled
     if (sum(contacts) > 0L) {
