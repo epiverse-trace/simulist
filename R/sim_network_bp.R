@@ -60,16 +60,6 @@
       chain_length <- chain_length + any(contacts >= 1L)
       chain_generation <- chain_generation + 1L
 
-      if (add_names && chain_size > 5180) {
-        warning(
-          "Returning early as total number of contacts exceeds number of ",
-          "names available from {randomNames}. \n If you want to simulate ",
-          "a larger line lists set add_names = FALSE",
-          call. = FALSE
-        )
-        break
-      }
-
       for (i in seq_along(contacts)) {
 
         if (contacts[i] > 0) {
