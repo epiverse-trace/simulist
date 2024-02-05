@@ -184,14 +184,7 @@ NULL
 
 #' @name .add_info
 .add_names <- function(.data) {
-  # create sample of names so there are no duplicates
-  .data$case_name <- randomNames::randomNames(
-    which.names = "both",
-    name.sep = " ",
-    name.order = "first.last",
-    gender = .data$gender,
-    sample.with.replacement = FALSE
-  )
+  .data$case_name <- .sample_names(.data = .data)
 
   # left join corresponding names to infectors preserving column and row order
   infector_names <- data.frame(id = .data$id, infector_name = .data$case_name)
