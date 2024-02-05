@@ -193,7 +193,7 @@ NULL
 
   # create sample of names so there are no duplicates
   names_m <- character(0)
-  while(length(names_m) < num_m) {
+  while (length(names_m) < num_m) {
     names_m <- unique(
       randomNames::randomNames(
         which.names = "both",
@@ -206,7 +206,7 @@ NULL
   }
 
   names_f <- character(0)
-  while(length(names_f) < num_f) {
+  while (length(names_f) < num_f) {
     names_f <- unique(
       randomNames::randomNames(
         which.names = "both",
