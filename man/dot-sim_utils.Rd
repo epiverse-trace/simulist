@@ -14,7 +14,6 @@ within \pkg{simulist}}
   outbreak_start_date,
   min_outbreak_size,
   population_age,
-  add_names,
   config
 )
 
@@ -61,9 +60,6 @@ range (both inclusive, i.e. [lower, upper]). The \verb{<data.frame>} with
 age groups and the proportion of the population in that group. See details
 and examples for more information.}
 
-\item{add_names}{A \code{logical} boolean for whether to add names to each row
-of the line list. Default is \code{TRUE}.}
-
 \item{config}{A list of settings to adjust the randomly sampled delays and
 Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
 
@@ -89,6 +85,9 @@ outside of hospitals across the population, or a \verb{<data.frame>} with age
 specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. See details and examples
 for more information.}
+
+\item{add_names}{A \code{logical} boolean for whether to add names to each row
+of the line list. Default is \code{TRUE}.}
 
 \item{add_ct}{A \code{logical} boolean for whether to add Ct values to each row
 of the line list. Default is \code{TRUE}.}
