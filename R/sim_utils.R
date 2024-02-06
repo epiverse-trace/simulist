@@ -20,7 +20,6 @@ NULL
                              outbreak_start_date,
                              min_outbreak_size,
                              population_age,
-                             add_names,
                              config) {
   outbreak_size <- 0
   max_iter <- 0L
@@ -30,7 +29,7 @@ NULL
       contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = prob_infect,
-      add_names = add_names
+      config = config
     )
     outbreak_size <- sum(chain$infected == "infected")
     max_iter <- max_iter + 1L
