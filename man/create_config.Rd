@@ -31,6 +31,7 @@ Accepted arguments and their defaults are:
 \item \code{first_contact_distribution_params = c(lambda = 3)}
 \item \code{ct_distribution = "norm"}
 \item \code{ct_distribution_params = c(mean = 25, sd = 2)}
+\item \code{network = "adjusted"}
 }
 
 These parameters do not warrant their own arguments in
@@ -38,6 +39,13 @@ These parameters do not warrant their own arguments in
 setting. Therefore it is not worth increasing the number of \code{\link[=sim_linelist]{sim_linelist()}}
 arguments to accommodate these and the \code{config} argument keeps the function
 signature simpler and more readable.
+
+The \code{network} option controls whether to sample contacts from a adjusted or
+unadjusted contact distribution. Adjusted (default) sampling uses
+\eqn{q(n) \sim (n + 1)p(n + 1)} where \eqn{p(n)} is the probability
+density function of a distribution, e.g., Poisson or Negative binomial.
+Unadjusted (\code{network = "unadjusted"}) instead samples contacts directly from
+a probability distribution \eqn{p(n)}.
 }
 \examples{
 # example with default configuration

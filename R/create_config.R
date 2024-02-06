@@ -12,12 +12,20 @@
 #' * `first_contact_distribution_params = c(lambda = 3)`
 #' * `ct_distribution = "norm"`
 #' * `ct_distribution_params = c(mean = 25, sd = 2)`
+#' * `network = "adjusted"`
 #'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
 #' setting. Therefore it is not worth increasing the number of [sim_linelist()]
 #' arguments to accommodate these and the `config` argument keeps the function
 #' signature simpler and more readable.
+#'
+#' The `network` option controls whether to sample contacts from a adjusted or
+#' unadjusted contact distribution. Adjusted (default) sampling uses
+#' \eqn{q(n) \sim (n + 1)p(n + 1)} where \eqn{p(n)} is the probability
+#' density function of a distribution, e.g., Poisson or Negative binomial.
+#' Unadjusted (`network = "unadjusted"`) instead samples contacts directly from
+#' a probability distribution \eqn{p(n)}.
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
 #' default settings. Only if names match exactly are elements replaced,
@@ -42,7 +50,8 @@ create_config <- function(...) {
     first_contact_distribution = "pois",
     first_contact_distribution_params = c(lambda = 3),
     ct_distribution = "norm",
-    ct_distribution_params = c(mean = 25, sd = 2)
+    ct_distribution_params = c(mean = 25, sd = 2),
+    network = "adjusted"
   )
 
   # capture dynamic dots
