@@ -199,6 +199,14 @@ head(outbreak$contacts)
 
 `sim_outbreak()` has the same features as `sim_linelist()` and `sim_contacts()`, this includes simulating with age-stratified risks of hospitalisation and death, the probability of case types or contact tracing status can be modified.
 
+::: {.alert .alert-info}
+
+_Advanced_
+
+The `sim_*()` functions, by default, use an excess degree distribution to account for a network effect when sampling the number of contacts in the simulation model ($q(n) \sim (n + 1)p(n + 1)$ where $p(n)$ is the probability density function of a distribution, e.g., Poisson or Negative binomial, within the `.sim_network_bp()` internal function). This network effect can be turned off by using the `config` argument in any `sim_*()` function and setting `network = "unadjusted"` (`create_config(network = "unadjusted")`) which will instead sample from a probability distribution $p(n)$.
+
+:::
+
 ## Using functions for distributions instead of `<epidist>`
 
 It is possible to use an [anonymous function](https://en.wikipedia.org/wiki/Anonymous_function) instead of an `<epidist>` object when specifying the parameters of the delay and contact distributions. We recommend using the `<epidist>` objects but here outline the alternative approach.
