@@ -24,7 +24,11 @@
 .sim_network_bp <- function(contact_distribution,
                             contact_interval,
                             prob_infect,
-                            add_names) {
+                            config) {
+  if (is.null(config$network) ||
+      !config$network %in% c("adjusted", "unadjusted")) {
+    stop("Network incorrectly specified, check config", call. = FALSE)
+  }
 
   # initialise data object
   ancestor <- vector(mode = "integer", 1e5)
@@ -49,9 +53,13 @@
 
   # run loop until no more individuals are sampled
   while (next_gen_size > 0) {
-    # sample contact distribution (excess degree distribution)
-    q <- contact_distribution(0:1e4 + 1) * (0:1e4 + 1)
-    q <- q / sum(q)
+    if (config$network == "adjusted") {
+      # sample contact distribution (excess degree distribution)
+      q <- contact_distribution(0:1e4 + 1) * (0:1e4 + 1)
+      q <- q / sum(q)
+    } else {
+      q <- contact_distribution(0:1e4)
+    }
     contacts <- sample(0:1e4, size = next_gen_size, replace = TRUE, prob = q)
 
     # add contacts if sampled
