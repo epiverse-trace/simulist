@@ -100,6 +100,6 @@ test_that("sim_contacts fails as expected with empty config", {
       prob_infect = 0.5,
       config = list()
     ),
-    regexp = "Distribution parameters are missing, check config"
+    regexp = "Network incorrectly specified, check config"
   )
 })

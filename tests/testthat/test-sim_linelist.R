@@ -321,7 +321,7 @@ test_that("sim_linelist fails as expected with empty config", {
       onset_to_death = onset_to_death,
       config = list()
     ),
-    regexp = "Distribution parameters are missing, check config"
+    regexp = "Network incorrectly specified, check config"
   )
 })
 
