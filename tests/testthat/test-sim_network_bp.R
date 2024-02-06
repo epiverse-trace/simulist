@@ -20,17 +20,13 @@ suppressMessages({
 
 test_that(".sim_network_bp works as expected", {
   set.seed(1)
-  res <- .sim_network_bp(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    config = create_config()
-  )
-  expect_s3_class(res, class = "data.frame")
-  expect_identical(dim(res), c(10L, 5L))
-  expect_identical(
-    colnames(res),
-    c("id", "ancestor", "generation", "infected", "time")
+  expect_snapshot(
+    .sim_network_bp(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      config = create_config()
+    )
   )
 })
 
@@ -46,32 +42,24 @@ test_that(".sim_network_bp works as expected with no contacts", {
     )
   )
   set.seed(1)
-  res <- .sim_network_bp(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    config = create_config()
-  )
-  expect_s3_class(res, class = "data.frame")
-  expect_identical(dim(res), c(1L, 5L))
-  expect_identical(
-    colnames(res),
-    c("id", "ancestor", "generation", "infected", "time")
+  expect_snapshot(
+    .sim_network_bp(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      config = create_config()
+    )
   )
 })
 
 test_that(".sim_network_bp works as expected with unadjusted network", {
   set.seed(1)
-  res <- .sim_network_bp(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    config = create_config(network = "unadjusted")
-  )
-  expect_s3_class(res, class = "data.frame")
-  expect_identical(dim(res), c(10L, 5L))
-  expect_identical(
-    colnames(res),
-    c("id", "ancestor", "generation", "infected", "time")
+  expect_snapshot(
+    .sim_network_bp(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      config = create_config(network = "unadjusted")
+    )
   )
 })
