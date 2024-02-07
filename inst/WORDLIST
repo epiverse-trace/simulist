@@ -34,6 +34,7 @@ olds
 ORCID
 packagename
 params
+parameterise
 parameterised
 pkgdown
 Poisson
@@ -42,6 +43,7 @@ prob
 qPCR
 randomNames
 RECON
+redocumented
 rmarkdown
 resimulate
 SARS
