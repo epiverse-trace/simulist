@@ -56,8 +56,10 @@ the onset to death delay distribution.}
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
 of the line list. Default is \code{TRUE}.}
 
-\item{add_ct}{A \code{logical} boolean for whether to add Ct values to each row
-of the line list. Default is \code{TRUE}.}
+\item{add_ct}{A \code{logical} boolean for whether to add Ct values to each
+confirmed case and \code{NA} otherwise for each case in the line list.
+Default is \code{TRUE}. Ct refers to the Cycle threshold from a Real-time
+PCR or quantitative PCR (qPCR).}
 
 \item{case_type_probs}{A named \code{numeric} vector with the probability of
 each case type. The names of the vector must be \code{"suspected"}, \code{"probable"},

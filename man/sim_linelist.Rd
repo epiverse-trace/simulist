@@ -65,8 +65,10 @@ for more information.}
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
 of the line list. Default is \code{TRUE}.}
 
-\item{add_ct}{A \code{logical} boolean for whether to add Ct values to each row
-of the line list. Default is \code{TRUE}.}
+\item{add_ct}{A \code{logical} boolean for whether to add Ct values to each
+confirmed case and \code{NA} otherwise for each case in the line list.
+Default is \code{TRUE}. Ct refers to the Cycle threshold from a Real-time
+PCR or quantitative PCR (qPCR).}
 
 \item{min_outbreak_size}{A single \code{numeric} defining the minimum chain size
 for the simulated outbreak. Default is \code{10}. This can be increased when the
