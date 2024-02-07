@@ -52,8 +52,10 @@
 #' @param outbreak_start_date A `date` for the start of the outbreak.
 #' @param add_names A `logical` boolean for whether to add names to each row
 #' of the line list. Default is `TRUE`.
-#' @param add_ct A `logical` boolean for whether to add Ct values to each row
-#' of the line list. Default is `TRUE`.
+#' @param add_ct A `logical` boolean for whether to add Ct values to each
+#' confirmed case and `NA` otherwise for each case in the line list.
+#' Default is `TRUE`. Ct refers to the Cycle threshold from a Real-time
+#' PCR or quantitative PCR (qPCR).
 #' @param min_outbreak_size A single `numeric` defining the minimum chain size
 #' for the simulated outbreak. Default is `10`. This can be increased when the
 #' function should simulate a larger outbreak.
