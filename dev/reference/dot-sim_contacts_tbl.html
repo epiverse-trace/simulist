@@ -73,14 +73,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.sim_contacts_tbl</span><span class="op">(</span></span>
-<span>  <span class="va">.data</span>,</span>
-<span>  <span class="va">outbreak_start_date</span>,</span>
-<span>  <span class="va">contact_distribution</span>,</span>
-<span>  <span class="va">population_age</span>,</span>
-<span>  <span class="va">contact_tracing_status_probs</span>,</span>
-<span>  <span class="va">config</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.sim_contacts_tbl</span><span class="op">(</span><span class="va">.data</span>, <span class="va">contact_tracing_status_probs</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -90,36 +83,11 @@
 branching process simulation.</p></dd>
 
 
-<dt>outbreak_start_date</dt>
-<dd><p>A <code>date</code> for the start of the outbreak.</p></dd>
-
-
-<dt>contact_distribution</dt>
-<dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
-the contact distribution. This is similar to the offspring distribution,
-but describes the heterogeneity of contacts that are not infected.</p></dd>
-
-
-<dt>population_age</dt>
-<dd><p>Either a <code>numeric</code> vector with two elements or a
-<code>&lt;data.frame&gt;</code> with age structure in the population. Use a <code>numeric</code> vector
-to specific the age range of the population, the first element is the lower
-bound for the age range, and and the second is the upper bound for the age
-range (both inclusive, i.e. [lower, upper]). The <code>&lt;data.frame&gt;</code> with
-age groups and the proportion of the population in that group. See details
-and examples for more information.</p></dd>
-
-
 <dt>contact_tracing_status_probs</dt>
 <dd><p>A named <code>numeric</code> vector with the
 probability of each contact tracing status. The names of the vector must
 be <code>"under_followup"</code>, <code>"lost_to_followup"</code>, <code>"unknown"</code>. Values of each
 contact tracing status must sum to one.</p></dd>
-
-
-<dt>config</dt>
-<dd><p>A list of settings to adjust the randomly sampled delays and
-Ct values (if <code>add_ct = TRUE</code>). See <code><a href="create_config.html">create_config()</a></code> for more information.</p></dd>
 
 </dl></div>
     <div class="section level2">

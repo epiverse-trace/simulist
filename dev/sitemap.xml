@@ -52,7 +52,13 @@
     <loc>/dev/reference/dot-check_sim_input.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/dot-sample_names.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/dot-sim_contacts_tbl.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/dot-sim_network_bp.html</loc>
   </url>
   <url>
     <loc>/dev/reference/dot-sim_utils.html</loc>

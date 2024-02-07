@@ -80,8 +80,9 @@ code being repeated across several simulation functions.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.sim_bp_linelist</span><span class="op">(</span></span>
-<span>  <span class="va">R</span>,</span>
-<span>  <span class="va">serial_interval</span>,</span>
+<span>  <span class="va">contact_distribution</span>,</span>
+<span>  <span class="va">contact_interval</span>,</span>
+<span>  <span class="va">prob_infect</span>,</span>
 <span>  <span class="va">outbreak_start_date</span>,</span>
 <span>  <span class="va">min_outbreak_size</span>,</span>
 <span>  <span class="va">population_age</span>,</span>
@@ -105,13 +106,24 @@ code being repeated across several simulation functions.</p>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>R</dt>
-<dd><p>A single <code>numeric</code> for the reproduction number.</p></dd>
-
-
-<dt>serial_interval</dt>
+    <dl><dt>contact_distribution</dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
-the serial interval.</p></dd>
+the contact distribution. This is any discrete density function that
+produces non-negative integers (including zero, \(\mathbb{N}_0\)) for the
+number of contacts per infection.</p></dd>
+
+
+<dt>contact_interval</dt>
+<dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
+the contact interval. This is analogous to the serial interval or generation
+time, but defines the time interval between an individual being
+infected/infectious (in the simulation the latency period is assumed to be
+zero) and having contact with another susceptible individual.</p></dd>
+
+
+<dt>prob_infect</dt>
+<dd><p>A single <code>numeric</code> for the probability of a secondary
+contact being infected by an infected primary contact.</p></dd>
 
 
 <dt>outbreak_start_date</dt>

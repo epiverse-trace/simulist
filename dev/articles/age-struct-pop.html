@@ -105,18 +105,26 @@
 <div class="alert alert-info">
 <p>If you are unfamiliar with the {simulist} package or the <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function <a href="simulist.html">Get Started vignette</a> is a great place to start.</p>
 </div>
-<p>This vignette describes how to simulate a line list with either a uniform or non-uniform distribution of ages within the population. This population age structure may either describe the population of a region as a whole, or specifically which age groups are more likely to become infected than others, for instance because they have more social contacts.</p>
-<p>The {simulist} package uses a <a href="https://epiverse-trace.github.io/bpmodels/reference/chain_sim.html" class="external-link">branching process</a> which is independent of population age structure to simulate the line list, and then {simulist} <em>paints</em> the demographic information onto the infected individuals (and in the case of <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> or <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> the contacts of infected individuals). In other words, once the cases in the line list have been simulated the ages are assigned to each individual post hoc, specified by the age range, and age structure, if supplied.</p>
+<p>This vignette describes how to simulate a line list with either a uniform or non-uniform distribution of ages within the population. This population age structure may either describe the population of a region as a whole, or specifically which age groups are more likely to become infected than others.</p>
+<p>The {simulist} package uses a branching process (using a random network model of contacts), which is independent of population age structure to simulate the line list, and then {simulist} <em>paints</em> the demographic information onto the infected individuals (and in the case of <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> or <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> the contacts of infected individuals). In other words, once the cases in the line list have been simulated the ages are assigned to each individual post hoc, specified by the age range, and age structure, if supplied.</p>
 <p>The age range and age structure for the simulation functions (<code>sim_*()</code>) in {simulist} is controlled by the <code>population_age</code> argument. The default age structure in {simulist} is a uniform structure between a lower and upper age range. The <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> function (and other <code>sim_*()</code> functions) can accept a <code>&lt;data.frame&gt;</code> instead of the <code>numeric</code> vector to specify the age structure for specified age groups. This feature can be especially useful when wanting to simulate an outbreak in a region with a heavily non-uniform age structure, <a href="https://ourworldindata.org/age-structure" class="external-link">for example younger populations such as Nigeria, or older populations such as Japan</a>.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">epiparameter</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
-</details><p>First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the serial interval is manually defined as it is not yet available from the {epiparameter} database.</p>
+</details><p>First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the contact distribution and the contact interval are manually defined as they are not yet available from the {epiparameter} database.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">serial_interval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
-<span>  epi_dist <span class="op">=</span> <span class="st">"serial interval"</span>,</span>
+<span>  epi_dist <span class="op">=</span> <span class="st">"contact distribution"</span>,</span>
+<span>  prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span>
+<span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
+<span></span>
+<span><span class="va">contact_interval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
+<span>  epi_dist <span class="op">=</span> <span class="st">"contact interval"</span>,</span>
 <span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span>
 <span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -155,31 +163,34 @@
 </details><div class="section level2">
 <h2 id="uniform-population-age">Uniform population age<a class="anchor" aria-label="anchor" href="#uniform-population-age"></a>
 </h2>
-<p>By default <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the <code>population_age</code> argument. Here we simulated an outbreak in a population with a population ranging from 5 to 75 (inclusive, <code>[5,75]</code>).</p>
-<p><strong><em>Note</em></strong>: all ages are assumed to be in the unit of years and need to be integers (or at least <a href="https://rlang.r-lib.org/reference/is_integerish.html" class="external-link">“integerish”</a> if stored as double)</p>
+<p>By default <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the <code>population_age</code> argument. Here we simulate an outbreak in a population with a population ranging from 5 to 75 (inclusive, <code>[5,75]</code>).</p>
+<p><strong><em>Note</em></strong>: all ages are assumed to be in the unit of years and need to be integers (or at least <a href="https://rlang.r-lib.org/reference/is_integerish.html" class="external-link">“integerish”</a> if stored as double).</p>
+<p>All simulations in this vignette condition the simulation to have a minimum outbreak size (<code>min_outbreak_size</code>) of 100 cases to clearly visualise the distribution of ages.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1.3</span>,</span>
-<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
+<span>  contact_interval <span class="op">=</span> <span class="va">contact_interval</span>,</span>
+<span>  prob_infect <span class="op">=</span> <span class="fl">0.45</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
-<span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">75</span><span class="op">)</span></span>
+<span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">75</span><span class="op">)</span>,</span>
+<span>  min_outbreak_size <span class="op">=</span> <span class="fl">100</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id          case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1  Mercedes Hamilton confirmed      f  34 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2      Denise Nipper suspected      f  42 2023-01-03     2023-01-03</span></span>
-<span><span class="co">#&gt; 3  3 Muzammil al-Ansari confirmed      m  21 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4   Ulyaa al-Darwish suspected      f   9 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5    Taylor Guerrero confirmed      f  23 2023-01-04           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6     Safawn Wilford confirmed      f  23 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   id           case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1           Ruoqi Lum confirmed      f  48 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  3 Ted Santos Sandoval confirmed      m  75 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  5      Ervin Ulibarri  probable      m  39 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6  6  Tenisha Makanjuola confirmed      f  37 2023-01-03           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 8  8      Kaylee Agustin confirmed      f  15 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 9  9    Anthony Youngman  probable      m  22 2023-01-02           &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.1</span></span>
-<span><span class="co">#&gt; 2       &lt;NA&gt;         2023-01-01        2023-01-03       NA</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-31        2023-01-01     24.1</span></span>
-<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-01        2023-01-06       NA</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-03        2023-01-07     24.1</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2022-12-29        2023-01-03     24.1</span></span></code></pre></div>
+<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.4</span></span>
+<span><span class="co">#&gt; 3       &lt;NA&gt;         2023-01-02        2023-01-03     24.4</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;         2022-12-31        2023-01-03       NA</span></span>
+<span><span class="co">#&gt; 6 2023-01-11         2023-01-01        2023-01-04     24.4</span></span>
+<span><span class="co">#&gt; 8       &lt;NA&gt;         2022-12-28        2023-01-02     24.4</span></span>
+<span><span class="co">#&gt; 9       &lt;NA&gt;         2022-12-27        2023-01-04       NA</span></span></code></pre></div>
 </details><p>We can plot the age distribution for individuals in the line list, binned into 5 year categories.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gender"</span>, <span class="st">"age"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
@@ -218,28 +229,30 @@ Figure 1: Age distribution of individuals in a simulated line list sampled from 
 <span><span class="co">#&gt; 3     60-90        0.3</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1.3</span>,</span>
-<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
+<span>  contact_interval <span class="op">=</span> <span class="va">contact_interval</span>,</span>
+<span>  prob_infect <span class="op">=</span> <span class="fl">0.45</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
-<span>  population_age <span class="op">=</span> <span class="va">age_struct</span></span>
+<span>  population_age <span class="op">=</span> <span class="va">age_struct</span>,</span>
+<span>  min_outbreak_size <span class="op">=</span> <span class="fl">100</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1 Kathrine Thompson confirmed      f  14 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2  Cameron Stephens  probable      m  65 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3     Lance Raiburn  probable      m  57 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4     Lewis Pierson  probable      m  72 2023-01-03     2023-01-03</span></span>
-<span><span class="co">#&gt; 5  5      Akiyoshi Lee  probable      m  59 2023-01-03           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6  Taamir al-Radwan confirmed      m   5 2023-01-03     2023-01-03</span></span>
-<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.2</span></span>
-<span><span class="co">#&gt; 2 2023-01-05         2023-01-01        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2022-12-30        2023-01-03       NA</span></span>
-<span><span class="co">#&gt; 4       &lt;NA&gt;         2023-01-01        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2023-01-07        2023-01-11       NA</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-03        2023-01-05     25.2</span></span></code></pre></div>
+<span><span class="co">#&gt;    id            case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1   1      Howard Arellano confirmed      m   3 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4   4         Alan Ornelas confirmed      m  78 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 8   8 Muhaajir el-Abdullah suspected      m  47 2023-01-03     2023-01-03</span></span>
+<span><span class="co">#&gt; 9   9          Colin Avina confirmed      m   1 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 10 10    Destinee Dettmann  probable      f   3 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 12 12         Wing Renehan confirmed      m   8 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;    date_death date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1        &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.2</span></span>
+<span><span class="co">#&gt; 4        &lt;NA&gt;         2022-12-31        2023-01-03     24.2</span></span>
+<span><span class="co">#&gt; 8        &lt;NA&gt;         2022-12-29        2023-01-01       NA</span></span>
+<span><span class="co">#&gt; 9        &lt;NA&gt;         2022-12-31        2023-01-05     24.2</span></span>
+<span><span class="co">#&gt; 10       &lt;NA&gt;         2022-12-31        2023-01-03       NA</span></span>
+<span><span class="co">#&gt; 12       &lt;NA&gt;         2022-12-31        2023-01-06     24.2</span></span></code></pre></div>
 </details><p>Again we can plot the age distribution to see the age structure for individuals in the line list. Given the relative uniformity of the age structure specified it is not greatly different from the uniform age structure plotted above, other than having a higher upper age limit. The data is binned into 5 year categories and facetted by gender.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gender"</span>, <span class="st">"age"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
@@ -287,28 +300,30 @@ Figure 2: Age distribution of line list cases facetted by gender.
 <span><span class="co">#&gt; 4     60-75        0.1</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
-<span>  R <span class="op">=</span> <span class="fl">1.3</span>,</span>
-<span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span>
+<span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
+<span>  contact_interval <span class="op">=</span> <span class="va">contact_interval</span>,</span>
+<span>  prob_infect <span class="op">=</span> <span class="fl">0.45</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
-<span>  population_age <span class="op">=</span> <span class="va">age_struct</span></span>
+<span>  population_age <span class="op">=</span> <span class="va">age_struct</span>,</span>
+<span>  min_outbreak_size <span class="op">=</span> <span class="fl">100</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id          case_name case_type gender age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1        Jia Gopalan confirmed      m   8 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  2     Raymond Staten confirmed      m  29 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  3          Joshua Su confirmed      m   2 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4       Kiona Arviso confirmed      f  22 2023-01-03     2023-01-05</span></span>
-<span><span class="co">#&gt; 5  5        Althea Fink  probable      f  46 2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  6 Shihaab el-Khalifa  probable      m  13 2023-01-03           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;   date_death date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.5</span></span>
-<span><span class="co">#&gt; 2       &lt;NA&gt;         2022-12-28        2023-01-01     24.5</span></span>
-<span><span class="co">#&gt; 3       &lt;NA&gt;         2023-01-02        2023-01-04     24.5</span></span>
-<span><span class="co">#&gt; 4 2023-02-03         2022-12-31        2023-01-05     24.5</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;         2022-12-31        2023-01-03       NA</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;         2023-01-07        2023-01-07       NA</span></span></code></pre></div>
+<span><span class="co">#&gt;    id          case_name case_type gender age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1   1       Deion Bia Jr confirmed      m   8 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3   3       Davier Oster confirmed      m  40 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6   6  Amru al-Nasrallah confirmed      m  62 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 8   8      Shianne Giehm confirmed      f   3 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 10 10      Kristen Allen  probable      f   7 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 12 12 Christina Hamilton confirmed      f   2 2023-01-02           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;    date_death date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1        &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     23.8</span></span>
+<span><span class="co">#&gt; 3        &lt;NA&gt;         2022-12-31        2023-01-06     23.8</span></span>
+<span><span class="co">#&gt; 6        &lt;NA&gt;         2022-12-29        2023-01-02     23.8</span></span>
+<span><span class="co">#&gt; 8        &lt;NA&gt;         2022-12-30        2023-01-04     23.8</span></span>
+<span><span class="co">#&gt; 10       &lt;NA&gt;         2022-12-31        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 12 2023-01-14         2022-12-30        2023-01-02     23.8</span></span></code></pre></div>
 </details><p>A common and useful method for plotting age data is in the form of age pyramids. Here we partition the data by gender and plot the age distribution.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist_m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">linelist</span>, subset <span class="op">=</span> <span class="va">gender</span> <span class="op">==</span> <span class="st">"m"</span><span class="op">)</span></span>

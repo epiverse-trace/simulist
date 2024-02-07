@@ -161,7 +161,7 @@ for defining age bounds. The newer structure is judged to be preferred
 as it prevents input errors by the user when the age bounds are
 overlapping or non-contiguous (i.e. missing age groups).</p></li>
 <li><p>The column names of the contact relationships (edges of the
-network) are called <code>from</code> and <code>to</code>. Names of
+network) are called <code>from</code> and <code>to</code>. Names of the
 contacts table match {epicontacts} <code>&lt;epicontacts&gt;</code>
 objects. If the column names of the two contacts provided to
 <code><a href="https://www.repidemicsconsortium.org/epicontacts/reference/make_epicontacts.html" class="external-link">epicontacts::make_epicontacts()</a></code> arguments <code>from</code>
@@ -170,7 +170,7 @@ will be silently renamed in the resulting
 <code>&lt;epicontacts&gt;</code> object. By making these column names
 <code>from</code> and <code>to</code> when output from
 <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> or <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> it prevents
-any confusion when used with {epicontacts}. This names are also
+any confusion when used with {epicontacts}. This naming is also
 preferred as they are usefully descriptive.</p></li>
 <li><p>The <a href="vis-linelist.html">Visualising simulated data
 vignette</a> contains interactive data visualisation when rendered to
@@ -215,6 +215,12 @@ and <em>admission</em>; in the simulated line list it is
 hospitalisation (e.g. <code><a href="../reference/dot-add_date.html">.add_hospitalisation()</a></code>). This is
 because I think <em>hospitalisation</em> is more descriptive but
 <code>date_admission</code> is used by {linelist}.</p></li>
+<li><p>{simulist} implements its own branching process model
+(<code><a href="../reference/dot-sim_network_bp.html">.sim_network_bp()</a></code>) which tracks contacts of infectious
+individuals. This is a simple random network model, but for future
+versions of {simulist} we will make the code modular in order to accept
+other simulations models. This will remove the burden on {simulist} to
+simulate from a range of model types.</p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -227,7 +233,6 @@ are:</p>
 <li>{stats}</li>
 <li><a href="https://CRAN.R-project.org/package=checkmate" class="external-link">{checkmate}</a></li>
 <li><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">{epiparameter}</a></li>
-<li><a href="https://github.com/epiverse-trace/bpmodels" class="external-link">{bpmodels}</a></li>
 <li><a href="https://CRAN.R-project.org/package=randomNames" class="external-link">{randomNames}</a></li>
 </ul>
 <p>{stats} is distributed with the R language so is viewed as a
@@ -237,11 +242,7 @@ used across Epiverse-TRACE packages. {epiparameter} is used to easily
 access epidemiological parameters from the package’s library, the
 package is currently unstable and actively developed, however, by using
 it in another package it can inform the development path of
-{epiparameter}. {bpmodels} is used to handle the single-type branching
-process model, this is taken on as a dependency as implementing
-different transmission models within {simulist} is beyond the package
-scope and does not scale as we implement more models to generate line
-list data. {randomNames} provides a utility function for generating
+{epiparameter}. {randomNames} provides a utility function for generating
 random names for case and contact data. The functionality could be
 replicated in {simulist}, however the {randomNames} package is
 maintained and contains a range of name generation settings which

@@ -77,8 +77,9 @@ parameterised with user defined epidemiological parameters.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sim_linelist</span><span class="op">(</span></span>
-<span>  <span class="va">R</span>,</span>
-<span>  <span class="va">serial_interval</span>,</span>
+<span>  <span class="va">contact_distribution</span>,</span>
+<span>  <span class="va">contact_interval</span>,</span>
+<span>  <span class="va">prob_infect</span>,</span>
 <span>  <span class="va">onset_to_hosp</span>,</span>
 <span>  <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="fl">0.2</span>,</span>
@@ -96,13 +97,24 @@ parameterised with user defined epidemiological parameters.</p>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>R</dt>
-<dd><p>A single <code>numeric</code> for the reproduction number.</p></dd>
-
-
-<dt>serial_interval</dt>
+    <dl><dt>contact_distribution</dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
-the serial interval.</p></dd>
+the contact distribution. This is any discrete density function that
+produces non-negative integers (including zero, \(\mathbb{N}_0\)) for the
+number of contacts per infection.</p></dd>
+
+
+<dt>contact_interval</dt>
+<dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
+the contact interval. This is analogous to the serial interval or generation
+time, but defines the time interval between an individual being
+infected/infectious (in the simulation the latency period is assumed to be
+zero) and having contact with another susceptible individual.</p></dd>
+
+
+<dt>prob_infect</dt>
+<dd><p>A single <code>numeric</code> for the probability of a secondary
+contact being infected by an infected primary contact.</p></dd>
 
 
 <dt>onset_to_hosp</dt>
@@ -211,9 +223,17 @@ that age group. Proportions must sum to one.</p></li>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># load data required to simulate line list</span></span></span>
-<span class="r-in"><span><span class="va">serial_interval</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
-<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"serial interval"</span>,</span></span>
+<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"contact distribution"</span>,</span></span>
+<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span></span>
+<span class="r-in"><span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Citation cannot be created as author, year, journal or title is missing</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">contact_interval</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
+<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"contact interval"</span>,</span></span>
 <span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span></span>
 <span class="r-in"><span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
@@ -248,27 +268,28 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> To retrieve the short citation use the 'get_citation' function</span>
 <span class="r-in"><span><span class="co"># example with single hospitalisation risk for entire population</span></span></span>
 <span class="r-in"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">sim_linelist</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span></span>
-<span class="r-in"><span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span></span>
+<span class="r-in"><span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span></span>
+<span class="r-in"><span>  contact_interval <span class="op">=</span> <span class="va">contact_interval</span>,</span></span>
+<span class="r-in"><span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
 <span class="r-in"><span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span></span>
 <span class="r-in"><span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span></span>
 <span class="r-in"><span>  hosp_risk <span class="op">=</span> <span class="fl">0.5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id       case_name case_type gender age date_onset date_admission date_death</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1 Sharisse Willis confirmed      f  28 2023-01-01     2023-01-07       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2     Devin Evans  probable      m  49 2023-01-01           &lt;NA&gt; 2023-01-29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3    Jeffrey Cole confirmed      m  19 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4      Donald Tay  probable      m  85 2023-01-01     2023-01-03       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5     Austin Yong confirmed      m  87 2023-01-05     2023-01-06       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6  Nina Gutierrez confirmed      f  21 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               &lt;NA&gt;              &lt;NA&gt;     25.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         2022-12-28        2023-01-01       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         2023-01-02        2023-01-03     25.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         2023-01-03        2023-01-06       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         2022-12-31        2023-01-04     25.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         2023-01-02        2023-01-04     25.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id         case_name case_type gender age date_onset date_admission</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1   Brandon Bennett confirmed      m  29 2023-01-01     2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 Jacqueline Rendon  probable      f  55 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3        Amy Vester suspected      f  54 2023-01-01     2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4    Miranda Aviles  probable      f  83 2023-01-01     2023-01-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5    Sarah Sullivan suspected      f  45 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6       Max Zarcula  probable      m  77 2023-01-01     2023-01-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date_death date_first_contact date_last_contact ct_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     26.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;         2023-01-02        2023-01-04       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2022-12-27        2023-01-01       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2023-01-02        2023-01-03       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;         2022-12-30        2023-01-02       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2023-01-03        2023-01-06       NA</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with age-stratified hospitalisation risk</span></span></span>
 <span class="r-in"><span><span class="co"># 20% for over 80s</span></span></span>
@@ -279,27 +300,28 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">sim_linelist</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  R <span class="op">=</span> <span class="fl">1.1</span>,</span></span>
-<span class="r-in"><span>  serial_interval <span class="op">=</span> <span class="va">serial_interval</span>,</span></span>
+<span class="r-in"><span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span></span>
+<span class="r-in"><span>  contact_interval <span class="op">=</span> <span class="va">contact_interval</span>,</span></span>
+<span class="r-in"><span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
 <span class="r-in"><span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span></span>
 <span class="r-in"><span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span></span>
 <span class="r-in"><span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id            case_name case_type gender age date_onset date_admission</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1        Matthew Brady suspected      m  19 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 Kamaaluddeen al-Kazi  probable      m  65 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3       Tiana Shoeboot suspected      f  81 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4         Davion Burke confirmed      m  33 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5        Madisen White confirmed      f  12 2023-01-04           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6     Shaakir el-Sabir suspected      m  10 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id         case_name case_type gender age date_onset date_admission</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1 Muzammil al-Abood  probable      m  12 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3  Tana Vierczhalek confirmed      f  11 2023-01-02           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4     Concetta Nash  probable      f  39 2023-01-02           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6     Chianne Jones confirmed      f  48 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  7 Andrew Warszawski confirmed      m  88 2023-01-01           &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  8     Brittney Chen suspected      f  34 2023-01-01           &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date_death date_first_contact date_last_contact ct_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;         2023-01-05        2023-01-07       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2023-01-02        2023-01-06       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2022-12-28        2023-01-02     26.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;         2022-12-30        2023-01-02     26.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2023-01-05        2023-01-07       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;         2023-01-04        2023-01-06     25.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;         2022-12-29        2023-01-01       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;         2023-01-01        2023-01-03     25.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7       &lt;NA&gt;         2023-01-01        2023-01-03     25.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8       &lt;NA&gt;         2022-12-30        2023-01-06       NA</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
