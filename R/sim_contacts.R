@@ -81,6 +81,7 @@ sim_contacts <- function(contact_distribution,
     .data = chain,
     contact_tracing_status_probs = contact_tracing_status_probs
   )
+  row.names(chain) <- NULL
 
   # return line list
   contacts

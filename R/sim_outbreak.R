@@ -170,6 +170,7 @@ sim_outbreak <- function(contact_distribution,
 
   linelist$chain <- linelist$chain[linelist$chain$infected == "infected", ]
   chain <- linelist$chain[, linelist$cols]
+  row.names(chain) <- NULL
 
   # return outbreak data
   list(
