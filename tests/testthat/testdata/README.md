@@ -18,9 +18,16 @@ The script to reproduce the data is:
 
 ``` r
 # load data required to simulate line list
-serial_interval <- epiparameter::epidist(
+contact_distribution <- epiparameter::epidist(
   disease = "COVID-19",
-  epi_dist = "serial interval",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 2)
+)
+
+contact_interval <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "contact interval",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
@@ -41,8 +48,9 @@ onset_to_death <- epiparameter::epidist_db(
 set.seed(1)
 
 linelist <- sim_linelist(
-  R = 1.1,
-  serial_interval = serial_interval,
+  contact_distribution = contact_distribution,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = 0.5
