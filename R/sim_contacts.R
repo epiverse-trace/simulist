@@ -65,24 +65,26 @@ sim_contacts <- function(contact_distribution,
     population_age = population_age
   )
 
-  chain <- .sim_bp_linelist(
+  contacts <- .sim_internal(
+    sim_type = "contacts",
     contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
+    onset_to_hosp = NULL,
+    onset_to_death = NULL,
+    hosp_risk = NULL,
+    hosp_death_risk = NULL,
+    non_hosp_death_risk = NULL,
     outbreak_start_date = outbreak_start_date,
+    add_names = NULL,
+    add_ct = NULL,
     min_outbreak_size = min_outbreak_size,
     population_age = population_age,
+    case_type_probs = NULL,
+    contact_tracing_status_probs = contact_tracing_status_probs,
     config = config
   )
 
-  chain <- .add_names(.data = chain)
-
-  contacts <- .sim_contacts_tbl(
-    .data = chain,
-    contact_tracing_status_probs = contact_tracing_status_probs
-  )
-  row.names(chain) <- NULL
-
-  # return line list
+  # return contacts table
   contacts
 }

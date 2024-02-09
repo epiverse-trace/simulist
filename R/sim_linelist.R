@@ -214,18 +214,11 @@ sim_linelist <- function(contact_distribution,
     )
   }
 
-  chain <- .sim_bp_linelist(
+  linelist <- .sim_internal(
+    sim_type = "linelist",
     contact_distribution = contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
-    outbreak_start_date = outbreak_start_date,
-    min_outbreak_size = min_outbreak_size,
-    population_age = population_age,
-    config = config
-  )
-
-  linelist <- .sim_clinical_linelist(
-    chain = chain,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     hosp_risk = hosp_risk,
@@ -234,14 +227,13 @@ sim_linelist <- function(contact_distribution,
     outbreak_start_date = outbreak_start_date,
     add_names = add_names,
     add_ct = add_ct,
+    min_outbreak_size = min_outbreak_size,
+    population_age = population_age,
     case_type_probs = case_type_probs,
+    contact_tracing_status_probs = NULL,
     config = config
   )
 
-  linelist$chain <- linelist$chain[linelist$chain$infected == "infected", ]
-  chain <- linelist$chain[, linelist$cols]
-  row.names(chain) <- NULL
-
   # return line list
-  chain
+  linelist
 }
