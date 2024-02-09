@@ -106,6 +106,6 @@ list of two \verb{<data.frame>}s if \code{sim_type} is \code{"outbreak"}.
 }
 \description{
 This internal function simulates a line list, and
-when \code{sim_type} is \code{"contacts"} or \code{"outbreak"} a contacts table.
+when \code{sim_type} is \code{"contacts"} or \code{"outbreak"} a contacts table as well.
 }
 \keyword{internal}

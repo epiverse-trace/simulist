@@ -2,7 +2,7 @@
 #' within \pkg{simulist}
 #'
 #' @description This internal function simulates a line list, and
-#' when `sim_type` is `"contacts"` or `"outbreak"` a contacts table.
+#' when `sim_type` is `"contacts"` or `"outbreak"` a contacts table as well.
 #'
 #' @inheritParams sim_linelist
 #' @inheritParams sim_contacts
@@ -102,7 +102,7 @@
     )
   }
 
-  if (sim_type == "linelist" || sim_type == "outbreak") {
+  if (sim_type %in% c("linelist", "outbreak")) {
     .data <- .add_hospitalisation(
       .data = .data,
       onset_to_hosp = onset_to_hosp,
@@ -148,7 +148,7 @@
     }
   }
 
-  if (sim_type == "contacts" || sim_type == "outbreak") {
+  if (sim_type %in% c("contacts", "outbreak")) {
     if (!"infector_name" %in% colnames(.data)) {
       .data <- .add_names(.data = .data)
     }
@@ -192,14 +192,13 @@
     .data <- .data[.data$infected == "infected", ]
     .data <- .data[, linelist_cols]
     row.names(.data) <- NULL
-  }
 
-  if (sim_type == "linelist") {
-    return(.data)
-  } else if (sim_type == "outbreak") {
-    return(list(
-      linelist = .data,
-      contacts = contacts_tbl
-    ))
+    switch(sim_type,
+      linelist = return(.data),
+      outbreak = return(list(
+        linelist = .data,
+        contacts = contacts_tbl
+      ))
+    )
   }
 }
