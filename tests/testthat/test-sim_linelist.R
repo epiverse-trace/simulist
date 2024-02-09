@@ -30,22 +30,13 @@ suppressMessages({
 
 test_that("sim_linelist works as expected", {
   set.seed(1)
-  linelist <- sim_linelist(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death
-  )
-
-  expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(17L, 11L))
-  expect_identical(
-    colnames(linelist),
-    c(
-      "id", "case_name", "case_type", "gender", "age", "date_onset",
-      "date_admission", "date_death", "date_first_contact",
-      "date_last_contact", "ct_value"
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death
     )
   )
 })
@@ -64,71 +55,44 @@ test_that("sim_linelist works as expected with age-strat risks", {
     risk = c(0.05, 0.025, 0.1)
   )
   set.seed(1)
-  linelist <- sim_linelist(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
-    hosp_risk = age_dep_hosp_risk,
-    hosp_death_risk = age_dep_hosp_death_risk,
-    non_hosp_death_risk = age_dep_non_hosp_death_risk
-  )
-
-  expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(17L, 11L))
-  expect_identical(
-    colnames(linelist),
-    c(
-      "id", "case_name", "case_type", "gender", "age", "date_onset",
-      "date_admission", "date_death", "date_first_contact",
-      "date_last_contact", "ct_value"
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      hosp_risk = age_dep_hosp_risk,
+      hosp_death_risk = age_dep_hosp_death_risk,
+      non_hosp_death_risk = age_dep_non_hosp_death_risk
     )
   )
 })
 
 test_that("sim_linelist works as expected without Ct", {
   set.seed(1)
-  linelist <- sim_linelist(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
-    add_ct = FALSE
-  )
-
-  expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(17L, 10L))
-  expect_identical(
-    colnames(linelist),
-    c(
-      "id", "case_name", "case_type", "gender", "age", "date_onset",
-      "date_admission", "date_death", "date_first_contact",
-      "date_last_contact"
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      add_ct = FALSE
     )
   )
 })
 
 test_that("sim_linelist works as expected with anonymous", {
   set.seed(1)
-  linelist <- sim_linelist(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
-    add_names = FALSE
-  )
-
-  expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(17L, 10L))
-  expect_identical(
-    colnames(linelist),
-    c(
-      "id", "case_type", "gender", "age", "date_onset",
-      "date_admission", "date_death", "date_first_contact",
-      "date_last_contact", "ct_value"
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      add_names = FALSE
     )
   )
 })
@@ -140,23 +104,14 @@ test_that("sim_linelist works as expected with age structure", {
     stringsAsFactors = FALSE
   )
   set.seed(1)
-  linelist <- sim_linelist(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
-    population_age = age_struct
-  )
-
-  expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(17L, 11L))
-  expect_identical(
-    colnames(linelist),
-    c(
-      "id", "case_name", "case_type", "gender", "age", "date_onset",
-      "date_admission", "date_death", "date_first_contact",
-      "date_last_contact", "ct_value"
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      population_age = age_struct
     )
   )
 })
@@ -172,24 +127,15 @@ test_that("sim_linelist works as expected with age-strat risks & age struct", {
     stringsAsFactors = FALSE
   )
   set.seed(1)
-  linelist <- sim_linelist(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
-    hosp_risk = age_dep_hosp_risk,
-    population_age = age_struct
-  )
-
-  expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(17L, 11L))
-  expect_identical(
-    colnames(linelist),
-    c(
-      "id", "case_name", "case_type", "gender", "age", "date_onset",
-      "date_admission", "date_death", "date_first_contact",
-      "date_last_contact", "ct_value"
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      hosp_risk = age_dep_hosp_risk,
+      population_age = age_struct
     )
   )
 })
@@ -231,51 +177,33 @@ test_that("sim_linelist gives expected proportion of ages with age struct", {
 
 test_that("sim_linelist works as expected with modified config", {
   set.seed(1)
-  linelist <- sim_linelist(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
-    config = create_config(
-      last_contact_distribution = "geom",
-      last_contact_distribution_params = c(prob = 0.5)
-    )
-  )
-
-  expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(17L, 11L))
-  expect_identical(
-    colnames(linelist),
-    c(
-      "id", "case_name", "case_type", "gender", "age", "date_onset",
-      "date_admission", "date_death", "date_first_contact",
-      "date_last_contact", "ct_value"
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = create_config(
+        last_contact_distribution = "geom",
+        last_contact_distribution_params = c(prob = 0.5)
+      )
     )
   )
 })
 
 test_that("sim_linelist works as expected with modified config parameters", {
   set.seed(1)
-  linelist <- sim_linelist(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
-    config = create_config(
-      last_contact_distribution_params = c(lambda = 5)
-    )
-  )
-
-  expect_s3_class(linelist, class = "data.frame")
-  expect_identical(dim(linelist), c(17L, 11L))
-  expect_identical(
-    colnames(linelist),
-    c(
-      "id", "case_name", "case_type", "gender", "age", "date_onset",
-      "date_admission", "date_death", "date_first_contact",
-      "date_last_contact", "ct_value"
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = create_config(
+        last_contact_distribution_params = c(lambda = 5)
+      )
     )
   )
 })
