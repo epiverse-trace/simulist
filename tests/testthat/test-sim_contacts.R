@@ -16,64 +16,40 @@ suppressMessages({
 
 test_that("sim_contacts works as expected", {
   set.seed(1)
-  contacts <- sim_contacts(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5
-  )
-
-  expect_s3_class(contacts, class = "data.frame")
-  expect_identical(dim(contacts), c(35L, 8L))
-  expect_identical(
-    colnames(contacts),
-    c(
-      "from", "to", "age", "gender", "date_first_contact",
-      "date_last_contact", "was_case", "status"
+  expect_snapshot(
+    sim_contacts(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5
     )
   )
 })
 
 test_that("sim_contacts works as expected with modified config", {
   set.seed(1)
-  contacts <- sim_contacts(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    config = create_config(
-      last_contact_distribution = "geom",
-      last_contact_distribution_params = c(prob = 0.5)
-    )
-  )
-
-  expect_s3_class(contacts, class = "data.frame")
-  expect_identical(dim(contacts), c(35L, 8L))
-  expect_identical(
-    colnames(contacts),
-    c(
-      "from", "to", "age", "gender", "date_first_contact",
-      "date_last_contact", "was_case", "status"
+  expect_snapshot(
+    sim_contacts(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      config = create_config(
+        last_contact_distribution = "geom",
+        last_contact_distribution_params = c(prob = 0.5)
+      )
     )
   )
 })
 
 test_that("sim_contacts works as expected with modified config parameters", {
   set.seed(1)
-  contacts <- sim_contacts(
-    contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
-    prob_infect = 0.5,
-    config = create_config(
-      last_contact_distribution_params = c(lambda = 5)
-    )
-  )
-
-  expect_s3_class(contacts, class = "data.frame")
-  expect_identical(dim(contacts), c(35L, 8L))
-  expect_identical(
-    colnames(contacts),
-    c(
-      "from", "to", "age", "gender", "date_first_contact",
-      "date_last_contact", "was_case", "status"
+  expect_snapshot(
+    sim_contacts(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      config = create_config(
+        last_contact_distribution_params = c(lambda = 5)
+      )
     )
   )
 })
