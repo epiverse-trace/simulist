@@ -113,7 +113,7 @@
 #' @return Invisibly return the `sim_type` `character` string. The function is
 #' called for its side-effects, which will error if the input is invalid.
 #' @keywords internal
-.check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"), # nolint cyclocomp_linter
+.check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"),
                              contact_distribution,
                              contact_interval,
                              prob_infect,
@@ -143,7 +143,7 @@
         is.data.frame(population_age)
   )
 
-  if (sim_type == "linelist" || sim_type == "outbreak") {
+  if (sim_type %in% c("linelist", "outbreak")) {
     .check_func_req_args(onset_to_hosp)
     .check_func_req_args(onset_to_death)
     checkmate::assert_logical(add_names, len = 1)
@@ -169,7 +169,7 @@
     )
   }
 
-  if (sim_type == "contacts" || sim_type == "outbreak") {
+  if (sim_type %in% c("contacts", "outbreak")) {
     checkmate::assert_numeric(contact_tracing_status_probs, len = 3)
     checkmate::assert_names(
       names(contact_tracing_status_probs),
