@@ -44,77 +44,77 @@
       
       $contacts
                         from                      to age gender date_first_contact
-      2     Macella Moreland          Kayla Ellerman  62      f         2023-01-02
-      3     Macella Moreland       Juwairiya al-Saah  20      f         2023-01-04
-      4       Kayla Ellerman          Ubaida el-Meer  29      m         2023-01-05
-      5       Kayla Ellerman     Matthew Biggerstaff  42      m         2023-01-03
-      6       Kayla Ellerman       Vanessa Sihombing  60      f         2023-01-02
-      7       Kayla Ellerman            Joslyn Smith  65      f         2022-12-31
-      8  Matthew Biggerstaff         Ross Mcclintock  28      m         2023-01-01
-      9  Matthew Biggerstaff         Danielle Medero  78      f         2022-12-29
-      10   Vanessa Sihombing          Suhaa el-Saidi  31      f         2023-01-04
-      11   Vanessa Sihombing           Ethan Lapitan  12      m         2023-01-02
-      12   Vanessa Sihombing              Amanda Day  80      f         2023-01-01
-      13     Ross Mcclintock         Breianna Colson  44      f         2022-12-29
-      14     Ross Mcclintock Benjamin Yokota-Stroman  74      m         2022-12-31
-      15     Ross Mcclintock           Austin Wilson  26      m         2023-01-06
-      16     Ross Mcclintock           Jakeob Wisham  33      m         2023-01-03
-      17     Ross Mcclintock         Victor Elizondo   4      m         2022-12-30
-      18      Suhaa el-Saidi       Gustavo Hernandez  53      m         2023-01-03
-      19       Jakeob Wisham       Shaahir el-Younis  86      m         2023-01-03
-      20   Shaahir el-Younis         Chelsea Phoenix  89      f         2023-01-02
-      21   Shaahir el-Younis         Kalina Siddiqui  24      f         2023-01-04
-      22   Shaahir el-Younis         Arianna Bellomy  37      f         2023-01-03
-      23     Arianna Bellomy         Angela Thompson  15      f         2023-01-03
-      24     Angela Thompson             Daniel Pham  14      m         2023-01-02
-      25     Angela Thompson           Irvin Quezada  81      m         2023-01-03
-      26       Irvin Quezada            Ronald Bliss  82      m         2023-01-02
-      27        Ronald Bliss           Andrew Truong  72      m         2023-01-03
-      28        Ronald Bliss          Dillan Aguilar  53      m         2023-01-03
-      29        Ronald Bliss            Andres Garza  56      m         2022-12-29
-      30       Andrew Truong           Dawson Wagner  71      m         2023-01-04
-      31       Andrew Truong              Jacky Chen  50      m         2023-01-01
-      32       Andrew Truong          Ignacio Gentry  73      m         2022-12-31
-      33       Andrew Truong              Tessa Yang  20      f         2023-01-01
-      34       Dawson Wagner             Jair Garcia  75      m         2023-01-06
-      35       Dawson Wagner             Monique Lau   2      f         2023-01-08
-      36          Jacky Chen              Dewi Smith   3      f         2023-01-03
+      1     Macella Moreland          Kayla Ellerman  62      f         2023-01-02
+      2     Macella Moreland       Juwairiya al-Saah  20      f         2023-01-04
+      3       Kayla Ellerman          Ubaida el-Meer  29      m         2023-01-05
+      4       Kayla Ellerman     Matthew Biggerstaff  42      m         2023-01-03
+      5       Kayla Ellerman       Vanessa Sihombing  60      f         2023-01-02
+      6       Kayla Ellerman            Joslyn Smith  65      f         2022-12-31
+      7  Matthew Biggerstaff         Ross Mcclintock  28      m         2023-01-01
+      8  Matthew Biggerstaff         Danielle Medero  78      f         2022-12-29
+      9    Vanessa Sihombing          Suhaa el-Saidi  31      f         2023-01-04
+      10   Vanessa Sihombing           Ethan Lapitan  12      m         2023-01-02
+      11   Vanessa Sihombing              Amanda Day  80      f         2023-01-01
+      12     Ross Mcclintock         Breianna Colson  44      f         2022-12-29
+      13     Ross Mcclintock Benjamin Yokota-Stroman  74      m         2022-12-31
+      14     Ross Mcclintock           Austin Wilson  26      m         2023-01-06
+      15     Ross Mcclintock           Jakeob Wisham  33      m         2023-01-03
+      16     Ross Mcclintock         Victor Elizondo   4      m         2022-12-30
+      17      Suhaa el-Saidi       Gustavo Hernandez  53      m         2023-01-03
+      18       Jakeob Wisham       Shaahir el-Younis  86      m         2023-01-03
+      19   Shaahir el-Younis         Chelsea Phoenix  89      f         2023-01-02
+      20   Shaahir el-Younis         Kalina Siddiqui  24      f         2023-01-04
+      21   Shaahir el-Younis         Arianna Bellomy  37      f         2023-01-03
+      22     Arianna Bellomy         Angela Thompson  15      f         2023-01-03
+      23     Angela Thompson             Daniel Pham  14      m         2023-01-02
+      24     Angela Thompson           Irvin Quezada  81      m         2023-01-03
+      25       Irvin Quezada            Ronald Bliss  82      m         2023-01-02
+      26        Ronald Bliss           Andrew Truong  72      m         2023-01-03
+      27        Ronald Bliss          Dillan Aguilar  53      m         2023-01-03
+      28        Ronald Bliss            Andres Garza  56      m         2022-12-29
+      29       Andrew Truong           Dawson Wagner  71      m         2023-01-04
+      30       Andrew Truong              Jacky Chen  50      m         2023-01-01
+      31       Andrew Truong          Ignacio Gentry  73      m         2022-12-31
+      32       Andrew Truong              Tessa Yang  20      f         2023-01-01
+      33       Dawson Wagner             Jair Garcia  75      m         2023-01-06
+      34       Dawson Wagner             Monique Lau   2      f         2023-01-08
+      35          Jacky Chen              Dewi Smith   3      f         2023-01-03
          date_last_contact was_case           status
-      2         2023-01-05        Y             case
-      3         2023-01-07        N   under_followup
-      4         2023-01-08        N   under_followup
+      1         2023-01-05        Y             case
+      2         2023-01-07        N   under_followup
+      3         2023-01-08        N   under_followup
+      4         2023-01-04        Y             case
       5         2023-01-04        Y             case
-      6         2023-01-04        Y             case
-      7         2023-01-03        N   under_followup
-      8         2023-01-03        Y             case
-      9         2023-01-04        Y             case
-      10        2023-01-07        Y             case
-      11        2023-01-04        N   under_followup
-      12        2023-01-03        N   under_followup
-      13        2023-01-02        N   under_followup
-      14        2023-01-04        N lost_to_followup
-      15        2023-01-07        N lost_to_followup
-      16        2023-01-04        Y             case
-      17        2023-01-03        N   under_followup
-      18        2023-01-06        N   under_followup
-      19        2023-01-04        Y             case
-      20        2023-01-03        N   under_followup
-      21        2023-01-05        N   under_followup
-      22        2023-01-05        Y             case
-      23        2023-01-04        Y             case
-      24        2023-01-04        N   under_followup
+      6         2023-01-03        N   under_followup
+      7         2023-01-03        Y             case
+      8         2023-01-04        Y             case
+      9         2023-01-07        Y             case
+      10        2023-01-04        N   under_followup
+      11        2023-01-03        N   under_followup
+      12        2023-01-02        N   under_followup
+      13        2023-01-04        N lost_to_followup
+      14        2023-01-07        N lost_to_followup
+      15        2023-01-04        Y             case
+      16        2023-01-03        N   under_followup
+      17        2023-01-06        N   under_followup
+      18        2023-01-04        Y             case
+      19        2023-01-03        N   under_followup
+      20        2023-01-05        N   under_followup
+      21        2023-01-05        Y             case
+      22        2023-01-04        Y             case
+      23        2023-01-04        N   under_followup
+      24        2023-01-04        Y             case
       25        2023-01-04        Y             case
       26        2023-01-04        Y             case
-      27        2023-01-04        Y             case
-      28        2023-01-06        N   under_followup
-      29        2023-01-02        N   under_followup
+      27        2023-01-06        N   under_followup
+      28        2023-01-02        N   under_followup
+      29        2023-01-04        Y             case
       30        2023-01-04        Y             case
-      31        2023-01-04        Y             case
-      32        2023-01-05        N   under_followup
-      33        2023-01-03        N   under_followup
-      34        2023-01-06        N lost_to_followup
-      35        2023-01-09        N   under_followup
-      36        2023-01-05        Y             case
+      31        2023-01-05        N   under_followup
+      32        2023-01-03        N   under_followup
+      33        2023-01-06        N lost_to_followup
+      34        2023-01-09        N   under_followup
+      35        2023-01-05        Y             case
       
 
 # sim_outbreak works as expected with add_names = FALSE
@@ -164,77 +164,77 @@
       
       $contacts
                        from                 to age gender date_first_contact
-      2      Janae Gallegos Fat'hiyaa al-Ishak  62      f         2023-01-02
-      3      Janae Gallegos      Rorie Wallace  20      f         2023-01-04
-      4  Fat'hiyaa al-Ishak     Jose Archuleta  29      m         2023-01-05
-      5  Fat'hiyaa al-Ishak  Jordan Mcclintock  42      m         2023-01-03
-      6  Fat'hiyaa al-Ishak    Xeandra Watkins  60      f         2023-01-02
-      7  Fat'hiyaa al-Ishak        Jenae Berhe  65      f         2022-12-31
-      8   Jordan Mcclintock        Ranny Bajwa  28      m         2023-01-01
-      9   Jordan Mcclintock         Ceara Pham  78      f         2022-12-29
-      10    Xeandra Watkins       Sara Baldwin  31      f         2023-01-04
-      11    Xeandra Watkins    Derek Pensoneau  12      m         2023-01-02
-      12    Xeandra Watkins        Nikki Begay  80      f         2023-01-01
-      13        Ranny Bajwa         Dewi Huynh  44      f         2022-12-29
-      14        Ranny Bajwa     Luis Gutierrez  74      m         2022-12-31
-      15        Ranny Bajwa       Kelvin Bliss  26      m         2023-01-06
-      16        Ranny Bajwa        Matthew Som  33      m         2023-01-03
-      17        Ranny Bajwa           Ian Hill   4      m         2022-12-30
-      18       Sara Baldwin      Dakota Wagner  53      m         2023-01-03
-      19        Matthew Som     Sean Kapushion  86      m         2023-01-03
-      20     Sean Kapushion  Saranya Wiedmaier  89      f         2023-01-02
-      21     Sean Kapushion         Han Mi Ngu  24      f         2023-01-04
-      22     Sean Kapushion   Tenazia Whitaker  37      f         2023-01-03
-      23   Tenazia Whitaker   Madeeha el-Nasir  15      f         2023-01-03
-      24   Madeeha el-Nasir        Joseph John  14      m         2023-01-02
-      25   Madeeha el-Nasir       Jacob Montez  81      m         2023-01-03
-      26       Jacob Montez        Jonathan Li  82      m         2023-01-02
-      27        Jonathan Li     Hamood el-Meer  72      m         2023-01-03
-      28        Jonathan Li     Giovanni Smith  53      m         2023-01-03
-      29        Jonathan Li         Atif Huynh  56      m         2022-12-29
-      30     Hamood el-Meer        Jonah Mahan  71      m         2023-01-04
-      31     Hamood el-Meer     Chandler Gasca  50      m         2023-01-01
-      32     Hamood el-Meer    Geoffrey Wisham  73      m         2022-12-31
-      33     Hamood el-Meer      Jazmyn Pillow  20      f         2023-01-01
-      34        Jonah Mahan   Rafeeq el-Younis  75      m         2023-01-06
-      35        Jonah Mahan      Savannah Hawk   2      f         2023-01-08
-      36     Chandler Gasca         Anna Chase   3      f         2023-01-03
+      1      Janae Gallegos Fat'hiyaa al-Ishak  62      f         2023-01-02
+      2      Janae Gallegos      Rorie Wallace  20      f         2023-01-04
+      3  Fat'hiyaa al-Ishak     Jose Archuleta  29      m         2023-01-05
+      4  Fat'hiyaa al-Ishak  Jordan Mcclintock  42      m         2023-01-03
+      5  Fat'hiyaa al-Ishak    Xeandra Watkins  60      f         2023-01-02
+      6  Fat'hiyaa al-Ishak        Jenae Berhe  65      f         2022-12-31
+      7   Jordan Mcclintock        Ranny Bajwa  28      m         2023-01-01
+      8   Jordan Mcclintock         Ceara Pham  78      f         2022-12-29
+      9     Xeandra Watkins       Sara Baldwin  31      f         2023-01-04
+      10    Xeandra Watkins    Derek Pensoneau  12      m         2023-01-02
+      11    Xeandra Watkins        Nikki Begay  80      f         2023-01-01
+      12        Ranny Bajwa         Dewi Huynh  44      f         2022-12-29
+      13        Ranny Bajwa     Luis Gutierrez  74      m         2022-12-31
+      14        Ranny Bajwa       Kelvin Bliss  26      m         2023-01-06
+      15        Ranny Bajwa        Matthew Som  33      m         2023-01-03
+      16        Ranny Bajwa           Ian Hill   4      m         2022-12-30
+      17       Sara Baldwin      Dakota Wagner  53      m         2023-01-03
+      18        Matthew Som     Sean Kapushion  86      m         2023-01-03
+      19     Sean Kapushion  Saranya Wiedmaier  89      f         2023-01-02
+      20     Sean Kapushion         Han Mi Ngu  24      f         2023-01-04
+      21     Sean Kapushion   Tenazia Whitaker  37      f         2023-01-03
+      22   Tenazia Whitaker   Madeeha el-Nasir  15      f         2023-01-03
+      23   Madeeha el-Nasir        Joseph John  14      m         2023-01-02
+      24   Madeeha el-Nasir       Jacob Montez  81      m         2023-01-03
+      25       Jacob Montez        Jonathan Li  82      m         2023-01-02
+      26        Jonathan Li     Hamood el-Meer  72      m         2023-01-03
+      27        Jonathan Li     Giovanni Smith  53      m         2023-01-03
+      28        Jonathan Li         Atif Huynh  56      m         2022-12-29
+      29     Hamood el-Meer        Jonah Mahan  71      m         2023-01-04
+      30     Hamood el-Meer     Chandler Gasca  50      m         2023-01-01
+      31     Hamood el-Meer    Geoffrey Wisham  73      m         2022-12-31
+      32     Hamood el-Meer      Jazmyn Pillow  20      f         2023-01-01
+      33        Jonah Mahan   Rafeeq el-Younis  75      m         2023-01-06
+      34        Jonah Mahan      Savannah Hawk   2      f         2023-01-08
+      35     Chandler Gasca         Anna Chase   3      f         2023-01-03
          date_last_contact was_case           status
-      2         2023-01-05        Y             case
-      3         2023-01-07        N lost_to_followup
-      4         2023-01-08        N   under_followup
+      1         2023-01-05        Y             case
+      2         2023-01-07        N lost_to_followup
+      3         2023-01-08        N   under_followup
+      4         2023-01-04        Y             case
       5         2023-01-04        Y             case
-      6         2023-01-04        Y             case
-      7         2023-01-03        N   under_followup
-      8         2023-01-03        Y             case
-      9         2023-01-04        Y             case
-      10        2023-01-07        Y             case
-      11        2023-01-04        N   under_followup
-      12        2023-01-03        N   under_followup
-      13        2023-01-02        N   under_followup
-      14        2023-01-04        N   under_followup
-      15        2023-01-07        N   under_followup
-      16        2023-01-04        Y             case
-      17        2023-01-03        N   under_followup
-      18        2023-01-06        N   under_followup
-      19        2023-01-04        Y             case
-      20        2023-01-03        N lost_to_followup
-      21        2023-01-05        N   under_followup
-      22        2023-01-05        Y             case
-      23        2023-01-04        Y             case
-      24        2023-01-04        N   under_followup
+      6         2023-01-03        N   under_followup
+      7         2023-01-03        Y             case
+      8         2023-01-04        Y             case
+      9         2023-01-07        Y             case
+      10        2023-01-04        N   under_followup
+      11        2023-01-03        N   under_followup
+      12        2023-01-02        N   under_followup
+      13        2023-01-04        N   under_followup
+      14        2023-01-07        N   under_followup
+      15        2023-01-04        Y             case
+      16        2023-01-03        N   under_followup
+      17        2023-01-06        N   under_followup
+      18        2023-01-04        Y             case
+      19        2023-01-03        N lost_to_followup
+      20        2023-01-05        N   under_followup
+      21        2023-01-05        Y             case
+      22        2023-01-04        Y             case
+      23        2023-01-04        N   under_followup
+      24        2023-01-04        Y             case
       25        2023-01-04        Y             case
       26        2023-01-04        Y             case
-      27        2023-01-04        Y             case
-      28        2023-01-06        N   under_followup
-      29        2023-01-02        N   under_followup
+      27        2023-01-06        N   under_followup
+      28        2023-01-02        N   under_followup
+      29        2023-01-04        Y             case
       30        2023-01-04        Y             case
-      31        2023-01-04        Y             case
-      32        2023-01-05        N   under_followup
-      33        2023-01-03        N lost_to_followup
-      34        2023-01-06        N lost_to_followup
-      35        2023-01-09        N lost_to_followup
-      36        2023-01-05        Y             case
+      31        2023-01-05        N   under_followup
+      32        2023-01-03        N lost_to_followup
+      33        2023-01-06        N lost_to_followup
+      34        2023-01-09        N lost_to_followup
+      35        2023-01-05        Y             case
       
 
 # sim_outbreak works as expected with age-strat risks
@@ -285,77 +285,77 @@
       
       $contacts
                      from                       to age gender date_first_contact
-      2   Rachael Sneesby               Nadia Hill  62      f         2023-01-02
-      3   Rachael Sneesby             Diane Slaugh  20      f         2023-01-04
-      4        Nadia Hill          Kelvin Poveromo  29      m         2023-01-05
-      5        Nadia Hill           Jonathan Huynh  42      m         2023-01-03
-      6        Nadia Hill          Tharwa al-Amber  60      f         2023-01-02
-      7        Nadia Hill        Taaliba el-Habibi  65      f         2022-12-31
-      8    Jonathan Huynh              Ian Sanchez  28      m         2023-01-01
-      9    Jonathan Huynh               Sadie Ross  78      f         2022-12-29
-      10  Tharwa al-Amber         Jordan Marquardt  31      f         2023-01-04
-      11  Tharwa al-Amber           Jacob Martinez  12      m         2023-01-02
-      12  Tharwa al-Amber          Melissa Salazar  80      f         2023-01-01
-      13      Ian Sanchez     Larissa Garcia Perez  44      f         2022-12-29
-      14      Ian Sanchez            Dakota Kremke  74      m         2022-12-31
-      15      Ian Sanchez                Atif Jung  26      m         2023-01-06
-      16      Ian Sanchez               Joseph Sky  33      m         2023-01-03
-      17      Ian Sanchez              Sean Powell   4      m         2022-12-30
-      18 Jordan Marquardt              Jonah Smith  53      m         2023-01-03
-      19       Joseph Sky            Geoffrey Boon  86      m         2023-01-03
-      20    Geoffrey Boon       Husniyya al-Zamani  89      f         2023-01-02
-      21    Geoffrey Boon             Leona Torres  24      f         2023-01-04
-      22    Geoffrey Boon            Juyoung Sands  37      f         2023-01-03
-      23    Juyoung Sands                 Mya Hunt  15      f         2023-01-03
-      24         Mya Hunt Chandler Saldana-Martine  14      m         2023-01-02
-      25         Mya Hunt             Josef Fortes  81      m         2023-01-03
-      26     Josef Fortes           Badri el-Hoque  82      m         2023-01-02
-      27   Badri el-Hoque            William Jones  72      m         2023-01-03
-      28   Badri el-Hoque                Ka Lok Le  53      m         2023-01-03
-      29   Badri el-Hoque           Bryan Goodwine  56      m         2022-12-29
-      30    William Jones             Luis Arreola  71      m         2023-01-04
-      31    William Jones           Zachary Abeyta  50      m         2023-01-01
-      32    William Jones           Naasif al-Sani  73      m         2022-12-31
-      33    William Jones          Danielle Morser  20      f         2023-01-01
-      34     Luis Arreola          Maahir al-Jamal  75      m         2023-01-06
-      35     Luis Arreola           Arielle Connor   2      f         2023-01-08
-      36   Zachary Abeyta          Shawnesse Smith   3      f         2023-01-03
+      1   Rachael Sneesby               Nadia Hill  62      f         2023-01-02
+      2   Rachael Sneesby             Diane Slaugh  20      f         2023-01-04
+      3        Nadia Hill          Kelvin Poveromo  29      m         2023-01-05
+      4        Nadia Hill           Jonathan Huynh  42      m         2023-01-03
+      5        Nadia Hill          Tharwa al-Amber  60      f         2023-01-02
+      6        Nadia Hill        Taaliba el-Habibi  65      f         2022-12-31
+      7    Jonathan Huynh              Ian Sanchez  28      m         2023-01-01
+      8    Jonathan Huynh               Sadie Ross  78      f         2022-12-29
+      9   Tharwa al-Amber         Jordan Marquardt  31      f         2023-01-04
+      10  Tharwa al-Amber           Jacob Martinez  12      m         2023-01-02
+      11  Tharwa al-Amber          Melissa Salazar  80      f         2023-01-01
+      12      Ian Sanchez     Larissa Garcia Perez  44      f         2022-12-29
+      13      Ian Sanchez            Dakota Kremke  74      m         2022-12-31
+      14      Ian Sanchez                Atif Jung  26      m         2023-01-06
+      15      Ian Sanchez               Joseph Sky  33      m         2023-01-03
+      16      Ian Sanchez              Sean Powell   4      m         2022-12-30
+      17 Jordan Marquardt              Jonah Smith  53      m         2023-01-03
+      18       Joseph Sky            Geoffrey Boon  86      m         2023-01-03
+      19    Geoffrey Boon       Husniyya al-Zamani  89      f         2023-01-02
+      20    Geoffrey Boon             Leona Torres  24      f         2023-01-04
+      21    Geoffrey Boon            Juyoung Sands  37      f         2023-01-03
+      22    Juyoung Sands                 Mya Hunt  15      f         2023-01-03
+      23         Mya Hunt Chandler Saldana-Martine  14      m         2023-01-02
+      24         Mya Hunt             Josef Fortes  81      m         2023-01-03
+      25     Josef Fortes           Badri el-Hoque  82      m         2023-01-02
+      26   Badri el-Hoque            William Jones  72      m         2023-01-03
+      27   Badri el-Hoque                Ka Lok Le  53      m         2023-01-03
+      28   Badri el-Hoque           Bryan Goodwine  56      m         2022-12-29
+      29    William Jones             Luis Arreola  71      m         2023-01-04
+      30    William Jones           Zachary Abeyta  50      m         2023-01-01
+      31    William Jones           Naasif al-Sani  73      m         2022-12-31
+      32    William Jones          Danielle Morser  20      f         2023-01-01
+      33     Luis Arreola          Maahir al-Jamal  75      m         2023-01-06
+      34     Luis Arreola           Arielle Connor   2      f         2023-01-08
+      35   Zachary Abeyta          Shawnesse Smith   3      f         2023-01-03
          date_last_contact was_case           status
-      2         2023-01-05        Y             case
-      3         2023-01-07        N lost_to_followup
-      4         2023-01-08        N lost_to_followup
+      1         2023-01-05        Y             case
+      2         2023-01-07        N lost_to_followup
+      3         2023-01-08        N lost_to_followup
+      4         2023-01-04        Y             case
       5         2023-01-04        Y             case
-      6         2023-01-04        Y             case
-      7         2023-01-03        N          unknown
-      8         2023-01-03        Y             case
-      9         2023-01-04        Y             case
-      10        2023-01-07        Y             case
-      11        2023-01-04        N   under_followup
-      12        2023-01-03        N lost_to_followup
-      13        2023-01-02        N   under_followup
-      14        2023-01-04        N   under_followup
-      15        2023-01-07        N          unknown
-      16        2023-01-04        Y             case
-      17        2023-01-03        N   under_followup
-      18        2023-01-06        N   under_followup
-      19        2023-01-04        Y             case
-      20        2023-01-03        N   under_followup
-      21        2023-01-05        N   under_followup
-      22        2023-01-05        Y             case
-      23        2023-01-04        Y             case
-      24        2023-01-04        N   under_followup
+      6         2023-01-03        N          unknown
+      7         2023-01-03        Y             case
+      8         2023-01-04        Y             case
+      9         2023-01-07        Y             case
+      10        2023-01-04        N   under_followup
+      11        2023-01-03        N lost_to_followup
+      12        2023-01-02        N   under_followup
+      13        2023-01-04        N   under_followup
+      14        2023-01-07        N          unknown
+      15        2023-01-04        Y             case
+      16        2023-01-03        N   under_followup
+      17        2023-01-06        N   under_followup
+      18        2023-01-04        Y             case
+      19        2023-01-03        N   under_followup
+      20        2023-01-05        N   under_followup
+      21        2023-01-05        Y             case
+      22        2023-01-04        Y             case
+      23        2023-01-04        N   under_followup
+      24        2023-01-04        Y             case
       25        2023-01-04        Y             case
       26        2023-01-04        Y             case
-      27        2023-01-04        Y             case
-      28        2023-01-06        N lost_to_followup
-      29        2023-01-02        N          unknown
+      27        2023-01-06        N lost_to_followup
+      28        2023-01-02        N          unknown
+      29        2023-01-04        Y             case
       30        2023-01-04        Y             case
-      31        2023-01-04        Y             case
-      32        2023-01-05        N lost_to_followup
-      33        2023-01-03        N   under_followup
-      34        2023-01-06        N   under_followup
-      35        2023-01-09        N   under_followup
-      36        2023-01-05        Y             case
+      31        2023-01-05        N lost_to_followup
+      32        2023-01-03        N   under_followup
+      33        2023-01-06        N   under_followup
+      34        2023-01-09        N   under_followup
+      35        2023-01-05        Y             case
       
 
 # sim_outbreak works as expected with age structure
@@ -405,76 +405,76 @@
       
       $contacts
                          from                   to age gender date_first_contact
-      2       Molly Archuleta        Gracie Lorenz  76      f         2023-01-02
-      3       Molly Archuleta     Mas'ooda el-Azad  65      f         2023-01-04
-      4         Gracie Lorenz      Jonathan Mccabe  35      m         2023-01-05
-      5         Gracie Lorenz         David Alexis   9      m         2023-01-03
-      6         Gracie Lorenz Jazmyn Trotter-Brown  89      f         2023-01-02
-      7         Gracie Lorenz      Jenifer Sanchez  36      f         2022-12-31
-      8          David Alexis           Jack Byers  16      m         2023-01-01
-      9          David Alexis         Janet Cortez  82      f         2022-12-29
-      10 Jazmyn Trotter-Brown         Angeling Das  27      f         2023-01-04
-      11 Jazmyn Trotter-Brown   Thewodros Martinez  35      m         2023-01-02
-      12 Jazmyn Trotter-Brown       Bianca Naranjo   2      f         2023-01-01
-      13           Jack Byers   Alexandra Brostrom   6      f         2022-12-29
-      14           Jack Byers   Timothy Rademacher  23      m         2022-12-31
-      15           Jack Byers        Kail Fanshier  90      m         2023-01-06
-      16           Jack Byers         Paul Collier  47      m         2023-01-03
-      17           Jack Byers         Timothy Diaz  64      m         2022-12-30
-      18         Angeling Das            Mark Soto  16      m         2023-01-03
-      19         Paul Collier  Shawn Bustos-Campos  85      m         2023-01-03
-      20  Shawn Bustos-Campos         Picabo Colin  42      f         2023-01-02
-      21  Shawn Bustos-Campos           Ana Rinard  26      f         2023-01-04
-      22  Shawn Bustos-Campos      Fuaada al-Kanan  57      f         2023-01-03
-      23      Fuaada al-Kanan       Caitlin Reeves  89      f         2023-01-03
-      24       Caitlin Reeves        Brendan Watts  21      m         2023-01-02
-      25       Caitlin Reeves       Samuel Thacker  90      m         2023-01-03
-      26       Samuel Thacker      Kenneth Huggins  48      m         2023-01-02
-      27      Kenneth Huggins        Alonzo Foster  62      m         2023-01-03
-      28      Kenneth Huggins        Hector Correa  20      m         2023-01-03
-      29      Kenneth Huggins      Samuel Classick   4      m         2022-12-29
-      30        Alonzo Foster      Wajeeb al-Jafri   9      m         2023-01-04
-      31        Alonzo Foster        Kyron Pollard  29      m         2023-01-01
-      32        Alonzo Foster          Lexie Meeks  32      m         2022-12-31
-      33        Alonzo Foster       Ahanabah Smith  82      f         2023-01-01
-      34      Wajeeb al-Jafri        Jordan Altman  75      m         2023-01-06
-      35      Wajeeb al-Jafri   Kebremeskel Gaines   2      f         2023-01-08
-      36        Kyron Pollard       Quinasia Lewis  79      f         2023-01-03
+      1       Molly Archuleta        Gracie Lorenz  76      f         2023-01-02
+      2       Molly Archuleta     Mas'ooda el-Azad  65      f         2023-01-04
+      3         Gracie Lorenz      Jonathan Mccabe  35      m         2023-01-05
+      4         Gracie Lorenz         David Alexis   9      m         2023-01-03
+      5         Gracie Lorenz Jazmyn Trotter-Brown  89      f         2023-01-02
+      6         Gracie Lorenz      Jenifer Sanchez  36      f         2022-12-31
+      7          David Alexis           Jack Byers  16      m         2023-01-01
+      8          David Alexis         Janet Cortez  82      f         2022-12-29
+      9  Jazmyn Trotter-Brown         Angeling Das  27      f         2023-01-04
+      10 Jazmyn Trotter-Brown   Thewodros Martinez  35      m         2023-01-02
+      11 Jazmyn Trotter-Brown       Bianca Naranjo   2      f         2023-01-01
+      12           Jack Byers   Alexandra Brostrom   6      f         2022-12-29
+      13           Jack Byers   Timothy Rademacher  23      m         2022-12-31
+      14           Jack Byers        Kail Fanshier  90      m         2023-01-06
+      15           Jack Byers         Paul Collier  47      m         2023-01-03
+      16           Jack Byers         Timothy Diaz  64      m         2022-12-30
+      17         Angeling Das            Mark Soto  16      m         2023-01-03
+      18         Paul Collier  Shawn Bustos-Campos  85      m         2023-01-03
+      19  Shawn Bustos-Campos         Picabo Colin  42      f         2023-01-02
+      20  Shawn Bustos-Campos           Ana Rinard  26      f         2023-01-04
+      21  Shawn Bustos-Campos      Fuaada al-Kanan  57      f         2023-01-03
+      22      Fuaada al-Kanan       Caitlin Reeves  89      f         2023-01-03
+      23       Caitlin Reeves        Brendan Watts  21      m         2023-01-02
+      24       Caitlin Reeves       Samuel Thacker  90      m         2023-01-03
+      25       Samuel Thacker      Kenneth Huggins  48      m         2023-01-02
+      26      Kenneth Huggins        Alonzo Foster  62      m         2023-01-03
+      27      Kenneth Huggins        Hector Correa  20      m         2023-01-03
+      28      Kenneth Huggins      Samuel Classick   4      m         2022-12-29
+      29        Alonzo Foster      Wajeeb al-Jafri   9      m         2023-01-04
+      30        Alonzo Foster        Kyron Pollard  29      m         2023-01-01
+      31        Alonzo Foster          Lexie Meeks  32      m         2022-12-31
+      32        Alonzo Foster       Ahanabah Smith  82      f         2023-01-01
+      33      Wajeeb al-Jafri        Jordan Altman  75      m         2023-01-06
+      34      Wajeeb al-Jafri   Kebremeskel Gaines   2      f         2023-01-08
+      35        Kyron Pollard       Quinasia Lewis  79      f         2023-01-03
          date_last_contact was_case           status
-      2         2023-01-05        Y             case
-      3         2023-01-07        N   under_followup
-      4         2023-01-08        N   under_followup
+      1         2023-01-05        Y             case
+      2         2023-01-07        N   under_followup
+      3         2023-01-08        N   under_followup
+      4         2023-01-04        Y             case
       5         2023-01-04        Y             case
-      6         2023-01-04        Y             case
-      7         2023-01-03        N   under_followup
-      8         2023-01-03        Y             case
-      9         2023-01-04        Y             case
-      10        2023-01-07        Y             case
-      11        2023-01-04        N   under_followup
-      12        2023-01-03        N   under_followup
-      13        2023-01-02        N   under_followup
-      14        2023-01-04        N   under_followup
-      15        2023-01-07        N   under_followup
-      16        2023-01-04        Y             case
-      17        2023-01-03        N lost_to_followup
-      18        2023-01-06        N   under_followup
-      19        2023-01-04        Y             case
-      20        2023-01-03        N   under_followup
-      21        2023-01-05        N          unknown
-      22        2023-01-05        Y             case
-      23        2023-01-04        Y             case
-      24        2023-01-04        N lost_to_followup
+      6         2023-01-03        N   under_followup
+      7         2023-01-03        Y             case
+      8         2023-01-04        Y             case
+      9         2023-01-07        Y             case
+      10        2023-01-04        N   under_followup
+      11        2023-01-03        N   under_followup
+      12        2023-01-02        N   under_followup
+      13        2023-01-04        N   under_followup
+      14        2023-01-07        N   under_followup
+      15        2023-01-04        Y             case
+      16        2023-01-03        N lost_to_followup
+      17        2023-01-06        N   under_followup
+      18        2023-01-04        Y             case
+      19        2023-01-03        N   under_followup
+      20        2023-01-05        N          unknown
+      21        2023-01-05        Y             case
+      22        2023-01-04        Y             case
+      23        2023-01-04        N lost_to_followup
+      24        2023-01-04        Y             case
       25        2023-01-04        Y             case
       26        2023-01-04        Y             case
-      27        2023-01-04        Y             case
-      28        2023-01-06        N   under_followup
-      29        2023-01-02        N   under_followup
+      27        2023-01-06        N   under_followup
+      28        2023-01-02        N   under_followup
+      29        2023-01-04        Y             case
       30        2023-01-04        Y             case
-      31        2023-01-04        Y             case
-      32        2023-01-05        N   under_followup
-      33        2023-01-03        N   under_followup
-      34        2023-01-06        N   under_followup
-      35        2023-01-09        N lost_to_followup
-      36        2023-01-05        Y             case
+      31        2023-01-05        N   under_followup
+      32        2023-01-03        N   under_followup
+      33        2023-01-06        N   under_followup
+      34        2023-01-09        N lost_to_followup
+      35        2023-01-05        Y             case
       
 
