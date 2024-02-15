@@ -230,7 +230,6 @@ sim_linelist <- function(contact_distribution,
     min_outbreak_size = min_outbreak_size,
     population_age = population_age,
     case_type_probs = case_type_probs,
-    contact_tracing_status_probs = NULL,
     config = config
   )
 
