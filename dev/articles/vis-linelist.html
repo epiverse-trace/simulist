@@ -327,35 +327,35 @@ distribution to 2.</p>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    id      case_name case_type gender age date_onset date_admission date_death</span></span>
-<span><span class="co">#&gt; 1   1        Kacy To confirmed      f  39 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3   3    Lorrin Dehn confirmed      f  36 2023-01-04     2023-01-07       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6   6     Tess Green  probable      f  81 2023-01-05           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 9   9  Alexander Chu confirmed      m  89 2023-01-06           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 10 10 Ashley Cornejo confirmed      f  73 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 13 13  Danika Folsom confirmed      f  79 2023-01-05           &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;    date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1                &lt;NA&gt;              &lt;NA&gt;     26.1</span></span>
-<span><span class="co">#&gt; 3          2023-01-06        2023-01-09     26.1</span></span>
-<span><span class="co">#&gt; 6          2023-01-03        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 9          2023-01-03        2023-01-08     26.1</span></span>
-<span><span class="co">#&gt; 10         2023-01-11        2023-01-12     26.1</span></span>
-<span><span class="co">#&gt; 13         2023-01-09        2023-01-10     26.1</span></span>
+<span><span class="co">#&gt;   id      case_name case_type gender age date_onset date_admission date_death</span></span>
+<span><span class="co">#&gt; 1  1        Kacy To confirmed      f  39 2023-01-01           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  3    Lorrin Dehn confirmed      f  36 2023-01-04     2023-01-07       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  6     Tess Green  probable      f  81 2023-01-05           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  9  Alexander Chu confirmed      m  89 2023-01-06           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5 10 Ashley Cornejo confirmed      f  73 2023-01-03           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6 13  Danika Folsom confirmed      f  79 2023-01-05           &lt;NA&gt;       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;   date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;              &lt;NA&gt;     26.1</span></span>
+<span><span class="co">#&gt; 2         2023-01-06        2023-01-09     26.1</span></span>
+<span><span class="co">#&gt; 3         2023-01-03        2023-01-05       NA</span></span>
+<span><span class="co">#&gt; 4         2023-01-03        2023-01-08     26.1</span></span>
+<span><span class="co">#&gt; 5         2023-01-11        2023-01-12     26.1</span></span>
+<span><span class="co">#&gt; 6         2023-01-09        2023-01-10     26.1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          from                to age gender date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 2     Kacy To Suhaila el-Akhtar  29      f         2022-12-31        2023-01-03</span></span>
-<span><span class="co">#&gt; 3     Kacy To       Lorrin Dehn  36      f         2023-01-06        2023-01-09</span></span>
-<span><span class="co">#&gt; 4     Kacy To         Jina Shaw  32      f         2023-01-02        2023-01-06</span></span>
-<span><span class="co">#&gt; 5     Kacy To   Nakheel el-Omar  51      f         2022-12-31        2023-01-07</span></span>
-<span><span class="co">#&gt; 6     Kacy To        Tess Green  81      f         2023-01-03        2023-01-05</span></span>
-<span><span class="co">#&gt; 7 Lorrin Dehn      Jairo Seaman  51      m         2023-01-06        2023-01-08</span></span>
+<span><span class="co">#&gt; 1     Kacy To Suhaila el-Akhtar  29      f         2022-12-31        2023-01-03</span></span>
+<span><span class="co">#&gt; 2     Kacy To       Lorrin Dehn  36      f         2023-01-06        2023-01-09</span></span>
+<span><span class="co">#&gt; 3     Kacy To         Jina Shaw  32      f         2023-01-02        2023-01-06</span></span>
+<span><span class="co">#&gt; 4     Kacy To   Nakheel el-Omar  51      f         2022-12-31        2023-01-07</span></span>
+<span><span class="co">#&gt; 5     Kacy To        Tess Green  81      f         2023-01-03        2023-01-05</span></span>
+<span><span class="co">#&gt; 6 Lorrin Dehn      Jairo Seaman  51      m         2023-01-06        2023-01-08</span></span>
 <span><span class="co">#&gt;   was_case           status</span></span>
-<span><span class="co">#&gt; 2        N lost_to_followup</span></span>
-<span><span class="co">#&gt; 3        Y             case</span></span>
+<span><span class="co">#&gt; 1        N lost_to_followup</span></span>
+<span><span class="co">#&gt; 2        Y             case</span></span>
+<span><span class="co">#&gt; 3        N   under_followup</span></span>
 <span><span class="co">#&gt; 4        N   under_followup</span></span>
-<span><span class="co">#&gt; 5        N   under_followup</span></span>
-<span><span class="co">#&gt; 6        Y             case</span></span>
-<span><span class="co">#&gt; 7        N          unknown</span></span></code></pre></div>
+<span><span class="co">#&gt; 5        Y             case</span></span>
+<span><span class="co">#&gt; 6        N          unknown</span></span></code></pre></div>
 <p>Using the line list and contacts data simulated we can create the
 <code>&lt;epicontacts&gt;</code> object.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">

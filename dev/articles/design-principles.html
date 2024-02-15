@@ -134,6 +134,11 @@ package</a>.</p>
 well-known data structure makes it easy to understand for users.</p>
 </div>
 <div class="section level2">
+<h2 id="package-architecture">Package architecture<a class="anchor" aria-label="anchor" href="#package-architecture"></a>
+</h2>
+<p><img src="../reference/figures/simulist_archi.png" width="700"></p>
+</div>
+<div class="section level2">
 <h2 id="design-decisions">Design decisions<a class="anchor" aria-label="anchor" href="#design-decisions"></a>
 </h2>
 <ul>
@@ -190,7 +195,7 @@ figure labelling.</p></li>
 <li><p>Exported functions that simulate data use the naming convention
 <code>sim_*()</code> (where <code>*</code> is the placeholder). Internal
 functions that simulate have a dot (<code>.</code>) prefix
-(e.g. <code><a href="../reference/dot-sim_utils.html">.sim_bp_linelist()</a></code>). Functions that create fixed data
+(e.g. <code><a href="../reference/dot-sim_internal.html">.sim_internal()</a></code>). Functions that create fixed data
 structures (i.e. data factory functions) have the naming convention
 (<code>create_*()</code> or <code>.create_*()</code>).</p></li>
 <li><p>The use of a <code>config</code> argument in the simulation
