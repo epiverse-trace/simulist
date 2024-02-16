@@ -226,6 +226,50 @@ plot(epicontacts)
 
 There is also the option to plot the contacts network in 3D using the `epicontacts::graph3D()`. 
 
+By default the outbreak simulated by `sim_outbreak()` contains contacts of cases that were not infected. These are shown in the previous network plot by terminal nodes that do not pass on infection to other individuals (note that terminal nodes can also be infected individuals that did not infect anybody else, either due to not have any contacts or due to the probabilistic nature of infection transmission). Here we show how to subset the contacts table in order to only plot the transmission network of cases from the outbreak. 
+
+### Subset contact network to transmission network {.tabset}
+
+#### Base R
+
+```{r, subset-linelist-base-r}
+outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case == "Y", ]
+```
+
+#### Tidyverse
+
+```{r, subset-linelist-tidyverse, message=FALSE}
+library(dplyr)
+outbreak$contacts <- outbreak$contacts %>%
+  dplyr::filter(was_case == "Y")
+```
+
+## {-}
+
+```{r, inspect-data}
+head(outbreak$linelist)
+head(outbreak$contacts)
+```
+
+```{r, create-cases-epicontacts}
+epicontacts <- make_epicontacts(
+  linelist = outbreak$linelist,
+  contacts = outbreak$contacts,
+  id = "case_name",
+  from = "from",
+  to = "to",
+  directed = TRUE
+)
+```
+
+```{r, print-cases-epicontacts}
+epicontacts
+```
+
+```{r, plot-cases-epicontacts, fig.cap="Figure 6: Transmission chain from infectious disease outbreak. This includes only individuals that were infected, including confirmed, probable and suspected cases."}
+plot(epicontacts)
+```
+
 ## Visualising other line list information
 
 If there are other aspects of line list data that can be plotted and you would like to them added to this vignette please make an [issue](https://github.com/epiverse-trace/simulist/issues) or [pull request](https://github.com/epiverse-trace/simulist/pulls).
