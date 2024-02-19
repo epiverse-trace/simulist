@@ -68,6 +68,48 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="simulist-development-version">simulist (development version)<a class="anchor" aria-label="anchor" href="#simulist-development-version"></a></h2>
+<p>Second release of <em>simulist</em>, updates the core simulation model and, as a result, the arguments for <code>sim_*()</code> functions for simulating line list data and/or contact table data exported from <em>simulist</em> are updated. The internal package architecture is also refactored.</p>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<div class="section level4">
+<h4 id="external-development-version">External<a class="anchor" aria-label="anchor" href="#external-development-version"></a></h4>
+<ul><li>
+<code><a href="../reference/create_config.html">create_config()</a></code> now returns a new element in the list: <code>$network</code>. By default <code><a href="../reference/create_config.html">create_config()</a></code> returns <code>network = "adjusted"</code>, which assumes the simulation is a random network and samples contacts with an excess degree distribution (see Details in <code>?create_config()</code>). The network effect can be changed to <code>"unadjusted"</code> to <em>switch off</em> the network effect. <code>$network</code> is checked internally (in <code><a href="../reference/dot-sim_network_bp.html">.sim_network_bp()</a></code>) and will error if not valid (<a href="https://github.com/epiverse-trace/simulist/issues/60" class="external-link">#60</a>).</li>
+<li>Package architecture diagram is added to <code>design-principles.Rmd</code> (<a href="https://github.com/epiverse-trace/simulist/issues/66" class="external-link">#66</a>).</li>
+<li>lintr GitHub action workflow (<code>lint-changed-files.yaml</code>) is added to the suite of continuous integration workflows (<a href="https://github.com/epiverse-trace/simulist/issues/68" class="external-link">#68</a>).</li>
+<li>Transmission chain visualisation is added to <code>vis-linelist.Rmd</code> (<a href="https://github.com/epiverse-trace/simulist/issues/70" class="external-link">#70</a>).</li>
+</ul></div>
+<div class="section level4">
+<h4 id="internal-development-version">Internal<a class="anchor" aria-label="anchor" href="#internal-development-version"></a></h4>
+<ul><li>
+<code><a href="../reference/dot-sim_network_bp.html">.sim_network_bp()</a></code> is added as an internal function and replaces <code>bpmodels::chain_sim()</code> as the core simulation model producing contacted and infected individuals. <code>{bpmodels}</code> is removed as a dependency as a result (<a href="https://github.com/epiverse-trace/simulist/issues/60" class="external-link">#60</a>).</li>
+<li>
+<code><a href="../reference/dot-sample_names.html">.sample_names()</a></code> is added as an internal function to utilise <code><a href="https://rdrr.io/pkg/randomNames/man/randomNames.html" class="external-link">randomNames::randomNames()</a></code> to produce more unique names than <code>randomNames(..., sample.with.replacement = FALSE)</code>.</li>
+<li>Refactor of internal simulation architecture replaced <code>.sim_bp_linelist()</code>, <code>.sim_clinical_linelist()</code> and <code>.sim_contacts_tbl()</code> with <code><a href="../reference/dot-sim_internal.html">.sim_internal()</a></code> (<a href="https://github.com/epiverse-trace/simulist/issues/66" class="external-link">#66</a>).</li>
+<li>The <code>sim_utils.R</code> file was renamed to <code>utils.R</code> (<a href="https://github.com/epiverse-trace/simulist/issues/66" class="external-link">#66</a>).</li>
+<li>Regression tests of <code>sim_*()</code> functions now use <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">snapshot testing</a> for more detailed data checking (<a href="https://github.com/epiverse-trace/simulist/issues/65" class="external-link">#65</a>).</li>
+<li>Internal testing data (<code>testdata</code>) files have been updated, as has the <code>testdata/README.md</code> with instructions (<a href="https://github.com/epiverse-trace/simulist/issues/64" class="external-link">#64</a>).</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>
+<code>R</code> and <code>serial_interval</code> arguments have been removed from <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> functions and instead <code>contact_distribution</code>, <code>contact_interval</code> and <code>prob_infect</code> are used to parameterise the simulation. Documentation, both functions and vignettes, have been updated with these changes (<a href="https://github.com/epiverse-trace/simulist/issues/60" class="external-link">#60</a>).</li>
+<li>The <code>contact_distribution</code> argument in <code>sim_*()</code> functions requires a density function if supplied as an anonymous function. Information is added to <code>simulist.Rmd</code> to explain this.</li>
+<li>The contacts table output from <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> now uses column headers <code>age</code> and <code>gender</code> instead of <code>cnt_age</code> and <code>cnt_gender</code>.</li>
+<li>
+<code>contact_distribution</code> is redefined and redocumented as the distribution of contacts per individual, rather than the number of contacts that do not get infected as it was in v0.1.0.</li>
+<li>
+<code>row.names</code> for <code>&lt;data.frame&gt;</code>s output by <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> are now sequential from <code>1:nrows</code> (<a href="https://github.com/epiverse-trace/simulist/issues/63" class="external-link">#63</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>None</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-and-defunct-development-version">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-development-version"></a></h3>
+<ul><li>None</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="simulist-010">simulist 0.1.0<a class="anchor" aria-label="anchor" href="#simulist-010"></a></h2>
