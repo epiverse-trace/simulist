@@ -51,6 +51,7 @@ NULL
   args <- c(nrow(.data), list(...))
 
   contact_delay <- tryCatch(
+    do.call(rdist, args = args),
     error = function(cnd) {
       stop(
         "Incorrect parameterisation of distribution, check config",
@@ -62,8 +63,7 @@ NULL
         "Incorrect parameterisation of distribution, check config",
         call. = FALSE
       )
-    },
-    do.call(rdist, args = args)
+    }
   )
 
   if (contact_type == "first") {
@@ -219,6 +219,7 @@ NULL
   args <- c(n = 1, list(...))
 
   ct_value <- tryCatch(
+    do.call(rdist, args = args),
     error = function(cnd) {
       stop(
         "Incorrect parameterisation of distribution, check config",
@@ -230,8 +231,7 @@ NULL
         "Incorrect parameterisation of distribution, check config",
         call. = FALSE
       )
-    },
-    do.call(rdist, args = args)
+    }
   )
 
   .data$ct_value <- ifelse(
