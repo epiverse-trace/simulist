@@ -24,7 +24,7 @@ Second release of _simulist_, updates the core simulation model and, as a result
 
 * `R` and `serial_interval` arguments have been removed from `sim_linelist()`, `sim_contacts()` and `sim_outbreak()` functions and instead `contact_distribution`, `contact_interval` and `prob_infect` are used to parameterise the simulation. Documentation, both functions and vignettes, have been updated with these changes (#60).
 * The `contact_distribution` argument in `sim_*()` functions requires a density function if supplied as an anonymous function. Information is added to `simulist.Rmd` to explain this.
-* The contacts table output from `sim_contacts()` and `sim_outbreak()` now uses column headers `age` and `gender` instead of `cnt_age` and `cnt_gender`.
+* The line list output from `sim_linelist()` now uses column header `sex` instead of `gender`. The contacts table output from `sim_contacts()` and `sim_outbreak()` now uses column headers `age` and `sex` instead of `cnt_age` and `cnt_gender`.
 * `contact_distribution` is redefined and redocumented as the distribution of contacts per individual, rather than the number of contacts that do not get infected as it was in v0.1.0.
 * `row.names` for `<data.frame>`s output by `sim_linelist()`, `sim_contacts()` and `sim_outbreak()` are now sequential from `1:nrows` (#63).
 
