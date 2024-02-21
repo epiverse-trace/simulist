@@ -110,6 +110,8 @@
   # remove unused IDs
   id <- seq_along(generation)
   infected <- infected[seq_along(generation)]
+  # if the outcome names are changed, please find and update all
+  # logical expressions, e.g., x == "infected" or x == "contact"
   infected <- ifelse(test = infected, yes = "infected", no = "contact")
   time <- time[seq_along(generation)]
 
