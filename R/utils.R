@@ -1,7 +1,7 @@
 #' Sample names using [randomNames::randomNames()]
 #'
 #' @description
-#' Sample names for specified genders by sampling with replacement to avoid
+#' Sample names for specified sexes by sampling with replacement to avoid
 #' exhausting number of name when `sample.with.replacement = FALSE`. The
 #' duplicated names during sampling need to be removed to ensure each
 #' individual has a unique name. In order to have enough unique names, more
@@ -21,8 +21,8 @@
 #' @keywords internal
 .sample_names <- function(.data,
                           buffer_factor = 1.5) {
-  m_idx <- .data$gender == "m"
-  f_idx <- .data$gender == "f"
+  m_idx <- .data$sex == "m"
+  f_idx <- .data$sex == "f"
   num_m <- sum(m_idx)
   num_f <- sum(f_idx)
   num_sample_m <- ceiling(num_m * buffer_factor)
@@ -59,7 +59,7 @@
   names_m <- names_m[1:num_m]
   names_f <- names_f[1:num_f]
 
-  # order names with gender codes from .data
+  # order names with sex codes from .data
   names_mf <- vector(mode = "character", length = nrow(.data))
   names_mf[m_idx] <- names_m
   names_mf[f_idx] <- names_f

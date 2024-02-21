@@ -80,8 +80,8 @@
     config$first_contact_distribution_params
   )
 
-  # add random age and gender
-  .data$gender <- sample(c("m", "f"), replace = TRUE, size = nrow(.data))
+  # add random age and sex
+  .data$sex <- sample(c("m", "f"), replace = TRUE, size = nrow(.data))
   if (is.data.frame(population_age)) {
     age_groups <- apply(population_age, MARGIN = 1, function(x) x[1]:x[2])
     sample_weight <- rep(population_age$proportion, times = lengths(age_groups))
@@ -120,7 +120,7 @@
     .data$date_death <- .data$deaths + outbreak_start_date
 
     linelist_cols <- c(
-      "id", "case_type", "gender", "age", "date_onset", "date_admission",
+      "id", "case_type", "sex", "age", "date_onset", "date_admission",
       "date_death", "date_first_contact", "date_last_contact"
     )
 
@@ -156,12 +156,12 @@
     contacts_tbl <- subset(
       .data,
       select = c(
-        "infector_name", "case_name", "age", "gender",
+        "infector_name", "case_name", "age", "sex",
         "date_first_contact", "date_last_contact"
       )
     )
     colnames(contacts_tbl) <- c(
-      "from", "to", "age", "gender", "date_first_contact",
+      "from", "to", "age", "sex", "date_first_contact",
       "date_last_contact"
     )
     contacts_tbl$was_case <- ifelse(
