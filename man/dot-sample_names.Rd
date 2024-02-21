@@ -18,7 +18,7 @@ oversampling (or buffer) when creating a vector of unique names from
 A \code{character} vector.
 }
 \description{
-Sample names for specified genders by sampling with replacement to avoid
+Sample names for specified sexes by sampling with replacement to avoid
 exhausting number of name when \code{sample.with.replacement = FALSE}. The
 duplicated names during sampling need to be removed to ensure each
 individual has a unique name. In order to have enough unique names, more
