@@ -114,14 +114,14 @@ weekly <- incidence(linelist, date_index = "date_onset", interval = "isoweek")
 plot(weekly)
 ```
 
-In order to check differences between a group in the line list data, for example gender, the `<incidence2>` data object can be recreated, specifying which columns to group by.
+In order to check differences between a group in the line list data, for example sex, the `<incidence2>` data object can be recreated, specifying which columns to group by.
 
-```{r, group-by-gender, fig.cap="Figure 3: Weekly incidence of cases from symptom onset facetted by gender.", fig.width = 8, fig.height = 5}
+```{r, group-by-sex, fig.cap="Figure 3: Weekly incidence of cases from symptom onset facetted by sex", fig.width = 8, fig.height = 5}
 weekly <- incidence(
   linelist,
   date_index = "date_onset",
   interval = "isoweek",
-  groups = "gender"
+  groups = "sex"
 )
 plot(weekly)
 ```
@@ -137,7 +137,7 @@ daily <- incidence(
     death = "date_death"
   ),
   interval = "daily",
-  groups = "gender"
+  groups = "sex"
 )
 daily <- complete_dates(daily)
 plot(daily)
