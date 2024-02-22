@@ -89,6 +89,7 @@ NULL
 
   # hosp_risk is either numeric or <data.frame>
   if (is.numeric(hosp_risk)) {
+    # size is converted to an integer internally in sample()
     pop_sample <- sample(
       which(infected_idx),
       replace = FALSE,
@@ -100,6 +101,7 @@ NULL
       age_bracket <- hosp_risk$min_age[i]:hosp_risk$max_age[i]
       age_group <- which(.data$age %in% age_bracket)
       not_hosp_prob <- 1 - hosp_risk$risk[i]
+      # size is converted to an integer internally in sample()
       age_group_sample <- sample(
         age_group,
         replace = FALSE,
@@ -126,6 +128,7 @@ NULL
 
   apply_death_risk <- function(.data, risk, hosp = TRUE) {
     if (is.numeric(risk)) {
+      # size is converted to an integer internally in sample()
       pop_sample <- sample(
         which(infected_idx),
         replace = FALSE,
@@ -145,6 +148,7 @@ NULL
           )
         }
         not_hosp_death_prob <- 1 - risk$risk[i]
+        # size is converted to an integer internally in sample()
         age_group_sample <- sample(
           age_group,
           replace = FALSE,
