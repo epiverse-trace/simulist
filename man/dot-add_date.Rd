@@ -12,7 +12,7 @@
   contact_type = c("first", "last"),
   distribution = c("pois", "geom"),
   ...,
-  outbreak_start_date
+  outbreak_start_date = NULL
 )
 
 .add_hospitalisation(.data, onset_to_hosp, hosp_risk)

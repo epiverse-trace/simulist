@@ -27,14 +27,14 @@ NULL
                               contact_type = c("first", "last"),
                               distribution = c("pois", "geom"),
                               ...,
-                              outbreak_start_date) {
+                              outbreak_start_date = NULL) {
   contact_type <- match.arg(contact_type)
   distribution <- match.arg(distribution)
 
   stopifnot(
     "outbreak_start_date is only required for adding date of last contact" =
-      contact_type == "last" && !missing(outbreak_start_date) ||
-      contact_type == "first" && missing(outbreak_start_date)
+      contact_type == "last" && !is.null(outbreak_start_date) ||
+      contact_type == "first" && is.null(outbreak_start_date)
   )
 
   rdist <- switch(distribution,
