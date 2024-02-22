@@ -79,3 +79,20 @@ test_that("sim_contacts fails as expected with empty config", {
     regexp = "Network incorrectly specified, check config"
   )
 })
+
+test_that("sim_contacts works as expected with age structure", {
+  age_struct <- data.frame(
+    age_range = c("1-4", "5-79", "80-90"),
+    proportion = c(0.1, 0.7, 0.2),
+    stringsAsFactors = FALSE
+  )
+  set.seed(1)
+  expect_snapshot(
+    sim_contacts(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      population_age = age_struct
+    )
+  )
+})
