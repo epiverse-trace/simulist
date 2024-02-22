@@ -3,7 +3,10 @@ test_that(".check_risk_df works as expected", {
     age_limit = c(1, 5, 80),
     risk = c(0.1, 0.05, 0.2)
   )
-  age_dep_hosp_risk <- .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90))
+  age_dep_hosp_risk <- .check_risk_df(
+    age_dep_hosp_risk,
+    age_range = c(lower = 1, upper = 90)
+  )
   expect_s3_class(age_dep_hosp_risk, class = "data.frame")
   expect_identical(dim(age_dep_hosp_risk), c(3L, 3L))
   expect_identical(colnames(age_dep_hosp_risk), c("min_age", "max_age", "risk"))
@@ -19,7 +22,7 @@ test_that(".check_risk_df fails as expected", {
     hosp_risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 91)),
+    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 91)),
     regexp = "column names should be 'age_limit' & 'risk'"
   )
 
@@ -28,7 +31,7 @@ test_that(".check_risk_df fails as expected", {
     risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
+    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
     regexp = "minimum age of lowest age group should match lower age range"
   )
 
@@ -37,7 +40,7 @@ test_that(".check_risk_df fails as expected", {
     risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
+    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
     regexp =
       "lower bound of oldest age group must be lower than highest age range"
   )
@@ -47,7 +50,7 @@ test_that(".check_risk_df fails as expected", {
     risk = c(-0.1, 0.5, 1.1)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
+    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
     regexp = "risk should be between 0 and 1"
   )
 
@@ -56,7 +59,7 @@ test_that(".check_risk_df fails as expected", {
     risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
+    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
     regexp = "age limit in risk data frame must be unique"
   )
 
@@ -65,7 +68,7 @@ test_that(".check_risk_df fails as expected", {
     risk = c(0.1, 0.05, NA)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(1, 90)),
+    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
     regexp = "age limit or risk cannot be NA or NaN"
   )
 })
