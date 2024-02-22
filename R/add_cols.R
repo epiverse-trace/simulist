@@ -87,6 +87,7 @@ NULL
   .data$hospitalisation[infected_idx] <- .data$time[infected_idx] +
     onset_to_hosp(num_infected)
 
+  # hosp_risk is either numeric or <data.frame>
   if (is.numeric(hosp_risk)) {
     pop_sample <- sample(
       which(infected_idx),
