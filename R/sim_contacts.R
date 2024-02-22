@@ -65,6 +65,18 @@ sim_contacts <- function(contact_distribution,
     population_age = population_age
   )
 
+  if (is.data.frame(population_age)) {
+    population_age <- .check_age_df(population_age)
+    age_range <- c(
+      lower = min(population_age[, "min_age"]),
+      upper = max(population_age[, "max_age"])
+    )
+  } else {
+    population_age <- sort(population_age)
+    names(population_age) <- c("lower", "upper")
+    age_range <- population_age
+  }
+
   contacts <- .sim_internal(
     sim_type = "contacts",
     contact_distribution = contact_distribution,
