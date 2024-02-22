@@ -237,3 +237,82 @@
       34        2023-01-12        N   under_followup
       35        2023-01-07        Y             case
 
+# sim_contacts works as expected with age structure
+
+    Code
+      sim_contacts(contact_distribution = contact_distribution, contact_interval = contact_interval,
+        prob_infect = 0.5, population_age = age_struct)
+    Output
+                        from                  to age sex date_first_contact
+      1         Shelbi Vitry     Kathryn Lapitan  76   f         2023-01-02
+      2         Shelbi Vitry      Larissa Wisham  65   f         2023-01-04
+      3      Kathryn Lapitan      Preston Miller  35   m         2023-01-05
+      4      Kathryn Lapitan          Derek Choi   9   m         2023-01-03
+      5      Kathryn Lapitan Chloe Moreno-Ferrel  89   f         2023-01-02
+      6      Kathryn Lapitan        Lisa Johnson  36   f         2022-12-31
+      7           Derek Choi         Jacob Begay  16   m         2023-01-01
+      8           Derek Choi  Mia Yokota-Stroman  82   f         2022-12-29
+      9  Chloe Moreno-Ferrel       Deja Elizondo  27   f         2023-01-04
+      10 Chloe Moreno-Ferrel         Jacob Glaub  35   m         2023-01-02
+      11 Chloe Moreno-Ferrel      Shandre Ostrom   2   f         2023-01-01
+      12         Jacob Begay         Kylie Hicar   6   f         2022-12-29
+      13         Jacob Begay        Woo Bin Park  23   m         2022-12-31
+      14         Jacob Begay       Jayson Brooks  90   m         2023-01-06
+      15         Jacob Begay         Mario Jones  47   m         2023-01-03
+      16         Jacob Begay             Tai Ali  64   m         2022-12-30
+      17       Deja Elizondo    Ronald Burgdorff  16   m         2023-01-03
+      18         Mario Jones        Rodrigo Leal  85   m         2023-01-03
+      19        Rodrigo Leal        Kelia Gentry  42   f         2023-01-02
+      20        Rodrigo Leal          Ana Romero  26   f         2023-01-04
+      21        Rodrigo Leal           Thao Pham  57   f         2023-01-03
+      22           Thao Pham    Nabeela al-Nazir  89   f         2023-01-03
+      23    Nabeela al-Nazir        David Nguyen  21   m         2023-01-02
+      24    Nabeela al-Nazir       Joshua Valeta  90   m         2023-01-03
+      25       Joshua Valeta         Evan Browne  48   m         2023-01-02
+      26         Evan Browne        Jordan Brown  62   m         2023-01-03
+      27         Evan Browne       Leighton Chun  20   m         2023-01-03
+      28         Evan Browne    Raymond Martinez   4   m         2022-12-29
+      29        Jordan Brown       Jalen Thrower   9   m         2023-01-04
+      30        Jordan Brown   Cleevens Smith Jr  29   m         2023-01-01
+      31        Jordan Brown      Saleel el-Dada  32   m         2022-12-31
+      32        Jordan Brown       Lashon Butler  82   f         2023-01-01
+      33       Jalen Thrower  Suhail al-Abdallah  75   m         2023-01-06
+      34       Jalen Thrower       Alison Truong   2   f         2023-01-08
+      35   Cleevens Smith Jr         Emma Weaver  79   f         2023-01-03
+         date_last_contact was_case           status
+      1         2023-01-05        Y             case
+      2         2023-01-07        N   under_followup
+      3         2023-01-08        N   under_followup
+      4         2023-01-04        Y             case
+      5         2023-01-04        Y             case
+      6         2023-01-03        N   under_followup
+      7         2023-01-03        Y             case
+      8         2023-01-04        Y             case
+      9         2023-01-07        Y             case
+      10        2023-01-04        N   under_followup
+      11        2023-01-03        N lost_to_followup
+      12        2023-01-02        N   under_followup
+      13        2023-01-04        N   under_followup
+      14        2023-01-07        N          unknown
+      15        2023-01-04        Y             case
+      16        2023-01-03        N lost_to_followup
+      17        2023-01-06        N   under_followup
+      18        2023-01-04        Y             case
+      19        2023-01-03        N lost_to_followup
+      20        2023-01-05        N   under_followup
+      21        2023-01-05        Y             case
+      22        2023-01-04        Y             case
+      23        2023-01-04        N   under_followup
+      24        2023-01-04        Y             case
+      25        2023-01-04        Y             case
+      26        2023-01-04        Y             case
+      27        2023-01-06        N   under_followup
+      28        2023-01-02        N   under_followup
+      29        2023-01-04        Y             case
+      30        2023-01-04        Y             case
+      31        2023-01-05        N lost_to_followup
+      32        2023-01-03        N   under_followup
+      33        2023-01-06        N lost_to_followup
+      34        2023-01-09        N   under_followup
+      35        2023-01-05        Y             case
+
