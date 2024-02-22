@@ -95,7 +95,7 @@ NULL
       replace = FALSE,
       size = (1 - hosp_risk) * num_infected
     )
-    .data$hospitalisation[pop_sample] <- NA
+    .data$hospitalisation[pop_sample] <- NA_real_
   } else {
     for (i in seq_len(nrow(hosp_risk))) {
       age_bracket <- hosp_risk$min_age[i]:hosp_risk$max_age[i]
@@ -107,7 +107,7 @@ NULL
         replace = FALSE,
         size = not_hosp_prob * length(age_group)
       )
-      .data$hospitalisation[age_group_sample] <- NA
+      .data$hospitalisation[age_group_sample] <- NA_real_
     }
   }
 
@@ -134,7 +134,7 @@ NULL
         replace = FALSE,
         size = (1 - risk) * num_infected
       )
-      .data$deaths[pop_sample] <- NA
+      .data$deaths[pop_sample] <- NA_real_
     } else {
       for (i in seq_len(nrow(risk))) {
         age_bracket <- risk$min_age[i]:risk$max_age[i]
@@ -154,7 +154,7 @@ NULL
           replace = FALSE,
           size = not_hosp_death_prob * length(age_group)
         )
-        .data$deaths[age_group_sample] <- NA
+        .data$deaths[age_group_sample] <- NA_real_
       }
     }
     .data
