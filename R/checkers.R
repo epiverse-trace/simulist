@@ -12,9 +12,9 @@
     "column names should be 'age_limit' & 'risk'" =
       setequal(c("age_limit", "risk"), colnames(x)),
     "minimum age of lowest age group should match lower age range" =
-      age_range[1] == min(x$age_limit),
+      age_range[["lower"]] == min(x$age_limit),
     "lower bound of oldest age group must be lower than highest age range" =
-      age_range[2] > max(x$age_limit),
+      age_range[["upper"]] > max(x$age_limit),
     "age limit or risk cannot be NA or NaN" =
       !anyNA(x),
     "risk should be between 0 and 1" =
@@ -27,7 +27,7 @@
   x <- x[order(x$age_limit), ]
 
   # format risk data frame
-  age_range_ <- age_range[1]:age_range[2]
+  age_range_ <- age_range[["lower"]]:age_range[["upper"]]
   # findInterval inclusive/exclusive bound rules match age bracket
   age_groups <- unname(split(age_range_, findInterval(age_range_, x$age_limit)))
 

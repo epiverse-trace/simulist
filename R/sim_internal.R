@@ -96,7 +96,7 @@
     )
   } else {
     .data$age <- sample(
-      population_age[1]:population_age[2],
+      population_age[["lower"]]:population_age[["upper"]],
       size = nrow(.data),
       replace = TRUE
     )
