@@ -20,7 +20,8 @@ Create a list of configuration settings for some details of \code{\link[=sim_lin
 \details{
 The \code{config} argument in \code{\link[=sim_linelist]{sim_linelist()}} controls the small details
 around time windows around infections (time of first contact and last
-contact with infector), and the distribution of the Ct value for confirmed
+contact with infector), and the distribution of the Cycle threshold (Ct)
+value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 cases.
 
 Accepted arguments and their defaults are:
@@ -39,6 +40,13 @@ These parameters do not warrant their own arguments in
 setting. Therefore it is not worth increasing the number of \code{\link[=sim_linelist]{sim_linelist()}}
 arguments to accommodate these and the \code{config} argument keeps the function
 signature simpler and more readable.
+
+The accepted distributions are:
+\itemize{
+\item \code{last_contact_distribution = c("pois", "geom")}
+\item \code{first_contact_distribution = c("pois", "geom")}
+\item \code{ct_distribution = c("norm", "lnorm")}
+}
 
 The \code{network} option controls whether to sample contacts from a adjusted or
 unadjusted contact distribution. Adjusted (default) sampling uses
