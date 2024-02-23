@@ -16,7 +16,8 @@ Second release of _simulist_, updates the core simulation model and, as a result
 * `.sim_network_bp()` is added as an internal function and replaces `bpmodels::chain_sim()` as the core simulation model producing contacted and infected individuals. `{bpmodels}` is removed as a dependency as a result (#60).
 * `.sample_names()` is added as an internal function to utilise `randomNames::randomNames()` to produce more unique names than `randomNames(..., sample.with.replacement = FALSE)`.
 * Refactor of internal simulation architecture replaced `.sim_bp_linelist()`, `.sim_clinical_linelist()` and `.sim_contacts_tbl()` with `.sim_internal()` (#66).
-* The `sim_utils.R` file was renamed to `utils.R` (#66).
+* The `sim_utils.R` file was renamed to `utils.R` (#66) and the empty `create_linelist.R` file was removed (#72).
+* `.add_date_contact()` argument `outbreak_start_date` is now `NULL` by default instead of missing (#82).
 * Regression tests of `sim_*()` functions now use [snapshot testing](https://testthat.r-lib.org/articles/snapshotting.html) for more detailed data checking (#65).
 * Internal testing data (`testdata`) files have been updated, as has the `testdata/README.md` with instructions (#64).
 
@@ -24,13 +25,13 @@ Second release of _simulist_, updates the core simulation model and, as a result
 
 * `R` and `serial_interval` arguments have been removed from `sim_linelist()`, `sim_contacts()` and `sim_outbreak()` functions and instead `contact_distribution`, `contact_interval` and `prob_infect` are used to parameterise the simulation. Documentation, both functions and vignettes, have been updated with these changes (#60).
 * The `contact_distribution` argument in `sim_*()` functions requires a density function if supplied as an anonymous function. Information is added to `simulist.Rmd` to explain this.
-* The line list output from `sim_linelist()` now uses column header `sex` instead of `gender`. The contacts table output from `sim_contacts()` and `sim_outbreak()` now uses column headers `age` and `sex` instead of `cnt_age` and `cnt_gender`.
+* The line list output from `sim_linelist()` now uses column header `sex` instead of `gender`. The contacts table output from `sim_contacts()` and `sim_outbreak()` now uses column headers `age` and `sex` instead of `cnt_age` and `cnt_gender` (#60, #79).
 * `contact_distribution` is redefined and redocumented as the distribution of contacts per individual, rather than the number of contacts that do not get infected as it was in v0.1.0.
 * `row.names` for `<data.frame>`s output by `sim_linelist()`, `sim_contacts()` and `sim_outbreak()` are now sequential from `1:nrows` (#63).
 
 ## Bug fixes
 
-* None
+* `sim_contacts()` now correctly runs with an age-structured population. In the previous version (v0.1.0), `sim_contacts()` did not call `.check_age_df()` and as a result the function errored, this is fixed as of PR #81.
 
 ## Deprecated and defunct
 
