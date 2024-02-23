@@ -96,7 +96,8 @@ otherwise the function errors.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <code>config</code> argument in <code><a href="sim_linelist.html">sim_linelist()</a></code> controls the small details
 around time windows around infections (time of first contact and last
-contact with infector), and the distribution of the Ct value for confirmed
+contact with infector), and the distribution of the Cycle threshold (Ct)
+value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 cases.</p>
 <p>Accepted arguments and their defaults are:</p><ul><li><p><code>last_contact_distribution = "pois"</code></p></li>
 <li><p><code>last_contact_distribution_params = c(lambda = 3)</code></p></li>
@@ -110,7 +111,10 @@ cases.</p>
 setting. Therefore it is not worth increasing the number of <code><a href="sim_linelist.html">sim_linelist()</a></code>
 arguments to accommodate these and the <code>config</code> argument keeps the function
 signature simpler and more readable.</p>
-<p>The <code>network</code> option controls whether to sample contacts from a adjusted or
+<p>The accepted distributions are:</p><ul><li><p><code>last_contact_distribution = c("pois", "geom")</code></p></li>
+<li><p><code>first_contact_distribution = c("pois", "geom")</code></p></li>
+<li><p><code>ct_distribution = c("norm", "lnorm")</code></p></li>
+</ul><p>The <code>network</code> option controls whether to sample contacts from a adjusted or
 unadjusted contact distribution. Adjusted (default) sampling uses
 \(q(n) \sim (n + 1)p(n + 1)\) where \(p(n)\) is the probability
 density function of a distribution, e.g., Poisson or Negative binomial.
