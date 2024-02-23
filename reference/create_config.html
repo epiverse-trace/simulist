@@ -17,7 +17,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="../logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
 
-    <small class="nav-text text-muted me-auto version-number" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+    <small class="nav-text text-muted me-auto version-number" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +96,8 @@ otherwise the function errors.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <code>config</code> argument in <code><a href="sim_linelist.html">sim_linelist()</a></code> controls the small details
 around time windows around infections (time of first contact and last
-contact with infector), and the distribution of the Ct value for confirmed
+contact with infector), and the distribution of the Cycle threshold (Ct)
+value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 cases.</p>
 <p>Accepted arguments and their defaults are:</p><ul><li><p><code>last_contact_distribution = "pois"</code></p></li>
 <li><p><code>last_contact_distribution_params = c(lambda = 3)</code></p></li>
@@ -104,11 +105,21 @@ cases.</p>
 <li><p><code>first_contact_distribution_params = c(lambda = 3)</code></p></li>
 <li><p><code>ct_distribution = "norm"</code></p></li>
 <li><p><code>ct_distribution_params = c(mean = 25, sd = 2)</code></p></li>
+<li><p><code>network = "adjusted"</code></p></li>
 </ul><p>These parameters do not warrant their own arguments in
 <code><a href="sim_linelist.html">sim_linelist()</a></code> as they rarely need to be changed from their default
 setting. Therefore it is not worth increasing the number of <code><a href="sim_linelist.html">sim_linelist()</a></code>
 arguments to accommodate these and the <code>config</code> argument keeps the function
 signature simpler and more readable.</p>
+<p>The accepted distributions are:</p><ul><li><p><code>last_contact_distribution = c("pois", "geom")</code></p></li>
+<li><p><code>first_contact_distribution = c("pois", "geom")</code></p></li>
+<li><p><code>ct_distribution = c("norm", "lnorm")</code></p></li>
+</ul><p>The <code>network</code> option controls whether to sample contacts from a adjusted or
+unadjusted contact distribution. Adjusted (default) sampling uses
+\(q(n) \sim (n + 1)p(n + 1)\) where \(p(n)\) is the probability
+density function of a distribution, e.g., Poisson or Negative binomial.
+Unadjusted (<code>network = "unadjusted"</code>) instead samples contacts directly from
+a probability distribution \(p(n)\).</p>
     </div>
 
     <div class="section level2">
@@ -136,6 +147,9 @@ signature simpler and more readable.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mean   sd </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   25    2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "adjusted"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with customised Ct distribution</span></span></span>
 <span class="r-in"><span><span class="fu">create_config</span><span class="op">(</span></span></span>
@@ -162,6 +176,9 @@ signature simpler and more readable.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ct_distribution_params</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> meanlog   sdlog </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       2       1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "adjusted"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
