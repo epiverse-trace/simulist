@@ -170,7 +170,9 @@
   }
 
   if (sim_type %in% c("contacts", "outbreak")) {
-    checkmate::assert_numeric(contact_tracing_status_probs, len = 3)
+    checkmate::assert_numeric(
+      contact_tracing_status_probs, len = 3, lower = 0, upper = 1
+    )
     checkmate::assert_names(
       names(contact_tracing_status_probs),
       permutation.of = c("under_followup", "lost_to_followup", "unknown")
