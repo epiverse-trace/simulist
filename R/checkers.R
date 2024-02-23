@@ -148,7 +148,7 @@
     .check_func_req_args(onset_to_death)
     checkmate::assert_logical(add_names, len = 1)
     checkmate::assert_logical(add_ct, len = 1)
-    checkmate::assert_numeric(case_type_probs, len = 3)
+    checkmate::assert_numeric(case_type_probs, len = 3, lower = 0, upper = 1)
     checkmate::assert_names(
       names(case_type_probs),
       permutation.of = c("suspected", "probable", "confirmed")
