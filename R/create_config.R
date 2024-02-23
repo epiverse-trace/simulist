@@ -2,7 +2,8 @@
 #'
 #' @details The `config` argument in [sim_linelist()] controls the small details
 #' around time windows around infections (time of first contact and last
-#' contact with infector), and the distribution of the Ct value for confirmed
+#' contact with infector), and the distribution of the Cycle threshold (Ct)
+#' value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 #' cases.
 #'
 #' Accepted arguments and their defaults are:
@@ -19,6 +20,11 @@
 #' setting. Therefore it is not worth increasing the number of [sim_linelist()]
 #' arguments to accommodate these and the `config` argument keeps the function
 #' signature simpler and more readable.
+#'
+#' The accepted distributions are:
+#' * `last_contact_distribution = c("pois", "geom")`
+#' * `first_contact_distribution = c("pois", "geom")`
+#' * `ct_distribution = c("norm", "lnorm")`
 #'
 #' The `network` option controls whether to sample contacts from a adjusted or
 #' unadjusted contact distribution. Adjusted (default) sampling uses
@@ -61,7 +67,7 @@ create_config <- function(...) {
   # check arguments in dots match arg list
   stopifnot(
     "Incorrect argument names supplied to create_config" =
-    all(dots_names %in% names(args))
+      all(dots_names %in% names(args))
   )
 
   # replace default args if in dots
