@@ -86,7 +86,9 @@
 <li>
 <code><a href="../reference/dot-sample_names.html">.sample_names()</a></code> is added as an internal function to utilise <code><a href="https://rdrr.io/pkg/randomNames/man/randomNames.html" class="external-link">randomNames::randomNames()</a></code> to produce more unique names than <code>randomNames(..., sample.with.replacement = FALSE)</code>.</li>
 <li>Refactor of internal simulation architecture replaced <code>.sim_bp_linelist()</code>, <code>.sim_clinical_linelist()</code> and <code>.sim_contacts_tbl()</code> with <code><a href="../reference/dot-sim_internal.html">.sim_internal()</a></code> (<a href="https://github.com/epiverse-trace/simulist/issues/66" class="external-link">#66</a>).</li>
-<li>The <code>sim_utils.R</code> file was renamed to <code>utils.R</code> (<a href="https://github.com/epiverse-trace/simulist/issues/66" class="external-link">#66</a>).</li>
+<li>The <code>sim_utils.R</code> file was renamed to <code>utils.R</code> (<a href="https://github.com/epiverse-trace/simulist/issues/66" class="external-link">#66</a>) and the empty <code>create_linelist.R</code> file was removed (<a href="https://github.com/epiverse-trace/simulist/issues/72" class="external-link">#72</a>).</li>
+<li>
+<code><a href="../reference/dot-add_date.html">.add_date_contact()</a></code> argument <code>outbreak_start_date</code> is now <code>NULL</code> by default instead of missing (<a href="https://github.com/epiverse-trace/simulist/issues/82" class="external-link">#82</a>).</li>
 <li>Regression tests of <code>sim_*()</code> functions now use <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">snapshot testing</a> for more detailed data checking (<a href="https://github.com/epiverse-trace/simulist/issues/65" class="external-link">#65</a>).</li>
 <li>Internal testing data (<code>testdata</code>) files have been updated, as has the <code>testdata/README.md</code> with instructions (<a href="https://github.com/epiverse-trace/simulist/issues/64" class="external-link">#64</a>).</li>
 </ul></div>
@@ -96,7 +98,7 @@
 <ul><li>
 <code>R</code> and <code>serial_interval</code> arguments have been removed from <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> functions and instead <code>contact_distribution</code>, <code>contact_interval</code> and <code>prob_infect</code> are used to parameterise the simulation. Documentation, both functions and vignettes, have been updated with these changes (<a href="https://github.com/epiverse-trace/simulist/issues/60" class="external-link">#60</a>).</li>
 <li>The <code>contact_distribution</code> argument in <code>sim_*()</code> functions requires a density function if supplied as an anonymous function. Information is added to <code>simulist.Rmd</code> to explain this.</li>
-<li>The line list output from <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> now uses column header <code>sex</code> instead of <code>gender</code>. The contacts table output from <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> now uses column headers <code>age</code> and <code>sex</code> instead of <code>cnt_age</code> and <code>cnt_gender</code>.</li>
+<li>The line list output from <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> now uses column header <code>sex</code> instead of <code>gender</code>. The contacts table output from <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> now uses column headers <code>age</code> and <code>sex</code> instead of <code>cnt_age</code> and <code>cnt_gender</code> (<a href="https://github.com/epiverse-trace/simulist/issues/60" class="external-link">#60</a>, <a href="https://github.com/epiverse-trace/simulist/issues/79" class="external-link">#79</a>).</li>
 <li>
 <code>contact_distribution</code> is redefined and redocumented as the distribution of contacts per individual, rather than the number of contacts that do not get infected as it was in v0.1.0.</li>
 <li>
@@ -104,7 +106,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>None</li>
+<ul><li>
+<code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> now correctly runs with an age-structured population. In the previous version (v0.1.0), <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> did not call <code><a href="../reference/dot-check_age_df.html">.check_age_df()</a></code> and as a result the function errored, this is fixed as of PR <a href="https://github.com/epiverse-trace/simulist/issues/81" class="external-link">#81</a>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="deprecated-and-defunct-development-version">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-development-version"></a></h3>
