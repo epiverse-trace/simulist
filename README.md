@@ -10,7 +10,7 @@
 <!-- badges: start -->
 
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/epiverse-trace/simulist/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/simulist/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/simulist/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/simulist?branch=main)
@@ -125,20 +125,20 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id         case_name case_type gender age date_onset date_admission
-#> 1  1 Sabeeha el-Hannan  probable      f  28 2023-01-01           <NA>
-#> 2  2    Jaedyn Robbins confirmed      f  62 2023-01-02     2023-01-02
-#> 5  5          Young Vu confirmed      m  42 2023-01-01           <NA>
-#> 6  6      Alyssa Gloyd  probable      f  60 2023-01-01           <NA>
-#> 8  8   Sebastian Boden  probable      m  28 2023-01-02     2023-01-03
-#> 9  9  Sierra Hernandez suspected      f  78 2023-01-01           <NA>
-#>   date_death date_first_contact date_last_contact ct_value
-#> 1       <NA>               <NA>              <NA>       NA
-#> 2       <NA>         2023-01-02        2023-01-05     25.1
-#> 5       <NA>         2023-01-03        2023-01-04     25.1
-#> 6       <NA>         2023-01-02        2023-01-04       NA
-#> 8       <NA>         2023-01-01        2023-01-03       NA
-#> 9       <NA>         2022-12-29        2023-01-04       NA
+#>   id           case_name case_type sex age date_onset date_admission date_death
+#> 1  1    Macella Moreland confirmed   f  28 2023-01-01           <NA>       <NA>
+#> 2  2      Kayla Ellerman confirmed   f  62 2023-01-02     2023-01-02       <NA>
+#> 3  5 Matthew Biggerstaff confirmed   m  42 2023-01-01           <NA>       <NA>
+#> 4  6   Vanessa Sihombing  probable   f  60 2023-01-01           <NA>       <NA>
+#> 5  8     Ross Mcclintock suspected   m  28 2023-01-02     2023-01-03       <NA>
+#> 6  9     Danielle Medero confirmed   f  78 2023-01-01           <NA>       <NA>
+#>   date_first_contact date_last_contact ct_value
+#> 1               <NA>              <NA>     23.6
+#> 2         2023-01-02        2023-01-05     23.6
+#> 3         2023-01-03        2023-01-04     23.6
+#> 4         2023-01-02        2023-01-04       NA
+#> 5         2023-01-01        2023-01-03       NA
+#> 6         2022-12-29        2023-01-04     23.6
 ```
 
 In this example, the line list is simulated using the default values
@@ -158,20 +158,20 @@ linelist <- sim_linelist(
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id              case_name case_type gender age date_onset date_admission
-#> 1  1 Aaren-Matthew Deguzman  probable      m  65 2019-12-01           <NA>
-#> 2  2      Thaamira el-Yusuf confirmed      f  61 2019-12-01           <NA>
-#> 3  3         Hector Hickman suspected      m  56 2019-12-01           <NA>
-#> 4  4     Zuhriyaa al-Saleem  probable      f  36 2019-12-01           <NA>
-#> 5  5            Chisa Xiong confirmed      f  20 2019-12-01           <NA>
-#> 6  6     Tre-Shawn Williams confirmed      m  85 2019-12-02     2019-12-06
-#>   date_death date_first_contact date_last_contact ct_value
-#> 1       <NA>               <NA>              <NA>       NA
-#> 2       <NA>         2019-11-26        2019-12-06     25.3
-#> 3       <NA>         2019-11-28        2019-12-03       NA
-#> 4       <NA>         2019-11-28        2019-12-02       NA
-#> 5       <NA>         2019-11-28        2019-12-02     25.3
-#> 6       <NA>         2019-12-01        2019-12-04     25.3
+#>   id           case_name case_type sex age date_onset date_admission date_death
+#> 1  1       Dakota Herman  probable   m  11 2019-12-01           <NA>       <NA>
+#> 2  5           Jose Dick confirmed   m  20 2019-12-01           <NA>       <NA>
+#> 3  6      Fredric Mosley suspected   m  38 2019-12-01           <NA>       <NA>
+#> 4  7 Ediht Valero-Zarate suspected   f  71 2019-12-01           <NA>       <NA>
+#> 5  8       Kia Ouellette  probable   f  29 2019-12-01           <NA>       <NA>
+#> 6 10   Mukhtaar al-Samad  probable   m   8 2019-12-01     2019-12-07       <NA>
+#>   date_first_contact date_last_contact ct_value
+#> 1               <NA>              <NA>       NA
+#> 2         2019-12-03        2019-12-04     25.7
+#> 3         2019-11-29        2019-12-01       NA
+#> 4         2019-11-26        2019-12-03       NA
+#> 5         2019-12-01        2019-12-07       NA
+#> 6         2019-12-06        2019-12-07       NA
 ```
 
 To simulate a table of contacts of cases (i.e. to reflect a contact
@@ -185,20 +185,20 @@ contacts <- sim_contacts(
   prob_infect = 0.5
 )
 head(contacts)
-#>             from               to age gender date_first_contact
-#> 2  James Padilla   Miranda Blanco  69      f         2022-12-31
-#> 3  James Padilla      Allan Bunge  83      m         2023-01-05
-#> 4    Allan Bunge   Nicholas Rabia  18      m         2023-01-02
-#> 5    Allan Bunge Unais al-Shabazz  85      m         2023-01-04
-#> 6 Nicholas Rabia    Apiluck Chong  84      m         2022-12-30
-#> 7 Nicholas Rabia     Rachel Tyler  90      f         2023-01-02
-#>   date_last_contact was_case         status
-#> 2        2023-01-03        N        unknown
-#> 3        2023-01-05        Y           case
-#> 4        2023-01-05        Y           case
-#> 5        2023-01-06        Y           case
-#> 6        2023-01-02        N under_followup
-#> 7        2023-01-04        Y           case
+#>             from              to age sex date_first_contact date_last_contact
+#> 1 Hannah Johnson     Amie Ismail  15   f         2023-01-01        2023-01-04
+#> 2 Hannah Johnson    Dravon Snell  13   m         2023-01-01        2023-01-04
+#> 3 Hannah Johnson    Travis Terry  34   m         2022-12-31        2023-01-06
+#> 4 Hannah Johnson Marilyn Harling  56   f         2022-12-31        2023-01-03
+#> 5   Travis Terry    Daniel Laima   3   m         2023-01-06        2023-01-09
+#> 6   Travis Terry    Sean Brendle  84   m         2023-01-03        2023-01-06
+#>   was_case           status
+#> 1        Y             case
+#> 2        N   under_followup
+#> 3        Y             case
+#> 4        Y             case
+#> 5        Y             case
+#> 6        N lost_to_followup
 ```
 
 If both the line list and contacts table are required, they can be
@@ -216,35 +216,35 @@ outbreak <- sim_outbreak(
   onset_to_death = onset_to_death
 )
 head(outbreak$linelist)
-#>    id           case_name case_type gender age date_onset date_admission
-#> 1   1   Katherin Trancoso confirmed      f   2 2023-01-01           <NA>
-#> 4   4        E-Shaw Allen confirmed      f  47 2023-01-01           <NA>
-#> 5   5     Madison Moltrer suspected      f   8 2023-01-01           <NA>
-#> 8   8 Christopher Richter confirmed      m  18 2023-01-02     2023-01-08
-#> 11 11      Elias Mckenzie confirmed      m   4 2023-01-01           <NA>
-#> 12 12       Elaine Nguyen confirmed      f  60 2023-01-02           <NA>
-#>    date_death date_first_contact date_last_contact ct_value
-#> 1        <NA>               <NA>              <NA>     24.5
-#> 4        <NA>         2023-01-02        2023-01-06     24.5
-#> 5        <NA>         2022-12-31        2023-01-03       NA
-#> 8        <NA>         2023-01-02        2023-01-03     24.5
-#> 11       <NA>         2023-01-04        2023-01-06     24.5
-#> 12       <NA>         2023-01-07        2023-01-09     24.5
+#>   id         case_name case_type sex age date_onset date_admission date_death
+#> 1  1      Y Nhi Eisele confirmed   f  24 2023-01-01           <NA>       <NA>
+#> 2  3    Rorie Lawrence  probable   f  43 2023-01-01     2023-01-06       <NA>
+#> 3  4        Wahida Bui  probable   f  16 2023-01-03           <NA>       <NA>
+#> 4  5    Navya Smalldon  probable   f  17 2023-01-01           <NA>       <NA>
+#> 5  8 Sebastian Padilla suspected   m  88 2023-01-02           <NA>       <NA>
+#> 6  9   Lizzelle Schoon confirmed   f  40 2023-01-01           <NA>       <NA>
+#>   date_first_contact date_last_contact ct_value
+#> 1               <NA>              <NA>     24.2
+#> 2         2023-01-01        2023-01-04       NA
+#> 3         2022-12-30        2023-01-03       NA
+#> 4         2023-01-02        2023-01-07       NA
+#> 5         2022-12-31        2023-01-02       NA
+#> 6         2022-12-29        2023-01-02     24.2
 head(outbreak$contacts)
-#>                from                to age gender date_first_contact
-#> 2 Katherin Trancoso      David Mcafee  46      m         2023-01-02
-#> 3 Katherin Trancoso Firdaus al-Hamidi  68      f         2022-12-30
-#> 4 Katherin Trancoso      E-Shaw Allen  47      f         2023-01-02
-#> 5 Katherin Trancoso   Madison Moltrer   8      f         2022-12-31
-#> 6      E-Shaw Allen       Tyko Pahang  24      m         2023-01-05
-#> 7   Madison Moltrer   Bryan Rodriguez  67      m         2022-12-31
-#>   date_last_contact was_case           status
-#> 2        2023-01-02        N lost_to_followup
-#> 3        2023-01-02        N   under_followup
-#> 4        2023-01-06        Y             case
-#> 5        2023-01-03        Y             case
-#> 6        2023-01-05        N lost_to_followup
-#> 7        2023-01-02        N   under_followup
+#>             from                to age sex date_first_contact date_last_contact
+#> 1   Y Nhi Eisele Najwa el-Mohammed  49   f         2023-01-03        2023-01-04
+#> 2   Y Nhi Eisele    Rorie Lawrence  43   f         2023-01-01        2023-01-04
+#> 3   Y Nhi Eisele        Wahida Bui  16   f         2022-12-30        2023-01-03
+#> 4   Y Nhi Eisele    Navya Smalldon  17   f         2023-01-02        2023-01-07
+#> 5   Y Nhi Eisele  Cole Batmanglidj  42   m         2022-12-29        2023-01-02
+#> 6 Rorie Lawrence Aerika White Bear  74   f         2023-01-03        2023-01-05
+#>   was_case           status
+#> 1        N   under_followup
+#> 2        Y             case
+#> 3        Y             case
+#> 4        Y             case
+#> 5        N   under_followup
+#> 6        N lost_to_followup
 ```
 
 ## Help
