@@ -24,6 +24,7 @@
 .sim_network_bp <- function(contact_distribution,
                             contact_interval,
                             prob_infect,
+                            max_outbreak_size,
                             config) {
   if (is.null(config$network) ||
       !config$network %in% c("adjusted", "unadjusted")) {
@@ -101,6 +102,15 @@
       next_gen_size <- length(ancestor_idx)
     } else {
       next_gen_size <- 0L
+    }
+    if (sum(infected) > max_outbreak_size) {
+      warning(
+        "Number of cases exceeds maximum outbreak size. \n",
+        "Returning data early with ", sum(infected), " cases and ",
+        max(which(infected == 1)), " total contacts (including cases).",
+        call. = FALSE
+      )
+      break
     }
   }
 

@@ -5,7 +5,13 @@
 \title{Simulate a random network branching process model with a probability of
 infection for each contact}
 \usage{
-.sim_network_bp(contact_distribution, contact_interval, prob_infect, config)
+.sim_network_bp(
+  contact_distribution,
+  contact_interval,
+  prob_infect,
+  max_outbreak_size,
+  config
+)
 }
 \arguments{
 \item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
