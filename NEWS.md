@@ -1,3 +1,5 @@
+# simulist (development version)
+
 # simulist 0.2.0
 
 Second release of _simulist_, updates the core simulation model and, as a result, the arguments for `sim_*()` functions for simulating line list data and/or contact table data exported from _simulist_ are updated. The internal package architecture is also refactored.
