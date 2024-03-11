@@ -208,6 +208,21 @@ test_that("sim_linelist works as expected with modified config parameters", {
   )
 })
 
+test_that("sim_linelist warns as expected", {
+  set.seed(1)
+  expect_warning(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      contact_interval = contact_interval,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      outbreak_size = c(5, 10)
+    ),
+    regexp = "(Number of cases exceeds maximum)*(Returning data early)"
+  )
+})
+
 test_that("sim_linelist fails as expected with modified config", {
   expect_error(
     sim_linelist(
