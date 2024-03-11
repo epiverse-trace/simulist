@@ -72,7 +72,7 @@ linelist <- sim_linelist(
   prob_infect = 0.33,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  min_outbreak_size = 500
+  outbreak_size = c(500, 1e5)
 )
 ```
 
