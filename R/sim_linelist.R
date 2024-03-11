@@ -56,9 +56,16 @@
 #' confirmed case and `NA` otherwise for each case in the line list.
 #' Default is `TRUE`. Ct refers to the Cycle threshold from a Real-time
 #' PCR or quantitative PCR (qPCR).
-#' @param min_outbreak_size A single `numeric` defining the minimum chain size
-#' for the simulated outbreak. Default is `10`. This can be increased when the
-#' function should simulate a larger outbreak.
+#' @param outbreak_size A `numeric` vector of length 2 defining the minimum and
+#' the maximum number of infected individuals for the simulated outbreak.
+#' Default is `c(10, 1e5)`, so the minimum outbreak size is 10 infected
+#' individuals, and the maximum outbreak size is 100,000 infected individuals.
+#' Either number can be changed to increase or decrease the maximum or minimum
+#' outbreak size to allow simulating larger or smaller outbreaks. If the
+#' minimum outbreak size cannot be reached after running the simulation for
+#' many iterations (internally) then the function errors, whereas if the
+#' maximum outbreak size is exceeded the function returns the data early and a
+#' warning stating how many cases and contacts are returned.
 #' @param population_age Either a `numeric` vector with two elements or a
 #' `<data.frame>` with age structure in the population. Use a `numeric` vector
 #' to specific the age range of the population, the first element is the lower
@@ -145,7 +152,7 @@ sim_linelist <- function(contact_distribution,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
                          add_ct = TRUE,
-                         min_outbreak_size = 10,
+                         outbreak_size = c(10, 1e5),
                          population_age = c(1, 90),
                          case_type_probs = c(
                            suspected = 0.2,
@@ -174,7 +181,7 @@ sim_linelist <- function(contact_distribution,
     contact_interval = contact_interval,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
-    min_outbreak_size = min_outbreak_size,
+    outbreak_size = outbreak_size,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     add_names = add_names,
@@ -229,7 +236,7 @@ sim_linelist <- function(contact_distribution,
     outbreak_start_date = outbreak_start_date,
     add_names = add_names,
     add_ct = add_ct,
-    min_outbreak_size = min_outbreak_size,
+    outbreak_size = outbreak_size,
     population_age = population_age,
     case_type_probs = case_type_probs,
     config = config

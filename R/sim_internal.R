@@ -23,29 +23,30 @@
                           outbreak_start_date,
                           add_names = NULL,
                           add_ct = NULL,
-                          min_outbreak_size,
+                          outbreak_size,
                           population_age,
                           case_type_probs = NULL,
                           contact_tracing_status_probs = NULL,
                           config) {
   sim_type <- match.arg(sim_type)
 
-  outbreak_size <- 0
+  num_cases <- 0
   max_iter <- 0L
   # condition on a minimum chain size
-  while (outbreak_size < min_outbreak_size) {
+  while (num_cases < min(outbreak_size)) {
     .data <- .sim_network_bp(
       contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = prob_infect,
+      max_outbreak_size = max(outbreak_size),
       config = config
     )
-    outbreak_size <- sum(.data$infected == "infected")
+    num_cases <- sum(.data$infected == "infected")
     max_iter <- max_iter + 1L
     if (max_iter >= 1e3) {
       stop(
         "Exceeded maximum number of iterations for simulating outbreak. \n",
-        "Change input parameters or min_outbreak_size.",
+        "Change input parameters or outbreak_size.",
         call. = FALSE
       )
     }

@@ -10,7 +10,7 @@
   contact_interval,
   prob_infect,
   outbreak_start_date,
-  min_outbreak_size,
+  outbreak_size,
   onset_to_hosp = NULL,
   onset_to_death = NULL,
   add_names = NULL,
@@ -43,9 +43,16 @@ contact being infected by an infected primary contact.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{min_outbreak_size}{A single \code{numeric} defining the minimum chain size
-for the simulated outbreak. Default is \code{10}. This can be increased when the
-function should simulate a larger outbreak.}
+\item{outbreak_size}{A \code{numeric} vector of length 2 defining the minimum and
+the maximum number of infected individuals for the simulated outbreak.
+Default is \code{c(10, 1e5)}, so the minimum outbreak size is 10 infected
+individuals, and the maximum outbreak size is 100,000 infected individuals.
+Either number can be changed to increase or decrease the maximum or minimum
+outbreak size to allow simulating larger or smaller outbreaks. If the
+minimum outbreak size cannot be reached after running the simulation for
+many iterations (internally) then the function errors, whereas if the
+maximum outbreak size is exceeded the function returns the data early and a
+warning stating how many cases and contacts are returned.}
 
 \item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
 the onset to hospitalisation delay distribution.}

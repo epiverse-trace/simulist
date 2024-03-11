@@ -118,7 +118,7 @@
                              contact_interval,
                              prob_infect,
                              outbreak_start_date,
-                             min_outbreak_size,
+                             outbreak_size,
                              onset_to_hosp = NULL,
                              onset_to_death = NULL,
                              add_names = NULL,
@@ -135,7 +135,7 @@
   .check_func_req_args(contact_distribution)
   .check_func_req_args(contact_interval)
   checkmate::assert_date(outbreak_start_date)
-  checkmate::assert_integerish(min_outbreak_size, lower = 1)
+  checkmate::assert_integerish(outbreak_size, lower = 1, len = 2)
 
   stopifnot(
     "population_age must be two numerics or a data.frame" =
