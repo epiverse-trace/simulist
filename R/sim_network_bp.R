@@ -77,7 +77,7 @@
             which.min(generation):(which.min(generation) + contacts[i] - 1)
 
           # grow vectors if idx exceeds length
-          if (max(vec_idx) > length(generation)) {
+          if (max(vec_idx) >= length(generation)) {
             ancestor <- c(ancestor, vector(mode = "integer", 1e5))
             generation <- c(generation, vector(mode = "integer", 1e5))
             infected <- c(infected, vector(mode = "integer", 1e5))
