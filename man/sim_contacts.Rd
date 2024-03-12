@@ -9,7 +9,7 @@ sim_contacts(
   contact_interval,
   prob_infect,
   outbreak_start_date = as.Date("2023-01-01"),
-  outbreak_size = c(10, 1e+05),
+  outbreak_size = c(10, 10000),
   population_age = c(1, 90),
   contact_tracing_status_probs = c(under_followup = 0.7, lost_to_followup = 0.2, unknown
     = 0.1),
@@ -35,8 +35,8 @@ contact being infected by an infected primary contact.}
 
 \item{outbreak_size}{A \code{numeric} vector of length 2 defining the minimum and
 the maximum number of infected individuals for the simulated outbreak.
-Default is \code{c(10, 1e5)}, so the minimum outbreak size is 10 infected
-individuals, and the maximum outbreak size is 100,000 infected individuals.
+Default is \code{c(10, 1e4)}, so the minimum outbreak size is 10 infected
+individuals, and the maximum outbreak size is 10,000 infected individuals.
 Either number can be changed to increase or decrease the maximum or minimum
 outbreak size to allow simulating larger or smaller outbreaks. If the
 minimum outbreak size cannot be reached after running the simulation for

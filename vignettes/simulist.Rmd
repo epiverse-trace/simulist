@@ -123,9 +123,9 @@ The way {simulist} assigns case types is by pasting case types onto existing cas
 
 The reproduction number has a strong influence on the size of an outbreak. For {simulist}, the reproduction number is determined by the mean number of contacts and the probability of infection. However, the {simulist} package generates line list data using a stochastic algorithm, so even when $R < 1$ it can produce a substantial outbreak by chance, or an $R >> 1$ will sometimes not produce a vast epidemic in one simulation (i.e. one replicate) due to the stochasticity. 
 
-When requiring a minimum or maximum outbreak size we can specify the `outbreak_size` argument in `sim_linelist()`. By default this is set to 10 and 100,000 for the minimum and maximum, respectively. In the case of the minimum outbreak size, this means that the simulation will not return a line list until the conditioning has been met. In other words, the simulation will resimulate a branching process model until an outbreak infects at least 10 people. In the case of the maximum outbreak size, if the number of infected individuals exceeds the maximum the simulation will end, even if there are still infectious individuals capable of continuing transmission, the function will return the data early with a warning that the number of infections in the data has reached the maximum and stating how many cases and contacts are in the data output.
+When requiring a minimum or maximum outbreak size we can specify the `outbreak_size` argument in `sim_linelist()`. By default this is set to 10 and 10,000 for the minimum and maximum, respectively. In the case of the minimum outbreak size, this means that the simulation will not return a line list until the conditioning has been met. In other words, the simulation will resimulate a branching process model until an outbreak infects at least 10 people. In the case of the maximum outbreak size, if the number of infected individuals exceeds the maximum the simulation will end, even if there are still infectious individuals capable of continuing transmission, the function will return the data early with a warning that the number of infections in the data has reached the maximum and stating how many cases and contacts are in the data output.
 
-When requiring a line list that represents a large outbreak, such as the COVID-19 outbreak, setting the `outbreak_size` to a larger number guarantees a line list of at least that size. Here we simulate a line list requiring at least 250 cases (and fewer than 100,000 cases). The maximum number of cases can also be increased when simulating outbreaks such as global pandemics.
+When requiring a line list that represents a large outbreak, such as the COVID-19 outbreak, setting the `outbreak_size` to a larger number guarantees a line list of at least that size. Here we simulate a line list requiring at least 250 cases (and fewer than 10,000 cases). The maximum number of cases can also be increased when simulating outbreaks such as global pandemics.
 
 ```{r, sim-large-linelist}
 linelist <- sim_linelist(
@@ -134,7 +134,7 @@ linelist <- sim_linelist(
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  outbreak_size = c(250, 1e5)
+  outbreak_size = c(250, 1e4)
 )
 head(linelist)
 ```

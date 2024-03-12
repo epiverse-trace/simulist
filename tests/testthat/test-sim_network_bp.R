@@ -25,7 +25,7 @@ test_that(".sim_network_bp works as expected", {
       contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = 0.5,
-      max_outbreak_size = 1e5,
+      max_outbreak_size = 1e4,
       config = create_config()
     )
   )
@@ -48,7 +48,7 @@ test_that(".sim_network_bp works as expected with no contacts", {
       contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = 0.5,
-      max_outbreak_size = 1e5,
+      max_outbreak_size = 1e4,
       config = create_config()
     )
   )
@@ -61,7 +61,7 @@ test_that(".sim_network_bp works as expected with unadjusted network", {
       contact_distribution = contact_distribution,
       contact_interval = contact_interval,
       prob_infect = 0.5,
-      max_outbreak_size = 1e5,
+      max_outbreak_size = 1e4,
       config = create_config(network = "unadjusted")
     )
   )
