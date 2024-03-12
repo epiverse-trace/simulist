@@ -64,7 +64,7 @@ sim_outbreak <- function(contact_distribution,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
                          add_ct = TRUE,
-                         outbreak_size = c(10, 1e5),
+                         outbreak_size = c(10, 1e4),
                          population_age = c(1, 90),
                          case_type_probs = c(
                            suspected = 0.2,

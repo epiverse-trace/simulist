@@ -58,8 +58,8 @@
 #' PCR or quantitative PCR (qPCR).
 #' @param outbreak_size A `numeric` vector of length 2 defining the minimum and
 #' the maximum number of infected individuals for the simulated outbreak.
-#' Default is `c(10, 1e5)`, so the minimum outbreak size is 10 infected
-#' individuals, and the maximum outbreak size is 100,000 infected individuals.
+#' Default is `c(10, 1e4)`, so the minimum outbreak size is 10 infected
+#' individuals, and the maximum outbreak size is 10,000 infected individuals.
 #' Either number can be changed to increase or decrease the maximum or minimum
 #' outbreak size to allow simulating larger or smaller outbreaks. If the
 #' minimum outbreak size cannot be reached after running the simulation for
@@ -152,7 +152,7 @@ sim_linelist <- function(contact_distribution,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
                          add_ct = TRUE,
-                         outbreak_size = c(10, 1e5),
+                         outbreak_size = c(10, 1e4),
                          population_age = c(1, 90),
                          case_type_probs = c(
                            suspected = 0.2,

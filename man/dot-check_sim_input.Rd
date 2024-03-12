@@ -45,8 +45,8 @@ contact being infected by an infected primary contact.}
 
 \item{outbreak_size}{A \code{numeric} vector of length 2 defining the minimum and
 the maximum number of infected individuals for the simulated outbreak.
-Default is \code{c(10, 1e5)}, so the minimum outbreak size is 10 infected
-individuals, and the maximum outbreak size is 100,000 infected individuals.
+Default is \code{c(10, 1e4)}, so the minimum outbreak size is 10 infected
+individuals, and the maximum outbreak size is 10,000 infected individuals.
 Either number can be changed to increase or decrease the maximum or minimum
 outbreak size to allow simulating larger or smaller outbreaks. If the
 minimum outbreak size cannot be reached after running the simulation for

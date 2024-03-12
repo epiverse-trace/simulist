@@ -78,7 +78,7 @@ By default `sim_linelist()` simulates individuals ages assuming a uniform distri
 
 ***Note***: all ages are assumed to be in the unit of years and need to be integers (or at least ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if stored as double).
 
-All simulations in this vignette condition the simulation to have a minimum outbreak size of 100 cases (`outbreak_size`, the maximum outbreak size is left at `1e5`) to clearly visualise the distribution of ages.
+All simulations in this vignette condition the simulation to have a minimum outbreak size of 100 cases (`outbreak_size`, the maximum outbreak size is left at `1e4`) to clearly visualise the distribution of ages.
 
 ```{r sim-linelist-age-range}
 linelist <- sim_linelist(
@@ -88,7 +88,7 @@ linelist <- sim_linelist(
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   population_age = c(5, 75),
-  outbreak_size = c(100, 1e5)
+  outbreak_size = c(100, 1e4)
 )
 head(linelist)
 ```
@@ -133,7 +133,7 @@ linelist <- sim_linelist(
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   population_age = age_struct,
-  outbreak_size = c(100, 1e5)
+  outbreak_size = c(100, 1e4)
 )
 
 head(linelist)
@@ -186,7 +186,7 @@ linelist <- sim_linelist(
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   population_age = age_struct,
-  outbreak_size = c(100, 1e5)
+  outbreak_size = c(100, 1e4)
 )
 
 head(linelist)

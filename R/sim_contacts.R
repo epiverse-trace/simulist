@@ -36,7 +36,7 @@ sim_contacts <- function(contact_distribution,
                          contact_interval,
                          prob_infect,
                          outbreak_start_date = as.Date("2023-01-01"),
-                         outbreak_size = c(10, 1e5),
+                         outbreak_size = c(10, 1e4),
                          population_age = c(1, 90),
                          contact_tracing_status_probs = c(
                            under_followup = 0.7,

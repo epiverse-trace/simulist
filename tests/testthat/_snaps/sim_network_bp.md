@@ -2,7 +2,7 @@
 
     Code
       .sim_network_bp(contact_distribution = contact_distribution, contact_interval = contact_interval,
-        prob_infect = 0.5, max_outbreak_size = 1e+05, config = create_config())
+        prob_infect = 0.5, max_outbreak_size = 10000, config = create_config())
     Output
          id ancestor generation infected       time
       1   1       NA          1 infected 0.00000000
@@ -20,7 +20,7 @@
 
     Code
       .sim_network_bp(contact_distribution = contact_distribution, contact_interval = contact_interval,
-        prob_infect = 0.5, max_outbreak_size = 1e+05, config = create_config())
+        prob_infect = 0.5, max_outbreak_size = 10000, config = create_config())
     Output
         id ancestor generation infected time
       1  1       NA          1 infected    0
@@ -29,7 +29,7 @@
 
     Code
       .sim_network_bp(contact_distribution = contact_distribution, contact_interval = contact_interval,
-        prob_infect = 0.5, max_outbreak_size = 1e+05, config = create_config(network = "unadjusted"))
+        prob_infect = 0.5, max_outbreak_size = 10000, config = create_config(network = "unadjusted"))
     Output
          id ancestor generation infected       time
       1   1       NA          1 infected 0.00000000
