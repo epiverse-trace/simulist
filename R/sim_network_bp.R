@@ -92,9 +92,9 @@
           infect <- stats::rbinom(n = contacts[i], size = 1, prob = prob_infect)
           infected[vec_idx] <- as.numeric(infect)
 
-          # add delay time, removing first element of ancestor time as it is NA
+          # add delay time
           time[vec_idx] <- contact_interval(length(vec_idx)) +
-            time[ancestor == ancestor_idx[i]][-1]
+            time[ancestor_idx[i]]
         }
       }
       ancestor_idx <- setdiff(which(infected == 1), prev_ancestors)
