@@ -82,6 +82,41 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
+## Controlling outbreak size
+
+The reproduction number ($R$) has a strong influence on the size of an outbreak. For {simulist}, the reproduction number is, not provided directly, but rather is determined by the mean number of contacts and the probability of infection. However, the {simulist} package generates line list data using a stochastic algorithm, so even when $R < 1$ it can produce a substantial outbreak by chance, or an $R >> 1$ will sometimes not produce a vast epidemic in one simulation (i.e. one replicate) due to the stochasticity. 
+
+::: {.alert .alert-warning}
+
+_Alert_
+
+The reproduction number ($R$) of the simulation results from the contact distribution (`contact_distribution`) and the probability of infection (`prob_infect`); the number of infections is a binomial sample of the number of contacts for each case with the probability of infection (i.e. being sampled) given by `prob_infect`. If the average number of secondary infections from each primary case is greater than 1 ($R > 1$) then this can lead to the outbreak becoming extremely large. 
+
+There is currently no depletion of susceptible individuals in the simulation model (i.e. infinite population size), so the maximum outbreak size (second element of the vector supplied to the `outbreak_size` argument) can be used to return a line list early without producing an excessively large data set.
+
+If $R > 1$, the simulation may return early after reaching the maximum outbreak size. In these scenarios when $R > 1$, the $R$ value is controlling the rate at which the maximum outbreak size is reached rather than the size of the outbreak (not all simulations with $R > 1$ will reach the maximum outbreak size due to stochasticity).
+
+The simulation is therefore sensitive to the contact distribution and probability of infection resulting in an $R$ just above or below 1.
+:::
+
+When requiring a minimum or maximum outbreak size we can specify the `outbreak_size` argument in `sim_linelist()`. By default this is set to 10 and 10,000 for the minimum and maximum, respectively. In the case of the minimum outbreak size, this means that the simulation will not return a line list until the conditioning has been met. In other words, the simulation will resimulate a branching process model until an outbreak infects at least 10 people. In the case of the maximum outbreak size, if the number of infected individuals exceeds the maximum the simulation will end, even if there are still infectious individuals capable of continuing transmission, the function will return the data early with a warning that the number of infections in the data has reached the maximum and stating how many cases and contacts are in the data output.
+
+When requiring a line list that represents a large outbreak, such as the COVID-19 outbreak, setting the `outbreak_size` to a larger number guarantees a line list of at least that size. Here we simulate a line list requiring at least 250 cases (and fewer than 10,000 cases). The maximum number of cases can also be increased when simulating outbreaks such as global pandemics.
+
+```{r, sim-large-linelist}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  contact_interval = contact_interval,
+  prob_infect = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  outbreak_size = c(250, 1e4)
+)
+head(linelist)
+```
+
+The amount of time the simulation takes can be determined by the mean of the contact distribution (`contact_distribution`), the probability of infection (`prob_infect`) and conditioning the outbreak size (`outbreak_size`). If the minimum `outbreak_size` is large, for example hundreds or thousands of cases, and the mean number of contacts and probability of infection mean the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.
+
 ## Case type 
 
 During an infectious disease outbreak it may not be possible to confirm every infection as a case. A confirmed case is typically defined via a diagnostic test. There are several reasons why a case may not be confirmed, including limited testing capacity and mild or non-specific early symptoms, especially in fast growing epidemics. We therefore include two other categories for cases: probable and suspected. For example, probable cases may be those that show clinical evidence for the disease but have not, or cannot, be confirmed by a diagnostic test. Suspected cases are those that are possibly infected but do not show clear clinical or epidemiological evidence, nor has a diagnostic test been performed. Hence the distribution of suspected/probable/confirmed will depend on the pathogen characteristics, outbreak-specific definitions, and resources available.
@@ -118,28 +153,6 @@ head(linelist)
 It is also possible to set one of these categories to `1`, in which case every case will be of that type. 
 
 The way {simulist} assigns case types is by pasting case types onto existing case data. Thus, it could be viewed that the true underlying data is that all cases in the simulation are confirmed, but that there is a lack of information in some cases. There are no cases in the output line list that are incorrectly attributed as probable or suspected that have not been infected. That is to say, all individuals in the line list, whatever their case type, are infected during the outbreak.
-
-## Conditioning simulation on outbreak size
-
-The reproduction number has a strong influence on the size of an outbreak. For {simulist}, the reproduction number is determined by the mean number of contacts and the probability of infection. However, the {simulist} package generates line list data using a stochastic algorithm, so even when $R < 1$ it can produce a substantial outbreak by chance, or an $R >> 1$ will sometimes not produce a vast epidemic in one simulation (i.e. one replicate) due to the stochasticity. 
-
-When requiring a minimum or maximum outbreak size we can specify the `outbreak_size` argument in `sim_linelist()`. By default this is set to 10 and 10,000 for the minimum and maximum, respectively. In the case of the minimum outbreak size, this means that the simulation will not return a line list until the conditioning has been met. In other words, the simulation will resimulate a branching process model until an outbreak infects at least 10 people. In the case of the maximum outbreak size, if the number of infected individuals exceeds the maximum the simulation will end, even if there are still infectious individuals capable of continuing transmission, the function will return the data early with a warning that the number of infections in the data has reached the maximum and stating how many cases and contacts are in the data output.
-
-When requiring a line list that represents a large outbreak, such as the COVID-19 outbreak, setting the `outbreak_size` to a larger number guarantees a line list of at least that size. Here we simulate a line list requiring at least 250 cases (and fewer than 10,000 cases). The maximum number of cases can also be increased when simulating outbreaks such as global pandemics.
-
-```{r, sim-large-linelist}
-linelist <- sim_linelist(
-  contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
-  prob_infect = 0.5,
-  onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death,
-  outbreak_size = c(250, 1e4)
-)
-head(linelist)
-```
-
-The amount of time the simulation takes can be determined by the mean of the contact distribution (`contact_distribution`), the probability of infection (`prob_infect`) and conditioning the outbreak size (`outbreak_size`). If the minimum `outbreak_size` is large, for example hundreds or thousands of cases, and the mean number of contacts and probability of infection mean the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.
 
 ## Anonymous line list
 
