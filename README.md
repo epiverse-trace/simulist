@@ -111,9 +111,19 @@ infection per contact of 0.5, we use the `sim_linelist()` function. The
 mean number of contacts and probability of infection determine the
 outbreak reproduction number, if the resulting reproduction number is
 around one it means we will likely get a reasonably sized outbreak (10 -
-1,000 cases, varying due to the stochastic simulation). *Take care when
-setting the mean number of contacts and the probability of infection, as
-this can lead to the outbreak becoming extremely large*.
+1,000 cases, varying due to the stochastic simulation).
+
+***Warning***: the reproduction number of the simulation results from
+the contact distribution (`contact_distribution`) and the probability of
+infection (`prob_infect`); the number of infections is a binomial sample
+of the number of contacts for each case with the probability of
+infection (i.e. being sampled) given by `prob_infect`. If the average
+number of secondary infections from each primary case is greater than 1
+then this can lead to the outbreak becoming extremely large. There is
+currently no depletion of susceptible individuals in the simulation
+model, so the maximum outbreak size (second element of the vector
+supplied to the `outbreak_size` argument) can be used to return a line
+list early without producing an excessively large data set.
 
 ``` r
 set.seed(1)
