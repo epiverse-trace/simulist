@@ -78,7 +78,7 @@
 <span>  <span class="va">contact_interval</span>,</span>
 <span>  <span class="va">prob_infect</span>,</span>
 <span>  outbreak_start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-01-01"</span><span class="op">)</span>,</span>
-<span>  min_outbreak_size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10000</span><span class="op">)</span>,</span>
 <span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">90</span><span class="op">)</span>,</span>
 <span>  contact_tracing_status_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>under_followup <span class="op">=</span> <span class="fl">0.7</span>, lost_to_followup <span class="op">=</span> <span class="fl">0.2</span>, unknown</span>
 <span>    <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span>
@@ -112,10 +112,17 @@ contact being infected by an infected primary contact.</p></dd>
 <dd><p>A <code>date</code> for the start of the outbreak.</p></dd>
 
 
-<dt>min_outbreak_size</dt>
-<dd><p>A single <code>numeric</code> defining the minimum chain size
-for the simulated outbreak. Default is <code>10</code>. This can be increased when the
-function should simulate a larger outbreak.</p></dd>
+<dt>outbreak_size</dt>
+<dd><p>A <code>numeric</code> vector of length 2 defining the minimum and
+the maximum number of infected individuals for the simulated outbreak.
+Default is <code>c(10, 1e4)</code>, so the minimum outbreak size is 10 infected
+individuals, and the maximum outbreak size is 10,000 infected individuals.
+Either number can be changed to increase or decrease the maximum or minimum
+outbreak size to allow simulating larger or smaller outbreaks. If the
+minimum outbreak size cannot be reached after running the simulation for
+many iterations (internally) then the function errors, whereas if the
+maximum outbreak size is exceeded the function returns the data early and a
+warning stating how many cases and contacts are returned.</p></dd>
 
 
 <dt>population_age</dt>

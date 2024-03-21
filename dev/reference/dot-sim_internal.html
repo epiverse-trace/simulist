@@ -92,7 +92,7 @@ when <code>sim_type</code> is <code>"contacts"</code> or <code>"outbreak"</code>
 <span>  <span class="va">outbreak_start_date</span>,</span>
 <span>  add_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  add_ct <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">min_outbreak_size</span>,</span>
+<span>  <span class="va">outbreak_size</span>,</span>
 <span>  <span class="va">population_age</span>,</span>
 <span>  case_type_probs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  contact_tracing_status_probs <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -176,10 +176,17 @@ Default is <code>TRUE</code>. Ct refers to the Cycle threshold from a Real-time
 PCR or quantitative PCR (qPCR).</p></dd>
 
 
-<dt>min_outbreak_size</dt>
-<dd><p>A single <code>numeric</code> defining the minimum chain size
-for the simulated outbreak. Default is <code>10</code>. This can be increased when the
-function should simulate a larger outbreak.</p></dd>
+<dt>outbreak_size</dt>
+<dd><p>A <code>numeric</code> vector of length 2 defining the minimum and
+the maximum number of infected individuals for the simulated outbreak.
+Default is <code>c(10, 1e4)</code>, so the minimum outbreak size is 10 infected
+individuals, and the maximum outbreak size is 10,000 infected individuals.
+Either number can be changed to increase or decrease the maximum or minimum
+outbreak size to allow simulating larger or smaller outbreaks. If the
+minimum outbreak size cannot be reached after running the simulation for
+many iterations (internally) then the function errors, whereas if the
+maximum outbreak size is exceeded the function returns the data early and a
+warning stating how many cases and contacts are returned.</p></dd>
 
 
 <dt>population_age</dt>

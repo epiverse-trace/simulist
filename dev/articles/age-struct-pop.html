@@ -165,7 +165,7 @@
 </h2>
 <p>By default <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the <code>population_age</code> argument. Here we simulate an outbreak in a population with a population ranging from 5 to 75 (inclusive, <code>[5,75]</code>).</p>
 <p><strong><em>Note</em></strong>: all ages are assumed to be in the unit of years and need to be integers (or at least <a href="https://rlang.r-lib.org/reference/is_integerish.html" class="external-link">“integerish”</a> if stored as double).</p>
-<p>All simulations in this vignette condition the simulation to have a minimum outbreak size (<code>min_outbreak_size</code>) of 100 cases to clearly visualise the distribution of ages.</p>
+<p>All simulations in this vignette condition the simulation to have a minimum outbreak size of 100 cases (<code>outbreak_size</code>, the maximum outbreak size is left at <code>1e4</code>) to clearly visualise the distribution of ages.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
@@ -174,7 +174,7 @@
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">75</span><span class="op">)</span>,</span>
-<span>  min_outbreak_size <span class="op">=</span> <span class="fl">100</span></span>
+<span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1e4</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id           case_name case_type sex age date_onset date_admission date_death</span></span>
@@ -235,7 +235,7 @@ Figure 1: Age distribution of individuals in a simulated line list sampled from 
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  population_age <span class="op">=</span> <span class="va">age_struct</span>,</span>
-<span>  min_outbreak_size <span class="op">=</span> <span class="fl">100</span></span>
+<span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1e4</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
@@ -306,7 +306,7 @@ Figure 2: Age distribution of line list cases facetted by sex
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  population_age <span class="op">=</span> <span class="va">age_struct</span>,</span>
-<span>  min_outbreak_size <span class="op">=</span> <span class="fl">100</span></span>
+<span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1e4</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
