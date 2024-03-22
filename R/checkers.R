@@ -115,7 +115,7 @@
 #' @keywords internal
 .check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"),
                              contact_distribution,
-                             contact_interval,
+                             infect_period,
                              prob_infect,
                              outbreak_start_date,
                              outbreak_size,
@@ -133,7 +133,7 @@
 
   checkmate::assert_number(prob_infect, lower = 0, upper = 1)
   .check_func_req_args(contact_distribution)
-  .check_func_req_args(contact_interval)
+  .check_func_req_args(infect_period)
   checkmate::assert_date(outbreak_start_date)
   checkmate::assert_integerish(outbreak_size, lower = 1, len = 2)
 

@@ -7,7 +7,7 @@ infection for each contact}
 \usage{
 .sim_network_bp(
   contact_distribution,
-  contact_interval,
+  infect_period,
   prob_infect,
   max_outbreak_size,
   config
@@ -19,11 +19,13 @@ the contact distribution. This is any discrete density function that
 produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
 number of contacts per infection.}
 
-\item{contact_interval}{An \verb{<epidist>} object or anonymous function for
-the contact interval. This is analogous to the serial interval or generation
-time, but defines the time interval between an individual being
-infected/infectious (in the simulation the latency period is assumed to be
-zero) and having contact with another susceptible individual.}
+\item{infect_period}{An \verb{<epidist>} object or anonymous function for
+the infectious period. This defines the duration from becoming infectious
+to no longer infectious. In the simulation, individuals are assumed to
+become infectious immediately after being infected (the latency period is
+assumed to be zero). The time intervals between an infected individual and
+their contacts are assumed to be uniformly distributed within the
+infectious period.}
 
 \item{prob_infect}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
@@ -38,8 +40,9 @@ A \verb{<data.frame>} with the contact and transmission chain data.
 Simulate a branching process on a infinite network where the contact
 distribution provides a function to sample the number of contacts of each
 individual in the simulation. Each contact is then infected with the
-probability of infection. The time between each infection is determined
-by the contact interval function.
+probability of infection. The time between each contact is assumed to be
+evenly distributed across the infectious period of the infected individual,
+and is independent of whether the contact becomes infected.
 }
 \details{
 The contact distribution sampled takes the network effect
