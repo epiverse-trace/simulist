@@ -24,11 +24,13 @@
 #' the contact distribution. This is any discrete density function that
 #' produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
 #' number of contacts per infection.
-#' @param contact_interval An `<epidist>` object or anonymous function for
-#' the contact interval. This is analogous to the serial interval or generation
-#' time, but defines the time interval between an individual being
-#' infected/infectious (in the simulation the latency period is assumed to be
-#' zero) and having contact with another susceptible individual.
+#' @param infect_period An `<epidist>` object or anonymous function for
+#' the infectious period. This defines the duration from becoming infectious
+#' to no longer infectious. In the simulation, individuals are assumed to
+#' become infectious immediately after being infected (the latency period is
+#' assumed to be zero). The time intervals between an infected individual and
+#' their contacts are assumed to be uniformly distributed within the
+#' infectious period.
 #' @param prob_infect A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
 #' @param onset_to_hosp An `<epidist>` object or anonymous function for
@@ -93,9 +95,9 @@
 #'   prob_distribution_params = c(mean = 2)
 #' )
 #'
-#' contact_interval <- epiparameter::epidist(
+#' infect_period <- epiparameter::epidist(
 #'   disease = "COVID-19",
-#'   epi_dist = "contact interval",
+#'   epi_dist = "infectious period",
 #'   prob_distribution = "gamma",
 #'   prob_distribution_params = c(shape = 1, scale = 1)
 #' )
@@ -116,7 +118,7 @@
 #' # example with single hospitalisation risk for entire population
 #' linelist <- sim_linelist(
 #'   contact_distribution = contact_distribution,
-#'   contact_interval = contact_interval,
+#'   infect_period = infect_period,
 #'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death,
@@ -134,7 +136,7 @@
 #' )
 #' linelist <- sim_linelist(
 #'   contact_distribution = contact_distribution,
-#'   contact_interval = contact_interval,
+#'   infect_period = infect_period,
 #'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death,
@@ -142,7 +144,7 @@
 #' )
 #' head(linelist)
 sim_linelist <- function(contact_distribution,
-                         contact_interval,
+                         infect_period,
                          prob_infect,
                          onset_to_hosp,
                          onset_to_death,
@@ -164,21 +166,21 @@ sim_linelist <- function(contact_distribution,
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(contact_distribution, c("function", "epidist")) &&
-      inherits(contact_interval, c("function", "epidist")) &&
+      inherits(infect_period, c("function", "epidist")) &&
       inherits(onset_to_hosp, c("function", "epidist")) &&
       inherits(onset_to_death, c("function", "epidist"))
   )
   contact_distribution <- as.function(
     contact_distribution, func_type = "density"
   )
-  contact_interval <- as.function(contact_interval, func_type = "generate")
+  infect_period <- as.function(infect_period, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")
 
   .check_sim_input(
     sim_type = "linelist",
     contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
+    infect_period = infect_period,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,
@@ -226,7 +228,7 @@ sim_linelist <- function(contact_distribution,
   linelist <- .sim_internal(
     sim_type = "linelist",
     contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
+    infect_period = infect_period,
     prob_infect = prob_infect,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
