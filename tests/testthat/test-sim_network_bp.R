@@ -8,10 +8,10 @@ suppressMessages({
     )
   )
 
-  contact_interval <- as.function(
+  infect_period <- as.function(
     epiparameter::epidist(
       disease = "COVID-19",
-      epi_dist = "contact interval",
+      epi_dist = "infectious period",
       prob_distribution = "gamma",
       prob_distribution_params = c(shape = 1, scale = 1)
     ), func_type = "generate"
@@ -23,7 +23,7 @@ test_that(".sim_network_bp works as expected", {
   expect_snapshot(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       max_outbreak_size = 1e4,
       config = create_config()
@@ -46,7 +46,7 @@ test_that(".sim_network_bp works as expected with no contacts", {
   expect_snapshot(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       max_outbreak_size = 1e4,
       config = create_config()
@@ -59,7 +59,7 @@ test_that(".sim_network_bp works as expected with unadjusted network", {
   expect_snapshot(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       max_outbreak_size = 1e4,
       config = create_config(network = "unadjusted")
@@ -72,7 +72,7 @@ test_that(".sim_network_bp warns as expected", {
   expect_warning(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       max_outbreak_size = 10,
       config = create_config()
