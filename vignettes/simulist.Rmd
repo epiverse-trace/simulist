@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 This is an introductory vignette to the {simulist} R package. {simulist} simulates two types of common epidemiological data collected during infectious disease outbreaks: 1) a line list, which provides individual-level descriptions of cases in an outbreak; 2) a contact dataset, which provides details of which others individuals were in contact with each of the cases.
 
-The main function in the {simulist} package is `sim_linelist()`. This functions takes in arguments that control the dynamics of the outbreak, such as the contact interval (i.e. time delay between contacts), and outputs a line list table (`<data.frame>`) with case information for each infected individual.
+The main function in the {simulist} package is `sim_linelist()`. This functions takes in arguments that control the dynamics of the outbreak, such as the infectious period, and outputs a line list table (`<data.frame>`) with case information for each infected individual.
 
 For this introduction we will simulate a line list for the early stages of a COVID-19 (SARS-CoV-2) outbreak. This will require two R packages: {simulist}, to produce the line list, and {epiparameter} to provide epidemiological parameters, such as onset-to-death delays.
 
@@ -40,10 +40,10 @@ contact_distribution <- epidist(
   prob_distribution_params = c(mean = 2)
 )
 
-# create contact interval (not available from {epiparameter} database)
-contact_interval <- epidist(
+# create infectious period (not available from {epiparameter} database)
+infect_period <- epidist(
   disease = "COVID-19",
-  epi_dist = "contact interval",
+  epi_dist = "infectious period",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
@@ -69,12 +69,12 @@ The seed is set to ensure the output of the vignette is consistent. When using {
 set.seed(123)
 ```
 
-The first argument in `sim_linelist()` is the contact distribution (`contact_distribution`), which here we specify as Poisson distribution with a mean (average) number of contacts of 2, and with the contact interval and probability of infection per contact (`prob_infect`) will control the growth rate of the simulated epidemic. Here we set the probability of infection as 0.5 (on average half of contacts become infected). The minimum requirements to simulate a line list are the contact distribution, the contact interval, probability of infection, onset-to-hospitalisation delay and onset-to-death delay.
+The first argument in `sim_linelist()` is the contact distribution (`contact_distribution`), which here we specify as Poisson distribution with a mean (average) number of contacts of 2, and with the infectious period and probability of infection per contact (`prob_infect`) will control the growth rate of the simulated epidemic. Here we set the probability of infection as 0.5 (on average half of contacts become infected). The minimum requirements to simulate a line list are the contact distribution, the infectious period, probability of infection, onset-to-hospitalisation delay and onset-to-death delay.
 
 ```{r, sim-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
@@ -106,7 +106,7 @@ When requiring a line list that represents a large outbreak, such as the COVID-1
 ```{r, sim-large-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
@@ -128,7 +128,7 @@ The line list output from the {simulist} simulation contains a column (`case_typ
 ```{r, sim-linelist-default-case-type}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
@@ -141,7 +141,7 @@ To alter these probabilities, supply a named vector to the `sim_linelist()` argu
 ```{r, sim-linelist-mod-case-type}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
@@ -161,7 +161,7 @@ By default `sim_linelist()` provides the name of each individual in the line lis
 ```{r sim-anon-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
@@ -187,7 +187,7 @@ To simulate a contacts table, the `sim_contacts()` function can be used. This re
 ```{r, sim-contacts}
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5)
 head(contacts)
 ```
@@ -201,7 +201,7 @@ In order to simulate a line list and a contacts table of the same outbreak the `
 ```{r, sim-outbreak}
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
@@ -227,7 +227,7 @@ It is possible to use an [anonymous function](https://en.wikipedia.org/wiki/Anon
 ```{r, sim-outbreak-anon-func}
 outbreak <- sim_outbreak(
   contact_distribution = function(x) dpois(x = x, lambda = 2),
-  contact_interval = function(x) rgamma(n = x, shape = 2, scale = 2),
+  infect_period = function(x) rgamma(n = x, shape = 2, scale = 2),
   prob_infect = 0.5,
   onset_to_hosp = function(x) rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
   onset_to_death = function(x) rweibull(n = x, shape = 0.5, scale = 0.2)
