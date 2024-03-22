@@ -7,5 +7,8 @@ articles:
   design-principles: design-principles.html
   simulist: simulist.html
   vis-linelist: vis-linelist.html
-last_built: 2024-03-21T16:53Z
+last_built: 2024-03-22T16:54Z
+urls:
+  reference: https://epiverse-trace.github.io/simulist/reference
+  article: https://epiverse-trace.github.io/simulist/articles
 
