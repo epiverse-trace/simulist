@@ -50,7 +50,7 @@ library(simulist)
 library(epiparameter)
 ```
 
-The line list simulation requires that we define a contact distribution, contact interval, onset-to-hospitalisation delay, and onset-to-death delay. We can load these from the library of epidemiological parameters in the `{epiparameter}` R package if available, or if these are not in the database yet (such as the contact interval for COVID-19) we can define them ourselves.
+The line list simulation requires that we define a contact distribution, period of infectiousness, onset-to-hospitalisation delay, and onset-to-death delay. We can load these from the library of epidemiological parameters in the `{epiparameter}` R package if available, or if these are not in the database yet (such as the contact distribution for COVID-19) we can define them ourselves.
 
 ```{r create-epidists}
 # create COVID-19 contact distribution
@@ -61,10 +61,10 @@ contact_distribution <- epiparameter::epidist(
   prob_distribution_params = c(mean = 2)
 )
 
-# create COVID-19 contact interval
-contact_interval <- epiparameter::epidist(
+# create COVID-19 infectious period
+infect_period <- epiparameter::epidist(
   disease = "COVID-19",
-  epi_dist = "contact interval",
+  epi_dist = "infectious period",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
@@ -92,7 +92,7 @@ To simulate a line list for COVID-19 with an Poisson contact distribution with a
 set.seed(1)
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
@@ -105,7 +105,7 @@ In this example, the line list is simulated using the default values (see `?sim_
 ```{r sim-linelist-diff-args}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
@@ -120,7 +120,7 @@ To simulate a table of contacts of cases (i.e. to reflect a contact tracing data
 ```{r, sim-contacts}
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval, 
+  infect_period = infect_period, 
   prob_infect = 0.5
 )
 head(contacts)
@@ -131,7 +131,7 @@ If both the line list and contacts table are required, they can be jointly simul
 ```{r, sim-outbreak}
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
