@@ -34,7 +34,7 @@ library(epiparameter)
 library(ggplot2)
 ```
 
-First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the contact distribution and the contact interval are manually defined as they are not yet available from the {epiparameter} database.
+First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the contact distribution and the infectious period are manually defined as they are not yet available from the {epiparameter} database.
 
 ```{r, read-delay-dists}
 contact_distribution <- epidist(
@@ -44,9 +44,9 @@ contact_distribution <- epidist(
   prob_distribution_params = c(mean = 2)
 )
 
-contact_interval <- epidist(
+infect_period <- epidist(
   disease = "COVID-19",
-  epi_dist = "contact interval",
+  epi_dist = "infectious period",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
@@ -83,7 +83,7 @@ All simulations in this vignette condition the simulation to have a minimum outb
 ```{r sim-linelist-age-range}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
@@ -128,7 +128,7 @@ age_struct
 ```{r, sim-age-struct-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
@@ -181,7 +181,7 @@ age_struct
 ```{r, sim-age-struct-linelist-young}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,

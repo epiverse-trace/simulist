@@ -13,7 +13,7 @@
 #' @keywords internal
 .sim_internal <- function(sim_type = c("linelist", "contacts", "outbreak"),
                           contact_distribution,
-                          contact_interval,
+                          infect_period,
                           prob_infect,
                           onset_to_hosp = NULL,
                           onset_to_death = NULL,
@@ -36,7 +36,7 @@
   while (num_cases < min(outbreak_size)) {
     .data <- .sim_network_bp(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = prob_infect,
       max_outbreak_size = max(outbreak_size),
       config = config

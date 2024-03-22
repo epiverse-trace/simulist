@@ -20,20 +20,20 @@
 #'   prob_distribution_params = c(mean = 2)
 #' )
 #'
-#' contact_interval <- epiparameter::epidist(
+#' infect_period <- epiparameter::epidist(
 #'   disease = "COVID-19",
-#'   epi_dist = "contact interval",
+#'   epi_dist = "infectious period",
 #'   prob_distribution = "gamma",
 #'   prob_distribution_params = c(shape = 1, scale = 1)
 #' )
 #'
 #' contacts <- sim_contacts(
 #'   contact_distribution = contact_distribution,
-#'   contact_interval = contact_interval,
+#'   infect_period = infect_period,
 #'   prob_infect = 0.5
 #' )
 sim_contacts <- function(contact_distribution,
-                         contact_interval,
+                         infect_period,
                          prob_infect,
                          outbreak_start_date = as.Date("2023-01-01"),
                          outbreak_size = c(10, 1e4),
@@ -47,17 +47,17 @@ sim_contacts <- function(contact_distribution,
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
-      inherits(contact_interval, c("function", "epidist"))
+      inherits(infect_period, c("function", "epidist"))
   )
   contact_distribution <- as.function(
     contact_distribution, func_type = "density"
   )
-  contact_interval <- as.function(contact_interval, func_type = "generate")
+  infect_period <- as.function(infect_period, func_type = "generate")
 
   .check_sim_input(
     sim_type = "contacts",
     contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
+    infect_period = infect_period,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,
@@ -75,7 +75,7 @@ sim_contacts <- function(contact_distribution,
   contacts <- .sim_internal(
     sim_type = "contacts",
     contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
+    infect_period = infect_period,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,

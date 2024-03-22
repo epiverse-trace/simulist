@@ -6,7 +6,7 @@
 \usage{
 sim_linelist(
   contact_distribution,
-  contact_interval,
+  infect_period,
   prob_infect,
   onset_to_hosp,
   onset_to_death,
@@ -28,11 +28,13 @@ the contact distribution. This is any discrete density function that
 produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
 number of contacts per infection.}
 
-\item{contact_interval}{An \verb{<epidist>} object or anonymous function for
-the contact interval. This is analogous to the serial interval or generation
-time, but defines the time interval between an individual being
-infected/infectious (in the simulation the latency period is assumed to be
-zero) and having contact with another susceptible individual.}
+\item{infect_period}{An \verb{<epidist>} object or anonymous function for
+the infectious period. This defines the duration from becoming infectious
+to no longer infectious. In the simulation, individuals are assumed to
+become infectious immediately after being infected (the latency period is
+assumed to be zero). The time intervals between an infected individual and
+their contacts are assumed to be uniformly distributed within the
+infectious period.}
 
 \item{prob_infect}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
@@ -134,9 +136,9 @@ contact_distribution <- epiparameter::epidist(
   prob_distribution_params = c(mean = 2)
 )
 
-contact_interval <- epiparameter::epidist(
+infect_period <- epiparameter::epidist(
   disease = "COVID-19",
-  epi_dist = "contact interval",
+  epi_dist = "infectious period",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
@@ -157,7 +159,7 @@ onset_to_death <- epiparameter::epidist_db(
 # example with single hospitalisation risk for entire population
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
@@ -175,7 +177,7 @@ age_dep_hosp_risk <- data.frame(
 )
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  contact_interval = contact_interval,
+  infect_period = infect_period,
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,

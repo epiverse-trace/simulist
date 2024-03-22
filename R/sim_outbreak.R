@@ -25,9 +25,9 @@
 #'   prob_distribution_params = c(mean = 2)
 #' )
 #'
-#' contact_interval <- epiparameter::epidist(
+#' infect_period <- epiparameter::epidist(
 #'   disease = "COVID-19",
-#'   epi_dist = "serial interval",
+#'   epi_dist = "infectious period",
 #'   prob_distribution = "gamma",
 #'   prob_distribution_params = c(shape = 1, scale = 1)
 #' )
@@ -48,13 +48,13 @@
 #'
 #' outbreak <- sim_outbreak(
 #'   contact_distribution = contact_distribution,
-#'   contact_interval = contact_interval,
+#'   infect_period = infect_period,
 #'   prob_infect = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death
 #' )
 sim_outbreak <- function(contact_distribution,
-                         contact_interval,
+                         infect_period,
                          prob_infect,
                          onset_to_hosp,
                          onset_to_death,
@@ -81,21 +81,21 @@ sim_outbreak <- function(contact_distribution,
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(contact_distribution, c("function", "epidist")) &&
-      inherits(contact_interval, c("function", "epidist")) &&
+      inherits(infect_period, c("function", "epidist")) &&
       inherits(onset_to_hosp, c("function", "epidist")) &&
       inherits(onset_to_death, c("function", "epidist"))
   )
   contact_distribution <- as.function(
     contact_distribution, func_type = "density"
   )
-  contact_interval <- as.function(contact_interval, func_type = "generate")
+  infect_period <- as.function(infect_period, func_type = "generate")
   onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
   onset_to_death <- as.function(onset_to_death, func_type = "generate")
 
   .check_sim_input(
     sim_type = "outbreak",
     contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
+    infect_period = infect_period,
     prob_infect = prob_infect,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,
@@ -144,7 +144,7 @@ sim_outbreak <- function(contact_distribution,
   outbreak <- .sim_internal(
     sim_type = "outbreak",
     contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
+    infect_period = infect_period,
     prob_infect = prob_infect,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
