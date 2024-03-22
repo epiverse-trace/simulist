@@ -5,8 +5,9 @@
 #' Simulate a branching process on a infinite network where the contact
 #' distribution provides a function to sample the number of contacts of each
 #' individual in the simulation. Each contact is then infected with the
-#' probability of infection. The time between each infection is determined
-#' by the contact interval function.
+#' probability of infection. The time between each contact is assumed to be
+#' evenly distributed across the infectious period of the infected individual,
+#' and is independent of whether the contact becomes infected.
 #'
 #' @details
 #' The contact distribution sampled takes the network effect
@@ -22,7 +23,7 @@
 #' @return A `<data.frame>` with the contact and transmission chain data.
 #' @keywords internal
 .sim_network_bp <- function(contact_distribution,
-                            contact_interval,
+                            infect_period,
                             prob_infect,
                             max_outbreak_size,
                             config) {
@@ -92,9 +93,16 @@
           infect <- stats::rbinom(n = contacts[i], size = 1, prob = prob_infect)
           infected[vec_idx] <- as.numeric(infect)
 
-          # add delay time
-          time[vec_idx] <- contact_interval(length(vec_idx)) +
-            time[ancestor_idx[i]]
+          # compute infectious period for ancestor
+          contact_infect_period <- infect_period(1)
+
+          # assume contacts are evenly distributed across the infectious period
+          contact_times <- stats::runif(
+            n = length(vec_idx),
+            min = 0,
+            max = contact_infect_period
+          )
+          time[vec_idx] <- contact_times + time[ancestor_idx[i]]
         }
       }
       ancestor_idx <- setdiff(which(infected == 1), prev_ancestors)
