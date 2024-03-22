@@ -6,9 +6,9 @@ suppressMessages({
     prob_distribution_params = c(mean = 2)
   )
 
-  contact_interval <- epiparameter::epidist(
+  infect_period <- epiparameter::epidist(
     disease = "COVID-19",
-    epi_dist = "contact interval",
+    epi_dist = "infectious period",
     prob_distribution = "gamma",
     prob_distribution_params = c(shape = 1, scale = 1)
   )
@@ -33,7 +33,7 @@ test_that("sim_linelist works as expected", {
   expect_snapshot(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death
@@ -58,7 +58,7 @@ test_that("sim_linelist works as expected with age-strat risks", {
   expect_snapshot(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -74,7 +74,7 @@ test_that("sim_linelist works as expected without Ct", {
   expect_snapshot(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -88,7 +88,7 @@ test_that("sim_linelist works as expected with anonymous", {
   expect_snapshot(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -107,7 +107,7 @@ test_that("sim_linelist works as expected with age structure", {
   expect_snapshot(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -130,7 +130,7 @@ test_that("sim_linelist works as expected with age-strat risks & age struct", {
   expect_snapshot(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -149,7 +149,7 @@ test_that("sim_linelist gives expected proportion of ages with age struct", {
   set.seed(3)
   linelist <- sim_linelist(
     contact_distribution = contact_distribution,
-    contact_interval = contact_interval,
+    infect_period = infect_period,
     prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
@@ -180,7 +180,7 @@ test_that("sim_linelist works as expected with modified config", {
   expect_snapshot(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -197,7 +197,7 @@ test_that("sim_linelist works as expected with modified config parameters", {
   expect_snapshot(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -213,7 +213,7 @@ test_that("sim_linelist warns as expected", {
   expect_warning(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -227,7 +227,7 @@ test_that("sim_linelist fails as expected with modified config", {
   expect_error(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -241,7 +241,7 @@ test_that("sim_linelist fails as expected with modified config", {
   expect_error(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -258,7 +258,7 @@ test_that("sim_linelist fails as expected with empty config", {
   expect_error(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
@@ -273,7 +273,7 @@ test_that("sim_linelist fails as expected exceeding max iter for bp model", {
   expect_error(
     sim_linelist(
       contact_distribution = contact_distribution,
-      contact_interval = contact_interval,
+      infect_period = infect_period,
       prob_infect = 0.1,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death
