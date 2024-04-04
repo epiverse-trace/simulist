@@ -67,3 +67,21 @@
   # return vector of names
   names_mf
 }
+
+#' Check if \R object is a single `NA`
+#'
+#' Check if an \R object is specifically a single logical [`NA`] (i.e.
+#' non-vectorised). [`NA_real_`], [`NA_character_`], [`NA_integer`],
+#' [`NA_complex_`] return `FALSE`.
+#'
+#' @param x An \R object
+#'
+#' @return A single boolean `logical`.
+#' @keywords internal
+is_na <- function(x) {
+  if (length(x) == 1 && is.atomic(x) && is.logical(x)) {
+    # check is.na() inside if as it warns for closures
+    return(all(is.na(x)))
+  }
+  return(FALSE)
+}
