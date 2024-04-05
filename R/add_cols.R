@@ -87,27 +87,29 @@ NULL
   .data$hospitalisation[infected_idx] <- .data$time[infected_idx] +
     onset_to_hosp(num_infected)
 
-  # hosp_risk is either numeric or <data.frame>
-  if (is.numeric(hosp_risk)) {
-    # size is converted to an integer internally in sample()
-    pop_sample <- sample(
-      which(infected_idx),
-      replace = FALSE,
-      size = (1 - hosp_risk) * num_infected
-    )
-    .data$hospitalisation[pop_sample] <- NA_real_
-  } else {
-    for (i in seq_len(nrow(hosp_risk))) {
-      age_bracket <- hosp_risk$min_age[i]:hosp_risk$max_age[i]
-      age_group <- which(.data$age %in% age_bracket)
-      not_hosp_prob <- 1 - hosp_risk$risk[i]
+  # hosp_risk is either numeric or <data.frame> or NA
+  if (!is_na(hosp_risk)) {
+    if (is.numeric(hosp_risk)) {
       # size is converted to an integer internally in sample()
-      age_group_sample <- sample(
-        age_group,
+      pop_sample <- sample(
+        which(infected_idx),
         replace = FALSE,
-        size = not_hosp_prob * length(age_group)
+        size = (1 - hosp_risk) * num_infected
       )
-      .data$hospitalisation[age_group_sample] <- NA_real_
+      .data$hospitalisation[pop_sample] <- NA_real_
+    } else {
+      for (i in seq_len(nrow(hosp_risk))) {
+        age_bracket <- hosp_risk$min_age[i]:hosp_risk$max_age[i]
+        age_group <- which(.data$age %in% age_bracket)
+        not_hosp_prob <- 1 - hosp_risk$risk[i]
+        # size is converted to an integer internally in sample()
+        age_group_sample <- sample(
+          age_group,
+          replace = FALSE,
+          size = not_hosp_prob * length(age_group)
+        )
+        .data$hospitalisation[age_group_sample] <- NA_real_
+      }
     }
   }
 
@@ -127,34 +129,36 @@ NULL
     onset_to_death(num_infected)
 
   apply_death_risk <- function(.data, risk, hosp = TRUE) {
-    if (is.numeric(risk)) {
-      # size is converted to an integer internally in sample()
-      pop_sample <- sample(
-        which(infected_idx),
-        replace = FALSE,
-        size = (1 - risk) * num_infected
-      )
-      .data$deaths[pop_sample] <- NA_real_
-    } else {
-      for (i in seq_len(nrow(risk))) {
-        age_bracket <- risk$min_age[i]:risk$max_age[i]
-        if (hosp) {
-          age_group <- which(
-            .data$age %in% age_bracket & !is.na(.data$hospitalisation)
-          )
-        } else {
-          age_group <- which(
-            .data$age %in% age_bracket & is.na(.data$hospitalisation)
-          )
-        }
-        not_hosp_death_prob <- 1 - risk$risk[i]
+    if (!is_na(risk)) {
+      if (is.numeric(risk)) {
         # size is converted to an integer internally in sample()
-        age_group_sample <- sample(
-          age_group,
+        pop_sample <- sample(
+          which(infected_idx),
           replace = FALSE,
-          size = not_hosp_death_prob * length(age_group)
+          size = (1 - risk) * num_infected
         )
-        .data$deaths[age_group_sample] <- NA_real_
+        .data$deaths[pop_sample] <- NA_real_
+      } else {
+        for (i in seq_len(nrow(risk))) {
+          age_bracket <- risk$min_age[i]:risk$max_age[i]
+          if (hosp) {
+            age_group <- which(
+              .data$age %in% age_bracket & !is.na(.data$hospitalisation)
+            )
+          } else {
+            age_group <- which(
+              .data$age %in% age_bracket & is.na(.data$hospitalisation)
+            )
+          }
+          not_hosp_death_prob <- 1 - risk$risk[i]
+          # size is converted to an integer internally in sample()
+          age_group_sample <- sample(
+            age_group,
+            replace = FALSE,
+            size = not_hosp_death_prob * length(age_group)
+          )
+          .data$deaths[age_group_sample] <- NA_real_
+        }
       }
     }
     .data
