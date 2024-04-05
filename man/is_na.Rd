@@ -14,7 +14,7 @@ A single boolean \code{logical}.
 }
 \description{
 Check if an \R object is specifically a single logical \code{\link{NA}} (i.e.
-non-vectorised). \code{\link{NA_real_}}, \code{\link{NA_character_}}, \code{\link{NA_integer}},
+non-vectorised). \code{\link{NA_real_}}, \code{\link{NA_character_}}, \code{\link{NA_integer_}},
 \code{\link{NA_complex_}} return \code{FALSE}.
 }
 \keyword{internal}

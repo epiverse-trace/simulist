@@ -71,7 +71,7 @@
 #' Check if \R object is a single `NA`
 #'
 #' Check if an \R object is specifically a single logical [`NA`] (i.e.
-#' non-vectorised). [`NA_real_`], [`NA_character_`], [`NA_integer`],
+#' non-vectorised). [`NA_real_`], [`NA_character_`], [`NA_integer_`],
 #' [`NA_complex_`] return `FALSE`.
 #'
 #' @param x An \R object
