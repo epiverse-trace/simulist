@@ -14,11 +14,13 @@ compatible with hospitalisation and death risks}
 )
 }
 \arguments{
-\item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
-the onset to hospitalisation delay distribution.}
+\item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
+the onset to hospitalisation delay distribution, or \code{NA} to not simulate
+hospitalisation (admission) dates.}
 
-\item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
-the onset to death delay distribution.}
+\item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
+the onset to death delay distribution, or \code{NA} to not simulate dates for
+individuals that died.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
