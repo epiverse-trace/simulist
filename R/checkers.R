@@ -159,13 +159,13 @@
         sum(case_type_probs) == 1,
       "hosp_risk must be a single numeric or a data.frame" =
         is.numeric(hosp_risk) && length(hosp_risk) == 1 ||
-          is.data.frame(hosp_risk),
+          is.data.frame(hosp_risk) || is_na(hosp_risk),
       "hosp_death_risk must be a single numeric or a data.frame" =
         is.numeric(hosp_death_risk) && length(hosp_death_risk) == 1 ||
-          is.data.frame(hosp_death_risk),
+          is.data.frame(hosp_death_risk) || is_na(hosp_death_risk),
       "non_hosp_death_risk must be a single numeric or a data.frame" =
         is.numeric(non_hosp_death_risk) && length(non_hosp_death_risk) == 1 ||
-          is.data.frame(non_hosp_death_risk)
+          is.data.frame(non_hosp_death_risk) || is_na(non_hosp_death_risk)
     )
   }
 
@@ -206,4 +206,101 @@
     sum(mapply(function(x, y) { # nolint undesirable function
       is.name(x) && y != "..."
     }, formals(args(func)), names(formals(args(func))))) == n_req_args
+}
+
+#' Cross check the onset-to-hospitalisation or -death arguments are
+#' compatible with hospitalisation and death risks
+#'
+#' @description
+#' There are two types of cross-checking:
+#' 1. If the onset-to-event distribution is specified but the corresponding risk
+#' is not specified (i.e. `NA`) the function will error ([stop()]).
+#' 2. If the onset-to-event distribution is not specified (i.e. `NA`) but the
+#' corresponding risk is specified the function will throw a warning
+#' ([warning()]).
+#'
+#' The difference in condition handling is because in the case that the
+#' onset-to-event is `NA` the simulation can safely ignore the corresponding
+#' risk, while throwing a warning, as there are no events. In other words, if
+#' the onset-to-hospitalisation is not specified, no infected individuals will
+#' go to hospital and the `date_admission` column in the line list will all be
+#' `NA`s. However, if the onset-to-event is specified and the corresponding
+#' risk is `NA` then the proportion of individuals infected that are
+#' hospitalised or die cannot be calculated and therefore the simulation
+#' cannot run. It is in this latter case that the cross-checking throws an
+#' error.
+#'
+#' @inheritParams sim_linelist
+#'
+#' @return Invisibly return the `onset_to_hosp` argument. The function is
+#' called for its side-effects, which will error or warn if the input is
+#' invalid.
+#' @keywords internal
+.cross_check_sim_input <- function(onset_to_hosp,
+                                   onset_to_death,
+                                   hosp_risk,
+                                   hosp_death_risk,
+                                   non_hosp_death_risk) {
+  # hosp_risk, hosp_death_risk and non_hosp_death_risk can assumed to be a
+  # number or a <data.frame> or NA as they will have been checked by
+  # .check_sim_input() before calling .cross_check_sim_input
+  # onset_to_hosp and onset_to_death will be closures
+
+  # risks can only be NA when the onset to event is also NA
+  if (!is_na(onset_to_hosp) && is_na(hosp_risk)) {
+    stop(
+      "hosp_risk is set to NA but onset_to_hosp is specified \n",
+      "set hosp_risk to numeric value",
+      call. = FALSE
+    )
+  }
+  if (!is_na(onset_to_death) && is_na(hosp_death_risk)) {
+    stop(
+      "hosp_death_risk is set to NA but onset_to_death is specified \n",
+      "set hosp_death_risk to numeric value",
+      call. = FALSE
+    )
+  }
+  if (!is_na(onset_to_death) && is_na(non_hosp_death_risk)) {
+    stop(
+      "non_hosp_death_risk is set to NA but onset_to_death is specified \n",
+      "set non_hosp_death_risk to numeric value",
+      call. = FALSE
+    )
+  }
+
+  # check if onset_to_hosp and onset_to_death produce NA or numeric
+  onset_to_hosp_eval <- onset_to_hosp(1)
+  onset_to_death_eval <- onset_to_death(1)
+
+  if (is_na(onset_to_hosp_eval) && checkmate::test_number(hosp_risk) ||
+      is_na(onset_to_hosp_eval) && is.data.frame(hosp_risk)) {
+    warning(
+      "onset_to_hosp is set to NA but hosp_risk is specified \n",
+      "hosp_risk is being ignored, set hosp_risk to NA when ",
+      "onset_to_hosp is NA",
+      call. = FALSE
+    )
+  }
+  if (is_na(onset_to_death_eval) && checkmate::test_number(hosp_death_risk) ||
+      is_na(onset_to_death_eval) && is.data.frame(hosp_death_risk)) {
+    warning(
+      "onset_to_death is set to NA but hosp_death_risk is specified \n",
+      "hosp_death_risk is being ignored, set hosp_death_risk to NA when ",
+      "onset_to_death is NA",
+      call. = FALSE
+    )
+  }
+  if (is_na(onset_to_death_eval) &&
+      checkmate::test_number(non_hosp_death_risk) ||
+      is_na(onset_to_death_eval) &&
+      is.data.frame(non_hosp_death_risk)) {
+    warning(
+      "onset_to_death is set to NA but non_hosp_death_risk is specified \n",
+      "non_hosp_death_risk is being ignored, set non_hosp_death_risk to NA ",
+      "when onset_to_death is NA",
+      call. = FALSE
+    )
+  }
+  invisible(onset_to_hosp)
 }
