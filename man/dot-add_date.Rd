@@ -4,7 +4,7 @@
 \alias{.add_date}
 \alias{.add_date_contact}
 \alias{.add_hospitalisation}
-\alias{.add_deaths}
+\alias{.add_outcome}
 \title{Add event date as column to infectious history \verb{<data.frame>}}
 \usage{
 .add_date_contact(
@@ -17,7 +17,13 @@
 
 .add_hospitalisation(.data, onset_to_hosp, hosp_risk)
 
-.add_deaths(.data, onset_to_death, hosp_death_risk, non_hosp_death_risk)
+.add_outcome(
+  .data,
+  onset_to_death,
+  onset_to_recovery,
+  hosp_death_risk,
+  non_hosp_death_risk
+)
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
@@ -35,8 +41,9 @@ given in the \code{distribution} argument.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
-the onset to hospitalisation delay distribution.}
+\item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
+the onset to hospitalisation delay distribution, or \code{NA} to not simulate
+hospitalisation (admission) dates.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
@@ -44,8 +51,14 @@ hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entir
 population. If the \code{onset_to_hosp} argument is set to \code{NA} this argument
 should also be set to \code{NA}. See details and examples for more information.}
 
-\item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
-the onset to death delay distribution.}
+\item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
+the onset to death delay distribution, or \code{NA} to not simulate dates for
+individuals that died.}
+
+\item{onset_to_recovery}{An \verb{<epidist>} object, an anonymous function for
+the onset to death delay distribution, or \code{NA} to not simulate dates for
+individuals that recovered. Default is \code{NA} so by default cases that
+recover get an \code{NA} in the \verb{$date_outcome} line list column.}
 
 \item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age

@@ -118,59 +118,60 @@ NULL
 }
 
 #' @name .add_date
-.add_deaths <- function(.data,
-                        onset_to_death,
-                        hosp_death_risk,
-                        non_hosp_death_risk) {
+.add_outcome <- function(.data,
+                         onset_to_death,
+                         onset_to_recovery,
+                         hosp_death_risk,
+                         non_hosp_death_risk) {
   infected_idx <- .data$infected == "infected"
   num_infected <- sum(infected_idx)
-  .data$deaths <- NA_real_
-  .data$deaths[infected_idx] <- .data$time[infected_idx] +
-    onset_to_death(num_infected)
+  .data$outcome <- "contact"
+  .data$outcome_time <- NA_real_
+  .data$outcome[infected_idx] <- "recovered"
+  .data$outcome_time[infected_idx] <- .data$time[infected_idx] +
+    onset_to_recovery(num_infected)
+  hosp_idx <- !is.na(.data$hospitalisation)
+  non_hosp_idx <- is.na(.data$hospitalisation)
 
-  apply_death_risk <- function(.data, risk, hosp = TRUE) {
+  apply_death_risk <- function(.data, risk, idx) {
     if (!is_na(risk)) {
       if (is.numeric(risk)) {
         # size is converted to an integer internally in sample()
         pop_sample <- sample(
-          which(infected_idx),
+          which(idx),
           replace = FALSE,
-          size = (1 - risk) * num_infected
+          size = risk * sum(idx)
         )
-        .data$deaths[pop_sample] <- NA_real_
+        .data$outcome[pop_sample] <- "died"
+        .data$outcome_time[pop_sample] <- .data$time[pop_sample] +
+          onset_to_death(length(pop_sample))
       } else {
         for (i in seq_len(nrow(risk))) {
           age_bracket <- risk$min_age[i]:risk$max_age[i]
-          if (hosp) {
-            age_group <- which(
-              .data$age %in% age_bracket & !is.na(.data$hospitalisation)
-            )
-          } else {
-            age_group <- which(
-              .data$age %in% age_bracket & is.na(.data$hospitalisation)
-            )
-          }
-          not_hosp_death_prob <- 1 - risk$risk[i]
+          age_group <- which(.data$age %in% age_bracket & idx)
           # size is converted to an integer internally in sample()
           age_group_sample <- sample(
             age_group,
             replace = FALSE,
-            size = not_hosp_death_prob * length(age_group)
+            size = risk$risk[i] * length(age_group)
           )
-          .data$deaths[age_group_sample] <- NA_real_
+          .data$outcome[age_group_sample] <- "died"
+          .data$outcome_time[age_group_sample] <- .data$time[age_group_sample] +
+            onset_to_death(length(age_group_sample))
         }
       }
     }
     .data
   }
 
-  .data <- apply_death_risk(.data, risk = hosp_death_risk, hosp = TRUE)
-  .data <- apply_death_risk(.data, risk = non_hosp_death_risk, hosp = FALSE)
+  .data <- apply_death_risk(.data, risk = hosp_death_risk, idx = hosp_idx)
+  .data <- apply_death_risk(
+    .data, risk = non_hosp_death_risk, idx = non_hosp_idx
+  )
 
   # return data
   .data
 }
-
 
 #' Add line list information as column to infectious history `<data.frame>`
 #'
