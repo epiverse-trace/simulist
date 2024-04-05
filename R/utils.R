@@ -111,9 +111,7 @@ as_function <- function(x) {
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(x$contact_distribution, c("function", "epidist")) &&
-      inherits(x$infect_period, c("function", "epidist"))
-  )
-  stopifnot(
+      inherits(x$infect_period, c("function", "epidist")),
     "onset_to_hosp and onset_to_death need to be a function, <epidist> or NA" =
       inherits(x$onset_to_hosp, c("function", "epidist")) ||
       is_na(x$onset_to_hosp) &&
@@ -124,17 +122,17 @@ as_function <- function(x) {
     x$contact_distribution, func_type = "density"
   )
   infect_period <- as.function(x$infect_period, func_type = "generate")
-  if (!is_na(x$onset_to_hosp)) {
-    onset_to_hosp <- as.function(x$onset_to_hosp, func_type = "generate")
-  } else {
+  if (is_na(x$onset_to_hosp)) {
     # function to generate NA instead of hospitalisation times
     onset_to_hosp <- function(x) rep(NA, times = x)
-  }
-  if (!is_na(x$onset_to_death)) {
-    onset_to_death <- as.function(x$onset_to_death, func_type = "generate")
   } else {
+    onset_to_hosp <- as.function(x$onset_to_hosp, func_type = "generate")
+  }
+  if (is_na(x$onset_to_death)) {
     # function to generate NA instead of death times
     onset_to_death <- function(x) rep(NA, times = x)
+  } else {
+    onset_to_death <- as.function(x$onset_to_death, func_type = "generate")
   }
 
   # return list of functions
