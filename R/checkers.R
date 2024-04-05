@@ -121,6 +121,7 @@
                              outbreak_size,
                              onset_to_hosp = NULL,
                              onset_to_death = NULL,
+                             onset_to_recovery = NULL,
                              add_names = NULL,
                              add_ct = NULL,
                              case_type_probs = NULL,
@@ -146,6 +147,7 @@
   if (sim_type %in% c("linelist", "outbreak")) {
     .check_func_req_args(onset_to_hosp)
     .check_func_req_args(onset_to_death)
+    .check_func_req_args(onset_to_recovery)
     checkmate::assert_logical(add_names, len = 1)
     checkmate::assert_logical(add_ct, len = 1)
     checkmate::assert_numeric(case_type_probs, len = 3, lower = 0, upper = 1)
@@ -250,59 +252,77 @@
   onset_to_hosp_eval <- onset_to_hosp(1)
   onset_to_death_eval <- onset_to_death(1)
 
+  msg <- character(0)
   # risks can only be NA when the onset to event is also NA
   if (!is_na(onset_to_hosp_eval) && is_na(hosp_risk)) {
-    stop(
+    msg <- c(msg, paste(
       "hosp_risk is set to NA but onset_to_hosp is specified \n",
-      "set hosp_risk to numeric value",
-      call. = FALSE
-    )
+      "set hosp_risk to numeric value"
+    ))
   }
   if (!is_na(onset_to_death_eval)) {
     if (is_na(hosp_death_risk)) {
-      stop(
+      msg <- c(msg, paste(
         "hosp_death_risk is set to NA but onset_to_death is specified \n",
-        "set hosp_death_risk to numeric value",
-        call. = FALSE
-      )
+        "set hosp_death_risk to numeric value"
+      ))
     }
     if (is_na(non_hosp_death_risk)) {
-      stop(
+      msg <- c(msg, paste(
         "non_hosp_death_risk is set to NA but onset_to_death is specified \n",
-        "set non_hosp_death_risk to numeric value",
-        call. = FALSE
-      )
+        "set non_hosp_death_risk to numeric value"
+      ))
     }
+  }
+  if (length(msg) > 0) {
+    stop(
+      "Some onset-to-event and their corresponding risk are incompatible:\n",
+      sprintf("  - %s\n", msg),
+      call. = FALSE
+    )
   }
 
   if (is_na(onset_to_hosp_eval) && checkmate::test_number(hosp_risk) ||
       is_na(onset_to_hosp_eval) && is.data.frame(hosp_risk)) {
-    warning(
+    msg <- c(msg, paste(
       "onset_to_hosp is set to NA but hosp_risk is specified \n",
-      "hosp_risk is being ignored, set hosp_risk to NA when ",
-      "onset_to_hosp is NA",
-      call. = FALSE
-    )
+      "hosp_risk is being ignored, set hosp_risk to NA when",
+      "onset_to_hosp is NA"
+    ))
+  }
+  if (is_na(onset_to_hosp_eval) && checkmate::test_number(hosp_death_risk) ||
+      is_na(onset_to_hosp_eval) && is.data.frame(hosp_death_risk)) {
+    msg <- c(msg, paste(
+      "onset_to_hosp is set to NA but hosp_death_risk is specified \n",
+      "hosp_death_risk is being ignored, set hosp_death_risk to NA when",
+      "onset_to_hosp is NA"
+    ))
   }
   if (is_na(onset_to_death_eval) && checkmate::test_number(hosp_death_risk) ||
       is_na(onset_to_death_eval) && is.data.frame(hosp_death_risk)) {
-    warning(
+    msg <- c(msg, paste(
       "onset_to_death is set to NA but hosp_death_risk is specified \n",
-      "hosp_death_risk is being ignored, set hosp_death_risk to NA when ",
-      "onset_to_death is NA",
-      call. = FALSE
-    )
+      "hosp_death_risk is being ignored, set hosp_death_risk to NA when",
+      "onset_to_death is NA"
+    ))
   }
   if (is_na(onset_to_death_eval) &&
       checkmate::test_number(non_hosp_death_risk) ||
       is_na(onset_to_death_eval) &&
       is.data.frame(non_hosp_death_risk)) {
-    warning(
+    msg <- c(msg, paste(
       "onset_to_death is set to NA but non_hosp_death_risk is specified \n",
-      "non_hosp_death_risk is being ignored, set non_hosp_death_risk to NA ",
-      "when onset_to_death is NA",
+      "non_hosp_death_risk is being ignored, set non_hosp_death_risk to NA",
+      "when onset_to_death is NA"
+    ))
+  }
+  if (length(msg) > 0) {
+    warning(
+      "Some onset-to-event and their corresponding risk are incompatible:\n",
+      sprintf("  - %s\n", msg),
       call. = FALSE
     )
   }
+
   invisible(onset_to_hosp)
 }

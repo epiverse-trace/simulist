@@ -13,6 +13,7 @@
   outbreak_size,
   onset_to_hosp = NULL,
   onset_to_death = NULL,
+  onset_to_recovery = NULL,
   add_names = NULL,
   add_ct = NULL,
   case_type_probs = NULL,
@@ -56,11 +57,18 @@ many iterations (internally) then the function errors, whereas if the
 maximum outbreak size is exceeded the function returns the data early and a
 warning stating how many cases and contacts are returned.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
-the onset to hospitalisation delay distribution.}
+\item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
+the onset to hospitalisation delay distribution, or \code{NA} to not simulate
+hospitalisation (admission) dates.}
 
-\item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
-the onset to death delay distribution.}
+\item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
+the onset to death delay distribution, or \code{NA} to not simulate dates for
+individuals that died.}
+
+\item{onset_to_recovery}{An \verb{<epidist>} object, an anonymous function for
+the onset to death delay distribution, or \code{NA} to not simulate dates for
+individuals that recovered. Default is \code{NA} so by default cases that
+recover get an \code{NA} in the \verb{$date_outcome} line list column.}
 
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
 of the line list. Default is \code{TRUE}.}
