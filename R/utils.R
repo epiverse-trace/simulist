@@ -103,7 +103,7 @@ is_na <- function(x) {
 #'
 #' @param x A named list containing either `<epidist>`, `function` or `NA`.
 #' Named list elements are: `"contact_distribution"`, `"infect_period"`,
-#' `"onset_to_hosp"`, `"onset_to_death"`.
+#' `"onset_to_hosp"`, `"onset_to_death"`, `"onset_to_recovery".`
 #'
 #' @return A list of `function`s.
 #' @keywords internal
@@ -112,7 +112,8 @@ as_function <- function(x) {
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(x$contact_distribution, c("function", "epidist")) &&
       inherits(x$infect_period, c("function", "epidist")),
-    "onset_to_hosp and onset_to_death need to be a function, <epidist> or NA" =
+    "onset_to_hosp, onset_to_death and onset_to_recovery need to be a function,
+    <epidist> or NA" =
       inherits(x$onset_to_hosp, c("function", "epidist")) ||
       is_na(x$onset_to_hosp) &&
       inherits(x$onset_to_death, c("function", "epidist")) ||
@@ -134,12 +135,21 @@ as_function <- function(x) {
   } else {
     onset_to_death <- as.function(x$onset_to_death, func_type = "generate")
   }
+  if (is_na(x$onset_to_recovery)) {
+    # function to generate NA instead of recovery times
+    onset_to_recovery <- function(x) rep(NA, times = x)
+  } else {
+    onset_to_recovery <- as.function(
+      x$onset_to_recovery, func_type = "generate"
+    )
+  }
 
   # return list of functions
   list(
     contact_distribution = contact_distribution,
     infect_period = infect_period,
     onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death
+    onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery
   )
 }

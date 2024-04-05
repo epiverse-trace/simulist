@@ -9,7 +9,7 @@ as_function(x)
 \arguments{
 \item{x}{A named list containing either \verb{<epidist>}, \code{function} or \code{NA}.
 Named list elements are: \code{"contact_distribution"}, \code{"infect_period"},
-\code{"onset_to_hosp"}, \code{"onset_to_death"}.}
+\code{"onset_to_hosp"}, \code{"onset_to_death"}, \verb{"onset_to_recovery".}}
 }
 \value{
 A list of \code{function}s.
