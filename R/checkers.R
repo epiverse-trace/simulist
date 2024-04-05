@@ -246,32 +246,32 @@
   # .check_sim_input() before calling .cross_check_sim_input
   # onset_to_hosp and onset_to_death will be closures
 
+  # check if onset_to_hosp and onset_to_death produce NA or numeric
+  onset_to_hosp_eval <- onset_to_hosp(1)
+  onset_to_death_eval <- onset_to_death(1)
+
   # risks can only be NA when the onset to event is also NA
-  if (!is_na(onset_to_hosp) && is_na(hosp_risk)) {
+  if (!is_na(onset_to_hosp_eval) && is_na(hosp_risk)) {
     stop(
       "hosp_risk is set to NA but onset_to_hosp is specified \n",
       "set hosp_risk to numeric value",
       call. = FALSE
     )
   }
-  if (!is_na(onset_to_death) && is_na(hosp_death_risk)) {
+  if (!is_na(onset_to_death_eval) && is_na(hosp_death_risk)) {
     stop(
       "hosp_death_risk is set to NA but onset_to_death is specified \n",
       "set hosp_death_risk to numeric value",
       call. = FALSE
     )
   }
-  if (!is_na(onset_to_death) && is_na(non_hosp_death_risk)) {
+  if (!is_na(onset_to_death_eval) && is_na(non_hosp_death_risk)) {
     stop(
       "non_hosp_death_risk is set to NA but onset_to_death is specified \n",
       "set non_hosp_death_risk to numeric value",
       call. = FALSE
     )
   }
-
-  # check if onset_to_hosp and onset_to_death produce NA or numeric
-  onset_to_hosp_eval <- onset_to_hosp(1)
-  onset_to_death_eval <- onset_to_death(1)
 
   if (is_na(onset_to_hosp_eval) && checkmate::test_number(hosp_risk) ||
       is_na(onset_to_hosp_eval) && is.data.frame(hosp_risk)) {
