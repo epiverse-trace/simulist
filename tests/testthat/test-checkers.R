@@ -239,6 +239,37 @@ test_that(".check_sim_input works as expected", {
   expect_length(chk, n = 1)
 })
 
+test_that(".check_sim_input works as expected with NA risks", {
+  chk <- .check_sim_input(
+    sim_type = "outbreak",
+    contact_distribution = contact_distribution,
+    infect_period = infect_period,
+    prob_infect = 0.5,
+    outbreak_start_date = as.Date("2023-01-01"),
+    outbreak_size = c(10, 1e4),
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    add_names = TRUE,
+    add_ct = FALSE,
+    case_type_probs = c(
+      suspected = 0.2,
+      probable = 0.3,
+      confirmed = 0.5
+    ),
+    contact_tracing_status_probs = c(
+      under_followup = 0.7,
+      lost_to_followup = 0.2,
+      unknown = 0.1
+    ),
+    hosp_risk = NA,
+    hosp_death_risk = NA,
+    non_hosp_death_risk = NA,
+    population_age = c(1, 90)
+  )
+  expect_type(chk, type = "character")
+  expect_length(chk, n = 1)
+})
+
 test_that(".check_sim_input fails as expected", {
   expect_error(
     .check_sim_input(sim_type = "random"),
@@ -281,5 +312,100 @@ test_that(".check_sim_input fails as expected", {
       outbreak_size = "c(10, 1e4)"
     ),
     regexp = "(Assertion on)*(outbreak_size)*(failed)"
+  )
+})
+
+test_that(".cross_check_sim_input works as expected with numeric risk", {
+  chk <- .cross_check_sim_input(
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    hosp_risk = 0.2,
+    hosp_death_risk = 0.5,
+    non_hosp_death_risk = 0.05
+  )
+  expect_type(chk, type = "closure")
+  expect_length(chk, n = 1)
+})
+
+test_that(".cross_check_sim_input works as expected with <data.frame> risks", {
+  age_dep_hosp_risk <- data.frame(
+    age_limit = c(1, 5, 80),
+    risk = c(0.1, 0.05, 0.2)
+  )
+  age_dep_hosp_death_risk <- data.frame(
+    age_limit = c(1, 5, 80),
+    risk = c(0.3, 0.1, 0.6)
+  )
+  age_dep_non_hosp_death_risk <- data.frame(
+    age_limit = c(1, 5, 80),
+    risk = c(0.1, 0.05, 0.1)
+  )
+
+  chk <- .cross_check_sim_input(
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    hosp_risk = age_dep_hosp_risk,
+    hosp_death_risk = age_dep_hosp_death_risk,
+    non_hosp_death_risk = age_dep_non_hosp_death_risk
+  )
+  expect_type(chk, type = "closure")
+  expect_length(chk, n = 1)
+})
+
+test_that(".cross_check_sim_input warns as expected", {
+  expect_warning(
+    .cross_check_sim_input(
+      onset_to_hosp = function(x) rep(NA, times = x),
+      onset_to_death = onset_to_death,
+      hosp_risk = 0.2,
+      hosp_death_risk = 0.5,
+      non_hosp_death_risk = 0.05
+    ),
+    regexp = "(onset_to_hosp is set to NA)*(hosp_risk is being ignored)"
+  )
+  # since testthat v3 these handle a single condition so nesting expect warning
+  # to check both warnings
+  expect_warning(
+    expect_warning(
+      .cross_check_sim_input(
+        onset_to_hosp = onset_to_hosp,
+        onset_to_death = function(x) rep(NA, times = x),
+        hosp_risk = 0.2,
+        hosp_death_risk = 0.5,
+        non_hosp_death_risk = 0.05
+      ),
+      regexp = "(onset_to_death is)*(NA)*(hosp_death_risk is being ignored)"
+    ),
+    regexp = "(onset_to_death is)*(NA)*(non_hosp_death_risk is being ignored)"
+  )
+  expect_error(
+    .cross_check_sim_input(
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      hosp_risk = NA,
+      hosp_death_risk = 0.5,
+      non_hosp_death_risk = 0.05
+    ),
+    regexp = "(hosp_risk is set to NA)*(but onset_to_hosp is specified)"
+  )
+  expect_error(
+    .cross_check_sim_input(
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      hosp_risk = 0.2,
+      hosp_death_risk = NA,
+      non_hosp_death_risk = 0.05
+    ),
+    regexp = "(hosp_death_risk is set to NA but onset_to_death is specified)"
+  )
+  expect_error(
+    .cross_check_sim_input(
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      hosp_risk = 0.2,
+      hosp_death_risk = 0.5,
+      non_hosp_death_risk = NA
+    ),
+    regexp = "(non_hosp_death_risk is set to NA)*(onset_to_death is specified)"
   )
 })
