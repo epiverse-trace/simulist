@@ -363,3 +363,50 @@ test_that("sim_linelist fails when onset-to-event are given by risk is NA", {
     regexp = "(non_hosp_death_risk is set to NA)*(onset_to_death is specified)"
   )
 })
+
+test_that("sim_linest date_admission column is NA when onset_to_hosp is NA", {
+  ll <- suppressWarnings(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = NA,
+      onset_to_death = onset_to_death
+    )
+  )
+  expect_true(all(is.na(ll$date_admission)))
+
+  ll <- sim_linelist(
+    contact_distribution = contact_distribution,
+    infect_period = infect_period,
+    prob_infect = 0.5,
+    onset_to_hosp = NA,
+    onset_to_death = onset_to_death,
+    hosp_risk = NA
+  )
+  expect_true(all(is.na(ll$date_admission)))
+})
+
+test_that("sim_linest date_death column is NA when onset_to_death is NA", {
+  ll <- suppressWarnings(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = NA
+    )
+  )
+  expect_true(all(is.na(ll$date_death)))
+
+  ll <- sim_linelist(
+    contact_distribution = contact_distribution,
+    infect_period = infect_period,
+    prob_infect = 0.5,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = NA,
+    hosp_death_risk = NA,
+    non_hosp_death_risk = NA
+  )
+  expect_true(all(is.na(ll$date_death)))
+})
