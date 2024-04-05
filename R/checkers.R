@@ -113,7 +113,7 @@
 #' @return Invisibly return the `sim_type` `character` string. The function is
 #' called for its side-effects, which will error if the input is invalid.
 #' @keywords internal
-.check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"),
+.check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"), # nolint cyclocomp_linter
                              contact_distribution,
                              infect_period,
                              prob_infect,
@@ -236,7 +236,7 @@
 #' called for its side-effects, which will error or warn if the input is
 #' invalid.
 #' @keywords internal
-.cross_check_sim_input <- function(onset_to_hosp,
+.cross_check_sim_input <- function(onset_to_hosp, # nolint cyclocomp_linter
                                    onset_to_death,
                                    hosp_risk,
                                    hosp_death_risk,
@@ -258,19 +258,21 @@
       call. = FALSE
     )
   }
-  if (!is_na(onset_to_death_eval) && is_na(hosp_death_risk)) {
-    stop(
-      "hosp_death_risk is set to NA but onset_to_death is specified \n",
-      "set hosp_death_risk to numeric value",
-      call. = FALSE
-    )
-  }
-  if (!is_na(onset_to_death_eval) && is_na(non_hosp_death_risk)) {
-    stop(
-      "non_hosp_death_risk is set to NA but onset_to_death is specified \n",
-      "set non_hosp_death_risk to numeric value",
-      call. = FALSE
-    )
+  if (!is_na(onset_to_death_eval)) {
+    if (is_na(hosp_death_risk)) {
+      stop(
+        "hosp_death_risk is set to NA but onset_to_death is specified \n",
+        "set hosp_death_risk to numeric value",
+        call. = FALSE
+      )
+    }
+    if (is_na(non_hosp_death_risk)) {
+      stop(
+        "non_hosp_death_risk is set to NA but onset_to_death is specified \n",
+        "set non_hosp_death_risk to numeric value",
+        call. = FALSE
+      )
+    }
   }
 
   if (is_na(onset_to_hosp_eval) && checkmate::test_number(hosp_risk) ||
