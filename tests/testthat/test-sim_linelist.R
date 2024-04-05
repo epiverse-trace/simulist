@@ -282,3 +282,84 @@ test_that("sim_linelist fails as expected exceeding max iter for bp model", {
     regexp = "(Exceeded maximum number of iterations for simulating outbreak)"
   )
 })
+
+test_that("sim_linelist warns when risks are given by onset-to-event is NA", {
+  set.seed(1)
+  expect_warning(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = NA,
+      onset_to_death = onset_to_death,
+      hosp_risk = 0.2
+    ),
+    regexp = "(onset_to_hosp is set to NA)*(hosp_risk is being ignored)"
+  )
+  # since testthat v3 these handle a single condition so nesting expect warning
+  # to check both warnings
+  expect_warning(
+    expect_warning(
+      sim_linelist(
+        contact_distribution = contact_distribution,
+        infect_period = infect_period,
+        prob_infect = 0.5,
+        onset_to_hosp = onset_to_hosp,
+        onset_to_death = NA,
+        hosp_death_risk = 0.5
+      ),
+      regexp = "(onset_to_death is)*(NA)*(hosp_death_risk is being ignored)"
+    ),
+    regexp = "(onset_to_death is)*(NA)*(non_hosp_death_risk is being ignored)"
+  )
+  expect_warning(
+    expect_warning(
+      sim_linelist(
+        contact_distribution = contact_distribution,
+        infect_period = infect_period,
+        prob_infect = 0.5,
+        onset_to_hosp = onset_to_hosp,
+        onset_to_death = NA,
+        non_hosp_death_risk = 0.02
+      ),
+      regexp = "(onset_to_death is)*(NA)*(hosp_death_risk is being ignored)"
+    ),
+    regexp = "(onset_to_death is)*(NA)*(non_hosp_death_risk is being ignored)"
+  )
+})
+
+test_that("sim_linelist fails when onset-to-event are given by risk is NA", {
+  expect_error(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      hosp_risk = NA
+    ),
+    regexp = "(hosp_risk is set to NA)*(but onset_to_hosp is specified)"
+  )
+  expect_error(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      hosp_death_risk = NA
+    ),
+    regexp = "(hosp_death_risk is set to NA but onset_to_death is specified)"
+  )
+  expect_error(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      non_hosp_death_risk = NA
+    ),
+    regexp = "(non_hosp_death_risk is set to NA)*(onset_to_death is specified)"
+  )
+})
