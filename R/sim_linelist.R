@@ -33,10 +33,16 @@
 #' infectious period.
 #' @param prob_infect A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
-#' @param onset_to_hosp An `<epidist>` object or anonymous function for
-#' the onset to hospitalisation delay distribution.
-#' @param onset_to_death An `<epidist>` object or anonymous function for
-#' the onset to death delay distribution.
+#' @param onset_to_hosp An `<epidist>` object, an anonymous function for
+#' the onset to hospitalisation delay distribution, or `NA` to not simulate
+#' hospitalisation (admission) dates.
+#' @param onset_to_death An `<epidist>` object, an anonymous function for
+#' the onset to death delay distribution, or `NA` to not simulate dates for
+#' individuals that died.
+#' @param onset_to_recovery An `<epidist>` object, an anonymous function for
+#' the onset to death delay distribution, or `NA` to not simulate dates for
+#' individuals that recovered. Default is `NA` so by default cases that
+#' recover get an `NA` in the `$date_outcome` line list column.
 #' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
 #' hospitalisation risks Default is 20% hospitalisation (`0.2`) for the entire
@@ -151,6 +157,7 @@ sim_linelist <- function(contact_distribution,
                          prob_infect,
                          onset_to_hosp,
                          onset_to_death,
+                         onset_to_recovery = NA,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,
                          non_hosp_death_risk = 0.05,
@@ -171,13 +178,15 @@ sim_linelist <- function(contact_distribution,
       contact_distribution = contact_distribution,
       infect_period = infect_period,
       onset_to_hosp = onset_to_hosp,
-      onset_to_death = onset_to_death
+      onset_to_death = onset_to_death,
+      onset_to_recovery = onset_to_recovery
     )
   )
   contact_distribution <- funcs$contact_distribution
   infect_period <- funcs$infect_period
   onset_to_hosp <- funcs$onset_to_hosp
   onset_to_death <- funcs$onset_to_death
+  onset_to_recovery <- funcs$onset_to_recovery
 
   .check_sim_input(
     sim_type = "linelist",
@@ -188,6 +197,7 @@ sim_linelist <- function(contact_distribution,
     outbreak_size = outbreak_size,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     add_names = add_names,
     add_ct = add_ct,
     case_type_probs = case_type_probs,
@@ -241,6 +251,7 @@ sim_linelist <- function(contact_distribution,
     prob_infect = prob_infect,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     hosp_risk = hosp_risk,
     hosp_death_risk = hosp_death_risk,
     non_hosp_death_risk = non_hosp_death_risk,

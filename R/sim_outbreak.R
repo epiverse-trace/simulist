@@ -58,6 +58,7 @@ sim_outbreak <- function(contact_distribution,
                          prob_infect,
                          onset_to_hosp,
                          onset_to_death,
+                         onset_to_recovery = NA,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,
                          non_hosp_death_risk = 0.05,
@@ -83,13 +84,15 @@ sim_outbreak <- function(contact_distribution,
       contact_distribution = contact_distribution,
       infect_period = infect_period,
       onset_to_hosp = onset_to_hosp,
-      onset_to_death = onset_to_death
+      onset_to_death = onset_to_death,
+      onset_to_recovery = onset_to_recovery
     )
   )
   contact_distribution <- funcs$contact_distribution
   infect_period <- funcs$infect_period
   onset_to_hosp <- funcs$onset_to_hosp
   onset_to_death <- funcs$onset_to_death
+  onset_to_recovery <- funcs$onset_to_recovery
 
   .check_sim_input(
     sim_type = "outbreak",
@@ -100,6 +103,7 @@ sim_outbreak <- function(contact_distribution,
     outbreak_size = outbreak_size,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     add_names = add_names,
     add_ct = add_ct,
     case_type_probs = case_type_probs,
@@ -154,6 +158,7 @@ sim_outbreak <- function(contact_distribution,
     prob_infect = prob_infect,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     hosp_risk = hosp_risk,
     hosp_death_risk = hosp_death_risk,
     non_hosp_death_risk = non_hosp_death_risk,
