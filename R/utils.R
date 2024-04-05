@@ -85,3 +85,63 @@ is_na <- function(x) {
   }
   return(FALSE)
 }
+
+#' Convert `<epidist>` or `NA` to function
+#'
+#' @description
+#' An extension to [as.function()], particularly the \pkg{epiparameter}
+#' `as.function` S3 method, with the added feature that [`NA`]s are converted
+#' into functions that generate a vector of `NA`s to behave equivalently to
+#' the generator functions output from
+#' `as.function(..., func_type = "generate")`.
+#'
+#' If a function is already passed to `as_function` it will be returned
+#' unchanged.
+#'
+#' There is also input checking to error if input is not an `<epidist>`,
+#' `function` ([closure]), or for onset-to-event distributions `NA`.
+#'
+#' @param x A named list containing either `<epidist>`, `function` or `NA`.
+#' Named list elements are: `"contact_distribution"`, `"infect_period"`,
+#' `"onset_to_hosp"`, `"onset_to_death"`.
+#'
+#' @return A list of `function`s.
+#' @keywords internal
+as_function <- function(x) {
+  stopifnot(
+    "Input delay distributions need to be either functions or <epidist>" =
+      inherits(x$contact_distribution, c("function", "epidist")) &&
+      inherits(x$infect_period, c("function", "epidist"))
+  )
+  stopifnot(
+    "onset_to_hosp and onset_to_death need to be a function, <epidist> or NA" =
+      inherits(x$onset_to_hosp, c("function", "epidist")) ||
+      is_na(x$onset_to_hosp) &&
+      inherits(x$onset_to_death, c("function", "epidist")) ||
+      is_na(x$onset_to_death)
+  )
+  contact_distribution <- as.function(
+    x$contact_distribution, func_type = "density"
+  )
+  infect_period <- as.function(x$infect_period, func_type = "generate")
+  if (!is_na(x$onset_to_hosp)) {
+    onset_to_hosp <- as.function(x$onset_to_hosp, func_type = "generate")
+  } else {
+    # function to generate NA instead of hospitalisation times
+    onset_to_hosp <- function(x) rep(NA, times = x)
+  }
+  if (!is_na(x$onset_to_death)) {
+    onset_to_death <- as.function(x$onset_to_death, func_type = "generate")
+  } else {
+    # function to generate NA instead of death times
+    onset_to_death <- function(x) rep(NA, times = x)
+  }
+
+  # return list of functions
+  list(
+    contact_distribution = contact_distribution,
+    infect_period = infect_period,
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death
+  )
+}

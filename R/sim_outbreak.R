@@ -78,34 +78,18 @@ sim_outbreak <- function(contact_distribution,
                          ),
                          config = create_config()) {
   # check and convert distribution to func if needed before .check_sim_input()
-  stopifnot(
-    "Input delay distributions need to be either functions or <epidist>" =
-      inherits(contact_distribution, c("function", "epidist")) &&
-      inherits(infect_period, c("function", "epidist"))
+  funcs <- as_function(
+    list(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death
+    )
   )
-  stopifnot(
-    "onset_to_hosp and onset_to_death need to be a function, <epidist> or NA" =
-      inherits(onset_to_hosp, c("function", "epidist")) ||
-      is_na(onset_to_hosp) &&
-      inherits(onset_to_death, c("function", "epidist")) ||
-      is_na(onset_to_death)
-  )
-  contact_distribution <- as.function(
-    contact_distribution, func_type = "density"
-  )
-  infect_period <- as.function(infect_period, func_type = "generate")
-  if (!is_na(onset_to_hosp)) {
-    onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
-  } else {
-    # function to generate NA instead of hospitalisation times
-    onset_to_hosp <- function(x) rep(NA, times = x)
-  }
-  if (!is_na(onset_to_death)) {
-    onset_to_death <- as.function(onset_to_death, func_type = "generate")
-  } else {
-    # function to generate NA instead of death times
-    onset_to_death <- function(x) rep(NA, times = x)
-  }
+  contact_distribution <- funcs$contact_distribution
+  infect_period <- funcs$infect_period
+  onset_to_hosp <- funcs$onset_to_hosp
+  onset_to_death <- funcs$onset_to_death
 
   .check_sim_input(
     sim_type = "outbreak",
