@@ -12,6 +12,7 @@ within \pkg{simulist}}
   prob_infect,
   onset_to_hosp = NULL,
   onset_to_death = NULL,
+  onset_to_recovery = NULL,
   hosp_risk = NULL,
   hosp_death_risk = NULL,
   non_hosp_death_risk = NULL,
@@ -45,11 +46,18 @@ infectious period.}
 \item{prob_infect}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object or anonymous function for
-the onset to hospitalisation delay distribution.}
+\item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
+the onset to hospitalisation delay distribution, or \code{NA} to not simulate
+hospitalisation (admission) dates.}
 
-\item{onset_to_death}{An \verb{<epidist>} object or anonymous function for
-the onset to death delay distribution.}
+\item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
+the onset to death delay distribution, or \code{NA} to not simulate dates for
+individuals that died.}
+
+\item{onset_to_recovery}{An \verb{<epidist>} object, an anonymous function for
+the onset to death delay distribution, or \code{NA} to not simulate dates for
+individuals that recovered. Default is \code{NA} so by default cases that
+recover get an \code{NA} in the \verb{$date_outcome} line list column.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
