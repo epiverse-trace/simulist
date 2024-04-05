@@ -138,23 +138,26 @@ the onset to death delay distribution.</p></dd>
 <dd><p>Either a single <code>numeric</code> for the hospitalisation risk of
 everyone in the population, or a <code>&lt;data.frame&gt;</code> with age specific
 hospitalisation risks Default is 20% hospitalisation (<code>0.2</code>) for the entire
-population. See details and examples for more information.</p></dd>
+population. If the <code>onset_to_hosp</code> argument is set to <code>NA</code> this argument
+should also be set to <code>NA</code>. See details and examples for more information.</p></dd>
 
 
 <dt>hosp_death_risk</dt>
 <dd><p>Either a single <code>numeric</code> for the death risk for
 hospitalised individuals across the population, or a <code>&lt;data.frame&gt;</code> with age
 specific hospitalised death risks Default is 50% death risk in hospitals
-(<code>0.5</code>) for the entire population. See details and examples for more
-information.</p></dd>
+(<code>0.5</code>) for the entire population. If the <code>onset_to_death</code> argument is set
+to <code>NA</code> this argument should also be set to <code>NA</code>. See details and examples
+for more information.</p></dd>
 
 
 <dt>non_hosp_death_risk</dt>
 <dd><p>Either a single <code>numeric</code> for the death risk for
 outside of hospitals across the population, or a <code>&lt;data.frame&gt;</code> with age
 specific death risks outside of hospitals. Default is 5% death risk outside
-of hospitals  (<code>0.05</code>) for the entire population. See details and examples
-for more information.</p></dd>
+of hospitals  (<code>0.05</code>) for the entire population. If the <code>onset_to_death</code>
+argument is set to <code>NA</code> this argument should also be set to <code>NA</code>. See
+details and examples for more information.</p></dd>
 
 
 <dt>outbreak_start_date</dt>
