@@ -146,14 +146,15 @@ test_that("sim_linelist gives expected proportion of ages with age struct", {
     proportion = c(0.2, 0.5, 0.3),
     stringsAsFactors = FALSE
   )
-  set.seed(3)
+  set.seed(1)
   linelist <- sim_linelist(
     contact_distribution = contact_distribution,
     infect_period = infect_period,
     prob_infect = 0.5,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
-    population_age = age_struct
+    population_age = age_struct,
+    outbreak_size = c(500, 5000)
   )
 
   # as nrow -> Inf, sampled proportion -> age struct proportion
