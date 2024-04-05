@@ -40,17 +40,20 @@
 #' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
 #' hospitalisation risks Default is 20% hospitalisation (`0.2`) for the entire
-#' population. See details and examples for more information.
+#' population. If the `onset_to_hosp` argument is set to `NA` this argument
+#' should also be set to `NA`. See details and examples for more information.
 #' @param hosp_death_risk Either a single `numeric` for the death risk for
 #' hospitalised individuals across the population, or a `<data.frame>` with age
 #' specific hospitalised death risks Default is 50% death risk in hospitals
-#' (`0.5`) for the entire population. See details and examples for more
-#' information.
+#' (`0.5`) for the entire population. If the `onset_to_death` argument is set
+#' to `NA` this argument should also be set to `NA`. See details and examples
+#' for more information.
 #' @param non_hosp_death_risk Either a single `numeric` for the death risk for
 #' outside of hospitals across the population, or a `<data.frame>` with age
 #' specific death risks outside of hospitals. Default is 5% death risk outside
-#' of hospitals  (`0.05`) for the entire population. See details and examples
-#' for more information.
+#' of hospitals  (`0.05`) for the entire population. If the `onset_to_death`
+#' argument is set to `NA` this argument should also be set to `NA`. See
+#' details and examples for more information.
 #' @param outbreak_start_date A `date` for the start of the outbreak.
 #' @param add_names A `logical` boolean for whether to add names to each row
 #' of the line list. Default is `TRUE`.
@@ -166,16 +169,31 @@ sim_linelist <- function(contact_distribution,
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(contact_distribution, c("function", "epidist")) &&
-      inherits(infect_period, c("function", "epidist")) &&
-      inherits(onset_to_hosp, c("function", "epidist")) &&
-      inherits(onset_to_death, c("function", "epidist"))
+      inherits(infect_period, c("function", "epidist"))
+  )
+  stopifnot(
+    "onset_to_hosp and onset_to_death need to be a function, <epidist> or NA" =
+      inherits(onset_to_hosp, c("function", "epidist")) ||
+      is_na(onset_to_hosp) &&
+      inherits(onset_to_death, c("function", "epidist")) ||
+      is_na(onset_to_death)
   )
   contact_distribution <- as.function(
     contact_distribution, func_type = "density"
   )
   infect_period <- as.function(infect_period, func_type = "generate")
-  onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
-  onset_to_death <- as.function(onset_to_death, func_type = "generate")
+  if (!is_na(onset_to_hosp)) {
+    onset_to_hosp <- as.function(onset_to_hosp, func_type = "generate")
+  } else {
+    # function to generate NA instead of hospitalisation times
+    onset_to_hosp <- function(x) rep(NA, times = x)
+  }
+  if (!is_na(onset_to_death)) {
+    onset_to_death <- as.function(onset_to_death, func_type = "generate")
+  } else {
+    # function to generate NA instead of death times
+    onset_to_death <- function(x) rep(NA, times = x)
+  }
 
   .check_sim_input(
     sim_type = "linelist",
@@ -193,6 +211,13 @@ sim_linelist <- function(contact_distribution,
     hosp_death_risk = hosp_death_risk,
     non_hosp_death_risk = non_hosp_death_risk,
     population_age = population_age
+  )
+  .cross_check_sim_input(
+    onset_to_hosp = onset_to_hosp,
+    onset_to_death = onset_to_death,
+    hosp_risk = hosp_risk,
+    hosp_death_risk = hosp_death_risk,
+    non_hosp_death_risk = non_hosp_death_risk
   )
 
   if (is.data.frame(population_age)) {
