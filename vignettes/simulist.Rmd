@@ -243,3 +243,23 @@ The `contact_distribution` requires a density function instead of a random numbe
 :::
 
 The same approach of using anonymous functions can be used in `sim_linelist()` and `sim_contacts()`.
+
+## Simulating without hospitalisations and/or deaths
+
+The onset-to-hospitalisation (`onset_to_hosp`) and onset-to-death (`onset_to_death`) arguments can also be set to `NA` in which case the date of admission (`$date_admission`) and date of death (`$date_death`) column in the line list will contains `NA`s. 
+
+```{r, sim-linelist-no-hosp-death}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infect_period = infect_period,
+  prob_infect = 0.5,
+  onset_to_hosp = NA,
+  onset_to_death = NA,
+  hosp_risk = NA,
+  hosp_death_risk = NA,
+  non_hosp_death_risk = NA
+)
+head(linelist)
+```
+
+This same functionality also applies to `sim_outbreak()`. In the above example, `hosp_risk`, `hosp_death_risk` and `non_hosp_death_risk` are set to `NA`. If the risk (`*_risk`) arguments are left as numeric inputs but the corresponding onset-to-event distribution (i.e. `hosp_risk` for `onset_to_hosp` and `hosp_death_risk` and `non_hosp_death_risk` for `onset_to_death`) are set to `NA` a warning will be produced. The example above simulates with neither hospitalisation or deaths, but these do not need to be _turned off_ together, and one or the other can be set to `NA` with their corresponding risk arguments.
