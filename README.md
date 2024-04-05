@@ -88,7 +88,7 @@ onset_to_hosp <- epiparameter::epidist_db(
 #> with Right Truncation: A Statistical Analysis of Publicly Available
 #> Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
 #> <https://doi.org/10.3390/jcm9020538>.. 
-#> To retrieve the short citation use the 'get_citation' function
+#> To retrieve the citation use the 'get_citation' function
 
 # get onset to death from {epiparameter} database
 onset_to_death <- epiparameter::epidist_db(
@@ -102,7 +102,7 @@ onset_to_death <- epiparameter::epidist_db(
 #> with Right Truncation: A Statistical Analysis of Publicly Available
 #> Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
 #> <https://doi.org/10.3390/jcm9020538>.. 
-#> To retrieve the short citation use the 'get_citation' function
+#> To retrieve the citation use the 'get_citation' function
 ```
 
 To simulate a line list for COVID-19 with an Poisson contact
@@ -135,20 +135,20 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id          case_name case_type sex age date_onset date_admission date_death
-#> 1  1     Joshua Esparza confirmed   m  71 2023-01-01           <NA>       <NA>
-#> 2  3     Alyshah Atkins confirmed   f  44 2023-01-02           <NA> 2023-01-24
-#> 3  4     Rifat al-Mussa suspected   m  49 2023-01-02     2023-01-03       <NA>
-#> 4  8 Zachery Miramontes  probable   m  50 2023-01-02           <NA>       <NA>
-#> 5  9          Ryan Zahn  probable   m   7 2023-01-02           <NA>       <NA>
-#> 6 11    Bruce Hishinuma confirmed   m  24 2023-01-02     2023-01-12       <NA>
+#>   id        case_name case_type sex age date_onset date_admission date_death
+#> 1  1 Isaiah Patterson  probable   m  35 2023-01-01           <NA>       <NA>
+#> 2  2     Michael John suspected   m  43 2023-01-01           <NA>       <NA>
+#> 3  3   Lorenzo Gaynor confirmed   m   1 2023-01-01           <NA>       <NA>
+#> 4  5     Cass Milburn confirmed   m  78 2023-01-01           <NA>       <NA>
+#> 5  6        Hope Cobb  probable   f  22 2023-01-01           <NA>       <NA>
+#> 6  8    Wyona Lenahan  probable   f  28 2023-01-01           <NA>       <NA>
 #>   date_first_contact date_last_contact ct_value
-#> 1               <NA>              <NA>     25.2
-#> 2         2023-01-01        2023-01-02     25.2
-#> 3         2023-01-02        2023-01-05       NA
-#> 4         2023-01-02        2023-01-05       NA
-#> 5         2023-01-03        2023-01-04       NA
-#> 6         2023-01-02        2023-01-05     25.2
+#> 1               <NA>              <NA>       NA
+#> 2         2022-12-30        2023-01-05       NA
+#> 3         2022-12-30        2023-01-02     25.6
+#> 4         2022-12-29        2023-01-02     25.6
+#> 5         2023-01-01        2023-01-03       NA
+#> 6         2023-01-03        2023-01-04       NA
 ```
 
 In this example, the line list is simulated using the default values
@@ -168,20 +168,20 @@ linelist <- sim_linelist(
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id       case_name case_type sex age date_onset date_admission date_death
-#> 1  1 Diozanae Ingram  probable   f   9 2019-12-01           <NA>       <NA>
-#> 2  2    Alexander Ho confirmed   m  66 2019-12-01           <NA>       <NA>
-#> 3  3    Olivia Valle suspected   f   9 2019-12-01           <NA>       <NA>
-#> 4  4   Anita Roberts suspected   f  41 2019-12-01           <NA> 2019-12-16
-#> 5  7   Aqil Stratton suspected   m  27 2019-12-02           <NA>       <NA>
-#> 6 10    Irma Lefebre confirmed   f  87 2019-12-02           <NA>       <NA>
+#>   id         case_name case_type sex age date_onset date_admission date_death
+#> 1  1      Elroy Phenna confirmed   m  80 2019-12-01           <NA>       <NA>
+#> 2  2     Ieesha Battle  probable   f  85 2019-12-01     2019-12-03       <NA>
+#> 3  4 Sydney Goldsberry suspected   f  76 2019-12-01           <NA>       <NA>
+#> 4  8      Victoria Kim confirmed   f  12 2019-12-01           <NA>       <NA>
+#> 5 11     Rachel Brooks confirmed   f  50 2019-12-01           <NA>       <NA>
+#> 6 14  Sitaara el-Sader confirmed   f  54 2019-12-01           <NA>       <NA>
 #>   date_first_contact date_last_contact ct_value
-#> 1               <NA>              <NA>       NA
-#> 2         2019-12-02        2019-12-06     25.2
-#> 3         2019-11-26        2019-12-01       NA
-#> 4         2019-12-04        2019-12-09       NA
-#> 5         2019-11-29        2019-12-01       NA
-#> 6         2019-12-07        2019-12-11     25.2
+#> 1               <NA>              <NA>       24
+#> 2         2019-12-04        2019-12-06       NA
+#> 3         2019-11-29        2019-12-03       NA
+#> 4         2019-12-05        2019-12-05       24
+#> 5         2019-12-03        2019-12-05       24
+#> 6         2019-11-30        2019-12-02       24
 ```
 
 To simulate a table of contacts of cases (i.e. to reflect a contact
@@ -195,20 +195,20 @@ contacts <- sim_contacts(
   prob_infect = 0.5
 )
 head(contacts)
-#>             from              to age sex date_first_contact date_last_contact
-#> 1   Zabiollah Ly  Daniyal Fifita  54   m         2023-01-04        2023-01-09
-#> 2   Zabiollah Ly  Tyler Mccreesh  45   m         2023-01-03        2023-01-04
-#> 3   Zabiollah Ly  Nicholas Coors   9   m         2022-12-28        2023-01-01
-#> 4 Daniyal Fifita  Julia Mcmillan  81   f         2023-01-05        2023-01-07
-#> 5 Daniyal Fifita  Savannah Begay  35   f         2022-12-30        2023-01-03
-#> 6 Daniyal Fifita Cleatus Sorrell  75   m         2022-12-31        2023-01-04
-#>   was_case           status
-#> 1        Y             case
-#> 2        N   under_followup
-#> 3        Y             case
-#> 4        N lost_to_followup
-#> 5        Y             case
-#> 6        N   under_followup
+#>             from               to age sex date_first_contact date_last_contact
+#> 1      Skye Chee   Rodrigo Deluca  39   m         2023-01-01        2023-01-04
+#> 2      Skye Chee  Diego Dominguez  54   m         2022-12-30        2023-01-03
+#> 3      Skye Chee  Jeremiah Nelson  23   m         2022-12-29        2023-01-01
+#> 4      Skye Chee     Oliver Green  16   m         2023-01-02        2023-01-03
+#> 5      Skye Chee   Samantha Parga  40   f         2023-01-02        2023-01-03
+#> 6 Rodrigo Deluca Habsa Huntington  20   f         2023-01-05        2023-01-06
+#>   was_case         status
+#> 1        Y           case
+#> 2        Y           case
+#> 3        N under_followup
+#> 4        Y           case
+#> 5        Y           case
+#> 6        N under_followup
 ```
 
 If both the line list and contacts table are required, they can be
@@ -226,35 +226,35 @@ outbreak <- sim_outbreak(
   onset_to_death = onset_to_death
 )
 head(outbreak$linelist)
-#>   id       case_name case_type sex age date_onset date_admission date_death
-#> 1  1   Joshua Claton suspected   m  88 2023-01-01     2023-01-06       <NA>
-#> 2  2  Estiben Alonzo  probable   m  73 2023-01-01           <NA>       <NA>
-#> 3  3 Tulaiha el-Basa suspected   f  75 2023-01-01           <NA>       <NA>
-#> 4  4    Marie Faisol suspected   f  47 2023-01-01     2023-01-06       <NA>
-#> 5  5      Jera Ortiz confirmed   f  43 2023-01-01           <NA>       <NA>
-#> 6  7     Evan Sailor confirmed   m   5 2023-01-02     2023-01-03       <NA>
+#>   id        case_name case_type sex age date_onset date_admission date_death
+#> 1  1         Ted Doan confirmed   m  28 2023-01-01           <NA>       <NA>
+#> 2  2    Anthony Perry confirmed   m  54 2023-01-02           <NA>       <NA>
+#> 3  4      Drew Hamann confirmed   m   9 2023-01-02           <NA>       <NA>
+#> 4  6 Kathryn Sullivan confirmed   f  35 2023-01-02           <NA>       <NA>
+#> 5  8     Chad Cochran confirmed   m   4 2023-01-02           <NA>       <NA>
+#> 6 10  Jasmine Atencio  probable   f   2 2023-01-02           <NA> 2023-01-24
 #>   date_first_contact date_last_contact ct_value
-#> 1               <NA>              <NA>       NA
-#> 2         2022-12-30        2023-01-03       NA
-#> 3         2022-12-31        2023-01-02       NA
-#> 4         2023-01-04        2023-01-07       NA
-#> 5         2023-01-07        2023-01-07     23.9
-#> 6         2023-01-01        2023-01-03     23.9
+#> 1               <NA>              <NA>     24.2
+#> 2         2023-01-04        2023-01-09     24.2
+#> 3         2022-12-28        2023-01-01     24.2
+#> 4         2022-12-30        2023-01-03     24.2
+#> 5         2022-12-30        2023-01-02     24.2
+#> 6         2023-01-01        2023-01-04       NA
 head(outbreak$contacts)
-#>             from              to age sex date_first_contact date_last_contact
-#> 1  Joshua Claton  Estiben Alonzo  73   m         2022-12-30        2023-01-03
-#> 2  Joshua Claton Tulaiha el-Basa  75   f         2022-12-31        2023-01-02
-#> 3  Joshua Claton    Marie Faisol  47   f         2023-01-04        2023-01-07
-#> 4  Joshua Claton      Jera Ortiz  43   f         2023-01-07        2023-01-07
-#> 5 Estiben Alonzo Kendall Jackson  49   m         2022-12-30        2023-01-02
-#> 6 Estiben Alonzo     Evan Sailor   5   m         2023-01-01        2023-01-03
-#>   was_case         status
-#> 1        Y           case
-#> 2        Y           case
-#> 3        Y           case
-#> 4        Y           case
-#> 5        N under_followup
-#> 6        Y           case
+#>            from               to age sex date_first_contact date_last_contact
+#> 1      Ted Doan    Anthony Perry  54   m         2023-01-04        2023-01-09
+#> 2      Ted Doan      Andrew Dehn  45   m         2023-01-03        2023-01-04
+#> 3      Ted Doan      Drew Hamann   9   m         2022-12-28        2023-01-01
+#> 4 Anthony Perry    Bianca Conger  81   f         2023-01-05        2023-01-07
+#> 5 Anthony Perry Kathryn Sullivan  35   f         2022-12-30        2023-01-03
+#> 6 Anthony Perry     Connor Crist  75   m         2022-12-31        2023-01-04
+#>   was_case           status
+#> 1        Y             case
+#> 2        N lost_to_followup
+#> 3        Y             case
+#> 4        N   under_followup
+#> 5        Y             case
+#> 6        N   under_followup
 ```
 
 ## Help
