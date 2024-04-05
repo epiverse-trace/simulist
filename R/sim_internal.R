@@ -17,6 +17,7 @@
                           prob_infect,
                           onset_to_hosp = NULL,
                           onset_to_death = NULL,
+                          onset_to_recovery = NULL,
                           hosp_risk = NULL,
                           hosp_death_risk = NULL,
                           non_hosp_death_risk = NULL,
@@ -109,20 +110,21 @@
       onset_to_hosp = onset_to_hosp,
       hosp_risk = hosp_risk
     )
-    .data <- .add_deaths(
+    .data <- .add_outcome(
       .data = .data,
       onset_to_death = onset_to_death,
+      onset_to_recovery = onset_to_recovery,
       hosp_death_risk = hosp_death_risk,
       non_hosp_death_risk = non_hosp_death_risk
     )
 
     # add hospitalisation and death dates
     .data$date_admission <- .data$hospitalisation + outbreak_start_date
-    .data$date_death <- .data$deaths + outbreak_start_date
+    .data$date_outcome <- .data$outcome_time + outbreak_start_date
 
     linelist_cols <- c(
       "id", "case_type", "sex", "age", "date_onset", "date_admission",
-      "date_death", "date_first_contact", "date_last_contact"
+      "outcome", "date_outcome", "date_first_contact", "date_last_contact"
     )
 
     if (add_names) {
