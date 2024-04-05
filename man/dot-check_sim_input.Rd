@@ -82,19 +82,22 @@ contact tracing status must sum to one.}
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
 hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entire
-population. See details and examples for more information.}
+population. If the \code{onset_to_hosp} argument is set to \code{NA} this argument
+should also be set to \code{NA}. See details and examples for more information.}
 
 \item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
 specific hospitalised death risks Default is 50\% death risk in hospitals
-(\code{0.5}) for the entire population. See details and examples for more
-information.}
+(\code{0.5}) for the entire population. If the \code{onset_to_death} argument is set
+to \code{NA} this argument should also be set to \code{NA}. See details and examples
+for more information.}
 
 \item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
 specific death risks outside of hospitals. Default is 5\% death risk outside
-of hospitals  (\code{0.05}) for the entire population. See details and examples
-for more information.}
+of hospitals  (\code{0.05}) for the entire population. If the \code{onset_to_death}
+argument is set to \code{NA} this argument should also be set to \code{NA}. See
+details and examples for more information.}
 
 \item{population_age}{Either a \code{numeric} vector with two elements or a
 \verb{<data.frame>} with age structure in the population. Use a \code{numeric} vector
