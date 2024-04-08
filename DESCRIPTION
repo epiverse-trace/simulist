@@ -32,6 +32,7 @@ Imports:
 Suggests: 
     bookdown,
     dplyr,
+    tidyr,
     epicontacts (>= 1.1.3),
     ggplot2,
     incidence2 (>= 2.1.0),
