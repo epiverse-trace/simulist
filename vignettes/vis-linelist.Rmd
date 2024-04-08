@@ -127,6 +127,40 @@ plot(weekly)
 ```
  
 To visualise the onset, hospitalisation and death incidence in the same plot they can be jointly specified to the `date_index` argument of `incidence2::incidence()`. 
+
+First the outcome data needs to be pivoted from long data to wide data to be input into `incidence2::incidence()`.
+
+### Reshape line list data {.tabset}
+
+#### Base R
+
+```{r, reshape-linelist-base-r, eval=FALSE}
+# this can also be achieved with the reshape() function but the user interface
+# for that function is complicated so here we just create the columns manually
+linelist$date_death <- linelist$date_outcome
+linelist$date_death[linelist$outcome == "recovered"] <- NA
+linelist$date_recovery <- linelist$date_outcome
+linelist$date_recovery[linelist$outcome == "died"] <- NA
+```
+
+#### Tidyverse
+
+```{r, reshape-linelist-tidyverse, message=FALSE}
+library(tidyr)
+library(dplyr)
+linelist <- linelist %>% 
+  tidyr::pivot_wider(
+    names_from = outcome, 
+    values_from = date_outcome
+  )
+linelist <- linelist %>%
+  dplyr::rename(
+    date_death = died, 
+    date_recovery = recovered
+  )
+```
+
+## {-}
  
 ```{r, plot-onset-hospitalisation, fig.cap="Figure 4: Daily incidence of cases from symptom onset and incidence of hospitalisations and deaths.", fig.width = 8, fig.height = 5}
 daily <- incidence(
@@ -238,7 +272,7 @@ outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case == "Y", ]
 
 #### Tidyverse
 
-```{r, subset-linelist-tidyverse, message=FALSE}
+```{r, subset-linelist-tidyverse}
 library(dplyr)
 outbreak$contacts <- outbreak$contacts %>%
   dplyr::filter(was_case == "Y")
