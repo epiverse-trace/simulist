@@ -164,6 +164,22 @@ references:
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2024'
 - type: software
+  title: tidyr
+  abstract: 'tidyr: Tidy Messy Data'
+  notes: Suggests
+  url: https://tidyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=tidyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+  - family-names: Girlich
+    given-names: Maximilian
+  year: '2024'
+- type: software
   title: epicontacts
   abstract: 'epicontacts: Handling, Visualisation and Analysis of Epidemiological
     Contacts'
