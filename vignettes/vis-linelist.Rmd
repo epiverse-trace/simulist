@@ -148,14 +148,14 @@ linelist$date_recovery[linelist$outcome == "died"] <- NA
 ```{r, reshape-linelist-tidyverse, message=FALSE}
 library(tidyr)
 library(dplyr)
-linelist <- linelist %>% 
+linelist <- linelist %>%
   tidyr::pivot_wider(
-    names_from = outcome, 
+    names_from = outcome,
     values_from = date_outcome
   )
 linelist <- linelist %>%
   dplyr::rename(
-    date_death = died, 
+    date_death = died,
     date_recovery = recovered
   )
 ```
