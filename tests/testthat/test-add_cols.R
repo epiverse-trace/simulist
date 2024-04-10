@@ -13,6 +13,8 @@ suppressMessages({
     epi_dist = "onset to death",
     single_epidist = TRUE
   ))
+
+  onset_to_recovery <- function(x) rep(NA, times = x)
 })
 
 test_that(".add_date_contact works as expected with contact_type = 'last'", {
@@ -173,42 +175,46 @@ test_that(".add_hospitalisation works as expected with age-strat risks", {
   )
 })
 
-test_that(".add_deaths works as expected", {
-  ll <- readRDS(file.path("testdata", "pre_death.rds"))
-  linelist <- .add_deaths(
+test_that(".add_outcome works as expected", {
+  ll <- readRDS(file.path("testdata", "pre_outcome.rds"))
+  linelist <- .add_outcome(
     .data = ll,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     hosp_death_risk = 0.5,
     non_hosp_death_risk = 0.5
   )
   expect_s3_class(linelist, class = "data.frame")
-  expect_type(linelist$deaths, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
+  expect_type(linelist$outcome, type = "character")
+  expect_type(linelist$outcome_time, type = "double")
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "deaths")
+    c(colnames(ll), "outcome", "outcome_time")
   )
 })
 
-test_that(".add_deaths works as expected with different parameter", {
-  ll <- readRDS(file.path("testdata", "pre_death.rds"))
-  linelist <- .add_deaths(
+test_that(".add_outcome works as expected with different parameter", {
+  ll <- readRDS(file.path("testdata", "pre_outcome.rds"))
+  linelist <- .add_outcome(
     .data = ll,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     hosp_death_risk = 0.9,
     non_hosp_death_risk = 0.1
   )
   expect_s3_class(linelist, class = "data.frame")
-  expect_type(linelist$deaths, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
+  expect_type(linelist$outcome, type = "character")
+  expect_type(linelist$outcome_time, type = "double")
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "deaths")
+    c(colnames(ll), "outcome", "outcome_time")
   )
 })
 
-test_that(".add_deaths works as expected with age-strat risks", {
-  ll <- readRDS(file.path("testdata", "pre_death.rds"))
+test_that(".add_outcome works as expected with age-strat risks", {
+  ll <- readRDS(file.path("testdata", "pre_outcome.rds"))
   age_dep_hosp_death_risk <- data.frame(
     min_age = c(1, 5, 80),
     max_age = c(4, 79, 90),
@@ -219,18 +225,20 @@ test_that(".add_deaths works as expected with age-strat risks", {
     max_age = c(4, 79, 90),
     risk = c(0.05, 0.025, 0.1)
   )
-  linelist <- .add_deaths(
+  linelist <- .add_outcome(
     .data = ll,
     onset_to_death = onset_to_death,
+    onset_to_recover = onset_to_recovery,
     hosp_death_risk = age_dep_hosp_death_risk,
     non_hosp_death_risk = age_dep_non_hosp_death_risk
   )
   expect_s3_class(linelist, class = "data.frame")
-  expect_type(linelist$deaths, type = "double")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
+  expect_type(linelist$outcome, type = "character")
+  expect_type(linelist$outcome_time, type = "double")
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
   expect_identical(
     colnames(linelist),
-    c(colnames(ll), "deaths")
+    c(colnames(ll), "outcome", "outcome_time")
   )
 })
 
