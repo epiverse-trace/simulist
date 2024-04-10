@@ -182,7 +182,8 @@ test_that(".add_outcome works as expected", {
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
     hosp_death_risk = 0.5,
-    non_hosp_death_risk = 0.5
+    non_hosp_death_risk = 0.5,
+    config = create_config()
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$outcome, type = "character")
@@ -201,7 +202,8 @@ test_that(".add_outcome works as expected with different parameter", {
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
     hosp_death_risk = 0.9,
-    non_hosp_death_risk = 0.1
+    non_hosp_death_risk = 0.1,
+    config = create_config()
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$outcome, type = "character")
