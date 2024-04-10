@@ -22,7 +22,8 @@
   onset_to_death,
   onset_to_recovery,
   hosp_death_risk,
-  non_hosp_death_risk
+  non_hosp_death_risk,
+  config
 )
 }
 \arguments{
@@ -73,6 +74,9 @@ specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. If the \code{onset_to_death}
 argument is set to \code{NA} this argument should also be set to \code{NA}. See
 details and examples for more information.}
+
+\item{config}{A list of settings to adjust the randomly sampled delays and
+Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
 }
 \value{
 A \verb{<data.frame>} with one more column than input into \code{.data}.
