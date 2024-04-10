@@ -122,7 +122,8 @@ NULL
                          onset_to_death,
                          onset_to_recovery,
                          hosp_death_risk,
-                         non_hosp_death_risk) {
+                         non_hosp_death_risk,
+                         config) {
   infected_idx <- .data$infected == "infected"
   num_infected <- sum(infected_idx)
   .data$outcome <- "contact"
@@ -142,6 +143,32 @@ NULL
           replace = FALSE,
           size = risk * sum(idx)
         )
+
+        if (is.function(config$time_varying_death_risk)) {
+          # check time-varying function
+          .check_func_req_args(config$time_varying_death_risk)
+
+          # sample which deaths to keep with time-varying risk
+          prob_death <- config$time_varying_death_risk(.data$time[pop_sample])
+          max_prob_death <- stats::optimise(
+            f = config$time_varying_death_risk,
+            interval = c(0, 100),
+            maximum = TRUE
+          )$objective
+          norm_prob_death <- prob_death / max_prob_death
+          # set all values > 1 and < 0 to 1 and 0 due to imprecision of optimise
+          # TODO: ideally this step would be removed as no values are 0 > x < 1
+          norm_prob_death[norm_prob_death > 1] <- 1
+          norm_prob_death[norm_prob_death < 0] <- 0
+          death_sample <- stats::rbinom(
+            n = pop_sample,
+            size = 1,
+            prob = norm_prob_death
+          )
+          # subset deaths given sampling (logical conversion for vec subsetting)
+          pop_sample <- pop_sample[as.logical(death_sample)]
+        }
+
         .data$outcome[pop_sample] <- "died"
         .data$outcome_time[pop_sample] <- .data$time[pop_sample] +
           onset_to_death(length(pop_sample))
