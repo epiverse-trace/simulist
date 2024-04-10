@@ -165,6 +165,14 @@ suppressMessages({
     epi_dist = "onset to death",
     single_epidist = TRUE
   ))
+
+  onset_to_recovery <- as.function(epiparameter::epidist(
+    disease = "COVID-19",
+    epi_dist = "onset to recovery",
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 3, sdlog = 1)
+  ))
+
 })
 
 test_that(".check_sim_input works as expected", {
@@ -177,6 +185,7 @@ test_that(".check_sim_input works as expected", {
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     add_names = TRUE,
     add_ct = FALSE,
     case_type_probs = c(
@@ -206,6 +215,7 @@ test_that(".check_sim_input works as expected", {
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     add_names = TRUE,
     add_ct = FALSE,
     case_type_probs = c(
@@ -249,6 +259,7 @@ test_that(".check_sim_input works as expected with NA risks", {
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
+    onset_to_recovery = onset_to_recovery,
     add_names = TRUE,
     add_ct = FALSE,
     case_type_probs = c(
@@ -361,22 +372,37 @@ test_that(".cross_check_sim_input warns as expected", {
       hosp_death_risk = 0.5,
       non_hosp_death_risk = 0.05
     ),
-    regexp = "(onset_to_hosp is set to NA)*(hosp_risk is being ignored)"
+    regexp = paste0(
+      "(onset_to_hosp is set to NA)*(hosp_risk is being ignored)*",
+      "(hosp_death_risk is being ignored)"
+    )
   )
-  # since testthat v3 these handle a single condition so nesting expect warning
-  # to check both warnings
+
   expect_warning(
-    expect_warning(
-      .cross_check_sim_input(
-        onset_to_hosp = onset_to_hosp,
-        onset_to_death = function(x) rep(NA, times = x),
-        hosp_risk = 0.2,
-        hosp_death_risk = 0.5,
-        non_hosp_death_risk = 0.05
-      ),
-      regexp = "(onset_to_death is)*(NA)*(hosp_death_risk is being ignored)"
+    .cross_check_sim_input(
+      onset_to_hosp = function(x) rep(NA, times = x),
+      onset_to_death = onset_to_death,
+      hosp_risk = 0.2,
+      hosp_death_risk = 0.5,
+      non_hosp_death_risk = 0.05
     ),
-    regexp = "(onset_to_death is)*(NA)*(non_hosp_death_risk is being ignored)"
+    regexp = paste0(
+      "(onset_to_hosp is set to NA)*(hosp_risk is being ignored)*",
+      "(hosp_death_risk is being ignored)"
+    )
+  )
+  expect_warning(
+    .cross_check_sim_input(
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = function(x) rep(NA, times = x),
+      hosp_risk = 0.2,
+      hosp_death_risk = 0.5,
+      non_hosp_death_risk = 0.05
+    ),
+    regexp = paste0(
+      "(onset_to_death is set to NA)*(hosp_death_risk is being ignored)*",
+      "(non_hosp_death_risk is being ignored)"
+    )
   )
   expect_error(
     .cross_check_sim_input(
@@ -386,7 +412,10 @@ test_that(".cross_check_sim_input warns as expected", {
       hosp_death_risk = 0.5,
       non_hosp_death_risk = 0.05
     ),
-    regexp = "(hosp_risk is set to NA)*(but onset_to_hosp is specified)"
+    regexp = paste0(
+      "(hosp_risk is set to NA)*(but onset_to_hosp is specified)*",
+      "(set hosp_risk to numeric value)"
+    )
   )
   expect_error(
     .cross_check_sim_input(
@@ -396,7 +425,10 @@ test_that(".cross_check_sim_input warns as expected", {
       hosp_death_risk = NA,
       non_hosp_death_risk = 0.05
     ),
-    regexp = "(hosp_death_risk is set to NA but onset_to_death is specified)"
+    regexp = paste0(
+      "(hosp_death_risk is set to NA)*(but onset_to_death is specified)*",
+      "(set hosp_death_risk to numeric value)"
+    )
   )
   expect_error(
     .cross_check_sim_input(
@@ -406,6 +438,9 @@ test_that(".cross_check_sim_input warns as expected", {
       hosp_death_risk = 0.5,
       non_hosp_death_risk = NA
     ),
-    regexp = "(non_hosp_death_risk is set to NA)*(onset_to_death is specified)"
+    regexp = paste0(
+      "(non_hosp_death_risk is set to NA)*(onset_to_death is specified)*",
+      "(set non_hosp_death_risk to numeric value)"
+    )
   )
 })

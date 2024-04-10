@@ -296,35 +296,33 @@ test_that("sim_linelist warns when risks are given by onset-to-event is NA", {
     ),
     regexp = "(onset_to_hosp is set to NA)*(hosp_risk is being ignored)"
   )
-  # since testthat v3 these handle a single condition so nesting expect warning
-  # to check both warnings
   expect_warning(
-    expect_warning(
-      sim_linelist(
-        contact_distribution = contact_distribution,
-        infect_period = infect_period,
-        prob_infect = 0.5,
-        onset_to_hosp = onset_to_hosp,
-        onset_to_death = NA,
-        hosp_death_risk = 0.5
-      ),
-      regexp = "(onset_to_death is)*(NA)*(hosp_death_risk is being ignored)"
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = NA,
+      hosp_death_risk = 0.5
     ),
-    regexp = "(onset_to_death is)*(NA)*(non_hosp_death_risk is being ignored)"
+    regexp = paste0(
+      "(onset_to_death is set to NA)*(hosp_death_risk is being ignored)*",
+      "(non_hosp_death_risk is being ignored)"
+    )
   )
   expect_warning(
-    expect_warning(
-      sim_linelist(
-        contact_distribution = contact_distribution,
-        infect_period = infect_period,
-        prob_infect = 0.5,
-        onset_to_hosp = onset_to_hosp,
-        onset_to_death = NA,
-        non_hosp_death_risk = 0.02
-      ),
-      regexp = "(onset_to_death is)*(NA)*(hosp_death_risk is being ignored)"
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = NA,
+      non_hosp_death_risk = 0.02
     ),
-    regexp = "(onset_to_death is)*(NA)*(non_hosp_death_risk is being ignored)"
+    regexp = paste0(
+      "(onset_to_death is set to NA)*(hosp_death_risk is being ignored)*",
+      "(non_hosp_death_risk is being ignored)"
+    )
   )
 })
 
@@ -376,13 +374,15 @@ test_that("sim_linest date_admission column is NA when onset_to_hosp is NA", {
   )
   expect_true(all(is.na(ll$date_admission)))
 
-  ll <- sim_linelist(
-    contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = 0.5,
-    onset_to_hosp = NA,
-    onset_to_death = onset_to_death,
-    hosp_risk = NA
+  ll <- suppressWarnings(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = NA,
+      onset_to_death = onset_to_death,
+      hosp_risk = NA
+    )
   )
   expect_true(all(is.na(ll$date_admission)))
 })
