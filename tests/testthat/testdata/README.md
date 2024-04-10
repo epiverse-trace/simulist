@@ -5,7 +5,7 @@ The {simulist} R package contains test data files in order to test internal func
 * "pre_date_last_contact"
 * "pre_date_first_contact"
 * "pre_hospitalisation"
-* "pre_death"
+* "pre_outcome"
 * "pre_names"
 * "pre_ct"
 
