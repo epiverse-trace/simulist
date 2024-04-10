@@ -22,7 +22,8 @@ The \code{config} argument in \code{\link[=sim_linelist]{sim_linelist()}} contro
 around time windows around infections (time of first contact and last
 contact with infector), and the distribution of the Cycle threshold (Ct)
 value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
-cases.
+cases, the network effect in the simulation, and if there is a time-varying
+death risk.
 
 Accepted arguments and their defaults are:
 \itemize{
@@ -33,6 +34,7 @@ Accepted arguments and their defaults are:
 \item \code{ct_distribution = "norm"}
 \item \code{ct_distribution_params = c(mean = 25, sd = 2)}
 \item \code{network = "adjusted"}
+\item \code{time_varying_death_risk = 1}
 }
 
 These parameters do not warrant their own arguments in

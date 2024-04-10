@@ -4,7 +4,8 @@
 #' around time windows around infections (time of first contact and last
 #' contact with infector), and the distribution of the Cycle threshold (Ct)
 #' value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
-#' cases.
+#' cases, the network effect in the simulation, and if there is a time-varying
+#' death risk.
 #'
 #' Accepted arguments and their defaults are:
 #' * `last_contact_distribution = "pois"`
@@ -14,6 +15,7 @@
 #' * `ct_distribution = "norm"`
 #' * `ct_distribution_params = c(mean = 25, sd = 2)`
 #' * `network = "adjusted"`
+#' * `time_varying_death_risk = NA`
 #'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
@@ -57,7 +59,8 @@ create_config <- function(...) {
     first_contact_distribution_params = c(lambda = 3),
     ct_distribution = "norm",
     ct_distribution_params = c(mean = 25, sd = 2),
-    network = "adjusted"
+    network = "adjusted",
+    time_varying_death_risk = NA
   )
 
   # capture dynamic dots
