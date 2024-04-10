@@ -115,7 +115,8 @@
       onset_to_death = onset_to_death,
       onset_to_recovery = onset_to_recovery,
       hosp_death_risk = hosp_death_risk,
-      non_hosp_death_risk = non_hosp_death_risk
+      non_hosp_death_risk = non_hosp_death_risk,
+      config = config
     )
 
     # add hospitalisation and death dates
