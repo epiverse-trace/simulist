@@ -23,6 +23,7 @@ articles:
   contents:
   - age-strat-risks
   - age-struct-pop
+  - time-varying-cfr
   - vis-linelist
 - title: Developer Documentation
   navbar: Developer Documentation
