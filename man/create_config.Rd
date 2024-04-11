@@ -34,7 +34,7 @@ Accepted arguments and their defaults are:
 \item \code{ct_distribution = "norm"}
 \item \code{ct_distribution_params = c(mean = 25, sd = 2)}
 \item \code{network = "adjusted"}
-\item \code{time_varying_death_risk = 1}
+\item \code{time_varying_death_risk = NA}
 }
 
 These parameters do not warrant their own arguments in
