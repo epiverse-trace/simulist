@@ -10,6 +10,7 @@ Ct
 ct
 db
 dist
+dplyr
 epi
 Epi
 epicontacts
@@ -58,6 +59,7 @@ svg
 tabset
 testthat
 threejs
+tidyr
 Tidyverse
 visNetwork
 yaml
