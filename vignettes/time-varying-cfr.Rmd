@@ -1,0 +1,413 @@
+---
+title: "Time-varying case fatality risk"
+output: 
+  bookdown::html_vignette2:
+    code_folding: show
+pkgdown:
+  as_is: true
+vignette: >
+  %\VignetteIndexEntry{Time-varying case fatality risk}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+::: {.alert .alert-info}
+If you are unfamiliar with the {simulist} package or the `sim_linelist()` function [Get Started vignette](simulist.html) is a great place to start.
+:::
+
+This vignette demonstrates how to use the time-varying case fatality risk and gives an overview of the methodologically details.
+
+::: {.alert .alert-secondary}
+
+The {simulist} R package uses an individual-based branching process simulation to generate contacts and cases for line list and contact tracing data. The time-varying case fatality risk feature provides a way to incorporate aspects of epidemics where the risk of death may decrease through time, potentially due to improved medical treatment, vaccination or viral evolution. It is also possible to model increasing case fatality risk through time, or a step-wise risk function where the risk of death shifts between states. 
+
+The time-varying case fatality risk implemented in this package is not meant to explicitly model these factors, but rather to give the user an option to more closely resemble fatality risk through the course of an epidemic, Possibly because there data on this, or just to simulate data that has these characteristics.
+
+See the [{epidemics} R package](https://epiverse-trace.github.io/epidemics/index.html) for a population-level epidemic simulation package with explicit interventions and vaccinations.
+
+:::
+
+Given that setting a time-varying case fatality risk is not needed for most use cases of the {simulist} R package, this feature uses the `config` argument in the `sim_*()` functions. Therefore, the time-varying case fatality risk can be set when calling `create_config()` (see below for details).
+
+```{r setup}
+library(simulist)
+library(epiparameter)
+library(tidyr)
+library(dplyr)
+library(incidence2)
+library(ggplot2)
+```
+
+First we will demonstrate the default setting of a constant case fatality risk throughout an epidemic.
+
+We load the required delay distributions using the {epiparameter} package, by either manually creating them (contact distribution and infectious period), or load them from the {epiparameter} library of epidemiological parameters (onset-to-hospitalisation and onset-to-death).
+
+```{r, read-delay-dists}
+contact_distribution <- epidist(
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 2)
+)
+
+infect_period <- epidist(
+  disease = "COVID-19",
+  epi_dist = "infectious period",
+  prob_distribution = "gamma",
+  prob_distribution_params = c(shape = 3, scale = 3)
+)
+
+# get onset to hospital admission from {epiparameter} database
+onset_to_hosp <- epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to hospitalisation",
+  single_epidist = TRUE
+)
+
+# get onset to death from {epiparameter} database
+onset_to_death <- epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to death",
+  single_epidist = TRUE
+)
+```
+
+We set the seed to ensure we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
+
+```{r, set-seed}
+set.seed(1)
+```
+
+## Constant case fatality risk
+
+When calling the `create_config()` function the default output contains a list element named `time_varying_death_risk` set to `NA`. This corresponds to a constant case fatality risk over time, which is controlled by the `hosp_death_risk` and `non_hosp_death_risk` arguments. The defaults for these two arguments are:
+
+* death risk when hospitalised (`hosp_death_risk`): `0.5` (50%)
+* death risk outside of hospitals (`non_hosp_death_risk`): `0.05` (5%)
+
+In this example we set them explicitly to be clear which risks we're using, but otherwise the `hosp_death_risk`, `non_hosp_death_risk` and `config` do not need to be specified and can use their default values.
+
+For all examples in this vignette we will set the epidemic size to be between 500 and 1,000 cases, to ensure that we can clearly see the case fatality patterns in the data. 
+
+::: {.alert .alert-info}
+See the [Get Started vignette section on Controlling Outbreak Size](simulist.html#Controlling-outbreak-size) for more information on this.
+:::
+
+```{r, sim-linelist}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infect_period = infect_period,
+  prob_infect = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  hosp_death_risk = 0.5,
+  non_hosp_death_risk = 0.05,
+  outbreak_size = c(500, 1000),
+  config = create_config()
+)
+
+head(linelist)
+```
+
+To visualise the incidence of cases and deaths over time we will use the [{incidence2} R package](https://www.reconverse.org/incidence2/).
+
+::: {.alert .alert-info}
+For more information on using {incidence2} to plot line list data see the [Visualising simulated data](vis-linelist.html) vignette.
+:::
+
+Before converting the line list `<data.frame>` to an `<incidence>` object we need to ungroup the outcome columns into their own columns using the [{tidyr}](https://tidyr.tidyverse.org/) and [{dplyr}](https://dplyr.tidyverse.org/) R package from the [Tidyverse](https://www.tidyverse.org/).
+
+```{r, reshape-linelist}
+linelist <- linelist %>%
+  pivot_wider(
+    names_from = outcome,
+    values_from = date_outcome
+  ) %>%
+  rename(
+    date_death = died,
+    date_recovery = recovered
+  )
+```
+
+```{r, plot-onset-hospitalisation, class.source = 'fold-hide', fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.5 and the risk for non-hospitalised individuals is 0.05, and these risks are constant through time.", fig.width = 8, fig.height = 5}
+daily <- incidence(
+  linelist,
+  date_index = c(
+    onset = "date_onset",
+    death = "date_death"
+  ),
+  interval = "daily"
+)
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+## Higher risk of case fatality
+
+We repeat the above simulation but increase the risk of case fatality for both hospitalised (`hosp_death_risk`) and non-hospitalised (`non_hosp_death_risk`) individuals infected. 
+
+```{r, sim-linelist-higher-death-risk}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infect_period = infect_period,
+  prob_infect = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  hosp_death_risk = 0.9,
+  non_hosp_death_risk = 0.75,
+  outbreak_size = c(500, 1000),
+  config = create_config()
+)
+
+# first 6 rows of linelist
+head(linelist)
+```
+
+```{r, reshape-linelist-higher-death-risk}
+linelist <- linelist %>%
+  pivot_wider(
+    names_from = outcome,
+    values_from = date_outcome
+  ) %>%
+  rename(
+    date_death = died,
+    date_recovery = recovered
+  )
+```
+
+```{r, plot-onset-death-higher-risk, class.source = 'fold-hide', fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.9 and the risk for non-hospitalised individuals is 0.75, and these risks are constant through time.", fig.width = 8, fig.height = 5}
+daily <- incidence(
+  linelist,
+  date_index = c(
+    onset = "date_onset",
+    death = "date_death"
+  ),
+  interval = "daily"
+)
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+## Continuous time-varying case fatality risk
+
+Now we've seen what the constant case fatality risk simulations look like, we can simulate with a time-varying function for the risk. 
+
+This is setup by calling the `create_config()` function, and providing an anonymous function with a single argument for the time of the simulation which maps to a probability, propensity or risk at each time value to `time_varying_death_risk`. 
+
+The `create_config()` function has no named arguments, and the argument you are modifying needs to be matched by name exactly (case sensitive). See `?create_config()` for documentation.
+
+```{r, setup-time-varying-cfr}
+config <- create_config(
+  time_varying_death_risk = function(x) dexp(x = x, rate = 0.05)
+)
+```
+
+Here we set the case fatality risk to exponentially decrease through time at a rate ($\lambda$) of 0.05. This will provide a shallow (monotonic) decline of case fatality through the simulated epidemic. 
+
+```{r, plot-exponential-dist, class.source = 'fold-hide', fig.width = 8, fig.height = 5}
+exp_df <- data.frame(
+  time = 1:150,
+  value = config$time_varying_death_risk(1:150)
+)
+ggplot(exp_df) +
+  geom_point(mapping = aes(x = time, y = value)) +
+  scale_y_continuous(name = "Value") +
+  scale_x_continuous(name = "Time (Days)") +
+  theme_bw()
+```
+
+::: {.alert .alert-info}
+
+_Advanced_
+
+The time-varying case fatality risk function reduces the death risk specified by `hosp_death_risk` and `non_hosp_death_risk`, in such as a way that the risks (`*_risk`) given by the user now operate as the maximum risk. The maximum values of the user-supplied time-varying function is the same as the risks specified. 
+
+In the example below `hosp_death_risk` is `0.9` and `non_hosp_death_risk` is `0.75`, and the time-varying case fatality risk function is an exponential decline. This means that on day 0 of the epidemic (i.e. first infection seeds the outbreak) the risks will be `0.9` and `0.75`. But any time after the start of the epidemic ($t_0 + \Delta t$) the risks will be lower, and when the exponential function approaches zero the risk of a case dying will also go to zero. 
+
+The time-varying function supplied to `create_config(time_varying_death_risk = <FUNC>)` does not need to evaluate to between 0 and 1 because internally the function is normalised.  
+
+:::
+
+Simulating with the time-varying case fatality risk:
+
+```{r, sim-linelist-time-varying-cfr}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infect_period = infect_period,
+  prob_infect = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  hosp_death_risk = 0.9,
+  non_hosp_death_risk = 0.75,
+  outbreak_size = c(500, 1000),
+  config = config
+)
+
+head(linelist)
+```
+
+```{r, reshape-linelist-time-varying-cfr}
+linelist <- linelist %>%
+  pivot_wider(
+    names_from = outcome,
+    values_from = date_outcome
+  ) %>%
+  rename(
+    date_death = died,
+    date_recovery = recovered
+  )
+```
+
+```{r, plot-onset-death-time-varying-cfr, class.source = 'fold-hide', fig.cap="Daily incidence of cases from symptom onset and incidence of deaths.", fig.width = 8, fig.height = 5}
+daily <- incidence(
+  linelist,
+  date_index = c(
+    onset = "date_onset",
+    death = "date_death"
+  ),
+  interval = "daily"
+)
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+## Stepwise time-varying case fatality risk
+
+In addition to a continuously varying case fatality risk function, the simulation can also work with stepwise (or piecewise) functions. This is where the risk will instantaneously change at a given point in time to another risk level.
+
+To achieve this, we again specify an anonymous function in `create_config()`, but have the risk of a case dying be equal to the `hosp_death_risk` and `non_hosp_death_risk` for the first 60 days of the outbreak and then become zero (i.e. if an individual is infected after day 60 they will definitely recover).
+
+```{r, setup-time-varying-cfr-stepwise}
+config <- create_config(
+  time_varying_death_risk = function(x) ifelse(test = x < 60, yes = 1, no = 0)
+)
+```
+
+```{r, plot-stepwise-dist, class.source = 'fold-hide', fig.width = 8, fig.height = 5}
+stepwise_df <- data.frame(
+  time = 1:150,
+  value = config$time_varying_death_risk(1:150)
+)
+ggplot(stepwise_df) +
+  geom_point(mapping = aes(x = time, y = value)) +
+  scale_y_continuous(name = "Value") +
+  scale_x_continuous(name = "Time (Days)") +
+  theme_bw()
+```
+
+Simulating with the stepwise time-varying case fatality risk:
+
+```{r, sim-linelist-time-varying-cfr-stepwise}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infect_period = infect_period,
+  prob_infect = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  hosp_death_risk = 0.9,
+  non_hosp_death_risk = 0.75,
+  outbreak_size = c(500, 1000),
+  config = config
+)
+
+head(linelist)
+```
+
+```{r, reshape-linelist-time-varying-cfr-stepwise}
+linelist <- linelist %>%
+  pivot_wider(
+    names_from = outcome,
+    values_from = date_outcome
+  ) %>%
+  rename(
+    date_death = died,
+    date_recovery = recovered
+  )
+```
+
+```{r, plot-onset-death-time-varying-cfr-stepwise, class.source = 'fold-hide', fig.cap="Daily incidence of cases from symptom onset and incidence of deaths.", fig.width = 8, fig.height = 5}
+daily <- incidence(
+  linelist,
+  date_index = c(
+    onset = "date_onset",
+    death = "date_death"
+  ),
+  interval = "daily"
+)
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+The same stepwise function can also be used to specify time windows were the risk of death is reduced. Here we specify the risk of death is equal to the `hosp_death_risk` and `non_hosp_death_risk` in the first 50 days of the epidemic, then between day 50 and day 100 the risk is reduced by half, and then from day 100 onwards the risk goes back to the rates specified by `hosp_death_risk` and `non_hosp_death_risk`. 
+
+```{r, setup-time-varying-cfr-stepwise-window}
+config <- create_config(
+  time_varying_death_risk = function(x) {
+   ifelse(test = x > 50 & x < 100, yes = 0.5, no = 1)
+  }
+)
+```
+
+```{r, plot-stepwise-dist-window, class.source = 'fold-hide', fig.width = 8, fig.height = 5}
+stepwise_df <- data.frame(
+  time = 1:150,
+  value = config$time_varying_death_risk(1:150)
+)
+ggplot(stepwise_df) +
+  geom_point(mapping = aes(x = time, y = value)) +
+  scale_y_continuous(name = "Value", limits = c(0, 1)) +
+  scale_x_continuous(name = "Time (Days)") +
+  theme_bw()
+```
+
+Simulating with the stepwise time-varying case fatality risk:
+
+```{r, sim-linelist-time-varying-cfr-stepwise-window}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infect_period = infect_period,
+  prob_infect = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  hosp_death_risk = 0.9,
+  non_hosp_death_risk = 0.75,
+  outbreak_size = c(500, 1000),
+  config = config
+)
+
+head(linelist)
+```
+
+```{r, reshape-linelist-time-varying-cfr-stepwise-window}
+linelist <- linelist %>%
+  pivot_wider(
+    names_from = outcome,
+    values_from = date_outcome
+  ) %>%
+  rename(
+    date_death = died,
+    date_recovery = recovered
+  )
+```
+
+```{r, plot-onset-death-time-varying-cfr-stepwise-window, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths.", fig.width = 8, fig.height = 5}
+daily <- incidence(
+  linelist,
+  date_index = c(
+    onset = "date_onset",
+    death = "date_death"
+  ),
+  interval = "daily"
+)
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+The implementation of the time-varying case fatality rate in the simulation functions (`sim_linelist()` and `sim_outbreak()`) is flexible to many functional forms. If there are other ways to have a time-varying case fatality risk that are not currently possible please make an [issue](https://github.com/epiverse-trace/simulist/issues) or [pull request](https://github.com/epiverse-trace/simulist/pulls). Currently the hospitalisation risk is assumed constant over time can cannot be adjusted to be time-varying like the death risk, if this is a feature you would like included in the {simulist} R package please make the request in an [issue](https://github.com/epiverse-trace/simulist/issues).
