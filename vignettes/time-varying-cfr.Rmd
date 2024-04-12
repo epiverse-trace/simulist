@@ -22,13 +22,13 @@ knitr::opts_chunk$set(
 If you are unfamiliar with the {simulist} package or the `sim_linelist()` function [Get Started vignette](simulist.html) is a great place to start.
 :::
 
-This vignette demonstrates how to use the time-varying case fatality risk and gives an overview of the methodologically details.
+This vignette demonstrates how to simulate line list data using the time-varying case fatality risk and gives an overview of the methodologically details.
 
 ::: {.alert .alert-secondary}
 
-The {simulist} R package uses an individual-based branching process simulation to generate contacts and cases for line list and contact tracing data. The time-varying case fatality risk feature provides a way to incorporate aspects of epidemics where the risk of death may decrease through time, potentially due to improved medical treatment, vaccination or viral evolution. It is also possible to model increasing case fatality risk through time, or a step-wise risk function where the risk of death shifts between states. 
+The {simulist} R package uses an individual-based branching process simulation to generate contacts and cases for line list and contact tracing data. The time-varying case fatality risk feature provides a way to incorporate aspects of epidemics where the risk of death may decrease through time, potentially due to improved medical treatment, vaccination or viral evolution. It is also possible to model increasing case fatality risk through time, or a stepwise risk function where the risk of death shifts between states. 
 
-The time-varying case fatality risk implemented in this package is not meant to explicitly model these factors, but rather to give the user an option to more closely resemble fatality risk through the course of an epidemic, Possibly because there data on this, or just to simulate data that has these characteristics.
+The time-varying case fatality risk implemented in this package is not meant to explicitly model these factors, but rather to give the user an option to more closely resemble fatality risk through the course of an epidemic, possibly because there is data on this, or just to simulate data that has these characteristics.
 
 See the [{epidemics} R package](https://epiverse-trace.github.io/epidemics/index.html) for a population-level epidemic simulation package with explicit interventions and vaccinations.
 
@@ -113,6 +113,7 @@ linelist <- sim_linelist(
   config = create_config()
 )
 
+# first 6 rows of linelist
 head(linelist)
 ```
 
@@ -122,7 +123,7 @@ To visualise the incidence of cases and deaths over time we will use the [{incid
 For more information on using {incidence2} to plot line list data see the [Visualising simulated data](vis-linelist.html) vignette.
 :::
 
-Before converting the line list `<data.frame>` to an `<incidence>` object we need to ungroup the outcome columns into their own columns using the [{tidyr}](https://tidyr.tidyverse.org/) and [{dplyr}](https://dplyr.tidyverse.org/) R package from the [Tidyverse](https://www.tidyverse.org/).
+Before converting the line list `<data.frame>` to an `<incidence>` object we need to ungroup the outcome columns into their own columns using the [{tidyr}](https://tidyr.tidyverse.org/) and [{dplyr}](https://dplyr.tidyverse.org/) R packages from the [Tidyverse](https://www.tidyverse.org/).
 
 ```{r, reshape-linelist}
 linelist <- linelist %>%
@@ -136,7 +137,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-hospitalisation, class.source = 'fold-hide', fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.5 and the risk for non-hospitalised individuals is 0.05, and these risks are constant through time.", fig.width = 8, fig.height = 5}
+```{r, plot-onset-hospitalisation, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.5 and the risk for non-hospitalised individuals is 0.05, and these risks are constant through time.", fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -166,7 +167,6 @@ linelist <- sim_linelist(
   config = create_config()
 )
 
-# first 6 rows of linelist
 head(linelist)
 ```
 
@@ -182,7 +182,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-higher-risk, class.source = 'fold-hide', fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.9 and the risk for non-hospitalised individuals is 0.75, and these risks are constant through time.", fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-higher-risk, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.9 and the risk for non-hospitalised individuals is 0.75, and these risks are constant through time.", fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -199,7 +199,7 @@ plot(daily)
 
 Now we've seen what the constant case fatality risk simulations look like, we can simulate with a time-varying function for the risk. 
 
-This is setup by calling the `create_config()` function, and providing an anonymous function with a single argument for the time of the simulation which maps to a probability, propensity or risk at each time value to `time_varying_death_risk`. 
+This is setup by calling the `create_config()` function, and providing an anonymous function with a single argument to `time_varying_death_risk` for the time of the simulation which maps to a probability, propensity or risk scaling factor at each time value. 
 
 The `create_config()` function has no named arguments, and the argument you are modifying needs to be matched by name exactly (case sensitive). See `?create_config()` for documentation.
 
@@ -211,7 +211,7 @@ config <- create_config(
 
 Here we set the case fatality risk to exponentially decrease through time at a rate ($\lambda$) of 0.05. This will provide a shallow (monotonic) decline of case fatality through the simulated epidemic. 
 
-```{r, plot-exponential-dist, class.source = 'fold-hide', fig.width = 8, fig.height = 5}
+```{r, plot-exponential-dist, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values at day 0 and decline through time, with risk approaching zero at around day 100.", fig.width = 8, fig.height = 5}
 exp_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(1:150)
@@ -265,7 +265,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr, class.source = 'fold-hide', fig.cap="Daily incidence of cases from symptom onset and incidence of deaths.", fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-time-varying-cfr, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these decline exponentially through time.", fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -290,7 +290,7 @@ config <- create_config(
 )
 ```
 
-```{r, plot-stepwise-dist, class.source = 'fold-hide', fig.width = 8, fig.height = 5}
+```{r, plot-stepwise-dist, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values from day 0 to day 60, and then become 0 onwards.", fig.width = 8, fig.height = 5}
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(1:150)
@@ -332,7 +332,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr-stepwise, class.source = 'fold-hide', fig.cap="Daily incidence of cases from symptom onset and incidence of deaths.", fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-time-varying-cfr-stepwise, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these rates remain constant from days 0 to 60, and then go to 0 from day 60 onwards.", fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -355,7 +355,7 @@ config <- create_config(
 )
 ```
 
-```{r, plot-stepwise-dist-window, class.source = 'fold-hide', fig.width = 8, fig.height = 5}
+```{r, plot-stepwise-dist-window, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values from day 0 to day 50, and then half the risks from day 50 to day 100, and then return to their maximum value from day 100 onwards.", fig.width = 8, fig.height = 5}
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(1:150)
@@ -397,7 +397,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr-stepwise-window, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths.", fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-time-varying-cfr-stepwise-window, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these rates remain constant from days 0 to 50, and then from days 50 to 100 the case fatality risk is halved (i.e `hosp_death_risk` = 0.45 and `non_hosp_death_risk` = 0.375), before going back to their original risks from day 100 onwards.", fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -409,5 +409,7 @@ daily <- incidence(
 daily <- complete_dates(daily)
 plot(daily)
 ```
+
+This vignette does not explore applying a time-varying case fatality risk to age-stratified fatality risks, but this is possible with the `sim_linelist()` and `sim_outbreak()` functions. See the [Age-stratified hospitalisation and death risks vignette](age-strat-risks.html) and combine with instructions from this vignette on setting in a time-varying function using `create_config()`.
 
 The implementation of the time-varying case fatality rate in the simulation functions (`sim_linelist()` and `sim_outbreak()`) is flexible to many functional forms. If there are other ways to have a time-varying case fatality risk that are not currently possible please make an [issue](https://github.com/epiverse-trace/simulist/issues) or [pull request](https://github.com/epiverse-trace/simulist/pulls). Currently the hospitalisation risk is assumed constant over time can cannot be adjusted to be time-varying like the death risk, if this is a feature you would like included in the {simulist} R package please make the request in an [issue](https://github.com/epiverse-trace/simulist/issues).
