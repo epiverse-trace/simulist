@@ -232,7 +232,8 @@ test_that(".add_outcome works as expected with age-strat risks", {
     onset_to_death = onset_to_death,
     onset_to_recover = onset_to_recovery,
     hosp_death_risk = age_dep_hosp_death_risk,
-    non_hosp_death_risk = age_dep_non_hosp_death_risk
+    non_hosp_death_risk = age_dep_non_hosp_death_risk,
+    config = create_config()
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$outcome, type = "character")
