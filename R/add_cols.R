@@ -131,69 +131,78 @@ NULL
   .data$outcome[infected_idx] <- "recovered"
   .data$outcome_time[infected_idx] <- .data$time[infected_idx] +
     onset_to_recovery(num_infected)
-  hosp_idx <- !is.na(.data$hospitalisation)
-  non_hosp_idx <- is.na(.data$hospitalisation)
+  hosp_idx <- !is.na(.data$hospitalisation) & infected_idx
+  non_hosp_idx <- is.na(.data$hospitalisation) & infected_idx
 
-  apply_death_risk <- function(.data, risk, idx) {
+  # define functions used only by .add_outcome
+  time_varying_risk <- function(.data, died_idx, config) {
+    # check time-varying function
+    .check_func_req_args(config$time_varying_death_risk)
+
+    # sample which deaths to keep with time-varying risk
+    prob_death <- config$time_varying_death_risk(.data$time[died_idx])
+    max_prob_death <- stats::optimise(
+      f = config$time_varying_death_risk,
+      interval = c(0, 100),
+      maximum = TRUE
+    )$objective
+    norm_prob_death <- prob_death / max_prob_death
+    # set all values > 1 and < 0 to 1 and 0 due to imprecision of optimise
+    # TODO: ideally this step would be removed as no values are 0 > x < 1
+    norm_prob_death[norm_prob_death > 1] <- 1
+    norm_prob_death[norm_prob_death < 0] <- 0
+    sampled_died <- stats::rbinom(
+      n = died_idx,
+      size = 1,
+      prob = norm_prob_death
+    )
+    # subset deaths given sampling (logical conversion for vec subsetting)
+    died_idx <- died_idx[as.logical(sampled_died)]
+
+    # return sample of deaths
+    died_idx
+  }
+
+  apply_death_risk <- function(.data, risk, idx, config) {
     if (!is_na(risk)) {
+      # single population risk is a special case of the age-strat risk
+      # convert population risk to data.frame to apply the same operations to both
       if (is.numeric(risk)) {
-        # size is converted to an integer internally in sample()
-        pop_sample <- sample(
-          which(idx),
-          replace = FALSE,
-          size = risk * sum(idx)
+        risk <- data.frame(
+          min_age = min(.data$age),
+          max_age = max(.data$age),
+          risk = risk
         )
-
+      }
+      for (i in seq_len(nrow(risk))) {
+        age_bracket <- risk$min_age[i]:risk$max_age[i]
+        age_group_idx <- which(.data$age %in% age_bracket & idx)
+        # size is converted to an integer internally in sample()
+        died_idx <- sample(
+          age_group_idx,
+          replace = FALSE,
+          size = risk$risk[i] * length(age_group_idx)
+        )
         if (is.function(config$time_varying_death_risk)) {
-          # check time-varying function
-          .check_func_req_args(config$time_varying_death_risk)
-
-          # sample which deaths to keep with time-varying risk
-          prob_death <- config$time_varying_death_risk(.data$time[pop_sample])
-          max_prob_death <- stats::optimise(
-            f = config$time_varying_death_risk,
-            interval = c(0, 100),
-            maximum = TRUE
-          )$objective
-          norm_prob_death <- prob_death / max_prob_death
-          # set all values > 1 and < 0 to 1 and 0 due to imprecision of optimise
-          # TODO: ideally this step would be removed as no values are 0 > x < 1
-          norm_prob_death[norm_prob_death > 1] <- 1
-          norm_prob_death[norm_prob_death < 0] <- 0
-          death_sample <- stats::rbinom(
-            n = pop_sample,
-            size = 1,
-            prob = norm_prob_death
+          died_idx <- time_varying_risk(
+            .data,
+            died_idx = died_idx,
+            config = config
           )
-          # subset deaths given sampling (logical conversion for vec subsetting)
-          pop_sample <- pop_sample[as.logical(death_sample)]
         }
-
-        .data$outcome[pop_sample] <- "died"
-        .data$outcome_time[pop_sample] <- .data$time[pop_sample] +
-          onset_to_death(length(pop_sample))
-      } else {
-        for (i in seq_len(nrow(risk))) {
-          age_bracket <- risk$min_age[i]:risk$max_age[i]
-          age_group <- which(.data$age %in% age_bracket & idx)
-          # size is converted to an integer internally in sample()
-          age_group_sample <- sample(
-            age_group,
-            replace = FALSE,
-            size = risk$risk[i] * length(age_group)
-          )
-          .data$outcome[age_group_sample] <- "died"
-          .data$outcome_time[age_group_sample] <- .data$time[age_group_sample] +
-            onset_to_death(length(age_group_sample))
-        }
+        .data$outcome[died_idx] <- "died"
+        .data$outcome_time[died_idx] <- .data$time[died_idx] +
+          onset_to_death(length(died_idx))
       }
     }
     .data
   }
 
-  .data <- apply_death_risk(.data, risk = hosp_death_risk, idx = hosp_idx)
   .data <- apply_death_risk(
-    .data, risk = non_hosp_death_risk, idx = non_hosp_idx
+    .data, risk = hosp_death_risk, idx = hosp_idx, config = config
+  )
+  .data <- apply_death_risk(
+    .data, risk = non_hosp_death_risk, idx = non_hosp_idx, config = config
   )
 
   # return data
