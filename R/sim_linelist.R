@@ -53,13 +53,17 @@
 #' specific hospitalised death risks Default is 50% death risk in hospitals
 #' (`0.5`) for the entire population. If the `onset_to_death` argument is set
 #' to `NA` this argument should also be set to `NA`. See details and examples
-#' for more information.
+#' for more information. If a time-varying death risk is specified in the
+#' `config` the `hosp_death_risk` is interpreted as the maximum risk across
+#' the epidemic.
 #' @param non_hosp_death_risk Either a single `numeric` for the death risk for
 #' outside of hospitals across the population, or a `<data.frame>` with age
 #' specific death risks outside of hospitals. Default is 5% death risk outside
 #' of hospitals  (`0.05`) for the entire population. If the `onset_to_death`
 #' argument is set to `NA` this argument should also be set to `NA`. See
-#' details and examples for more information.
+#' details and examples for more information. If a time-varying death risk is
+#' specified in the `config` the `non_hosp_death_risk` is interpreted as the
+#' maximum risk across the epidemic.
 #' @param outbreak_start_date A `date` for the start of the outbreak.
 #' @param add_names A `logical` boolean for whether to add names to each row
 #' of the line list. Default is `TRUE`.

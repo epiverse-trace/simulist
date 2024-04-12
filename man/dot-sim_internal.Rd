@@ -70,14 +70,18 @@ hospitalised individuals across the population, or a \verb{<data.frame>} with ag
 specific hospitalised death risks Default is 50\% death risk in hospitals
 (\code{0.5}) for the entire population. If the \code{onset_to_death} argument is set
 to \code{NA} this argument should also be set to \code{NA}. See details and examples
-for more information.}
+for more information. If a time-varying death risk is specified in the
+\code{config} the \code{hosp_death_risk} is interpreted as the maximum risk across
+the epidemic.}
 
 \item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
 specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. If the \code{onset_to_death}
 argument is set to \code{NA} this argument should also be set to \code{NA}. See
-details and examples for more information.}
+details and examples for more information. If a time-varying death risk is
+specified in the \code{config} the \code{non_hosp_death_risk} is interpreted as the
+maximum risk across the epidemic.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
