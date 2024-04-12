@@ -166,7 +166,7 @@ NULL
   apply_death_risk <- function(.data, risk, idx, config) {
     if (!is_na(risk)) {
       # single population risk is a special case of the age-strat risk
-      # convert population risk to data.frame to apply the same operations to both
+      # convert population risk to data.frame to apply the same operations
       if (is.numeric(risk)) {
         risk <- data.frame(
           min_age = min(.data$age),
