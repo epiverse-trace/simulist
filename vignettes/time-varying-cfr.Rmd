@@ -284,10 +284,12 @@ In addition to a continuously varying case fatality risk function, the simulatio
 
 To achieve this, we again specify an anonymous function in `create_config()`, but have the risk of a case dying be equal to the `hosp_death_risk` and `non_hosp_death_risk` for the first 60 days of the outbreak and then become zero (i.e. if an individual is infected after day 60 they will definitely recover).
 
-```{r, setup-time-varying-cfr-stepwise}
+```{r, setup-time-varying-cfr-stepwise, echo=2}
+# nolint start redundant_ifelse_linter ifelse used for consistency with other examples
 config <- create_config(
   time_varying_death_risk = function(x) ifelse(test = x < 60, yes = 1, no = 0)
 )
+# nolint end
 ```
 
 ```{r, plot-stepwise-dist, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values from day 0 to day 60, and then become 0 onwards.", fig.width = 8, fig.height = 5}
