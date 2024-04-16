@@ -410,3 +410,57 @@ test_that("sim_linest date_death column is NA when onset_to_death is NA", {
   )
   expect_true(all(is.na(ll$date_death)))
 })
+
+test_that("sim_linelist works as expected with time-varying cfr", {
+  set.seed(1)
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = create_config(
+        time_varying_death_risk = function(x) dexp(x = x, rate = 0.05)
+      )
+    )
+  )
+})
+
+test_that("sim_linelist works as expected with time-varying cfr & age-strat", {
+  set.seed(1)
+  age_dep_hosp_death_risk <- data.frame(
+    age_limit = c(1, 5, 80),
+    risk = c(0.1, 0.05, 0.2)
+  )
+  expect_snapshot(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      hosp_death_risk = age_dep_hosp_death_risk,
+      config = create_config(
+        time_varying_death_risk = function(x) dexp(x = x, rate = 0.05)
+      )
+    )
+  )
+})
+
+test_that("sim_linelist fails as expected with time-varying cfr", {
+  expect_error(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = create_config(
+        time_varying_death_risk = function(x, y) dexp(x = x, rate = 0.05)
+      )
+    ),
+    regexp = "(Anonymous functions supplied must have)*(1)*(argument)"
+  )
+
+})
