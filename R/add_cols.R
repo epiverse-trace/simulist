@@ -152,7 +152,7 @@ NULL
     norm_prob_death[norm_prob_death > 1] <- 1
     norm_prob_death[norm_prob_death < 0] <- 0
     sampled_died <- stats::rbinom(
-      n = died_idx,
+      n = length(died_idx),
       size = 1,
       prob = norm_prob_death
     )
