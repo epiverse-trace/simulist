@@ -204,10 +204,16 @@
   # using formals(args(fn)) to allow checking args of builtin primitives
   # for which formals(fn) would return NULL and cause the check to error
   # errors non-informatively for specials such as `if`
-  checkmate::test_function(func) &&
+  valid_func <- checkmate::test_function(func) &&
     sum(mapply(function(x, y) { # nolint undesirable function
       is.name(x) && y != "..."
     }, formals(args(func)), names(formals(args(func))))) == n_req_args
+  if (!valid_func) {
+    stop(
+      "Anonymous functions supplied must have ", n_req_args, " argument(s).",
+      call. = FALSE
+    )
+  }
 }
 
 #' Cross check the onset-to-hospitalisation or -death arguments are
