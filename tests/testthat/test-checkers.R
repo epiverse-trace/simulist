@@ -444,3 +444,25 @@ test_that(".cross_check_sim_input warns as expected", {
     )
   )
 })
+
+test_that(".check_func_req_args works as expected", {
+  expect_silent(.check_func_req_args(func = function(x) x + 1, n_req_args = 1))
+  expect_null(.check_func_req_args(func = function(x) x + 1, n_req_args = 1))
+})
+
+test_that(".check_func_req_args works with more than 1 req args", {
+  fn <- function(x, y) x + y
+  expect_silent(.check_func_req_args(func = fn, n_req_args = 2))
+  expect_null(.check_func_req_args(func = fn, n_req_args = 2))
+})
+
+test_that(".check_func_req_args fails as expected", {
+  expect_error(
+    .check_func_req_args(func = function(x) x + 1, n_req_args = 2),
+    regexp = "(Anonymous functions supplied must have)*(2)*(argument)"
+  )
+  expect_error(
+    .check_func_req_args(func = function(x, y) x + y, n_req_args = 1),
+    regexp = "(Anonymous functions supplied must have)*(1)*(argument)"
+  )
+})
