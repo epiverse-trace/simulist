@@ -139,7 +139,7 @@ NULL
   # time_varying_risk() subset deaths given time-varying death risk
   time_varying_risk <- function(.data, died_idx, config) {
     # check time-varying function
-    .check_func_req_args(config$time_varying_death_risk)
+    .check_func_req_args(config$time_varying_death_risk, n_req_args = 1)
 
     # evaluate time-varying death risk function for each infection time of an
     # individual that is sampled to die
