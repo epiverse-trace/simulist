@@ -15,7 +15,7 @@
 #' * `ct_distribution = "norm"`
 #' * `ct_distribution_params = c(mean = 25, sd = 2)`
 #' * `network = "adjusted"`
-#' * `time_varying_death_risk = NA`
+#' * `time_varying_death_risk = NULL`
 #'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
@@ -60,7 +60,7 @@ create_config <- function(...) {
     ct_distribution = "norm",
     ct_distribution_params = c(mean = 25, sd = 2),
     network = "adjusted",
-    time_varying_death_risk = NA
+    time_varying_death_risk = NULL
   )
 
   # capture dynamic dots

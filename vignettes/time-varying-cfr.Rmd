@@ -87,7 +87,7 @@ set.seed(1)
 
 ## Constant case fatality risk
 
-When calling the `create_config()` function the default output contains a list element named `time_varying_death_risk` set to `NA`. This corresponds to a constant case fatality risk over time, which is controlled by the `hosp_death_risk` and `non_hosp_death_risk` arguments. The defaults for these two arguments are:
+When calling the `create_config()` function the default output contains a list element named `time_varying_death_risk` set to `NULL`. This corresponds to a constant case fatality risk over time, which is controlled by the `hosp_death_risk` and `non_hosp_death_risk` arguments. The defaults for these two arguments are:
 
 * death risk when hospitalised (`hosp_death_risk`): `0.5` (50%)
 * death risk outside of hospitals (`non_hosp_death_risk`): `0.05` (5%)
