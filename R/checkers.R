@@ -160,15 +160,23 @@
       "The values in the case_type_prob vector must sum to 1" =
         sum(case_type_probs) == 1,
       "hosp_risk must be a single numeric or a data.frame" =
-        is.numeric(hosp_risk) && length(hosp_risk) == 1 ||
-          is.data.frame(hosp_risk) || is_na(hosp_risk),
+        is.numeric(hosp_risk) || is.data.frame(hosp_risk) || is_na(hosp_risk),
       "hosp_death_risk must be a single numeric or a data.frame" =
-        is.numeric(hosp_death_risk) && length(hosp_death_risk) == 1 ||
-          is.data.frame(hosp_death_risk) || is_na(hosp_death_risk),
+        is.numeric(hosp_death_risk) || is.data.frame(hosp_death_risk) ||
+        is_na(hosp_death_risk),
       "non_hosp_death_risk must be a single numeric or a data.frame" =
-        is.numeric(non_hosp_death_risk) && length(non_hosp_death_risk) == 1 ||
-          is.data.frame(non_hosp_death_risk) || is_na(non_hosp_death_risk)
+        is.numeric(non_hosp_death_risk) || is.data.frame(non_hosp_death_risk) ||
+        is_na(non_hosp_death_risk)
     )
+    if (is.numeric(hosp_risk)) {
+      checkmate::assert_number(hosp_risk, lower = 0, upper = 1)
+    }
+    if (is.numeric(hosp_death_risk)) {
+      checkmate::assert_number(hosp_death_risk, lower = 0, upper = 1)
+    }
+    if (is.numeric(non_hosp_death_risk)) {
+      checkmate::assert_number(non_hosp_death_risk, lower = 0, upper = 1)
+    }
   }
 
   if (sim_type %in% c("contacts", "outbreak")) {
