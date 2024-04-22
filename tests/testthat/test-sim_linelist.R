@@ -421,7 +421,7 @@ test_that("sim_linelist works as expected with time-varying cfr", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        time_varying_death_risk = function(x) dexp(x = x, rate = 0.05)
+        time_varying_death_risk = function(risk, time) risk * exp(-time)
       )
     )
   )
@@ -442,7 +442,7 @@ test_that("sim_linelist works as expected with time-varying cfr & age-strat", {
       onset_to_death = onset_to_death,
       hosp_death_risk = age_dep_hosp_death_risk,
       config = create_config(
-        time_varying_death_risk = function(x) dexp(x = x, rate = 0.05)
+        time_varying_death_risk = function(risk, time) risk * exp(-time)
       )
     )
   )
@@ -457,10 +457,22 @@ test_that("sim_linelist fails as expected with time-varying cfr", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        time_varying_death_risk = function(x, y) dexp(x = x, rate = 0.05)
+        time_varying_death_risk = function(x, y, z) x + y + x
       )
     ),
-    regexp = "(Anonymous functions supplied must have)*(1)*(argument)"
+    regexp = "(Anonymous functions supplied must have)*(2)*(argument)"
   )
-
+  expect_error(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = create_config(
+        time_varying_death_risk = function(risk, time) risk * exp(time)
+      )
+    ),
+    regexp = "(Time-varying)*(risk outside)*(0)*(1)*(Check time-varying func)",
+  )
 })
