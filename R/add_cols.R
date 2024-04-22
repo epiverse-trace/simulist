@@ -134,42 +134,6 @@ NULL
   hosp_idx <- !is.na(.data$hospitalisation) & infected_idx
   non_hosp_idx <- is.na(.data$hospitalisation) & infected_idx
 
-  # internal function only called in .add_outcome() (by apply_death_risk())
-  # deaths are sampled in apply_death_risk() before calling time_varying_risk()
-  # time_varying_risk() subset deaths given time-varying death risk
-  time_varying_risk <- function(.data, died_idx, config) {
-    # check time-varying function
-    .check_func_req_args(config$time_varying_death_risk, n_req_args = 1)
-
-    # evaluate time-varying death risk function for each infection time of an
-    # individual that is sampled to die
-    prob_death <- config$time_varying_death_risk(.data$time[died_idx])
-    # determine maximum possible value of the time-varying death risk function
-    max_prob_death <- stats::optimise(
-      f = config$time_varying_death_risk,
-      interval = c(0, 100),
-      maximum = TRUE
-    )$objective
-    # normalise probability of death to ensure values are [0, 1]
-    # used as probabilities for binomial sampling
-    norm_prob_death <- prob_death / max_prob_death
-    # set all values > 1 and < 0 to 1 and 0 due to imprecision of optimise
-    # TODO: ideally this step would be removed as no values are 0 > x < 1
-    norm_prob_death[norm_prob_death > 1] <- 1
-    norm_prob_death[norm_prob_death < 0] <- 0
-    # sample which deaths are kept using normalised probability of death
-    sampled_died <- stats::rbinom(
-      n = length(died_idx),
-      size = 1,
-      prob = norm_prob_death
-    )
-    # subset deaths given sampling (logical conversion for vec subsetting)
-    died_idx <- died_idx[as.logical(sampled_died)]
-
-    # return sample of deaths
-    died_idx
-  }
-
   # internal function only called in .add_outcome()
   # assign deaths using population or age-stratified death risk
   # if risk is NA then no deaths are assigned
@@ -188,20 +152,33 @@ NULL
       for (i in seq_len(nrow(risk))) {
         age_bracket <- risk$min_age[i]:risk$max_age[i]
         age_group_idx <- which(.data$age %in% age_bracket & idx)
-        # size is converted to an integer internally in sample()
-        died_idx <- sample(
-          age_group_idx,
-          replace = FALSE,
-          size = risk$risk[i] * length(age_group_idx)
-        )
+
         if (is.function(config$time_varying_death_risk)) {
-          # subset sampled deaths with time-varying death risk function
-          died_idx <- time_varying_risk(
-            .data,
-            died_idx = died_idx,
-            config = config
+          .check_func_req_args(config$time_varying_death_risk, n_req_args = 2)
+          risk_ <- config$time_varying_death_risk(
+            risk = risk$risk[i],
+            time = .data$time[age_group_idx]
           )
+          valid_risk <- checkmate::test_numeric(
+            risk_,
+            lower = 0,
+            upper = 1,
+            any.missing = FALSE
+          )
+          if (!valid_risk) {
+            stop(
+              "Time-varying death risk outside [0,1]. \n",
+              "Check time-varying function.",
+              call. = FALSE
+            )
+          }
+        } else {
+          risk_ <- rep(risk$risk[i], times = length(age_group_idx))
         }
+
+        # sample individuals in the risk category (e.g. hosp) to die given risk
+        died_idx <- stats::rbinom(n = length(risk_), size = 1, prob = risk_)
+        died_idx <- age_group_idx[as.logical(died_idx)]
         .data$outcome[died_idx] <- "died"
         .data$outcome_time[died_idx] <- .data$time[died_idx] +
           onset_to_death(length(died_idx))
