@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 If you are unfamiliar with the {simulist} package or the `sim_linelist()` function [Get Started vignette](simulist.html) is a great place to start.
 :::
 
-This vignette demonstrates how to simulate line list data using the time-varying case fatality risk and gives an overview of the methodologically details.
+This vignette demonstrates how to simulate line list data using the time-varying case fatality risk and gives an overview of the methodological details.
 
 ::: {.alert .alert-secondary}
 
@@ -199,22 +199,22 @@ plot(daily)
 
 Now we've seen what the constant case fatality risk simulations look like, we can simulate with a time-varying function for the risk. 
 
-This is setup by calling the `create_config()` function, and providing an anonymous function with a single argument to `time_varying_death_risk` for the time of the simulation which maps to a probability, propensity or risk scaling factor at each time value. 
+This is setup by calling the `create_config()` function, and providing an anonymous function with two arguments, `risk` and `time`, to `time_varying_death_risk`. This function will then use the relevant risk (e.g. `hosp_death_risk`) and the time an individual is infected and calculates the probability (or risk) of death. 
 
 The `create_config()` function has no named arguments, and the argument you are modifying needs to be matched by name exactly (case sensitive). See `?create_config()` for documentation.
 
 ```{r, setup-time-varying-cfr}
 config <- create_config(
-  time_varying_death_risk = function(x) dexp(x = x, rate = 0.05)
+  time_varying_death_risk = function(risk, time) risk * exp(-0.05 * time)
 )
 ```
 
-Here we set the case fatality risk to exponentially decrease through time at a rate ($\lambda$) of 0.05. This will provide a shallow (monotonic) decline of case fatality through the simulated epidemic. 
+Here we set the case fatality risk to exponentially decrease through time. This will provide a shallow (monotonic) decline of case fatality through the simulated epidemic. 
 
-```{r, plot-exponential-dist, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values at day 0 and decline through time, with risk approaching zero at around day 100.", fig.width = 8, fig.height = 5}
+```{r, plot-exponential-dist, class.source = 'fold-hide', fig.cap="The time-varying hospitalised case fatality risk function (`config$time_varying_death_risk`) throughout the epidemic. In this case the hospitalised risks (`hosp_death_risk`) are at their maximum value at day 0 and decline through time, with risk approaching zero at around day 100.", fig.width = 8, fig.height = 5}
 exp_df <- data.frame(
   time = 1:150,
-  value = config$time_varying_death_risk(1:150)
+  value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
 )
 ggplot(exp_df) +
   geom_point(mapping = aes(x = time, y = value)) +
@@ -227,11 +227,9 @@ ggplot(exp_df) +
 
 _Advanced_
 
-The time-varying case fatality risk function reduces the death risk specified by `hosp_death_risk` and `non_hosp_death_risk`, in such as a way that the risks (`*_risk`) given by the user now operate as the maximum risk. The maximum values of the user-supplied time-varying function is the same as the risks specified. 
+The time-varying case fatality risk function modifies the the death risk specified by `hosp_death_risk` and `non_hosp_death_risk`. In this example, the user-supplied `hosp_death_risk` and `non_hosp_death_risk` are the maximum values, because the user-supplied time-varying function is declining over time, however, a user-supplied function may also increase over time, or fluctuate. The requirements are that the time-varying case fatality risk for both hospitalised and non-hospitalised infections must be between 0 and 1, otherwise the function will error.
 
 In the example below `hosp_death_risk` is `0.9` and `non_hosp_death_risk` is `0.75`, and the time-varying case fatality risk function is an exponential decline. This means that on day 0 of the epidemic (i.e. first infection seeds the outbreak) the risks will be `0.9` and `0.75`. But any time after the start of the epidemic ($t_0 + \Delta t$) the risks will be lower, and when the exponential function approaches zero the risk of a case dying will also go to zero. 
-
-The time-varying function supplied to `create_config(time_varying_death_risk = <FUNC>)` does not need to evaluate to between 0 and 1 because internally the function is normalised.  
 
 :::
 
@@ -265,7 +263,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these decline exponentially through time.", fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-time-varying-cfr, fig.cap="Daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these decline exponentially through time.", fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -282,20 +280,20 @@ plot(daily)
 
 In addition to a continuously varying case fatality risk function, the simulation can also work with stepwise (or piecewise) functions. This is where the risk will instantaneously change at a given point in time to another risk level.
 
-To achieve this, we again specify an anonymous function in `create_config()`, but have the risk of a case dying be equal to the `hosp_death_risk` and `non_hosp_death_risk` for the first 60 days of the outbreak and then become zero (i.e. if an individual is infected after day 60 they will definitely recover).
+To achieve this, we again specify an anonymous function in `create_config()`, but have the risk of a case dying set as the baseline `hosp_death_risk` and `non_hosp_death_risk` for the first 60 days of the outbreak and then become zero (i.e. if an individual is infected after day 60 they will definitely recover).
 
 ```{r, setup-time-varying-cfr-stepwise, echo=2}
 # nolint start redundant_ifelse_linter ifelse used for consistency with other examples
 config <- create_config(
-  time_varying_death_risk = function(x) ifelse(test = x < 60, yes = 1, no = 0)
+  time_varying_death_risk = function(risk, time) ifelse(test = time < 60, yes = risk, no = 0)
 )
 # nolint end
 ```
 
-```{r, plot-stepwise-dist, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values from day 0 to day 60, and then become 0 onwards.", fig.width = 8, fig.height = 5}
+```{r, plot-stepwise-dist, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) for the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their user-supplied values from day 0 to day 60, and then become 0 onwards.", fig.width = 8, fig.height = 5}
 stepwise_df <- data.frame(
   time = 1:150,
-  value = config$time_varying_death_risk(1:150)
+  value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
 )
 ggplot(stepwise_df) +
   geom_point(mapping = aes(x = time, y = value)) +
@@ -347,12 +345,12 @@ daily <- complete_dates(daily)
 plot(daily)
 ```
 
-The same stepwise function can also be used to specify time windows were the risk of death is reduced. Here we specify the risk of death is equal to the `hosp_death_risk` and `non_hosp_death_risk` in the first 50 days of the epidemic, then between day 50 and day 100 the risk is reduced by half, and then from day 100 onwards the risk goes back to the rates specified by `hosp_death_risk` and `non_hosp_death_risk`. 
+The same stepwise function can also be used to specify time windows were the risk of death is reduced. Here we specify the `hosp_death_risk` and `non_hosp_death_risk` in the first 50 days of the epidemic, then between day 50 and day 100 the risk is reduced by half, and then from day 100 onwards the risk goes back to the rates specified by `hosp_death_risk` and `non_hosp_death_risk`. 
 
 ```{r, setup-time-varying-cfr-stepwise-window}
 config <- create_config(
-  time_varying_death_risk = function(x) {
-   ifelse(test = x > 50 & x < 100, yes = 0.5, no = 1)
+  time_varying_death_risk = function(risk, time) {
+   ifelse(test = time > 50 & time < 100, yes = risk * 0.5, no = risk)
   }
 )
 ```
@@ -360,7 +358,7 @@ config <- create_config(
 ```{r, plot-stepwise-dist-window, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values from day 0 to day 50, and then half the risks from day 50 to day 100, and then return to their maximum value from day 100 onwards.", fig.width = 8, fig.height = 5}
 stepwise_df <- data.frame(
   time = 1:150,
-  value = config$time_varying_death_risk(1:150)
+  value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
 )
 ggplot(stepwise_df) +
   geom_point(mapping = aes(x = time, y = value)) +
