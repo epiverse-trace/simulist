@@ -456,13 +456,33 @@ test_that(".check_func_req_args works with more than 1 req args", {
   expect_null(.check_func_req_args(func = fn, n_req_args = 2))
 })
 
+test_that(".check_func_req_args works with arg names", {
+  fn <- function(x) x
+  expect_silent(.check_func_req_args(func = fn, req_arg_names = "x"))
+  expect_null(.check_func_req_args(func = fn, req_arg_names = "x"))
+})
+
 test_that(".check_func_req_args fails as expected", {
   expect_error(
-    .check_func_req_args(func = function(x) x + 1, n_req_args = 2),
-    regexp = "(Anonymous functions supplied must have)*(2)*(argument)"
+    .check_func_req_args(
+      func = function(x) x + 1, func_name = "anonymous func", n_req_args = 2
+    ),
+    regexp = "(anonymous func supplied must have)*(2)*(argument)"
   )
   expect_error(
-    .check_func_req_args(func = function(x, y) x + y, n_req_args = 1),
-    regexp = "(Anonymous functions supplied must have)*(1)*(argument)"
+    .check_func_req_args(
+      func = function(x, y) x + y, func_name = "anonymous func", n_req_args = 1
+    ),
+    regexp = "(anonymous func supplied must have)*(1)*(argument)"
+  )
+})
+
+test_that(".check_func_req_args fails with arg names", {
+  fn <- function(x) x
+  expect_error(
+    .check_func_req_args(
+      func = fn, func_name = "anonymous func", req_arg_names = c("x", "y")
+    ),
+    regexp = "(anonymous func supplied must have)*(y)*(arguments)"
   )
 })
