@@ -133,8 +133,8 @@
   sim_type <- match.arg(sim_type)
 
   checkmate::assert_number(prob_infect, lower = 0, upper = 1)
-  .check_func_req_args(contact_distribution)
-  .check_func_req_args(infect_period)
+  .check_func_req_args(contact_distribution, func_name = "contact_distribution")
+  .check_func_req_args(infect_period, func_name = "infect_period")
   checkmate::assert_date(outbreak_start_date)
   checkmate::assert_integerish(outbreak_size, lower = 1, len = 2)
 
@@ -145,9 +145,9 @@
   )
 
   if (sim_type %in% c("linelist", "outbreak")) {
-    .check_func_req_args(onset_to_hosp)
-    .check_func_req_args(onset_to_death)
-    .check_func_req_args(onset_to_recovery)
+    .check_func_req_args(onset_to_hosp, func_name = "onset_to_hosp")
+    .check_func_req_args(onset_to_death, func_name = "onset_to_death")
+    .check_func_req_args(onset_to_recovery, func_name = "onset_to_recovery")
     checkmate::assert_logical(add_names, len = 1)
     checkmate::assert_logical(add_ct, len = 1)
     checkmate::assert_numeric(case_type_probs, len = 3, lower = 0, upper = 1)
@@ -206,7 +206,10 @@
 #' @return A `logical`.
 #' @keywords internal
 #' @noRd
-.check_func_req_args <- function(func, n_req_args = 1) {
+.check_func_req_args <- function(func,
+                                 func_name,
+                                 n_req_args = 1,
+                                 req_arg_names = NULL) {
   checkmate::assert_function(func)
   checkmate::assert_count(n_req_args, positive = TRUE)
   # using formals(args(fn)) to allow checking args of builtin primitives
@@ -216,11 +219,23 @@
     sum(mapply(function(x, y) { # nolint undesirable function
       is.name(x) && y != "..."
     }, formals(args(func)), names(formals(args(func))))) == n_req_args
+
+
+  msg <- character(0)
   if (!valid_func) {
-    stop(
-      "Anonymous functions supplied must have ", n_req_args, " argument(s).",
-      call. = FALSE
-    )
+    msg <- c(msg, paste(
+      func_name, "supplied must have", n_req_args, "arguments."
+    ))
+  }
+  if (!is.null(req_arg_names) &&
+       !identical(names(formals(func)), req_arg_names)) {
+    msg <- c(msg, paste(
+      func_name, "supplied must have", paste(req_arg_names, collapse = " & "),
+      "arguments."
+    ))
+  }
+  if (length(msg) > 0) {
+    stop("\n", sprintf("  - %s\n", msg), call. = FALSE)
   }
 }
 
