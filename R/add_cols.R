@@ -154,7 +154,12 @@ NULL
         age_group_idx <- which(.data$age %in% age_bracket & idx)
 
         if (is.function(config$time_varying_death_risk)) {
-          .check_func_req_args(config$time_varying_death_risk, n_req_args = 2)
+          .check_func_req_args(
+            config$time_varying_death_risk,
+            func_name = "time_varying_death_risk",
+            n_req_args = 2,
+            req_arg_names = c("risk", "time")
+          )
           risk_ <- config$time_varying_death_risk(
             risk = risk$risk[i],
             time = .data$time[age_group_idx]
