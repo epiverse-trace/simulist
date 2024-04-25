@@ -1,7 +1,7 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v1.0.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "simulist" in publications use:'
@@ -347,3 +347,4 @@ references:
 identifiers:
 - type: url
   value: https://epiverse-trace.github.io/simulist/
+
