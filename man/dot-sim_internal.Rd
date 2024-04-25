@@ -18,7 +18,6 @@ within \pkg{simulist}}
   non_hosp_death_risk = NULL,
   outbreak_start_date,
   add_names = NULL,
-  add_ct = NULL,
   outbreak_size,
   population_age,
   case_type_probs = NULL,
@@ -88,11 +87,6 @@ maximum risk across the epidemic.}
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
 of the line list. Default is \code{TRUE}.}
 
-\item{add_ct}{A \code{logical} boolean for whether to add Ct values to each
-confirmed case and \code{NA} otherwise for each case in the line list.
-Default is \code{TRUE}. Ct refers to the Cycle threshold from a Real-time
-PCR or quantitative PCR (qPCR).}
-
 \item{outbreak_size}{A \code{numeric} vector of length 2 defining the minimum and
 the maximum number of infected individuals for the simulated outbreak.
 Default is \code{c(10, 1e4)}, so the minimum outbreak size is 10 infected
@@ -122,7 +116,7 @@ be \code{"under_followup"}, \code{"lost_to_followup"}, \code{"unknown"}. Values 
 contact tracing status must sum to one.}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
-Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
+Ct values. See \code{\link[=create_config]{create_config()}} for more information.}
 }
 \value{
 A \verb{<data.frame>} if \code{sim_type} is \code{"linelist"} or \code{"contacts"}, or a

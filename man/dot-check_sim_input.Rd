@@ -15,7 +15,6 @@
   onset_to_death = NULL,
   onset_to_recovery = NULL,
   add_names = NULL,
-  add_ct = NULL,
   case_type_probs = NULL,
   contact_tracing_status_probs = NULL,
   hosp_risk = NULL,
@@ -72,11 +71,6 @@ recover get an \code{NA} in the \verb{$date_outcome} line list column.}
 
 \item{add_names}{A \code{logical} boolean for whether to add names to each row
 of the line list. Default is \code{TRUE}.}
-
-\item{add_ct}{A \code{logical} boolean for whether to add Ct values to each
-confirmed case and \code{NA} otherwise for each case in the line list.
-Default is \code{TRUE}. Ct refers to the Cycle threshold from a Real-time
-PCR or quantitative PCR (qPCR).}
 
 \item{case_type_probs}{A named \code{numeric} vector with the probability of
 each case type. The names of the vector must be \code{"suspected"}, \code{"probable"},

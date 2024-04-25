@@ -60,7 +60,7 @@ be \code{"under_followup"}, \code{"lost_to_followup"}, \code{"unknown"}. Values 
 contact tracing status must sum to one.}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
-Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
+Ct values. See \code{\link[=create_config]{create_config()}} for more information.}
 }
 \value{
 A contacts \verb{<data.frame>}

@@ -31,7 +31,7 @@ infectious period.}
 contact being infected by an infected primary contact.}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
-Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
+Ct values. See \code{\link[=create_config]{create_config()}} for more information.}
 }
 \value{
 A \verb{<data.frame>} with the contact and transmission chain data.
