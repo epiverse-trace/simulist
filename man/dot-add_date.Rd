@@ -80,7 +80,7 @@ specified in the \code{config} the \code{non_hosp_death_risk} is interpreted as 
 maximum risk across the epidemic.}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
-Ct values (if \code{add_ct = TRUE}). See \code{\link[=create_config]{create_config()}} for more information.}
+Ct values. See \code{\link[=create_config]{create_config()}} for more information.}
 }
 \value{
 A \verb{<data.frame>} with one more column than input into \code{.data}.

@@ -67,10 +67,6 @@
 #' @param outbreak_start_date A `date` for the start of the outbreak.
 #' @param add_names A `logical` boolean for whether to add names to each row
 #' of the line list. Default is `TRUE`.
-#' @param add_ct A `logical` boolean for whether to add Ct values to each
-#' confirmed case and `NA` otherwise for each case in the line list.
-#' Default is `TRUE`. Ct refers to the Cycle threshold from a Real-time
-#' PCR or quantitative PCR (qPCR).
 #' @param outbreak_size A `numeric` vector of length 2 defining the minimum and
 #' the maximum number of infected individuals for the simulated outbreak.
 #' Default is `c(10, 1e4)`, so the minimum outbreak size is 10 infected
@@ -92,7 +88,7 @@
 #' each case type. The names of the vector must be `"suspected"`, `"probable"`,
 #' `"confirmed"`. Values of each case type must sum to one.
 #' @param config A list of settings to adjust the randomly sampled delays and
-#' Ct values (if `add_ct = TRUE`). See [create_config()] for more information.
+#' Ct values. See [create_config()] for more information.
 #'
 #' @return A line list `<data.frame>`
 #' @export
@@ -167,7 +163,6 @@ sim_linelist <- function(contact_distribution,
                          non_hosp_death_risk = 0.05,
                          outbreak_start_date = as.Date("2023-01-01"),
                          add_names = TRUE,
-                         add_ct = TRUE,
                          outbreak_size = c(10, 1e4),
                          population_age = c(1, 90),
                          case_type_probs = c(
@@ -203,7 +198,6 @@ sim_linelist <- function(contact_distribution,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
     add_names = add_names,
-    add_ct = add_ct,
     case_type_probs = case_type_probs,
     hosp_risk = hosp_risk,
     hosp_death_risk = hosp_death_risk,
@@ -261,7 +255,6 @@ sim_linelist <- function(contact_distribution,
     non_hosp_death_risk = non_hosp_death_risk,
     outbreak_start_date = outbreak_start_date,
     add_names = add_names,
-    add_ct = add_ct,
     outbreak_size = outbreak_size,
     population_age = population_age,
     case_type_probs = case_type_probs,

@@ -23,7 +23,6 @@
                           non_hosp_death_risk = NULL,
                           outbreak_start_date,
                           add_names = NULL,
-                          add_ct = NULL,
                           outbreak_size,
                           population_age,
                           case_type_probs = NULL,
@@ -142,14 +141,12 @@
     )
 
     # add Ct if confirmed
-    if (add_ct) {
-      .data <- .add_ct(
-        .data = .data,
-        distribution = config$ct_distribution,
-        config$ct_distribution_params
-      )
-      linelist_cols <- c(linelist_cols, "ct_value")
-    }
+    .data <- .add_ct(
+      .data = .data,
+      distribution = config$ct_distribution,
+      config$ct_distribution_params
+    )
+    linelist_cols <- c(linelist_cols, "ct_value")
   }
 
   if (sim_type %in% c("contacts", "outbreak")) {
