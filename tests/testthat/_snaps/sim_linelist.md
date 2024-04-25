@@ -66,40 +66,6 @@
       11         <NA>         2023-01-01        2023-01-04       NA
       12         <NA>         2023-01-01        2023-01-03       NA
 
-# sim_linelist works as expected without Ct
-
-    Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
-        add_ct = FALSE)
-    Output
-         id              case_name case_type sex age date_onset date_admission
-      1   1        Dominic Sundara  probable   m  35 2023-01-01           <NA>
-      2   2     Preston Montgomery suspected   m  43 2023-01-01           <NA>
-      3   3          Reece Chittum  probable   m   1 2023-01-01           <NA>
-      4   5          Michael Cheek confirmed   m  78 2023-01-01           <NA>
-      5   6         Jennifer Smith confirmed   f  22 2023-01-01           <NA>
-      6   8         Erika Quintero confirmed   f  28 2023-01-01           <NA>
-      7  11       Isaiah Patterson suspected   m  46 2023-01-01     2023-01-13
-      8  12        Cicely Anderson suspected   f  67 2023-01-01           <NA>
-      9  13           Michael John  probable   m  86 2023-01-01     2023-01-01
-      10 18 Giovana Magana Aguirre suspected   f  60 2023-01-02           <NA>
-      11 20       Mudrik al-Hallal suspected   m  49 2023-01-02           <NA>
-      12 22          Tea Slaughter  probable   f   7 2023-01-02     2023-01-02
-           outcome date_outcome date_first_contact date_last_contact
-      1  recovered         <NA>               <NA>              <NA>
-      2  recovered         <NA>         2022-12-30        2023-01-05
-      3  recovered         <NA>         2022-12-30        2023-01-02
-      4  recovered         <NA>         2022-12-29        2023-01-02
-      5  recovered         <NA>         2023-01-01        2023-01-03
-      6  recovered         <NA>         2023-01-03        2023-01-04
-      7  recovered         <NA>         2023-01-04        2023-01-05
-      8  recovered         <NA>         2023-01-01        2023-01-04
-      9       died   2023-01-12         2022-12-31        2023-01-03
-      10 recovered         <NA>         2022-12-30        2023-01-03
-      11 recovered         <NA>         2023-01-01        2023-01-04
-      12 recovered         <NA>         2023-01-01        2023-01-03
-
 # sim_linelist works as expected with anonymous
 
     Code
