@@ -37,6 +37,7 @@
     <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
     <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
+    <a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Developer Documentation</h6>
@@ -87,7 +88,8 @@
 <span>  <span class="va">onset_to_death</span>,</span>
 <span>  <span class="va">onset_to_recovery</span>,</span>
 <span>  <span class="va">hosp_death_risk</span>,</span>
-<span>  <span class="va">non_hosp_death_risk</span></span>
+<span>  <span class="va">non_hosp_death_risk</span>,</span>
+<span>  <span class="va">config</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -151,7 +153,9 @@ hospitalised individuals across the population, or a <code>&lt;data.frame&gt;</c
 specific hospitalised death risks Default is 50% death risk in hospitals
 (<code>0.5</code>) for the entire population. If the <code>onset_to_death</code> argument is set
 to <code>NA</code> this argument should also be set to <code>NA</code>. See details and examples
-for more information.</p></dd>
+for more information. If a time-varying death risk is specified in the
+<code>config</code> the <code>hosp_death_risk</code> is interpreted as the maximum risk across
+the epidemic.</p></dd>
 
 
 <dt>non_hosp_death_risk</dt>
@@ -160,7 +164,14 @@ outside of hospitals across the population, or a <code>&lt;data.frame&gt;</code>
 specific death risks outside of hospitals. Default is 5% death risk outside
 of hospitals  (<code>0.05</code>) for the entire population. If the <code>onset_to_death</code>
 argument is set to <code>NA</code> this argument should also be set to <code>NA</code>. See
-details and examples for more information.</p></dd>
+details and examples for more information. If a time-varying death risk is
+specified in the <code>config</code> the <code>non_hosp_death_risk</code> is interpreted as the
+maximum risk across the epidemic.</p></dd>
+
+
+<dt>config</dt>
+<dd><p>A list of settings to adjust the randomly sampled delays and
+Ct values (if <code>add_ct = TRUE</code>). See <code><a href="create_config.html">create_config()</a></code> for more information.</p></dd>
 
 </dl></div>
     <div class="section level2">

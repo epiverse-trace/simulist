@@ -62,6 +62,7 @@
     <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
     <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
+    <a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Developer Documentation</h6>
@@ -207,6 +208,16 @@ unlikely to be changed by the user or if they are changed require an
 advanced understanding of the simulation model are placed within the
 <code>config</code>, and given default values with
 <code><a href="../reference/create_config.html">create_config()</a></code>.</p></li>
+<li><p>Input checking of the <code>config</code> list takes place within
+the call stack of exported <code>sim_*()</code> functions when certain
+elements of the <code>config</code> list are used, and not in the
+<code><a href="../reference/create_config.html">create_config()</a></code> function. Therefore, it is possible to
+create an invalid <code>config</code> list with
+<code><a href="../reference/create_config.html">create_config()</a></code>. An example of throwing an error from an
+internal function of the simulation is if <code>config$network</code> is
+not <code>"adjusted"</code> or <code>"unadjusted"</code>, or is
+<code>NULL</code> it will error in
+<code><a href="../reference/dot-sim_network_bp.html">.sim_network_bp()</a></code>.</p></li>
 <li><p>The column names of the line list data produced by
 <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> matches the
 tag names used in the <a href="https://CRAN.R-project.org/package=linelist" class="external-link">{linelist} R

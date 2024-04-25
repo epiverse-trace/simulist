@@ -37,6 +37,7 @@
     <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
     <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
+    <a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Developer Documentation</h6>
@@ -97,7 +98,8 @@ otherwise the function errors.</p></dd>
 around time windows around infections (time of first contact and last
 contact with infector), and the distribution of the Cycle threshold (Ct)
 value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
-cases.</p>
+cases, the network effect in the simulation, and if there is a time-varying
+death risk.</p>
 <p>Accepted arguments and their defaults are:</p><ul><li><p><code>last_contact_distribution = "pois"</code></p></li>
 <li><p><code>last_contact_distribution_params = c(lambda = 3)</code></p></li>
 <li><p><code>first_contact_distribution = "pois"</code></p></li>
@@ -105,6 +107,7 @@ cases.</p>
 <li><p><code>ct_distribution = "norm"</code></p></li>
 <li><p><code>ct_distribution_params = c(mean = 25, sd = 2)</code></p></li>
 <li><p><code>network = "adjusted"</code></p></li>
+<li><p><code>time_varying_death_risk = NULL</code></p></li>
 </ul><p>These parameters do not warrant their own arguments in
 <code><a href="sim_linelist.html">sim_linelist()</a></code> as they rarely need to be changed from their default
 setting. Therefore it is not worth increasing the number of <code><a href="sim_linelist.html">sim_linelist()</a></code>
@@ -149,6 +152,9 @@ a probability distribution \(p(n)\).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "adjusted"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $time_varying_death_risk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with customised Ct distribution</span></span></span>
 <span class="r-in"><span><span class="fu">create_config</span><span class="op">(</span></span></span>
@@ -178,6 +184,9 @@ a probability distribution \(p(n)\).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "adjusted"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $time_varying_death_risk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
