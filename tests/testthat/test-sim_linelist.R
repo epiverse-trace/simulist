@@ -69,20 +69,6 @@ test_that("sim_linelist works as expected with age-strat risks", {
   )
 })
 
-test_that("sim_linelist works as expected without Ct", {
-  set.seed(1)
-  expect_snapshot(
-    sim_linelist(
-      contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
-      onset_to_hosp = onset_to_hosp,
-      onset_to_death = onset_to_death,
-      add_ct = FALSE
-    )
-  )
-})
-
 test_that("sim_linelist works as expected with anonymous", {
   set.seed(1)
   expect_snapshot(
@@ -246,7 +232,6 @@ test_that("sim_linelist fails as expected with modified config", {
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
-      add_ct = TRUE,
       config = create_config(
         ct_distribution = "gamma"
       )
