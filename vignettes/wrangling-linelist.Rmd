@@ -83,10 +83,10 @@ set.seed(123)
 
 ```{r, sim-outbreak}
 outbreak <- sim_outbreak(
-  contact_distribution = contact_distribution, 
-  infect_period = infect_period, 
-  prob_infect = 0.5, 
-  onset_to_hosp = onset_to_hosp, 
+  contact_distribution = contact_distribution,
+  infect_period = infect_period,
+  prob_infect = 0.5,
+  onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
 linelist <- outbreak$linelist
@@ -117,7 +117,7 @@ linelist$ct_value <- NULL
 linelist <- linelist[, 1:11]
 
 # remove column by column name
-linelist <- linelist[, !colnames(linelist) %in% "ct_value"]
+linelist <- linelist[, !colnames(linelist) == "ct_value"]
 linelist
 ```
 
