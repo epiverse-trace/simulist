@@ -363,6 +363,7 @@ test_that("sim_linelist fails when onset-to-event are given by risk is NA", {
 })
 
 test_that("sim_linest date_admission column is NA when onset_to_hosp is NA", {
+  set.seed(1)
   ll <- suppressWarnings(
     sim_linelist(
       contact_distribution = contact_distribution,
@@ -388,6 +389,7 @@ test_that("sim_linest date_admission column is NA when onset_to_hosp is NA", {
 })
 
 test_that("sim_linest date_death column is NA when onset_to_death is NA", {
+  set.seed(1)
   ll <- suppressWarnings(
     sim_linelist(
       contact_distribution = contact_distribution,
