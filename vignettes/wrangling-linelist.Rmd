@@ -1,0 +1,128 @@
+---
+title: "Wrangling simulated outbreak data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{wrrangling-linelist}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The {simulist} R package can generate line list data (`sim_linelist()`), contact tracing data (`sim_contacts()`), or both (`sim_outbreak()`). By default the line list produced by `sim_linelist()` and `sim_outbreak()` contains 12 columns. Some amount of post-simulation data wrangling may be needed to use the simulated epidemiological case data to certain applications. This vignette demonstrates some common data wrangling tasks that may be performed on simulated line list or contact tracing data.
+
+```{r setup}
+library(simulist)
+library(epiparameter)
+library(dplyr)
+```
+
+This vignette provides data wrangling examples using both functions available in the R language (commonly called "base R") as well as using [tidyverse R packages](https://www.tidyverse.org/), which are commonly applied to data science tasks in R. The tidyverse examples are shown by default, but select the "Base R" tab to see the equivalent functionality using base R. There are many other tools for wrangling data in R which are not covered by this vignette (e.g. [{data.table}](https://rdatatable.gitlab.io/data.table/)).
+
+::: {.alert .alert-info}
+See these great resources for more information on general data wrangling in R:
+
+* [R for Data Science by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund](https://r4ds.hadley.nz/)
+* [{dplyr} R package](https://dplyr.tidyverse.org/)
+* [{tidyr} R package](https://github.com/tidyverse/tidyr)
+* [Wrangling data frames chapter in An Introduction to R by Alex Douglas, Deon Roos, Francesca Mancini, Ana Couto & David Lusseau](https://intro2r.com/wrangling-data-frames.html)
+:::
+
+## Simulate an outbreak
+
+To simulate an outbreak we will use the `sim_outbreak()` function from the {simulist} R package.
+
+::: {.alert .alert-info}
+If you are unfamiliar with the {simulist} package or the `sim_outbreak()` function [Get Started vignette](simulist.html) is a great place to start.
+:::
+
+First we load in some data that is required for the outbreak simulation. Data on epidemiological parameters and distributions are read from the {epiparameter} R package.
+
+```{r read-epidist}
+# create contact distribution (not available from {epiparameter} database)
+contact_distribution <- epidist(
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 2)
+)
+
+# create infectious period (not available from {epiparameter} database)
+infect_period <- epidist(
+  disease = "COVID-19",
+  epi_dist = "infectious period",
+  prob_distribution = "gamma",
+  prob_distribution_params = c(shape = 1, scale = 1)
+)
+
+# get onset to hospital admission from {epiparameter} database
+onset_to_hosp <- epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to hospitalisation",
+  single_epidist = TRUE
+)
+
+# get onset to death from {epiparameter} database
+onset_to_death <- epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to death",
+  single_epidist = TRUE
+)
+```
+
+The seed is set to ensure the output of the vignette is consistent. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
+
+```{r, set-seed}
+set.seed(123)
+```
+
+```{r, sim-outbreak}
+outbreak <- sim_outbreak(
+  contact_distribution = contact_distribution, 
+  infect_period = infect_period, 
+  prob_infect = 0.5, 
+  onset_to_hosp = onset_to_hosp, 
+  onset_to_death = onset_to_death
+)
+linelist <- outbreak$linelist
+contacts <- outbreak$contacts
+```
+
+## Removing a line list column {.tabset}
+
+Not every column in the simulated line list may be required for the use case at hand. In this example we will remove the `$ct_value` column. For instance, if we wanted to simulate an outbreak for which no laboratory testing (e.g Polymerase chain reaction, PCR, testing) was available and thus a Cycle threshold (Ct) value would not be known for confirmed cases.
+
+### Tidyverse
+
+```{r, rm-ct-col-tidyverse}
+# remove column by name
+linelist <- linelist %>%
+  select(!ct_value)
+linelist
+```
+
+### Base R
+
+```{r, rm-ct-col-base, eval=FALSE}
+# remove column by assigning it to NULL
+linelist$ct_value <- NULL
+
+# remove column by numeric column indexing
+# ct_value is column 12 (the last column)
+linelist <- linelist[, 1:11]
+
+# remove column by column name
+linelist <- linelist[, !colnames(linelist) %in% "ct_value"]
+linelist
+```
+
+```{r, rm-ct-col-base2, eval=TRUE, echo=FALSE}
+linelist
+```
+
+## {-}
