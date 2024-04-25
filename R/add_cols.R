@@ -148,46 +148,48 @@ NULL
           risk = risk
         )
       }
-      # loop through each age group and sample which cases die
-      for (i in seq_len(nrow(risk))) {
-        age_bracket <- risk$min_age[i]:risk$max_age[i]
-        age_group_idx <- which(.data$age %in% age_bracket & idx)
-
-        if (is.function(config$time_varying_death_risk)) {
-          .check_func_req_args(
-            config$time_varying_death_risk,
-            func_name = "time_varying_death_risk",
-            n_req_args = 2,
-            req_arg_names = c("risk", "time")
+      # find risk group for each individual based on age
+      # findInterval indexes from 0 so plus 1 for R vec indexing
+      # oldest age group is inclusive at upper bound so rightmost.closed = TRUE
+      risk_group_idx <- findInterval(
+        x = .data$age,
+        vec = risk$max_age,
+        rightmost.closed = TRUE
+      ) + 1
+      # assign risk to each individual given age group
+      risk_ <- risk$risk[risk_group_idx]
+      if (is.function(config$time_varying_death_risk)) {
+        .check_func_req_args(
+          config$time_varying_death_risk,
+          func_name = "time_varying_death_risk",
+          n_req_args = 2,
+          req_arg_names = c("risk", "time")
+        )
+        risk_ <- config$time_varying_death_risk(
+          risk = risk$risk[risk_group_idx],
+          time = .data$time
+        )
+        valid_risk <- checkmate::test_numeric(
+          risk_,
+          lower = 0,
+          upper = 1,
+          any.missing = FALSE
+        )
+        if (!valid_risk) {
+          stop(
+            "Time-varying death risk outside [0,1]. \n",
+            "Check time-varying function.",
+            call. = FALSE
           )
-          risk_ <- config$time_varying_death_risk(
-            risk = risk$risk[i],
-            time = .data$time[age_group_idx]
-          )
-          valid_risk <- checkmate::test_numeric(
-            risk_,
-            lower = 0,
-            upper = 1,
-            any.missing = FALSE
-          )
-          if (!valid_risk) {
-            stop(
-              "Time-varying death risk outside [0,1]. \n",
-              "Check time-varying function.",
-              call. = FALSE
-            )
-          }
-        } else {
-          risk_ <- rep(risk$risk[i], times = length(age_group_idx))
         }
-
-        # sample individuals in the risk category (e.g. hosp) to die given risk
-        died_idx <- stats::rbinom(n = length(risk_), size = 1, prob = risk_)
-        died_idx <- age_group_idx[as.logical(died_idx)]
-        .data$outcome[died_idx] <- "died"
-        .data$outcome_time[died_idx] <- .data$time[died_idx] +
-          onset_to_death(length(died_idx))
       }
+      # sample individuals to die given risk group
+      died_idx <- stats::rbinom(n = length(risk_), size = 1, prob = risk_)
+      # died index requires individuals to be in idx group (e.g. hosp)
+      died_idx <- as.logical(died_idx) & idx
+      .data$outcome[died_idx] <- "died"
+      .data$outcome_time[died_idx] <- .data$time[died_idx] +
+        onset_to_death(sum(died_idx))
     }
     .data
   }
