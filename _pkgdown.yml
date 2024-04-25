@@ -18,12 +18,16 @@ reference:
     - create_config
 
 articles:
-- title: Package Vignettes
-  navbar: Package Vignettes
+- title: Customising simulated outbreak
+  navbar: Customising simulated outbreak
   contents:
   - age-strat-risks
   - age-struct-pop
   - time-varying-cfr
+- title: Wrangling and plotting data
+  navbar: Wrangling and plotting data
+  contents:
+  - wrangling-linelist
   - vis-linelist
 - title: Developer Documentation
   navbar: Developer Documentation
