@@ -9,6 +9,7 @@ sim_contacts(
   infect_period,
   prob_infect,
   outbreak_start_date = as.Date("2023-01-01"),
+  anonymise = FALSE,
   outbreak_size = c(10, 10000),
   population_age = c(1, 90),
   contact_tracing_status_probs = c(under_followup = 0.7, lost_to_followup = 0.2, unknown
@@ -34,6 +35,9 @@ infectious period.}
 contact being infected by an infected primary contact.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
+
+\item{anonymise}{A \code{logical} boolean for whether case names should be
+anonymised. Default is \code{FALSE}.}
 
 \item{outbreak_size}{A \code{numeric} vector of length 2 defining the minimum and
 the maximum number of infected individuals for the simulated outbreak.

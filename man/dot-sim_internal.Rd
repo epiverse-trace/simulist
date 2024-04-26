@@ -17,7 +17,7 @@ within \pkg{simulist}}
   hosp_death_risk = NULL,
   non_hosp_death_risk = NULL,
   outbreak_start_date,
-  add_names = NULL,
+  anonymise = NULL,
   outbreak_size,
   population_age,
   case_type_probs = NULL,
@@ -84,8 +84,8 @@ maximum risk across the epidemic.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{add_names}{A \code{logical} boolean for whether to add names to each row
-of the line list. Default is \code{TRUE}.}
+\item{anonymise}{A \code{logical} boolean for whether case names should be
+anonymised. Default is \code{FALSE}.}
 
 \item{outbreak_size}{A \code{numeric} vector of length 2 defining the minimum and
 the maximum number of infected individuals for the simulated outbreak.

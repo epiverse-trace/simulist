@@ -6,13 +6,16 @@
 \alias{.add_ct}
 \title{Add line list information as column to infectious history \verb{<data.frame>}}
 \usage{
-.add_names(.data)
+.add_names(.data, anonymise = FALSE)
 
 .add_ct(.data, distribution = c("norm", "lnorm"), ...)
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
 branching process simulation}
+
+\item{anonymise}{A \code{logical} boolean for whether case names should be
+anonymised. Default is \code{FALSE}.}
 
 \item{distribution}{A \code{character} with the name of the distribution,
 following the base R convention for distribution naming (e.g. Poisson

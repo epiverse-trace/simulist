@@ -14,7 +14,7 @@
   onset_to_hosp = NULL,
   onset_to_death = NULL,
   onset_to_recovery = NULL,
-  add_names = NULL,
+  anonymise = NULL,
   case_type_probs = NULL,
   contact_tracing_status_probs = NULL,
   hosp_risk = NULL,
@@ -69,8 +69,8 @@ the onset to death delay distribution, or \code{NA} to not simulate dates for
 individuals that recovered. Default is \code{NA} so by default cases that
 recover get an \code{NA} in the \verb{$date_outcome} line list column.}
 
-\item{add_names}{A \code{logical} boolean for whether to add names to each row
-of the line list. Default is \code{TRUE}.}
+\item{anonymise}{A \code{logical} boolean for whether case names should be
+anonymised. Default is \code{FALSE}.}
 
 \item{case_type_probs}{A named \code{numeric} vector with the probability of
 each case type. The names of the vector must be \code{"suspected"}, \code{"probable"},

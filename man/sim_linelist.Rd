@@ -15,7 +15,7 @@ sim_linelist(
   hosp_death_risk = 0.5,
   non_hosp_death_risk = 0.05,
   outbreak_start_date = as.Date("2023-01-01"),
-  add_names = TRUE,
+  anonymise = FALSE,
   outbreak_size = c(10, 10000),
   population_age = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.3, confirmed = 0.5),
@@ -78,8 +78,8 @@ maximum risk across the epidemic.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{add_names}{A \code{logical} boolean for whether to add names to each row
-of the line list. Default is \code{TRUE}.}
+\item{anonymise}{A \code{logical} boolean for whether case names should be
+anonymised. Default is \code{FALSE}.}
 
 \item{outbreak_size}{A \code{numeric} vector of length 2 defining the minimum and
 the maximum number of infected individuals for the simulated outbreak.
