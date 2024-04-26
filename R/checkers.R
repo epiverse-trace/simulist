@@ -122,7 +122,7 @@
                              onset_to_hosp = NULL,
                              onset_to_death = NULL,
                              onset_to_recovery = NULL,
-                             add_names = NULL,
+                             anonymise = NULL,
                              case_type_probs = NULL,
                              contact_tracing_status_probs = NULL,
                              hosp_risk = NULL,
@@ -147,7 +147,7 @@
     .check_func_req_args(onset_to_hosp, func_name = "onset_to_hosp")
     .check_func_req_args(onset_to_death, func_name = "onset_to_death")
     .check_func_req_args(onset_to_recovery, func_name = "onset_to_recovery")
-    checkmate::assert_logical(add_names, len = 1)
+    checkmate::assert_logical(anonymise, len = 1)
     checkmate::assert_numeric(case_type_probs, len = 3, lower = 0, upper = 1)
     checkmate::assert_names(
       names(case_type_probs),

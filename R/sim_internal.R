@@ -22,7 +22,7 @@
                           hosp_death_risk = NULL,
                           non_hosp_death_risk = NULL,
                           outbreak_start_date,
-                          add_names = NULL,
+                          anonymise = NULL,
                           outbreak_size,
                           population_age,
                           case_type_probs = NULL,
@@ -127,10 +127,8 @@
       "outcome", "date_outcome", "date_first_contact", "date_last_contact"
     )
 
-    if (add_names) {
-      .data <- .add_names(.data = .data)
-      linelist_cols <- append(linelist_cols, "case_name", after = 1)
-    }
+    .data <- .add_names(.data = .data, anonymise = anonymise)
+    linelist_cols <- append(linelist_cols, "case_name", after = 1)
 
     # add confirmed, probable, suspected case types
     .data$case_type[.data$infected == "infected"] <- sample(
@@ -151,7 +149,7 @@
 
   if (sim_type %in% c("contacts", "outbreak")) {
     if (!"infector_name" %in% colnames(.data)) {
-      .data <- .add_names(.data = .data)
+      .data <- .add_names(.data = .data, anonymise = anonymise)
     }
 
     contacts_tbl <- subset(
