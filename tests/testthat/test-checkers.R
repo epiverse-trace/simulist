@@ -186,7 +186,7 @@ test_that(".check_sim_input works as expected", {
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
-    add_names = TRUE,
+    anonymise = FALSE,
     case_type_probs = c(
       suspected = 0.2,
       probable = 0.3,
@@ -215,7 +215,7 @@ test_that(".check_sim_input works as expected", {
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
-    add_names = TRUE,
+    anonymise = FALSE,
     case_type_probs = c(
       suspected = 0.2,
       probable = 0.3,
@@ -258,7 +258,7 @@ test_that(".check_sim_input works as expected with NA risks", {
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
-    add_names = TRUE,
+    anonymise = FALSE,
     case_type_probs = c(
       suspected = 0.2,
       probable = 0.3,
