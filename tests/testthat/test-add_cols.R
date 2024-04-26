@@ -258,6 +258,19 @@ test_that(".add_names works as expected", {
   )
 })
 
+test_that(".add_names works as expected with anonymise = TRUE", {
+  ll <- readRDS(file.path("testdata", "pre_names.rds"))
+  linelist <- .add_names(.data = ll, anonymise = TRUE)
+  expect_s3_class(linelist, class = "data.frame")
+  expect_type(linelist$case_name, type = "character")
+  expect_type(linelist$infector_name, type = "character")
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
+  expect_identical(
+    colnames(linelist),
+    c(colnames(ll), "case_name", "infector_name")
+  )
+})
+
 test_that(".add_ct works as expected", {
   ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   linelist <- .add_ct(.data = ll, distribution = "norm", mean = 3, sd = 0.5)
