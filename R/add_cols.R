@@ -214,6 +214,7 @@ NULL
 #' is `pois`).
 #' @param ... [dots] Extra arguments to be passed to the distribution function
 #' given in the `distribution` argument.
+#' @inheritParams sim_linelist
 #'
 #' @name .add_info
 #'
@@ -225,8 +226,11 @@ NULL
 NULL
 
 #' @name .add_info
-.add_names <- function(.data) {
+.add_names <- function(.data, anonymise = FALSE) {
   .data$case_name <- .sample_names(.data = .data)
+  if (anonymise) {
+    .data$case_name <- .anonymise(.data$case_name)
+  }
 
   # left join corresponding names to infectors preserving column and row order
   infector_names <- data.frame(id = .data$id, infector_name = .data$case_name)
