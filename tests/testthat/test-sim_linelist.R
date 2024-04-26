@@ -78,7 +78,7 @@ test_that("sim_linelist works as expected with anonymous", {
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
-      add_names = FALSE
+      anonymise = TRUE
     )
   )
 })

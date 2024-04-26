@@ -71,34 +71,34 @@
     Code
       sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
         prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
-        add_names = FALSE)
+        anonymise = TRUE)
     Output
-         id case_type sex age date_onset date_admission   outcome date_outcome
-      1   1 confirmed   m  35 2023-01-01           <NA> recovered         <NA>
-      2   2 suspected   m  43 2023-01-01           <NA> recovered         <NA>
-      3   3  probable   m   1 2023-01-01           <NA> recovered         <NA>
-      4   5 confirmed   m  78 2023-01-01           <NA> recovered         <NA>
-      5   6 confirmed   f  22 2023-01-01           <NA> recovered         <NA>
-      6   8 confirmed   f  28 2023-01-01           <NA> recovered         <NA>
-      7  11 confirmed   m  46 2023-01-01     2023-01-13 recovered         <NA>
-      8  12 suspected   f  67 2023-01-01           <NA> recovered         <NA>
-      9  13 confirmed   m  86 2023-01-01     2023-01-01      died   2023-01-12
-      10 18 suspected   f  60 2023-01-02           <NA> recovered         <NA>
-      11 20 confirmed   m  49 2023-01-02           <NA> recovered         <NA>
-      12 22 confirmed   f   7 2023-01-02     2023-01-02 recovered         <NA>
-         date_first_contact date_last_contact ct_value
-      1                <NA>              <NA>     23.9
-      2          2022-12-30        2023-01-05       NA
-      3          2022-12-30        2023-01-02       NA
-      4          2022-12-29        2023-01-02     23.9
-      5          2023-01-01        2023-01-03     23.9
-      6          2023-01-03        2023-01-04     23.9
-      7          2023-01-04        2023-01-05     23.9
-      8          2023-01-01        2023-01-04       NA
-      9          2022-12-31        2023-01-03     23.9
-      10         2022-12-30        2023-01-03       NA
-      11         2023-01-01        2023-01-04     23.9
-      12         2023-01-01        2023-01-03     23.9
+         id  case_name case_type sex age date_onset date_admission   outcome
+      1   1 ng7AzDS6oX confirmed   m  35 2023-01-01           <NA> recovered
+      2   2 fHuaqm1SzN  probable   m  43 2023-01-01           <NA> recovered
+      3   3 bO5h4yEtT6 confirmed   m   1 2023-01-01           <NA> recovered
+      4   5 a8e6yKFNmy suspected   m  78 2023-01-01           <NA> recovered
+      5   6 dPL7XeZaLT  probable   f  22 2023-01-01           <NA> recovered
+      6   8 TLkhw9tYeb confirmed   f  28 2023-01-01           <NA> recovered
+      7  11 WQihvSfYVA confirmed   m  46 2023-01-01     2023-01-13 recovered
+      8  12 RDjDafq8m2 confirmed   f  67 2023-01-01           <NA> recovered
+      9  13 zbFUJRewLY confirmed   m  86 2023-01-01     2023-01-01      died
+      10 18 VV4dJ6ZKaU confirmed   f  60 2023-01-02           <NA> recovered
+      11 20 fVJ5ftN2GN suspected   m  49 2023-01-02           <NA> recovered
+      12 22 ERhwf5kY6K confirmed   f   7 2023-01-02     2023-01-02 recovered
+         date_outcome date_first_contact date_last_contact ct_value
+      1          <NA>               <NA>              <NA>     25.8
+      2          <NA>         2022-12-30        2023-01-05       NA
+      3          <NA>         2022-12-30        2023-01-02     25.8
+      4          <NA>         2022-12-29        2023-01-02       NA
+      5          <NA>         2023-01-01        2023-01-03       NA
+      6          <NA>         2023-01-03        2023-01-04     25.8
+      7          <NA>         2023-01-04        2023-01-05     25.8
+      8          <NA>         2023-01-01        2023-01-04     25.8
+      9    2023-01-12         2022-12-31        2023-01-03     25.8
+      10         <NA>         2022-12-30        2023-01-03     25.8
+      11         <NA>         2023-01-01        2023-01-04       NA
+      12         <NA>         2023-01-01        2023-01-03     25.8
 
 # sim_linelist works as expected with age structure
 

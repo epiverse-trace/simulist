@@ -41,7 +41,7 @@ test_that("sim_outbreak works as expected", {
   )
 })
 
-test_that("sim_outbreak works as expected with add_names = FALSE", {
+test_that("sim_outbreak works as expected with anonymised", {
   set.seed(1)
   expect_snapshot(
     sim_outbreak(
@@ -50,7 +50,7 @@ test_that("sim_outbreak works as expected with add_names = FALSE", {
       prob_infect = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
-      add_names = FALSE
+      anonymise = TRUE
     )
   )
 })

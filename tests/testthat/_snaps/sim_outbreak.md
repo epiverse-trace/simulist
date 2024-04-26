@@ -79,86 +79,86 @@
       21        2023-01-03        Y           case
       
 
-# sim_outbreak works as expected with add_names = FALSE
+# sim_outbreak works as expected with anonymised
 
     Code
       sim_outbreak(contact_distribution = contact_distribution, infect_period = infect_period,
         prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
-        add_names = FALSE)
+        anonymise = TRUE)
     Output
       $linelist
-         id case_type sex age date_onset date_admission   outcome date_outcome
-      1   1 confirmed   m  35 2023-01-01           <NA> recovered         <NA>
-      2   2 suspected   m  43 2023-01-01           <NA> recovered         <NA>
-      3   3  probable   m   1 2023-01-01           <NA> recovered         <NA>
-      4   5 confirmed   m  78 2023-01-01           <NA> recovered         <NA>
-      5   6 confirmed   f  22 2023-01-01           <NA> recovered         <NA>
-      6   8 confirmed   f  28 2023-01-01           <NA> recovered         <NA>
-      7  11 confirmed   m  46 2023-01-01     2023-01-13 recovered         <NA>
-      8  12 suspected   f  67 2023-01-01           <NA> recovered         <NA>
-      9  13 confirmed   m  86 2023-01-01     2023-01-01      died   2023-01-12
-      10 18 suspected   f  60 2023-01-02           <NA> recovered         <NA>
-      11 20 confirmed   m  49 2023-01-02           <NA> recovered         <NA>
-      12 22 confirmed   f   7 2023-01-02     2023-01-02 recovered         <NA>
-         date_first_contact date_last_contact ct_value
-      1                <NA>              <NA>     23.9
-      2          2022-12-30        2023-01-05       NA
-      3          2022-12-30        2023-01-02       NA
-      4          2022-12-29        2023-01-02     23.9
-      5          2023-01-01        2023-01-03     23.9
-      6          2023-01-03        2023-01-04     23.9
-      7          2023-01-04        2023-01-05     23.9
-      8          2023-01-01        2023-01-04       NA
-      9          2022-12-31        2023-01-03     23.9
-      10         2022-12-30        2023-01-03       NA
-      11         2023-01-01        2023-01-04     23.9
-      12         2023-01-01        2023-01-03     23.9
+         id  case_name case_type sex age date_onset date_admission   outcome
+      1   1 ng7AzDS6oX confirmed   m  35 2023-01-01           <NA> recovered
+      2   2 fHuaqm1SzN  probable   m  43 2023-01-01           <NA> recovered
+      3   3 bO5h4yEtT6 confirmed   m   1 2023-01-01           <NA> recovered
+      4   5 a8e6yKFNmy suspected   m  78 2023-01-01           <NA> recovered
+      5   6 dPL7XeZaLT  probable   f  22 2023-01-01           <NA> recovered
+      6   8 TLkhw9tYeb confirmed   f  28 2023-01-01           <NA> recovered
+      7  11 WQihvSfYVA confirmed   m  46 2023-01-01     2023-01-13 recovered
+      8  12 RDjDafq8m2 confirmed   f  67 2023-01-01           <NA> recovered
+      9  13 zbFUJRewLY confirmed   m  86 2023-01-01     2023-01-01      died
+      10 18 VV4dJ6ZKaU confirmed   f  60 2023-01-02           <NA> recovered
+      11 20 fVJ5ftN2GN suspected   m  49 2023-01-02           <NA> recovered
+      12 22 ERhwf5kY6K confirmed   f   7 2023-01-02     2023-01-02 recovered
+         date_outcome date_first_contact date_last_contact ct_value
+      1          <NA>               <NA>              <NA>     25.8
+      2          <NA>         2022-12-30        2023-01-05       NA
+      3          <NA>         2022-12-30        2023-01-02     25.8
+      4          <NA>         2022-12-29        2023-01-02       NA
+      5          <NA>         2023-01-01        2023-01-03       NA
+      6          <NA>         2023-01-03        2023-01-04     25.8
+      7          <NA>         2023-01-04        2023-01-05     25.8
+      8          <NA>         2023-01-01        2023-01-04     25.8
+      9    2023-01-12         2022-12-31        2023-01-03     25.8
+      10         <NA>         2022-12-30        2023-01-03     25.8
+      11         <NA>         2023-01-01        2023-01-04       NA
+      12         <NA>         2023-01-01        2023-01-03     25.8
       
       $contacts
-                        from                  to age sex date_first_contact
-      1           Jonah Hord    Benjamin Flowers  43   m         2022-12-30
-      2           Jonah Hord         Rito Cooper   1   m         2022-12-30
-      3     Benjamin Flowers        Claire Hicks  29   f         2022-12-27
-      4     Benjamin Flowers   Jeremy Loughridge  78   m         2022-12-29
-      5          Rito Cooper         Ashwini Ali  22   f         2023-01-01
-      6          Rito Cooper          Rory Jumbo  70   m         2022-12-30
-      7          Rito Cooper       Danielle Kuhn  28   f         2023-01-03
-      8    Jeremy Loughridge     Gicell Cisneros  37   f         2023-01-06
-      9          Ashwini Ali       Lauren Nguyen  61   f         2023-01-01
-      10       Danielle Kuhn    Thaamir al-Amini  46   m         2023-01-04
-      11       Danielle Kuhn         Selena Chun  67   f         2023-01-01
-      12       Danielle Kuhn Charles Stuart Rasi  86   m         2022-12-31
-      13    Thaamir al-Amini        Jose Hurtado  71   m         2022-12-28
-      14    Thaamir al-Amini      Brianne Shahid  51   f         2023-01-01
-      15    Thaamir al-Amini        Efren Armijo  44   m         2023-01-02
-      16         Selena Chun    Juanita Martinez  49   f         2023-01-02
-      17 Charles Stuart Rasi       Hannah Bodnar  60   f         2022-12-30
-      18 Charles Stuart Rasi    Kifaaya el-Ameen  56   f         2023-01-06
-      19 Charles Stuart Rasi       Enrique Ponce  49   m         2023-01-01
-      20 Charles Stuart Rasi Jaarallah al-Masood  50   m         2023-01-01
-      21       Hannah Bodnar        Ashley Isaac   7   f         2023-01-01
-         date_last_contact was_case         status
-      1         2023-01-05        Y           case
-      2         2023-01-02        Y           case
-      3         2023-01-03        N under_followup
-      4         2023-01-02        Y           case
-      5         2023-01-03        Y           case
-      6         2023-01-02        N under_followup
-      7         2023-01-04        Y           case
-      8         2023-01-06        N under_followup
-      9         2023-01-05        N under_followup
-      10        2023-01-05        Y           case
-      11        2023-01-04        Y           case
-      12        2023-01-03        Y           case
-      13        2023-01-05        N        unknown
-      14        2023-01-04        N under_followup
-      15        2023-01-05        N under_followup
-      16        2023-01-03        N under_followup
-      17        2023-01-03        Y           case
-      18        2023-01-09        N under_followup
-      19        2023-01-04        Y           case
-      20        2023-01-03        N        unknown
-      21        2023-01-03        Y           case
+               from         to age sex date_first_contact date_last_contact was_case
+      1  ng7AzDS6oX fHuaqm1SzN  43   m         2022-12-30        2023-01-05        Y
+      2  ng7AzDS6oX bO5h4yEtT6   1   m         2022-12-30        2023-01-02        Y
+      3  fHuaqm1SzN tejRt34oCb  29   f         2022-12-27        2023-01-03        N
+      4  fHuaqm1SzN a8e6yKFNmy  78   m         2022-12-29        2023-01-02        Y
+      5  bO5h4yEtT6 dPL7XeZaLT  22   f         2023-01-01        2023-01-03        Y
+      6  bO5h4yEtT6 mhWsVUBVWY  70   m         2022-12-30        2023-01-02        N
+      7  bO5h4yEtT6 TLkhw9tYeb  28   f         2023-01-03        2023-01-04        Y
+      8  a8e6yKFNmy 1elczXnmE3  37   f         2023-01-06        2023-01-06        N
+      9  dPL7XeZaLT U4HDzSVgVA  61   f         2023-01-01        2023-01-05        N
+      10 TLkhw9tYeb WQihvSfYVA  46   m         2023-01-04        2023-01-05        Y
+      11 TLkhw9tYeb RDjDafq8m2  67   f         2023-01-01        2023-01-04        Y
+      12 TLkhw9tYeb zbFUJRewLY  86   m         2022-12-31        2023-01-03        Y
+      13 WQihvSfYVA tBBlIdUTzm  71   m         2022-12-28        2023-01-05        N
+      14 WQihvSfYVA cTo9HLY9VZ  51   f         2023-01-01        2023-01-04        N
+      15 WQihvSfYVA dzuuT3p6Kx  44   m         2023-01-02        2023-01-05        N
+      16 RDjDafq8m2 uczwJ3WvUc  49   f         2023-01-02        2023-01-03        N
+      17 zbFUJRewLY VV4dJ6ZKaU  60   f         2022-12-30        2023-01-03        Y
+      18 zbFUJRewLY Kvu5Ak6RZk  56   f         2023-01-06        2023-01-09        N
+      19 zbFUJRewLY fVJ5ftN2GN  49   m         2023-01-01        2023-01-04        Y
+      20 zbFUJRewLY kk2uuqi2rY  50   m         2023-01-01        2023-01-03        N
+      21 VV4dJ6ZKaU ERhwf5kY6K   7   f         2023-01-01        2023-01-03        Y
+                   status
+      1              case
+      2              case
+      3  lost_to_followup
+      4              case
+      5              case
+      6    under_followup
+      7              case
+      8    under_followup
+      9    under_followup
+      10             case
+      11             case
+      12             case
+      13   under_followup
+      14 lost_to_followup
+      15 lost_to_followup
+      16 lost_to_followup
+      17             case
+      18   under_followup
+      19             case
+      20 lost_to_followup
+      21             case
       
 
 # sim_outbreak works as expected with age-strat risks
