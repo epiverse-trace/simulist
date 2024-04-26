@@ -68,6 +68,58 @@
   names_mf
 }
 
+#' Anonymise names
+#'
+#' @description
+#' A simple algorithm to replace names with an alphanumeric string with an
+#' fixed number of characters (i.e. [nchar()]) specified by `string_len`.
+#'
+#' @param x A vector of `character` strings.
+#' @param string_len A single `numeric` specifying the number of alphanumeric
+#' characters to use for each anonymising `character` string.
+#' Default is `10`.
+#'
+#' @return A vector of `character` strings of equal length to the input.
+#' @keywords internal
+.anonymise <- function(x, string_len = 10) {
+  # find any NAs in input vector
+  na_idx <- is.na(x)
+  # make copy of x
+  x_ <- x
+  # remove NAs from vector for anonymising
+  x <- x[!is.na(x)]
+  # unique vector so repeated strings get the same anon string
+  uniq_x <- unique(x)
+  # create characters to sample
+  chars <- c(letters, LETTERS, 1:9)
+  # while loop to ensure all anon strings are unique
+  uniq_anon <- TRUE
+  while (uniq_anon) {
+    # sample and combine anonymised string
+    anon <- vapply(
+      uniq_x,
+      function(x) {
+        paste(
+          sample(x = chars, size = string_len, replace = TRUE),
+          collapse = ""
+        )
+      },
+      FUN.VALUE = character(1)
+    )
+    if (anyDuplicated(anon) == 0) {
+      uniq_anon <- FALSE
+    }
+  }
+  # insert anon strings and NAs at original index position
+  out <- rep(NA, times = length(na_idx))
+  for (i in seq_along(anon)) {
+    # which to drop NAs
+    out[which(x_ == uniq_x[i])] <- anon[i]
+  }
+  # return character vector
+  out
+}
+
 #' Check if \R object is a single `NA`
 #'
 #' Check if an \R object is specifically a single logical [`NA`] (i.e.
