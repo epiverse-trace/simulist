@@ -156,7 +156,7 @@ The way {simulist} assigns case types is by pasting case types onto existing cas
 
 ## Anonymous line list
 
-By default `sim_linelist()` provides the name of each individual in the line list. If an anonymised line list is required the `add_names` argument of `sim_linelist()` can be set to `FALSE`. 
+By default `sim_linelist()` provides the name of each individual in the line list. If an anonymised line list is required the `anonymise` argument of `sim_linelist()` can be set to `TRUE`. 
 
 ```{r sim-anon-linelist}
 linelist <- sim_linelist(
@@ -165,12 +165,12 @@ linelist <- sim_linelist(
   prob_infect = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  add_names = FALSE
+  anonymise = TRUE
 )
 head(linelist)
 ```
 
-The names used in the line list are produced at random by the [{randomNames}](https://CRAN.R-project.org/package=randomNames) R package. Therefore, even when `add_names = TRUE` there is no personal data of real individuals being produced or shared.
+The names used in the line list are produced at random by the [{randomNames}](https://CRAN.R-project.org/package=randomNames) R package. Therefore, even when `anonymise = FALSE` there is no personal data of real individuals being produced or shared. The `anonymise` argument only changes the `$case_name` column of the line list, as this is deemed the only personally identifiable information (PII) in the line list data.
 
 ## Population age
 
