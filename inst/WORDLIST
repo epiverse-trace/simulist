@@ -21,7 +21,9 @@ dplyr
 epi
 Epi
 epicontacts
+epidict
 epidist
+EpiNow
 epiparameter
 Epiverse
 errored
@@ -39,10 +41,12 @@ lifecycle
 Lifecycle
 linelist
 lintr
+LLsim
 Lusseau
 Mancini
 md
 MERS
+MSF
 olds
 ORCID
 packagename
@@ -63,6 +67,7 @@ Rundel
 SARS
 sensu
 sim
+simulacr
 socialmixr
 st
 stochasticity
