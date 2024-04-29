@@ -101,27 +101,22 @@ Not every column in the simulated line list may be required for the use case at 
 
 ```{r, rm-ct-col-tidyverse}
 # remove column by name
-linelist <- linelist %>%
+linelist %>%
   select(!ct_value)
-linelist
 ```
 
 ### Base R
 
-```{r, rm-ct-col-base, eval=FALSE}
-# remove column by assigning it to NULL
-linelist$ct_value <- NULL
-
+```{r, rm-ct-col-base}
 # remove column by numeric column indexing
 # ct_value is column 12 (the last column)
-linelist <- linelist[, -12]
+linelist[, -12]
 
 # remove column by column name
-linelist <- linelist[, colnames(linelist) != "ct_value"]
-linelist
-```
+linelist[, colnames(linelist) != "ct_value"]
 
-```{r, rm-ct-col-base2, eval=TRUE, echo=FALSE}
+# remove column by assigning it to NULL
+linelist$ct_value <- NULL
 linelist
 ```
 
