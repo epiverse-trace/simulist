@@ -309,33 +309,47 @@ In some cases the packages are dedicated to simulating line list and
 other epidemiological data (e.g. {simulist}), in others the line list
 simulation is one part of a wider R package (e.g. {EpiNow}).
 
+- [`{LLsim}`](https://github.com/jrcpulliam/LLsim) simulates line list
+  data using a stochastic SIR model with a fixed population with
+  observation and reporting delays.
+- [`{simulacr}`](https://github.com/reconhub/simulacr) uses a branching
+  process model to simulate cases and contacts for an outbreak. It
+  simulates transmission of infections using other epidemiological R
+  packages (`{epicontacts}` and `{distcrete}`) to parameterise and plot
+  simulated data.
+- [`{epidict}`](https://github.com/R4EPI/epidict) is a package for data
+  dictionaries for outbreaks and surveys. It can generate line list data
+  using an outbreak data dictionary (`gen_data()`). Currently MSF
+  outbreak data dictionaries for Acute Jaundice Syndrome, Cholera,
+  Measles and Meningitis are available.
+- [`{EpiNow}`](https://github.com/epiforecasts/EpiNow) - a now
+  deprecated R package - includes the `simulate_cases()` and
+  `generate_pseudo_linelist()` functions for generating line list data.
+
+<details>
+<summary>
+Table of line list simulator features
+</summary>
+
+|                                      | {simulist}         | {LLsim}            | {simulacr}         | {epidict}          | {EpiNow}           |
+|--------------------------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+| Simulates line list                  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Simulates contacts                   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
+| Parameterised with epi distributions | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: |
+| Interoperable with {epicontacts}     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
+| Explicit population size             | :x:                | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
+| R package                            | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Actively maintained\*                | :white_check_mark: | :x:                | :x:                | :x:                | :x:                |
+| On CRAN                              | :x:                | :x:                | :x:                | :x:                | :x:                |
+| Unit testing                         | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :x:                |
+
+\* We define actively maintained as the repository having a commit to
+the main branch within the last 12 months
+
+</details>
+
 If there is another package with this functionality missing from the
 list that should be added, or if a package included in this list has
 been updated and the table should reflect this please contribute by
 making an [issue](https://github.com/epiverse-trace/simulist/issues) or
 a [pull request](https://github.com/epiverse-trace/simulist/pulls).
-
-- [`{LLsim}`](https://github.com/jrcpulliam/LLsim) has the same
-  objective as `{simulist}`, to simualte realistic line list data.
-- [`{simulacr}`](https://github.com/reconhub/simulacr)
-- [`{epidict}`](https://github.com/R4EPI/epidict) is a package for data
-  dictionaries and generating epi data. Its `gen_data()` function can
-  simulate line list data.
-- [`{EpiNow}`](https://github.com/epiforecasts/EpiNow) is a now
-  deprecated R package that includes the `simulate_cases()` and
-  `generate_pseudo_linelist()` functions.
-
-|                                      | {simulist}    | {LLsim}     | {simulacr}     | {epidict}    | {EpiNow}       |
-|--------------------------------------|---------------|-------------|----------------|--------------|----------------|
-| Simulates line list                  | ✅            | ✅          | ✅             | ✅           | ✅             |
-| Simulates contacts                   | Lorem ipsum   | Sed do      | Ut enim        | Duis aute    | Cillum dolore  |
-| Parameterised with epi distributions | Lorem ipsum   | Sed do      | Ut enim        | Duis aute    | Cillum dolore  |
-| Actively maintained\*                | ✅            | Anim id     | ❌             | ❌           | ❌             |
-| Unit testing                         | ✅            | Duis aute   | ❌             | ✅           | ❌             |
-| Lorem ipsum                          | Cillum dolore | Ut enim     | Laboris nisi   | Duis aute    | Excepteur sint |
-| Interoperable with {epicontacts}     | ❌            | Ut enim     | Laboris nisi   | Duis aute    | Excepteur sint |
-| Explicit population size             | ❌            | Sed do      | Ut enim        | Duis aute    | Cillum dolore  |
-| On CRAN                              | ❌            | Lorem ipsum | Excepteur sint | Laboris nisi | Ut enim        |
-
-\* We define actively maintained as the respository having a commit to
-the main branch within the last 12 months
