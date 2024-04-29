@@ -117,7 +117,7 @@ linelist$ct_value <- NULL
 linelist <- linelist[, -12]
 
 # remove column by column name
-linelist <- linelist[, !colnames(linelist) == "ct_value"]
+linelist <- linelist[, colnames(linelist) != "ct_value"]
 linelist
 ```
 
