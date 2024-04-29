@@ -59,10 +59,13 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
+    <h6 class="dropdown-header" data-toc-skip>Customising simulated outbreak</h6>
     <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
     <a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Wrangling and plotting data</h6>
+    <a class="dropdown-item" href="../articles/wrangling-linelist.html">Wrangling simulated outbreak data</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Developer Documentation</h6>
@@ -236,6 +239,20 @@ individuals. This is a simple random network model, but for future
 versions of {simulist} we will make the code modular in order to accept
 other simulations models. This will remove the burden on {simulist} to
 simulate from a range of model types.</p></li>
+<li><p>The <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> and
+<code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> do not have arguments that change the
+dimensions of the <code>&lt;data.frame&gt;</code> returned by the
+functions (or in the case of <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> a list of two
+<code>&lt;data.frame&gt;</code>s). Instead, we recommend modifying the
+line list or contact tracing data after the simulation, and provide a
+vignette to guide users on common data wrangling tasks in
+<code>wrangling-linelist.Rmd</code>. Not including arguments that can
+remove or add columns to the output <code>&lt;data.frame&gt;</code>s
+reduces the complexity of the functions; and by limiting the simulation
+function arguments to only parameterise, and not change the
+dimensionality of, the simulated data, the package is more robust to
+being used in pipelines or other automated approaches, where the data
+needs to be predictably formatted.</p></li>
 </ul>
 </div>
 <div class="section level2">

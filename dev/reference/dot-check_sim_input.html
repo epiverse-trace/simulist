@@ -34,10 +34,13 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <h6 class="dropdown-header" data-toc-skip>Package Vignettes</h6>
+    <h6 class="dropdown-header" data-toc-skip>Customising simulated outbreak</h6>
     <a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a>
     <a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a>
     <a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Wrangling and plotting data</h6>
+    <a class="dropdown-item" href="../articles/wrangling-linelist.html">Wrangling simulated outbreak data</a>
     <a class="dropdown-item" href="../articles/vis-linelist.html">Visualising simulated data</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Developer Documentation</h6>
@@ -84,7 +87,6 @@
 <span>  onset_to_death <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  onset_to_recovery <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  add_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  add_ct <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  case_type_probs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  contact_tracing_status_probs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -162,13 +164,6 @@ recover get an <code>NA</code> in the <code>$date_outcome</code> line list colum
 <dt>add_names</dt>
 <dd><p>A <code>logical</code> boolean for whether to add names to each row
 of the line list. Default is <code>TRUE</code>.</p></dd>
-
-
-<dt>add_ct</dt>
-<dd><p>A <code>logical</code> boolean for whether to add Ct values to each
-confirmed case and <code>NA</code> otherwise for each case in the line list.
-Default is <code>TRUE</code>. Ct refers to the Cycle threshold from a Real-time
-PCR or quantitative PCR (qPCR).</p></dd>
 
 
 <dt>case_type_probs</dt>
