@@ -114,7 +114,7 @@ linelist$ct_value <- NULL
 
 # remove column by numeric column indexing
 # ct_value is column 12 (the last column)
-linelist <- linelist[, 1:11]
+linelist <- linelist[, -12]
 
 # remove column by column name
 linelist <- linelist[, !colnames(linelist) == "ct_value"]
