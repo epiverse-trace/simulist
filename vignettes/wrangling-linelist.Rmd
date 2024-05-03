@@ -2,7 +2,7 @@
 title: "Wrangling simulated outbreak data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{wrrangling-linelist}
+  %\VignetteIndexEntry{Wrangling simulated outbreak data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
