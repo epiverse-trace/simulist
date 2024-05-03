@@ -325,23 +325,31 @@ simulation is one part of a wider R package (e.g. {EpiNow}).
 - [`{EpiNow}`](https://github.com/epiforecasts/EpiNow) - a now
   deprecated R package - includes the `simulate_cases()` and
   `generate_pseudo_linelist()` functions for generating line list data.
+- [generative-nowcasting](https://github.com/adrian-lison/generative-nowcasting)
+  is a set of R scripts and functions to perform epidemiological
+  nowcasting. There are [functions to simulate line list
+  data](https://github.com/adrian-lison/generative-nowcasting/blob/bf48e027e82ce9d42de468d0b708d010253b7475/code/utils/utils_simulate.R)
+  within the repository, but the repository is not (and does not
+  contain) an R package. Functions can be sourced. Cases are simulated
+  with a renewal process and the simulation can incorporate
+  epidemiological delays and ascertainment.
 
 <details>
 <summary>
 Table of line list simulator features
 </summary>
 
-|                                      | {simulist}         | {LLsim}            | {simulacr}         | {epidict}          | {EpiNow}           |
-|--------------------------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
-| Simulates line list                  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Simulates contacts                   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
-| Parameterised with epi distributions | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: |
-| Interoperable with {epicontacts}     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
-| Explicit population size             | :x:                | :white_check_mark: | :white_check_mark: | :x:                | :x:                |
-| R package                            | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Actively maintained\*                | :white_check_mark: | :x:                | :x:                | :x:                | :x:                |
-| On CRAN                              | :x:                | :x:                | :x:                | :x:                | :x:                |
-| Unit testing                         | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :x:                |
+|                                      | {simulist}         | {LLsim}            | {simulacr}         | {epidict}          | {EpiNow}           | generative-nowcasting |
+|--------------------------------------|--------------------|--------------------|--------------------|--------------------|--------------------|-----------------------|
+| Simulates line list                  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:    |
+| Simulates contacts                   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
+| Parameterised with epi distributions | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :white_check_mark:    |
+| Interoperable with {epicontacts}     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
+| Explicit population size             | :x:                | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
+| R package                            | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                   |
+| Actively maintained\*                | :white_check_mark: | :x:                | :x:                | :x:                | :x:                | :white_check_mark:    |
+| On CRAN                              | :x:                | :x:                | :x:                | :x:                | :x:                | NA                    |
+| Unit testing                         | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :x:                | NA                    |
 
 \* We define actively maintained as the repository having a commit to
 the main branch within the last 12 months
