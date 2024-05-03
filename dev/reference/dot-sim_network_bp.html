@@ -102,14 +102,14 @@ and is independent of whether the contact becomes infected.</p>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>contact_distribution</dt>
+    <dl><dt id="arg-contact-distribution">contact_distribution<a class="anchor" aria-label="anchor" href="#arg-contact-distribution"></a></dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
 the contact distribution. This is any discrete density function that
 produces non-negative integers (including zero, \(\mathbb{N}_0\)) for the
 number of contacts per infection.</p></dd>
 
 
-<dt>infect_period</dt>
+<dt id="arg-infect-period">infect_period<a class="anchor" aria-label="anchor" href="#arg-infect-period"></a></dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
 the infectious period. This defines the duration from becoming infectious
 to no longer infectious. In the simulation, individuals are assumed to
@@ -119,12 +119,12 @@ their contacts are assumed to be uniformly distributed within the
 infectious period.</p></dd>
 
 
-<dt>prob_infect</dt>
+<dt id="arg-prob-infect">prob_infect<a class="anchor" aria-label="anchor" href="#arg-prob-infect"></a></dt>
 <dd><p>A single <code>numeric</code> for the probability of a secondary
 contact being infected by an infected primary contact.</p></dd>
 
 
-<dt>config</dt>
+<dt id="arg-config">config<a class="anchor" aria-label="anchor" href="#arg-config"></a></dt>
 <dd><p>A list of settings to adjust the randomly sampled delays and
 Ct values. See <code><a href="create_config.html">create_config()</a></code> for more information.</p></dd>
 

@@ -81,6 +81,7 @@
 <span>  <span class="va">infect_period</span>,</span>
 <span>  <span class="va">prob_infect</span>,</span>
 <span>  outbreak_start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-01-01"</span><span class="op">)</span>,</span>
+<span>  anonymise <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10000</span><span class="op">)</span>,</span>
 <span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">90</span><span class="op">)</span>,</span>
 <span>  contact_tracing_status_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>under_followup <span class="op">=</span> <span class="fl">0.7</span>, lost_to_followup <span class="op">=</span> <span class="fl">0.2</span>, unknown</span>
@@ -91,14 +92,14 @@
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>contact_distribution</dt>
+    <dl><dt id="arg-contact-distribution">contact_distribution<a class="anchor" aria-label="anchor" href="#arg-contact-distribution"></a></dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
 the contact distribution. This is any discrete density function that
 produces non-negative integers (including zero, \(\mathbb{N}_0\)) for the
 number of contacts per infection.</p></dd>
 
 
-<dt>infect_period</dt>
+<dt id="arg-infect-period">infect_period<a class="anchor" aria-label="anchor" href="#arg-infect-period"></a></dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
 the infectious period. This defines the duration from becoming infectious
 to no longer infectious. In the simulation, individuals are assumed to
@@ -108,16 +109,21 @@ their contacts are assumed to be uniformly distributed within the
 infectious period.</p></dd>
 
 
-<dt>prob_infect</dt>
+<dt id="arg-prob-infect">prob_infect<a class="anchor" aria-label="anchor" href="#arg-prob-infect"></a></dt>
 <dd><p>A single <code>numeric</code> for the probability of a secondary
 contact being infected by an infected primary contact.</p></dd>
 
 
-<dt>outbreak_start_date</dt>
+<dt id="arg-outbreak-start-date">outbreak_start_date<a class="anchor" aria-label="anchor" href="#arg-outbreak-start-date"></a></dt>
 <dd><p>A <code>date</code> for the start of the outbreak.</p></dd>
 
 
-<dt>outbreak_size</dt>
+<dt id="arg-anonymise">anonymise<a class="anchor" aria-label="anchor" href="#arg-anonymise"></a></dt>
+<dd><p>A <code>logical</code> boolean for whether case names should be
+anonymised. Default is <code>FALSE</code>.</p></dd>
+
+
+<dt id="arg-outbreak-size">outbreak_size<a class="anchor" aria-label="anchor" href="#arg-outbreak-size"></a></dt>
 <dd><p>A <code>numeric</code> vector of length 2 defining the minimum and
 the maximum number of infected individuals for the simulated outbreak.
 Default is <code>c(10, 1e4)</code>, so the minimum outbreak size is 10 infected
@@ -130,7 +136,7 @@ maximum outbreak size is exceeded the function returns the data early and a
 warning stating how many cases and contacts are returned.</p></dd>
 
 
-<dt>population_age</dt>
+<dt id="arg-population-age">population_age<a class="anchor" aria-label="anchor" href="#arg-population-age"></a></dt>
 <dd><p>Either a <code>numeric</code> vector with two elements or a
 <code>&lt;data.frame&gt;</code> with age structure in the population. Use a <code>numeric</code> vector
 to specific the age range of the population, the first element is the lower
@@ -140,14 +146,14 @@ age groups and the proportion of the population in that group. See details
 and examples for more information.</p></dd>
 
 
-<dt>contact_tracing_status_probs</dt>
+<dt id="arg-contact-tracing-status-probs">contact_tracing_status_probs<a class="anchor" aria-label="anchor" href="#arg-contact-tracing-status-probs"></a></dt>
 <dd><p>A named <code>numeric</code> vector with the
 probability of each contact tracing status. The names of the vector must
 be <code>"under_followup"</code>, <code>"lost_to_followup"</code>, <code>"unknown"</code>. Values of each
 contact tracing status must sum to one.</p></dd>
 
 
-<dt>config</dt>
+<dt id="arg-config">config<a class="anchor" aria-label="anchor" href="#arg-config"></a></dt>
 <dd><p>A list of settings to adjust the randomly sampled delays and
 Ct values. See <code><a href="create_config.html">create_config()</a></code> for more information.</p></dd>
 

@@ -98,38 +98,38 @@
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>.data</dt>
+    <dl><dt id="arg--data">.data<a class="anchor" aria-label="anchor" href="#arg--data"></a></dt>
 <dd><p>A <code>&lt;data.frame&gt;</code> containing the infectious history from a
 branching process simulation.</p></dd>
 
 
-<dt>contact_type</dt>
+<dt id="arg-contact-type">contact_type<a class="anchor" aria-label="anchor" href="#arg-contact-type"></a></dt>
 <dd><p>A <code>character</code> with the type of contact, either first
 contact (<code>"first"</code>), or last contact (<code>"last"</code>).</p></dd>
 
 
-<dt>distribution</dt>
+<dt id="arg-distribution">distribution<a class="anchor" aria-label="anchor" href="#arg-distribution"></a></dt>
 <dd><p>A <code>character</code> with the name of the distribution,
 following the base R convention for distribution naming (e.g. Poisson
 is <code>pois</code>).</p></dd>
 
 
-<dt>...</dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p><a href="https://rdrr.io/r/base/dots.html" class="external-link">dots</a> Extra arguments to be passed to the distribution function
 given in the <code>distribution</code> argument.</p></dd>
 
 
-<dt>outbreak_start_date</dt>
+<dt id="arg-outbreak-start-date">outbreak_start_date<a class="anchor" aria-label="anchor" href="#arg-outbreak-start-date"></a></dt>
 <dd><p>A <code>date</code> for the start of the outbreak.</p></dd>
 
 
-<dt>onset_to_hosp</dt>
+<dt id="arg-onset-to-hosp">onset_to_hosp<a class="anchor" aria-label="anchor" href="#arg-onset-to-hosp"></a></dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object, an anonymous function for
 the onset to hospitalisation delay distribution, or <code>NA</code> to not simulate
 hospitalisation (admission) dates.</p></dd>
 
 
-<dt>hosp_risk</dt>
+<dt id="arg-hosp-risk">hosp_risk<a class="anchor" aria-label="anchor" href="#arg-hosp-risk"></a></dt>
 <dd><p>Either a single <code>numeric</code> for the hospitalisation risk of
 everyone in the population, or a <code>&lt;data.frame&gt;</code> with age specific
 hospitalisation risks Default is 20% hospitalisation (<code>0.2</code>) for the entire
@@ -137,20 +137,20 @@ population. If the <code>onset_to_hosp</code> argument is set to <code>NA</code>
 should also be set to <code>NA</code>. See details and examples for more information.</p></dd>
 
 
-<dt>onset_to_death</dt>
+<dt id="arg-onset-to-death">onset_to_death<a class="anchor" aria-label="anchor" href="#arg-onset-to-death"></a></dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object, an anonymous function for
 the onset to death delay distribution, or <code>NA</code> to not simulate dates for
 individuals that died.</p></dd>
 
 
-<dt>onset_to_recovery</dt>
+<dt id="arg-onset-to-recovery">onset_to_recovery<a class="anchor" aria-label="anchor" href="#arg-onset-to-recovery"></a></dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object, an anonymous function for
 the onset to death delay distribution, or <code>NA</code> to not simulate dates for
 individuals that recovered. Default is <code>NA</code> so by default cases that
 recover get an <code>NA</code> in the <code>$date_outcome</code> line list column.</p></dd>
 
 
-<dt>hosp_death_risk</dt>
+<dt id="arg-hosp-death-risk">hosp_death_risk<a class="anchor" aria-label="anchor" href="#arg-hosp-death-risk"></a></dt>
 <dd><p>Either a single <code>numeric</code> for the death risk for
 hospitalised individuals across the population, or a <code>&lt;data.frame&gt;</code> with age
 specific hospitalised death risks Default is 50% death risk in hospitals
@@ -161,7 +161,7 @@ for more information. If a time-varying death risk is specified in the
 the epidemic.</p></dd>
 
 
-<dt>non_hosp_death_risk</dt>
+<dt id="arg-non-hosp-death-risk">non_hosp_death_risk<a class="anchor" aria-label="anchor" href="#arg-non-hosp-death-risk"></a></dt>
 <dd><p>Either a single <code>numeric</code> for the death risk for
 outside of hospitals across the population, or a <code>&lt;data.frame&gt;</code> with age
 specific death risks outside of hospitals. Default is 5% death risk outside
@@ -172,7 +172,7 @@ specified in the <code>config</code> the <code>non_hosp_death_risk</code> is int
 maximum risk across the epidemic.</p></dd>
 
 
-<dt>config</dt>
+<dt id="arg-config">config<a class="anchor" aria-label="anchor" href="#arg-config"></a></dt>
 <dd><p>A list of settings to adjust the randomly sampled delays and
 Ct values. See <code><a href="create_config.html">create_config()</a></code> for more information.</p></dd>
 
