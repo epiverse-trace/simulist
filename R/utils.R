@@ -120,24 +120,6 @@
   out
 }
 
-#' Check if \R object is a single `NA`
-#'
-#' Check if an \R object is specifically a single logical [`NA`] (i.e.
-#' non-vectorised). [`NA_real_`], [`NA_character_`], [`NA_integer_`],
-#' [`NA_complex_`] return `FALSE`.
-#'
-#' @param x An \R object
-#'
-#' @return A single boolean `logical`.
-#' @keywords internal
-is_na <- function(x) {
-  if (length(x) == 1 && is.atomic(x) && is.logical(x)) {
-    # check is.na() inside if as it warns for closures
-    return(all(is.na(x)))
-  }
-  return(FALSE)
-}
-
 #' Convert `<epidist>` or `NA` to function
 #'
 #' @description
@@ -167,27 +149,27 @@ as_function <- function(x) {
     "onset_to_hosp, onset_to_death and onset_to_recovery need to be a function,
     <epidist> or NA" =
       inherits(x$onset_to_hosp, c("function", "epidist")) ||
-      is_na(x$onset_to_hosp) &&
+      rlang::is_lgl_na(x$onset_to_hosp) &&
       inherits(x$onset_to_death, c("function", "epidist")) ||
-      is_na(x$onset_to_death)
+      rlang::is_lgl_na(x$onset_to_death)
   )
   contact_distribution <- as.function(
     x$contact_distribution, func_type = "density"
   )
   infect_period <- as.function(x$infect_period, func_type = "generate")
-  if (is_na(x$onset_to_hosp)) {
+  if (rlang::is_lgl_na(x$onset_to_hosp)) {
     # function to generate NA instead of hospitalisation times
     onset_to_hosp <- function(x) rep(NA, times = x)
   } else {
     onset_to_hosp <- as.function(x$onset_to_hosp, func_type = "generate")
   }
-  if (is_na(x$onset_to_death)) {
+  if (rlang::is_lgl_na(x$onset_to_death)) {
     # function to generate NA instead of death times
     onset_to_death <- function(x) rep(NA, times = x)
   } else {
     onset_to_death <- as.function(x$onset_to_death, func_type = "generate")
   }
-  if (is_na(x$onset_to_recovery)) {
+  if (rlang::is_lgl_na(x$onset_to_recovery)) {
     # function to generate NA instead of recovery times
     onset_to_recovery <- function(x) rep(NA, times = x)
   } else {

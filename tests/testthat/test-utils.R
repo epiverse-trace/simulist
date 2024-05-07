@@ -1,19 +1,3 @@
-test_that("is_na works as expected", {
-  expect_true(is_na(NA))
-  expect_false(is_na(NA_character_))
-  expect_false(is_na(NA_complex_))
-  expect_false(is_na(NA_integer_))
-  expect_false(is_na(NA_real_))
-  expect_false(is_na(NULL))
-  expect_false(is_na(NaN))
-  expect_false(is_na(1))
-  expect_false(is_na(1L))
-  expect_false(is_na("1"))
-  expect_false(is_na(c(1, 2, 3)))
-  expect_false(is_na(list(1, 2, 3)))
-  expect_false(is_na(as.Date("2020-01-01")))
-})
-
 test_that(".anonymise works as expected", {
   set.seed(1)
   expect_identical(.anonymise("string"), "5dMaH9wQnr")
