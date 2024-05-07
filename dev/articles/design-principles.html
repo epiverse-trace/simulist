@@ -253,6 +253,14 @@ function arguments to only parameterise, and not change the
 dimensionality of, the simulated data, the package is more robust to
 being used in pipelines or other automated approaches, where the data
 needs to be predictably formatted.</p></li>
+<li><p>Several parts of the {simulist} codebase use indices for
+determining which individual are infected, allocation to vectors, and
+other uses. R’s subsetting (<code>[</code>) can use logical vectors or
+numeric vectors, but in {simulist} these are differentiated by the names
+<code>*_idx</code> for variables holding a <code>numeric</code> vector
+of indices, and <code>*_lgl_idx</code> for a <code>logical</code> vector
+of indices. This makes it safer and more readable to call functions like
+<code><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum()</a></code> or <code><a href="https://rdrr.io/r/base/which.html" class="external-link">which()</a></code> on index vectors.</p></li>
 </ul>
 </div>
 <div class="section level2">
