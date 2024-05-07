@@ -50,6 +50,8 @@ The simulation functions either return a `<data.frame>` or a `list` of `<data.fr
 
 - The `sim_linelist()`, `sim_contacts()` and `sim_outbreak()` do not have arguments that change the dimensions of the `<data.frame>` returned by the functions (or in the case of `sim_outbreak()` a list of two `<data.frame>`s). Instead, we recommend modifying the line list or contact tracing data after the simulation, and provide a vignette to guide users on common data wrangling tasks in `wrangling-linelist.Rmd`. Not including arguments that can remove or add columns to the output `<data.frame>`s reduces the complexity of the functions; and by limiting the simulation function arguments to only parameterise, and not change the dimensionality of, the simulated data, the package is more robust to being used in pipelines or other automated approaches, where the data needs to be predictably formatted.
 
+- Several parts of the {simulist} codebase use indices for determining which individual are infected, allocation to vectors, and other uses. R's subsetting (`[`) can use logical vectors or numeric vectors, but in {simulist} these are differentiated by the names `*_idx` for variables holding a `numeric` vector of indices, and `*_lgl_idx` for a `logical` vector of indices. This makes it safer and more readable to call functions like `sum()` or `which()` on index vectors.
+
 ## Dependencies
 
 The aim is to restrict the number of dependencies to a minimal required set for ease of maintenance. The current hard dependencies are:
