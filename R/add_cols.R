@@ -81,10 +81,10 @@ NULL
 .add_hospitalisation <- function(.data,
                                  onset_to_hosp,
                                  hosp_risk) {
-  infected_idx <- .data$infected == "infected"
-  num_infected <- sum(infected_idx)
+  infected_lgl_idx <- .data$infected == "infected"
+  num_infected <- sum(infected_lgl_idx)
   .data$hospitalisation <- NA_real_
-  .data$hospitalisation[infected_idx] <- .data$time[infected_idx] +
+  .data$hospitalisation[infected_lgl_idx] <- .data$time[infected_lgl_idx] +
     onset_to_hosp(num_infected)
 
   # hosp_risk is either numeric or <data.frame> or NA
@@ -92,7 +92,7 @@ NULL
     if (is.numeric(hosp_risk)) {
       # size is converted to an integer internally in sample()
       pop_sample <- sample(
-        which(infected_idx),
+        which(infected_lgl_idx),
         replace = FALSE,
         size = (1 - hosp_risk) * num_infected
       )
@@ -124,15 +124,15 @@ NULL
                          hosp_death_risk,
                          non_hosp_death_risk,
                          config) {
-  infected_idx <- .data$infected == "infected"
-  num_infected <- sum(infected_idx)
+  infected_lgl_idx <- .data$infected == "infected"
+  num_infected <- sum(infected_lgl_idx)
   .data$outcome <- "contact"
   .data$outcome_time <- NA_real_
-  .data$outcome[infected_idx] <- "recovered"
-  .data$outcome_time[infected_idx] <- .data$time[infected_idx] +
+  .data$outcome[infected_lgl_idx] <- "recovered"
+  .data$outcome_time[infected_lgl_idx] <- .data$time[infected_lgl_idx] +
     onset_to_recovery(num_infected)
-  hosp_idx <- !is.na(.data$hospitalisation) & infected_idx
-  non_hosp_idx <- is.na(.data$hospitalisation) & infected_idx
+  hosp_lgl_idx <- !is.na(.data$hospitalisation) & infected_lgl_idx
+  non_hosp_lgl_idx <- is.na(.data$hospitalisation) & infected_lgl_idx
 
   # internal function only called in .add_outcome()
   # assign deaths using population or age-stratified death risk
@@ -186,19 +186,19 @@ NULL
       # sample individuals to die given risk group
       died_idx <- stats::rbinom(n = length(risk_), size = 1, prob = risk_)
       # died index requires individuals to be in idx group (e.g. hosp)
-      died_idx <- as.logical(died_idx) & idx
-      .data$outcome[died_idx] <- "died"
-      .data$outcome_time[died_idx] <- .data$time[died_idx] +
-        onset_to_death(sum(died_idx))
+      died_lgl_idx <- as.logical(died_idx) & idx
+      .data$outcome[died_lgl_idx] <- "died"
+      .data$outcome_time[died_lgl_idx] <- .data$time[died_lgl_idx] +
+        onset_to_death(sum(died_lgl_idx))
     }
     .data
   }
 
   .data <- apply_death_risk(
-    .data, risk = hosp_death_risk, idx = hosp_idx, config = config
+    .data, risk = hosp_death_risk, idx = hosp_lgl_idx, config = config
   )
   .data <- apply_death_risk(
-    .data, risk = non_hosp_death_risk, idx = non_hosp_idx, config = config
+    .data, risk = non_hosp_death_risk, idx = non_hosp_lgl_idx, config = config
   )
 
   # return data

@@ -21,10 +21,10 @@
 #' @keywords internal
 .sample_names <- function(.data,
                           buffer_factor = 1.5) {
-  m_idx <- .data$sex == "m"
-  f_idx <- .data$sex == "f"
-  num_m <- sum(m_idx)
-  num_f <- sum(f_idx)
+  m_lgl_idx <- .data$sex == "m"
+  f_lgl_idx <- .data$sex == "f"
+  num_m <- sum(m_lgl_idx)
+  num_f <- sum(f_lgl_idx)
   num_sample_m <- ceiling(num_m * buffer_factor)
   num_sample_f <- ceiling(num_f * buffer_factor)
 
@@ -61,8 +61,8 @@
 
   # order names with sex codes from .data
   names_mf <- vector(mode = "character", length = nrow(.data))
-  names_mf[m_idx] <- names_m
-  names_mf[f_idx] <- names_f
+  names_mf[m_lgl_idx] <- names_m
+  names_mf[f_lgl_idx] <- names_f
 
   # return vector of names
   names_mf
