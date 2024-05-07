@@ -158,13 +158,14 @@
       "The values in the case_type_prob vector must sum to 1" =
         sum(case_type_probs) == 1,
       "hosp_risk must be a single numeric or a data.frame" =
-        is.numeric(hosp_risk) || is.data.frame(hosp_risk) || is_na(hosp_risk),
+        is.numeric(hosp_risk) || is.data.frame(hosp_risk) ||
+        rlang::is_lgl_na(hosp_risk),
       "hosp_death_risk must be a single numeric or a data.frame" =
         is.numeric(hosp_death_risk) || is.data.frame(hosp_death_risk) ||
-        is_na(hosp_death_risk),
+        rlang::is_lgl_na(hosp_death_risk),
       "non_hosp_death_risk must be a single numeric or a data.frame" =
         is.numeric(non_hosp_death_risk) || is.data.frame(non_hosp_death_risk) ||
-        is_na(non_hosp_death_risk)
+        rlang::is_lgl_na(non_hosp_death_risk)
     )
     if (is.numeric(hosp_risk)) {
       checkmate::assert_number(hosp_risk, lower = 0, upper = 1)
@@ -281,20 +282,20 @@
 
   msg <- character(0)
   # risks can only be NA when the onset to event is also NA
-  if (!is_na(onset_to_hosp_eval) && is_na(hosp_risk)) {
+  if (!rlang::is_lgl_na(onset_to_hosp_eval) && rlang::is_lgl_na(hosp_risk)) {
     msg <- c(msg, paste(
       "hosp_risk is set to NA but onset_to_hosp is specified \n",
       "set hosp_risk to numeric value"
     ))
   }
-  if (!is_na(onset_to_death_eval)) {
-    if (is_na(hosp_death_risk)) {
+  if (!rlang::is_lgl_na(onset_to_death_eval)) {
+    if (rlang::is_lgl_na(hosp_death_risk)) {
       msg <- c(msg, paste(
         "hosp_death_risk is set to NA but onset_to_death is specified \n",
         "set hosp_death_risk to numeric value"
       ))
     }
-    if (is_na(non_hosp_death_risk)) {
+    if (rlang::is_lgl_na(non_hosp_death_risk)) {
       msg <- c(msg, paste(
         "non_hosp_death_risk is set to NA but onset_to_death is specified \n",
         "set non_hosp_death_risk to numeric value"
@@ -309,33 +310,36 @@
     )
   }
 
-  if (is_na(onset_to_hosp_eval) && checkmate::test_number(hosp_risk) ||
-      is_na(onset_to_hosp_eval) && is.data.frame(hosp_risk)) {
+  if (rlang::is_lgl_na(onset_to_hosp_eval) &&
+      checkmate::test_number(hosp_risk) ||
+      rlang::is_lgl_na(onset_to_hosp_eval) && is.data.frame(hosp_risk)) {
     msg <- c(msg, paste(
       "onset_to_hosp is set to NA but hosp_risk is specified \n",
       "hosp_risk is being ignored, set hosp_risk to NA when",
       "onset_to_hosp is NA"
     ))
   }
-  if (is_na(onset_to_hosp_eval) && checkmate::test_number(hosp_death_risk) ||
-      is_na(onset_to_hosp_eval) && is.data.frame(hosp_death_risk)) {
+  if (rlang::is_lgl_na(onset_to_hosp_eval) &&
+      checkmate::test_number(hosp_death_risk) ||
+      rlang::is_lgl_na(onset_to_hosp_eval) && is.data.frame(hosp_death_risk)) {
     msg <- c(msg, paste(
       "onset_to_hosp is set to NA but hosp_death_risk is specified \n",
       "hosp_death_risk is being ignored, set hosp_death_risk to NA when",
       "onset_to_hosp is NA"
     ))
   }
-  if (is_na(onset_to_death_eval) && checkmate::test_number(hosp_death_risk) ||
-      is_na(onset_to_death_eval) && is.data.frame(hosp_death_risk)) {
+  if (rlang::is_lgl_na(onset_to_death_eval) &&
+      checkmate::test_number(hosp_death_risk) ||
+      rlang::is_lgl_na(onset_to_death_eval) && is.data.frame(hosp_death_risk)) {
     msg <- c(msg, paste(
       "onset_to_death is set to NA but hosp_death_risk is specified \n",
       "hosp_death_risk is being ignored, set hosp_death_risk to NA when",
       "onset_to_death is NA"
     ))
   }
-  if (is_na(onset_to_death_eval) &&
+  if (rlang::is_lgl_na(onset_to_death_eval) &&
       checkmate::test_number(non_hosp_death_risk) ||
-      is_na(onset_to_death_eval) &&
+      rlang::is_lgl_na(onset_to_death_eval) &&
       is.data.frame(non_hosp_death_risk)) {
     msg <- c(msg, paste(
       "onset_to_death is set to NA but non_hosp_death_risk is specified \n",

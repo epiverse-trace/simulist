@@ -88,7 +88,7 @@ NULL
     onset_to_hosp(num_infected)
 
   # hosp_risk is either numeric or <data.frame> or NA
-  if (!is_na(hosp_risk)) {
+  if (!rlang::is_lgl_na(hosp_risk)) {
     if (is.numeric(hosp_risk)) {
       # size is converted to an integer internally in sample()
       pop_sample <- sample(
@@ -138,7 +138,7 @@ NULL
   # assign deaths using population or age-stratified death risk
   # if risk is NA then no deaths are assigned
   apply_death_risk <- function(.data, risk, idx, config) {
-    if (!is_na(risk)) {
+    if (!rlang::is_lgl_na(risk)) {
       # single population risk is a special case of the age-strat risk
       # convert population risk to data.frame to apply the same operations
       if (is.numeric(risk)) {
