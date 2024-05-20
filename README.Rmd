@@ -166,7 +166,7 @@ This project has some overlap with other R packages. Here we list these packages
 
 In some cases the packages are dedicated to simulating line list and other epidemiological data (e.g. {simulist}), in others the line list simulation is one part of a wider R package (e.g. {EpiNow}). 
 
-- [`{LLsim}`](https://github.com/jrcpulliam/LLsim) simulates line list data using a stochastic SIR model with a fixed population with observation and reporting delays.
+- [`{LLsim}`](https://github.com/jrcpulliam/LLsim) simulates line list data using a stochastic SIR model with a fixed population with observation and reporting delays. Line list data is generated in two steps, 1) the SIR model simulates the outbreak (`simpleSim()`), 2) the outbreak data is converted into a line list (`createLineList()`).
 - [`{simulacr}`](https://github.com/reconhub/simulacr) uses a branching process model to simulate cases and contacts for an outbreak. It simulates transmission of infections using other epidemiological R packages (`{epicontacts}` and `{distcrete}`) to parameterise and plot simulated data.
 - [`{epidict}`](https://github.com/R4EPI/epidict) is a package for data dictionaries for outbreaks and surveys. It can generate line list data using an outbreak data dictionary (`gen_data()`). Currently MSF outbreak data dictionaries for Acute Jaundice Syndrome, Cholera, Measles and Meningitis are available.
 - [`{EpiNow}`](https://github.com/epiforecasts/EpiNow) - a now deprecated R package - includes the `simulate_cases()` and `generate_pseudo_linelist()` functions for generating line list data.
