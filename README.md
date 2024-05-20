@@ -66,6 +66,9 @@ contact_distribution <- epiparameter::epidist(
   prob_distribution_params = c(mean = 2)
 )
 #> Citation cannot be created as author, year, journal or title is missing
+```
+
+``` r
 
 # create COVID-19 infectious period
 infect_period <- epiparameter::epidist(
@@ -75,6 +78,9 @@ infect_period <- epiparameter::epidist(
   prob_distribution_params = c(shape = 1, scale = 1)
 )
 #> Citation cannot be created as author, year, journal or title is missing
+```
+
+``` r
 
 # get onset to hospital admission from {epiparameter} database
 onset_to_hosp <- epiparameter::epidist_db(
@@ -89,6 +95,9 @@ onset_to_hosp <- epiparameter::epidist_db(
 #> Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
 #> <https://doi.org/10.3390/jcm9020538>.. 
 #> To retrieve the citation use the 'get_citation' function
+```
+
+``` r
 
 # get onset to death from {epiparameter} database
 onset_to_death <- epiparameter::epidist_db(
@@ -240,6 +249,9 @@ head(outbreak$linelist)
 #> 4         <NA>         2023-01-01        2023-01-03       NA
 #> 5         <NA>         2023-01-02        2023-01-05     25.8
 #> 6         <NA>         2023-01-03        2023-01-06     25.8
+```
+
+``` r
 head(outbreak$contacts)
 #>                from                to age sex date_first_contact
 #> 1  Elshadaii Rivers Gerardo Hernandez  63   m         2022-12-28
@@ -311,7 +323,9 @@ simulation is one part of a wider R package (e.g. {EpiNow}).
 
 - [`{LLsim}`](https://github.com/jrcpulliam/LLsim) simulates line list
   data using a stochastic SIR model with a fixed population with
-  observation and reporting delays.
+  observation and reporting delays. Line list data is generated in two
+  steps, 1) the SIR model simulates the outbreak (`simpleSim()`), 2) the
+  outbreak data is converted into a line list (`createLineList()`).
 - [`{simulacr}`](https://github.com/reconhub/simulacr) uses a branching
   process model to simulate cases and contacts for an outbreak. It
   simulates transmission of infections using other epidemiological R
@@ -339,20 +353,17 @@ simulation is one part of a wider R package (e.g. {EpiNow}).
 Table of line list simulator features
 </summary>
 
-|                                      | {simulist}         | {LLsim}            | {simulacr}         | {epidict}          | {EpiNow}           | generative-nowcasting |
-|--------------------------------------|--------------------|--------------------|--------------------|--------------------|--------------------|-----------------------|
-| Simulates line list                  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:    |
-| Simulates contacts                   | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
-| Parameterised with epi distributions | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :white_check_mark:    |
-| Interoperable with {epicontacts}     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
-| Explicit population size             | :x:                | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
-| R package                            | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                   |
-| Actively maintained\*                | :white_check_mark: | :x:                | :x:                | :x:                | :x:                | :white_check_mark:    |
-| On CRAN                              | :x:                | :x:                | :x:                | :x:                | :x:                | NA                    |
-| Unit testing                         | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :x:                | NA                    |
-
-\* We define actively maintained as the repository having a commit to
-the main branch within the last 12 months
+|                                          | {simulist}         | {LLsim}            | {simulacr}         | {epidict}          | {EpiNow}           | generative-nowcasting |
+|------------------------------------------|--------------------|--------------------|--------------------|--------------------|--------------------|-----------------------|
+| Simulates line list                      | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:    |
+| Simulates contacts                       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
+| Parameterised with epi distributions[^1] | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :white_check_mark:    |
+| Interoperable with {epicontacts}         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
+| Explicit population size[^2]             | :x:                | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                   |
+| R package                                | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:                   |
+| Actively maintained[^3]                  | :white_check_mark: | :x:                | :x:                | :x:                | :x:                | :white_check_mark:    |
+| On CRAN                                  | :x:                | :x:                | :x:                | :x:                | :x:                | NA                    |
+| Unit testing[^4]                         | :white_check_mark: | :white_check_mark: | :x:                | :white_check_mark: | :x:                | NA                    |
 
 </details>
 
@@ -361,3 +372,39 @@ list that should be added, or if a package included in this list has
 been updated and the table should reflect this please contribute by
 making an [issue](https://github.com/epiverse-trace/simulist/issues) or
 a [pull request](https://github.com/epiverse-trace/simulist/pulls).
+
+Some packages are related to {simulist} but do not simulate line list
+data. These include:
+
+- [`{outbreaks}`](https://CRAN.R-project.org/package=outbreaks) an R
+  package containing a library of outbreak data sets, including line
+  list data, for a variety of past and simulated outbreaks, e.g. Ebola
+  and MERS.
+- [`{ringbp}`](https://github.com/epiforecasts/ringbp) an R package to
+  simulate cases using an individual-level transmission model with
+  contact tracing.
+- [`{epichains}`](https://github.com/epiverse-trace/epichains) an R
+  package with functionality to simulate transmission chains using a
+  branching process model.
+
+The {outbreaks} package is useful if data from a past outbreak data or
+generic line list data is required. The {ringbp} and {epichains}
+packages can be used to generate case data over time which can then be
+converted into a line list with some manual post-processing.
+
+[^1]: In this context *Parameterised with epi distributions* means that
+    the simulation uses epidemiological distributions (e.g. serial
+    interval, infectious period) to parameterise the model and the
+    parameters of these epi distributions can be modified by the user.
+
+[^2]: *Explicit population size* refers to the simulation using a finite
+    population size which is controlled by the user for the depletion of
+    susceptible individuals in the model.
+
+[^3]: We define *Actively maintained* as the repository having a commit
+    to the main branch within the last 12 months.
+
+[^4]: *Unit testing* is ticked if the package contains any form of
+    testing, this can use any testing framework, for example
+    [{testthat}](https://CRAN.R-project.org/package=testthat) or
+    [{tinytest}](https://CRAN.R-project.org/package=tinytest).
