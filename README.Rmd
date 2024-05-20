@@ -181,18 +181,21 @@ In some cases the packages are dedicated to simulating line list and other epide
 | -------------- | -------------- | -------------- | -------------- | -------------- | -------------- | -------------- |
 | Simulates line list | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Simulates contacts | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :x: | :x: |
-| Parameterised with epi distributions[^1] | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: |
+| Parameterised with epi distributions[^dist] | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: |
 | Interoperable with {epicontacts} | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :x: | :x: |
-| Explicit population size[^2] | :x: | :white_check_mark: | :white_check_mark: | :x: | :x: | :x: |
+| Explicit population size[^pop] | :x: | :white_check_mark: | :white_check_mark: | :x: | :x: | :x: |
 | R package | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
-| Actively maintained[^3] | :white_check_mark: | :x: | :x: | :x: | :x: | :white_check_mark: |
+| Actively maintained[^active] | :white_check_mark: | :x: | :x: | :x: | :x: | :white_check_mark: |
 | On CRAN | :x: | :x: | :x: | :x: | :x: |  NA |
-| Unit testing[^4] | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :x: | NA |
+| Unit testing[^tests] | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :x: | NA |
 
-[^1] In this context _Parameterised with epi distributions_ means that the simulation uses epidemiological distributions (e.g. serial interval, infectious period) to parameterise the model and the parameters of these epi distributions can be modified by the user.
-[^2] _Explicit population size_ refers to the simulation using a finite population size which is controlled by the user for the depletion of susceptible individuals in the model.
-[^3] We define _Actively maintained_ as the repository having a commit to the main branch within the last 12 months
-[^4] _Unit testing_ is ticked if the package contains any form of testing, this can use any testing framework, for example [{testthat}](https://CRAN.R-project.org/package=testthat) or [{tinytest}](https://CRAN.R-project.org/package=tinytest).
+[^dist]: In this context _Parameterised with epi distributions_ means that the simulation uses epidemiological distributions (e.g. serial interval, infectious period) to parameterise the model and the parameters of these epi distributions can be modified by the user.
+
+[^pop]: _Explicit population size_ refers to the simulation using a finite population size which is controlled by the user for the depletion of susceptible individuals in the model.
+
+[^active]: We define _Actively maintained_ as the repository having a commit to the main branch within the last 12 months.
+
+[^tests]: _Unit testing_ is ticked if the package contains any form of testing, this can use any testing framework, for example [{testthat}](https://CRAN.R-project.org/package=testthat) or [{tinytest}](https://CRAN.R-project.org/package=tinytest).
 
 </details>
 
