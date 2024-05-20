@@ -332,7 +332,7 @@ simulation is one part of a wider R package (e.g. {EpiNow}).
   packages (`{epicontacts}` and `{distcrete}`) to parameterise and plot
   simulated data.
 - [`{epidict}`](https://github.com/R4EPI/epidict) is a package that can
-  be used to simulate outbreak data, including linelists, in a DHIS2
+  be used to simulate outbreak data, including line lists, in a DHIS2
   format, and survey data that mimics the format by Kobo, using the
   function `gen_data()`. In addition, MSF outbreak data are available in
   this package as data dictionaries for Acute Jaundice Syndrome,
