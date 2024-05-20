@@ -331,11 +331,13 @@ simulation is one part of a wider R package (e.g. {EpiNow}).
   simulates transmission of infections using other epidemiological R
   packages (`{epicontacts}` and `{distcrete}`) to parameterise and plot
   simulated data.
-- [`{epidict}`](https://github.com/R4EPI/epidict) is a package for data
-  dictionaries for outbreaks and surveys. It can generate line list data
-  using an outbreak data dictionary (`gen_data()`). Currently MSF
-  outbreak data dictionaries for Acute Jaundice Syndrome, Cholera,
-  Measles and Meningitis are available.
+- [`{epidict}`](https://github.com/R4EPI/epidict) is a package that can
+  be used to simulate outbreak data, including linelists, in a DHIS2
+  format, and survey data that mimics the format by Kobo, using the
+  function `gen_data()`. In addition, MSF outbreak data are available in
+  this package as data dictionaries for Acute Jaundice Syndrome,
+  Cholera, Measles and Meningitis, accessible through the function
+  `msf_dict()`.
 - [`{EpiNow}`](https://github.com/epiforecasts/EpiNow) - a now
   deprecated R package - includes the `simulate_cases()` and
   `generate_pseudo_linelist()` functions for generating line list data.
