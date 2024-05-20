@@ -1,6 +1,6 @@
 pandoc: 3.1.11
 pkgdown: 2.0.9.9000
-pkgdown_sha: 10b398d01ab3171f2a1c8146f9f6d07fd80dbba0
+pkgdown_sha: 5761658b7582743d0962136cd0c1e6e8d42b56d5
 articles:
   age-strat-risks: age-strat-risks.html
   age-struct-pop: age-struct-pop.html
@@ -9,7 +9,7 @@ articles:
   time-varying-cfr: time-varying-cfr.html
   vis-linelist: vis-linelist.html
   wrangling-linelist: wrangling-linelist.html
-last_built: 2024-05-07T11:50Z
+last_built: 2024-05-20T15:15Z
 urls:
   reference: https://epiverse-trace.github.io/simulist/reference
   article: https://epiverse-trace.github.io/simulist/articles
