@@ -1,5 +1,58 @@
 # simulist (development version)
 
+The third release of the _simulist_ R package contains a range of new features, enhancements, documentation and unit tests. 
+
+The headline changes to the package are:
+
+* The simulation is now parameterised with an infectious period rather than a contact interval.
+* Line list data now has `date_outcome` and `outcome` columns which can be parameterised with `onset_to_death` and `onset_to_recovery`.
+* Case fatality risk can vary through time with a customisable user-defined function.
+* Two new vignettes on time-varying case fatality risk, and wrangling line list and contact tracing data.
+
+## New features
+
+### External
+
+* `onset_to_hosp` and `onset_to_death` arguments can now take `NA` as input and will return a column of `NA`s in the line list columns `date_admission` and `date_outcome` (#98).
+
+* An `onset_to_recovery` argument has been added to the simulation functions, `sim_linelist()` and `sim_outbreak()`, and so the recovery date can be explicitly given in the line list data (#99).
+
+* The line list simulation can now use a time-varying case fatality risk. The `create_config()` function now returns a `$time_varying_death_risk` list element, which is `NULL` by default but can take an R function to enable the fatality risk of cases to change over the epidemic (#101).
+
+* A new vignette, `time-varying-cfr.Rmd`, has been added to the package to describe how to use the time-varying case fatality risk functionality and describe a few different time-varying functions that can be used (#101).
+
+* A new vignette, `wrangling-linelist.Rmd`, has been added to go over some of the common post-processing steps that might be required after simulating line list or contact tracing data. This vignette is short and currently only contains a single post-processing example, more examples will be added over time (#104).
+
+* The `README` now has a section on related projects to provide an overview of packages that simulate line list data, or are related to _simulist_. This section contains a disclosure widget containing a feature table providing a high-level description of the features and development status of each related package (#110).
+
+* Updated package architecture diagram in the `design-principles.Rmd` vignette (#113).
+
+### Internal
+
+* The `.add_deaths()` function has been replaced by the `.add_outcome()` function which can simulate death and recovery times (#99).
+
+* `.cross_check_sim_input()` function has been added to the package to ensure user input is coherent across arguments (#98).
+
+* `.anonymise()` function has been added to convert individual's names into alphanumeric codes to anonymise individuals in line list and contact tracing data (#106).
+
+## Breaking changes
+
+* The simulation functions are now parameterised with an infectious period (`infect_period` argument) instead of a contact interval (`contact_interval` argument). This moves away from parameterising the simulation with the time delay between a person becoming infected and having contact with a susceptible individual, and instead uses an infectious period distribution within which contacts are uniformly distributed in time (#96). 
+
+* The simulation functions can now set a maximum as well as a minimum outbreak size. The `min_outbreak_size` argument in the exported `sim_*()` functions has been renamed `outbreak_size` and takes a `numeric` vector of two elements, the minimum and maximum outbreak size. The maximum outbreak size is a soft limit due to the stochastic nature of the branching process model, so epidemiological data returned can contain more cases and/or contacts that the maximum in `outbreak_size` but in these case a warning is returned explaining to the user how many cases/contacts are being returned (#93).
+
+* The `add_ct` argument in `sim_linelist()` and `sim_outbreak()` has been removed. The functionality is now equivalent to `add_ct = TRUE` in the previous _simulist_ version. The `add_ct` argument was removed to move the package to always returning `<data.frame>`s with the same number of columns, for consistency and predictability (#104).
+
+* The `add_names` argument in the simulation functions has been renamed to `anonymise`. The new argument controls whether names are given to each case (`anonymise = FALSE`, default behaviour) or whether fixed length hexadecimal codes are given to each case (`anonymise = TRUE`), this ensures the returned `<data.frame>` has the same number of columns (#106). 
+
+## Bug fixes
+
+* `.sim_network_bp()` now indexes the time vector correctly. Previously a vector indexing bug meant the epidemic would not progress through time (#95).
+
+## Deprecated and defunct
+
+* None
+
 # simulist 0.2.0
 
 Second release of _simulist_, updates the core simulation model and, as a result, the arguments for `sim_*()` functions for simulating line list data and/or contact table data exported from _simulist_ are updated. The internal package architecture is also refactored.
