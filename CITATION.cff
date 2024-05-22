@@ -79,9 +79,10 @@ references:
   year: '2024'
 - type: software
   title: epiparameter
-  abstract: 'epiparameter: Library of Epidemiological Parameters'
+  abstract: 'epiparameter: Library of Epidemiological Parameters with Helper Functions
+    and Classes'
   notes: Imports
-  url: https://epiverse-trace.github.io/epiparameter/
+  url: https://github.com/epiverse-trace/epiparameter/
   authors:
   - family-names: Lambert
     given-names: Joshua W.
@@ -91,12 +92,16 @@ references:
     given-names: Adam
     email: adam.kucharski@lshtm.ac.uk
     orcid: https://orcid.org/0000-0001-8814-9421
+  - family-names: Tamayo
+    given-names: Carmen
+    email: carmen.tamayo-cuartero@lshtm.ac.uk
+    orcid: https://orcid.org/0000-0003-4184-2864
   year: '2024'
 - type: software
   title: randomNames
   abstract: 'randomNames: Generate Random Given and Surnames'
   notes: Imports
-  url: https://CenterForAssessment.github.io/randomNames
+  url: https://centerforassessment.github.io/randomNames/
   repository: https://CRAN.R-project.org/package=randomNames
   authors:
   - family-names: Betebenner
