@@ -6,8 +6,7 @@
   gtag('config', 'G-XZ471458FQ');
 </script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark"><div class="container">
-    <a href="https://epiverse-trace.github.io/" class="external-link"><img src="../logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
     <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9000</small>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +44,47 @@
     </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="simulist-development-version">simulist (development version)<a class="anchor" aria-label="anchor" href="#simulist-development-version"></a></h2>
+<p>The third release of the <em>simulist</em> R package contains a range of new features, enhancements, documentation and unit tests.</p>
+<p>The headline changes to the package are:</p>
+<ul><li>The simulation is now parameterised with an infectious period rather than a contact interval.</li>
+<li>Line list data now has <code>date_outcome</code> and <code>outcome</code> columns which can be parameterised with <code>onset_to_death</code> and <code>onset_to_recovery</code>.</li>
+<li>Case fatality risk can vary through time with a customisable user-defined function.</li>
+<li>Two new vignettes on time-varying case fatality risk, and wrangling line list and contact tracing data.</li>
+</ul><div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<div class="section level4">
+<h4 id="external-development-version">External<a class="anchor" aria-label="anchor" href="#external-development-version"></a></h4>
+<ul><li><p><code>onset_to_hosp</code> and <code>onset_to_death</code> arguments can now take <code>NA</code> as input and will return a column of <code>NA</code>s in the line list columns <code>date_admission</code> and <code>date_outcome</code> (<a href="https://github.com/epiverse-trace/simulist/issues/98" class="external-link">#98</a>).</p></li>
+<li><p>An <code>onset_to_recovery</code> argument has been added to the simulation functions, <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code>, and so the recovery date can be explicitly given in the line list data (<a href="https://github.com/epiverse-trace/simulist/issues/99" class="external-link">#99</a>).</p></li>
+<li><p>The line list simulation can now use a time-varying case fatality risk. The <code><a href="../reference/create_config.html">create_config()</a></code> function now returns a <code>$time_varying_death_risk</code> list element, which is <code>NULL</code> by default but can take an R function to enable the fatality risk of cases to change over the epidemic (<a href="https://github.com/epiverse-trace/simulist/issues/101" class="external-link">#101</a>).</p></li>
+<li><p>A new vignette, <code>time-varying-cfr.Rmd</code>, has been added to the package to describe how to use the time-varying case fatality risk functionality and describe a few different time-varying functions that can be used (<a href="https://github.com/epiverse-trace/simulist/issues/101" class="external-link">#101</a>).</p></li>
+<li><p>A new vignette, <code>wrangling-linelist.Rmd</code>, has been added to go over some of the common post-processing steps that might be required after simulating line list or contact tracing data. This vignette is short and currently only contains a single post-processing example, more examples will be added over time (<a href="https://github.com/epiverse-trace/simulist/issues/104" class="external-link">#104</a>).</p></li>
+<li><p>The <code>README</code> now has a section on related projects to provide an overview of packages that simulate line list data, or are related to <em>simulist</em>. This section contains a disclosure widget containing a feature table providing a high-level description of the features and development status of each related package (<a href="https://github.com/epiverse-trace/simulist/issues/110" class="external-link">#110</a>).</p></li>
+<li><p>Updated package architecture diagram in the <code>design-principles.Rmd</code> vignette (<a href="https://github.com/epiverse-trace/simulist/issues/113" class="external-link">#113</a>).</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="internal-development-version">Internal<a class="anchor" aria-label="anchor" href="#internal-development-version"></a></h4>
+<ul><li><p>The <code>.add_deaths()</code> function has been replaced by the <code><a href="../reference/dot-add_date.html">.add_outcome()</a></code> function which can simulate death and recovery times (<a href="https://github.com/epiverse-trace/simulist/issues/99" class="external-link">#99</a>).</p></li>
+<li><p><code><a href="../reference/dot-cross_check_sim_input.html">.cross_check_sim_input()</a></code> function has been added to the package to ensure user input is coherent across arguments (<a href="https://github.com/epiverse-trace/simulist/issues/98" class="external-link">#98</a>).</p></li>
+<li><p><code><a href="../reference/dot-anonymise.html">.anonymise()</a></code> function has been added to convert individual’s names into alphanumeric codes to anonymise individuals in line list and contact tracing data (<a href="https://github.com/epiverse-trace/simulist/issues/106" class="external-link">#106</a>).</p></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li><p>The simulation functions are now parameterised with an infectious period (<code>infect_period</code> argument) instead of a contact interval (<code>contact_interval</code> argument). This moves away from parameterising the simulation with the time delay between a person becoming infected and having contact with a susceptible individual, and instead uses an infectious period distribution within which contacts are uniformly distributed in time (<a href="https://github.com/epiverse-trace/simulist/issues/96" class="external-link">#96</a>).</p></li>
+<li><p>The simulation functions can now set a maximum as well as a minimum outbreak size. The <code>min_outbreak_size</code> argument in the exported <code>sim_*()</code> functions has been renamed <code>outbreak_size</code> and takes a <code>numeric</code> vector of two elements, the minimum and maximum outbreak size. The maximum outbreak size is a soft limit due to the stochastic nature of the branching process model, so epidemiological data returned can contain more cases and/or contacts that the maximum in <code>outbreak_size</code> but in these case a warning is returned explaining to the user how many cases/contacts are being returned (<a href="https://github.com/epiverse-trace/simulist/issues/93" class="external-link">#93</a>).</p></li>
+<li><p>The <code>add_ct</code> argument in <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> has been removed. The functionality is now equivalent to <code>add_ct = TRUE</code> in the previous <em>simulist</em> version. The <code>add_ct</code> argument was removed to move the package to always returning <code>&lt;data.frame&gt;</code>s with the same number of columns, for consistency and predictability (<a href="https://github.com/epiverse-trace/simulist/issues/104" class="external-link">#104</a>).</p></li>
+<li><p>The <code>add_names</code> argument in the simulation functions has been renamed to <code>anonymise</code>. The new argument controls whether names are given to each case (<code>anonymise = FALSE</code>, default behaviour) or whether fixed length hexadecimal codes are given to each case (<code>anonymise = TRUE</code>), this ensures the returned <code>&lt;data.frame&gt;</code> has the same number of columns (<a href="https://github.com/epiverse-trace/simulist/issues/106" class="external-link">#106</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>
+<code><a href="../reference/dot-sim_network_bp.html">.sim_network_bp()</a></code> now indexes the time vector correctly. Previously a vector indexing bug meant the epidemic would not progress through time (<a href="https://github.com/epiverse-trace/simulist/issues/95" class="external-link">#95</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-and-defunct-development-version">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-development-version"></a></h3>
+<ul><li>None</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="simulist-020">simulist 0.2.0<a class="anchor" aria-label="anchor" href="#simulist-020"></a></h2>
