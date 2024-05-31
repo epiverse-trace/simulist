@@ -7,11 +7,13 @@ cff-version: 1.2.0
 message: 'To cite package "simulist" in publications use:'
 type: software
 license: MIT
-title: 'simulist: Tools to Simulate Line List and Contacts Data'
+title: 'simulist: Simulate Disease Outbreak Line List and Contacts Data'
 version: 0.2.0.9000
 doi: 10.5281/zenodo.10471458
-abstract: Tools to simulate raw case data for an epidemic in the form of line lists
-  and contacts using a branching process.
+abstract: Tools to simulate realistic raw case data for an epidemic in the form of
+  line lists and contacts using a branching process. Simulated outbreaks are parameterised
+  with epidemiological parameters and can have age structured populations, age-stratified
+  hospitalisation and death risk and time-varying case fatality risk.
 authors:
 - family-names: Lambert
   given-names: Joshua W.
@@ -23,7 +25,7 @@ authors:
   orcid: https://orcid.org/0000-0003-4184-2864
 preferred-citation:
   type: manual
-  title: 'simulist: Tools to Simulate Line List and Contacts Data'
+  title: 'simulist: Simulate Disease Outbreak Line List and Contacts Data'
   authors:
   - family-names: Lambert
     given-names: Joshua W.
@@ -79,9 +81,10 @@ references:
   year: '2024'
 - type: software
   title: epiparameter
-  abstract: 'epiparameter: Library of Epidemiological Parameters'
+  abstract: 'epiparameter: Library of Epidemiological Parameters with Helper Functions
+    and Classes'
   notes: Imports
-  url: https://epiverse-trace.github.io/epiparameter/
+  url: https://github.com/epiverse-trace/epiparameter/
   authors:
   - family-names: Lambert
     given-names: Joshua W.
@@ -91,12 +94,16 @@ references:
     given-names: Adam
     email: adam.kucharski@lshtm.ac.uk
     orcid: https://orcid.org/0000-0001-8814-9421
+  - family-names: Tamayo
+    given-names: Carmen
+    email: carmen.tamayo-cuartero@lshtm.ac.uk
+    orcid: https://orcid.org/0000-0003-4184-2864
   year: '2024'
 - type: software
   title: randomNames
   abstract: 'randomNames: Generate Random Given and Surnames'
   notes: Imports
-  url: https://CenterForAssessment.github.io/randomNames
+  url: https://centerforassessment.github.io/randomNames/
   repository: https://CRAN.R-project.org/package=randomNames
   authors:
   - family-names: Betebenner
@@ -162,22 +169,6 @@ references:
     given-names: Davis
     email: davis@posit.co
     orcid: https://orcid.org/0000-0003-4777-038X
-  year: '2024'
-- type: software
-  title: tidyr
-  abstract: 'tidyr: Tidy Messy Data'
-  notes: Suggests
-  url: https://tidyr.tidyverse.org
-  repository: https://CRAN.R-project.org/package=tidyr
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  - family-names: Vaughan
-    given-names: Davis
-    email: davis@posit.co
-  - family-names: Girlich
-    given-names: Maximilian
   year: '2024'
 - type: software
   title: epicontacts
@@ -344,6 +335,22 @@ references:
     email: hadley@posit.co
   year: '2024'
   version: '>= 3.0.0'
+- type: software
+  title: tidyr
+  abstract: 'tidyr: Tidy Messy Data'
+  notes: Suggests
+  url: https://tidyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=tidyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+  - family-names: Girlich
+    given-names: Maximilian
+  year: '2024'
 identifiers:
 - type: url
   value: https://epiverse-trace.github.io/simulist/
