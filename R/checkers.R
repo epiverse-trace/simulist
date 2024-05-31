@@ -9,17 +9,17 @@
 .check_risk_df <- function(x, age_range) {
   # check input
   stopifnot(
-    "column names should be 'age_limit' & 'risk'" =
+    "Column names should be 'age_limit' & 'risk'" =
       setequal(c("age_limit", "risk"), colnames(x)),
-    "minimum age of lowest age group should match lower age range" =
+    "Minimum age of lowest age group should match lower age range" =
       age_range[["lower"]] == min(x$age_limit),
-    "lower bound of oldest age group must be lower than highest age range" =
+    "Lower bound of oldest age group must be lower than highest age range" =
       age_range[["upper"]] > max(x$age_limit),
-    "age limit or risk cannot be NA or NaN" =
+    "Age limit or risk cannot be NA or NaN" =
       !anyNA(x),
-    "risk should be between 0 and 1" =
+    "Risk should be between 0 and 1" =
       min(x$risk) >= 0 && max(x$risk) <= 1,
-    "age limit in risk data frame must be unique" =
+    "Age limit in risk data frame must be unique" =
       anyDuplicated(x$age_limit) == 0
   )
 
@@ -59,13 +59,13 @@
 .check_age_df <- function(x) {
   # check input
   stopifnot(
-    "column names should be 'age_range' & 'proportion'" =
+    "Column names should be 'age_range' & 'proportion'" =
       setequal(c("age_range", "proportion"), colnames(x)),
-    "age range or proportion cannot be NA or NaN" =
+    "Age range or proportion cannot be NA or NaN" =
       !anyNA(x),
-    "proportions of each age bracket should sum to 1" =
+    "Proportions of each age bracket should sum to 1" =
       all.equal(sum(x$proportion), 1),
-    "all age groups should be separated with a '-' (e.g. '1-5')" =
+    "All age groups should be separated with a '-' (e.g. '1-5')" =
       all(grepl(pattern = "^\\d+(-)\\d+$", x = x$age_range)) # nolint nonportable_path_linter
   )
 
@@ -76,11 +76,11 @@
 
   # check age input
   stopifnot(
-    "age groups should be non-overlapping" =
+    "Age groups should be non-overlapping" =
       anyDuplicated(age_groups) == 0,
-    "age groups should be contiguous" =
+    "Age groups should be contiguous" =
       all(min(age_groups):max(age_groups) %in% age_groups),
-    "age groups should include only positive integers" =
+    "Age groups should include only positive integers" =
       checkmate::test_integerish(unlist(age_bounds), lower = 0)
   )
 
