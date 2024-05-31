@@ -1,4 +1,5 @@
-#' Add event date as column to infectious history `<data.frame>`
+#' Add line list event dates and case information as columns to infectious
+#' history `<data.frame>`
 #'
 #' @description These `.add_*()` functions add columns to the `<data.frame>`
 #' output by [.sim_network_bp()]. The `<data.frame>` supplied to `.data` will
@@ -20,7 +21,7 @@
 #' given in the `distribution` argument.
 #' @inheritParams sim_linelist
 #'
-#' @name .add_date
+#' @name .add_cols
 #'
 #' @return A `<data.frame>` with one more column than input into `.data`.
 #' Unless the column heading is already present in which the data is
@@ -29,7 +30,7 @@
 #'
 NULL
 
-#' @name .add_date
+#' @name .add_cols
 .add_date_contact <- function(.data,
                               contact_type = c("first", "last"),
                               distribution = c("pois", "geom"),
@@ -86,7 +87,7 @@ NULL
   .data
 }
 
-#' @name .add_date
+#' @name .add_cols
 .add_hospitalisation <- function(.data,
                                  onset_to_hosp,
                                  hosp_risk) {
@@ -126,7 +127,7 @@ NULL
   .data
 }
 
-#' @name .add_date
+#' @name .add_cols
 .add_outcome <- function(.data,
                          onset_to_death,
                          onset_to_recovery,
@@ -214,27 +215,7 @@ NULL
   .data
 }
 
-#' Add line list information as column to infectious history `<data.frame>`
-#'
-#' @param .data A `<data.frame>` containing the infectious history from a
-#' branching process simulation
-#' @param distribution A `character` with the name of the distribution,
-#' following the base R convention for distribution naming (e.g. Poisson
-#' is `pois`).
-#' @param ... [dots] Extra arguments to be passed to the distribution function
-#' given in the `distribution` argument.
-#' @inheritParams sim_linelist
-#'
-#' @name .add_info
-#'
-#' @return A `<data.frame>` with one more column than input into `.data`.
-#' Unless the column heading is already present in which the data is
-#' overwritten.
-#' @keywords internal
-#'
-NULL
-
-#' @name .add_info
+#' @name .add_cols
 .add_names <- function(.data, anonymise = FALSE) {
   .data$case_name <- .sample_names(.data = .data)
   if (anonymise) {
@@ -256,7 +237,7 @@ NULL
   .data
 }
 
-#' @name .add_info
+#' @name .add_cols
 .add_ct <- function(.data, distribution = c("norm", "lnorm"), ...) {
   distribution <- match.arg(distribution)
 

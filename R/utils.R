@@ -12,7 +12,7 @@
 #' the `.sample_names()` function will need to loop until it has enough
 #' unique names.
 #'
-#' @inheritParams .add_date
+#' @inheritParams .add_cols
 #' @param buffer_factor A single `numeric` determining the level of
 #' oversampling (or buffer) when creating a vector of unique names from
 #' [randomNames()].
