@@ -23,7 +23,7 @@ test_that(".check_risk_df fails as expected", {
   )
   expect_error(
     .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 91)),
-    regexp = "column names should be 'age_limit' & 'risk'"
+    regexp = "Column names should be 'age_limit' & 'risk'"
   )
 
   age_dep_hosp_risk <- data.frame(
@@ -32,7 +32,7 @@ test_that(".check_risk_df fails as expected", {
   )
   expect_error(
     .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
-    regexp = "minimum age of lowest age group should match lower age range"
+    regexp = "Minimum age of lowest age group should match lower age range"
   )
 
   age_dep_hosp_risk <- data.frame(
@@ -42,7 +42,7 @@ test_that(".check_risk_df fails as expected", {
   expect_error(
     .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
     regexp =
-      "lower bound of oldest age group must be lower than highest age range"
+      "Lower bound of oldest age group must be lower than highest age range"
   )
 
   age_dep_hosp_risk <- data.frame(
@@ -51,7 +51,7 @@ test_that(".check_risk_df fails as expected", {
   )
   expect_error(
     .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
-    regexp = "risk should be between 0 and 1"
+    regexp = "Risk should be between 0 and 1"
   )
 
   age_dep_hosp_risk <- data.frame(
@@ -60,7 +60,7 @@ test_that(".check_risk_df fails as expected", {
   )
   expect_error(
     .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
-    regexp = "age limit in risk data frame must be unique"
+    regexp = "Age limit in risk data frame must be unique"
   )
 
   age_dep_hosp_risk <- data.frame(
@@ -69,7 +69,7 @@ test_that(".check_risk_df fails as expected", {
   )
   expect_error(
     .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
-    regexp = "age limit or risk cannot be NA or NaN"
+    regexp = "Age limit or risk cannot be NA or NaN"
   )
 })
 
@@ -93,7 +93,7 @@ test_that(".check_age_df fails as expected", {
   )
   expect_error(
     .check_age_df(age_struct),
-    regexp = "column names should be 'age_range' & 'proportion'"
+    regexp = "Column names should be 'age_range' & 'proportion'"
   )
 
   age_struct <- data.frame(
@@ -103,7 +103,7 @@ test_that(".check_age_df fails as expected", {
   )
   expect_error(
     .check_age_df(age_struct),
-    regexp = "age range or proportion cannot be NA or NaN"
+    regexp = "Age range or proportion cannot be NA or NaN"
   )
 
   age_struct <- data.frame(
@@ -113,7 +113,7 @@ test_that(".check_age_df fails as expected", {
   )
   expect_error(
     .check_age_df(age_struct),
-    regexp = "proportions of each age bracket should sum to 1"
+    regexp = "Proportions of each age bracket should sum to 1"
   )
 
   age_struct <- data.frame(
@@ -123,7 +123,7 @@ test_that(".check_age_df fails as expected", {
   )
   expect_error(
     .check_age_df(age_struct),
-    regexp = "(all age groups should be separated with a)*(-)"
+    regexp = "(All age groups should be separated with a)*(-)"
   )
 
   age_struct <- data.frame(
@@ -133,7 +133,7 @@ test_that(".check_age_df fails as expected", {
   )
   expect_error(
     .check_age_df(age_struct),
-    regexp = "age groups should be contiguous"
+    regexp = "Age groups should be contiguous"
   )
 })
 
