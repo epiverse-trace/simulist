@@ -1,9 +1,16 @@
 #' Add event date as column to infectious history `<data.frame>`
 #'
-#' @description The event date could be first contact, last contact or other.
+#' @description These `.add_*()` functions add columns to the `<data.frame>`
+#' output by [.sim_network_bp()]. The `<data.frame>` supplied to `.data` will
+#' have a different number of columns depending on which function is being
+#' called (i.e. the `<data.frame>` supplied to [.add_hospitalisation()] will
+#' have more columns than the `<data.frame>` supplied to [.add_date_contact()]
+#' as former function is called later in the simulation).
+#'
+#' The event date could be first contact, last contact or other.
 #'
 #' @param .data A `<data.frame>` containing the infectious history from a
-#' branching process simulation.
+#' branching process simulation ([.sim_network_bp()]).
 #' @param contact_type A `character` with the type of contact, either first
 #' contact (`"first"`), or last contact (`"last"`).
 #' @param distribution A `character` with the name of the distribution,

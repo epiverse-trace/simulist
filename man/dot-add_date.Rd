@@ -28,7 +28,7 @@
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
-branching process simulation.}
+branching process simulation (\code{\link[=.sim_network_bp]{.sim_network_bp()}}).}
 
 \item{contact_type}{A \code{character} with the type of contact, either first
 contact (\code{"first"}), or last contact (\code{"last"}).}
@@ -88,6 +88,13 @@ Unless the column heading is already present in which the data is
 overwritten.
 }
 \description{
+These \verb{.add_*()} functions add columns to the \verb{<data.frame>}
+output by \code{\link[=.sim_network_bp]{.sim_network_bp()}}. The \verb{<data.frame>} supplied to \code{.data} will
+have a different number of columns depending on which function is being
+called (i.e. the \verb{<data.frame>} supplied to \code{\link[=.add_hospitalisation]{.add_hospitalisation()}} will
+have more columns than the \verb{<data.frame>} supplied to \code{\link[=.add_date_contact]{.add_date_contact()}}
+as former function is called later in the simulation).
+
 The event date could be first contact, last contact or other.
 }
 \keyword{internal}
