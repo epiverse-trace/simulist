@@ -4,9 +4,9 @@
 \name{simulist-package}
 \alias{simulist}
 \alias{simulist-package}
-\title{simulist: Tools to Simulate Line List and Contacts Data}
+\title{simulist: Simulate Disease Outbreak Line List and Contacts Data}
 \description{
-Tools to simulate raw case data for an epidemic in the form of line lists and contacts using a branching process.
+Tools to simulate realistic raw case data for an epidemic in the form of line lists and contacts using a branching process. Simulated outbreaks are parameterised with epidemiological parameters and can have age structured populations, age-stratified hospitalisation and death risk and time-varying case fatality risk.
 }
 \seealso{
 Useful links:
