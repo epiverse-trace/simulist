@@ -1,3 +1,25 @@
+#' Check if hospitalisation and death risks are correct
+#'
+#' @param x A named list of risks
+#' @param age_range A `numeric` vector with two elements.
+#'
+#' @return A named list of either `numeric` or `<data.frame>` risks.
+#' @keywords internal
+.check_risk <- function(x, age_range) {
+  risks <- lapply(
+    x,
+    function(y, age_range) {
+      if (is.data.frame(y)) {
+        .check_risk_df(y, age_range = age_range)
+      } else {
+        y
+      }
+    },
+    age_range = age_range
+  )
+  risks
+}
+
 #' Check if `<data.frame>` defining age-stratified hospitalisation or death risk
 #' is correct
 #'
