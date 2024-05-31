@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="simulist">
 <title>Age structured population • simulist</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -15,13 +14,14 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Age structured population">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Age structured population">
+<meta name="description" content="simulist">
 <meta property="og:description" content="simulist">
 <meta property="og:image" content="https://epiverse-trace.github.io/simulist/logo.svg">
 <meta name="robots" content="noindex">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
+<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -30,7 +30,8 @@
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
     <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9000</small>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,19 +153,19 @@
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1e4</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id           case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1  Abhisaar Inthavong confirmed   m  63 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  2         Ruby Warren confirmed   f  56 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 3  3        Rayanna Reid confirmed   f   7 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  5    Jasmine Martinez confirmed   f  35 2023-01-02           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 5  6 Alexander Lekarczyk  probable   m  60 2023-01-02           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 6  8 Candelario Casillas suspected   m  38 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt;   id       case_name case_type sex age date_onset date_admission   outcome</span></span>
+<span><span class="co">#&gt; 1  1   Branley Young confirmed   m  63 2023-01-01     2023-02-02      died</span></span>
+<span><span class="co">#&gt; 2  2   Brittany Ryan confirmed   f  56 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 3  3 Zuhra al-Nasser confirmed   f   7 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 4  5   Sarah Johnson  probable   f  35 2023-01-02           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 5  6      Kevin Ward confirmed   m  60 2023-01-02           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 6  8 Rashaad al-Alam suspected   m  38 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     26.1</span></span>
-<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-02        2023-01-03     26.1</span></span>
-<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-04        2023-01-05     26.1</span></span>
-<span><span class="co">#&gt; 4         &lt;NA&gt;         2022-12-30        2023-01-04     26.1</span></span>
-<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-01        2023-01-04       NA</span></span>
+<span><span class="co">#&gt; 1   2023-01-05               &lt;NA&gt;              &lt;NA&gt;     22.4</span></span>
+<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-02        2023-01-03     22.4</span></span>
+<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-04        2023-01-05     22.4</span></span>
+<span><span class="co">#&gt; 4         &lt;NA&gt;         2022-12-30        2023-01-04       NA</span></span>
+<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-01        2023-01-04     22.4</span></span>
 <span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-05        2023-01-07       NA</span></span></code></pre></div>
 </details><p>We can plot the age distribution for individuals in the line list, binned into 5 year categories.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -214,20 +215,20 @@ Figure 1: Age distribution of individuals in a simulated line list sampled from 
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id        case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1    Isabelle Moua  probable   f  82 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  3      Jay Rinhart confirmed   m  41 2023-01-01     2023-01-05 recovered</span></span>
-<span><span class="co">#&gt; 3  4 Nu'maan el-Islam  probable   m  17 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  6     Mikal Elwood confirmed   m  59 2023-01-01     2023-01-03 recovered</span></span>
-<span><span class="co">#&gt; 5  7     Connor Smith confirmed   m  31 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 6  8  Justin Reynolds  probable   m  49 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-01        2023-01-05     26.5</span></span>
-<span><span class="co">#&gt; 3         &lt;NA&gt;         2022-12-31        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 4         &lt;NA&gt;         2023-01-01        2023-01-02     26.5</span></span>
-<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-05        2023-01-05     26.5</span></span>
-<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-01        2023-01-03       NA</span></span></code></pre></div>
+<span><span class="co">#&gt;   id             case_name case_type sex age date_onset date_admission</span></span>
+<span><span class="co">#&gt; 1  1       Shamika Roberts confirmed   f  82 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  3 Christopher Kauffmann confirmed   m  41 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  4             Bottra Wu confirmed   m  17 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  6          Percy Gaffin suspected   m  59 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5  7    Nathan Darmstedter confirmed   m  31 2023-01-01     2023-01-29</span></span>
+<span><span class="co">#&gt; 6  8       Brandon Salazar confirmed   m  49 2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;     outcome date_outcome date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1      died   2023-01-22               &lt;NA&gt;              &lt;NA&gt;     25.5</span></span>
+<span><span class="co">#&gt; 2 recovered         &lt;NA&gt;         2023-01-01        2023-01-05     25.5</span></span>
+<span><span class="co">#&gt; 3 recovered         &lt;NA&gt;         2022-12-31        2023-01-04     25.5</span></span>
+<span><span class="co">#&gt; 4 recovered         &lt;NA&gt;         2023-01-01        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 5 recovered         &lt;NA&gt;         2023-01-05        2023-01-05     25.5</span></span>
+<span><span class="co">#&gt; 6 recovered         &lt;NA&gt;         2023-01-01        2023-01-03     25.5</span></span></code></pre></div>
 </details><p>Again we can plot the age distribution to see the age structure for individuals in the line list. Given the relative uniformity of the age structure specified it is not greatly different from the uniform age structure plotted above, other than having a higher upper age limit. The data is binned into 5 year categories and facetted by sex.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
@@ -285,20 +286,20 @@ Figure 2: Age distribution of line list cases facetted by sex
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1     Destiny Silva confirmed   f   5 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  2   Michael Ferrari  probable   m  43 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 3  4 Theador Culpepper confirmed   m  52 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  5    Rashawn Muller confirmed   m   1 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 5  6    Carlie Quinlan confirmed   f  12 2023-01-04           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 6  8  Noora el-Zakaria confirmed   f  19 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt;   id        case_name case_type sex age date_onset date_admission   outcome</span></span>
+<span><span class="co">#&gt; 1  1    Jasmine Power confirmed   f   5 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 2  2    Gustyn Rangel  probable   m  43 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 3  4 Alexander Squier confirmed   m  52 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 4  5       Jake Davis  probable   m   1 2023-01-01     2023-01-10 recovered</span></span>
+<span><span class="co">#&gt; 5  6  Karlie Sullivan suspected   f  12 2023-01-04           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 6  8 Sylvia Murrietta confirmed   f  19 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     23.8</span></span>
+<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     21.9</span></span>
 <span><span class="co">#&gt; 2         &lt;NA&gt;         2022-12-28        2023-01-02       NA</span></span>
-<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-02        2023-01-04     23.8</span></span>
-<span><span class="co">#&gt; 4         &lt;NA&gt;         2022-12-31        2023-01-06     23.8</span></span>
-<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-05        2023-01-06     23.8</span></span>
-<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-02        2023-01-05     23.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-02        2023-01-04     21.9</span></span>
+<span><span class="co">#&gt; 4         &lt;NA&gt;         2022-12-31        2023-01-06       NA</span></span>
+<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-05        2023-01-06       NA</span></span>
+<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-02        2023-01-05     21.9</span></span></code></pre></div>
 </details><p>A common and useful method for plotting age data is in the form of age pyramids. Here we partition the data by sex and plot the age distribution.</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist_m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">linelist</span>, subset <span class="op">=</span> <span class="va">sex</span> <span class="op">==</span> <span class="st">"m"</span><span class="op">)</span></span>

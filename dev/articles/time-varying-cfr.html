@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="simulist">
 <title>Time-varying case fatality risk • simulist</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -15,13 +14,14 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Time-varying case fatality risk">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Time-varying case fatality risk">
+<meta name="description" content="simulist">
 <meta property="og:description" content="simulist">
 <meta property="og:image" content="https://epiverse-trace.github.io/simulist/logo.svg">
 <meta name="robots" content="noindex">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
+<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -30,7 +30,8 @@
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
     <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9000</small>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -182,20 +183,20 @@
 <span></span>
 <span><span class="co"># first 6 rows of linelist</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id        case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1 Brandon Hairston  probable   m  60 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  2     Grisel Price confirmed   f  54 2023-01-04           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 3  4    Alam Terrones  probable   m  12 2023-01-05           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  6 Naadir al-Hallal suspected   m  45 2023-01-07           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 5  7      Tiana Kirby confirmed   f  11 2023-01-09     2023-01-09 recovered</span></span>
-<span><span class="co">#&gt; 6  8        Jacob Dai confirmed   m  36 2023-01-08           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt;   id       case_name case_type sex age date_onset date_admission   outcome</span></span>
+<span><span class="co">#&gt; 1  1  Skyler Acharya  probable   m  60 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 2  2 Pritishri Clark confirmed   f  54 2023-01-04           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 3  4    John Padilla confirmed   m  12 2023-01-05           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 4  6 Courtney Bryant  probable   m  45 2023-01-07           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 5  7      Lydia Mose suspected   f  11 2023-01-09     2023-01-18 recovered</span></span>
+<span><span class="co">#&gt; 6  8 Muammar al-Bari  probable   m  36 2023-01-08     2023-01-12 recovered</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
 <span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-03        2023-01-06     25.7</span></span>
-<span><span class="co">#&gt; 3         &lt;NA&gt;         2022-12-30        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-03        2023-01-06     24.9</span></span>
+<span><span class="co">#&gt; 3         &lt;NA&gt;         2022-12-30        2023-01-02     24.9</span></span>
 <span><span class="co">#&gt; 4         &lt;NA&gt;         2023-01-03        2023-01-06       NA</span></span>
-<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-01        2023-01-05     25.7</span></span>
-<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-01        2023-01-05     25.7</span></span></code></pre></div>
+<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-01        2023-01-05       NA</span></span>
+<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-01        2023-01-05       NA</span></span></code></pre></div>
 </details><p>To visualise the incidence of cases and deaths over time we will use the <a href="https://www.reconverse.org/incidence2/" class="external-link">{incidence2} R package</a>.</p>
 <div class="alert alert-info">
 <p>For more information on using {incidence2} to plot line list data see the <a href="vis-linelist.html">Visualising simulated data</a> vignette.</p>
@@ -250,20 +251,20 @@ Figure 1: Daily incidence of cases from symptom onset and incidence of deaths. C
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_admission outcome</span></span>
-<span><span class="co">#&gt; 1  1  Taiseer el-Azimi suspected   m  42 2023-01-01           &lt;NA&gt;    died</span></span>
-<span><span class="co">#&gt; 2  2   Nathaniel Brown suspected   m  25 2023-01-06           &lt;NA&gt;    died</span></span>
-<span><span class="co">#&gt; 3  4       Sarah Walls  probable   f  64 2023-01-07     2023-01-07    died</span></span>
-<span><span class="co">#&gt; 4  6       Marina Bean suspected   f  46 2023-01-09           &lt;NA&gt;    died</span></span>
-<span><span class="co">#&gt; 5  8   Shahada Buckner  probable   f  78 2023-01-08           &lt;NA&gt;    died</span></span>
-<span><span class="co">#&gt; 6 10 Shafaaa al-Abbasi  probable   f  13 2023-01-15           &lt;NA&gt;    died</span></span>
+<span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_admission outcome</span></span>
+<span><span class="co">#&gt; 1  1        Cody Farley  probable   m  42 2023-01-01           &lt;NA&gt;    died</span></span>
+<span><span class="co">#&gt; 2  2      Samuel Wenzel  probable   m  25 2023-01-06           &lt;NA&gt;    died</span></span>
+<span><span class="co">#&gt; 3  4       Haley Hosack confirmed   f  64 2023-01-07           &lt;NA&gt;    died</span></span>
+<span><span class="co">#&gt; 4  6 Santeijha Pisarski  probable   f  46 2023-01-09           &lt;NA&gt;    died</span></span>
+<span><span class="co">#&gt; 5  8  Kulthum al-Pashia suspected   f  78 2023-01-08           &lt;NA&gt;    died</span></span>
+<span><span class="co">#&gt; 6 10  Hadiyya el-Ghazal suspected   f  13 2023-01-15           &lt;NA&gt;    died</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1   2023-02-03               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2   2023-01-26         2022-12-29        2023-01-03       NA</span></span>
-<span><span class="co">#&gt; 3   2023-01-21         2023-01-05        2023-01-07       NA</span></span>
-<span><span class="co">#&gt; 4   2023-01-25         2023-01-09        2023-01-11       NA</span></span>
-<span><span class="co">#&gt; 5   2023-01-20         2023-01-08        2023-01-09       NA</span></span>
-<span><span class="co">#&gt; 6   2023-02-17         2023-01-07        2023-01-11       NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   2023-01-13               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
+<span><span class="co">#&gt; 2   2023-01-29         2022-12-29        2023-01-03       NA</span></span>
+<span><span class="co">#&gt; 3   2023-01-15         2023-01-05        2023-01-07     25.1</span></span>
+<span><span class="co">#&gt; 4   2023-01-21         2023-01-09        2023-01-11       NA</span></span>
+<span><span class="co">#&gt; 5   2023-01-29         2023-01-08        2023-01-09       NA</span></span>
+<span><span class="co">#&gt; 6   2023-01-29         2023-01-07        2023-01-11       NA</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span></span>
@@ -339,20 +340,20 @@ Figure 3: The time-varying hospitalised case fatality risk function (<code>confi
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1   Shirlya Whitney confirmed   f  20 2023-01-01           &lt;NA&gt;      died</span></span>
-<span><span class="co">#&gt; 2  2     Sahl al-Hasen confirmed   m  59 2023-01-06           &lt;NA&gt;      died</span></span>
-<span><span class="co">#&gt; 3  3        Ace Truong confirmed   m   2 2023-01-02           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  6 Shawqi al-Abdella suspected   m   5 2023-01-07           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 5  8 Taahir el-Bagheri confirmed   m  22 2023-01-08     2023-01-08 recovered</span></span>
-<span><span class="co">#&gt; 6 11    Lucas Noterman suspected   m  56 2023-01-04     2023-01-04 recovered</span></span>
+<span><span class="co">#&gt;   id        case_name case_type sex age date_onset date_admission   outcome</span></span>
+<span><span class="co">#&gt; 1  1 Javon Habteyesus confirmed   m  82 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 2  2  Cory Harrington confirmed   m  81 2023-01-05           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 3  4      Jacob Lerum  probable   m  13 2023-01-15           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt; 4  5    Abhishekha Do confirmed   m  55 2023-01-15           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 5  7   Matthew Duenas confirmed   m  65 2023-01-15           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 6  8   Aseel el-Yamin confirmed   m  82 2023-01-20     2023-01-21 recovered</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1   2023-01-18               &lt;NA&gt;              &lt;NA&gt;     24.4</span></span>
-<span><span class="co">#&gt; 2   2023-01-12         2023-01-02        2023-01-05     24.4</span></span>
-<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-03        2023-01-06     24.4</span></span>
-<span><span class="co">#&gt; 4         &lt;NA&gt;         2023-01-04        2023-01-08       NA</span></span>
-<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-05        2023-01-07     24.4</span></span>
-<span><span class="co">#&gt; 6         &lt;NA&gt;         2022-12-27        2023-01-02       NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.3</span></span>
+<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-01        2023-01-04     25.3</span></span>
+<span><span class="co">#&gt; 3   2023-02-12         2023-01-07        2023-01-07       NA</span></span>
+<span><span class="co">#&gt; 4         &lt;NA&gt;         2023-01-14        2023-01-16     25.3</span></span>
+<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-16        2023-01-17     25.3</span></span>
+<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-16        2023-01-16     25.3</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span></span>
@@ -419,23 +420,26 @@ Figure 5: The time-varying case fatality risk function (<code>config$time_varyin
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
 <span>  config <span class="op">=</span> <span class="va">config</span></span>
 <span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id       case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1  Scottie Earvin  probable   m   5 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  2   Matthew Chham  probable   m  19 2023-01-05           &lt;NA&gt;      died</span></span>
-<span><span class="co">#&gt; 3  4 Samantha Pulido suspected   f  44 2023-01-07           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  5      Toni Vigil confirmed   f  72 2023-01-11     2023-01-24      died</span></span>
-<span><span class="co">#&gt; 5  6  Amaan al-Saleh  probable   m  69 2023-01-10           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 6  8 Yahaira Pedraza suspected   f  16 2023-01-09           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2   2023-01-19         2022-12-30        2023-01-05       NA</span></span>
-<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-05        2023-01-07       NA</span></span>
-<span><span class="co">#&gt; 4   2023-01-24         2023-01-10        2023-01-12     25.2</span></span>
-<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-10        2023-01-11       NA</span></span>
-<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-05        2023-01-07       NA</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Number of cases exceeds maximum outbreak size. </span></span>
+<span><span class="co">#&gt; Returning data early with 1024 cases and 1986 total contacts (including cases).</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_admission   outcome</span></span>
+<span><span class="co">#&gt; 1  1 Genesis Alemseged confirmed   f  72 2023-01-01           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt; 2  2  Ghaali el-Maroun  probable   m  36 2023-01-02           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 3  3    Cameron Prieto confirmed   m   3 2023-01-02           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt; 4  4        Aaron Damm confirmed   m  35 2023-01-03           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt; 5  5    Chase Ebberson confirmed   m  19 2023-01-01           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt; 6  6    Andro Kundalia confirmed   m  90 2023-01-01           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1   2023-01-21               &lt;NA&gt;              &lt;NA&gt;     24.8</span></span>
+<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-04        2023-01-07       NA</span></span>
+<span><span class="co">#&gt; 3   2023-01-25         2022-12-29        2023-01-04     24.8</span></span>
+<span><span class="co">#&gt; 4   2023-02-05         2023-01-01        2023-01-06     24.8</span></span>
+<span><span class="co">#&gt; 5   2023-01-20         2022-12-31        2023-01-05     24.8</span></span>
+<span><span class="co">#&gt; 6   2023-02-09         2023-01-03        2023-01-06     24.8</span></span></code></pre></div>
+</details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span></span>
 <span>    names_from <span class="op">=</span> <span class="va">outcome</span>,</span>
@@ -445,7 +449,7 @@ Figure 5: The time-varying case fatality risk function (<code>config$time_varyin
 <span>    date_death <span class="op">=</span> <span class="va">died</span>,</span>
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-</details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+</details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -463,13 +467,13 @@ Figure 6: Daily incidence of cases from symptom onset and incidence of deaths. T
 </p>
 </div>
 <p>The same stepwise function can also be used to specify time windows were the risk of death is reduced. Here we specify the <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code> in the first 50 days of the epidemic, then between day 50 and day 100 the risk is reduced by half, and then from day 100 onwards the risk goes back to the rates specified by <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code>.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_config.html">create_config</a></span><span class="op">(</span></span>
 <span>  time_varying_death_risk <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">risk</span>, <span class="va">time</span><span class="op">)</span> <span class="op">{</span></span>
 <span>   <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">time</span> <span class="op">&gt;</span> <span class="fl">50</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">100</span>, yes <span class="op">=</span> <span class="va">risk</span> <span class="op">*</span> <span class="fl">0.5</span>, no <span class="op">=</span> <span class="va">risk</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+</details><details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stepwise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  time <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,</span>
 <span>  value <span class="op">=</span> <span class="va">config</span><span class="op">$</span><span class="fu">time_varying_death_risk</span><span class="op">(</span>risk <span class="op">=</span> <span class="fl">0.9</span>, time <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span><span class="op">)</span></span>
@@ -486,7 +490,7 @@ Figure 7: The time-varying case fatality risk function (<code>config$time_varyin
 </p>
 </div>
 <p>Simulating with the stepwise time-varying case fatality risk:</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
@@ -498,25 +502,22 @@ Figure 7: The time-varying case fatality risk function (<code>config$time_varyin
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
 <span>  config <span class="op">=</span> <span class="va">config</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Number of cases exceeds maximum outbreak size. </span></span>
-<span><span class="co">#&gt; Returning data early with 1009 cases and 1973 total contacts (including cases).</span></span></code></pre></div>
-</details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_admission outcome</span></span>
-<span><span class="co">#&gt; 1  1    Bailey Clutter  probable   f  67 2023-01-01           &lt;NA&gt;    died</span></span>
-<span><span class="co">#&gt; 2  2 Sebastian Pacheco  probable   m  48 2023-01-02           &lt;NA&gt;    died</span></span>
-<span><span class="co">#&gt; 3  3    Hamad al-Zafar suspected   m   4 2023-01-07           &lt;NA&gt;    died</span></span>
-<span><span class="co">#&gt; 4  6  Shelby Dalrymple suspected   f  43 2023-01-02     2023-01-05    died</span></span>
-<span><span class="co">#&gt; 5  7 Atienne Delacerda confirmed   f  31 2023-01-10           &lt;NA&gt;    died</span></span>
-<span><span class="co">#&gt; 6  8     Justina Zhang confirmed   f  77 2023-01-08           &lt;NA&gt;    died</span></span>
+<span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_admission   outcome</span></span>
+<span><span class="co">#&gt; 1  1     Charles Person suspected   m  79 2023-01-01           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt; 2  2       Awn al-Malik suspected   m  35 2023-01-02           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 3  4   Da'Quasha Mberwa confirmed   f  84 2023-01-03           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt; 4  5   Haarith al-Zadeh suspected   m  78 2023-01-16     2023-01-17      died</span></span>
+<span><span class="co">#&gt; 5  7 Kareema el-Rahmani  probable   f  90 2023-01-04     2023-01-12      died</span></span>
+<span><span class="co">#&gt; 6 10    Natasha Bhagria suspected   f  83 2023-01-19           &lt;NA&gt;      died</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1   2023-01-10               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2   2023-01-12         2023-01-01        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 3   2023-01-28         2023-01-02        2023-01-03       NA</span></span>
-<span><span class="co">#&gt; 4   2023-01-08         2022-12-31        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 5   2023-01-23         2023-01-11        2023-01-12     25.6</span></span>
-<span><span class="co">#&gt; 6   2023-01-27         2023-01-06        2023-01-10     25.6</span></span></code></pre></div>
+<span><span class="co">#&gt; 1   2023-02-19               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
+<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-06        2023-01-07       NA</span></span>
+<span><span class="co">#&gt; 3   2023-02-08         2022-12-30        2023-01-02     27.2</span></span>
+<span><span class="co">#&gt; 4   2023-02-11         2023-01-03        2023-01-05       NA</span></span>
+<span><span class="co">#&gt; 5   2023-01-22         2023-01-08        2023-01-09       NA</span></span>
+<span><span class="co">#&gt; 6   2023-02-08         2023-01-14        2023-01-18       NA</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span></span>
