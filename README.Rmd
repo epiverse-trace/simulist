@@ -170,6 +170,12 @@ By contributing to this project, you agree to abide by its terms.
 citation("simulist")
 ```
 
+## Complimentary R packages
+
+:package: :left_right_arrow: :package:  [{epiparameter}](https://epiverse-trace.github.io/epiparameter/) <br>
+:package: :left_right_arrow: :package: [{epicontacts}](https://www.repidemicsconsortium.org/epicontacts/) <br>
+:package: :left_right_arrow: :package: [{incidence2}](https://www.reconverse.org/incidence2/) <br>
+
 ## Related projects
 
 This project has some overlap with other R packages. Here we list these packages and provide a table of features and attributes that are present for each package to help decide which package is appropriate for each use-case.
