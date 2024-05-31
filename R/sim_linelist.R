@@ -223,24 +223,18 @@ sim_linelist <- function(contact_distribution,
     names(population_age) <- c("lower", "upper")
     age_range <- population_age
   }
-  if (is.data.frame(hosp_risk)) {
-    hosp_risk <- .check_risk_df(
-      hosp_risk,
-      age_range = age_range
-    )
-  }
-  if (is.data.frame(hosp_death_risk)) {
-    hosp_death_risk <- .check_risk_df(
-      hosp_death_risk,
-      age_range = age_range
-    )
-  }
-  if (is.data.frame(non_hosp_death_risk)) {
-    non_hosp_death_risk <- .check_risk_df(
-      non_hosp_death_risk,
-      age_range = age_range
-    )
-  }
+
+  risks <- .check_risk(
+    list(
+      hosp_risk = hosp_risk,
+      hosp_death_risk =  hosp_death_risk,
+      non_hosp_death_risk = non_hosp_death_risk
+    ),
+    age_range = age_range
+  )
+  hosp_risk <- risks$hosp_risk
+  hosp_death_risk <- risks$hosp_death_risk
+  non_hosp_death_risk <- risks$non_hosp_death_risk
 
   linelist <- .sim_internal(
     sim_type = "linelist",
