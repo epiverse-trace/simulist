@@ -74,8 +74,10 @@ NULL
   )
 
   if (contact_type == "first") {
+    # add date of first contact with infector
     .data$date_first_contact <- .data$date_last_contact - contact_delay
   } else {
+    # add date of last contact with infector
     .data$date_last_contact <- .data$infector_time + contact_delay +
       outbreak_start_date
   }
