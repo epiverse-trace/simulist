@@ -32,6 +32,16 @@ knitr::opts_chunk$set(
 
 `{simulist}` is developed at the [Centre for the Mathematical Modelling of Infectious Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases) at the [London School of Hygiene and Tropical Medicine](https://www.lshtm.ac.uk/) as part of [Epiverse-TRACE](https://data.org/initiatives/epiverse/).
 
+## Key features
+
+`{simulist}` allows you to simulate realistic line list and contact tracing data, with:
+
+:hourglass_flowing_sand: Parameterised epidemiological delay distributions <br>
+:hospital: Population-wide or age-stratified hospitalisation and death risks <br>
+:bar_chart: Uniform or age-structured populations <br>
+:chart_with_upwards_trend: Constant or time-varying case fatality risk <br>
+:clipboard: Customisable probability of case types and contact tracing follow-up <br>
+
 ## Installation
 
 You can install the development version of `{simulist}` from
