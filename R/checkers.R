@@ -66,7 +66,7 @@
     "proportions of each age bracket should sum to 1" =
       all.equal(sum(x$proportion), 1),
     "all age groups should be separated with a '-' (e.g. '1-5')" =
-      all(grepl(pattern = "^\\d+(-)\\d+$", x = x$age_range))
+      all(grepl(pattern = "^\\d+(-)\\d+$", x = x$age_range)) # nolint nonportable_path_linter
   )
 
   # extract bounds and groups
