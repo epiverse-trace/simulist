@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
-branching process simulation.}
+branching process simulation (\code{\link[=.sim_network_bp]{.sim_network_bp()}}).}
 
 \item{buffer_factor}{A single \code{numeric} determining the level of
 oversampling (or buffer) when creating a vector of unique names from
