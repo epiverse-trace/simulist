@@ -230,7 +230,7 @@ test_that(".add_outcome works as expected with age-strat risks", {
   linelist <- .add_outcome(
     .data = ll,
     onset_to_death = onset_to_death,
-    onset_to_recover = onset_to_recovery,
+    onset_to_recovery = onset_to_recovery,
     hosp_death_risk = age_dep_hosp_death_risk,
     non_hosp_death_risk = age_dep_non_hosp_death_risk,
     config = create_config()
