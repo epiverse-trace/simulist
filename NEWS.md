@@ -25,6 +25,8 @@ The headline changes to the package are:
 
 * The `README` now has a section on related projects to provide an overview of packages that simulate line list data, or are related to _simulist_. This section contains a disclosure widget containing a feature table providing a high-level description of the features and development status of each related package (#110).
 
+* A Key features section and Complimentary R packages section has been added to the `README` (#134).
+
 * Updated package architecture diagram in the `design-principles.Rmd` vignette (#113).
 
 ### Internal
