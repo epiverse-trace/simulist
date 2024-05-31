@@ -283,7 +283,7 @@
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in .check_risk_df(hosp_risk, age_range = age_range): lower bound of oldest age group must be lower than highest age range</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in .check_risk_df(hosp_risk, age_range = age_range): Lower bound of oldest age group must be lower than highest age range</span></span></code></pre></div>
 </details><p>In order to make this code run with the age-stratified hospitalisation risk given, the <code>population_age</code> can be adjusted. Here the oldest age bracket is now 95 to 100 (<code>[95, 100]</code>).</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
