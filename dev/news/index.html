@@ -65,7 +65,7 @@
 </ul></div>
 <div class="section level4">
 <h4 id="internal-development-version">Internal<a class="anchor" aria-label="anchor" href="#internal-development-version"></a></h4>
-<ul><li><p>The <code>.add_deaths()</code> function has been replaced by the <code><a href="../reference/dot-add_date.html">.add_outcome()</a></code> function which can simulate death and recovery times (<a href="https://github.com/epiverse-trace/simulist/issues/99" class="external-link">#99</a>).</p></li>
+<ul><li><p>The <code>.add_deaths()</code> function has been replaced by the <code><a href="../reference/dot-add_cols.html">.add_outcome()</a></code> function which can simulate death and recovery times (<a href="https://github.com/epiverse-trace/simulist/issues/99" class="external-link">#99</a>).</p></li>
 <li><p><code><a href="../reference/dot-cross_check_sim_input.html">.cross_check_sim_input()</a></code> function has been added to the package to ensure user input is coherent across arguments (<a href="https://github.com/epiverse-trace/simulist/issues/98" class="external-link">#98</a>).</p></li>
 <li><p><code><a href="../reference/dot-anonymise.html">.anonymise()</a></code> function has been added to convert individual’s names into alphanumeric codes to anonymise individuals in line list and contact tracing data (<a href="https://github.com/epiverse-trace/simulist/issues/106" class="external-link">#106</a>).</p></li>
 </ul></div>
@@ -109,7 +109,7 @@
 <li>Refactor of internal simulation architecture replaced <code>.sim_bp_linelist()</code>, <code>.sim_clinical_linelist()</code> and <code>.sim_contacts_tbl()</code> with <code><a href="../reference/dot-sim_internal.html">.sim_internal()</a></code> (<a href="https://github.com/epiverse-trace/simulist/issues/66" class="external-link">#66</a>).</li>
 <li>The <code>sim_utils.R</code> file was renamed to <code>utils.R</code> (<a href="https://github.com/epiverse-trace/simulist/issues/66" class="external-link">#66</a>) and the empty <code>create_linelist.R</code> file was removed (<a href="https://github.com/epiverse-trace/simulist/issues/72" class="external-link">#72</a>).</li>
 <li>
-<code><a href="../reference/dot-add_date.html">.add_date_contact()</a></code> argument <code>outbreak_start_date</code> is now <code>NULL</code> by default instead of missing (<a href="https://github.com/epiverse-trace/simulist/issues/82" class="external-link">#82</a>).</li>
+<code><a href="../reference/dot-add_cols.html">.add_date_contact()</a></code> argument <code>outbreak_start_date</code> is now <code>NULL</code> by default instead of missing (<a href="https://github.com/epiverse-trace/simulist/issues/82" class="external-link">#82</a>).</li>
 <li>Regression tests of <code>sim_*()</code> functions now use <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">snapshot testing</a> for more detailed data checking (<a href="https://github.com/epiverse-trace/simulist/issues/65" class="external-link">#65</a>).</li>
 <li>Internal testing data (<code>testdata</code>) files have been updated, as has the <code>testdata/README.md</code> with instructions (<a href="https://github.com/epiverse-trace/simulist/issues/64" class="external-link">#64</a>).</li>
 </ul></div>
