@@ -1,4 +1,4 @@
-# simulist (development version)
+# simulist 0.3.0
 
 The third release of the _simulist_ R package contains a range of new features, enhancements, documentation and unit tests. 
 
