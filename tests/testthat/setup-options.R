@@ -3,6 +3,5 @@
 options(
   warnPartialMatchAttr = TRUE,
   warnPartialMatchDollar = TRUE,
-  # https://github.com/CenterForAssessment/randomNames/pull/82
-  warnPartialMatchArgs = FALSE # temp FALSE due to PartialMatchArgs in import
+  warnPartialMatchArgs = TRUE
 )
