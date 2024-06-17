@@ -136,7 +136,7 @@
 #' `function` ([closure]), or for onset-to-event distributions `NA`.
 #'
 #' @param x A named list containing either `<epidist>`, `function` or `NA`.
-#' Named list elements are: `"contact_distribution"`, `"infect_period"`,
+#' Named list elements are: `"contact_distribution"`, `"infectious_period"`,
 #' `"onset_to_hosp"`, `"onset_to_death"`, `"onset_to_recovery".`
 #'
 #' @return A list of `function`s.
@@ -145,7 +145,7 @@ as_function <- function(x) {
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
       inherits(x$contact_distribution, c("function", "epidist")) &&
-      inherits(x$infect_period, c("function", "epidist")),
+      inherits(x$infectious_period, c("function", "epidist")),
     "onset_to_hosp, onset_to_death and onset_to_recovery need to be a function,
     <epidist> or NA" =
       inherits(x$onset_to_hosp, c("function", "epidist")) ||
@@ -156,7 +156,7 @@ as_function <- function(x) {
   contact_distribution <- as.function(
     x$contact_distribution, func_type = "density"
   )
-  infect_period <- as.function(x$infect_period, func_type = "generate")
+  infectious_period <- as.function(x$infectious_period, func_type = "generate")
   if (rlang::is_lgl_na(x$onset_to_hosp)) {
     # function to generate NA instead of hospitalisation times
     onset_to_hosp <- function(x) rep(NA, times = x)
@@ -181,7 +181,7 @@ as_function <- function(x) {
   # return list of functions
   list(
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
+    infectious_period = infectious_period,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery
@@ -195,14 +195,14 @@ as_function <- function(x) {
 #' @return A single `numeric`.
 #' @keywords internal
 #' @noRd
-.sample_infect_period <- function(infect_period) {
-  contact_infect_period <- infect_period(1)
-  if (contact_infect_period < 0) {
+.sample_infectious_period <- function(infectious_period) {
+  contact_infectious_period <- infectious_period(1)
+  if (contact_infectious_period < 0) {
     stop(
       "Negative infectious period sampled. ",
       "The infectious period must be strictly positive.",
       call. = FALSE
     )
   }
-  contact_infect_period
+  contact_infectious_period
 }

@@ -6,7 +6,7 @@ suppressMessages({
     prob_distribution_params = c(mean = 2)
   )
 
-  infect_period <- epiparameter::epidist(
+  infectious_period <- epiparameter::epidist(
     disease = "COVID-19",
     epi_dist = "infectious period",
     prob_distribution = "gamma",
@@ -19,8 +19,8 @@ test_that("sim_contacts works as expected", {
   expect_snapshot(
     sim_contacts(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5
+      infectious_period = infectious_period,
+      prob_infection = 0.5
     )
   )
 })
@@ -30,8 +30,8 @@ test_that("sim_contacts works as expected with modified config", {
   expect_snapshot(
     sim_contacts(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       config = create_config(
         last_contact_distribution = "geom",
         last_contact_distribution_params = c(prob = 0.5)
@@ -45,8 +45,8 @@ test_that("sim_contacts works as expected with modified config parameters", {
   expect_snapshot(
     sim_contacts(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       config = create_config(
         last_contact_distribution_params = c(lambda = 5)
       )
@@ -58,8 +58,8 @@ test_that("sim_contacts fails as expected with modified config", {
   expect_error(
     sim_contacts(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       config = create_config(
         last_contact_distribution = "geom"
       )
@@ -72,8 +72,8 @@ test_that("sim_contacts fails as expected with empty config", {
   expect_error(
     sim_contacts(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       config = list()
     ),
     regexp = "Network incorrectly specified, check config"
@@ -90,8 +90,8 @@ test_that("sim_contacts works as expected with age structure", {
   expect_snapshot(
     sim_contacts(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       population_age = age_struct
     )
   )

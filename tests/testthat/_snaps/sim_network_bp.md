@@ -1,8 +1,8 @@
 # .sim_network_bp works as expected
 
     Code
-      .sim_network_bp(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, max_outbreak_size = 10000, config = create_config())
+      .sim_network_bp(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, max_outbreak_size = 10000, config = create_config())
     Output
          id ancestor generation infected     time
       1   1       NA          1 infected 0.000000
@@ -35,8 +35,8 @@
 # .sim_network_bp works as expected with no contacts
 
     Code
-      .sim_network_bp(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, max_outbreak_size = 10000, config = create_config())
+      .sim_network_bp(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, max_outbreak_size = 10000, config = create_config())
     Output
         id ancestor generation infected time
       1  1       NA          1 infected    0
@@ -44,8 +44,9 @@
 # .sim_network_bp works as expected with unadjusted network
 
     Code
-      .sim_network_bp(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, max_outbreak_size = 10000, config = create_config(network = "unadjusted"))
+      .sim_network_bp(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, max_outbreak_size = 10000, config = create_config(
+          network = "unadjusted"))
     Output
          id ancestor generation infected     time
       1   1       NA          1 infected 0.000000

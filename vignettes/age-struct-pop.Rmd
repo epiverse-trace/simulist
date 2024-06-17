@@ -44,7 +44,7 @@ contact_distribution <- epidist(
   prob_distribution_params = c(mean = 2)
 )
 
-infect_period <- epidist(
+infectious_period <- epidist(
   disease = "COVID-19",
   epi_dist = "infectious period",
   prob_distribution = "gamma",
@@ -83,8 +83,8 @@ All simulations in this vignette condition the simulation to have a minimum outb
 ```{r sim-linelist-age-range}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.45,
+  infectious_period = infectious_period,
+  prob_infection = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   population_age = c(5, 75),
@@ -128,8 +128,8 @@ age_struct
 ```{r, sim-age-struct-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.45,
+  infectious_period = infectious_period,
+  prob_infection = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   population_age = age_struct,
@@ -181,8 +181,8 @@ age_struct
 ```{r, sim-age-struct-linelist-young}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.45,
+  infectious_period = infectious_period,
+  prob_infection = 0.45,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   population_age = age_struct,

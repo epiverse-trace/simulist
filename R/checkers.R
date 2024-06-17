@@ -115,8 +115,8 @@
 #' @keywords internal
 .check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"), # nolint cyclocomp_linter
                              contact_distribution,
-                             infect_period,
-                             prob_infect,
+                             infectious_period,
+                             prob_infection,
                              outbreak_start_date,
                              outbreak_size,
                              onset_to_hosp = NULL,
@@ -131,9 +131,9 @@
                              population_age = NULL) {
   sim_type <- match.arg(sim_type)
 
-  checkmate::assert_number(prob_infect, lower = 0, upper = 1)
+  checkmate::assert_number(prob_infection, lower = 0, upper = 1)
   .check_func_req_args(contact_distribution, func_name = "contact_distribution")
-  .check_func_req_args(infect_period, func_name = "infect_period")
+  .check_func_req_args(infectious_period, func_name = "infectious_period")
   checkmate::assert_date(outbreak_start_date)
   checkmate::assert_integerish(outbreak_size, lower = 1, len = 2)
 

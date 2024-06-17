@@ -57,7 +57,7 @@ contact_distribution <- epidist(
   prob_distribution_params = c(mean = 2)
 )
 
-infect_period <- epidist(
+infectious_period <- epidist(
   disease = "COVID-19",
   epi_dist = "infectious period",
   prob_distribution = "gamma",
@@ -103,8 +103,8 @@ See the [Get Started vignette section on Controlling Outbreak Size](simulist.htm
 ```{r, sim-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_death_risk = 0.5,
@@ -157,8 +157,8 @@ We repeat the above simulation but increase the risk of case fatality for both h
 ```{r, sim-linelist-higher-death-risk}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_death_risk = 0.9,
@@ -238,8 +238,8 @@ Simulating with the time-varying case fatality risk:
 ```{r, sim-linelist-time-varying-cfr}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_death_risk = 0.9,
@@ -307,8 +307,8 @@ Simulating with the stepwise time-varying case fatality risk:
 ```{r, sim-linelist-time-varying-cfr-stepwise}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_death_risk = 0.9,
@@ -372,8 +372,8 @@ Simulating with the stepwise time-varying case fatality risk:
 ```{r, sim-linelist-time-varying-cfr-stepwise-window}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_death_risk = 0.9,

@@ -1,8 +1,8 @@
 # sim_outbreak works as expected
 
     Code
-      sim_outbreak(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death)
+      sim_outbreak(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death)
     Output
       $linelist
          id          case_name case_type sex age date_onset date_admission   outcome
@@ -82,8 +82,8 @@
 # sim_outbreak works as expected with anonymised
 
     Code
-      sim_outbreak(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_outbreak(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         anonymise = TRUE)
     Output
       $linelist
@@ -164,8 +164,8 @@
 # sim_outbreak works as expected with age-strat risks
 
     Code
-      sim_outbreak(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_outbreak(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         hosp_risk = age_dep_hosp_risk, hosp_death_risk = age_dep_hosp_death_risk,
         non_hosp_death_risk = age_dep_non_hosp_death_risk)
     Output
@@ -247,8 +247,8 @@
 # sim_outbreak works as expected with age structure
 
     Code
-      sim_outbreak(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_outbreak(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         population_age = age_struct)
     Output
       $linelist

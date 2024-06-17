@@ -1,8 +1,8 @@
 # sim_linelist works as expected
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death)
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death)
     Output
          id          case_name case_type sex age date_onset date_admission   outcome
       1   1    Rushdi al-Ishak  probable   m  35 2023-01-01           <NA> recovered
@@ -34,8 +34,8 @@
 # sim_linelist works as expected with age-strat risks
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         hosp_risk = age_dep_hosp_risk, hosp_death_risk = age_dep_hosp_death_risk,
         non_hosp_death_risk = age_dep_non_hosp_death_risk)
     Output
@@ -69,8 +69,8 @@
 # sim_linelist works as expected with anonymous
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         anonymise = TRUE)
     Output
          id  case_name case_type sex age date_onset date_admission   outcome
@@ -103,8 +103,8 @@
 # sim_linelist works as expected with age structure
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         population_age = age_struct)
     Output
          id            case_name case_type sex age date_onset date_admission
@@ -137,8 +137,8 @@
 # sim_linelist works as expected with age-strat risks & age struct
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         hosp_risk = age_dep_hosp_risk, population_age = age_struct)
     Output
          id           case_name case_type sex age date_onset date_admission   outcome
@@ -171,8 +171,8 @@
 # sim_linelist works as expected with modified config
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         config = create_config(last_contact_distribution = "geom",
           last_contact_distribution_params = c(prob = 0.5)))
     Output
@@ -206,8 +206,8 @@
 # sim_linelist works as expected with modified config parameters
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         config = create_config(last_contact_distribution_params = c(lambda = 5)))
     Output
          id          case_name case_type sex age date_onset date_admission   outcome
@@ -240,8 +240,8 @@
 # sim_linelist works as expected with time-varying cfr
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         config = create_config(time_varying_death_risk = function(risk, time) risk *
           exp(-time)))
     Output
@@ -275,8 +275,8 @@
 # sim_linelist works as expected with time-varying cfr & age-strat
 
     Code
-      sim_linelist(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
+      sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         hosp_death_risk = age_dep_hosp_death_risk, config = create_config(
           time_varying_death_risk = function(risk, time) risk * exp(-time)))
     Output
