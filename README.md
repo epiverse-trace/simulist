@@ -83,7 +83,7 @@ contact_distribution <- epiparameter::epidist(
 ``` r
 
 # create COVID-19 infectious period
-infect_period <- epiparameter::epidist(
+infectious_period <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "infectious period",
   prob_distribution = "gamma",
@@ -136,9 +136,9 @@ around one it means we will likely get a reasonably sized outbreak (10 -
 
 ***Warning***: the reproduction number of the simulation results from
 the contact distribution (`contact_distribution`) and the probability of
-infection (`prob_infect`); the number of infections is a binomial sample
-of the number of contacts for each case with the probability of
-infection (i.e. being sampled) given by `prob_infect`. If the average
+infection (`prob_infection`); the number of infections is a binomial
+sample of the number of contacts for each case with the probability of
+infection (i.e. being sampled) given by `prob_infection`. If the average
 number of secondary infections from each primary case is greater than 1
 then this can lead to the outbreak becoming extremely large. There is
 currently no depletion of susceptible individuals in the simulation
@@ -150,8 +150,8 @@ list early without producing an excessively large data set.
 set.seed(1)
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
@@ -181,8 +181,8 @@ modify either of these, we can specify them in the function.
 ``` r
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = 0.01,
@@ -212,8 +212,8 @@ above.
 ``` r
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
-  infect_period = infect_period, 
-  prob_infect = 0.5
+  infectious_period = infectious_period, 
+  prob_infection = 0.5
 )
 #> Warning: Number of cases exceeds maximum outbreak size. 
 #> Returning data early with 10176 cases and 20217 total contacts (including cases).
@@ -246,8 +246,8 @@ the same default settings as the other functions).
 ``` r
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
