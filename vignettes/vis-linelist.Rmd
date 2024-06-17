@@ -35,7 +35,7 @@ contact_distribution <- epidist(
   prob_distribution_params = c(mean = 3)
 )
 
-infect_period <- epidist(
+infectious_period <- epidist(
   disease = "COVID-19",
   epi_dist = "infectious period",
   prob_distribution = "gamma",
@@ -68,8 +68,8 @@ Using a simple line list simulation with the factory default settings:
 ```{r sim-linelist} 
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.33,
+  infectious_period = infectious_period,
+  prob_infection = 0.33,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   outbreak_size = c(500, 1e4)
@@ -218,8 +218,8 @@ contact_distribution <- epidist(
 set.seed(1)
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )

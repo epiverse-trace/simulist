@@ -8,7 +8,7 @@ suppressMessages({
     )
   )
 
-  infect_period <- as.function(
+  infectious_period <- as.function(
     epiparameter::epidist(
       disease = "COVID-19",
       epi_dist = "infectious period",
@@ -23,8 +23,8 @@ test_that(".sim_network_bp works as expected", {
   expect_snapshot(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       max_outbreak_size = 1e4,
       config = create_config()
     )
@@ -46,8 +46,8 @@ test_that(".sim_network_bp works as expected with no contacts", {
   expect_snapshot(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       max_outbreak_size = 1e4,
       config = create_config()
     )
@@ -59,8 +59,8 @@ test_that(".sim_network_bp works as expected with unadjusted network", {
   expect_snapshot(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       max_outbreak_size = 1e4,
       config = create_config(network = "unadjusted")
     )
@@ -72,8 +72,8 @@ test_that(".sim_network_bp warns as expected", {
   expect_warning(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       max_outbreak_size = 10,
       config = create_config()
     ),
@@ -83,7 +83,7 @@ test_that(".sim_network_bp warns as expected", {
 
 test_that(".sim_network_bp errors with negative infectious period", {
   suppressMessages({
-    infect_period <- as.function(
+    infectious_period <- as.function(
     epiparameter::epidist(
       disease = "COVID-19",
       epi_dist = "infectious period",
@@ -96,8 +96,8 @@ test_that(".sim_network_bp errors with negative infectious period", {
   expect_error(
     .sim_network_bp(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       max_outbreak_size = 1e4,
       config = create_config()
     ),

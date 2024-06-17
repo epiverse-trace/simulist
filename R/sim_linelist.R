@@ -24,14 +24,14 @@
 #' the contact distribution. This is any discrete density function that
 #' produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
 #' number of contacts per infection.
-#' @param infect_period An `<epidist>` object or anonymous function for
+#' @param infectious_period An `<epidist>` object or anonymous function for
 #' the infectious period. This defines the duration from becoming infectious
 #' to no longer infectious. In the simulation, individuals are assumed to
 #' become infectious immediately after being infected (the latency period is
 #' assumed to be zero). The time intervals between an infected individual and
 #' their contacts are assumed to be uniformly distributed within the
 #' infectious period. Infectious periods must be strictly positive.
-#' @param prob_infect A single `numeric` for the probability of a secondary
+#' @param prob_infection A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
 #' @param onset_to_hosp An `<epidist>` object, an anonymous function for
 #' the onset to hospitalisation delay distribution, or `NA` to not simulate
@@ -104,7 +104,7 @@
 #'   prob_distribution_params = c(mean = 2)
 #' )
 #'
-#' infect_period <- epiparameter::epidist(
+#' infectious_period <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "infectious period",
 #'   prob_distribution = "gamma",
@@ -127,8 +127,8 @@
 #' # example with single hospitalisation risk for entire population
 #' linelist <- sim_linelist(
 #'   contact_distribution = contact_distribution,
-#'   infect_period = infect_period,
-#'   prob_infect = 0.5,
+#'   infectious_period = infectious_period,
+#'   prob_infection = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death,
 #'   hosp_risk = 0.5
@@ -145,16 +145,16 @@
 #' )
 #' linelist <- sim_linelist(
 #'   contact_distribution = contact_distribution,
-#'   infect_period = infect_period,
-#'   prob_infect = 0.5,
+#'   infectious_period = infectious_period,
+#'   prob_infection = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death,
 #'   hosp_risk = age_dep_hosp_risk
 #' )
 #' head(linelist)
 sim_linelist <- function(contact_distribution,
-                         infect_period,
-                         prob_infect,
+                         infectious_period,
+                         prob_infection,
                          onset_to_hosp,
                          onset_to_death,
                          onset_to_recovery = NA,
@@ -175,14 +175,14 @@ sim_linelist <- function(contact_distribution,
   funcs <- as_function(
     list(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
+      infectious_period = infectious_period,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       onset_to_recovery = onset_to_recovery
     )
   )
   contact_distribution <- funcs$contact_distribution
-  infect_period <- funcs$infect_period
+  infectious_period <- funcs$infectious_period
   onset_to_hosp <- funcs$onset_to_hosp
   onset_to_death <- funcs$onset_to_death
   onset_to_recovery <- funcs$onset_to_recovery
@@ -190,8 +190,8 @@ sim_linelist <- function(contact_distribution,
   .check_sim_input(
     sim_type = "linelist",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = prob_infect,
+    infectious_period = infectious_period,
+    prob_infection = prob_infection,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,
     onset_to_hosp = onset_to_hosp,
@@ -245,8 +245,8 @@ sim_linelist <- function(contact_distribution,
   linelist <- .sim_internal(
     sim_type = "linelist",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = prob_infect,
+    infectious_period = infectious_period,
+    prob_infection = prob_infection,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,

@@ -23,8 +23,8 @@
 #' @return A `<data.frame>` with the contact and transmission chain data.
 #' @keywords internal
 .sim_network_bp <- function(contact_distribution,
-                            infect_period,
-                            prob_infect,
+                            infectious_period,
+                            prob_infection,
                             max_outbreak_size,
                             config) {
   if (is.null(config$network) ||
@@ -90,17 +90,23 @@
           ancestor[vec_idx] <- ancestor_idx[i]
 
           # sample infected contacts
-          infect <- stats::rbinom(n = contacts[i], size = 1, prob = prob_infect)
+          infect <- stats::rbinom(
+            n = contacts[i],
+            size = 1,
+            prob = prob_infection
+          )
           infected[vec_idx] <- as.numeric(infect)
 
           # compute infectious period for ancestor
-          contact_infect_period <- .sample_infect_period(infect_period)
+          contact_infectious_period <- .sample_infectious_period(
+            infectious_period = infectious_period
+          )
 
           # assume contacts are evenly distributed across the infectious period
           contact_times <- stats::runif(
             n = length(vec_idx),
             min = 0,
-            max = contact_infect_period
+            max = contact_infectious_period
           )
           time[vec_idx] <- contact_times + time[ancestor_idx[i]]
         }

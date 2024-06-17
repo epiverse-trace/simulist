@@ -145,7 +145,7 @@ suppressMessages({
     prob_distribution_params = c(mean = 2)
   ))
 
-  infect_period <- as.function(epiparameter::epidist(
+  infectious_period <- as.function(epiparameter::epidist(
     disease = "COVID-19",
     epi_dist = "infectious period",
     prob_distribution = "gamma",
@@ -179,8 +179,8 @@ test_that(".check_sim_input works as expected", {
   chk <- .check_sim_input(
     sim_type = "outbreak",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = 0.5,
+    infectious_period = infectious_period,
+    prob_infection = 0.5,
     outbreak_start_date = as.Date("2023-01-01"),
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
@@ -208,8 +208,8 @@ test_that(".check_sim_input works as expected", {
   chk <- .check_sim_input(
     sim_type = "linelist",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = 0.5,
+    infectious_period = infectious_period,
+    prob_infection = 0.5,
     outbreak_start_date = as.Date("2023-01-01"),
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
@@ -232,8 +232,8 @@ test_that(".check_sim_input works as expected", {
   chk <- .check_sim_input(
     sim_type = "contacts",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = 0.5,
+    infectious_period = infectious_period,
+    prob_infection = 0.5,
     outbreak_start_date = as.Date("2023-01-01"),
     outbreak_size = c(10, 1e4),
     contact_tracing_status_probs = c(
@@ -251,8 +251,8 @@ test_that(".check_sim_input works as expected with NA risks", {
   chk <- .check_sim_input(
     sim_type = "outbreak",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = 0.5,
+    infectious_period = infectious_period,
+    prob_infection = 0.5,
     outbreak_start_date = as.Date("2023-01-01"),
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
@@ -287,7 +287,7 @@ test_that(".check_sim_input fails as expected", {
     .check_sim_input(
       sim_type = "outbreak",
       contact_distribution = list(),
-      prob_infect = 0.5
+      prob_infection = 0.5
     ),
     regexp = "(Assertion on)*(contact_distribution)*(failed)"
   )
@@ -295,17 +295,17 @@ test_that(".check_sim_input fails as expected", {
     .check_sim_input(
       sim_type = "outbreak",
       contact_distribution = contact_distribution,
-      infect_period = list(),
-      prob_infect = 0.5
+      infectious_period = list(),
+      prob_infection = 0.5
     ),
-    regexp = "(Assertion on)*(infect_period)*(failed)"
+    regexp = "(Assertion on)*(infectious_period)*(failed)"
   )
   expect_error(
     .check_sim_input(
       sim_type = "outbreak",
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       outbreak_start_date = "01-01-2023"
     ),
     regexp = "(Assertion on)*(outbreak_start_date)*(failed)"
@@ -314,8 +314,8 @@ test_that(".check_sim_input fails as expected", {
     .check_sim_input(
       sim_type = "outbreak",
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       outbreak_start_date = as.Date("2023-01-01"),
       outbreak_size = "c(10, 1e4)"
     ),

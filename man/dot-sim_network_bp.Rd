@@ -7,8 +7,8 @@ infection for each contact}
 \usage{
 .sim_network_bp(
   contact_distribution,
-  infect_period,
-  prob_infect,
+  infectious_period,
+  prob_infection,
   max_outbreak_size,
   config
 )
@@ -19,7 +19,7 @@ the contact distribution. This is any discrete density function that
 produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
 number of contacts per infection.}
 
-\item{infect_period}{An \verb{<epidist>} object or anonymous function for
+\item{infectious_period}{An \verb{<epidist>} object or anonymous function for
 the infectious period. This defines the duration from becoming infectious
 to no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
@@ -27,7 +27,7 @@ assumed to be zero). The time intervals between an infected individual and
 their contacts are assumed to be uniformly distributed within the
 infectious period. Infectious periods must be strictly positive.}
 
-\item{prob_infect}{A single \code{numeric} for the probability of a secondary
+\item{prob_infection}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and

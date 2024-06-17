@@ -41,7 +41,7 @@ contact_distribution <- epidist(
 )
 
 # create infectious period (not available from {epiparameter} database)
-infect_period <- epidist(
+infectious_period <- epidist(
   disease = "COVID-19",
   epi_dist = "infectious period",
   prob_distribution = "gamma",
@@ -69,13 +69,13 @@ The seed is set to ensure the output of the vignette is consistent. When using {
 set.seed(123)
 ```
 
-The first argument in `sim_linelist()` is the contact distribution (`contact_distribution`), which here we specify as Poisson distribution with a mean (average) number of contacts of 2, and with the infectious period and probability of infection per contact (`prob_infect`) will control the growth rate of the simulated epidemic. Here we set the probability of infection as 0.5 (on average half of contacts become infected). The minimum requirements to simulate a line list are the contact distribution, the infectious period, probability of infection, onset-to-hospitalisation delay and onset-to-death delay.
+The first argument in `sim_linelist()` is the contact distribution (`contact_distribution`), which here we specify as Poisson distribution with a mean (average) number of contacts of 2, and with the infectious period and probability of infection per contact (`prob_infection`) will control the growth rate of the simulated epidemic. Here we set the probability of infection as 0.5 (on average half of contacts become infected). The minimum requirements to simulate a line list are the contact distribution, the infectious period, probability of infection, onset-to-hospitalisation delay and onset-to-death delay.
 
 ```{r, sim-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
@@ -90,7 +90,7 @@ The reproduction number ($R$) has a strong influence on the size of an outbreak.
 
 _Alert_
 
-The reproduction number ($R$) of the simulation results from the contact distribution (`contact_distribution`) and the probability of infection (`prob_infect`); the number of infections is a binomial sample of the number of contacts for each case with the probability of infection (i.e. being sampled) given by `prob_infect`. If the average number of secondary infections from each primary case is greater than 1 ($R > 1$) then this can lead to the outbreak becoming extremely large. 
+The reproduction number ($R$) of the simulation results from the contact distribution (`contact_distribution`) and the probability of infection (`prob_infection`); the number of infections is a binomial sample of the number of contacts for each case with the probability of infection (i.e. being sampled) given by `prob_infect`. If the average number of secondary infections from each primary case is greater than 1 ($R > 1$) then this can lead to the outbreak becoming extremely large. 
 
 There is currently no depletion of susceptible individuals in the simulation model (i.e. infinite population size), so the maximum outbreak size (second element of the vector supplied to the `outbreak_size` argument) can be used to return a line list early without producing an excessively large data set.
 
@@ -106,8 +106,8 @@ When requiring a line list that represents a large outbreak, such as the COVID-1
 ```{r, sim-large-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   outbreak_size = c(250, 1e4)
@@ -115,7 +115,7 @@ linelist <- sim_linelist(
 head(linelist)
 ```
 
-The amount of time the simulation takes can be determined by the mean of the contact distribution (`contact_distribution`), the probability of infection (`prob_infect`) and conditioning the outbreak size (`outbreak_size`). If the minimum `outbreak_size` is large, for example hundreds or thousands of cases, and the mean number of contacts and probability of infection mean the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.
+The amount of time the simulation takes can be determined by the mean of the contact distribution (`contact_distribution`), the probability of infection (`prob_infection`) and conditioning the outbreak size (`outbreak_size`). If the minimum `outbreak_size` is large, for example hundreds or thousands of cases, and the mean number of contacts and probability of infection mean the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.
 
 ## Case type 
 
@@ -128,8 +128,8 @@ The line list output from the {simulist} simulation contains a column (`case_typ
 ```{r, sim-linelist-default-case-type}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
@@ -141,8 +141,8 @@ To alter these probabilities, supply a named vector to the `sim_linelist()` argu
 ```{r, sim-linelist-mod-case-type}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   case_type_probs = c(suspected = 0.05, probable = 0.05, confirmed = 0.9)
@@ -161,8 +161,8 @@ By default `sim_linelist()` provides the name of each individual in the line lis
 ```{r sim-anon-linelist}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   anonymise = TRUE
@@ -187,8 +187,8 @@ To simulate a contacts table, the `sim_contacts()` function can be used. This re
 ```{r, sim-contacts}
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5)
+  infectious_period = infectious_period,
+  prob_infection = 0.5)
 head(contacts)
 ```
 
@@ -201,8 +201,8 @@ In order to simulate a line list and a contacts table of the same outbreak the `
 ```{r, sim-outbreak}
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death
 )
@@ -227,8 +227,8 @@ It is possible to use an [anonymous function](https://en.wikipedia.org/wiki/Anon
 ```{r, sim-outbreak-anon-func}
 outbreak <- sim_outbreak(
   contact_distribution = function(x) dpois(x = x, lambda = 2),
-  infect_period = function(x) rgamma(n = x, shape = 2, scale = 2),
-  prob_infect = 0.5,
+  infectious_period = function(x) rgamma(n = x, shape = 2, scale = 2),
+  prob_infection = 0.5,
   onset_to_hosp = function(x) rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
   onset_to_death = function(x) rweibull(n = x, shape = 0.5, scale = 0.2)
 )
@@ -251,8 +251,8 @@ The onset-to-hospitalisation (`onset_to_hosp`) and onset-to-death (`onset_to_dea
 ```{r, sim-linelist-no-hosp-death}
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
   onset_to_hosp = NA,
   onset_to_death = NA,
   hosp_risk = NA,

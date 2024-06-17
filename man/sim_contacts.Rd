@@ -6,8 +6,8 @@
 \usage{
 sim_contacts(
   contact_distribution,
-  infect_period,
-  prob_infect,
+  infectious_period,
+  prob_infection,
   outbreak_start_date = as.Date("2023-01-01"),
   anonymise = FALSE,
   outbreak_size = c(10, 10000),
@@ -23,7 +23,7 @@ the contact distribution. This is any discrete density function that
 produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
 number of contacts per infection.}
 
-\item{infect_period}{An \verb{<epidist>} object or anonymous function for
+\item{infectious_period}{An \verb{<epidist>} object or anonymous function for
 the infectious period. This defines the duration from becoming infectious
 to no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
@@ -31,7 +31,7 @@ assumed to be zero). The time intervals between an infected individual and
 their contacts are assumed to be uniformly distributed within the
 infectious period. Infectious periods must be strictly positive.}
 
-\item{prob_infect}{A single \code{numeric} for the probability of a secondary
+\item{prob_infection}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
@@ -81,7 +81,7 @@ contact_distribution <- epiparameter::epidist(
   prob_distribution_params = c(mean = 2)
 )
 
-infect_period <- epiparameter::epidist(
+infectious_period <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "infectious period",
   prob_distribution = "gamma",
@@ -90,8 +90,8 @@ infect_period <- epiparameter::epidist(
 
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
-  infect_period = infect_period,
-  prob_infect = 0.5
+  infectious_period = infectious_period,
+  prob_infection = 0.5
 )
 }
 \author{

@@ -1,8 +1,8 @@
 # sim_contacts works as expected
 
     Code
-      sim_contacts(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5)
+      sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5)
     Output
                             from                      to age sex date_first_contact
       1       Barrington Johnson       Nykalous Shumpert  51   m         2022-12-30
@@ -60,8 +60,8 @@
 # sim_contacts works as expected with modified config
 
     Code
-      sim_contacts(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, config = create_config(last_contact_distribution = "geom",
+      sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, config = create_config(last_contact_distribution = "geom",
           last_contact_distribution_params = c(prob = 0.5)))
     Output
                       from                       to age sex date_first_contact
@@ -120,9 +120,9 @@
 # sim_contacts works as expected with modified config parameters
 
     Code
-      sim_contacts(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, config = create_config(last_contact_distribution_params = c(
-          lambda = 5)))
+      sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, config = create_config(
+          last_contact_distribution_params = c(lambda = 5)))
     Output
                             from                      to age sex date_first_contact
       1       Barrington Johnson       Nykalous Shumpert  51   m         2022-12-31
@@ -180,8 +180,8 @@
 # sim_contacts works as expected with age structure
 
     Code
-      sim_contacts(contact_distribution = contact_distribution, infect_period = infect_period,
-        prob_infect = 0.5, population_age = age_struct)
+      sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
+        prob_infection = 0.5, population_age = age_struct)
     Output
                         from                      to age sex date_first_contact
       1          Ramon Burch             Job Cabrera  62   m         2022-12-30

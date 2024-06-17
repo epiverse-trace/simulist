@@ -25,7 +25,7 @@
 #'   prob_distribution_params = c(mean = 2)
 #' )
 #'
-#' infect_period <- epiparameter::epidist(
+#' infectious_period <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "infectious period",
 #'   prob_distribution = "gamma",
@@ -48,14 +48,14 @@
 #'
 #' outbreak <- sim_outbreak(
 #'   contact_distribution = contact_distribution,
-#'   infect_period = infect_period,
-#'   prob_infect = 0.5,
+#'   infectious_period = infectious_period,
+#'   prob_infection = 0.5,
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death
 #' )
 sim_outbreak <- function(contact_distribution,
-                         infect_period,
-                         prob_infect,
+                         infectious_period,
+                         prob_infection,
                          onset_to_hosp,
                          onset_to_death,
                          onset_to_recovery = NA,
@@ -81,14 +81,14 @@ sim_outbreak <- function(contact_distribution,
   funcs <- as_function(
     list(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
+      infectious_period = infectious_period,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       onset_to_recovery = onset_to_recovery
     )
   )
   contact_distribution <- funcs$contact_distribution
-  infect_period <- funcs$infect_period
+  infectious_period <- funcs$infectious_period
   onset_to_hosp <- funcs$onset_to_hosp
   onset_to_death <- funcs$onset_to_death
   onset_to_recovery <- funcs$onset_to_recovery
@@ -96,8 +96,8 @@ sim_outbreak <- function(contact_distribution,
   .check_sim_input(
     sim_type = "outbreak",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = prob_infect,
+    infectious_period = infectious_period,
+    prob_infection = prob_infection,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,
     onset_to_hosp = onset_to_hosp,
@@ -152,8 +152,8 @@ sim_outbreak <- function(contact_distribution,
   outbreak <- .sim_internal(
     sim_type = "outbreak",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = prob_infect,
+    infectious_period = infectious_period,
+    prob_infection = prob_infection,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,

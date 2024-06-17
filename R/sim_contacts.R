@@ -20,7 +20,7 @@
 #'   prob_distribution_params = c(mean = 2)
 #' )
 #'
-#' infect_period <- epiparameter::epidist(
+#' infectious_period <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "infectious period",
 #'   prob_distribution = "gamma",
@@ -29,12 +29,12 @@
 #'
 #' contacts <- sim_contacts(
 #'   contact_distribution = contact_distribution,
-#'   infect_period = infect_period,
-#'   prob_infect = 0.5
+#'   infectious_period = infectious_period,
+#'   prob_infection = 0.5
 #' )
 sim_contacts <- function(contact_distribution,
-                         infect_period,
-                         prob_infect,
+                         infectious_period,
+                         prob_infection,
                          outbreak_start_date = as.Date("2023-01-01"),
                          anonymise = FALSE,
                          outbreak_size = c(10, 1e4),
@@ -48,18 +48,18 @@ sim_contacts <- function(contact_distribution,
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
     "Input delay distributions need to be either functions or <epidist>" =
-      inherits(infect_period, c("function", "epidist"))
+      inherits(infectious_period, c("function", "epidist"))
   )
   contact_distribution <- as.function(
     contact_distribution, func_type = "density"
   )
-  infect_period <- as.function(infect_period, func_type = "generate")
+  infectious_period <- as.function(infectious_period, func_type = "generate")
 
   .check_sim_input(
     sim_type = "contacts",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = prob_infect,
+    infectious_period = infectious_period,
+    prob_infection = prob_infection,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,
     contact_tracing_status_probs = contact_tracing_status_probs,
@@ -76,8 +76,8 @@ sim_contacts <- function(contact_distribution,
   contacts <- .sim_internal(
     sim_type = "contacts",
     contact_distribution = contact_distribution,
-    infect_period = infect_period,
-    prob_infect = prob_infect,
+    infectious_period = infectious_period,
+    prob_infection = prob_infection,
     outbreak_start_date = outbreak_start_date,
     anonymise = anonymise,
     outbreak_size = outbreak_size,

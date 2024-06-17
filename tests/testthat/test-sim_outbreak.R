@@ -6,7 +6,7 @@ suppressMessages({
     prob_distribution_params = c(mean = 2)
   )
 
-  infect_period <- epiparameter::epidist(
+  infectious_period <- epiparameter::epidist(
     disease = "COVID-19",
     epi_dist = "infectious period",
     prob_distribution = "gamma",
@@ -33,8 +33,8 @@ test_that("sim_outbreak works as expected", {
   expect_snapshot(
     sim_outbreak(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death
     )
@@ -46,8 +46,8 @@ test_that("sim_outbreak works as expected with anonymised", {
   expect_snapshot(
     sim_outbreak(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       anonymise = TRUE
@@ -72,8 +72,8 @@ test_that("sim_outbreak works as expected with age-strat risks", {
   expect_snapshot(
     sim_outbreak(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       hosp_risk = age_dep_hosp_risk,
@@ -93,8 +93,8 @@ test_that("sim_outbreak works as expected with age structure", {
   expect_snapshot(
     sim_outbreak(
       contact_distribution = contact_distribution,
-      infect_period = infect_period,
-      prob_infect = 0.5,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       population_age = age_struct
