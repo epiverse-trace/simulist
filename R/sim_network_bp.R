@@ -94,7 +94,7 @@
           infected[vec_idx] <- as.numeric(infect)
 
           # compute infectious period for ancestor
-          contact_infect_period <- infect_period(1)
+          contact_infect_period <- .sample_infect_period(infect_period)
 
           # assume contacts are evenly distributed across the infectious period
           contact_times <- stats::runif(

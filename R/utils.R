@@ -187,3 +187,22 @@ as_function <- function(x) {
     onset_to_recovery = onset_to_recovery
   )
 }
+
+#' Sample infectious period distribution and check value is positive
+#'
+#' @inheritParams sim_linelist
+#'
+#' @return A single `numeric`.
+#' @keywords internal
+#' @noRd
+.sample_infect_period <- function(infect_period) {
+  contact_infect_period <- infect_period(1)
+  if (contact_infect_period < 0) {
+    stop(
+      "Negative infectious period sampled. ",
+      "The infectious period must be strictly positive.",
+      call. = FALSE
+    )
+  }
+  contact_infect_period
+}
