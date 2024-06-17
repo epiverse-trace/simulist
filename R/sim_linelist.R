@@ -30,7 +30,7 @@
 #' become infectious immediately after being infected (the latency period is
 #' assumed to be zero). The time intervals between an infected individual and
 #' their contacts are assumed to be uniformly distributed within the
-#' infectious period.
+#' infectious period. Infectious periods must be strictly positive.
 #' @param prob_infect A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
 #' @param onset_to_hosp An `<epidist>` object, an anonymous function for

@@ -38,7 +38,7 @@ to no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
 assumed to be zero). The time intervals between an infected individual and
 their contacts are assumed to be uniformly distributed within the
-infectious period.}
+infectious period. Infectious periods must be strictly positive.}
 
 \item{prob_infect}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
