@@ -80,3 +80,27 @@ test_that(".sim_network_bp warns as expected", {
     regexp = "(Number of cases exceeds maximum)*(Returning data early)"
   )
 })
+
+test_that(".sim_network_bp errors with negative infectious period", {
+  suppressMessages({
+    infect_period <- as.function(
+    epiparameter::epidist(
+      disease = "COVID-19",
+      epi_dist = "infectious period",
+      prob_distribution = "norm",
+      prob_distribution_params = c(mean = 10, sd = 5)
+    ), func_type = "generate"
+    )
+  })
+  set.seed(3)
+  expect_error(
+    .sim_network_bp(
+      contact_distribution = contact_distribution,
+      infect_period = infect_period,
+      prob_infect = 0.5,
+      max_outbreak_size = 1e4,
+      config = create_config()
+    ),
+    regexp = "(Negative infectious period sampled)"
+  )
+})
