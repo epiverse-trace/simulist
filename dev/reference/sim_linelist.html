@@ -81,8 +81,8 @@ parameterised with user defined epidemiological parameters.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sim_linelist</span><span class="op">(</span></span>
 <span>  <span class="va">contact_distribution</span>,</span>
-<span>  <span class="va">infect_period</span>,</span>
-<span>  <span class="va">prob_infect</span>,</span>
+<span>  <span class="va">infectious_period</span>,</span>
+<span>  <span class="va">prob_infection</span>,</span>
 <span>  <span class="va">onset_to_hosp</span>,</span>
 <span>  <span class="va">onset_to_death</span>,</span>
 <span>  onset_to_recovery <span class="op">=</span> <span class="cn">NA</span>,</span>
@@ -107,7 +107,7 @@ produces non-negative integers (including zero, \(\mathbb{N}_0\)) for the
 number of contacts per infection.</p></dd>
 
 
-<dt>infect_period</dt>
+<dt>infectious_period</dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object or anonymous function for
 the infectious period. This defines the duration from becoming infectious
 to no longer infectious. In the simulation, individuals are assumed to
@@ -117,7 +117,7 @@ their contacts are assumed to be uniformly distributed within the
 infectious period. Infectious periods must be strictly positive.</p></dd>
 
 
-<dt>prob_infect</dt>
+<dt>prob_infection</dt>
 <dd><p>A single <code>numeric</code> for the probability of a secondary
 contact being infected by an infected primary contact.</p></dd>
 
@@ -254,7 +254,7 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Citation cannot be created as author, year, journal or title is missing</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">infect_period</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
 <span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span></span>
 <span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span></span>
@@ -292,8 +292,8 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span><span class="co"># example with single hospitalisation risk for entire population</span></span></span>
 <span class="r-in"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">sim_linelist</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span></span>
-<span class="r-in"><span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span></span>
-<span class="r-in"><span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span></span>
+<span class="r-in"><span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
 <span class="r-in"><span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span></span>
 <span class="r-in"><span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span></span>
 <span class="r-in"><span>  hosp_risk <span class="op">=</span> <span class="fl">0.5</span></span></span>
@@ -324,8 +324,8 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu">sim_linelist</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span></span>
-<span class="r-in"><span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span></span>
-<span class="r-in"><span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span></span>
+<span class="r-in"><span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
 <span class="r-in"><span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span></span>
 <span class="r-in"><span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span></span>
 <span class="r-in"><span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span></span></span>

@@ -133,7 +133,7 @@ looks as expected given how the simulation was parameterised.</p>
 <span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">infect_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span>
 <span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span>
@@ -181,8 +181,8 @@ settings:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.33</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.33</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">1e4</span><span class="op">)</span></span>
@@ -370,8 +370,8 @@ distribution to 2.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_outbreak.html">sim_outbreak</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>

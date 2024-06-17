@@ -124,7 +124,7 @@
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># create infectious period (not available from {epiparameter} database)</span></span>
-<span><span class="va">infect_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span>
 <span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span>
@@ -164,12 +164,12 @@
 </details><p>The seed is set to ensure the output of the vignette is consistent. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></code></pre></div>
-</details><p>The first argument in <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> is the contact distribution (<code>contact_distribution</code>), which here we specify as Poisson distribution with a mean (average) number of contacts of 2, and with the infectious period and probability of infection per contact (<code>prob_infect</code>) will control the growth rate of the simulated epidemic. Here we set the probability of infection as 0.5 (on average half of contacts become infected). The minimum requirements to simulate a line list are the contact distribution, the infectious period, probability of infection, onset-to-hospitalisation delay and onset-to-death delay.</p>
+</details><p>The first argument in <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> is the contact distribution (<code>contact_distribution</code>), which here we specify as Poisson distribution with a mean (average) number of contacts of 2, and with the infectious period and probability of infection per contact (<code>prob_infection</code>) will control the growth rate of the simulated epidemic. Here we set the probability of infection as 0.5 (on average half of contacts become infected). The minimum requirements to simulate a line list are the contact distribution, the infectious period, probability of infection, onset-to-hospitalisation delay and onset-to-death delay.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
@@ -194,7 +194,7 @@
 <p>The reproduction number (<span class="math inline">\(R\)</span>) has a strong influence on the size of an outbreak. For {simulist}, the reproduction number is, not provided directly, but rather is determined by the mean number of contacts and the probability of infection. However, the {simulist} package generates line list data using a stochastic algorithm, so even when <span class="math inline">\(R &lt; 1\)</span> it can produce a substantial outbreak by chance, or an <span class="math inline">\(R &gt;&gt; 1\)</span> will sometimes not produce a vast epidemic in one simulation (i.e. one replicate) due to the stochasticity.</p>
 <div class="alert alert-warning">
 <p><em>Alert</em></p>
-<p>The reproduction number (<span class="math inline">\(R\)</span>) of the simulation results from the contact distribution (<code>contact_distribution</code>) and the probability of infection (<code>prob_infect</code>); the number of infections is a binomial sample of the number of contacts for each case with the probability of infection (i.e. being sampled) given by <code>prob_infect</code>. If the average number of secondary infections from each primary case is greater than 1 (<span class="math inline">\(R &gt; 1\)</span>) then this can lead to the outbreak becoming extremely large.</p>
+<p>The reproduction number (<span class="math inline">\(R\)</span>) of the simulation results from the contact distribution (<code>contact_distribution</code>) and the probability of infection (<code>prob_infection</code>); the number of infections is a binomial sample of the number of contacts for each case with the probability of infection (i.e. being sampled) given by <code>prob_infect</code>. If the average number of secondary infections from each primary case is greater than 1 (<span class="math inline">\(R &gt; 1\)</span>) then this can lead to the outbreak becoming extremely large.</p>
 <p>There is currently no depletion of susceptible individuals in the simulation model (i.e. infinite population size), so the maximum outbreak size (second element of the vector supplied to the <code>outbreak_size</code> argument) can be used to return a line list early without producing an excessively large data set.</p>
 <p>If <span class="math inline">\(R &gt; 1\)</span>, the simulation may return early after reaching the maximum outbreak size. In these scenarios when <span class="math inline">\(R &gt; 1\)</span>, the <span class="math inline">\(R\)</span> value is controlling the rate at which the maximum outbreak size is reached rather than the size of the outbreak (not all simulations with <span class="math inline">\(R &gt; 1\)</span> will reach the maximum outbreak size due to stochasticity).</p>
 <p>The simulation is therefore sensitive to the contact distribution and probability of infection resulting in an <span class="math inline">\(R\)</span> just above or below 1.</p>
@@ -204,8 +204,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">1e4</span><span class="op">)</span></span>
@@ -225,7 +225,7 @@
 <span><span class="co">#&gt; 4         &lt;NA&gt;         2022-12-25        2023-01-02     25.9</span></span>
 <span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-04        2023-01-05       NA</span></span>
 <span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-01        2023-01-04     25.9</span></span></code></pre></div>
-</details><p>The amount of time the simulation takes can be determined by the mean of the contact distribution (<code>contact_distribution</code>), the probability of infection (<code>prob_infect</code>) and conditioning the outbreak size (<code>outbreak_size</code>). If the minimum <code>outbreak_size</code> is large, for example hundreds or thousands of cases, and the mean number of contacts and probability of infection mean the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.</p>
+</details><p>The amount of time the simulation takes can be determined by the mean of the contact distribution (<code>contact_distribution</code>), the probability of infection (<code>prob_infection</code>) and conditioning the outbreak size (<code>outbreak_size</code>). If the minimum <code>outbreak_size</code> is large, for example hundreds or thousands of cases, and the mean number of contacts and probability of infection mean the reproduction number is below one, it will take many branching process simulations until finding one that produces a sufficiently large epidemic.</p>
 </div>
 <div class="section level2">
 <h2 id="case-type">Case type<a class="anchor" aria-label="anchor" href="#case-type"></a>
@@ -236,8 +236,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
@@ -260,8 +260,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  case_type_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>suspected <span class="op">=</span> <span class="fl">0.05</span>, probable <span class="op">=</span> <span class="fl">0.05</span>, confirmed <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
@@ -291,8 +291,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  anonymise <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -331,8 +331,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_contacts.html">sim_contacts</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">contacts</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                     from                     to age sex date_first_contact</span></span>
 <span><span class="co">#&gt; 1        Karin Mendicino            Robert Tran  72   m         2023-01-01</span></span>
@@ -358,8 +358,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_outbreak.html">sim_outbreak</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
@@ -407,8 +407,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_outbreak.html">sim_outbreak</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">dpois</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, lambda <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">rgamma</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, shape <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">rgamma</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, shape <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">1.5</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html" class="external-link">rweibull</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, shape <span class="op">=</span> <span class="fl">0.5</span>, scale <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -455,8 +455,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="cn">NA</span>,</span>

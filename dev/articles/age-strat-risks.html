@@ -132,7 +132,7 @@
 <span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span></code></pre></div>
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">infect_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span>
 <span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span>
@@ -187,8 +187,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
 <span><span class="op">)</span></span>
@@ -213,8 +213,8 @@
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="fl">0.4</span>,</span>
@@ -266,8 +266,8 @@
 </details><details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span></span>
@@ -307,8 +307,8 @@
 <code class="sourceCode R"><span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span></span>
@@ -323,8 +323,8 @@
 <span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span>,</span>
@@ -362,8 +362,8 @@
 <code class="sourceCode R"><span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_death_risk <span class="op">=</span> <span class="va">age_dep_hosp_death_risk</span></span>
@@ -382,8 +382,8 @@
 <code class="sourceCode R"><span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  non_hosp_death_risk <span class="op">=</span> <span class="va">age_dep_non_hosp_death_risk</span></span>
@@ -405,8 +405,8 @@
 <span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
-<span>  infect_period <span class="op">=</span> <span class="va">infect_period</span>,</span>
-<span>  prob_infect <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span>,</span>
