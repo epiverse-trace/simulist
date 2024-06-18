@@ -86,6 +86,14 @@
             time <- c(time, vector(mode = "double", 1e5))
           }
 
+          # sample age of each contact
+          age[vec_idx] <- .sample_age(
+            index_age = age[ancestor_idx[i]],
+            population_age = population_age,
+            n = contacts[i],
+            contact_df = contact_df
+          )
+
           generation[vec_idx] <- chain_generation
           ancestor[vec_idx] <- ancestor_idx[i]
 
@@ -138,6 +146,7 @@
   # logical expressions, e.g., x == "infected" or x == "contact"
   infected <- ifelse(test = infected, yes = "infected", no = "contact")
   time <- time[seq_along(generation)]
+  age <- age[seq_along(generation)]
 
   # return chain as <data.frame>
   data.frame(
@@ -145,6 +154,7 @@
     ancestor = ancestor,
     generation = generation,
     infected = infected,
-    time = time
+    time = time,
+    age = age
   )
 }
