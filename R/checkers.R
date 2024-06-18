@@ -357,3 +357,42 @@
 
   invisible(onset_to_hosp)
 }
+
+#' Check if `matrix` defining the age-structured contact patterns is correct
+#'
+#' @param x A `matrix`.
+#'
+#' @return A `matrix` defining the age-structured contact patterns, also called
+#' for side-effects when input is invalid.
+#' @keywords internal
+.check_contact_matrix <- function(x, population_age) {
+  stopifnot(
+    "contact matrix must be matrix" =
+      is.matrix(x),
+    "contact matrix must have row names" =
+      !is.null(row.names(x)),
+    "all contact matrix row names must start with '[', except last row" =
+      all(grepl(
+        pattern = "^[\\[].*",
+        x = row.names(x)[1:(nrow(x) - 1)]
+      )),
+    "contact matrix row name must be comma separated (e.g. '[0,20)')" =
+      all(grepl(
+        pattern = "\\d+(,)\\d+",
+        x = row.names(x)[1:(nrow(x) - 1)]
+      ))
+  )
+
+  # format and convert to data.frame
+  x <- .format_contact_matrix(x, population_age = population_age)
+
+  stopifnot(
+    "youngest age group in contact matrix must match population_age" =
+      min(x$min_age) == population_age[["lower"]],
+    "oldest age group in contact matrix must match population_age" =
+      max(x$max_age) == population_age[["upper"]]
+  )
+
+  # return contact matrix data.frame
+  x
+}
