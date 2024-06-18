@@ -39,6 +39,7 @@
       infectious_period = infectious_period,
       prob_infection = prob_infection,
       max_outbreak_size = max(outbreak_size),
+      population_age = population_age,
       config = config
     )
     num_cases <- sum(.data$infected == "infected")
@@ -83,25 +84,6 @@
 
   # add random age and sex
   .data$sex <- sample(c("m", "f"), replace = TRUE, size = nrow(.data))
-  if (is.data.frame(population_age)) {
-    age_groups <- apply(population_age, MARGIN = 1, function(x) x[1]:x[2])
-    sample_weight <- rep(population_age$proportion, times = lengths(age_groups))
-    # normalise for vector length
-    sample_weight <- sample_weight /
-      rep(lengths(age_groups), times = lengths(age_groups))
-    .data$age <- sample(
-      unlist(age_groups),
-      size = nrow(.data),
-      replace = TRUE,
-      prob = sample_weight
-    )
-  } else {
-    .data$age <- sample(
-      population_age[["lower"]]:population_age[["upper"]],
-      size = nrow(.data),
-      replace = TRUE
-    )
-  }
 
   if (sim_type %in% c("linelist", "outbreak")) {
     .data <- .add_hospitalisation(
