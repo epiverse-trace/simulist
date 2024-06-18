@@ -22,8 +22,9 @@ The \code{config} argument in \code{\link[=sim_linelist]{sim_linelist()}} contro
 around time windows around infections (time of first contact and last
 contact with infector), and the distribution of the Cycle threshold (Ct)
 value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
-cases, the network effect in the simulation, and if there is a time-varying
-death risk.
+cases, the network effect in the simulation, if there is a time-varying
+death risk, and if there is a social contact matrix that gives the
+average number of contacts between two groups.
 
 Accepted arguments and their defaults are:
 \itemize{
@@ -35,6 +36,8 @@ Accepted arguments and their defaults are:
 \item \code{ct_distribution_params = c(mean = 25, sd = 2)}
 \item \code{network = "adjusted"}
 \item \code{time_varying_death_risk = NULL}
+\item \code{contact_matrix = NULL}
+\item \code{index_case_age = 30}
 }
 
 These parameters do not warrant their own arguments in
@@ -56,6 +59,13 @@ unadjusted contact distribution. Adjusted (default) sampling uses
 density function of a distribution, e.g., Poisson or Negative binomial.
 Unadjusted (\code{network = "unadjusted"}) instead samples contacts directly from
 a probability distribution \eqn{p(n)}.
+
+The social contact matrix specifies the average number of contacts between
+people in group \eqn{i} and group \eqn{j}. The default \code{NULL} represents
+a homogeneously mixing population.
+
+The index case age is the age of the individual that seeds the outbreak. The
+age of this individual matters when a contact matrix is supplied.
 }
 \examples{
 # example with default configuration

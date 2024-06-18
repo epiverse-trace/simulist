@@ -4,8 +4,9 @@
 #' around time windows around infections (time of first contact and last
 #' contact with infector), and the distribution of the Cycle threshold (Ct)
 #' value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
-#' cases, the network effect in the simulation, and if there is a time-varying
-#' death risk.
+#' cases, the network effect in the simulation, if there is a time-varying
+#' death risk, and if there is a social contact matrix that gives the
+#' average number of contacts between two groups.
 #'
 #' Accepted arguments and their defaults are:
 #' * `last_contact_distribution = "pois"`
@@ -16,6 +17,8 @@
 #' * `ct_distribution_params = c(mean = 25, sd = 2)`
 #' * `network = "adjusted"`
 #' * `time_varying_death_risk = NULL`
+#' * `contact_matrix = NULL`
+#' * `index_case_age = 30`
 #'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
@@ -34,6 +37,13 @@
 #' density function of a distribution, e.g., Poisson or Negative binomial.
 #' Unadjusted (`network = "unadjusted"`) instead samples contacts directly from
 #' a probability distribution \eqn{p(n)}.
+#'
+#' The social contact matrix specifies the average number of contacts between
+#' people in group \eqn{i} and group \eqn{j}. The default `NULL` represents
+#' a homogeneously mixing population.
+#'
+#' The index case age is the age of the individual that seeds the outbreak. The
+#' age of this individual matters when a contact matrix is supplied.
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
 #' default settings. Only if names match exactly are elements replaced,
@@ -60,7 +70,9 @@ create_config <- function(...) {
     ct_distribution = "norm",
     ct_distribution_params = c(mean = 25, sd = 2),
     network = "adjusted",
-    time_varying_death_risk = NULL
+    time_varying_death_risk = NULL,
+    contact_matrix = NULL,
+    index_case_age = 30
   )
 
   # capture dynamic dots
