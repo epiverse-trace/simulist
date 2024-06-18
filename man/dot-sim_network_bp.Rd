@@ -10,6 +10,7 @@ infection for each contact}
   infectious_period,
   prob_infection,
   max_outbreak_size,
+  population_age,
   config
 )
 }
@@ -29,6 +30,14 @@ infectious period. Infectious periods must be strictly positive.}
 
 \item{prob_infection}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
+
+\item{population_age}{Either a \code{numeric} vector with two elements or a
+\verb{<data.frame>} with age structure in the population. Use a \code{numeric} vector
+to specific the age range of the population, the first element is the lower
+bound for the age range, and and the second is the upper bound for the age
+range (both inclusive, i.e. [lower, upper]). The \verb{<data.frame>} with
+age groups and the proportion of the population in that group. See details
+and examples for more information.}
 
 \item{config}{A list of settings to adjust the randomly sampled delays and
 Ct values. See \code{\link[=create_config]{create_config()}} for more information.}

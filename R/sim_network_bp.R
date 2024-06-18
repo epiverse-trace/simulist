@@ -26,17 +26,33 @@
                             infectious_period,
                             prob_infection,
                             max_outbreak_size,
+                            population_age,
                             config) {
   if (is.null(config$network) ||
       !config$network %in% c("adjusted", "unadjusted")) {
     stop("Network incorrectly specified, check config", call. = FALSE)
   }
+  contact_df <- NULL
+  if (is.matrix(config$contact_matrix)) {
+    contact_df <- .check_contact_matrix(
+      config$contact_matrix,
+      population_age = population_age
+    )
+  }
+  stopifnot(
+    "age of index case must be an integer, see ?create_config" =
+      checkmate::test_integerish(config$index_case_age),
+    "age of index case must be within population age range, see ?create_config" =
+      config$index_case_age >= min(population_age) &&
+      config$index_case_age <= max(population_age)
+  )
 
   # initialise data object
   ancestor <- vector(mode = "integer", 1e5)
   generation <- vector(mode = "integer", 1e5)
   infected <- vector(mode = "integer", 1e5)
   time <- vector(mode = "double", 1e5)
+  age <- vector(mode = "double", 1e5)
 
   # store initial individual
   ancestor[1] <- NA_integer_
@@ -44,6 +60,7 @@
   # 1 is infected, 0 is non-infected contact
   infected[1] <- 1L
   time[1] <- 0
+  age[1] <- config$index_case_age
 
   # initialise counters
   next_gen_size <- 1L
