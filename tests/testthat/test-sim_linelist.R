@@ -332,7 +332,7 @@ test_that("sim_linelist fails when onset-to-event are given by risk is NA", {
       onset_to_death = onset_to_death,
       hosp_death_risk = NA
     ),
-    regexp = "(hosp_death_risk is set to NA but onset_to_death is specified)"
+    regexp = "(hosp_death_risk is set to NA but hosp_risk and onset_to_death)"
   )
   expect_error(
     sim_linelist(
