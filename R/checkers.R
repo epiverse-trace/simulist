@@ -289,10 +289,10 @@
     ))
   }
   if (!rlang::is_lgl_na(onset_to_death_eval)) {
-    if (rlang::is_lgl_na(hosp_death_risk)) {
+    if (rlang::is_lgl_na(hosp_death_risk) && !rlang::is_lgl_na(hosp_risk)) {
       msg <- c(msg, paste(
-        "hosp_death_risk is set to NA but onset_to_death is specified \n",
-        "set hosp_death_risk to numeric value"
+        "hosp_death_risk is set to NA but hosp_risk and onset_to_death is",
+        "specified \n set hosp_death_risk to numeric value"
       ))
     }
     if (rlang::is_lgl_na(non_hosp_death_risk)) {
