@@ -15,33 +15,33 @@ compatible with hospitalisation and death risks}
 }
 \arguments{
 \item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
-the onset to hospitalisation delay distribution, or \code{NA} to not simulate
+the onset to hospitalisation delay distribution, or \code{NULL} to not simulate
 hospitalisation (admission) dates.}
 
 \item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NA} to not simulate dates for
+the onset to death delay distribution, or \code{NULL} to not simulate dates for
 individuals that died.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
 hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entire
-population. If the \code{onset_to_hosp} argument is set to \code{NA} this argument
-should also be set to \code{NA}. See details and examples for more information.}
+population. If the \code{onset_to_hosp} argument is set to \code{NULL} this argument
+should also be set to \code{NULL}. See details and examples for more information.}
 
 \item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
 specific hospitalised death risks Default is 50\% death risk in hospitals
 (\code{0.5}) for the entire population. If the \code{onset_to_death} argument is set
-to \code{NA} this argument should also be set to \code{NA}. See details and examples
-for more information. If a time-varying death risk is specified in the
-\code{config} the \code{hosp_death_risk} is interpreted as the maximum risk across
+to \code{NULL} this argument should also be set to \code{NULL}. See details and
+examples for more information. If a time-varying death risk is specified in
+the \code{config} the \code{hosp_death_risk} is interpreted as the maximum risk across
 the epidemic.}
 
 \item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
 specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. If the \code{onset_to_death}
-argument is set to \code{NA} this argument should also be set to \code{NA}. See
+argument is set to \code{NULL} this argument should also be set to \code{NULL}. See
 details and examples for more information. If a time-varying death risk is
 specified in the \code{config} the \code{non_hosp_death_risk} is interpreted as the
 maximum risk across the epidemic.}
@@ -55,19 +55,19 @@ invalid.
 There are two types of cross-checking:
 \enumerate{
 \item If the onset-to-event distribution is specified but the corresponding risk
-is not specified (i.e. \code{NA}) the function will error (\code{\link[=stop]{stop()}}).
-\item If the onset-to-event distribution is not specified (i.e. \code{NA}) but the
+is not specified (i.e. \code{NULL}) the function will error (\code{\link[=stop]{stop()}}).
+\item If the onset-to-event distribution is not specified (i.e. \code{NULL}) but the
 corresponding risk is specified the function will throw a warning
 (\code{\link[=warning]{warning()}}).
 }
 
 The difference in condition handling is because in the case that the
-onset-to-event is \code{NA} the simulation can safely ignore the corresponding
+onset-to-event is \code{NULL} the simulation can safely ignore the corresponding
 risk, while throwing a warning, as there are no events. In other words, if
 the onset-to-hospitalisation is not specified, no infected individuals will
 go to hospital and the \code{date_admission} column in the line list will all be
 \code{NA}s. However, if the onset-to-event is specified and the corresponding
-risk is \code{NA} then the proportion of individuals infected that are
+risk is \code{NULL} then the proportion of individuals infected that are
 hospitalised or die cannot be calculated and therefore the simulation
 cannot run. It is in this latter case that the cross-checking throws an
 error.

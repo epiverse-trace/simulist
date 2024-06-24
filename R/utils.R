@@ -120,11 +120,11 @@
   out
 }
 
-#' Convert `<epidist>` or `NA` to function
+#' Convert `<epidist>` or `NULL` to function
 #'
 #' @description
 #' An extension to [as.function()], particularly the \pkg{epiparameter}
-#' `as.function` S3 method, with the added feature that [`NA`]s are converted
+#' `as.function` S3 method, with the added feature that [`NULL`]s are converted
 #' into functions that generate a vector of `NA`s to behave equivalently to
 #' the generator functions output from
 #' `as.function(..., func_type = "generate")`.
@@ -133,9 +133,9 @@
 #' unchanged.
 #'
 #' There is also input checking to error if input is not an `<epidist>`,
-#' `function` ([closure]), or for onset-to-event distributions `NA`.
+#' `function` ([closure]), or for onset-to-event distributions `NULL`.
 #'
-#' @param x A named list containing either `<epidist>`, `function` or `NA`.
+#' @param x A named list containing either `<epidist>`, `function` or `NULL`.
 #' Named list elements are: `"contact_distribution"`, `"infectious_period"`,
 #' `"onset_to_hosp"`, `"onset_to_death"`, `"onset_to_recovery".`
 #'
@@ -147,29 +147,29 @@ as_function <- function(x) {
       inherits(x$contact_distribution, c("function", "epidist")) &&
       inherits(x$infectious_period, c("function", "epidist")),
     "onset_to_hosp, onset_to_death and onset_to_recovery need to be a function,
-    <epidist> or NA" =
-      inherits(x$onset_to_hosp, c("function", "epidist")) ||
-      rlang::is_lgl_na(x$onset_to_hosp) &&
-      inherits(x$onset_to_death, c("function", "epidist")) ||
-      rlang::is_lgl_na(x$onset_to_death)
+    <epidist> or NULL" =
+      (inherits(x$onset_to_hosp, c("function", "epidist")) ||
+      is.null(x$onset_to_hosp)) &&
+      (inherits(x$onset_to_death, c("function", "epidist")) ||
+      is.null(x$onset_to_death))
   )
   contact_distribution <- as.function(
     x$contact_distribution, func_type = "density"
   )
   infectious_period <- as.function(x$infectious_period, func_type = "generate")
-  if (rlang::is_lgl_na(x$onset_to_hosp)) {
+  if (is.null(x$onset_to_hosp)) {
     # function to generate NA instead of hospitalisation times
     onset_to_hosp <- function(x) rep(NA, times = x)
   } else {
     onset_to_hosp <- as.function(x$onset_to_hosp, func_type = "generate")
   }
-  if (rlang::is_lgl_na(x$onset_to_death)) {
+  if (is.null(x$onset_to_death)) {
     # function to generate NA instead of death times
     onset_to_death <- function(x) rep(NA, times = x)
   } else {
     onset_to_death <- as.function(x$onset_to_death, func_type = "generate")
   }
-  if (rlang::is_lgl_na(x$onset_to_recovery)) {
+  if (is.null(x$onset_to_recovery)) {
     # function to generate NA instead of recovery times
     onset_to_recovery <- function(x) rep(NA, times = x)
   } else {

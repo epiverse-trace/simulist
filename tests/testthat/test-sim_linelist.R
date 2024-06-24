@@ -268,18 +268,18 @@ test_that("sim_linelist fails as expected exceeding max iter for bp model", {
   )
 })
 
-test_that("sim_linelist warns when risks are given by onset-to-event is NA", {
+test_that("sim_linelist warns when risks are given by onset-to-event is NULL", {
   set.seed(1)
   expect_warning(
     sim_linelist(
       contact_distribution = contact_distribution,
       infectious_period = infectious_period,
       prob_infection = 0.5,
-      onset_to_hosp = NA,
+      onset_to_hosp = NULL,
       onset_to_death = onset_to_death,
       hosp_risk = 0.2
     ),
-    regexp = "(onset_to_hosp is set to NA)*(hosp_risk is being ignored)"
+    regexp = "(onset_to_hosp is set to NULL)*(hosp_risk is being ignored)"
   )
   expect_warning(
     sim_linelist(
@@ -287,11 +287,11 @@ test_that("sim_linelist warns when risks are given by onset-to-event is NA", {
       infectious_period = infectious_period,
       prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
-      onset_to_death = NA,
+      onset_to_death = NULL,
       hosp_death_risk = 0.5
     ),
     regexp = paste0(
-      "(onset_to_death is set to NA)*(hosp_death_risk is being ignored)*",
+      "(onset_to_death is set to NULL)*(hosp_death_risk is being ignored)*",
       "(non_hosp_death_risk is being ignored)"
     )
   )
@@ -301,17 +301,17 @@ test_that("sim_linelist warns when risks are given by onset-to-event is NA", {
       infectious_period = infectious_period,
       prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
-      onset_to_death = NA,
+      onset_to_death = NULL,
       non_hosp_death_risk = 0.02
     ),
     regexp = paste0(
-      "(onset_to_death is set to NA)*(hosp_death_risk is being ignored)*",
+      "(onset_to_death is set to NULL)*(hosp_death_risk is being ignored)*",
       "(non_hosp_death_risk is being ignored)"
     )
   )
 })
 
-test_that("sim_linelist fails when onset-to-event are given by risk is NA", {
+test_that("sim_linelist fails when onset-to-event are given by risk is NULL", {
   expect_error(
     sim_linelist(
       contact_distribution = contact_distribution,
@@ -319,9 +319,9 @@ test_that("sim_linelist fails when onset-to-event are given by risk is NA", {
       prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
-      hosp_risk = NA
+      hosp_risk = NULL
     ),
-    regexp = "(hosp_risk is set to NA)*(but onset_to_hosp is specified)"
+    regexp = "(hosp_risk is set to NULL)*(but onset_to_hosp is specified)"
   )
   expect_error(
     sim_linelist(
@@ -330,9 +330,9 @@ test_that("sim_linelist fails when onset-to-event are given by risk is NA", {
       prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
-      hosp_death_risk = NA
+      hosp_death_risk = NULL
     ),
-    regexp = "(hosp_death_risk is set to NA but hosp_risk and onset_to_death)"
+    regexp = "(hosp_death_risk is set to NULL but hosp_risk and onset_to_death)"
   )
   expect_error(
     sim_linelist(
@@ -341,20 +341,20 @@ test_that("sim_linelist fails when onset-to-event are given by risk is NA", {
       prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
-      non_hosp_death_risk = NA
+      non_hosp_death_risk = NULL
     ),
-    regexp = "(non_hosp_death_risk is set to NA)*(onset_to_death is specified)"
+    regexp = "(non_hosp_death_risk is set to NULL)*(onset_to_death is specified)"
   )
 })
 
-test_that("sim_linest date_admission column is NA when onset_to_hosp is NA", {
+test_that("sim_linest date_admission column is NA when onset_to_hosp is NULL", {
   set.seed(1)
   ll <- suppressWarnings(
     sim_linelist(
       contact_distribution = contact_distribution,
       infectious_period = infectious_period,
       prob_infection = 0.5,
-      onset_to_hosp = NA,
+      onset_to_hosp = NULL,
       onset_to_death = onset_to_death
     )
   )
@@ -365,15 +365,15 @@ test_that("sim_linest date_admission column is NA when onset_to_hosp is NA", {
       contact_distribution = contact_distribution,
       infectious_period = infectious_period,
       prob_infection = 0.5,
-      onset_to_hosp = NA,
+      onset_to_hosp = NULL,
       onset_to_death = onset_to_death,
-      hosp_risk = NA
+      hosp_risk = NULL
     )
   )
   expect_true(all(is.na(ll$date_admission)))
 })
 
-test_that("sim_linest date_death column is NA when onset_to_death is NA", {
+test_that("sim_linest date_death column is NA when onset_to_death is NULL", {
   set.seed(1)
   ll <- suppressWarnings(
     sim_linelist(
@@ -381,7 +381,7 @@ test_that("sim_linest date_death column is NA when onset_to_death is NA", {
       infectious_period = infectious_period,
       prob_infection = 0.5,
       onset_to_hosp = onset_to_hosp,
-      onset_to_death = NA
+      onset_to_death = NULL
     )
   )
   expect_true(all(is.na(ll$date_death)))
@@ -391,9 +391,9 @@ test_that("sim_linest date_death column is NA when onset_to_death is NA", {
     infectious_period = infectious_period,
     prob_infection = 0.5,
     onset_to_hosp = onset_to_hosp,
-    onset_to_death = NA,
-    hosp_death_risk = NA,
-    non_hosp_death_risk = NA
+    onset_to_death = NULL,
+    hosp_death_risk = NULL,
+    non_hosp_death_risk = NULL
   )
   expect_true(all(is.na(ll$date_death)))
 })

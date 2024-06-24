@@ -2,12 +2,12 @@
 % Please edit documentation in R/utils.R
 \name{as_function}
 \alias{as_function}
-\title{Convert \verb{<epidist>} or \code{NA} to function}
+\title{Convert \verb{<epidist>} or \code{NULL} to function}
 \usage{
 as_function(x)
 }
 \arguments{
-\item{x}{A named list containing either \verb{<epidist>}, \code{function} or \code{NA}.
+\item{x}{A named list containing either \verb{<epidist>}, \code{function} or \code{NULL}.
 Named list elements are: \code{"contact_distribution"}, \code{"infectious_period"},
 \code{"onset_to_hosp"}, \code{"onset_to_death"}, \verb{"onset_to_recovery".}}
 }
@@ -16,7 +16,7 @@ A list of \code{function}s.
 }
 \description{
 An extension to \code{\link[=as.function]{as.function()}}, particularly the \pkg{epiparameter}
-\code{as.function} S3 method, with the added feature that \code{\link{NA}}s are converted
+\code{as.function} S3 method, with the added feature that \code{\link{NULL}}s are converted
 into functions that generate a vector of \code{NA}s to behave equivalently to
 the generator functions output from
 \code{as.function(..., func_type = "generate")}.
@@ -25,6 +25,6 @@ If a function is already passed to \code{as_function} it will be returned
 unchanged.
 
 There is also input checking to error if input is not an \verb{<epidist>},
-\code{function} (\link{closure}), or for onset-to-event distributions \code{NA}.
+\code{function} (\link{closure}), or for onset-to-event distributions \code{NULL}.
 }
 \keyword{internal}

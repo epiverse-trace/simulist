@@ -247,7 +247,7 @@ test_that(".check_sim_input works as expected", {
   expect_length(chk, n = 1)
 })
 
-test_that(".check_sim_input works as expected with NA risks", {
+test_that(".check_sim_input works as expected with NULL risks", {
   chk <- .check_sim_input(
     sim_type = "outbreak",
     contact_distribution = contact_distribution,
@@ -269,9 +269,9 @@ test_that(".check_sim_input works as expected with NA risks", {
       lost_to_followup = 0.2,
       unknown = 0.1
     ),
-    hosp_risk = NA,
-    hosp_death_risk = NA,
-    non_hosp_death_risk = NA,
+    hosp_risk = NULL,
+    hosp_death_risk = NULL,
+    non_hosp_death_risk = NULL,
     population_age = c(1, 90)
   )
   expect_type(chk, type = "character")
@@ -405,7 +405,7 @@ test_that(".cross_check_sim_input warns as expected", {
     .cross_check_sim_input(
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
-      hosp_risk = NA,
+      hosp_risk = NULL,
       hosp_death_risk = 0.5,
       non_hosp_death_risk = 0.05
     ),
@@ -419,7 +419,7 @@ test_that(".cross_check_sim_input warns as expected", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       hosp_risk = 0.2,
-      hosp_death_risk = NA,
+      hosp_death_risk = NULL,
       non_hosp_death_risk = 0.05
     ),
     regexp = paste0(
@@ -433,7 +433,7 @@ test_that(".cross_check_sim_input warns as expected", {
       onset_to_death = onset_to_death,
       hosp_risk = 0.2,
       hosp_death_risk = 0.5,
-      non_hosp_death_risk = NA
+      non_hosp_death_risk = NULL
     ),
     regexp = paste0(
       "(non_hosp_death_risk is set to NA)*(onset_to_death is specified)*",
