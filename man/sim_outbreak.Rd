@@ -10,7 +10,7 @@ sim_outbreak(
   prob_infection,
   onset_to_hosp,
   onset_to_death,
-  onset_to_recovery = NA,
+  onset_to_recovery = NULL,
   hosp_risk = 0.2,
   hosp_death_risk = 0.5,
   non_hosp_death_risk = 0.05,
@@ -42,38 +42,38 @@ infectious period. Infectious periods must be strictly positive.}
 contact being infected by an infected primary contact.}
 
 \item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
-the onset to hospitalisation delay distribution, or \code{NA} to not simulate
+the onset to hospitalisation delay distribution, or \code{NULL} to not simulate
 hospitalisation (admission) dates.}
 
 \item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NA} to not simulate dates for
+the onset to death delay distribution, or \code{NULL} to not simulate dates for
 individuals that died.}
 
 \item{onset_to_recovery}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NA} to not simulate dates for
-individuals that recovered. Default is \code{NA} so by default cases that
+the onset to death delay distribution, or \code{NULL} to not simulate dates for
+individuals that recovered. Default is \code{NULL} so by default cases that
 recover get an \code{NA} in the \verb{$date_outcome} line list column.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
 hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entire
-population. If the \code{onset_to_hosp} argument is set to \code{NA} this argument
-should also be set to \code{NA}. See details and examples for more information.}
+population. If the \code{onset_to_hosp} argument is set to \code{NULL} this argument
+should also be set to \code{NULL}. See details and examples for more information.}
 
 \item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
 specific hospitalised death risks Default is 50\% death risk in hospitals
 (\code{0.5}) for the entire population. If the \code{onset_to_death} argument is set
-to \code{NA} this argument should also be set to \code{NA}. See details and examples
-for more information. If a time-varying death risk is specified in the
-\code{config} the \code{hosp_death_risk} is interpreted as the maximum risk across
+to \code{NULL} this argument should also be set to \code{NULL}. See details and
+examples for more information. If a time-varying death risk is specified in
+the \code{config} the \code{hosp_death_risk} is interpreted as the maximum risk across
 the epidemic.}
 
 \item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
 specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. If the \code{onset_to_death}
-argument is set to \code{NA} this argument should also be set to \code{NA}. See
+argument is set to \code{NULL} this argument should also be set to \code{NULL}. See
 details and examples for more information. If a time-varying death risk is
 specified in the \code{config} the \code{non_hosp_death_risk} is interpreted as the
 maximum risk across the epidemic.}

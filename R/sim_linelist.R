@@ -34,33 +34,33 @@
 #' @param prob_infection A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
 #' @param onset_to_hosp An `<epidist>` object, an anonymous function for
-#' the onset to hospitalisation delay distribution, or `NA` to not simulate
+#' the onset to hospitalisation delay distribution, or `NULL` to not simulate
 #' hospitalisation (admission) dates.
 #' @param onset_to_death An `<epidist>` object, an anonymous function for
-#' the onset to death delay distribution, or `NA` to not simulate dates for
+#' the onset to death delay distribution, or `NULL` to not simulate dates for
 #' individuals that died.
 #' @param onset_to_recovery An `<epidist>` object, an anonymous function for
-#' the onset to death delay distribution, or `NA` to not simulate dates for
-#' individuals that recovered. Default is `NA` so by default cases that
+#' the onset to death delay distribution, or `NULL` to not simulate dates for
+#' individuals that recovered. Default is `NULL` so by default cases that
 #' recover get an `NA` in the `$date_outcome` line list column.
 #' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
 #' hospitalisation risks Default is 20% hospitalisation (`0.2`) for the entire
-#' population. If the `onset_to_hosp` argument is set to `NA` this argument
-#' should also be set to `NA`. See details and examples for more information.
+#' population. If the `onset_to_hosp` argument is set to `NULL` this argument
+#' should also be set to `NULL`. See details and examples for more information.
 #' @param hosp_death_risk Either a single `numeric` for the death risk for
 #' hospitalised individuals across the population, or a `<data.frame>` with age
 #' specific hospitalised death risks Default is 50% death risk in hospitals
 #' (`0.5`) for the entire population. If the `onset_to_death` argument is set
-#' to `NA` this argument should also be set to `NA`. See details and examples
-#' for more information. If a time-varying death risk is specified in the
-#' `config` the `hosp_death_risk` is interpreted as the maximum risk across
+#' to `NULL` this argument should also be set to `NULL`. See details and
+#' examples for more information. If a time-varying death risk is specified in
+#' the `config` the `hosp_death_risk` is interpreted as the maximum risk across
 #' the epidemic.
 #' @param non_hosp_death_risk Either a single `numeric` for the death risk for
 #' outside of hospitals across the population, or a `<data.frame>` with age
 #' specific death risks outside of hospitals. Default is 5% death risk outside
 #' of hospitals  (`0.05`) for the entire population. If the `onset_to_death`
-#' argument is set to `NA` this argument should also be set to `NA`. See
+#' argument is set to `NULL` this argument should also be set to `NULL`. See
 #' details and examples for more information. If a time-varying death risk is
 #' specified in the `config` the `non_hosp_death_risk` is interpreted as the
 #' maximum risk across the epidemic.
@@ -157,7 +157,7 @@ sim_linelist <- function(contact_distribution,
                          prob_infection,
                          onset_to_hosp,
                          onset_to_death,
-                         onset_to_recovery = NA,
+                         onset_to_recovery = NULL,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,
                          non_hosp_death_risk = 0.05,
