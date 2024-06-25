@@ -42,7 +42,7 @@ mass function internally.
 The default is an anonymous function with a Poisson probability mass function
 (\code{\link[=dpois]{dpois()}}) with a mean (\eqn{\lambda}) of 2 contacts per infection.}
 
-\item{infectious_period}{A function or an \verb{<epidist>} object for the
+\item{infectious_period}{A \code{function} or an \verb{<epidist>} object for the
 infectious period. This defines the duration from becoming infectious to
 no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
@@ -76,7 +76,7 @@ many iterations (internally) then the function errors, whereas if the
 maximum outbreak size is exceeded the function returns the data early and a
 warning stating how many cases and contacts are returned.}
 
-\item{onset_to_hosp}{A function or an \verb{<epidist>} object for the
+\item{onset_to_hosp}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-hospitalisation delay distribution. \code{onset_to_hosp} can also be
 set to \code{NULL} to not simulate hospitalisation (admission) dates.
 
@@ -90,7 +90,7 @@ generator internally.
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.}
 
-\item{onset_to_death}{A function or an \verb{<epidist>} object for the
+\item{onset_to_death}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-death delay distribution. \code{onset_to_death} can also be set to
 \code{NULL} to not simulate dates for individuals that died.
 
@@ -104,7 +104,7 @@ generator internally.
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.}
 
-\item{onset_to_recovery}{A function or an \verb{<epidist>} object for the
+\item{onset_to_recovery}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
 to not simulate dates for individuals that recovered.
 

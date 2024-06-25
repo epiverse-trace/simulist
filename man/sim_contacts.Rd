@@ -33,7 +33,7 @@ mass function internally.
 The default is an anonymous function with a Poisson probability mass function
 (\code{\link[=dpois]{dpois()}}) with a mean (\eqn{\lambda}) of 2 contacts per infection.}
 
-\item{infectious_period}{A function or an \verb{<epidist>} object for the
+\item{infectious_period}{A \code{function} or an \verb{<epidist>} object for the
 infectious period. This defines the duration from becoming infectious to
 no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is

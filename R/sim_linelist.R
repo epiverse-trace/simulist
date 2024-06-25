@@ -35,7 +35,7 @@
 #' The default is an anonymous function with a Poisson probability mass function
 #' ([dpois()]) with a mean (\eqn{\lambda}) of 2 contacts per infection.
 #'
-#' @param infectious_period A function or an `<epidist>` object for the
+#' @param infectious_period A `function` or an `<epidist>` object for the
 #' infectious period. This defines the duration from becoming infectious to
 #' no longer infectious. In the simulation, individuals are assumed to
 #' become infectious immediately after being infected (the latency period is
@@ -56,7 +56,7 @@
 #' @param prob_infection A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
 #'
-#' @param onset_to_hosp A function or an `<epidist>` object for the
+#' @param onset_to_hosp A `function` or an `<epidist>` object for the
 #' onset-to-hospitalisation delay distribution. `onset_to_hosp` can also be
 #' set to `NULL` to not simulate hospitalisation (admission) dates.
 #'
@@ -70,7 +70,7 @@
 #' The default is an anonymous function with a lognormal distribution random
 #' number generator ([rlnorm()]) with `meanlog = 1.5` and `sdlog = 0.5`.
 #'
-#' @param onset_to_death A function or an `<epidist>` object for the
+#' @param onset_to_death A `function` or an `<epidist>` object for the
 #' onset-to-death delay distribution. `onset_to_death` can also be set to
 #' `NULL` to not simulate dates for individuals that died.
 #'
@@ -84,7 +84,7 @@
 #' The default is an anonymous function with a lognormal distribution random
 #' number generator ([rlnorm()]) with `meanlog = 2.5` and `sdlog = 0.5`.
 #'
-#' @param onset_to_recovery A function or an `<epidist>` object for the
+#' @param onset_to_recovery A `function` or an `<epidist>` object for the
 #' onset-to-recovery delay distribution. `onset_to_recovery` can also be `NULL`
 #' to not simulate dates for individuals that recovered.
 #'
