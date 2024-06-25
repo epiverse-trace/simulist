@@ -18,18 +18,38 @@ sim_contacts(
 )
 }
 \arguments{
-\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
-the contact distribution. This is any discrete density function that
-produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
-number of contacts per infection.}
+\item{contact_distribution}{A \code{function} or an \verb{<epidist>} object to generate
+the number of contacts per infection.
 
-\item{infectious_period}{An \verb{<epidist>} object or anonymous function for
-the infectious period. This defines the duration from becoming infectious
-to no longer infectious. In the simulation, individuals are assumed to
+The function can be defined or anonymous. The function must return a vector
+of \code{numerics}. The vector is the probability mass of sampling a certain
+number of contacts, i.e. the first element in the vector is the weight of
+sampling zero contacts, the second element is the weight of sampling a single
+contact, etc. The function must have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a probability
+mass function internally.
+
+The default is an anonymous function with a Poisson probability mass function
+(\code{\link[=dpois]{dpois()}}) with a mean (\eqn{\lambda}) of 2 contacts per infection.}
+
+\item{infectious_period}{A function or an \verb{<epidist>} object for the
+infectious period. This defines the duration from becoming infectious to
+no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
 assumed to be zero). The time intervals between an infected individual and
 their contacts are assumed to be uniformly distributed within the
-infectious period. Infectious periods must be strictly positive.}
+infectious period. Infectious periods must be strictly positive.
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the infectious period. The function must
+have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2} and \code{sdlog = 0.5}.}
 
 \item{prob_infection}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}

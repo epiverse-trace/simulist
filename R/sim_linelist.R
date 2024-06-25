@@ -1,7 +1,7 @@
 #' Simulate a line list
 #'
 #' @description The line list is simulated using a branching process and
-#' parameterised with user defined epidemiological parameters.
+#' parameterised with epidemiological parameters.
 #'
 #' @details For age-stratified hospitalised and death risks a `<data.frame>`
 #' will need to be passed to the `hosp_risk` and/or `hosp_death_risk`
@@ -20,34 +20,90 @@
 #' * `proportion`: a column with the proportion of the population that are in
 #' that age group. Proportions must sum to one.
 #'
-#' @param contact_distribution An `<epidist>` object or anonymous function for
-#' the contact distribution. This is any discrete density function that
-#' produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
-#' number of contacts per infection.
-#' @param infectious_period An `<epidist>` object or anonymous function for
-#' the infectious period. This defines the duration from becoming infectious
-#' to no longer infectious. In the simulation, individuals are assumed to
+#' @param contact_distribution A `function` or an `<epidist>` object to generate
+#' the number of contacts per infection.
+#'
+#' The function can be defined or anonymous. The function must return a vector
+#' of `numerics`. The vector is the probability mass of sampling a certain
+#' number of contacts, i.e. the first element in the vector is the weight of
+#' sampling zero contacts, the second element is the weight of sampling a single
+#' contact, etc. The function must have a single argument.
+#'
+#' An `<epidist>` can be provided. This will be converted into a probability
+#' mass function internally.
+#'
+#' The default is an anonymous function with a Poisson probability mass function
+#' ([dpois()]) with a mean (\eqn{\lambda}) of 2 contacts per infection.
+#'
+#' @param infectious_period A function or an `<epidist>` object for the
+#' infectious period. This defines the duration from becoming infectious to
+#' no longer infectious. In the simulation, individuals are assumed to
 #' become infectious immediately after being infected (the latency period is
 #' assumed to be zero). The time intervals between an infected individual and
 #' their contacts are assumed to be uniformly distributed within the
 #' infectious period. Infectious periods must be strictly positive.
+#'
+#' The function can be defined or anonymous. The function must return a vector
+#' of `numeric`s for the length of the infectious period. The function must
+#' have a single argument.
+#'
+#' An `<epidist>` can be provided. This will be converted into random number
+#' generator internally.
+#'
+#' The default is an anonymous function with a lognormal distribution random
+#' number generator ([rlnorm()]) with `meanlog = 2` and `sdlog = 0.5`.
+#'
 #' @param prob_infection A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
-#' @param onset_to_hosp An `<epidist>` object, an anonymous function for
-#' the onset to hospitalisation delay distribution, or `NULL` to not simulate
-#' hospitalisation (admission) dates.
-#' @param onset_to_death An `<epidist>` object, an anonymous function for
-#' the onset to death delay distribution, or `NULL` to not simulate dates for
-#' individuals that died.
-#' @param onset_to_recovery An `<epidist>` object, an anonymous function for
-#' the onset to death delay distribution, or `NULL` to not simulate dates for
-#' individuals that recovered. Default is `NULL` so by default cases that
-#' recover get an `NA` in the `$date_outcome` line list column.
+#'
+#' @param onset_to_hosp A function or an `<epidist>` object for the
+#' onset-to-hospitalisation delay distribution. `onset_to_hosp` can also be
+#' set to `NULL` to not simulate hospitalisation (admission) dates.
+#'
+#' The function can be defined or anonymous. The function must return a vector
+#' of `numeric`s for the length of the onset-to-hospitalisation delay. The
+#' function must have a single argument.
+#'
+#' An `<epidist>` can be provided. This will be converted into a random number
+#' generator internally.
+#'
+#' The default is an anonymous function with a lognormal distribution random
+#' number generator ([rlnorm()]) with `meanlog = 1.5` and `sdlog = 0.5`.
+#'
+#' @param onset_to_death A function or an `<epidist>` object for the
+#' onset-to-death delay distribution. `onset_to_death` can also be set to
+#' `NULL` to not simulate dates for individuals that died.
+#'
+#' The function can be defined or anonymous. The function must return a vector
+#' of `numeric`s for the length of the onset-to-death delay. The function must
+#' have a single argument.
+#'
+#' An `<epidist>` can be provided. This will be converted into a random number
+#' generator internally.
+#'
+#' The default is an anonymous function with a lognormal distribution random
+#' number generator ([rlnorm()]) with `meanlog = 2.5` and `sdlog = 0.5`.
+#'
+#' @param onset_to_recovery A function or an `<epidist>` object for the
+#' onset-to-recovery delay distribution. `onset_to_recovery` can also be `NULL`
+#' to not simulate dates for individuals that recovered.
+#'
+#' The function can be defined or anonymous. The function must return a vector
+#' of `numeric`s for the length of the onset-to-recovery delay. The function
+#' must have a single argument.
+#'
+#' An `<epidist>` can be provided. This will be converted into a random number
+#' generator internally.
+#'
+#' The default is `NULL` so by default cases that recover get an `NA` in the
+#' `$date_outcome` line list column.
+#'
 #' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
 #' hospitalisation risks Default is 20% hospitalisation (`0.2`) for the entire
 #' population. If the `onset_to_hosp` argument is set to `NULL` this argument
 #' should also be set to `NULL`. See details and examples for more information.
+#'
 #' @param hosp_death_risk Either a single `numeric` for the death risk for
 #' hospitalised individuals across the population, or a `<data.frame>` with age
 #' specific hospitalised death risks Default is 50% death risk in hospitals
@@ -56,6 +112,7 @@
 #' examples for more information. If a time-varying death risk is specified in
 #' the `config` the `hosp_death_risk` is interpreted as the maximum risk across
 #' the epidemic.
+#'
 #' @param non_hosp_death_risk Either a single `numeric` for the death risk for
 #' outside of hospitals across the population, or a `<data.frame>` with age
 #' specific death risks outside of hospitals. Default is 5% death risk outside
@@ -64,9 +121,12 @@
 #' details and examples for more information. If a time-varying death risk is
 #' specified in the `config` the `non_hosp_death_risk` is interpreted as the
 #' maximum risk across the epidemic.
+#'
 #' @param outbreak_start_date A `date` for the start of the outbreak.
+#'
 #' @param anonymise A `logical` boolean for whether case names should be
 #' anonymised. Default is `FALSE`.
+#'
 #' @param outbreak_size A `numeric` vector of length 2 defining the minimum and
 #' the maximum number of infected individuals for the simulated outbreak.
 #' Default is `c(10, 1e4)`, so the minimum outbreak size is 10 infected
@@ -77,6 +137,7 @@
 #' many iterations (internally) then the function errors, whereas if the
 #' maximum outbreak size is exceeded the function returns the data early and a
 #' warning stating how many cases and contacts are returned.
+#'
 #' @param population_age Either a `numeric` vector with two elements or a
 #' `<data.frame>` with age structure in the population. Use a `numeric` vector
 #' to specific the age range of the population, the first element is the lower
@@ -84,9 +145,11 @@
 #' range (both inclusive, i.e. \[lower, upper\]). The `<data.frame>` with
 #' age groups and the proportion of the population in that group. See details
 #' and examples for more information.
+#'
 #' @param case_type_probs A named `numeric` vector with the probability of
 #' each case type. The names of the vector must be `"suspected"`, `"probable"`,
 #' `"confirmed"`. Values of each case type must sum to one.
+#'
 #' @param config A list of settings to adjust the randomly sampled delays and
 #' Ct values. See [create_config()] for more information.
 #'

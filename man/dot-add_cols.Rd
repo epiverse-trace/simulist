@@ -49,9 +49,19 @@ given in the \code{distribution} argument.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
-the onset to hospitalisation delay distribution, or \code{NULL} to not simulate
-hospitalisation (admission) dates.}
+\item{onset_to_hosp}{A function or an \verb{<epidist>} object for the
+onset-to-hospitalisation delay distribution. \code{onset_to_hosp} can also be
+set to \code{NULL} to not simulate hospitalisation (admission) dates.
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-hospitalisation delay. The
+function must have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
@@ -59,14 +69,33 @@ hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entir
 population. If the \code{onset_to_hosp} argument is set to \code{NULL} this argument
 should also be set to \code{NULL}. See details and examples for more information.}
 
-\item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NULL} to not simulate dates for
-individuals that died.}
+\item{onset_to_death}{A function or an \verb{<epidist>} object for the
+onset-to-death delay distribution. \code{onset_to_death} can also be set to
+\code{NULL} to not simulate dates for individuals that died.
 
-\item{onset_to_recovery}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NULL} to not simulate dates for
-individuals that recovered. Default is \code{NULL} so by default cases that
-recover get an \code{NA} in the \verb{$date_outcome} line list column.}
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-death delay. The function must
+have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.}
+
+\item{onset_to_recovery}{A function or an \verb{<epidist>} object for the
+onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
+to not simulate dates for individuals that recovered.
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-recovery delay. The function
+must have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is \code{NULL} so by default cases that recover get an \code{NA} in the
+\verb{$date_outcome} line list column.}
 
 \item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
