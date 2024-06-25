@@ -152,11 +152,11 @@
 #'   hosp_risk = age_dep_hosp_risk
 #' )
 #' head(linelist)
-sim_linelist <- function(contact_distribution,
-                         infectious_period,
-                         prob_infection,
-                         onset_to_hosp,
-                         onset_to_death,
+sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2),
+                         infectious_period = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+                         prob_infection = 0.5,
+                         onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
+                         onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2.5, sdlog = 0.5),
                          onset_to_recovery = NULL,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,
