@@ -5,9 +5,9 @@
 \title{Simulate contacts for an infectious disease outbreak}
 \usage{
 sim_contacts(
-  contact_distribution,
-  infectious_period,
-  prob_infection,
+  contact_distribution = function(x) stats::dpois(x = x, lambda = 2),
+  infectious_period = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+  prob_infection = 0.5,
   outbreak_start_date = as.Date("2023-01-01"),
   anonymise = FALSE,
   outbreak_size = c(10, 10000),
@@ -73,7 +73,12 @@ A contacts \verb{<data.frame>}
 Simulate contacts for an infectious disease outbreak
 }
 \examples{
-# load data required to simulate contacts
+# quickly simulate contact tracing data using the function defaults
+contacts <- sim_contacts()
+head(contacts)
+
+# to simulate more realistic contact tracing data load epiparameters from
+# {epiparameter}
 contact_distribution <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "contact distribution",

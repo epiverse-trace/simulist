@@ -12,7 +12,12 @@
 #' @author Joshua W. Lambert, Carmen Tamayo
 #'
 #' @examples
-#' # load data required to simulate contacts
+#' # quickly simulate contact tracing data using the function defaults
+#' contacts <- sim_contacts()
+#' head(contacts)
+#'
+#' # to simulate more realistic contact tracing data load epiparameters from
+#' # {epiparameter}
 #' contact_distribution <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "contact distribution",

@@ -17,7 +17,13 @@
 #' @author Joshua W. Lambert
 #'
 #' @examples
-#' # load data required to simulate outbreak data
+#' # quickly simulate an outbreak using the function defaults
+#' outbreak <- sim_outbreak()
+#' head(outbreak$linelist)
+#' head(outbreak$contacts)
+#'
+#' # to simulate a more realistic outbreak load epiparameters from
+#' # {epiparameter}
 #' contact_distribution <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "contact distribution",
