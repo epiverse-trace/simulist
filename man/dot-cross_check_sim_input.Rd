@@ -14,7 +14,7 @@ compatible with hospitalisation and death risks}
 )
 }
 \arguments{
-\item{onset_to_hosp}{A function or an \verb{<epidist>} object for the
+\item{onset_to_hosp}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-hospitalisation delay distribution. \code{onset_to_hosp} can also be
 set to \code{NULL} to not simulate hospitalisation (admission) dates.
 
@@ -28,7 +28,7 @@ generator internally.
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.}
 
-\item{onset_to_death}{A function or an \verb{<epidist>} object for the
+\item{onset_to_death}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-death delay distribution. \code{onset_to_death} can also be set to
 \code{NULL} to not simulate dates for individuals that died.
 

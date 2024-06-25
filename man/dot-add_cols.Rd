@@ -49,7 +49,7 @@ given in the \code{distribution} argument.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{onset_to_hosp}{A function or an \verb{<epidist>} object for the
+\item{onset_to_hosp}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-hospitalisation delay distribution. \code{onset_to_hosp} can also be
 set to \code{NULL} to not simulate hospitalisation (admission) dates.
 
@@ -69,7 +69,7 @@ hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entir
 population. If the \code{onset_to_hosp} argument is set to \code{NULL} this argument
 should also be set to \code{NULL}. See details and examples for more information.}
 
-\item{onset_to_death}{A function or an \verb{<epidist>} object for the
+\item{onset_to_death}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-death delay distribution. \code{onset_to_death} can also be set to
 \code{NULL} to not simulate dates for individuals that died.
 
@@ -83,7 +83,7 @@ generator internally.
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.}
 
-\item{onset_to_recovery}{A function or an \verb{<epidist>} object for the
+\item{onset_to_recovery}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
 to not simulate dates for individuals that recovered.
 
