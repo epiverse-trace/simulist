@@ -32,9 +32,9 @@
 #'   infectious_period = infectious_period,
 #'   prob_infection = 0.5
 #' )
-sim_contacts <- function(contact_distribution,
-                         infectious_period,
-                         prob_infection,
+sim_contacts <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2),
+                         infectious_period = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+                         prob_infection = 0.5,
                          outbreak_start_date = as.Date("2023-01-01"),
                          anonymise = FALSE,
                          outbreak_size = c(10, 1e4),
