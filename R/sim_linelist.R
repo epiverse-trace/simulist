@@ -96,7 +96,12 @@
 #' @author Joshua W. Lambert, Carmen Tamayo
 #'
 #' @examples
-#' # load data required to simulate line list
+#' # quickly simulate a line list using the function defaults
+#' linelist <- sim_linelist()
+#' head(linelist)
+#'
+#' # to simulate a more realistic line list load epiparameters from
+#' # {epiparameter}
 #' contact_distribution <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "contact distribution",
