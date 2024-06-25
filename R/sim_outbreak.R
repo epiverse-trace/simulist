@@ -1,8 +1,7 @@
 #' Simulate a line list and a contacts table
 #'
 #' @description The line list and contacts are simulated using a branching
-#' process and parameterised with previously published epidemiological
-#' parameters.
+#' process and parameterised with epidemiological parameters.
 #'
 #' @inherit sim_linelist details
 #'

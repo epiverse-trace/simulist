@@ -29,34 +29,83 @@ within \pkg{simulist}}
 \item{sim_type}{A \code{character} string specifying which simulation function
 this function is being called within.}
 
-\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
-the contact distribution. This is any discrete density function that
-produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
-number of contacts per infection.}
+\item{contact_distribution}{A \code{function} or an \verb{<epidist>} object to generate
+the number of contacts per infection.
 
-\item{infectious_period}{An \verb{<epidist>} object or anonymous function for
-the infectious period. This defines the duration from becoming infectious
-to no longer infectious. In the simulation, individuals are assumed to
+The function can be defined or anonymous. The function must return a vector
+of \code{numerics}. The vector is the probability mass of sampling a certain
+number of contacts, i.e. the first element in the vector is the weight of
+sampling zero contacts, the second element is the weight of sampling a single
+contact, etc. The function must have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a probability
+mass function internally.
+
+The default is an anonymous function with a Poisson probability mass function
+(\code{\link[=dpois]{dpois()}}) with a mean (\eqn{\lambda}) of 2 contacts per infection.}
+
+\item{infectious_period}{A function or an \verb{<epidist>} object for the
+infectious period. This defines the duration from becoming infectious to
+no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
 assumed to be zero). The time intervals between an infected individual and
 their contacts are assumed to be uniformly distributed within the
-infectious period. Infectious periods must be strictly positive.}
+infectious period. Infectious periods must be strictly positive.
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the infectious period. The function must
+have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2} and \code{sdlog = 0.5}.}
 
 \item{prob_infection}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
-the onset to hospitalisation delay distribution, or \code{NULL} to not simulate
-hospitalisation (admission) dates.}
+\item{onset_to_hosp}{A function or an \verb{<epidist>} object for the
+onset-to-hospitalisation delay distribution. \code{onset_to_hosp} can also be
+set to \code{NULL} to not simulate hospitalisation (admission) dates.
 
-\item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NULL} to not simulate dates for
-individuals that died.}
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-hospitalisation delay. The
+function must have a single argument.
 
-\item{onset_to_recovery}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NULL} to not simulate dates for
-individuals that recovered. Default is \code{NULL} so by default cases that
-recover get an \code{NA} in the \verb{$date_outcome} line list column.}
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.}
+
+\item{onset_to_death}{A function or an \verb{<epidist>} object for the
+onset-to-death delay distribution. \code{onset_to_death} can also be set to
+\code{NULL} to not simulate dates for individuals that died.
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-death delay. The function must
+have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.}
+
+\item{onset_to_recovery}{A function or an \verb{<epidist>} object for the
+onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
+to not simulate dates for individuals that recovered.
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-recovery delay. The function
+must have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is \code{NULL} so by default cases that recover get an \code{NA} in the
+\verb{$date_outcome} line list column.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
