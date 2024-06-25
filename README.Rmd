@@ -57,10 +57,21 @@ pak::pak("epiverse-trace/simulist")
 
 ```{r load-simulist}
 library(simulist)
-library(epiparameter)
 ```
 
-The line list simulation requires that we define a contact distribution, period of infectiousness, onset-to-hospitalisation delay, and onset-to-death delay. We can load these from the library of epidemiological parameters in the `{epiparameter}` R package if available, or if these are not in the database yet (such as the contact distribution for COVID-19) we can define them ourselves.
+A line list can be simulated by calling `sim_linelist()`. The function provides sensible defaults to quickly generate a epidemiologically valid data set.
+
+```{r, sim-linelist-defaults}
+set.seed(1)
+linelist <- sim_linelist()
+head(linelist)
+```
+
+However, to simulate a more realistic line list using epidemiological parameters estimated for a infectious disease we can use previously estimated epidemiological parameters. These can be from the `{epiparameter}` R package if available, or if these are not in the `{epiparameter}` database yet (such as the contact distribution for COVID-19) we can define them ourselves. Here we define a contact distribution, period of infectiousness, onset-to-hospitalisation delay, and onset-to-death delay. 
+
+```{r load-epiparameter}
+library(epiparameter)
+```
 
 ```{r create-epidists}
 # create COVID-19 contact distribution
