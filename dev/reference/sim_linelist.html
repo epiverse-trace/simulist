@@ -85,7 +85,7 @@ parameterised with user defined epidemiological parameters.</p>
 <span>  <span class="va">prob_infection</span>,</span>
 <span>  <span class="va">onset_to_hosp</span>,</span>
 <span>  <span class="va">onset_to_death</span>,</span>
-<span>  onset_to_recovery <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  onset_to_recovery <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>  hosp_death_risk <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  non_hosp_death_risk <span class="op">=</span> <span class="fl">0.05</span>,</span>
@@ -124,20 +124,20 @@ contact being infected by an infected primary contact.</p></dd>
 
 <dt>onset_to_hosp</dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object, an anonymous function for
-the onset to hospitalisation delay distribution, or <code>NA</code> to not simulate
+the onset to hospitalisation delay distribution, or <code>NULL</code> to not simulate
 hospitalisation (admission) dates.</p></dd>
 
 
 <dt>onset_to_death</dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object, an anonymous function for
-the onset to death delay distribution, or <code>NA</code> to not simulate dates for
+the onset to death delay distribution, or <code>NULL</code> to not simulate dates for
 individuals that died.</p></dd>
 
 
 <dt>onset_to_recovery</dt>
 <dd><p>An <code>&lt;epidist&gt;</code> object, an anonymous function for
-the onset to death delay distribution, or <code>NA</code> to not simulate dates for
-individuals that recovered. Default is <code>NA</code> so by default cases that
+the onset to death delay distribution, or <code>NULL</code> to not simulate dates for
+individuals that recovered. Default is <code>NULL</code> so by default cases that
 recover get an <code>NA</code> in the <code>$date_outcome</code> line list column.</p></dd>
 
 
@@ -145,8 +145,8 @@ recover get an <code>NA</code> in the <code>$date_outcome</code> line list colum
 <dd><p>Either a single <code>numeric</code> for the hospitalisation risk of
 everyone in the population, or a <code>&lt;data.frame&gt;</code> with age specific
 hospitalisation risks Default is 20% hospitalisation (<code>0.2</code>) for the entire
-population. If the <code>onset_to_hosp</code> argument is set to <code>NA</code> this argument
-should also be set to <code>NA</code>. See details and examples for more information.</p></dd>
+population. If the <code>onset_to_hosp</code> argument is set to <code>NULL</code> this argument
+should also be set to <code>NULL</code>. See details and examples for more information.</p></dd>
 
 
 <dt>hosp_death_risk</dt>
@@ -154,9 +154,9 @@ should also be set to <code>NA</code>. See details and examples for more informa
 hospitalised individuals across the population, or a <code>&lt;data.frame&gt;</code> with age
 specific hospitalised death risks Default is 50% death risk in hospitals
 (<code>0.5</code>) for the entire population. If the <code>onset_to_death</code> argument is set
-to <code>NA</code> this argument should also be set to <code>NA</code>. See details and examples
-for more information. If a time-varying death risk is specified in the
-<code>config</code> the <code>hosp_death_risk</code> is interpreted as the maximum risk across
+to <code>NULL</code> this argument should also be set to <code>NULL</code>. See details and
+examples for more information. If a time-varying death risk is specified in
+the <code>config</code> the <code>hosp_death_risk</code> is interpreted as the maximum risk across
 the epidemic.</p></dd>
 
 
@@ -165,7 +165,7 @@ the epidemic.</p></dd>
 outside of hospitals across the population, or a <code>&lt;data.frame&gt;</code> with age
 specific death risks outside of hospitals. Default is 5% death risk outside
 of hospitals  (<code>0.05</code>) for the entire population. If the <code>onset_to_death</code>
-argument is set to <code>NA</code> this argument should also be set to <code>NA</code>. See
+argument is set to <code>NULL</code> this argument should also be set to <code>NULL</code>. See
 details and examples for more information. If a time-varying death risk is
 specified in the <code>config</code> the <code>non_hosp_death_risk</code> is interpreted as the
 maximum risk across the epidemic.</p></dd>

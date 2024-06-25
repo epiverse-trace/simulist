@@ -451,17 +451,17 @@
 <div class="section level2">
 <h2 id="simulating-without-hospitalisations-andor-deaths">Simulating without hospitalisations and/or deaths<a class="anchor" aria-label="anchor" href="#simulating-without-hospitalisations-andor-deaths"></a>
 </h2>
-<p>The onset-to-hospitalisation (<code>onset_to_hosp</code>) and onset-to-death (<code>onset_to_death</code>) arguments can also be set to <code>NA</code> in which case the date of admission (<code>$date_admission</code>) and date of death (<code>$date_death</code>) column in the line list will contains <code>NA</code>s.</p>
+<p>The onset-to-hospitalisation (<code>onset_to_hosp</code>) and onset-to-death (<code>onset_to_death</code>) arguments can also be set to <code>NULL</code> in which case the date of admission (<code>$date_admission</code>) and date of death (<code>$date_death</code>) column in the line list will contains <code>NA</code>s.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
 <span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  onset_to_hosp <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  onset_to_death <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  hosp_risk <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  hosp_death_risk <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  non_hosp_death_risk <span class="op">=</span> <span class="cn">NA</span></span>
+<span>  onset_to_hosp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  onset_to_death <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hosp_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hosp_death_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  non_hosp_death_risk <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id             case_name case_type sex age date_onset date_admission</span></span>
@@ -478,7 +478,7 @@
 <span><span class="co">#&gt; 4 recovered         &lt;NA&gt;         2022-12-31        2023-01-04     23.1</span></span>
 <span><span class="co">#&gt; 5 recovered         &lt;NA&gt;         2022-12-31        2023-01-02       NA</span></span>
 <span><span class="co">#&gt; 6 recovered         &lt;NA&gt;         2023-01-01        2023-01-03     23.1</span></span></code></pre></div>
-</details><p>This same functionality also applies to <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code>. In the above example, <code>hosp_risk</code>, <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code> are set to <code>NA</code>. If the risk (<code>*_risk</code>) arguments are left as numeric inputs but the corresponding onset-to-event distribution (i.e. <code>hosp_risk</code> for <code>onset_to_hosp</code> and <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code> for <code>onset_to_death</code>) are set to <code>NA</code> a warning will be produced. The example above simulates with neither hospitalisation or deaths, but these do not need to be <em>turned off</em> together, and one or the other can be set to <code>NA</code> with their corresponding risk arguments.</p>
+</details><p>This same functionality also applies to <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code>. In the above example, <code>hosp_risk</code>, <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code> are set to <code>NULL</code>. If the risk (<code>*_risk</code>) arguments are left as numeric inputs but the corresponding onset-to-event distribution (i.e. <code>hosp_risk</code> for <code>onset_to_hosp</code> and <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code> for <code>onset_to_death</code>) are set to <code>NULL</code> a warning will be produced. The example above simulates with neither hospitalisation or deaths, but these do not need to be <em>turned off</em> together, and one or the other can be set to <code>NULL</code> with their corresponding risk arguments.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
