@@ -59,15 +59,44 @@ pak::pak("epiverse-trace/simulist")
 
 ``` r
 library(simulist)
-library(epiparameter)
 ```
 
-The line list simulation requires that we define a contact distribution,
-period of infectiousness, onset-to-hospitalisation delay, and
-onset-to-death delay. We can load these from the library of
-epidemiological parameters in the `{epiparameter}` R package if
-available, or if these are not in the database yet (such as the contact
-distribution for COVID-19) we can define them ourselves.
+A line list can be simulated by calling `sim_linelist()`. The function
+provides sensible defaults to quickly generate a epidemiologically valid
+data set.
+
+``` r
+set.seed(1)
+linelist <- sim_linelist()
+head(linelist)
+#>   id        case_name case_type sex age date_onset date_admission   outcome
+#> 1  1   Dylan Quintana confirmed   m  59 2023-01-01           <NA> recovered
+#> 2  2     Briana Owens confirmed   f  90 2023-01-01     2023-01-06      died
+#> 3  3  Elaine Phillips  probable   f   4 2023-01-02     2023-01-08      died
+#> 4  5    Justin Farley  probable   m  29 2023-01-04           <NA> recovered
+#> 5  6 Sadeeda el-Obeid suspected   f  14 2023-01-05           <NA> recovered
+#> 6  7   Mouneek Israel  probable   f  85 2023-01-06           <NA>      died
+#>   date_outcome date_first_contact date_last_contact ct_value
+#> 1         <NA>               <NA>              <NA>     26.3
+#> 2   2023-01-19         2022-12-31        2023-01-05     26.3
+#> 3   2023-01-08         2022-12-30        2023-01-01       NA
+#> 4         <NA>         2023-01-05        2023-01-05       NA
+#> 5         <NA>         2023-01-07        2023-01-08       NA
+#> 6   2023-01-15         2023-01-03        2023-01-06       NA
+```
+
+However, to simulate a more realistic line list using epidemiological
+parameters estimated for a infectious disease we can use previously
+estimated epidemiological parameters. These can be from the
+`{epiparameter}` R package if available, or if these are not in the
+`{epiparameter}` database yet (such as the contact distribution for
+COVID-19) we can define them ourselves. Here we define a contact
+distribution, period of infectiousness, onset-to-hospitalisation delay,
+and onset-to-death delay.
+
+``` r
+library(epiparameter)
+```
 
 ``` r
 # create COVID-19 contact distribution
