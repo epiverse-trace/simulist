@@ -5,77 +5,77 @@
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death)
     Output
       $linelist
-         id          case_name case_type sex age date_onset date_admission   outcome
-      1   1    Rushdi al-Ishak  probable   m  35 2023-01-01           <NA> recovered
-      2   2         Jeffrey Le confirmed   m  43 2023-01-01           <NA> recovered
-      3   3  Dominic Barringer suspected   m   1 2023-01-01           <NA> recovered
-      4   5       Tyler Kelley  probable   m  78 2023-01-01           <NA> recovered
-      5   6      Carolyn Moore confirmed   f  22 2023-01-01           <NA> recovered
-      6   8  Cheyenne Sayavong confirmed   f  28 2023-01-01     2023-01-04      died
-      7  11   Bassaam el-Majid confirmed   m  46 2023-01-01     2023-01-14 recovered
-      8  12          Kendra To suspected   f  67 2023-01-01     2023-01-10      died
-      9  13    Qaaid al-Madani confirmed   m  86 2023-01-01           <NA> recovered
-      10 18  Dominique Raymond confirmed   f  60 2023-01-02           <NA> recovered
-      11 20 Abdul Noor el-Syed  probable   m  49 2023-01-02           <NA> recovered
-      12 22      Susana Varela  probable   f   7 2023-01-02           <NA> recovered
+         id        case_name case_type sex age date_onset date_admission   outcome
+      1   1  Wajdi al-Demian  probable   m  35 2023-01-01           <NA> recovered
+      2   2    Raaid el-Diab confirmed   m  43 2023-01-01     2023-01-07 recovered
+      3   3   Nickolas Nault suspected   m   1 2023-01-01           <NA> recovered
+      4   5      Hee Kennedy confirmed   m  78 2023-01-01     2023-01-03      died
+      5   6      Hope Arshad suspected   f  22 2023-01-01     2023-01-28      died
+      6   8   Shanta Holiday  probable   f  28 2023-01-01           <NA> recovered
+      7  11 Raakaan al-Shams  probable   m  46 2023-01-01           <NA> recovered
+      8  12   Chandra Kilian suspected   f  67 2023-01-01           <NA> recovered
+      9  13  Ricardo Sanchez confirmed   m  86 2023-01-01           <NA> recovered
+      10 18    Kanani Nguyen confirmed   f  60 2023-01-02           <NA> recovered
+      11 20   Jared Chambers  probable   m  49 2023-01-02           <NA> recovered
+      12 22     Annie Carter  probable   f   7 2023-01-02           <NA> recovered
          date_outcome date_first_contact date_last_contact ct_value
       1          <NA>               <NA>              <NA>       NA
-      2          <NA>         2022-12-30        2023-01-05       24
+      2          <NA>         2022-12-30        2023-01-05     24.1
       3          <NA>         2022-12-30        2023-01-02       NA
-      4          <NA>         2022-12-29        2023-01-02       NA
-      5          <NA>         2023-01-01        2023-01-03       24
-      6    2023-01-16         2023-01-03        2023-01-04       24
-      7          <NA>         2023-01-04        2023-01-05       24
-      8    2023-01-17         2023-01-01        2023-01-04       NA
-      9          <NA>         2022-12-31        2023-01-03       24
-      10         <NA>         2022-12-30        2023-01-03       24
+      4    2023-01-21         2022-12-29        2023-01-02     24.1
+      5    2023-01-10         2023-01-01        2023-01-03       NA
+      6          <NA>         2023-01-03        2023-01-04       NA
+      7          <NA>         2023-01-04        2023-01-05       NA
+      8          <NA>         2023-01-01        2023-01-04       NA
+      9          <NA>         2022-12-31        2023-01-03     24.1
+      10         <NA>         2022-12-30        2023-01-03     24.1
       11         <NA>         2023-01-01        2023-01-04       NA
       12         <NA>         2023-01-01        2023-01-03       NA
       
       $contacts
-                      from                        to age sex date_first_contact
-      1    Rushdi al-Ishak                Jeffrey Le  43   m         2022-12-30
-      2    Rushdi al-Ishak         Dominic Barringer   1   m         2022-12-30
-      3         Jeffrey Le             Taylor Graves  29   f         2022-12-27
-      4         Jeffrey Le              Tyler Kelley  78   m         2022-12-29
-      5  Dominic Barringer             Carolyn Moore  22   f         2023-01-01
-      6  Dominic Barringer           Jackson Carlson  70   m         2022-12-30
-      7  Dominic Barringer         Cheyenne Sayavong  28   f         2023-01-03
-      8       Tyler Kelley         Mercedes Lovelace  37   f         2023-01-06
-      9      Carolyn Moore Chantelle Vazquez-Luevano  61   f         2023-01-01
-      10 Cheyenne Sayavong          Bassaam el-Majid  46   m         2023-01-04
-      11 Cheyenne Sayavong                 Kendra To  67   f         2023-01-01
-      12 Cheyenne Sayavong           Qaaid al-Madani  86   m         2022-12-31
-      13  Bassaam el-Majid          John Khanthavong  71   m         2022-12-28
-      14  Bassaam el-Majid               Megan Hayes  51   f         2023-01-01
-      15  Bassaam el-Majid     Abdul Kader el-Jabour  44   m         2023-01-02
-      16         Kendra To         Amanda Larochelle  49   f         2023-01-02
-      17   Qaaid al-Madani         Dominique Raymond  60   f         2022-12-30
-      18   Qaaid al-Madani            Natalie Newton  56   f         2023-01-06
-      19   Qaaid al-Madani        Abdul Noor el-Syed  49   m         2023-01-01
-      20   Qaaid al-Madani               Sam Spencer  50   m         2023-01-01
-      21 Dominique Raymond             Susana Varela   7   f         2023-01-01
+                     from                     to age sex date_first_contact
+      1   Wajdi al-Demian          Raaid el-Diab  43   m         2022-12-30
+      2   Wajdi al-Demian         Nickolas Nault   1   m         2022-12-30
+      3     Raaid el-Diab            Durine Cobb  29   f         2022-12-27
+      4     Raaid el-Diab            Hee Kennedy  78   m         2022-12-29
+      5    Nickolas Nault            Hope Arshad  22   f         2023-01-01
+      6    Nickolas Nault      Mubarak el-Vaziri  70   m         2022-12-30
+      7    Nickolas Nault         Shanta Holiday  28   f         2023-01-03
+      8       Hee Kennedy           Darian Guyon  37   f         2023-01-06
+      9       Hope Arshad          Mackenzie Ahn  61   f         2023-01-01
+      10   Shanta Holiday       Raakaan al-Shams  46   m         2023-01-04
+      11   Shanta Holiday         Chandra Kilian  67   f         2023-01-01
+      12   Shanta Holiday        Ricardo Sanchez  86   m         2022-12-31
+      13 Raakaan al-Shams         Tae Woo Nguyen  71   m         2022-12-28
+      14 Raakaan al-Shams       Mikhaila Carlson  51   f         2023-01-01
+      15 Raakaan al-Shams         Alexander Orio  44   m         2023-01-02
+      16   Chandra Kilian      Alexandra Johnson  49   f         2023-01-02
+      17  Ricardo Sanchez          Kanani Nguyen  60   f         2022-12-30
+      18  Ricardo Sanchez Nirvana Elizalde Villa  56   f         2023-01-06
+      19  Ricardo Sanchez         Jared Chambers  49   m         2023-01-01
+      20  Ricardo Sanchez         Thomas Morales  50   m         2023-01-01
+      21    Kanani Nguyen           Annie Carter   7   f         2023-01-01
          date_last_contact was_case           status
       1         2023-01-05        Y             case
       2         2023-01-02        Y             case
-      3         2023-01-03        N          unknown
+      3         2023-01-03        N   under_followup
       4         2023-01-02        Y             case
       5         2023-01-03        Y             case
       6         2023-01-02        N   under_followup
       7         2023-01-04        Y             case
       8         2023-01-06        N   under_followup
-      9         2023-01-05        N   under_followup
+      9         2023-01-05        N lost_to_followup
       10        2023-01-05        Y             case
       11        2023-01-04        Y             case
       12        2023-01-03        Y             case
-      13        2023-01-05        N   under_followup
-      14        2023-01-04        N lost_to_followup
+      13        2023-01-05        N lost_to_followup
+      14        2023-01-04        N   under_followup
       15        2023-01-05        N   under_followup
       16        2023-01-03        N   under_followup
       17        2023-01-03        Y             case
       18        2023-01-09        N          unknown
       19        2023-01-04        Y             case
-      20        2023-01-03        N   under_followup
+      20        2023-01-03        N lost_to_followup
       21        2023-01-03        Y             case
       
 
@@ -88,62 +88,62 @@
     Output
       $linelist
          id  case_name case_type sex age date_onset date_admission   outcome
-      1   1 1ePRI5wC1I suspected   m  35 2023-01-01           <NA> recovered
-      2   2 Ji3IItv5Ov suspected   m  43 2023-01-01           <NA> recovered
-      3   3 sRrRMCAJFE  probable   m   1 2023-01-01           <NA> recovered
-      4   5 uuoY8Kxng7  probable   m  78 2023-01-01           <NA> recovered
-      5   6 AzDS6oXfHu  probable   f  22 2023-01-01           <NA> recovered
-      6   8 h4yEtT6tej confirmed   f  28 2023-01-01     2023-01-04      died
-      7  11 7XeZaLTmhW confirmed   m  46 2023-01-01     2023-01-14 recovered
-      8  12 sVUBVWYTLk  probable   f  67 2023-01-01     2023-01-10      died
-      9  13 hw9tYeb1el suspected   m  86 2023-01-01           <NA> recovered
-      10 18 UJRewLYtBB  probable   f  60 2023-01-02           <NA> recovered
-      11 20 9HLY9VZdzu  probable   m  49 2023-01-02           <NA> recovered
-      12 22 wJ3WvUcVV4 confirmed   f   7 2023-01-02           <NA> recovered
+      1   1 qKY39Zyiuu  probable   m  35 2023-01-01           <NA> recovered
+      2   2 oY8Kxng7Az confirmed   m  43 2023-01-01     2023-01-07 recovered
+      3   3 DS6oXfHuaq  probable   m   1 2023-01-01           <NA> recovered
+      4   5 yEtT6tejRt confirmed   m  78 2023-01-01     2023-01-03      died
+      5   6 34oCba8e6y confirmed   f  22 2023-01-01     2023-01-28      died
+      6   8 eZaLTmhWsV suspected   f  28 2023-01-01           <NA> recovered
+      7  11 XnmE3U4HDz confirmed   m  46 2023-01-01           <NA> recovered
+      8  12 SVgVAWQihv confirmed   f  67 2023-01-01           <NA> recovered
+      9  13 SfYVARDjDa confirmed   m  86 2023-01-01           <NA> recovered
+      10 18 3p6KxuczwJ  probable   f  60 2023-01-02           <NA> recovered
+      11 20 6ZKaUKvu5A  probable   m  49 2023-01-02           <NA> recovered
+      12 22 tN2GNkk2uu confirmed   f   7 2023-01-02           <NA> recovered
          date_outcome date_first_contact date_last_contact ct_value
       1          <NA>               <NA>              <NA>       NA
-      2          <NA>         2022-12-30        2023-01-05       NA
+      2          <NA>         2022-12-30        2023-01-05     24.2
       3          <NA>         2022-12-30        2023-01-02       NA
-      4          <NA>         2022-12-29        2023-01-02       NA
-      5          <NA>         2023-01-01        2023-01-03       NA
-      6    2023-01-16         2023-01-03        2023-01-04     23.8
-      7          <NA>         2023-01-04        2023-01-05     23.8
-      8    2023-01-17         2023-01-01        2023-01-04       NA
-      9          <NA>         2022-12-31        2023-01-03       NA
+      4    2023-01-21         2022-12-29        2023-01-02     24.2
+      5    2023-01-10         2023-01-01        2023-01-03     24.2
+      6          <NA>         2023-01-03        2023-01-04       NA
+      7          <NA>         2023-01-04        2023-01-05     24.2
+      8          <NA>         2023-01-01        2023-01-04     24.2
+      9          <NA>         2022-12-31        2023-01-03     24.2
       10         <NA>         2022-12-30        2023-01-03       NA
       11         <NA>         2023-01-01        2023-01-04       NA
-      12         <NA>         2023-01-01        2023-01-03     23.8
+      12         <NA>         2023-01-01        2023-01-03     24.2
       
       $contacts
                from         to age sex date_first_contact date_last_contact was_case
-      1  1ePRI5wC1I Ji3IItv5Ov  43   m         2022-12-30        2023-01-05        Y
-      2  1ePRI5wC1I sRrRMCAJFE   1   m         2022-12-30        2023-01-02        Y
-      3  Ji3IItv5Ov Y3qKY39Zyi  29   f         2022-12-27        2023-01-03        N
-      4  Ji3IItv5Ov uuoY8Kxng7  78   m         2022-12-29        2023-01-02        Y
-      5  sRrRMCAJFE AzDS6oXfHu  22   f         2023-01-01        2023-01-03        Y
-      6  sRrRMCAJFE aqm1SzNbO5  70   m         2022-12-30        2023-01-02        N
-      7  sRrRMCAJFE h4yEtT6tej  28   f         2023-01-03        2023-01-04        Y
-      8  uuoY8Kxng7 Rt34oCba8e  37   f         2023-01-06        2023-01-06        N
-      9  AzDS6oXfHu 6yKFNmydPL  61   f         2023-01-01        2023-01-05        N
-      10 h4yEtT6tej 7XeZaLTmhW  46   m         2023-01-04        2023-01-05        Y
-      11 h4yEtT6tej sVUBVWYTLk  67   f         2023-01-01        2023-01-04        Y
-      12 h4yEtT6tej hw9tYeb1el  86   m         2022-12-31        2023-01-03        Y
-      13 7XeZaLTmhW czXnmE3U4H  71   m         2022-12-28        2023-01-05        N
-      14 7XeZaLTmhW DzSVgVAWQi  51   f         2023-01-01        2023-01-04        N
-      15 7XeZaLTmhW hvSfYVARDj  44   m         2023-01-02        2023-01-05        N
-      16 sVUBVWYTLk Dafq8m2zbF  49   f         2023-01-02        2023-01-03        N
-      17 hw9tYeb1el UJRewLYtBB  60   f         2022-12-30        2023-01-03        Y
-      18 hw9tYeb1el lIdUTzmcTo  56   f         2023-01-06        2023-01-09        N
-      19 hw9tYeb1el 9HLY9VZdzu  49   m         2023-01-01        2023-01-04        Y
-      20 hw9tYeb1el uT3p6Kxucz  50   m         2023-01-01        2023-01-03        N
-      21 UJRewLYtBB wJ3WvUcVV4   7   f         2023-01-01        2023-01-03        Y
+      1  qKY39Zyiuu oY8Kxng7Az  43   m         2022-12-30        2023-01-05        Y
+      2  qKY39Zyiuu DS6oXfHuaq   1   m         2022-12-30        2023-01-02        Y
+      3  oY8Kxng7Az m1SzNbO5h4  29   f         2022-12-27        2023-01-03        N
+      4  oY8Kxng7Az yEtT6tejRt  78   m         2022-12-29        2023-01-02        Y
+      5  DS6oXfHuaq 34oCba8e6y  22   f         2023-01-01        2023-01-03        Y
+      6  DS6oXfHuaq KFNmydPL7X  70   m         2022-12-30        2023-01-02        N
+      7  DS6oXfHuaq eZaLTmhWsV  28   f         2023-01-03        2023-01-04        Y
+      8  yEtT6tejRt UBVWYTLkhw  37   f         2023-01-06        2023-01-06        N
+      9  34oCba8e6y 9tYeb1elcz  61   f         2023-01-01        2023-01-05        N
+      10 eZaLTmhWsV XnmE3U4HDz  46   m         2023-01-04        2023-01-05        Y
+      11 eZaLTmhWsV SVgVAWQihv  67   f         2023-01-01        2023-01-04        Y
+      12 eZaLTmhWsV SfYVARDjDa  86   m         2022-12-31        2023-01-03        Y
+      13 XnmE3U4HDz fq8m2zbFUJ  71   m         2022-12-28        2023-01-05        N
+      14 XnmE3U4HDz RewLYtBBlI  51   f         2023-01-01        2023-01-04        N
+      15 XnmE3U4HDz dUTzmcTo9H  44   m         2023-01-02        2023-01-05        N
+      16 SVgVAWQihv LY9VZdzuuT  49   f         2023-01-02        2023-01-03        N
+      17 SfYVARDjDa 3p6KxuczwJ  60   f         2022-12-30        2023-01-03        Y
+      18 SfYVARDjDa 3WvUcVV4dJ  56   f         2023-01-06        2023-01-09        N
+      19 SfYVARDjDa 6ZKaUKvu5A  49   m         2023-01-01        2023-01-04        Y
+      20 SfYVARDjDa k6RZkfVJ5f  50   m         2023-01-01        2023-01-03        N
+      21 3p6KxuczwJ tN2GNkk2uu   7   f         2023-01-01        2023-01-03        Y
                    status
       1              case
       2              case
       3    under_followup
       4              case
       5              case
-      6    under_followup
+      6  lost_to_followup
       7              case
       8    under_followup
       9    under_followup
@@ -151,13 +151,13 @@
       11             case
       12             case
       13   under_followup
-      14 lost_to_followup
+      14          unknown
       15   under_followup
       16   under_followup
       17             case
-      18          unknown
+      18   under_followup
       19             case
-      20 lost_to_followup
+      20   under_followup
       21             case
       
 
@@ -171,17 +171,17 @@
     Output
       $linelist
          id          case_name case_type sex age date_onset date_admission   outcome
-      1   1 Ghaamid el-Ishmael suspected   m  35 2023-01-01           <NA> recovered
-      2   2   Faatih el-Kaiser confirmed   m  43 2023-01-01           <NA> recovered
-      3   3   Brandon Galligan confirmed   m   1 2023-01-01     2023-01-04 recovered
-      4   5      Aiman el-Riaz suspected   m  78 2023-01-01           <NA> recovered
+      1   1         Kyle Crane suspected   m  35 2023-01-01           <NA> recovered
+      2   2 Ghaamid el-Ishmael confirmed   m  43 2023-01-01     2023-01-07 recovered
+      3   3   Faatih el-Kaiser confirmed   m   1 2023-01-01           <NA> recovered
+      4   5   Va'Aahi Galligan suspected   m  78 2023-01-01           <NA> recovered
       5   6     Katelyn Catlin confirmed   f  22 2023-01-01           <NA> recovered
       6   8       Lynsey Duron confirmed   f  28 2023-01-01           <NA> recovered
-      7  11      Travis Foster confirmed   m  46 2023-01-01           <NA> recovered
+      7  11    Wajdi al-Demian confirmed   m  46 2023-01-01           <NA> recovered
       8  12       Jacy Cousins confirmed   f  67 2023-01-01           <NA> recovered
-      9  13        Khoa Murray confirmed   m  86 2023-01-01     2023-01-02 recovered
+      9  13      Travis Foster confirmed   m  86 2023-01-01           <NA> recovered
       10 18     Maria Eberhart  probable   f  60 2023-01-02           <NA> recovered
-      11 20        John Flores suspected   m  49 2023-01-02           <NA> recovered
+      11 20  Mubarak el-Vaziri suspected   m  49 2023-01-02           <NA> recovered
       12 22        Erin Payson confirmed   f   7 2023-01-02           <NA> recovered
          date_outcome date_first_contact date_last_contact ct_value
       1          <NA>               <NA>              <NA>       NA
@@ -199,26 +199,26 @@
       
       $contacts
                        from                     to age sex date_first_contact
-      1  Ghaamid el-Ishmael       Faatih el-Kaiser  43   m         2022-12-30
-      2  Ghaamid el-Ishmael       Brandon Galligan   1   m         2022-12-30
-      3    Faatih el-Kaiser Carisa Flores-Gonzalez  29   f         2022-12-27
-      4    Faatih el-Kaiser          Aiman el-Riaz  78   m         2022-12-29
-      5    Brandon Galligan         Katelyn Catlin  22   f         2023-01-01
-      6    Brandon Galligan        Wajdi al-Demian  70   m         2022-12-30
-      7    Brandon Galligan           Lynsey Duron  28   f         2023-01-03
-      8       Aiman el-Riaz        Amaani al-Gaber  37   f         2023-01-06
+      1          Kyle Crane     Ghaamid el-Ishmael  43   m         2022-12-30
+      2          Kyle Crane       Faatih el-Kaiser   1   m         2022-12-30
+      3  Ghaamid el-Ishmael Carisa Flores-Gonzalez  29   f         2022-12-27
+      4  Ghaamid el-Ishmael       Va'Aahi Galligan  78   m         2022-12-29
+      5    Faatih el-Kaiser         Katelyn Catlin  22   f         2023-01-01
+      6    Faatih el-Kaiser          Aiman el-Riaz  70   m         2022-12-30
+      7    Faatih el-Kaiser           Lynsey Duron  28   f         2023-01-03
+      8    Va'Aahi Galligan        Amaani al-Gaber  37   f         2023-01-06
       9      Katelyn Catlin         Lilibeth Black  61   f         2023-01-01
-      10       Lynsey Duron          Travis Foster  46   m         2023-01-04
+      10       Lynsey Duron        Wajdi al-Demian  46   m         2023-01-04
       11       Lynsey Duron           Jacy Cousins  67   f         2023-01-01
-      12       Lynsey Duron            Khoa Murray  86   m         2022-12-31
-      13      Travis Foster          Raaid el-Diab  71   m         2022-12-28
-      14      Travis Foster       Marquaja Johnson  51   f         2023-01-01
-      15      Travis Foster      Mubarak el-Vaziri  44   m         2023-01-02
+      12       Lynsey Duron          Travis Foster  86   m         2022-12-31
+      13    Wajdi al-Demian         Raymond Murray  71   m         2022-12-28
+      14    Wajdi al-Demian       Marquaja Johnson  51   f         2023-01-01
+      15    Wajdi al-Demian          Raaid el-Diab  44   m         2023-01-02
       16       Jacy Cousins            Kayla Tudor  49   f         2023-01-02
-      17        Khoa Murray         Maria Eberhart  60   f         2022-12-30
-      18        Khoa Murray            Katja Muetz  56   f         2023-01-06
-      19        Khoa Murray            John Flores  49   m         2023-01-01
-      20        Khoa Murray             Bryce Sena  50   m         2023-01-01
+      17      Travis Foster         Maria Eberhart  60   f         2022-12-30
+      18      Travis Foster            Katja Muetz  56   f         2023-01-06
+      19      Travis Foster      Mubarak el-Vaziri  49   m         2023-01-01
+      20      Travis Foster     Alexandre Guerrero  50   m         2023-01-01
       21     Maria Eberhart            Erin Payson   7   f         2023-01-01
          date_last_contact was_case           status
       1         2023-01-05        Y             case
@@ -252,56 +252,56 @@
         population_age = age_struct)
     Output
       $linelist
-         id            case_name case_type sex age date_onset date_admission
-      1   1        Bryce Cunniff  probable   m  44 2023-01-01           <NA>
-      2   2 Ignacio Garcia Mayen confirmed   m  13 2023-01-01           <NA>
-      3   3     Dominic Martinez suspected   m  22 2023-01-01           <NA>
-      4   5   Sheldon Kacprowicz  probable   m  85 2023-01-01     2023-01-22
-      5   6 Caroline Hergenreter confirmed   f  41 2023-01-01     2023-01-01
-      6   8  Cassandra Whitworth confirmed   f  89 2023-01-01     2023-01-03
-      7  11        Tyler Carlson confirmed   m  69 2023-01-01           <NA>
-      8  12    Harleigh Sayavong suspected   f  23 2023-01-01           <NA>
-      9  13        Cleatus Black confirmed   m   9 2023-01-01           <NA>
-      10 18            Kendra To confirmed   f  62 2023-01-02           <NA>
-      11 20            Jelani Le  probable   m  52 2023-01-02           <NA>
-      12 22        Amanda Kaiser  probable   f  76 2023-01-02           <NA>
-           outcome date_outcome date_first_contact date_last_contact ct_value
-      1  recovered         <NA>               <NA>              <NA>       NA
-      2  recovered         <NA>         2022-12-30        2023-01-05       24
-      3  recovered         <NA>         2022-12-30        2023-01-02       NA
-      4       died   2023-01-16         2022-12-29        2023-01-02       NA
-      5  recovered         <NA>         2023-01-01        2023-01-03       24
-      6       died   2023-01-16         2023-01-03        2023-01-04       24
-      7  recovered         <NA>         2023-01-04        2023-01-05       24
-      8  recovered         <NA>         2023-01-01        2023-01-04       NA
-      9  recovered         <NA>         2022-12-31        2023-01-03       24
-      10 recovered         <NA>         2022-12-30        2023-01-03       24
-      11 recovered         <NA>         2023-01-01        2023-01-04       NA
-      12 recovered         <NA>         2023-01-01        2023-01-03       NA
+         id          case_name case_type sex age date_onset date_admission   outcome
+      1   1      Gabriel Black  probable   m  44 2023-01-01     2023-01-02 recovered
+      2   2       Tyler Kelley confirmed   m  13 2023-01-01           <NA> recovered
+      3   3       Cody Morales suspected   m  22 2023-01-01           <NA> recovered
+      4   5          Joewid Le  probable   m  85 2023-01-01           <NA> recovered
+      5   6      Carolyn Moore confirmed   f  41 2023-01-01           <NA> recovered
+      6   8  Cheyenne Sayavong confirmed   f  89 2023-01-01           <NA> recovered
+      7  11 Pierce Khanthavong confirmed   m  69 2023-01-01           <NA> recovered
+      8  12          Kendra To suspected   f  23 2023-01-01           <NA> recovered
+      9  13  Preston Barringer confirmed   m   9 2023-01-01           <NA> recovered
+      10 18  Dominique Raymond confirmed   f  62 2023-01-02     2023-01-03      died
+      11 20   Bassaam el-Majid  probable   m  52 2023-01-02           <NA> recovered
+      12 22      Susana Varela  probable   f  76 2023-01-02     2023-01-05 recovered
+         date_outcome date_first_contact date_last_contact ct_value
+      1          <NA>               <NA>              <NA>       NA
+      2          <NA>         2022-12-30        2023-01-05       24
+      3          <NA>         2022-12-30        2023-01-02       NA
+      4          <NA>         2022-12-29        2023-01-02       NA
+      5          <NA>         2023-01-01        2023-01-03       24
+      6          <NA>         2023-01-03        2023-01-04       24
+      7          <NA>         2023-01-04        2023-01-05       24
+      8          <NA>         2023-01-01        2023-01-04       NA
+      9          <NA>         2022-12-31        2023-01-03       24
+      10   2023-01-21         2022-12-30        2023-01-03       24
+      11         <NA>         2023-01-01        2023-01-04       NA
+      12         <NA>         2023-01-01        2023-01-03       NA
       
       $contacts
-                         from                        to age sex date_first_contact
-      1         Bryce Cunniff      Ignacio Garcia Mayen  13   m         2022-12-30
-      2         Bryce Cunniff          Dominic Martinez  22   m         2022-12-30
-      3  Ignacio Garcia Mayen          Grayson Anderson   5   f         2022-12-27
-      4  Ignacio Garcia Mayen        Sheldon Kacprowicz  85   m         2022-12-29
-      5      Dominic Martinez      Caroline Hergenreter  41   f         2023-01-01
-      6      Dominic Martinez        Khristopher Kelley   2   m         2022-12-30
-      7      Dominic Martinez       Cassandra Whitworth  89   f         2023-01-03
-      8    Sheldon Kacprowicz             Taylor Graves  86   f         2023-01-06
-      9  Caroline Hergenreter             Carolyn Moore  82   f         2023-01-01
-      10  Cassandra Whitworth             Tyler Carlson  69   m         2023-01-04
-      11  Cassandra Whitworth         Harleigh Sayavong  23   f         2023-01-01
-      12  Cassandra Whitworth             Cleatus Black   9   m         2022-12-31
-      13        Tyler Carlson           Jackson Spencer  79   m         2022-12-28
-      14        Tyler Carlson          Candace Lovelace  29   f         2023-01-01
-      15        Tyler Carlson              David Abeyta   4   m         2023-01-02
-      16    Harleigh Sayavong Chantelle Vazquez-Luevano  13   f         2023-01-02
-      17        Cleatus Black                 Kendra To  62   f         2022-12-30
-      18        Cleatus Black          Megan Riggenbach  24   f         2023-01-06
-      19        Cleatus Black                 Jelani Le  52   m         2023-01-01
-      20        Cleatus Black         Rushdi al-Chahine  74   m         2023-01-01
-      21            Kendra To             Amanda Kaiser  76   f         2023-01-01
+                       from                        to age sex date_first_contact
+      1       Gabriel Black              Tyler Kelley  13   m         2022-12-30
+      2       Gabriel Black              Cody Morales  22   m         2022-12-30
+      3        Tyler Kelley             Taylor Graves   5   f         2022-12-27
+      4        Tyler Kelley                 Joewid Le  85   m         2022-12-29
+      5        Cody Morales             Carolyn Moore  41   f         2023-01-01
+      6        Cody Morales           Rushdi al-Ishak   2   m         2022-12-30
+      7        Cody Morales         Cheyenne Sayavong  89   f         2023-01-03
+      8           Joewid Le         Mercedes Lovelace  86   f         2023-01-06
+      9       Carolyn Moore Chantelle Vazquez-Luevano  82   f         2023-01-01
+      10  Cheyenne Sayavong        Pierce Khanthavong  69   m         2023-01-04
+      11  Cheyenne Sayavong                 Kendra To  23   f         2023-01-01
+      12  Cheyenne Sayavong         Preston Barringer   9   m         2022-12-31
+      13 Pierce Khanthavong           Jackson Carlson  79   m         2022-12-28
+      14 Pierce Khanthavong               Megan Hayes  29   f         2023-01-01
+      15 Pierce Khanthavong               Sam Spencer   4   m         2023-01-02
+      16          Kendra To         Amanda Larochelle  13   f         2023-01-02
+      17  Preston Barringer         Dominique Raymond  62   f         2022-12-30
+      18  Preston Barringer            Natalie Newton  24   f         2023-01-06
+      19  Preston Barringer          Bassaam el-Majid  52   m         2023-01-01
+      20  Preston Barringer           Qaaid al-Madani  74   m         2023-01-01
+      21  Dominique Raymond             Susana Varela  76   f         2023-01-01
          date_last_contact was_case           status
       1         2023-01-05        Y             case
       2         2023-01-02        Y             case
