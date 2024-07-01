@@ -100,27 +100,33 @@ NULL
   # hosp_risk is either numeric or <data.frame> or NULL
   if (!is.null(hosp_risk)) {
     if (is.numeric(hosp_risk)) {
-      # size is converted to an integer internally in sample()
-      pop_sample <- sample(
-        which(infected_lgl_idx),
-        replace = FALSE,
-        size = (1 - hosp_risk) * num_infected
+      # single population risk is a special case of the age-strat risk
+      # convert population risk to data.frame to apply the same operations
+      hosp_risk <- data.frame(
+        min_age = min(.data$age),
+        max_age = max(.data$age),
+        risk = hosp_risk
       )
-      .data$hospitalisation[pop_sample] <- NA_real_
-    } else {
-      for (i in seq_len(nrow(hosp_risk))) {
-        age_bracket <- hosp_risk$min_age[i]:hosp_risk$max_age[i]
-        age_group <- which(.data$age %in% age_bracket)
-        not_hosp_prob <- 1 - hosp_risk$risk[i]
-        # size is converted to an integer internally in sample()
-        age_group_sample <- sample(
-          age_group,
-          replace = FALSE,
-          size = not_hosp_prob * length(age_group)
-        )
-        .data$hospitalisation[age_group_sample] <- NA_real_
-      }
     }
+    # find risk group for each individual based on age
+    # findInterval indexes from 0 so plus 1 for R vec indexing
+    # oldest age group is inclusive at upper bound so rightmost.closed = TRUE
+    hosp_risk_group_idx <- findInterval(
+      x = .data$age,
+      vec = hosp_risk$max_age,
+      rightmost.closed = TRUE
+    ) + 1
+    # assign risk to each individual given age group
+    hosp_risk_ <- hosp_risk$risk[hosp_risk_group_idx]
+    # sample individuals to unhospitalise given risk group
+    hosp_idx <- stats::rbinom(
+      n = length(hosp_risk_),
+      size = 1,
+      prob = (1 - hosp_risk_)
+    )
+    # hosp index requires individuals to be in idx group (e.g. infected)
+    hosp_lgl_idx <- as.logical(hosp_idx) & infected_lgl_idx
+    .data$hospitalisation[hosp_lgl_idx] <- NA_real_
   }
 
   # return data
