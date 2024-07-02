@@ -44,8 +44,8 @@
 #' infectious period. Infectious periods must be strictly positive.
 #'
 #' The function can be defined or anonymous. The function must return a vector
-#' of `numeric`s for the length of the infectious period. The function must
-#' have a single argument.
+#' of randomly generated real numbers representing sampled infectious periods. The function must
+#' have a single argument, the number of random infectious periods to generate.
 #'
 #' An `<epidist>` can be provided. This will be converted into random number
 #' generator internally.
