@@ -295,10 +295,8 @@ test_that("sim_linelist warns when risks are given by onset-to-event is NULL", {
       onset_to_death = NULL,
       hosp_death_risk = 0.5
     ),
-    regexp = paste0(
-      "(onset_to_death is set to NULL)*(hosp_death_risk is being ignored)*",
-      "(non_hosp_death_risk is being ignored)"
-    )
+    regexp =
+      "(onset_to_death is set to NULL)*(hosp_death_risk is being ignored)"
   )
   expect_warning(
     sim_linelist(
@@ -309,9 +307,49 @@ test_that("sim_linelist warns when risks are given by onset-to-event is NULL", {
       onset_to_death = NULL,
       non_hosp_death_risk = 0.02
     ),
-    regexp = paste0(
-      "(onset_to_death is set to NULL)*(hosp_death_risk is being ignored)*",
-      "(non_hosp_death_risk is being ignored)"
+    regexp =
+      "(onset_to_death is set to NULL)*(non_hosp_death_risk is being ignored)"
+  )
+})
+
+test_that("sim_linelist is silent when onset is NULL and risk is off", {
+  set.seed(1)
+  expect_silent(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
+      onset_to_hosp = NULL,
+      onset_to_death = onset_to_death
+    )
+  )
+  expect_silent(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
+      onset_to_hosp = NULL,
+      onset_to_death = onset_to_death,
+      hosp_risk = NULL
+    )
+  )
+  expect_silent(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = NULL,
+    )
+  )
+  expect_silent(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = NULL,
+      non_hosp_death_risk = NULL
     )
   )
 })
@@ -337,7 +375,8 @@ test_that("sim_linelist fails when onset-to-event are given by risk is NULL", {
       onset_to_death = onset_to_death,
       hosp_death_risk = NULL
     ),
-    regexp = "(hosp_death_risk is set to NULL but hosp_risk and onset_to_death)"
+    regexp =
+      "(hosp_death_risk is set to NULL but onset_to_hosp and onset_to_death)"
   )
   expect_error(
     sim_linelist(
