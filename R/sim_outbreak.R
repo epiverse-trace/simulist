@@ -1,8 +1,7 @@
 #' Simulate a line list and a contacts table
 #'
 #' @description The line list and contacts are simulated using a branching
-#' process and parameterised with previously published epidemiological
-#' parameters.
+#' process and parameterised with epidemiological parameters.
 #'
 #' @inherit sim_linelist details
 #'
@@ -17,7 +16,13 @@
 #' @author Joshua W. Lambert
 #'
 #' @examples
-#' # load data required to simulate outbreak data
+#' # quickly simulate an outbreak using the function defaults
+#' outbreak <- sim_outbreak()
+#' head(outbreak$linelist)
+#' head(outbreak$contacts)
+#'
+#' # to simulate a more realistic outbreak load epiparameters from
+#' # {epiparameter}
 #' contact_distribution <- epiparameter::epidist(
 #'   disease = "COVID-19",
 #'   epi_dist = "contact distribution",
@@ -53,11 +58,11 @@
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death
 #' )
-sim_outbreak <- function(contact_distribution,
-                         infectious_period,
-                         prob_infection,
-                         onset_to_hosp,
-                         onset_to_death,
+sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2), # nolint start line_length_linter
+                         infectious_period = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+                         prob_infection = 0.5,
+                         onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
+                         onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2.5, sdlog = 0.5), # nolint end line_length_linter
                          onset_to_recovery = NULL,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,

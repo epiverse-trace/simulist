@@ -1,3 +1,51 @@
+# sim_contacts works as expected with defaults
+
+    Code
+      sim_contacts()
+    Output
+                             from                       to age sex date_first_contact
+      1     Naasiruddeen al-Jafri          Naadir al-Saleh  26   m         2023-01-04
+      2     Naasiruddeen al-Jafri Louis Baltazar-Francisco  15   m         2023-01-02
+      3  Louis Baltazar-Francisco       Kalia Lubthisophon  58   f         2023-01-16
+      4  Louis Baltazar-Francisco           Skylinn Topaha  29   f         2023-01-11
+      5  Louis Baltazar-Francisco           Aurreana Salas  24   f         2023-01-12
+      6        Kalia Lubthisophon           Rachel Stevens  42   f         2023-01-15
+      7        Kalia Lubthisophon        Mitchell Sandoval  48   m         2023-01-18
+      8        Kalia Lubthisophon          Haala al-Akhter  76   f         2023-01-19
+      9            Rachel Stevens       Mersadez Barringer  39   f         2023-01-24
+      10          Haala al-Akhter           Yulisa Estrada  24   f         2023-01-21
+      11          Haala al-Akhter        Bethany Mccracken  53   f         2023-01-22
+      12           Yulisa Estrada             Cade Amerson  86   m         2023-01-24
+      13           Yulisa Estrada             Andrew Wixom  40   m         2023-01-25
+      14             Cade Amerson             Celsa Torres  83   f         2023-01-26
+      15             Celsa Torres         Tristan Stockton  90   m         2023-02-02
+      16             Celsa Torres         Bassaam al-Faris  35   m         2023-02-05
+      17             Celsa Torres         Triana Henderson  43   f         2023-02-04
+      18         Bassaam al-Faris        Jennifer Gallegos   1   f         2023-02-06
+      19         Bassaam al-Faris           Patrick Martin  29   m         2023-01-31
+      20         Bassaam al-Faris            Bryant Taylor  78   m         2023-02-04
+         date_last_contact was_case           status
+      1         2023-01-06        N   under_followup
+      2         2023-01-03        Y             case
+      3         2023-01-19        Y             case
+      4         2023-01-16        N lost_to_followup
+      5         2023-01-16        N   under_followup
+      6         2023-01-19        Y             case
+      7         2023-01-21        N   under_followup
+      8         2023-01-21        Y             case
+      9         2023-01-28        N lost_to_followup
+      10        2023-01-24        Y             case
+      11        2023-01-26        N   under_followup
+      12        2023-01-26        Y             case
+      13        2023-01-27        N          unknown
+      14        2023-02-03        Y             case
+      15        2023-02-05        N   under_followup
+      16        2023-02-07        Y             case
+      17        2023-02-05        N lost_to_followup
+      18        2023-02-09        N   under_followup
+      19        2023-02-06        Y             case
+      20        2023-02-07        N lost_to_followup
+
 # sim_contacts works as expected
 
     Code

@@ -288,19 +288,18 @@
       "set hosp_risk to numeric value"
     ))
   }
-  if (!rlang::is_lgl_na(onset_to_death_eval)) {
-    if (is.null(hosp_death_risk) && !is.null(hosp_risk)) {
-      msg <- c(msg, paste(
-        "hosp_death_risk is set to NULL but hosp_risk and onset_to_death is",
-        "specified \n set hosp_death_risk to numeric value"
-      ))
-    }
-    if (is.null(non_hosp_death_risk)) {
-      msg <- c(msg, paste(
-        "non_hosp_death_risk is set to NULL but onset_to_death is specified \n",
-        "set non_hosp_death_risk to numeric value"
-      ))
-    }
+  if (!rlang::is_lgl_na(onset_to_hosp_eval) &&
+      !rlang::is_lgl_na(onset_to_death_eval) && is.null(hosp_death_risk)) {
+    msg <- c(msg, paste(
+      "hosp_death_risk is set to NULL but onset_to_hosp and onset_to_death",
+      "is specified \n set hosp_death_risk to numeric value"
+    ))
+  }
+  if (!rlang::is_lgl_na(onset_to_death_eval) && is.null(non_hosp_death_risk)) {
+    msg <- c(msg, paste(
+      "non_hosp_death_risk is set to NULL but onset_to_death is specified \n",
+      "set non_hosp_death_risk to numeric value"
+    ))
   }
   if (length(msg) > 0) {
     stop(

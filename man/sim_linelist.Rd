@@ -5,11 +5,11 @@
 \title{Simulate a line list}
 \usage{
 sim_linelist(
-  contact_distribution,
-  infectious_period,
-  prob_infection,
-  onset_to_hosp,
-  onset_to_death,
+  contact_distribution = function(x) stats::dpois(x = x, lambda = 2),
+  infectious_period = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+  prob_infection = 0.5,
+  onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
+  onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2.5, sdlog = 0.5),
   onset_to_recovery = NULL,
   hosp_risk = 0.2,
   hosp_death_risk = 0.5,
@@ -23,58 +23,122 @@ sim_linelist(
 )
 }
 \arguments{
-\item{contact_distribution}{An \verb{<epidist>} object or anonymous function for
-the contact distribution. This is any discrete density function that
-produces non-negative integers (including zero, \eqn{\mathbb{N}_0}) for the
-number of contacts per infection.}
+\item{contact_distribution}{A \code{function} or an \verb{<epidist>} object to generate
+the number of contacts per infection.
 
-\item{infectious_period}{An \verb{<epidist>} object or anonymous function for
-the infectious period. This defines the duration from becoming infectious
-to no longer infectious. In the simulation, individuals are assumed to
+The function can be defined or anonymous. The function must have a single
+argument in the form of an \code{integer} vector with elements representing the
+number of contacts, and return a \code{numeric} vector where each element
+corresponds to the probability of observing the number of contacts in the
+vector passed to the function. The index of the \code{numeric} vector returned
+is offset by one to the corresponding probability of observing the number
+of contacts, i.e. the first element of the output vector is the probability
+of observing zero contacts, the second element is the probability of
+observing one contact, etc.
+
+An \verb{<epidist>} can be provided. This will be converted into a probability
+mass function internally.
+
+The default is an anonymous function with a Poisson probability mass function
+(\code{\link[=dpois]{dpois()}}) with a mean (\eqn{\lambda}) of 2 contacts per infection.}
+
+\item{infectious_period}{A \code{function} or an \verb{<epidist>} object for the
+infectious period. This defines the duration from becoming infectious to
+no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
 assumed to be zero). The time intervals between an infected individual and
 their contacts are assumed to be uniformly distributed within the
-infectious period. Infectious periods must be strictly positive.}
+infectious period. Infectious periods must be strictly positive.
+
+The function can be defined or anonymous. The function must return a vector
+of randomly generated real numbers representing sampled infectious periods.
+The function must have a single argument, the number of random infectious
+periods to generate.
+
+An \verb{<epidist>} can be provided. This will be converted into random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2} and \code{sdlog = 0.5}.}
 
 \item{prob_infection}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
 
-\item{onset_to_hosp}{An \verb{<epidist>} object, an anonymous function for
-the onset to hospitalisation delay distribution, or \code{NULL} to not simulate
-hospitalisation (admission) dates.}
+\item{onset_to_hosp}{A \code{function} or an \verb{<epidist>} object for the
+onset-to-hospitalisation delay distribution. \code{onset_to_hosp} can also be
+set to \code{NULL} to not simulate hospitalisation (admission) dates.
 
-\item{onset_to_death}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NULL} to not simulate dates for
-individuals that died.}
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-hospitalisation delay. The
+function must have a single argument.
 
-\item{onset_to_recovery}{An \verb{<epidist>} object, an anonymous function for
-the onset to death delay distribution, or \code{NULL} to not simulate dates for
-individuals that recovered. Default is \code{NULL} so by default cases that
-recover get an \code{NA} in the \verb{$date_outcome} line list column.}
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.
+
+If \code{onset_to_hosp} is set to \code{NULL} then \code{hosp_risk} and \code{hosp_death_risk}
+will be automatically set to \code{NULL} if not manually specified.}
+
+\item{onset_to_death}{A \code{function} or an \verb{<epidist>} object for the
+onset-to-death delay distribution. \code{onset_to_death} can also be set to
+\code{NULL} to not simulate dates for individuals that died.
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-death delay. The function must
+have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is an anonymous function with a lognormal distribution random
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.
+
+If \code{onset_to_death} is set to \code{NULL} then \code{non_hosp_death_risk} and
+\code{hosp_death_risk} will be automatically set to \code{NULL} if not manually
+specified.}
+
+\item{onset_to_recovery}{A \code{function} or an \verb{<epidist>} object for the
+onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
+to not simulate dates for individuals that recovered.
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the onset-to-recovery delay. The function
+must have a single argument.
+
+An \verb{<epidist>} can be provided. This will be converted into a random number
+generator internally.
+
+The default is \code{NULL} so by default cases that recover get an \code{NA} in the
+\verb{$date_outcome} line list column.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
-hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entire
+hospitalisation risks. Default is 20\% hospitalisation (\code{0.2}) for the entire
 population. If the \code{onset_to_hosp} argument is set to \code{NULL} this argument
-should also be set to \code{NULL}. See details and examples for more information.}
+will automatically be set to \code{NULL} if not specified or can be manually
+set to \code{NULL}. See details and examples for more information.}
 
 \item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
 specific hospitalised death risks Default is 50\% death risk in hospitals
 (\code{0.5}) for the entire population. If the \code{onset_to_death} argument is set
-to \code{NULL} this argument should also be set to \code{NULL}. See details and
-examples for more information. If a time-varying death risk is specified in
-the \code{config} the \code{hosp_death_risk} is interpreted as the maximum risk across
-the epidemic.}
+to \code{NULL} this argument will automatically be set to \code{NULL} if not specified
+or can be manually set to \code{NULL}. See details and examples for more
+information. The \code{hosp_death_risk} can vary through time if specified in
+the \code{time_varying_death_risk} element of \code{config}, see
+\code{vignette("time-varying-cfr", package = "simulist")} for more information.}
 
 \item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
 specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. If the \code{onset_to_death}
-argument is set to \code{NULL} this argument should also be set to \code{NULL}. See
-details and examples for more information. If a time-varying death risk is
-specified in the \code{config} the \code{non_hosp_death_risk} is interpreted as the
-maximum risk across the epidemic.}
+argument is set to \code{NULL} this argument will automatically be set to \code{NULL}
+if not specified or can be manually set to \code{NULL}. See details and examples
+for more information. The \code{non_hosp_death_risk} can vary through time if
+specified in the \code{time_varying_death_risk} element of \code{config}, see
+\code{vignette("time-varying-cfr", package = "simulist")} for more information.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
@@ -112,7 +176,7 @@ A line list \verb{<data.frame>}
 }
 \description{
 The line list is simulated using a branching process and
-parameterised with user defined epidemiological parameters.
+parameterised with epidemiological parameters.
 }
 \details{
 For age-stratified hospitalised and death risks a \verb{<data.frame>}
@@ -137,7 +201,12 @@ that age group. Proportions must sum to one.
 }
 }
 \examples{
-# load data required to simulate line list
+# quickly simulate a line list using the function defaults
+linelist <- sim_linelist()
+head(linelist)
+
+# to simulate a more realistic line list load epiparameters from
+# {epiparameter}
 contact_distribution <- epiparameter::epidist(
   disease = "COVID-19",
   epi_dist = "contact distribution",

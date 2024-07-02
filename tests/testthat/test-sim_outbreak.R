@@ -1,3 +1,8 @@
+test_that("sim_outbreak works as expected with defaults", {
+  set.seed(1)
+  expect_snapshot(sim_outbreak())
+})
+
 suppressMessages({
   contact_distribution <- epiparameter::epidist(
     disease = "COVID-19",
