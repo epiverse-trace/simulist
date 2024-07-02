@@ -239,6 +239,27 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
                            confirmed = 0.5
                          ),
                          config = create_config()) {
+  # if hosp_risk or hosp_death_risk is supplied but onset_to_hosp is NULL
+  # set risks to NULL without warning in .cross_check_sim_input()
+  # this needs to happen in the current function frame and not within
+  # .cross_check_sim_input() due to the behaviour of missing()
+  if (is.null(onset_to_hosp)) {
+    if (missing(hosp_risk)) {
+      hosp_risk <- NULL
+    }
+    if (missing(hosp_death_risk)) {
+      hosp_death_risk <- NULL
+    }
+  }
+  if (is.null(onset_to_death)) {
+    if (missing(non_hosp_death_risk)) {
+      non_hosp_death_risk <- NULL
+    }
+    if (missing(hosp_death_risk)) {
+      hosp_death_risk <- NULL
+    }
+  }
+
   # check and convert distribution to func if needed before .check_sim_input()
   funcs <- as_function(
     list(
