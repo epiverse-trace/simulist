@@ -126,11 +126,13 @@ onset_to_death <- epiparameter::epidist_db(
 #> To retrieve the citation use the 'get_citation' function
 ```
 
-To simulate a line list for COVID-19 with an Poisson contact
-distribution with a mean number of contacts of 2 and a probability of
-infection per contact of 0.5, we use the `sim_linelist()` function. The
-mean number of contacts and probability of infection determine the
-outbreak reproduction number, if the resulting reproduction number is
+To simulate a line list for COVID-19 with a Poisson contact distribution
+with a mean number of contacts of 2 and a probability of infection per
+contact of 0.5, we use the `sim_linelist()` function. As outlined in
+@bjornstad2020a, the mean number of contacts ($k$) and probability of
+infection ($\pi$) are combined into a transmission rate that, multiplied
+by the infectious period ($1/\gamma$), determines the outbreak
+reproduction number ($R_o$). If the resulting reproduction number is
 around one it means we will likely get a reasonably sized outbreak (10 -
 1,000 cases, varying due to the stochastic simulation).
 
@@ -156,20 +158,20 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id         case_name case_type sex age date_onset date_admission   outcome
-#> 1  1   Rushdi al-Ishak  probable   m  35 2023-01-01           <NA> recovered
-#> 2  2        Jeffrey Le confirmed   m  43 2023-01-01           <NA> recovered
-#> 3  3 Dominic Barringer suspected   m   1 2023-01-01           <NA> recovered
-#> 4  5      Tyler Kelley  probable   m  78 2023-01-01           <NA> recovered
-#> 5  6     Carolyn Moore confirmed   f  22 2023-01-01           <NA> recovered
-#> 6  8 Cheyenne Sayavong confirmed   f  28 2023-01-01     2023-01-04      died
+#>   id       case_name case_type sex age date_onset date_admission   outcome
+#> 1  1 Wajdi al-Demian  probable   m  35 2023-01-01           <NA> recovered
+#> 2  2   Raaid el-Diab confirmed   m  43 2023-01-01     2023-01-07 recovered
+#> 3  3  Nickolas Nault suspected   m   1 2023-01-01           <NA> recovered
+#> 4  5     Hee Kennedy confirmed   m  78 2023-01-01     2023-01-03      died
+#> 5  6     Hope Arshad suspected   f  22 2023-01-01     2023-01-28      died
+#> 6  8  Shanta Holiday  probable   f  28 2023-01-01           <NA> recovered
 #>   date_outcome date_first_contact date_last_contact ct_value
 #> 1         <NA>               <NA>              <NA>       NA
-#> 2         <NA>         2022-12-30        2023-01-05       24
+#> 2         <NA>         2022-12-30        2023-01-05     24.1
 #> 3         <NA>         2022-12-30        2023-01-02       NA
-#> 4         <NA>         2022-12-29        2023-01-02       NA
-#> 5         <NA>         2023-01-01        2023-01-03       24
-#> 6   2023-01-16         2023-01-03        2023-01-04       24
+#> 4   2023-01-21         2022-12-29        2023-01-02     24.1
+#> 5   2023-01-10         2023-01-01        2023-01-03       NA
+#> 6         <NA>         2023-01-03        2023-01-04       NA
 ```
 
 In this example, the line list is simulated using the default values
@@ -189,20 +191,20 @@ linelist <- sim_linelist(
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id         case_name case_type sex age date_onset date_admission   outcome
-#> 1  1 Kiersten Matthews confirmed   f  72 2019-12-01           <NA> recovered
-#> 2  2         Omar Cruz confirmed   m  85 2019-12-01           <NA> recovered
-#> 3  3   Emilio Alvarado suspected   m  24 2019-12-01           <NA> recovered
-#> 4  4    Sonya Santiago confirmed   f  67 2019-12-01     2019-12-03 recovered
-#> 5  5   Michelle Brooks  probable   f  37 2019-12-02           <NA> recovered
-#> 6  6  Anastasia Hamlin confirmed   f  14 2019-12-02           <NA> recovered
+#>   id            case_name case_type sex age date_onset date_admission   outcome
+#> 1  1 Kristiana Acheampong confirmed   f  88 2019-12-01           <NA> recovered
+#> 2  3   Jadeeda el-Abdalla confirmed   f   8 2019-12-01           <NA> recovered
+#> 3  4     Dominic Sandoval  probable   m  48 2019-12-01           <NA> recovered
+#> 4  5          Zoe Johnson confirmed   f   3 2019-12-01           <NA> recovered
+#> 5  6        Breann Bruski  probable   f  25 2019-12-01           <NA> recovered
+#> 6  7       Joseph Charley suspected   m  57 2019-12-01           <NA> recovered
 #>   date_outcome date_first_contact date_last_contact ct_value
-#> 1         <NA>               <NA>              <NA>     23.5
-#> 2         <NA>         2019-11-30        2019-12-06     23.5
-#> 3         <NA>         2019-11-30        2019-12-01       NA
-#> 4         <NA>         2019-12-07        2019-12-09     23.5
-#> 5         <NA>         2019-12-01        2019-12-04       NA
-#> 6         <NA>         2019-12-01        2019-12-04     23.5
+#> 1         <NA>               <NA>              <NA>     26.7
+#> 2         <NA>         2019-11-30        2019-12-02     26.7
+#> 3         <NA>         2019-11-30        2019-12-03       NA
+#> 4         <NA>         2019-12-02        2019-12-04     26.7
+#> 5         <NA>         2019-11-28        2019-12-04       NA
+#> 6         <NA>         2019-12-05        2019-12-06       NA
 ```
 
 To simulate a table of contacts of cases (i.e. to reflect a contact
@@ -215,26 +217,21 @@ contacts <- sim_contacts(
   infectious_period = infectious_period, 
   prob_infection = 0.5
 )
-#> Warning: Number of cases exceeds maximum outbreak size. 
-#> Returning data early with 10176 cases and 20217 total contacts (including cases).
-```
-
-``` r
 head(contacts)
-#>             from               to age sex date_first_contact date_last_contact
-#> 1 Brandon Byrnes Mustaba el-Wahba  14   m         2023-01-01        2023-01-03
-#> 2 Brandon Byrnes  Lonnie Williams  33   m         2022-12-31        2023-01-05
-#> 3 Brandon Byrnes     Robert Brown  34   m         2022-12-28        2023-01-02
-#> 4 Brandon Byrnes    Desiree Mabry  76   f         2023-01-03        2023-01-06
-#> 5 Brandon Byrnes Salvador Trevino  73   m         2023-01-05        2023-01-07
-#> 6  Desiree Mabry          Gina Yu  90   f         2023-01-05        2023-01-06
-#>   was_case           status
-#> 1        N   under_followup
-#> 2        N lost_to_followup
-#> 3        N   under_followup
-#> 4        Y             case
-#> 5        N   under_followup
-#> 6        N   under_followup
+#>              from                 to age sex date_first_contact
+#> 1 Munisa el-Kamal      Alicia Topper  76   f         2023-01-05
+#> 2 Munisa el-Kamal     Donald Ramirez  24   m         2023-01-01
+#> 3 Munisa el-Kamal   Brittney Jarmond   7   f         2023-01-05
+#> 4 Munisa el-Kamal Ramalaan el-Saadeh  57   m         2023-01-01
+#> 5   Alicia Topper         Cody Cohen   7   m         2023-01-02
+#> 6   Alicia Topper        Ashley Kohl  48   f         2022-12-31
+#>   date_last_contact was_case         status
+#> 1        2023-01-07        Y           case
+#> 2        2023-01-03        Y           case
+#> 3        2023-01-05        N under_followup
+#> 4        2023-01-04        N        unknown
+#> 5        2023-01-04        Y           case
+#> 6        2023-01-03        Y           case
 ```
 
 If both the line list and contacts table are required, they can be
@@ -252,38 +249,38 @@ outbreak <- sim_outbreak(
   onset_to_death = onset_to_death
 )
 head(outbreak$linelist)
-#>   id        case_name case_type sex age date_onset date_admission   outcome
-#> 1  1 Annnees al-Nazir  probable   m  24 2023-01-01           <NA> recovered
-#> 2  2  Muammar al-Miah  probable   m  46 2023-01-02           <NA> recovered
-#> 3  4     Melina Tarin  probable   f  71 2023-01-02           <NA> recovered
-#> 4  6    Alysh Lovejoy suspected   f  13 2023-01-03           <NA> recovered
-#> 5  9    Dylan Scanlon confirmed   m  28 2023-01-03           <NA> recovered
-#> 6 11  Nikolay Mcinnis suspected   m  15 2023-01-03           <NA> recovered
+#>   id         case_name case_type sex age date_onset date_admission   outcome
+#> 1  1     Okatomi Reish confirmed   f  30 2023-01-01           <NA> recovered
+#> 2  6   Angel Escalante confirmed   m  83 2023-01-01           <NA> recovered
+#> 3  8  Miqdaad el-Turay  probable   m  17 2023-01-01           <NA> recovered
+#> 4  9 Jennifer Gonzalez confirmed   f  74 2023-01-01           <NA>      died
+#> 5 10        Brendan Wu confirmed   m  33 2023-01-01     2023-01-03 recovered
+#> 6 12   Erminio Mandell  probable   m  24 2023-01-01           <NA> recovered
 #>   date_outcome date_first_contact date_last_contact ct_value
-#> 1         <NA>               <NA>              <NA>       NA
-#> 2         <NA>         2023-01-04        2023-01-07       NA
-#> 3         <NA>         2023-01-03        2023-01-05       NA
-#> 4         <NA>         2023-01-04        2023-01-06       NA
-#> 5         <NA>         2023-01-04        2023-01-07     25.6
-#> 6         <NA>         2023-01-05        2023-01-06       NA
+#> 1         <NA>               <NA>              <NA>     23.9
+#> 2         <NA>         2023-01-01        2023-01-05     23.9
+#> 3         <NA>         2022-12-31        2023-01-02       NA
+#> 4   2023-01-21         2023-01-07        2023-01-08     23.9
+#> 5         <NA>         2023-01-01        2023-01-01     23.9
+#> 6         <NA>         2023-01-02        2023-01-05       NA
 ```
 
 ``` r
 head(outbreak$contacts)
-#>               from              to age sex date_first_contact date_last_contact
-#> 1 Annnees al-Nazir Muammar al-Miah  46   m         2023-01-04        2023-01-07
-#> 2 Annnees al-Nazir    Siena Quimby  76   f         2022-12-27        2023-01-02
-#> 3  Muammar al-Miah    Melina Tarin  71   f         2023-01-03        2023-01-05
-#> 4  Muammar al-Miah  Destinee Embry  49   f         2023-01-01        2023-01-04
-#> 5     Melina Tarin   Alysh Lovejoy  13   f         2023-01-04        2023-01-06
-#> 6    Alysh Lovejoy    Andrew Knott  55   m         2023-01-03        2023-01-05
-#>   was_case           status
-#> 1        Y             case
-#> 2        N lost_to_followup
-#> 3        Y             case
-#> 4        N   under_followup
-#> 5        Y             case
-#> 6        N   under_followup
+#>              from                 to age sex date_first_contact
+#> 1   Okatomi Reish         Jesse Lynn  44   f         2023-01-04
+#> 2   Okatomi Reish        Joshua Rose  89   m         2023-01-05
+#> 3   Okatomi Reish   Wadee'a al-Rayes  11   f         2023-01-04
+#> 4   Okatomi Reish  Khaleel al-Hamady  19   m         2022-12-30
+#> 5   Okatomi Reish    Angel Escalante  83   m         2023-01-01
+#> 6 Angel Escalante Burhaan el-Hashemi  87   m         2022-12-29
+#>   date_last_contact was_case           status
+#> 1        2023-01-05        N lost_to_followup
+#> 2        2023-01-05        N          unknown
+#> 3        2023-01-05        N   under_followup
+#> 4        2023-01-03        N   under_followup
+#> 5        2023-01-05        Y             case
+#> 6        2023-01-02        N          unknown
 ```
 
 ## Help
