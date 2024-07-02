@@ -88,7 +88,10 @@ An \verb{<epidist>} can be provided. This will be converted into a random number
 generator internally.
 
 The default is an anonymous function with a lognormal distribution random
-number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.}
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.
+
+If \code{onset_to_hosp} is set to \code{NULL} then \code{hosp_risk} and \code{hosp_death_risk}
+will be automatically set to \code{NULL} if not manually specified.}
 
 \item{onset_to_death}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-death delay distribution. \code{onset_to_death} can also be set to
@@ -102,7 +105,11 @@ An \verb{<epidist>} can be provided. This will be converted into a random number
 generator internally.
 
 The default is an anonymous function with a lognormal distribution random
-number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.}
+number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.
+
+If \code{onset_to_death} is set to \code{NULL} then \code{non_hosp_death_risk} and
+\code{hosp_death_risk} will be automatically set to \code{NULL} if not manually
+specified.}
 
 \item{onset_to_recovery}{A \code{function} or an \verb{<epidist>} object for the
 onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
@@ -132,27 +139,30 @@ contact tracing status must sum to one.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
-hospitalisation risks Default is 20\% hospitalisation (\code{0.2}) for the entire
+hospitalisation risks. Default is 20\% hospitalisation (\code{0.2}) for the entire
 population. If the \code{onset_to_hosp} argument is set to \code{NULL} this argument
-should also be set to \code{NULL}. See details and examples for more information.}
+will automatically be set to \code{NULL} if not specified or can be manually
+set to \code{NULL}. See details and examples for more information.}
 
 \item{hosp_death_risk}{Either a single \code{numeric} for the death risk for
 hospitalised individuals across the population, or a \verb{<data.frame>} with age
 specific hospitalised death risks Default is 50\% death risk in hospitals
 (\code{0.5}) for the entire population. If the \code{onset_to_death} argument is set
-to \code{NULL} this argument should also be set to \code{NULL}. See details and
-examples for more information. If a time-varying death risk is specified in
-the \code{config} the \code{hosp_death_risk} is interpreted as the maximum risk across
-the epidemic.}
+to \code{NULL} this argument will automatically be set to \code{NULL} if not specified
+or can be manually set to \code{NULL}. See details and examples for more
+information. The \code{hosp_death_risk} can vary through time if specified in
+the \code{time_varying_death_risk} element of \code{config}, see
+\code{vignette("time-varying-cfr", package = "simulist")} for more information.}
 
 \item{non_hosp_death_risk}{Either a single \code{numeric} for the death risk for
 outside of hospitals across the population, or a \verb{<data.frame>} with age
 specific death risks outside of hospitals. Default is 5\% death risk outside
 of hospitals  (\code{0.05}) for the entire population. If the \code{onset_to_death}
-argument is set to \code{NULL} this argument should also be set to \code{NULL}. See
-details and examples for more information. If a time-varying death risk is
-specified in the \code{config} the \code{non_hosp_death_risk} is interpreted as the
-maximum risk across the epidemic.}
+argument is set to \code{NULL} this argument will automatically be set to \code{NULL}
+if not specified or can be manually set to \code{NULL}. See details and examples
+for more information. The \code{non_hosp_death_risk} can vary through time if
+specified in the \code{time_varying_death_risk} element of \code{config}, see
+\code{vignette("time-varying-cfr", package = "simulist")} for more information.}
 
 \item{population_age}{Either a \code{numeric} vector with two elements or a
 \verb{<data.frame>} with age structure in the population. Use a \code{numeric} vector

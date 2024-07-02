@@ -70,6 +70,9 @@
 #' The default is an anonymous function with a lognormal distribution random
 #' number generator ([rlnorm()]) with `meanlog = 1.5` and `sdlog = 0.5`.
 #'
+#' If `onset_to_hosp` is set to `NULL` then `hosp_risk` and `hosp_death_risk`
+#' will be automatically set to `NULL` if not manually specified.
+#'
 #' @param onset_to_death A `function` or an `<epidist>` object for the
 #' onset-to-death delay distribution. `onset_to_death` can also be set to
 #' `NULL` to not simulate dates for individuals that died.
@@ -83,6 +86,10 @@
 #'
 #' The default is an anonymous function with a lognormal distribution random
 #' number generator ([rlnorm()]) with `meanlog = 2.5` and `sdlog = 0.5`.
+#'
+#' If `onset_to_death` is set to `NULL` then `non_hosp_death_risk` and
+#' `hosp_death_risk` will be automatically set to `NULL` if not manually
+#' specified.
 #'
 #' @param onset_to_recovery A `function` or an `<epidist>` object for the
 #' onset-to-recovery delay distribution. `onset_to_recovery` can also be `NULL`
@@ -100,27 +107,30 @@
 #'
 #' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
-#' hospitalisation risks Default is 20% hospitalisation (`0.2`) for the entire
+#' hospitalisation risks. Default is 20% hospitalisation (`0.2`) for the entire
 #' population. If the `onset_to_hosp` argument is set to `NULL` this argument
-#' should also be set to `NULL`. See details and examples for more information.
+#' will automatically be set to `NULL` if not specified or can be manually
+#' set to `NULL`. See details and examples for more information.
 #'
 #' @param hosp_death_risk Either a single `numeric` for the death risk for
 #' hospitalised individuals across the population, or a `<data.frame>` with age
 #' specific hospitalised death risks Default is 50% death risk in hospitals
 #' (`0.5`) for the entire population. If the `onset_to_death` argument is set
-#' to `NULL` this argument should also be set to `NULL`. See details and
-#' examples for more information. If a time-varying death risk is specified in
-#' the `config` the `hosp_death_risk` is interpreted as the maximum risk across
-#' the epidemic.
+#' to `NULL` this argument will automatically be set to `NULL` if not specified
+#' or can be manually set to `NULL`. See details and examples for more
+#' information. The `hosp_death_risk` can vary through time if specified in
+#' the `time_varying_death_risk` element of `config`, see
+#' `vignette("time-varying-cfr", package = "simulist")` for more information.
 #'
 #' @param non_hosp_death_risk Either a single `numeric` for the death risk for
 #' outside of hospitals across the population, or a `<data.frame>` with age
 #' specific death risks outside of hospitals. Default is 5% death risk outside
 #' of hospitals  (`0.05`) for the entire population. If the `onset_to_death`
-#' argument is set to `NULL` this argument should also be set to `NULL`. See
-#' details and examples for more information. If a time-varying death risk is
-#' specified in the `config` the `non_hosp_death_risk` is interpreted as the
-#' maximum risk across the epidemic.
+#' argument is set to `NULL` this argument will automatically be set to `NULL`
+#' if not specified or can be manually set to `NULL`. See details and examples
+#' for more information. The `non_hosp_death_risk` can vary through time if
+#' specified in the `time_varying_death_risk` element of `config`, see
+#' `vignette("time-varying-cfr", package = "simulist")` for more information.
 #'
 #' @param outbreak_start_date A `date` for the start of the outbreak.
 #'
