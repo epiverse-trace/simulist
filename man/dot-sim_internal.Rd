@@ -57,8 +57,9 @@ their contacts are assumed to be uniformly distributed within the
 infectious period. Infectious periods must be strictly positive.
 
 The function can be defined or anonymous. The function must return a vector
-of randomly generated real numbers representing sampled infectious periods. The function must
-have a single argument, the number of random infectious periods to generate.
+of randomly generated real numbers representing sampled infectious periods.
+The function must have a single argument, the number of random infectious
+periods to generate.
 
 An \verb{<epidist>} can be provided. This will be converted into random number
 generator internally.
