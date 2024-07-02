@@ -23,11 +23,15 @@
 #' @param contact_distribution A `function` or an `<epidist>` object to generate
 #' the number of contacts per infection.
 #'
-#' The function can be defined or anonymous. The function must return a vector
-#' of `numerics`. The vector is the probability mass of sampling a certain
-#' number of contacts, i.e. the first element in the vector is the weight of
-#' sampling zero contacts, the second element is the weight of sampling a single
-#' contact, etc. The function must have a single argument.
+#' The function can be defined or anonymous. The function must have a single
+#' argument in the form of an `integer` vector with elements representing the
+#' number of contacts, and return a `numeric` vector where each element
+#' corresponds to the probability of observing the number of contacts in the
+#' vector passed to the function. The index of the `numeric` vector returned
+#' is offset by one to the corresponding probability of observing the number
+#' of contacts, i.e. the first element of the output vector is the probability
+#' of observing zero contacts, the second element is the probability of
+#' observing one contact, etc.
 #'
 #' An `<epidist>` can be provided. This will be converted into a probability
 #' mass function internally.
