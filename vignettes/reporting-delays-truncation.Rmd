@@ -1,0 +1,113 @@
+---
+title: "Reporting delays and right-truncation of line list data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{reporting-delays-truncation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simulist)
+library(epiparameter)
+```
+
+## Truncation
+
+Right-truncation can occur to epidemiological data when the most recent events are not recorded. This leads to an underestimate of recent cases or death, and is especially relevant for ongoing outbreaks where recent cases might not have been recorded. It can also happen if cases are no longer recorded after a certain point in time. 
+
+Right-truncated outbreak data, in particular line list data, can give the impression that the incidence is decreasing ($R$ < 1), however this can be an artefact resulting from the fact the data is right-truncated, and the outbreak can be stable or growing.
+
+By default {simulist} simulates an outbreak from start to finish. Therefore, the line list or contact data contain all cases and outcomes. In order to get data that is more representative of ongoing outbreak dynamics where recent cases are not yet recorded and will be revised upwards in the future the `truncation()` function can be applied.
+
+First we simulate a simple line list using `sim_linelist()`. We load or construct the contact distribution, infectious period and delay distributions using the {epiparameter} R package.
+
+```{r, read-delay-dists}
+contact_distribution <- epidist(
+  disease = "COVID-19",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 2)
+)
+
+infectious_period <- epidist(
+  disease = "COVID-19",
+  epi_dist = "infectious period",
+  prob_distribution = "gamma",
+  prob_distribution_params = c(shape = 1, scale = 1)
+)
+
+# get onset to hospital admission from {epiparameter} database
+onset_to_hosp <- epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to hospitalisation",
+  single_epidist = TRUE
+)
+
+# get onset to death from {epiparameter} database
+onset_to_death <- epidist_db(
+  disease = "COVID-19",
+  epi_dist = "onset to death",
+  single_epidist = TRUE
+)
+```
+
+We set the seed to ensure we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
+
+```{r, set-seed}
+set.seed(1)
+```
+
+```{r, sim-linelist}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death
+)
+
+# first 6 rows of linelist
+head(linelist)
+```
+
+### Variable truncation point (default)
+
+...
+
+### Fixed truncation point
+
+The `delay` argument in `truncation()` is flexible to allow the use of a variety of random number generators, such as different parametric probability distributions or different distribution parameters. This enables variability in the truncation. However, it may be warranted that the truncation point is the same for all cases. This could be the case if the reporting of cases during an outbreak stopped on a given date. 
+
+To adjust the line list for right-truncation using a fixed truncation point we can use the same setup of the `delay` argument but specify the variability of the distribution as zero. 
+
+```{r, rlnorm-zero-sd}
+delay <- function(x) rlnorm(n = x, meanlog = 2, sdlog = 0)
+```
+
+This will produce the same time point at which all the data get right truncated if more recent than. 
+
+```{r, generate-rlnorm-zero-sd}
+delay(10)
+```
+
+
+```{r, truncate-linelist-zero-sd}
+linelist_trunc <- truncation(linelist = linelist, delay = delay)
+```
+
+Alternatively, a function could be supplied that deterministically generates the same truncation point without using a probability distribution.
+
+```{r, constant-trunc}
+delay <- function(x) rep(x = 5, times = x)
+delay(10)
+linelist_trunc <- truncation(linelist = linelist, delay = delay)
+```
+
