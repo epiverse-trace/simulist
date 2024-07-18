@@ -132,18 +132,6 @@ references:
     address: Vienna, Austria
   year: '2024'
 - type: software
-  title: bookdown
-  abstract: 'bookdown: Authoring Books and Technical Documents with R Markdown'
-  notes: Suggests
-  url: https://pkgs.rstudio.com/bookdown/
-  repository: https://CRAN.R-project.org/package=bookdown
-  authors:
-  - family-names: Xie
-    given-names: Yihui
-    email: xie@yihui.name
-    orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2024'
-- type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
   notes: Suggests
