@@ -207,7 +207,7 @@ config <- create_config(
 
 Here we set the case fatality risk to exponentially decrease through time. This will provide a shallow (monotonic) decline of case fatality through the simulated epidemic. 
 
-```{r, plot-exponential-dist, class.source = 'fold-hide', fig.cap="The time-varying hospitalised case fatality risk function (`config$time_varying_death_risk`) throughout the epidemic. In this case the hospitalised risks (`hosp_death_risk`) are at their maximum value at day 0 and decline through time, with risk approaching zero at around day 100.", fig.width = 8, fig.height = 5}
+```{r, plot-exponential-dist, fig.cap="The time-varying hospitalised case fatality risk function (`config$time_varying_death_risk`) throughout the epidemic. In this case the hospitalised risks (`hosp_death_risk`) are at their maximum value at day 0 and decline through time, with risk approaching zero at around day 100.", fig.width = 8, fig.height = 5}
 exp_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
@@ -286,7 +286,7 @@ config <- create_config(
 # nolint end
 ```
 
-```{r, plot-stepwise-dist, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) for the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their user-supplied values from day 0 to day 60, and then become 0 onwards.", fig.width = 8, fig.height = 5}
+```{r, plot-stepwise-dist, fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) for the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their user-supplied values from day 0 to day 60, and then become 0 onwards.", fig.width = 8, fig.height = 5}
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
@@ -351,7 +351,7 @@ config <- create_config(
 )
 ```
 
-```{r, plot-stepwise-dist-window, class.source = 'fold-hide', fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values from day 0 to day 50, and then half the risks from day 50 to day 100, and then return to their maximum value from day 100 onwards.", fig.width = 8, fig.height = 5}
+```{r, plot-stepwise-dist-window, fig.cap="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values from day 0 to day 50, and then half the risks from day 50 to day 100, and then return to their maximum value from day 100 onwards.", fig.width = 8, fig.height = 5}
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
