@@ -1,8 +1,6 @@
 ---
 title: "Age structured population"
-output: 
-  rmarkdown::html_vignette:
-    code_folding: show
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Age structured population}
   %\VignetteEngine{knitr::rmarkdown}

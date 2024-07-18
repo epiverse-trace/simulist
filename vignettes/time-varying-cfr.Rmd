@@ -1,8 +1,6 @@
 ---
 title: "Time-varying case fatality risk"
-output: 
-  rmarkdown::html_vignette:
-    code_folding: show
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Time-varying case fatality risk}
   %\VignetteEngine{knitr::rmarkdown}
