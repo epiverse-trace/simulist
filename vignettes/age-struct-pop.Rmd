@@ -1,7 +1,7 @@
 ---
 title: "Age structured population"
 output: 
-  bookdown::html_vignette2:
+  rmarkdown::html_vignette:
     code_folding: show
 vignette: >
   %\VignetteIndexEntry{Age structured population}

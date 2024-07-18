@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with {simulist}"
 output: 
-  bookdown::html_vignette2:
+  rmarkdown::html_vignette:
     code_folding: show
 vignette: >
   %\VignetteIndexEntry{Getting Started with {simulist}}
