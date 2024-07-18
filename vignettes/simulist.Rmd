@@ -1,8 +1,6 @@
 ---
 title: "Getting Started with {simulist}"
-output: 
-  rmarkdown::html_vignette:
-    code_folding: show
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting Started with {simulist}}
   %\VignetteEngine{knitr::rmarkdown}

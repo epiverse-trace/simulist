@@ -1,8 +1,6 @@
 ---
 title: "Age-stratified hospitalisation and death risks"
-output: 
-  rmarkdown::html_vignette:
-    code_folding: show
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Age-stratified hospitalisation and death risks}
   %\VignetteEngine{knitr::rmarkdown}
