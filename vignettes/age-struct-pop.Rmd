@@ -3,8 +3,6 @@ title: "Age structured population"
 output: 
   bookdown::html_vignette2:
     code_folding: show
-pkgdown:
-  as_is: true
 vignette: >
   %\VignetteIndexEntry{Age structured population}
   %\VignetteEngine{knitr::rmarkdown}
