@@ -86,8 +86,8 @@ head(linelist)
 ```
 
 However, to simulate a more realistic line list using epidemiological
-parameters estimated for a infectious disease we can use previously
-estimated epidemiological parameters. These can be from the
+parameters estimated for an infectious disease outbreak we can use
+previously estimated epidemiological parameters. These can be from the
 `{epiparameter}` R package if available, or if these are not in the
 `{epiparameter}` database yet (such as the contact distribution for
 COVID-19) we can define them ourselves. Here we define a contact
@@ -107,9 +107,6 @@ contact_distribution <- epiparameter::epidist(
   prob_distribution_params = c(mean = 2)
 )
 #> Citation cannot be created as author, year, journal or title is missing
-```
-
-``` r
 
 # create COVID-19 infectious period
 infectious_period <- epiparameter::epidist(
@@ -119,9 +116,6 @@ infectious_period <- epiparameter::epidist(
   prob_distribution_params = c(shape = 1, scale = 1)
 )
 #> Citation cannot be created as author, year, journal or title is missing
-```
-
-``` r
 
 # get onset to hospital admission from {epiparameter} database
 onset_to_hosp <- epiparameter::epidist_db(
@@ -136,9 +130,6 @@ onset_to_hosp <- epiparameter::epidist_db(
 #> Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
 #> <https://doi.org/10.3390/jcm9020538>.. 
 #> To retrieve the citation use the 'get_citation' function
-```
-
-``` r
 
 # get onset to death from {epiparameter} database
 onset_to_death <- epiparameter::epidist_db(
@@ -290,9 +281,6 @@ head(outbreak$linelist)
 #> 4   2023-01-21         2023-01-07        2023-01-08     23.9
 #> 5         <NA>         2023-01-01        2023-01-01     23.9
 #> 6         <NA>         2023-01-02        2023-01-05       NA
-```
-
-``` r
 head(outbreak$contacts)
 #>              from                 to age sex date_first_contact
 #> 1   Okatomi Reish         Jesse Lynn  44   f         2023-01-04
