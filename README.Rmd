@@ -67,7 +67,7 @@ linelist <- sim_linelist()
 head(linelist)
 ```
 
-However, to simulate a more realistic line list using epidemiological parameters estimated for a infectious disease we can use previously estimated epidemiological parameters. These can be from the `{epiparameter}` R package if available, or if these are not in the `{epiparameter}` database yet (such as the contact distribution for COVID-19) we can define them ourselves. Here we define a contact distribution, period of infectiousness, onset-to-hospitalisation delay, and onset-to-death delay. 
+However, to simulate a more realistic line list using epidemiological parameters estimated for an infectious disease outbreak we can use previously estimated epidemiological parameters. These can be from the `{epiparameter}` R package if available, or if these are not in the `{epiparameter}` database yet (such as the contact distribution for COVID-19) we can define them ourselves. Here we define a contact distribution, period of infectiousness, onset-to-hospitalisation delay, and onset-to-death delay. 
 
 ```{r load-epiparameter}
 library(epiparameter)
