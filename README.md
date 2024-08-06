@@ -118,27 +118,27 @@ onset_to_death <- epiparameter::epidist_db(
 ```
 
 To simulate a line list for COVID-19 with a Poisson contact distribution
-with a mean number of contacts of 2 and a probability of infection per
-contact of 0.5, we use the `sim_linelist()` function. As outlined in
-@bjornstad2020a, the mean number of contacts ($k$) and probability of
-infection ($\pi$) are combined into a transmission rate that, multiplied
-by the infectious period ($1/\gamma$), determines the outbreak
-reproduction number ($R_o$). If the resulting reproduction number is
-around one it means we will likely get a reasonably sized outbreak (10 -
-1,000 cases, varying due to the stochastic simulation).
+with a mean number of contacts of 2 per day and a probability of
+infection per contact of 0.5, we use the `sim_linelist()` function. As
+outlined in @bjornstad2020a, the contact rate ($k$) and probability of
+infection on contact ($\pi$) are combined into a transmission rate that,
+multiplied by the infectious period ($1/\gamma$), determines the
+outbreak reproduction number ($R_o$). If the resulting reproduction
+number is around one it means we will likely get a reasonably sized
+outbreak (10 - 1,000 cases, varying due to the stochastic simulation).
 
 ***Warning***: the reproduction number of the simulation results from
-the infectious period distribution (`infectious_period`), the number of
-contacts distribution (`contact_distribution`) and the probability of
-infection (`prob_infection`); the number of infections is a binomial
-sample of the number of contacts for each case with the probability of
-infection (i.e. being sampled) given by `prob_infection`. If the average
-number of secondary infections from each primary case is greater than 1
-then this can lead to the outbreak becoming extremely large. There is
-currently no depletion of susceptible individuals in the simulation
-model, so the maximum outbreak size (second element of the vector
-supplied to the `outbreak_size` argument) can be used to return a line
-list early without producing an excessively large data set.
+the infectious period distribution (`infectious_period`), the contact
+rate distribution (`contact_distribution`) and the probability of
+infection on contact (`prob_infection`); the number of infections is a
+binomial sample of the number of contacts for each case with the
+probability of infection (i.e. being sampled) given by `prob_infection`.
+If the average number of secondary infections from each primary case is
+greater than 1 then this can lead to the outbreak becoming extremely
+large. There is currently no depletion of susceptible individuals in the
+simulation model, so the maximum outbreak size (second element of the
+vector supplied to the `outbreak_size` argument) can be used to return a
+line list early without producing an excessively large data set.
 
 ``` r
 set.seed(1)
