@@ -78,9 +78,6 @@ contact_distribution <- epiparameter::epidist(
   prob_distribution_params = c(mean = 2)
 )
 #> Citation cannot be created as author, year, journal or title is missing
-```
-
-``` r
 
 # create COVID-19 infectious period
 infectious_period <- epiparameter::epidist(
@@ -90,9 +87,6 @@ infectious_period <- epiparameter::epidist(
   prob_distribution_params = c(shape = 1, scale = 1)
 )
 #> Citation cannot be created as author, year, journal or title is missing
-```
-
-``` r
 
 # get onset to hospital admission from {epiparameter} database
 onset_to_hosp <- epiparameter::epidist_db(
@@ -107,9 +101,6 @@ onset_to_hosp <- epiparameter::epidist_db(
 #> Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
 #> <https://doi.org/10.3390/jcm9020538>.. 
 #> To retrieve the citation use the 'get_citation' function
-```
-
-``` r
 
 # get onset to death from {epiparameter} database
 onset_to_death <- epiparameter::epidist_db(
@@ -137,7 +128,8 @@ around one it means we will likely get a reasonably sized outbreak (10 -
 1,000 cases, varying due to the stochastic simulation).
 
 ***Warning***: the reproduction number of the simulation results from
-the contact distribution (`contact_distribution`) and the probability of
+the infectious period distribution (`infectious_period`), the number of
+contacts distribution (`contact_distribution`) and the probability of
 infection (`prob_infection`); the number of infections is a binomial
 sample of the number of contacts for each case with the probability of
 infection (i.e. being sampled) given by `prob_infection`. If the average
@@ -263,9 +255,6 @@ head(outbreak$linelist)
 #> 4   2023-01-21         2023-01-07        2023-01-08     23.9
 #> 5         <NA>         2023-01-01        2023-01-01     23.9
 #> 6         <NA>         2023-01-02        2023-01-05       NA
-```
-
-``` r
 head(outbreak$contacts)
 #>              from                 to age sex date_first_contact
 #> 1   Okatomi Reish         Jesse Lynn  44   f         2023-01-04
