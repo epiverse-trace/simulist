@@ -128,14 +128,14 @@ error.</p>
 
 
 <dl><dt id="arg-onset-to-hosp">onset_to_hosp<a class="anchor" aria-label="anchor" href="#arg-onset-to-hosp"></a></dt>
-<dd><p>A <code>function</code> or an <code>&lt;epidist&gt;</code> object for the
+<dd><p>A <code>function</code> or an <code>&lt;epiparameter&gt;</code> object for the
 onset-to-hospitalisation delay distribution. <code>onset_to_hosp</code> can also be
 set to <code>NULL</code> to not simulate hospitalisation (admission) dates.</p>
 <p>The function can be defined or anonymous. The function must return a vector
 of <code>numeric</code>s for the length of the onset-to-hospitalisation delay. The
 function must have a single argument.</p>
-<p>An <code>&lt;epidist&gt;</code> can be provided. This will be converted into a random number
-generator internally.</p>
+<p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into a random
+number generator internally.</p>
 <p>The default is an anonymous function with a lognormal distribution random
 number generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) with <code>meanlog = 1.5</code> and <code>sdlog = 0.5</code>.</p>
 <p>If <code>onset_to_hosp</code> is set to <code>NULL</code> then <code>hosp_risk</code> and <code>hosp_death_risk</code>
@@ -143,14 +143,14 @@ will be automatically set to <code>NULL</code> if not manually specified.</p></d
 
 
 <dt id="arg-onset-to-death">onset_to_death<a class="anchor" aria-label="anchor" href="#arg-onset-to-death"></a></dt>
-<dd><p>A <code>function</code> or an <code>&lt;epidist&gt;</code> object for the
+<dd><p>A <code>function</code> or an <code>&lt;epiparameter&gt;</code> object for the
 onset-to-death delay distribution. <code>onset_to_death</code> can also be set to
 <code>NULL</code> to not simulate dates for individuals that died.</p>
 <p>The function can be defined or anonymous. The function must return a vector
 of <code>numeric</code>s for the length of the onset-to-death delay. The function must
 have a single argument.</p>
-<p>An <code>&lt;epidist&gt;</code> can be provided. This will be converted into a random number
-generator internally.</p>
+<p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into a random
+number generator internally.</p>
 <p>The default is an anonymous function with a lognormal distribution random
 number generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) with <code>meanlog = 2.5</code> and <code>sdlog = 0.5</code>.</p>
 <p>If <code>onset_to_death</code> is set to <code>NULL</code> then <code>non_hosp_death_risk</code> and

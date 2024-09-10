@@ -93,8 +93,8 @@ parameterised with epidemiological parameters.</p>
 
 
 <dl><dt id="arg-contact-distribution">contact_distribution<a class="anchor" aria-label="anchor" href="#arg-contact-distribution"></a></dt>
-<dd><p>A <code>function</code> or an <code>&lt;epidist&gt;</code> object to generate
-the number of contacts per infection.</p>
+<dd><p>A <code>function</code> or an <code>&lt;epiparameter&gt;</code> object to
+generate the number of contacts per infection.</p>
 <p>The function can be defined or anonymous. The function must have a single
 argument in the form of an <code>integer</code> vector with elements representing the
 number of contacts, and return a <code>numeric</code> vector where each element
@@ -104,14 +104,14 @@ is offset by one to the corresponding probability of observing the number
 of contacts, i.e. the first element of the output vector is the probability
 of observing zero contacts, the second element is the probability of
 observing one contact, etc.</p>
-<p>An <code>&lt;epidist&gt;</code> can be provided. This will be converted into a probability
-mass function internally.</p>
+<p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into a
+probability mass function internally.</p>
 <p>The default is an anonymous function with a Poisson probability mass function
 (<code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">dpois()</a></code>) with a mean (\(\lambda\)) of 2 contacts per infection.</p></dd>
 
 
 <dt id="arg-infectious-period">infectious_period<a class="anchor" aria-label="anchor" href="#arg-infectious-period"></a></dt>
-<dd><p>A <code>function</code> or an <code>&lt;epidist&gt;</code> object for the
+<dd><p>A <code>function</code> or an <code>&lt;epiparameter&gt;</code> object for the
 infectious period. This defines the duration from becoming infectious to
 no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
@@ -122,8 +122,8 @@ infectious period. Infectious periods must be strictly positive.</p>
 of randomly generated real numbers representing sampled infectious periods.
 The function must have a single argument, the number of random infectious
 periods to generate.</p>
-<p>An <code>&lt;epidist&gt;</code> can be provided. This will be converted into random number
-generator internally.</p>
+<p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into random
+number generator internally.</p>
 <p>The default is an anonymous function with a lognormal distribution random
 number generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) with <code>meanlog = 2</code> and <code>sdlog = 0.5</code>.</p></dd>
 
@@ -134,14 +134,14 @@ contact being infected by an infected primary contact.</p></dd>
 
 
 <dt id="arg-onset-to-hosp">onset_to_hosp<a class="anchor" aria-label="anchor" href="#arg-onset-to-hosp"></a></dt>
-<dd><p>A <code>function</code> or an <code>&lt;epidist&gt;</code> object for the
+<dd><p>A <code>function</code> or an <code>&lt;epiparameter&gt;</code> object for the
 onset-to-hospitalisation delay distribution. <code>onset_to_hosp</code> can also be
 set to <code>NULL</code> to not simulate hospitalisation (admission) dates.</p>
 <p>The function can be defined or anonymous. The function must return a vector
 of <code>numeric</code>s for the length of the onset-to-hospitalisation delay. The
 function must have a single argument.</p>
-<p>An <code>&lt;epidist&gt;</code> can be provided. This will be converted into a random number
-generator internally.</p>
+<p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into a random
+number generator internally.</p>
 <p>The default is an anonymous function with a lognormal distribution random
 number generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) with <code>meanlog = 1.5</code> and <code>sdlog = 0.5</code>.</p>
 <p>If <code>onset_to_hosp</code> is set to <code>NULL</code> then <code>hosp_risk</code> and <code>hosp_death_risk</code>
@@ -149,14 +149,14 @@ will be automatically set to <code>NULL</code> if not manually specified.</p></d
 
 
 <dt id="arg-onset-to-death">onset_to_death<a class="anchor" aria-label="anchor" href="#arg-onset-to-death"></a></dt>
-<dd><p>A <code>function</code> or an <code>&lt;epidist&gt;</code> object for the
+<dd><p>A <code>function</code> or an <code>&lt;epiparameter&gt;</code> object for the
 onset-to-death delay distribution. <code>onset_to_death</code> can also be set to
 <code>NULL</code> to not simulate dates for individuals that died.</p>
 <p>The function can be defined or anonymous. The function must return a vector
 of <code>numeric</code>s for the length of the onset-to-death delay. The function must
 have a single argument.</p>
-<p>An <code>&lt;epidist&gt;</code> can be provided. This will be converted into a random number
-generator internally.</p>
+<p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into a random
+number generator internally.</p>
 <p>The default is an anonymous function with a lognormal distribution random
 number generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) with <code>meanlog = 2.5</code> and <code>sdlog = 0.5</code>.</p>
 <p>If <code>onset_to_death</code> is set to <code>NULL</code> then <code>non_hosp_death_risk</code> and
@@ -165,14 +165,14 @@ specified.</p></dd>
 
 
 <dt id="arg-onset-to-recovery">onset_to_recovery<a class="anchor" aria-label="anchor" href="#arg-onset-to-recovery"></a></dt>
-<dd><p>A <code>function</code> or an <code>&lt;epidist&gt;</code> object for the
+<dd><p>A <code>function</code> or an <code>&lt;epiparameter&gt;</code> object for the
 onset-to-recovery delay distribution. <code>onset_to_recovery</code> can also be <code>NULL</code>
 to not simulate dates for individuals that recovered.</p>
 <p>The function can be defined or anonymous. The function must return a vector
 of <code>numeric</code>s for the length of the onset-to-recovery delay. The function
 must have a single argument.</p>
-<p>An <code>&lt;epidist&gt;</code> can be provided. This will be converted into a random number
-generator internally.</p>
+<p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into a random
+number generator internally.</p>
 <p>The default is <code>NULL</code> so by default cases that recover get an <code>NA</code> in the
 <code>$date_outcome</code> line list column.</p></dd>
 
@@ -300,7 +300,7 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># to simulate a more realistic line list load epiparameters from</span></span></span>
 <span class="r-in"><span><span class="co"># {epiparameter}</span></span></span>
-<span class="r-in"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
 <span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"contact distribution"</span>,</span></span>
 <span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span></span>
@@ -308,7 +308,7 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Citation cannot be created as author, year, journal or title is missing</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
 <span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span></span>
 <span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span></span>
@@ -317,10 +317,10 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Citation cannot be created as author, year, journal or title is missing</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># get onset to hospital admission from {epiparameter} database</span></span></span>
-<span class="r-in"><span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
 <span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"onset to hospitalisation"</span>,</span></span>
-<span class="r-in"><span>  single_epidist <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> B, Kinoshita R, Nishiura H (2020). “Incubation Period and Other</span>
@@ -331,10 +331,10 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> To retrieve the citation use the 'get_citation' function</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># get onset to death from {epiparameter} database</span></span></span>
-<span class="r-in"><span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
 <span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"onset to death"</span>,</span></span>
-<span class="r-in"><span>  single_epidist <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> B, Kinoshita R, Nishiura H (2020). “Incubation Period and Other</span>

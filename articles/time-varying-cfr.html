@@ -152,7 +152,7 @@ infectious period), or load them from the {epiparameter} library of
 epidemiological parameters (onset-to-hospitalisation and
 onset-to-death).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"contact distribution"</span>,</span>
 <span>  prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span>
@@ -160,7 +160,7 @@ onset-to-death).</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
 <span></span>
-<span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span>
 <span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span>
@@ -169,10 +169,10 @@ onset-to-death).</p>
 <span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
 <span></span>
 <span><span class="co"># get onset to hospital admission from {epiparameter} database</span></span>
-<span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span>
+<span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"onset to hospitalisation"</span>,</span>
-<span>  single_epidist <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span></span>
 <span><span class="co">#&gt; B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other</span></span>
@@ -183,10 +183,10 @@ onset-to-death).</p>
 <span><span class="co">#&gt; To retrieve the citation use the 'get_citation' function</span></span>
 <span></span>
 <span><span class="co"># get onset to death from {epiparameter} database</span></span>
-<span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span>
+<span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"onset to death"</span>,</span>
-<span>  single_epidist <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span></span>
 <span><span class="co">#&gt; B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other</span></span>
@@ -280,7 +280,7 @@ columns into their own columns using the <a href="https://tidyr.tidyverse.org/" 
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -288,7 +288,7 @@ columns into their own columns using the <a href="https://tidyr.tidyverse.org/" 
 <span>  <span class="op">)</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
+<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="time-varying-cfr_files/figure-html/plot-onset-hospitalisation-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.5 and the risk for non-hospitalised individuals is 0.05, and these risks are constant through time." width="768"><p class="caption">
@@ -347,7 +347,7 @@ infected.</p>
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -355,7 +355,7 @@ infected.</p>
 <span>  <span class="op">)</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
+<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="time-varying-cfr_files/figure-html/plot-onset-death-higher-risk-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.9 and the risk for non-hospitalised individuals is 0.75, and these risks are constant through time." width="768"><p class="caption">
@@ -468,7 +468,7 @@ zero the risk of a case dying will also go to zero.</p>
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -476,7 +476,7 @@ zero the risk of a case dying will also go to zero.</p>
 <span>  <span class="op">)</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
+<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these decline exponentially through time." width="768"><p class="caption">
@@ -566,7 +566,7 @@ then become 0 onwards.
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -574,7 +574,7 @@ then become 0 onwards.
 <span>  <span class="op">)</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
+<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these rates remain constant from days 0 to 60, and then go to 0 from day 60 onwards." width="768"><p class="caption">
@@ -659,7 +659,7 @@ onwards.
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -667,7 +667,7 @@ onwards.
 <span>  <span class="op">)</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
+<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-window-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these rates remain constant from days 0 to 50, and then from days 50 to 100 the case fatality risk is halved (i.e `hosp_death_risk` = 0.45 and `non_hosp_death_risk` = 0.375), before going back to their original risks from day 100 onwards." width="768"><p class="caption">

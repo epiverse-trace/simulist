@@ -140,7 +140,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create COVID-19 contact distribution</span></span>
-<span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>, </span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"contact distribution"</span>, </span>
 <span>  prob_distribution <span class="op">=</span> <span class="st">"pois"</span>, </span>
@@ -149,7 +149,7 @@
 <span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
 <span></span>
 <span><span class="co"># create COVID-19 infectious period</span></span>
-<span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist.html" class="external-link">epidist</a></span><span class="op">(</span></span>
+<span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span>
 <span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span>
@@ -158,10 +158,10 @@
 <span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
 <span></span>
 <span><span class="co"># get onset to hospital admission from {epiparameter} database</span></span>
-<span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span>
+<span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"onset to hospitalisation"</span>,</span>
-<span>  single_epidist <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span></span>
 <span><span class="co">#&gt; B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other</span></span>
@@ -172,10 +172,10 @@
 <span><span class="co">#&gt; To retrieve the citation use the 'get_citation' function</span></span>
 <span></span>
 <span><span class="co"># get onset to death from {epiparameter} database</span></span>
-<span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epidist_db.html" class="external-link">epidist_db</a></span><span class="op">(</span></span>
+<span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"onset to death"</span>,</span>
-<span>  single_epidist <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span></span>
 <span><span class="co">#&gt; B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other</span></span>
