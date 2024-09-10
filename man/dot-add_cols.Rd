@@ -49,7 +49,7 @@ given in the \code{distribution} argument.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
-\item{onset_to_hosp}{A \code{function} or an \verb{<epidist>} object for the
+\item{onset_to_hosp}{A \code{function} or an \verb{<epiparameter>} object for the
 onset-to-hospitalisation delay distribution. \code{onset_to_hosp} can also be
 set to \code{NULL} to not simulate hospitalisation (admission) dates.
 
@@ -57,8 +57,8 @@ The function can be defined or anonymous. The function must return a vector
 of \code{numeric}s for the length of the onset-to-hospitalisation delay. The
 function must have a single argument.
 
-An \verb{<epidist>} can be provided. This will be converted into a random number
-generator internally.
+An \verb{<epiparameter>} can be provided. This will be converted into a random
+number generator internally.
 
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.
@@ -73,7 +73,7 @@ population. If the \code{onset_to_hosp} argument is set to \code{NULL} this argu
 will automatically be set to \code{NULL} if not specified or can be manually
 set to \code{NULL}. See details and examples for more information.}
 
-\item{onset_to_death}{A \code{function} or an \verb{<epidist>} object for the
+\item{onset_to_death}{A \code{function} or an \verb{<epiparameter>} object for the
 onset-to-death delay distribution. \code{onset_to_death} can also be set to
 \code{NULL} to not simulate dates for individuals that died.
 
@@ -81,8 +81,8 @@ The function can be defined or anonymous. The function must return a vector
 of \code{numeric}s for the length of the onset-to-death delay. The function must
 have a single argument.
 
-An \verb{<epidist>} can be provided. This will be converted into a random number
-generator internally.
+An \verb{<epiparameter>} can be provided. This will be converted into a random
+number generator internally.
 
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.
@@ -91,7 +91,7 @@ If \code{onset_to_death} is set to \code{NULL} then \code{non_hosp_death_risk} a
 \code{hosp_death_risk} will be automatically set to \code{NULL} if not manually
 specified.}
 
-\item{onset_to_recovery}{A \code{function} or an \verb{<epidist>} object for the
+\item{onset_to_recovery}{A \code{function} or an \verb{<epiparameter>} object for the
 onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
 to not simulate dates for individuals that recovered.
 
@@ -99,8 +99,8 @@ The function can be defined or anonymous. The function must return a vector
 of \code{numeric}s for the length of the onset-to-recovery delay. The function
 must have a single argument.
 
-An \verb{<epidist>} can be provided. This will be converted into a random number
-generator internally.
+An \verb{<epiparameter>} can be provided. This will be converted into a random
+number generator internally.
 
 The default is \code{NULL} so by default cases that recover get an \code{NA} in the
 \verb{$date_outcome} line list column.}

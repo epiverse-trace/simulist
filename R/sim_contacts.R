@@ -18,14 +18,14 @@
 #'
 #' # to simulate more realistic contact tracing data load epiparameters from
 #' # {epiparameter}
-#' contact_distribution <- epiparameter::epidist(
+#' contact_distribution <- epiparameter::epiparameter(
 #'   disease = "COVID-19",
 #'   epi_dist = "contact distribution",
 #'   prob_distribution = "pois",
 #'   prob_distribution_params = c(mean = 2)
 #' )
 #'
-#' infectious_period <- epiparameter::epidist(
+#' infectious_period <- epiparameter::epiparameter(
 #'   disease = "COVID-19",
 #'   epi_dist = "infectious period",
 #'   prob_distribution = "gamma",
@@ -52,8 +52,8 @@ sim_contacts <- function(contact_distribution = function(x) stats::dpois(x = x, 
                          config = create_config()) {
   # check and convert distribution to func if needed before .check_sim_input()
   stopifnot(
-    "Input delay distributions need to be either functions or <epidist>" =
-      inherits(infectious_period, c("function", "epidist"))
+    "Input delay distributions need to be either functions or <epiparameter>" =
+      inherits(infectious_period, c("function", "epiparameter"))
   )
   contact_distribution <- as.function(
     contact_distribution, func_type = "density"

@@ -120,7 +120,7 @@
   out
 }
 
-#' Convert `<epidist>` or `NULL` to function
+#' Convert `<epiparameter>` or `NULL` to function
 #'
 #' @description
 #' An extension to [as.function()], particularly the \pkg{epiparameter}
@@ -132,25 +132,26 @@
 #' If a function is already passed to `as_function` it will be returned
 #' unchanged.
 #'
-#' There is also input checking to error if input is not an `<epidist>`,
+#' There is also input checking to error if input is not an `<epiparameter>`,
 #' `function` ([closure]), or for onset-to-event distributions `NULL`.
 #'
-#' @param x A named list containing either `<epidist>`, `function` or `NULL`.
-#' Named list elements are: `"contact_distribution"`, `"infectious_period"`,
-#' `"onset_to_hosp"`, `"onset_to_death"`, `"onset_to_recovery".`
+#' @param x A named list containing either `<epiparameter>`, `function` or
+#' `NULL`. Named list elements are: `"contact_distribution"`,
+#' `"infectious_period"`, `"onset_to_hosp"`, `"onset_to_death"`,
+#' `"onset_to_recovery".`
 #'
 #' @return A list of `function`s.
 #' @keywords internal
 as_function <- function(x) {
   stopifnot(
-    "Input delay distributions need to be either functions or <epidist>" =
-      inherits(x$contact_distribution, c("function", "epidist")) &&
-      inherits(x$infectious_period, c("function", "epidist")),
+    "Input delay distributions need to be either functions or <epiparameter>" =
+      inherits(x$contact_distribution, c("function", "epiparameter")) &&
+      inherits(x$infectious_period, c("function", "epiparameter")),
     "onset_to_hosp, onset_to_death and onset_to_recovery need to be a function,
-    <epidist> or NULL" =
-      (inherits(x$onset_to_hosp, c("function", "epidist")) ||
+    <epiparameter> or NULL" =
+      (inherits(x$onset_to_hosp, c("function", "epiparameter")) ||
       is.null(x$onset_to_hosp)) &&
-      (inherits(x$onset_to_death, c("function", "epidist")) ||
+      (inherits(x$onset_to_death, c("function", "epiparameter")) ||
       is.null(x$onset_to_death))
   )
   contact_distribution <- as.function(

@@ -20,8 +20,8 @@
 #' * `proportion`: a column with the proportion of the population that are in
 #' that age group. Proportions must sum to one.
 #'
-#' @param contact_distribution A `function` or an `<epidist>` object to generate
-#' the number of contacts per infection.
+#' @param contact_distribution A `function` or an `<epiparameter>` object to
+#' generate the number of contacts per infection.
 #'
 #' The function can be defined or anonymous. The function must have a single
 #' argument in the form of an `integer` vector with elements representing the
@@ -33,13 +33,13 @@
 #' of observing zero contacts, the second element is the probability of
 #' observing one contact, etc.
 #'
-#' An `<epidist>` can be provided. This will be converted into a probability
-#' mass function internally.
+#' An `<epiparameter>` can be provided. This will be converted into a
+#' probability mass function internally.
 #'
 #' The default is an anonymous function with a Poisson probability mass function
 #' ([dpois()]) with a mean (\eqn{\lambda}) of 2 contacts per infection.
 #'
-#' @param infectious_period A `function` or an `<epidist>` object for the
+#' @param infectious_period A `function` or an `<epiparameter>` object for the
 #' infectious period. This defines the duration from becoming infectious to
 #' no longer infectious. In the simulation, individuals are assumed to
 #' become infectious immediately after being infected (the latency period is
@@ -52,8 +52,8 @@
 #' The function must have a single argument, the number of random infectious
 #' periods to generate.
 #'
-#' An `<epidist>` can be provided. This will be converted into random number
-#' generator internally.
+#' An `<epiparameter>` can be provided. This will be converted into random
+#' number generator internally.
 #'
 #' The default is an anonymous function with a lognormal distribution random
 #' number generator ([rlnorm()]) with `meanlog = 2` and `sdlog = 0.5`.
@@ -61,7 +61,7 @@
 #' @param prob_infection A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
 #'
-#' @param onset_to_hosp A `function` or an `<epidist>` object for the
+#' @param onset_to_hosp A `function` or an `<epiparameter>` object for the
 #' onset-to-hospitalisation delay distribution. `onset_to_hosp` can also be
 #' set to `NULL` to not simulate hospitalisation (admission) dates.
 #'
@@ -69,8 +69,8 @@
 #' of `numeric`s for the length of the onset-to-hospitalisation delay. The
 #' function must have a single argument.
 #'
-#' An `<epidist>` can be provided. This will be converted into a random number
-#' generator internally.
+#' An `<epiparameter>` can be provided. This will be converted into a random
+#' number generator internally.
 #'
 #' The default is an anonymous function with a lognormal distribution random
 #' number generator ([rlnorm()]) with `meanlog = 1.5` and `sdlog = 0.5`.
@@ -78,7 +78,7 @@
 #' If `onset_to_hosp` is set to `NULL` then `hosp_risk` and `hosp_death_risk`
 #' will be automatically set to `NULL` if not manually specified.
 #'
-#' @param onset_to_death A `function` or an `<epidist>` object for the
+#' @param onset_to_death A `function` or an `<epiparameter>` object for the
 #' onset-to-death delay distribution. `onset_to_death` can also be set to
 #' `NULL` to not simulate dates for individuals that died.
 #'
@@ -86,8 +86,8 @@
 #' of `numeric`s for the length of the onset-to-death delay. The function must
 #' have a single argument.
 #'
-#' An `<epidist>` can be provided. This will be converted into a random number
-#' generator internally.
+#' An `<epiparameter>` can be provided. This will be converted into a random
+#' number generator internally.
 #'
 #' The default is an anonymous function with a lognormal distribution random
 #' number generator ([rlnorm()]) with `meanlog = 2.5` and `sdlog = 0.5`.
@@ -96,7 +96,7 @@
 #' `hosp_death_risk` will be automatically set to `NULL` if not manually
 #' specified.
 #'
-#' @param onset_to_recovery A `function` or an `<epidist>` object for the
+#' @param onset_to_recovery A `function` or an `<epiparameter>` object for the
 #' onset-to-recovery delay distribution. `onset_to_recovery` can also be `NULL`
 #' to not simulate dates for individuals that recovered.
 #'
@@ -104,8 +104,8 @@
 #' of `numeric`s for the length of the onset-to-recovery delay. The function
 #' must have a single argument.
 #'
-#' An `<epidist>` can be provided. This will be converted into a random number
-#' generator internally.
+#' An `<epiparameter>` can be provided. This will be converted into a random
+#' number generator internally.
 #'
 #' The default is `NULL` so by default cases that recover get an `NA` in the
 #' `$date_outcome` line list column.
@@ -180,14 +180,14 @@
 #'
 #' # to simulate a more realistic line list load epiparameters from
 #' # {epiparameter}
-#' contact_distribution <- epiparameter::epidist(
+#' contact_distribution <- epiparameter::epiparameter(
 #'   disease = "COVID-19",
 #'   epi_dist = "contact distribution",
 #'   prob_distribution = "pois",
 #'   prob_distribution_params = c(mean = 2)
 #' )
 #'
-#' infectious_period <- epiparameter::epidist(
+#' infectious_period <- epiparameter::epiparameter(
 #'   disease = "COVID-19",
 #'   epi_dist = "infectious period",
 #'   prob_distribution = "gamma",
@@ -195,17 +195,17 @@
 #' )
 #'
 #' # get onset to hospital admission from {epiparameter} database
-#' onset_to_hosp <- epiparameter::epidist_db(
+#' onset_to_hosp <- epiparameter::epiparameter_db(
 #'   disease = "COVID-19",
 #'   epi_dist = "onset to hospitalisation",
-#'   single_epidist = TRUE
+#'   single_epiparameter = TRUE
 #' )
 #'
 #' # get onset to death from {epiparameter} database
-#' onset_to_death <- epiparameter::epidist_db(
+#' onset_to_death <- epiparameter::epiparameter_db(
 #'   disease = "COVID-19",
 #'   epi_dist = "onset to death",
-#'   single_epidist = TRUE
+#'   single_epiparameter = TRUE
 #' )
 #' # example with single hospitalisation risk for entire population
 #' linelist <- sim_linelist(

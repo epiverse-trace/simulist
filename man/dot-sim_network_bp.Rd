@@ -14,8 +14,8 @@ infection for each contact}
 )
 }
 \arguments{
-\item{contact_distribution}{A \code{function} or an \verb{<epidist>} object to generate
-the number of contacts per infection.
+\item{contact_distribution}{A \code{function} or an \verb{<epiparameter>} object to
+generate the number of contacts per infection.
 
 The function can be defined or anonymous. The function must have a single
 argument in the form of an \code{integer} vector with elements representing the
@@ -27,13 +27,13 @@ of contacts, i.e. the first element of the output vector is the probability
 of observing zero contacts, the second element is the probability of
 observing one contact, etc.
 
-An \verb{<epidist>} can be provided. This will be converted into a probability
-mass function internally.
+An \verb{<epiparameter>} can be provided. This will be converted into a
+probability mass function internally.
 
 The default is an anonymous function with a Poisson probability mass function
 (\code{\link[=dpois]{dpois()}}) with a mean (\eqn{\lambda}) of 2 contacts per infection.}
 
-\item{infectious_period}{A \code{function} or an \verb{<epidist>} object for the
+\item{infectious_period}{A \code{function} or an \verb{<epiparameter>} object for the
 infectious period. This defines the duration from becoming infectious to
 no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
@@ -46,8 +46,8 @@ of randomly generated real numbers representing sampled infectious periods.
 The function must have a single argument, the number of random infectious
 periods to generate.
 
-An \verb{<epidist>} can be provided. This will be converted into random number
-generator internally.
+An \verb{<epiparameter>} can be provided. This will be converted into random
+number generator internally.
 
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2} and \code{sdlog = 0.5}.}

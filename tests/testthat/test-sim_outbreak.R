@@ -4,14 +4,14 @@ test_that("sim_outbreak works as expected with defaults", {
 })
 
 suppressMessages({
-  contact_distribution <- epiparameter::epidist(
+  contact_distribution <- epiparameter::epiparameter(
     disease = "COVID-19",
     epi_dist = "contact distribution",
     prob_distribution = "pois",
     prob_distribution_params = c(mean = 2)
   )
 
-  infectious_period <- epiparameter::epidist(
+  infectious_period <- epiparameter::epiparameter(
     disease = "COVID-19",
     epi_dist = "infectious period",
     prob_distribution = "gamma",
@@ -19,17 +19,17 @@ suppressMessages({
   )
 
   # get onset to hospital admission from {epiparameter} database
-  onset_to_hosp <- epiparameter::epidist_db(
+  onset_to_hosp <- epiparameter::epiparameter_db(
     disease = "COVID-19",
     epi_dist = "onset to hospitalisation",
-    single_epidist = TRUE
+    single_epiparameter = TRUE
   )
 
   # get onset to death from {epiparameter} database
-  onset_to_death <- epiparameter::epidist_db(
+  onset_to_death <- epiparameter::epiparameter_db(
     disease = "COVID-19",
     epi_dist = "onset to death",
-    single_epidist = TRUE
+    single_epiparameter = TRUE
   )
 })
 
