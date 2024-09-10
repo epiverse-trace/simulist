@@ -1,6 +1,6 @@
 suppressMessages({
   contact_distribution <- as.function(
-    epiparameter::epidist(
+    epiparameter::epiparameter(
       disease = "COVID-19",
       epi_dist = "contact distribution",
       prob_distribution = "pois",
@@ -9,7 +9,7 @@ suppressMessages({
   )
 
   infectious_period <- as.function(
-    epiparameter::epidist(
+    epiparameter::epiparameter(
       disease = "COVID-19",
       epi_dist = "infectious period",
       prob_distribution = "gamma",
@@ -34,7 +34,7 @@ test_that(".sim_network_bp works as expected", {
 test_that(".sim_network_bp works as expected with no contacts", {
   suppressMessages(
     contact_distribution <- as.function(
-      epiparameter::epidist(
+      epiparameter::epiparameter(
         disease = "COVID-19",
         epi_dist = "contact distribution",
         prob_distribution = "pois",
@@ -84,7 +84,7 @@ test_that(".sim_network_bp warns as expected", {
 test_that(".sim_network_bp errors with negative infectious period", {
   suppressMessages({
     infectious_period <- as.function(
-    epiparameter::epidist(
+    epiparameter::epiparameter(
       disease = "COVID-19",
       epi_dist = "infectious period",
       prob_distribution = "norm",

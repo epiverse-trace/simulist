@@ -29,7 +29,7 @@ First we load in some data that is required for the line list simulation. Data o
 
 ```{r read-epidist}
 # create contact distribution (not available from {epiparameter} database)
-contact_distribution <- epidist(
+contact_distribution <- epiparameter(
   disease = "COVID-19",
   epi_dist = "contact distribution",
   prob_distribution = "pois",
@@ -37,7 +37,7 @@ contact_distribution <- epidist(
 )
 
 # create infectious period (not available from {epiparameter} database)
-infectious_period <- epidist(
+infectious_period <- epiparameter(
   disease = "COVID-19",
   epi_dist = "infectious period",
   prob_distribution = "gamma",
@@ -45,17 +45,17 @@ infectious_period <- epidist(
 )
 
 # get onset to hospital admission from {epiparameter} database
-onset_to_hosp <- epidist_db(
+onset_to_hosp <- epiparameter_db(
   disease = "COVID-19",
   epi_dist = "onset to hospitalisation",
-  single_epidist = TRUE
+  single_epiparameter = TRUE
 )
 
 # get onset to death from {epiparameter} database
-onset_to_death <- epidist_db(
+onset_to_death <- epiparameter_db(
   disease = "COVID-19",
   epi_dist = "onset to death",
-  single_epidist = TRUE
+  single_epiparameter = TRUE
 )
 ```
 
@@ -216,9 +216,9 @@ The `sim_*()` functions, by default, use an excess degree distribution to accoun
 
 :::
 
-## Using functions for distributions instead of `<epidist>`
+## Using functions for distributions instead of `<epiparameter>`
 
-The `contact_distribution`, `infectious_period`, `onset_to_hosp`, `onset_to_death` and `onset_to_recovery` arguments can accept either an `<epidist>` object (as shown above), or can accept a function. It is possible to use a predefined function or an [anonymous function](https://en.wikipedia.org/wiki/Anonymous_function). Here we'll demonstrate how to use both.
+The `contact_distribution`, `infectious_period`, `onset_to_hosp`, `onset_to_death` and `onset_to_recovery` arguments can accept either an `<epiparameter>` object (as shown above), or can accept a function. It is possible to use a predefined function or an [anonymous function](https://en.wikipedia.org/wiki/Anonymous_function). Here we'll demonstrate how to use both.
 
 ### Predefined functions
 

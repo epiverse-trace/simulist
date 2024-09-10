@@ -29,8 +29,8 @@ within \pkg{simulist}}
 \item{sim_type}{A \code{character} string specifying which simulation function
 this function is being called within.}
 
-\item{contact_distribution}{A \code{function} or an \verb{<epidist>} object to generate
-the number of contacts per infection.
+\item{contact_distribution}{A \code{function} or an \verb{<epiparameter>} object to
+generate the number of contacts per infection.
 
 The function can be defined or anonymous. The function must have a single
 argument in the form of an \code{integer} vector with elements representing the
@@ -42,13 +42,13 @@ of contacts, i.e. the first element of the output vector is the probability
 of observing zero contacts, the second element is the probability of
 observing one contact, etc.
 
-An \verb{<epidist>} can be provided. This will be converted into a probability
-mass function internally.
+An \verb{<epiparameter>} can be provided. This will be converted into a
+probability mass function internally.
 
 The default is an anonymous function with a Poisson probability mass function
 (\code{\link[=dpois]{dpois()}}) with a mean (\eqn{\lambda}) of 2 contacts per infection.}
 
-\item{infectious_period}{A \code{function} or an \verb{<epidist>} object for the
+\item{infectious_period}{A \code{function} or an \verb{<epiparameter>} object for the
 infectious period. This defines the duration from becoming infectious to
 no longer infectious. In the simulation, individuals are assumed to
 become infectious immediately after being infected (the latency period is
@@ -61,8 +61,8 @@ of randomly generated real numbers representing sampled infectious periods.
 The function must have a single argument, the number of random infectious
 periods to generate.
 
-An \verb{<epidist>} can be provided. This will be converted into random number
-generator internally.
+An \verb{<epiparameter>} can be provided. This will be converted into random
+number generator internally.
 
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2} and \code{sdlog = 0.5}.}
@@ -70,7 +70,7 @@ number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2} and \
 \item{prob_infection}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
 
-\item{onset_to_hosp}{A \code{function} or an \verb{<epidist>} object for the
+\item{onset_to_hosp}{A \code{function} or an \verb{<epiparameter>} object for the
 onset-to-hospitalisation delay distribution. \code{onset_to_hosp} can also be
 set to \code{NULL} to not simulate hospitalisation (admission) dates.
 
@@ -78,8 +78,8 @@ The function can be defined or anonymous. The function must return a vector
 of \code{numeric}s for the length of the onset-to-hospitalisation delay. The
 function must have a single argument.
 
-An \verb{<epidist>} can be provided. This will be converted into a random number
-generator internally.
+An \verb{<epiparameter>} can be provided. This will be converted into a random
+number generator internally.
 
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and \code{sdlog = 0.5}.
@@ -87,7 +87,7 @@ number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 1.5} and
 If \code{onset_to_hosp} is set to \code{NULL} then \code{hosp_risk} and \code{hosp_death_risk}
 will be automatically set to \code{NULL} if not manually specified.}
 
-\item{onset_to_death}{A \code{function} or an \verb{<epidist>} object for the
+\item{onset_to_death}{A \code{function} or an \verb{<epiparameter>} object for the
 onset-to-death delay distribution. \code{onset_to_death} can also be set to
 \code{NULL} to not simulate dates for individuals that died.
 
@@ -95,8 +95,8 @@ The function can be defined or anonymous. The function must return a vector
 of \code{numeric}s for the length of the onset-to-death delay. The function must
 have a single argument.
 
-An \verb{<epidist>} can be provided. This will be converted into a random number
-generator internally.
+An \verb{<epiparameter>} can be provided. This will be converted into a random
+number generator internally.
 
 The default is an anonymous function with a lognormal distribution random
 number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and \code{sdlog = 0.5}.
@@ -105,7 +105,7 @@ If \code{onset_to_death} is set to \code{NULL} then \code{non_hosp_death_risk} a
 \code{hosp_death_risk} will be automatically set to \code{NULL} if not manually
 specified.}
 
-\item{onset_to_recovery}{A \code{function} or an \verb{<epidist>} object for the
+\item{onset_to_recovery}{A \code{function} or an \verb{<epiparameter>} object for the
 onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
 to not simulate dates for individuals that recovered.
 
@@ -113,8 +113,8 @@ The function can be defined or anonymous. The function must return a vector
 of \code{numeric}s for the length of the onset-to-recovery delay. The function
 must have a single argument.
 
-An \verb{<epidist>} can be provided. This will be converted into a random number
-generator internally.
+An \verb{<epiparameter>} can be provided. This will be converted into a random
+number generator internally.
 
 The default is \code{NULL} so by default cases that recover get an \code{NA} in the
 \verb{$date_outcome} line list column.}

@@ -2,14 +2,15 @@
 % Please edit documentation in R/utils.R
 \name{as_function}
 \alias{as_function}
-\title{Convert \verb{<epidist>} or \code{NULL} to function}
+\title{Convert \verb{<epiparameter>} or \code{NULL} to function}
 \usage{
 as_function(x)
 }
 \arguments{
-\item{x}{A named list containing either \verb{<epidist>}, \code{function} or \code{NULL}.
-Named list elements are: \code{"contact_distribution"}, \code{"infectious_period"},
-\code{"onset_to_hosp"}, \code{"onset_to_death"}, \verb{"onset_to_recovery".}}
+\item{x}{A named list containing either \verb{<epiparameter>}, \code{function} or
+\code{NULL}. Named list elements are: \code{"contact_distribution"},
+\code{"infectious_period"}, \code{"onset_to_hosp"}, \code{"onset_to_death"},
+\verb{"onset_to_recovery".}}
 }
 \value{
 A list of \code{function}s.
@@ -24,7 +25,7 @@ the generator functions output from
 If a function is already passed to \code{as_function} it will be returned
 unchanged.
 
-There is also input checking to error if input is not an \verb{<epidist>},
+There is also input checking to error if input is not an \verb{<epiparameter>},
 \code{function} (\link{closure}), or for onset-to-event distributions \code{NULL}.
 }
 \keyword{internal}
