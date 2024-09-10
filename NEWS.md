@@ -1,5 +1,33 @@
 # simulist (development version)
 
+A minor version release of _simulist_ containing various minor improvements to the function arguments and their docuemntation, as well as removing some triggers for warning users. There are also a few internal enhancements.
+
+## New features
+
+### External
+
+* Defaults have been added to all `sim_*()` arguments that previous did not have one. Allowing functions to be run without specifying any arguments (e.g. `linelist <- sim_linelist()`) (#149).
+* Documentation `sim_*()` function arguments that accept either a `function` or `<epidist>` object has been improved.
+* `sim_*()` functions no longer warn if the user has not specified `*_risk` arguments and have set `onset_to_*` arguments to `NULL` (#149).
+* All vignettes now use `rmarkdown::html_vignette` for to correctly render the website and for maximum compatibility with {pkgdown} >= 2.1.0. This removes figure numbering and code folding (#153).
+
+### Internal
+
+* `.add_hospitalisation()` has been vectorises following `.add_outcome()` in PR (#101) (#150). 
+
+## Breaking changes
+
+* The function arguments `infect_period` and `prob_infect` have been renamed `infectious_period` and `prob_infection` (#143).
+* `sim_*()` functions now use `NULL` instead of `NA` to turn off processes (e.g. `onset_to_death = NULL` for no deaths) (#148).
+
+## Bug fixes
+
+* A new function, `.sample_infect_period()` is added that errors if infectious period function generates a negative number (#142).
+
+## Deprecated and defunct
+
+* None
+
 # simulist 0.3.0
 
 The third release of the _simulist_ R package contains a range of new features, enhancements, documentation and unit tests. 
