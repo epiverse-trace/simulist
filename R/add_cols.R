@@ -258,7 +258,8 @@ NULL
   }
 
   # name list elements with vec names to ensure arg matching in do.call
-  args <- c(n = 1, list(...))
+  # as.list(c(...)) ensures that ... can be a list, vector or multiple args
+  args <- c(n = nrow(.data), as.list(c(...)))
 
   ct_value <- tryCatch(
     do.call(rdist, args = args),
