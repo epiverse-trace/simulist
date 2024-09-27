@@ -259,7 +259,10 @@ NULL
 
   # name list elements with vec names to ensure arg matching in do.call
   # as.list(c(...)) ensures that ... can be a list, vector or multiple args
-  args <- c(n = nrow(.data), as.list(c(...)))
+  args <- c(
+    n = sum(.data$case_type == "confirmed", na.rm = TRUE),
+    as.list(c(...))
+  )
 
   ct_value <- tryCatch(
     do.call(rdist, args = args),
@@ -276,14 +279,11 @@ NULL
       )
     }
   )
+  ct_value <- signif(ct_value, digits = 3)
 
-  .data$ct_value <- ifelse(
-    test = .data$case_type == "confirmed",
-    yes = ct_value,
-    no = NA_real_
-  )
-
-  .data$ct_value <- signif(.data$ct_value, digits = 3)
+  .data$ct_value <- NA_real_
+  # which to handle NAs in data.frame col
+  .data$ct_value[which(.data$case_type == "confirmed")] <- ct_value
 
   # return data
   .data
