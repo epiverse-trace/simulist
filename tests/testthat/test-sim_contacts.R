@@ -6,16 +6,20 @@ test_that("sim_contacts works as expected with defaults", {
 suppressMessages({
   contact_distribution <- epiparameter::epiparameter(
     disease = "COVID-19",
-    epi_dist = "contact distribution",
-    prob_distribution = "pois",
-    prob_distribution_params = c(mean = 2)
+    epi_name = "contact distribution",
+    prob_distribution = create_prob_distribution(
+      prob_distribution = "pois",
+      prob_distribution_params = c(mean = 2)
+    )
   )
 
   infectious_period <- epiparameter::epiparameter(
     disease = "COVID-19",
-    epi_dist = "infectious period",
-    prob_distribution = "gamma",
-    prob_distribution_params = c(shape = 1, scale = 1)
+    epi_name = "infectious period",
+    prob_distribution = create_prob_distribution(
+      prob_distribution = "gamma",
+      prob_distribution_params = c(shape = 1, scale = 1)
+    )
   )
 })
 
