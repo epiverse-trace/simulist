@@ -1,19 +1,19 @@
 # simulist (development version)
 
-A minor version release of _simulist_ containing various minor improvements to the function arguments and their docuemntation, as well as removing some triggers for warning users. There are also a few internal enhancements.
+A minor version release of _simulist_ containing various minor improvements to the functions and documentation, as well as removing some triggers for warning users. There are also a few bug fixes and internal enhancements.
 
 ## New features
 
 ### External
 
-* Defaults have been added to all `sim_*()` arguments that previous did not have one. Allowing functions to be run without specifying any arguments (e.g. `linelist <- sim_linelist()`) (#149).
-* Documentation `sim_*()` function arguments that accept either a `function` or `<epidist>` object has been improved.
+* Defaults have been added to all `sim_*()` arguments that previously did not have one. Allowing functions to be run without specifying any arguments (e.g. `linelist <- sim_linelist()`) (#149).
+* Documentation for `sim_*()` function arguments that accept either a `function` or an `<epiparameter>` object has been improved (#149).
 * `sim_*()` functions no longer warn if the user has not specified `*_risk` arguments and have set `onset_to_*` arguments to `NULL` (#149).
 * All vignettes now use `rmarkdown::html_vignette` for to correctly render the website and for maximum compatibility with {pkgdown} >= 2.1.0. This removes figure numbering and code folding (#153).
 
 ### Internal
 
-* `.add_hospitalisation()` has been vectorises following `.add_outcome()` in PR (#101) (#150). 
+* `.add_hospitalisation()` has been vectorised following `.add_outcome()` in PR #101 (#150). 
 
 ## Breaking changes
 
@@ -22,7 +22,10 @@ A minor version release of _simulist_ containing various minor improvements to t
 
 ## Bug fixes
 
-* A new function, `.sample_infect_period()` is added that errors if infectious period function generates a negative number (#142).
+* A new function, `.sample_infect_period()` is added that errors if the infectious period function generates a negative number (#142).
+* `sim_linelist()` no longer errors when `hosp_death_risk` is `NULL` and `onset_to_death` is parameterised as a delay distribution (#144). 
+* `.add_ct()` generates the correct number of values and does not duplicate Ct values due to vector recycling (#158). 
+* Update {epiparameter} usage (#159).
 
 ## Deprecated and defunct
 
