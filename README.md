@@ -101,8 +101,8 @@ library(epiparameter)
 ``` r
 # create COVID-19 contact distribution
 contact_distribution <- epiparameter::epiparameter(
-  disease = "COVID-19", 
-  epi_name = "contact distribution", 
+  disease = "COVID-19",
+  epi_name = "contact distribution",
   prob_distribution = create_prob_distribution(
     prob_distribution = "pois",
     prob_distribution_params = c(mean = 2)
@@ -236,7 +236,7 @@ above.
 ``` r
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
-  infectious_period = infectious_period, 
+  infectious_period = infectious_period,
   prob_infection = 0.5
 )
 head(contacts)
