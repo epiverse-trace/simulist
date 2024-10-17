@@ -61,7 +61,8 @@ sim_contacts <- function(contact_distribution = function(x) stats::dpois(x = x, 
       inherits(infectious_period, c("function", "epiparameter"))
   )
   contact_distribution <- as.function(
-    contact_distribution, func_type = "density"
+    contact_distribution,
+    func_type = "density"
   )
   infectious_period <- as.function(infectious_period, func_type = "generate")
 

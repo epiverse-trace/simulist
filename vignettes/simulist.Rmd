@@ -188,7 +188,8 @@ To simulate a contacts table, the `sim_contacts()` function can be used. This re
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
-  prob_infection = 0.5)
+  prob_infection = 0.5
+)
 head(contacts)
 ```
 

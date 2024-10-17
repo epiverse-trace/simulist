@@ -139,37 +139,45 @@ test_that(".check_age_df fails as expected", {
 
 suppressMessages({
   library(epiparameter)
-  contact_distribution <- as.function(epiparameter(
-    disease = "COVID-19",
-    epi_name = "contact distribution",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "pois",
-      prob_distribution_params = c(mean = 2)
+  contact_distribution <- as.function(
+    epiparameter(
+      disease = "COVID-19",
+      epi_name = "contact distribution",
+      prob_distribution = create_prob_distribution(
+        prob_distribution = "pois",
+        prob_distribution_params = c(mean = 2)
+      )
     )
-  ))
+  )
 
-  infectious_period <- as.function(epiparameter(
-    disease = "COVID-19",
-    epi_name = "infectious period",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "gamma",
-      prob_distribution_params = c(shape = 1, scale = 1)
+  infectious_period <- as.function(
+    epiparameter(
+      disease = "COVID-19",
+      epi_name = "infectious period",
+      prob_distribution = create_prob_distribution(
+        prob_distribution = "gamma",
+        prob_distribution_params = c(shape = 1, scale = 1)
+      )
     )
-  ))
+  )
 
   # get onset to hospital admission from {epiparameter} database
-  onset_to_hosp <- as.function(epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to hospitalisation",
-    single_epiparameter = TRUE
-  ))
+  onset_to_hosp <- as.function(
+    epiparameter_db(
+      disease = "COVID-19",
+      epi_name = "onset to hospitalisation",
+      single_epiparameter = TRUE
+    )
+  )
 
   # get onset to death from {epiparameter} database
-  onset_to_death <- as.function(epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to death",
-    single_epiparameter = TRUE
-  ))
+  onset_to_death <- as.function(
+    epiparameter_db(
+      disease = "COVID-19",
+      epi_name = "onset to death",
+      single_epiparameter = TRUE
+    )
+  )
 
   onset_to_recovery <- as.function(epiparameter(
     disease = "COVID-19",
@@ -179,7 +187,6 @@ suppressMessages({
       prob_distribution_params = c(meanlog = 3, sdlog = 1)
     )
   ))
-
 })
 
 test_that(".check_sim_input works as expected", {

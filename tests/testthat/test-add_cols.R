@@ -1,18 +1,22 @@
 suppressMessages({
   # get onset to hospital admission from {epiparameter} database &
   # convert to function
-  onset_to_hosp <- as.function(epiparameter::epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to hospitalisation",
-    single_epiparameter = TRUE
-  ))
+  onset_to_hosp <- as.function(
+    epiparameter::epiparameter_db(
+      disease = "COVID-19",
+      epi_name = "onset to hospitalisation",
+      single_epiparameter = TRUE
+    )
+  )
 
   # get onset to death from {epiparameter} database
-  onset_to_death <- as.function(epiparameter::epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to death",
-    single_epiparameter = TRUE
-  ))
+  onset_to_death <- as.function(
+    epiparameter::epiparameter_db(
+      disease = "COVID-19",
+      epi_name = "onset to death",
+      single_epiparameter = TRUE
+    )
+  )
 
   onset_to_recovery <- function(x) rep(NA, times = x)
 })

@@ -71,9 +71,7 @@
       chain_generation <- chain_generation + 1L
 
       for (i in seq_along(contacts)) {
-
         if (contacts[i] > 0) {
-
           # vec index can be which.min of either generation or ancestor vec
           vec_idx <-
             which.min(generation):(which.min(generation) + contacts[i] - 1)
