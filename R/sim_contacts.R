@@ -18,18 +18,23 @@
 #'
 #' # to simulate more realistic contact tracing data load epiparameters from
 #' # {epiparameter}
-#' contact_distribution <- epiparameter::epiparameter(
+#' library(epiparameter)
+#' contact_distribution <- epiparameter(
 #'   disease = "COVID-19",
-#'   epi_dist = "contact distribution",
-#'   prob_distribution = "pois",
-#'   prob_distribution_params = c(mean = 2)
+#'   epi_name = "contact distribution",
+#'   prob_distribution = create_prob_distribution(
+#'     prob_distribution = "pois",
+#'     prob_distribution_params = c(mean = 2)
+#'   )
 #' )
 #'
-#' infectious_period <- epiparameter::epiparameter(
+#' infectious_period <- epiparameter(
 #'   disease = "COVID-19",
-#'   epi_dist = "infectious period",
-#'   prob_distribution = "gamma",
-#'   prob_distribution_params = c(shape = 1, scale = 1)
+#'   epi_name = "infectious period",
+#'   prob_distribution = create_prob_distribution(
+#'     prob_distribution = "gamma",
+#'     prob_distribution_params = c(shape = 1, scale = 1)
+#'   )
 #' )
 #'
 #' contacts <- sim_contacts(

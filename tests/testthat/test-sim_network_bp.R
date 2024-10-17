@@ -1,19 +1,24 @@
 suppressMessages({
+  library(epiparameter)
   contact_distribution <- as.function(
-    epiparameter::epiparameter(
+    epiparameter(
       disease = "COVID-19",
-      epi_dist = "contact distribution",
-      prob_distribution = "pois",
-      prob_distribution_params = c(mean = 2)
+      epi_name = "contact distribution",
+      prob_distribution = create_prob_distribution(
+        prob_distribution = "pois",
+        prob_distribution_params = c(mean = 2)
+      )
     )
   )
 
   infectious_period <- as.function(
-    epiparameter::epiparameter(
+    epiparameter(
       disease = "COVID-19",
-      epi_dist = "infectious period",
-      prob_distribution = "gamma",
-      prob_distribution_params = c(shape = 1, scale = 1)
+      epi_name = "infectious period",
+      prob_distribution = create_prob_distribution(
+        prob_distribution = "gamma",
+        prob_distribution_params = c(shape = 1, scale = 1)
+      )
     ), func_type = "generate"
   )
 })
@@ -34,11 +39,13 @@ test_that(".sim_network_bp works as expected", {
 test_that(".sim_network_bp works as expected with no contacts", {
   suppressMessages(
     contact_distribution <- as.function(
-      epiparameter::epiparameter(
+      epiparameter(
         disease = "COVID-19",
-        epi_dist = "contact distribution",
-        prob_distribution = "pois",
-        prob_distribution_params = c(mean = 1)
+        epi_name = "contact distribution",
+        prob_distribution = create_prob_distribution(
+          prob_distribution = "pois",
+          prob_distribution_params = c(mean = 1)
+        )
       )
     )
   )
@@ -84,11 +91,13 @@ test_that(".sim_network_bp warns as expected", {
 test_that(".sim_network_bp errors with negative infectious period", {
   suppressMessages({
     infectious_period <- as.function(
-    epiparameter::epiparameter(
+    epiparameter(
       disease = "COVID-19",
-      epi_dist = "infectious period",
-      prob_distribution = "norm",
-      prob_distribution_params = c(mean = 10, sd = 5)
+      epi_name = "infectious period",
+      prob_distribution = create_prob_distribution(
+        prob_distribution = "norm",
+        prob_distribution_params = c(mean = 10, sd = 5)
+      )
     ), func_type = "generate"
     )
   })
