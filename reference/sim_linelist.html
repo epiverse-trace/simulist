@@ -292,34 +292,39 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 10    Aaron Goldstein  probable   m  90 2023-01-02           &lt;NA&gt; recovered</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date_outcome date_first_contact date_last_contact ct_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         &lt;NA&gt;         2023-01-03        2023-01-06     23.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         &lt;NA&gt;         2023-01-03        2023-01-06     22.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3         &lt;NA&gt;         2022-12-28        2023-01-02       NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4         &lt;NA&gt;         2023-01-04        2023-01-07       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         &lt;NA&gt;         2023-01-01        2023-01-03     23.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         &lt;NA&gt;         2023-01-01        2023-01-03     22.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6         &lt;NA&gt;         2023-01-01        2023-01-05       NA</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># to simulate a more realistic line list load epiparameters from</span></span></span>
 <span class="r-in"><span><span class="co"># {epiparameter}</span></span></span>
-<span class="r-in"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
-<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"contact distribution"</span>,</span></span>
-<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span></span>
-<span class="r-in"><span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  epi_name <span class="op">=</span> <span class="st">"contact distribution"</span>,</span></span>
+<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/create_prob_distribution.html" class="external-link">create_prob_distribution</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span></span>
+<span class="r-in"><span>    prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Citation cannot be created as author, year, journal or title is missing</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
-<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span></span>
-<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span></span>
-<span class="r-in"><span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  epi_name <span class="op">=</span> <span class="st">"infectious period"</span>,</span></span>
+<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/create_prob_distribution.html" class="external-link">create_prob_distribution</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span></span>
+<span class="r-in"><span>    prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Citation cannot be created as author, year, journal or title is missing</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># get onset to hospital admission from {epiparameter} database</span></span></span>
-<span class="r-in"><span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
-<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"onset to hospitalisation"</span>,</span></span>
+<span class="r-in"><span>  epi_name <span class="op">=</span> <span class="st">"onset to hospitalisation"</span>,</span></span>
 <span class="r-in"><span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span>
@@ -331,9 +336,9 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> To retrieve the citation use the 'get_citation' function</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># get onset to death from {epiparameter} database</span></span></span>
-<span class="r-in"><span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
-<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"onset to death"</span>,</span></span>
+<span class="r-in"><span>  epi_name <span class="op">=</span> <span class="st">"onset to death"</span>,</span></span>
 <span class="r-in"><span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span>
@@ -353,20 +358,20 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span>  hosp_risk <span class="op">=</span> <span class="fl">0.5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id          case_name case_type sex age date_onset date_admission   outcome</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1     Courtney Parks confirmed   f  86 2023-01-01     2023-01-01      died</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 Nawwaara al-Shahan confirmed   f  43 2023-01-01           &lt;NA&gt; recovered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  4  Faraah el-Shaheed suspected   f  31 2023-01-01     2023-01-01      died</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  7    Ryanna Bottorff  probable   f  28 2023-01-01     2023-01-01      died</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  8       Blas Desersa confirmed   m  77 2023-01-01           &lt;NA&gt; recovered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  9    Gerardo Ortivez  probable   m  86 2023-01-01           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id           case_name case_type sex age date_onset date_admission   outcome</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1      Henry Sumearll confirmed   m  39 2023-01-01           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2           Warren Le confirmed   m  44 2023-01-01     2023-01-01      died</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3      Iffat el-Qadir  probable   f  32 2023-01-01     2023-01-10 recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  7    Simone Patterson confirmed   f  67 2023-01-02     2023-01-03 recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  8 Lutfiyya al-Khalili suspected   f  59 2023-01-02     2023-01-06      died</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  9   Fakeeha el-Hashim  probable   f  49 2023-01-02           &lt;NA&gt; recovered</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date_outcome date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   2023-01-27               &lt;NA&gt;              &lt;NA&gt;     26.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         &lt;NA&gt;         2023-01-01        2023-01-02     26.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   2023-02-23         2023-01-04        2023-01-05       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   2023-01-23         2023-01-02        2023-01-03       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         &lt;NA&gt;         2023-01-02        2023-01-05     26.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         &lt;NA&gt;         2023-01-01        2023-01-03       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     26.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2023-01-12         2023-01-01        2023-01-06     20.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         &lt;NA&gt;         2022-12-29        2023-01-01       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         &lt;NA&gt;         2022-12-29        2023-01-05     26.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   2023-01-26         2023-01-02        2023-01-06       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         &lt;NA&gt;         2023-01-02        2023-01-04       NA</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with age-stratified hospitalisation risk</span></span></span>
 <span class="r-in"><span><span class="co"># 20% for over 80s</span></span></span>
@@ -385,20 +390,20 @@ that age group. Proportions must sum to one.</p></li>
 <span class="r-in"><span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id              case_name case_type sex age date_onset date_admission</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1        Sergio Gonzales  probable   m  57 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 Cristofer Frias-Guzman confirmed   m  35 2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3       Gisselle Codding  probable   f  42 2023-01-02           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4         Marisa Bradley suspected   f  69 2023-01-02           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  6     Kenta Abdulhussein suspected   m  81 2023-01-03           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  7             Elba Bueno confirmed   f  20 2023-01-03     2023-01-06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     outcome date_outcome date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 recovered         &lt;NA&gt;         2022-12-27        2023-01-02     25.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 recovered         &lt;NA&gt;         2023-01-01        2023-01-05       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 recovered         &lt;NA&gt;         2023-01-06        2023-01-07       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 recovered         &lt;NA&gt;         2023-01-03        2023-01-05       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      died   2023-01-29         2023-01-04        2023-01-06     25.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id       case_name case_type sex age date_onset date_admission   outcome</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1    Elizabeth Ko suspected   f  15 2023-01-01           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2   Dekota Rector confirmed   m  56 2023-01-01           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3   Nicklos Rough suspected   m  49 2023-01-01           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4    Quartus Sufi confirmed   m  10 2023-01-03           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  5 William Madison  probable   m  15 2023-01-01           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  7   Seth Cretecos suspected   m  37 2023-01-03           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date_outcome date_first_contact date_last_contact ct_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         &lt;NA&gt;         2023-01-02        2023-01-05     22.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         &lt;NA&gt;         2022-12-30        2023-01-02       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         &lt;NA&gt;         2022-12-28        2023-01-01     23.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         &lt;NA&gt;         2023-01-03        2023-01-05       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         &lt;NA&gt;         2023-01-04        2023-01-07       NA</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -410,7 +415,7 @@ that age group. Proportions must sum to one.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

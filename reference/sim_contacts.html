@@ -200,19 +200,24 @@ Ct values. See <code><a href="create_config.html">create_config()</a></code> for
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># to simulate more realistic contact tracing data load epiparameters from</span></span></span>
 <span class="r-in"><span><span class="co"># {epiparameter}</span></span></span>
-<span class="r-in"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
-<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"contact distribution"</span>,</span></span>
-<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span></span>
-<span class="r-in"><span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  epi_name <span class="op">=</span> <span class="st">"contact distribution"</span>,</span></span>
+<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/create_prob_distribution.html" class="external-link">create_prob_distribution</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    prob_distribution <span class="op">=</span> <span class="st">"pois"</span>,</span></span>
+<span class="r-in"><span>    prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Citation cannot be created as author, year, journal or title is missing</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span></span>
-<span class="r-in"><span>  epi_dist <span class="op">=</span> <span class="st">"infectious period"</span>,</span></span>
-<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span></span>
-<span class="r-in"><span>  prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  epi_name <span class="op">=</span> <span class="st">"infectious period"</span>,</span></span>
+<span class="r-in"><span>  prob_distribution <span class="op">=</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/create_prob_distribution.html" class="external-link">create_prob_distribution</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    prob_distribution <span class="op">=</span> <span class="st">"gamma"</span>,</span></span>
+<span class="r-in"><span>    prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Citation cannot be created as author, year, journal or title is missing</span>
 <span class="r-in"><span></span></span>
@@ -232,7 +237,7 @@ Ct values. See <code><a href="create_config.html">create_config()</a></code> for
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
