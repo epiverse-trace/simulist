@@ -350,7 +350,7 @@ The same stepwise function can also be used to specify time windows were the ris
 ```{r, setup-time-varying-cfr-stepwise-window}
 config <- create_config(
   time_varying_death_risk = function(risk, time) {
-   ifelse(test = time > 50 & time < 100, yes = risk * 0.5, no = risk)
+    ifelse(test = time > 50 & time < 100, yes = risk * 0.5, no = risk)
   }
 )
 ```

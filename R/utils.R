@@ -150,12 +150,13 @@ as_function <- function(x) {
     "onset_to_hosp, onset_to_death and onset_to_recovery need to be a function,
     <epiparameter> or NULL" =
       (inherits(x$onset_to_hosp, c("function", "epiparameter")) ||
-      is.null(x$onset_to_hosp)) &&
+         is.null(x$onset_to_hosp)) &&
       (inherits(x$onset_to_death, c("function", "epiparameter")) ||
-      is.null(x$onset_to_death))
+         is.null(x$onset_to_death))
   )
   contact_distribution <- as.function(
-    x$contact_distribution, func_type = "density"
+    x$contact_distribution,
+    func_type = "density"
   )
   infectious_period <- as.function(x$infectious_period, func_type = "generate")
   if (is.null(x$onset_to_hosp)) {
@@ -175,7 +176,8 @@ as_function <- function(x) {
     onset_to_recovery <- function(x) rep(NA, times = x)
   } else {
     onset_to_recovery <- as.function(
-      x$onset_to_recovery, func_type = "generate"
+      x$onset_to_recovery,
+      func_type = "generate"
     )
   }
 

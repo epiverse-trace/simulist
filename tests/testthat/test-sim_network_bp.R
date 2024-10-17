@@ -19,7 +19,8 @@ suppressMessages({
         prob_distribution = "gamma",
         prob_distribution_params = c(shape = 1, scale = 1)
       )
-    ), func_type = "generate"
+    ),
+    func_type = "generate"
   )
 })
 
@@ -91,14 +92,15 @@ test_that(".sim_network_bp warns as expected", {
 test_that(".sim_network_bp errors with negative infectious period", {
   suppressMessages({
     infectious_period <- as.function(
-    epiparameter(
-      disease = "COVID-19",
-      epi_name = "infectious period",
-      prob_distribution = create_prob_distribution(
-        prob_distribution = "norm",
-        prob_distribution_params = c(mean = 10, sd = 5)
-      )
-    ), func_type = "generate"
+      epiparameter(
+        disease = "COVID-19",
+        epi_name = "infectious period",
+        prob_distribution = create_prob_distribution(
+          prob_distribution = "norm",
+          prob_distribution_params = c(mean = 10, sd = 5)
+        )
+      ),
+      func_type = "generate"
     )
   })
   set.seed(3)

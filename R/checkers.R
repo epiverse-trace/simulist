@@ -140,7 +140,7 @@
   stopifnot(
     "population_age must be two numerics or a data.frame" =
       checkmate::test_numeric(population_age, len = 2) ||
-        is.data.frame(population_age)
+      is.data.frame(population_age)
   )
 
   if (sim_type %in% c("linelist", "outbreak")) {
@@ -180,7 +180,8 @@
 
   if (sim_type %in% c("contacts", "outbreak")) {
     checkmate::assert_numeric(
-      contact_tracing_status_probs, len = 3, lower = 0, upper = 1
+      contact_tracing_status_probs,
+      len = 3, lower = 0, upper = 1
     )
     checkmate::assert_names(
       names(contact_tracing_status_probs),
@@ -227,7 +228,7 @@
     ))
   }
   if (!is.null(req_arg_names) &&
-       !identical(names(formals(func)), req_arg_names)) {
+      !identical(names(formals(func)), req_arg_names)) {
     msg <- c(msg, paste(
       func_name, "supplied must have", paste(req_arg_names, collapse = " & "),
       "arguments."
