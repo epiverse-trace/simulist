@@ -1,3 +1,35 @@
-url: ~
+url: https://epiverse-trace.github.io/simulist/
 template:
   package: epiversetheme
+  bslib:
+    font_weight_base : 300
+
+development:
+  mode: unreleased
+
+reference:
+  - title: Simulation functions
+    desc: Functions to simulate disease outbreak data.
+    contents:
+    - starts_with("sim_")
+
+  - title: Helper functions
+    contents:
+    - create_config
+
+articles:
+- title: Customising simulated outbreak
+  navbar: Customising simulated outbreak
+  contents:
+  - age-strat-risks
+  - age-struct-pop
+  - time-varying-cfr
+- title: Wrangling and plotting data
+  navbar: Wrangling and plotting data
+  contents:
+  - wrangling-linelist
+  - vis-linelist
+- title: Developer Documentation
+  navbar: Developer Documentation
+  contents:
+  - design-principles

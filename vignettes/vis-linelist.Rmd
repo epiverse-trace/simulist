@@ -1,0 +1,315 @@
+---
+title: "Visualising simulated data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Visualising simulated data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette gives an overview of the ways to plot the line list and contacts data output from the `sim_linelist()` and `sim_outbreak()` functions.
+
+Plotting can be useful to identify certain transmission dynamics and patterns in the simulated data, or just to check that the simulated data looks as expected given how the simulation was parameterised.
+
+```{r setup}
+library(simulist)
+library(epiparameter)
+library(incidence2)
+library(epicontacts)
+```
+
+First we load the required delay distributions using the {epiparameter} package.
+
+```{r, read-delay-dists}
+contact_distribution <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "contact distribution",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "pois",
+    prob_distribution_params = c(mean = 3)
+  )
+)
+
+infectious_period <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "infectious period",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "gamma",
+    prob_distribution_params = c(shape = 3, scale = 2)
+  )
+)
+
+# get onset to hospital admission from {epiparameter} database
+onset_to_hosp <- epiparameter_db(
+  disease = "COVID-19",
+  epi_name = "onset to hospitalisation",
+  single_epiparameter = TRUE
+)
+
+# get onset to death from {epiparameter} database
+onset_to_death <- epiparameter_db(
+  disease = "COVID-19",
+  epi_name = "onset to death",
+  single_epiparameter = TRUE
+)
+```
+
+Setting the seed ensures we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
+
+```{r, set-seed}
+set.seed(123)
+```
+
+Using a simple line list simulation with the factory default settings:
+
+```{r sim-linelist} 
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.33,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  outbreak_size = c(500, 1e4)
+)
+```
+
+This line list contains `r nrow(linelist)` cases.
+
+## Visualising incidence of onset, hospitalisation and death
+
+::: {.alert .alert-info}
+
+This section of the vignette is heavily based upon examples given in the [Get Started vignette in the {incidence2} package](https://www.reconverse.org/incidence2/articles/incidence2.html). It is highly recommended to read the documentation supplied in the [{incidence2} package](https://CRAN.R-project.org/package=incidence2) to explore the full range of functionality.
+
+:::
+
+To visualise the number of cases with onset on a particular day, the {incidence2} package, and its dedicated class (`<incidence2>`) are used for handling and plotting this data.
+
+Currently {simulist} outputs dates that are not rounded to the nearest day, i.e. it can be half way through a day. This is not obvious as R prints dates to the nearest day by default, and only by removing the date class (using `unclass()`) can you see the decimals (as R stores dates internally as the number of days since 1970-01-01).
+
+***Note*** storing dates as precise doubles and not as integer days may change in the near future.
+
+The `interval = "daily"` is required as {incidence2} requires rounded dates to aggregate cases per unit time and specifying the `interval` will do this automatically for us.
+
+```{r create-incidence}
+# create incidence object
+daily <- incidence(x = linelist, date_index = "date_onset", interval = "daily")
+```
+
+It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
+
+```{r, complete-dates, fig.cap="Daily incidence of cases from symptom onset including days with zero cases.", fig.width = 8, fig.height = 5}
+# impute for days without cases
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+Alternatively, incidence can be plotting weekly:
+
+```{r plot-weekly, fig.cap="Weekly incidence of cases from symptom onset", fig.width = 8, fig.height = 5}
+weekly <- incidence(linelist, date_index = "date_onset", interval = "isoweek")
+plot(weekly)
+```
+
+In order to check differences between a group in the line list data, for example sex, the `<incidence2>` data object can be recreated, specifying which columns to group by.
+
+```{r, group-by-sex, fig.cap="Weekly incidence of cases from symptom onset facetted by sex", fig.width = 8, fig.height = 5}
+weekly <- incidence(
+  linelist,
+  date_index = "date_onset",
+  interval = "isoweek",
+  groups = "sex"
+)
+plot(weekly)
+```
+ 
+To visualise the onset, hospitalisation and death incidence in the same plot they can be jointly specified to the `date_index` argument of `incidence2::incidence()`. 
+
+First the outcome data needs to be pivoted from long data to wide data to be input into `incidence2::incidence()`.
+
+### Reshape line list data {.tabset}
+
+#### Base R
+
+```{r, reshape-linelist-base-r, eval=FALSE}
+# this can also be achieved with the reshape() function but the user interface
+# for that function is complicated so here we just create the columns manually
+linelist$date_death <- linelist$date_outcome
+linelist$date_death[linelist$outcome == "recovered"] <- NA
+linelist$date_recovery <- linelist$date_outcome
+linelist$date_recovery[linelist$outcome == "died"] <- NA
+```
+
+#### Tidyverse
+
+```{r, reshape-linelist-tidyverse, message=FALSE}
+library(tidyr)
+library(dplyr)
+linelist <- linelist %>%
+  tidyr::pivot_wider(
+    names_from = outcome,
+    values_from = date_outcome
+  )
+linelist <- linelist %>%
+  dplyr::rename(
+    date_death = died,
+    date_recovery = recovered
+  )
+```
+
+## {-}
+ 
+```{r, plot-onset-hospitalisation, fig.cap="Daily incidence of cases from symptom onset and incidence of hospitalisations and deaths.", fig.width = 8, fig.height = 5}
+daily <- incidence(
+  linelist,
+  date_index = c(
+    onset = "date_onset",
+    hospitalisation = "date_admission",
+    death = "date_death"
+  ),
+  interval = "daily",
+  groups = "sex"
+)
+daily <- complete_dates(daily)
+plot(daily)
+```
+
+## Demographic data
+
+Please see the [Age structured population vignette](age-struct-pop.html) for examples of how to plot the distribution of ages within a line list data set, including age pyramids. 
+
+The plotting code in vignettes is hidden by default, click the Code button with arrow to reveal the plotting code.
+
+## Visualising contact data
+
+::: {.alert .alert-info}
+
+This section of the vignette is based upon examples from the [{epicontacts} R package documentation](https://www.repidemicsconsortium.org/epicontacts/index.html) and the examples provided in the [The Epidemiological R Handbook chapter on transmission chains](https://epirhandbook.com/en/transmission-chains.html). We recommend going to the documentation of the {epicontacts} R package to see the all plotting and data wrangling functionality.
+
+:::
+
+Just as we utilised the `<incidence2>` class from the {incidence2} package to handle and plot incidence data, we are going to use the `<epicontacts>` class from the {epicontacts} R package to handle and plot epidemiological contact data.
+
+::: {.alert .alert-success}
+
+The benefit of using {epicontacts} is the same as {incidence2}, in the fact that a default plotting method is supplied by the package.
+
+_Advanced_
+
+Additionally, {epicontacts} provides access to network plotting from JavaScript libraries via the [{visNetwork}](https://CRAN.R-project.org/package=visNetwork) and [{threejs}](https://CRAN.R-project.org/package=threejs) R packages.
+
+:::
+
+The {epicontacts} function `make_epicontacts()` requires both the line list and contacts table, so we will run the `sim_outbreak()` function to produce both. We will use the same epidemiological delay distributions that we used to simulate a line list above, but reduce the mean number of contacts in the contact distribution to 2.
+
+```{r, contact-distribution}
+contact_distribution <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "contact distribution",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "pois",
+    prob_distribution_params = c(mean = 2)
+  )
+)
+```
+
+```{r, sim-outbreak}
+set.seed(1)
+outbreak <- sim_outbreak(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death
+)
+head(outbreak$linelist)
+head(outbreak$contacts)
+```
+
+Using the line list and contacts data simulated we can create the `<epicontacts>` object.
+
+```{r, create-epicontacts}
+epicontacts <- make_epicontacts(
+  linelist = outbreak$linelist,
+  contacts = outbreak$contacts,
+  id = "case_name",
+  from = "from",
+  to = "to",
+  directed = TRUE
+)
+```
+
+The `<epicontacts>` object comes with a custom printing feature to see the data.
+
+```{r, print-epicontacts}
+epicontacts
+```
+
+To plot the contact network we can use the plotting method that is supplied by {epicontacts} and will be automatically recognised if the {epicontacts} package is loaded (as done above with `library(epicontacts)`).
+
+::: {.alert .alert-primary}
+
+If you are viewing this vignette on the web (or on a web browser) the graph below is interactive and will allow you to highlight individuals in the network using the drop-down menu, to zoom in and out of the plot by scrolling, and to move the network using the mouse to drag and drop.
+
+:::
+
+```{r, plot-epicontacts, fig.cap="Contact network from infectious disease outbreak. This includes all contacts, i.e. individuals that were infected and not infected"}
+plot(epicontacts)
+```
+
+There is also the option to plot the contacts network in 3D using the `epicontacts::graph3D()`. 
+
+By default the outbreak simulated by `sim_outbreak()` contains contacts of cases that were not infected. These are shown in the previous network plot by terminal nodes that do not pass on infection to other individuals (note that terminal nodes can also be infected individuals that did not infect anybody else, either due to not have any contacts or due to the probabilistic nature of infection transmission). Here we show how to subset the contacts table in order to only plot the transmission network of cases from the outbreak. 
+
+### Subset contact network to transmission network {.tabset}
+
+#### Base R
+
+```{r, subset-linelist-base-r}
+outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case == "Y", ]
+```
+
+#### Tidyverse
+
+```{r, subset-linelist-tidyverse}
+library(dplyr)
+outbreak$contacts <- outbreak$contacts %>%
+  dplyr::filter(was_case == "Y")
+```
+
+## {-}
+
+```{r, inspect-data}
+head(outbreak$linelist)
+head(outbreak$contacts)
+```
+
+```{r, create-cases-epicontacts}
+epicontacts <- make_epicontacts(
+  linelist = outbreak$linelist,
+  contacts = outbreak$contacts,
+  id = "case_name",
+  from = "from",
+  to = "to",
+  directed = TRUE
+)
+```
+
+```{r, print-cases-epicontacts}
+epicontacts
+```
+
+```{r, plot-cases-epicontacts, fig.cap="Transmission chain from infectious disease outbreak. This includes only individuals that were infected, including confirmed, probable and suspected cases."}
+plot(epicontacts)
+```
+
+## Visualising other line list information
+
+If there are other aspects of line list data that can be plotted and you would like to them added to this vignette please make an [issue](https://github.com/epiverse-trace/simulist/issues) or [pull request](https://github.com/epiverse-trace/simulist/pulls).

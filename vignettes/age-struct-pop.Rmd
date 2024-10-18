@@ -1,0 +1,221 @@
+---
+title: "Age structured population"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Age structured population}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+::: {.alert .alert-info}
+If you are unfamiliar with the {simulist} package or the `sim_linelist()` function [Get Started vignette](simulist.html) is a great place to start.
+:::
+
+This vignette describes how to simulate a line list with either a uniform or non-uniform distribution of ages within the population. This population age structure may either describe the population of a region as a whole, or specifically which age groups are more likely to become infected than others.
+
+The {simulist} package uses a branching process (using a random network model of contacts), which is independent of population age structure to simulate the line list, and then {simulist} _paints_ the demographic information onto the infected individuals (and in the case of `sim_outbreak()` or `sim_contacts()` the contacts of infected individuals). In other words, once the cases in the line list have been simulated the ages are assigned to each individual post hoc, specified by the age range, and age structure, if supplied.
+
+The age range and age structure for the simulation functions (`sim_*()`) in {simulist} is controlled by the `population_age` argument. The default age structure in {simulist} is a uniform structure between a lower and upper age range. The `sim_linelist()` function (and other `sim_*()` functions) can accept a `<data.frame>` instead of the `numeric` vector to specify the age structure for specified age groups. This feature can be especially useful when wanting to simulate an outbreak in a region with a heavily non-uniform age structure, [for example younger populations such as Nigeria, or older populations such as Japan](https://ourworldindata.org/age-structure). 
+
+```{r setup}
+library(simulist)
+library(epiparameter)
+library(ggplot2)
+```
+
+First we load the requested delay distributions using the {epiparameter} package. The onset-to-hospitalisation and onset-to-death delay distributions are extracted from the {epiparameter} database, and the contact distribution and the infectious period are manually defined as they are not yet available from the {epiparameter} database.
+
+```{r, read-delay-dists}
+contact_distribution <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "contact distribution",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "pois",
+    prob_distribution_params = c(mean = 2)
+  )
+)
+
+infectious_period <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "infectious period",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "gamma",
+    prob_distribution_params = c(shape = 1, scale = 1)
+  )
+)
+
+# get onset to hospital admission from {epiparameter} database
+onset_to_hosp <- epiparameter_db(
+  disease = "COVID-19",
+  epi_name = "onset to hospitalisation",
+  single_epiparameter = TRUE
+)
+
+# get onset to death from {epiparameter} database
+onset_to_death <- epiparameter_db(
+  disease = "COVID-19",
+  epi_name = "onset to death",
+  single_epiparameter = TRUE
+)
+```
+
+By setting the seed we ensure the output of the vignette remains the same each time it is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
+
+```{r, set-seed}
+set.seed(1)
+```
+
+## Uniform population age
+
+By default `sim_linelist()` simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the `population_age` argument. Here we simulate an outbreak in a population with a population ranging from 5 to 75 (inclusive, `[5,75]`).
+
+***Note***: all ages are assumed to be in the unit of years and need to be integers (or at least ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if stored as double).
+
+All simulations in this vignette condition the simulation to have a minimum outbreak size of 100 cases (`outbreak_size`, the maximum outbreak size is left at `1e4`) to clearly visualise the distribution of ages.
+
+```{r sim-linelist-age-range}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.45,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  population_age = c(5, 75),
+  outbreak_size = c(100, 1e4)
+)
+head(linelist)
+```
+
+We can plot the age distribution for individuals in the line list, binned into 5 year categories.
+
+```{r plot-age-range, fig.cap="Age distribution of individuals in a simulated line list sampled from a uniform distribution between 5 and 75.", fig.width = 8, fig.height = 5}
+ggplot(linelist[, c("sex", "age")]) +
+  geom_histogram(
+    mapping = aes(x = age),
+    fill = "#10BED2",
+    colour = "black",
+    binwidth = 5
+  ) +
+  scale_y_continuous(name = "Number of Individuals") +
+  scale_x_continuous(name = "Age", breaks = seq(0, 75, 5)) +
+  theme_bw()
+```
+
+If the `population_age` argument was left unspecified, it would have assumed the default age range of 1 to 90 (`c(1, 90)`).
+
+## Structured population age
+
+To simulate with a non-uniform age structure we create a table (`<data.frame>`) containing the age range of each age bracket in the population and the proportion of the population made up by that age group.
+
+For this example we will simulate a population where 30% of the population are between 1 and 19, 40% of the population are between 20 and 59, and 30% are between 60 and 90. The age groups are inclusive so the age brackets should not overlap. There will be no individuals in the population younger then 1 or older than 90.
+
+```{r, make-age-struct-df}
+age_struct <- data.frame(
+  age_range = c("1-19", "20-59", "60-90"),
+  proportion = c(0.3, 0.4, 0.3),
+  stringsAsFactors = FALSE
+)
+age_struct
+```
+
+```{r, sim-age-struct-linelist}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.45,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  population_age = age_struct,
+  outbreak_size = c(100, 1e4)
+)
+
+head(linelist)
+```
+
+Again we can plot the age distribution to see the age structure for individuals in the line list. Given the relative uniformity of the age structure specified it is not greatly different from the uniform age structure plotted above, other than having a higher upper age limit. The data is binned into 5 year categories and facetted by sex.
+
+```{r plot-age-struct, fig.cap="Age distribution of line list cases facetted by sex", fig.width = 8, fig.height = 5}
+ggplot(linelist[, c("sex", "age")]) +
+  geom_histogram(
+    mapping = aes(x = age),
+    fill = "#10BED2",
+    colour = "black",
+    binwidth = 5
+  ) +
+  scale_y_continuous(name = "Number of Individuals") +
+  scale_x_continuous(name = "Age", breaks = seq(0, 90, 5)) +
+  theme_bw() +
+  facet_wrap(vars(sex))
+```
+
+::: {.alert .alert-warning}
+
+The age groups specified in the `<data.frame>` must be non-overlapping and be contiguous between the minimum age of the youngest age group and the maximum age of the oldest age group. In order words, there cannot be any missing age groups (e.g. 20-40 year olds) without a specified proportion. If this is the case the function will error with an informative error message.
+
+:::
+
+An example for a much younger population could instead specify:
+
+* `0.4` (or 40%) for 1-9 years old
+* `0.3` (or 30%) for 10-29 years old
+* `0.2` (or 20%) for 30-59 years old
+* `0.1` (or 10%) for 60-75 years old
+
+
+```{r, make-age-struct-df-young}
+age_struct <- data.frame(
+  age_range = c("1-9", "10-29", "30-59", "60-75"),
+  proportion = c(0.4, 0.3, 0.2, 0.1),
+  stringsAsFactors = FALSE
+)
+age_struct
+```
+
+```{r, sim-age-struct-linelist-young}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.45,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  population_age = age_struct,
+  outbreak_size = c(100, 1e4)
+)
+
+head(linelist)
+```
+A common and useful method for plotting age data is in the form of age pyramids. Here we partition the data by sex and plot the age distribution.
+
+```{r plot-age-struct-young, fig.cap="Age pyramid for a simulated line list with an age structured population.", fig.width = 8, fig.height = 5}
+linelist_m <- subset(linelist, subset = sex == "m")
+age_cats_m <- as.data.frame(table(floor(linelist_m$age / 5) * 5))
+colnames(age_cats_m) <- c("AgeCat", "Population")
+age_cats_m <- cbind(age_cats_m, sex = "m")
+linelist_f <- subset(linelist, subset = sex == "f")
+age_cats_f <- as.data.frame(table(floor(linelist_f$age / 5) * 5))
+colnames(age_cats_f) <- c("AgeCat", "Population")
+age_cats_f$Population <- -age_cats_f$Population
+age_cats_f <- cbind(age_cats_f, sex = "f")
+age_cats <- rbind(age_cats_m, age_cats_f)
+
+breaks <- pretty(range(age_cats$Population), n = 10)
+labels <- abs(breaks)
+
+ggplot(age_cats) +
+  geom_col(mapping = aes(x = Population, y = factor(AgeCat), fill = sex)) +
+  scale_y_discrete(name = "Lower bound of Age Category") +
+  scale_x_continuous(name = "Population", breaks = breaks, labels = labels) +
+  scale_fill_manual(values = c("#F04A4C", "#106BA0")) +
+  theme_bw()
+```
+
+We have used the {ggplot2} package to construct our age pyramid, however the [{apyramid} R package from R4Epi](https://r4epi.github.io/apyramid/) can assist in making these plots; as can the [Applied Epidemiology Handbook chapter on age pyramids](https://epirhandbook.com/en/demographic-pyramids-and-likert-scales.html). The blog post on ["Population Pyramid Plots in ggplot2"](https://www.njtierney.com/post/2022/08/09/ggplot-pyramid/) also contains useful tips on constructing pyramid plots.
+
+As shown in the two age structured examples, the number of age groups is flexible. Therefore a coarse population structure with two or three age groups can be specified, or where precise census demographic data is available, several age groups can be specified.
