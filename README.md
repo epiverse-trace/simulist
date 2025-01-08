@@ -46,6 +46,12 @@ probability of case types and contact tracing follow-up <br>
 
 ## Installation
 
+The package can be installed from CRAN using
+
+``` r
+install.packages("simulist")
+```
+
 You can install the development version of `{simulist}` from
 [GitHub](https://github.com/) with:
 
@@ -53,6 +59,13 @@ You can install the development version of `{simulist}` from
 # check whether {pak} is installed
 if(!require("pak")) install.packages("pak")
 pak::pak("epiverse-trace/simulist")
+```
+
+Alternatively, install pre-compiled binaries from [the Epiverse TRACE
+R-universe](https://epiverse-trace.r-universe.dev/simulist)
+
+``` r
+install.packages("simulist", repos = c("https://epiverse-trace.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ## Quick start
@@ -326,7 +339,7 @@ By contributing to this project, you agree to abide by its terms.
 citation("simulist")
 #> To cite package 'simulist' in publications use:
 #> 
-#>   Lambert J, Tamayo C (2024). _simulist: Simulate Disease Outbreak Line
+#>   Lambert J, Tamayo C (2025). _simulist: Simulate Disease Outbreak Line
 #>   List and Contacts Data_. doi:10.5281/zenodo.10471458
 #>   <https://doi.org/10.5281/zenodo.10471458>,
 #>   <https://epiverse-trace.github.io/simulist/>.
@@ -336,7 +349,7 @@ citation("simulist")
 #>   @Manual{,
 #>     title = {simulist: Simulate Disease Outbreak Line List and Contacts Data},
 #>     author = {Joshua W. Lambert and Carmen Tamayo},
-#>     year = {2024},
+#>     year = {2025},
 #>     doi = {10.5281/zenodo.10471458},
 #>     url = {https://epiverse-trace.github.io/simulist/},
 #>   }
