@@ -44,6 +44,12 @@ knitr::opts_chunk$set(
 
 ## Installation
 
+The package can be installed from CRAN using
+
+```r
+install.packages("simulist")
+```
+
 You can install the development version of `{simulist}` from
 [GitHub](https://github.com/) with:
 
@@ -51,6 +57,12 @@ You can install the development version of `{simulist}` from
 # check whether {pak} is installed
 if(!require("pak")) install.packages("pak")
 pak::pak("epiverse-trace/simulist")
+```
+
+Alternatively, install pre-compiled binaries from [the Epiverse TRACE R-universe](https://epiverse-trace.r-universe.dev/simulist)
+
+``` r
+install.packages("simulist", repos = c("https://epiverse-trace.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ## Quick start
