@@ -1,4 +1,4 @@
-# simulist (development version)
+# simulist 0.4.0
 
 A minor version release of _simulist_ containing various minor improvements to the functions and documentation, as well as removing some triggers for warning users. There are also a few bug fixes and internal enhancements.
 
