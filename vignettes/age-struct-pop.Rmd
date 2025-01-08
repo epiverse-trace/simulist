@@ -216,6 +216,6 @@ ggplot(age_cats) +
   theme_bw()
 ```
 
-We have used the {ggplot2} package to construct our age pyramid, however the [{apyramid} R package from R4Epi](https://r4epi.github.io/apyramid/) can assist in making these plots; as can the [Applied Epidemiology Handbook chapter on age pyramids](https://epirhandbook.com/en/demographic-pyramids-and-likert-scales.html). The blog post on ["Population Pyramid Plots in ggplot2"](https://www.njtierney.com/post/2022/08/09/ggplot-pyramid/) also contains useful tips on constructing pyramid plots.
+We have used the {ggplot2} package to construct our age pyramid, however the [{apyramid} R package from R4Epi](https://r4epi.github.io/apyramid/) can assist in making these plots; as can the [Applied Epidemiology Handbook chapter on age pyramids](https://www.epirhandbook.com/en/new_pages/age_pyramid.html). The blog post on ["Population Pyramid Plots in ggplot2"](https://www.njtierney.com/post/2022/08/09/ggplot-pyramid/) also contains useful tips on constructing pyramid plots.
 
 As shown in the two age structured examples, the number of age groups is flexible. Therefore a coarse population structure with two or three age groups can be specified, or where precise census demographic data is available, several age groups can be specified.
