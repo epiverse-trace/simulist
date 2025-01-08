@@ -191,7 +191,7 @@ The plotting code in vignettes is hidden by default, click the Code button with 
 
 ::: {.alert .alert-info}
 
-This section of the vignette is based upon examples from the [{epicontacts} R package documentation](https://www.repidemicsconsortium.org/epicontacts/index.html) and the examples provided in the [The Epidemiological R Handbook chapter on transmission chains](https://epirhandbook.com/en/transmission-chains.html). We recommend going to the documentation of the {epicontacts} R package to see the all plotting and data wrangling functionality.
+This section of the vignette is based upon examples from the [{epicontacts} R package documentation](https://www.repidemicsconsortium.org/epicontacts/index.html) and the examples provided in the [The Epidemiological R Handbook chapter on transmission chains](https://www.epirhandbook.com/en/new_pages/transmission_chains.html). We recommend going to the documentation of the {epicontacts} R package to see the all plotting and data wrangling functionality.
 
 :::
 
