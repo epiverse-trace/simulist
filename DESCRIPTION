@@ -28,7 +28,7 @@ Depends:
     R (>= 3.6.0)
 Imports:
     checkmate,
-    epiparameter,
+    epiparameter (>= 0.4.0),
     randomNames,
     rlang,
     stats
@@ -44,8 +44,6 @@ Suggests:
     tidyr
 VignetteBuilder: 
     knitr
-Remotes:
-    epiverse-trace/epiparameter
 Config/Needs/website: epiverse-trace/epiversetheme
 Config/testthat/edition: 3
 Encoding: UTF-8
