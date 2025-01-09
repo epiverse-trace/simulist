@@ -12,7 +12,7 @@ branching process simulation (\code{\link[=.sim_network_bp]{.sim_network_bp()}})
 
 \item{buffer_factor}{A single \code{numeric} determining the level of
 oversampling (or buffer) when creating a vector of unique names from
-\code{\link[=randomNames]{randomNames()}}.}
+\code{\link[randomNames:randomNames]{randomNames::randomNames()}}.}
 }
 \value{
 A \code{character} vector.
@@ -22,8 +22,8 @@ Sample names for specified sexes by sampling with replacement to avoid
 exhausting number of name when \code{sample.with.replacement = FALSE}. The
 duplicated names during sampling need to be removed to ensure each
 individual has a unique name. In order to have enough unique names, more
-names than required are sampled from \code{\link[=randomNames]{randomNames()}}, and the level of
-oversampling is determined by the \code{buffer_factor} argument. A
+names than required are sampled from \code{\link[randomNames:randomNames]{randomNames::randomNames()}}, and the
+level of oversampling is determined by the \code{buffer_factor} argument. A
 \code{buffer_factor} too high and the more names are sampled which takes longer,
 a \code{buffer_factor} too low and not enough unique names are sampled and
 the \code{.sample_names()} function will need to loop until it has enough
