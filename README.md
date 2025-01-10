@@ -17,6 +17,10 @@ coverage](https://codecov.io/gh/epiverse-trace/simulist/branch/main/graph/badge.
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10471459.svg)](https://doi.org/10.5281/zenodo.10471459)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/simulist)](https://CRAN.R-project.org/package=simulist)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/simulist)](https://cran.r-project.org/package=simulist)
 <!-- badges: end -->
 
 `{simulist}` is an R package to simulate individual-level infectious
