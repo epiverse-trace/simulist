@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Simulate Disease Outbreak Line List and Contacts Data">
 <meta name="description" content="Tools to simulate realistic raw case data for an epidemic in the form of line lists and contacts using a branching process. Simulated outbreaks are parameterised with epidemiological parameters and can have age structured populations, age-stratified hospitalisation and death risk and time-varying case fatality risk.">
 <meta property="og:description" content="Tools to simulate realistic raw case data for an epidemic in the form of line lists and contacts using a branching process. Simulated outbreaks are parameterised with epidemiological parameters and can have age structured populations, age-stratified hospitalisation and death risk and time-varying case fatality risk.">
@@ -36,7 +36,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="index.html">simulist</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,19 +105,25 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>The package can be installed from CRAN using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"simulist"</span><span class="op">)</span></span></code></pre></div>
+<p>You can install the development version of <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># check whether {pak} is installed</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://pak.r-lib.org/" class="external-link">"pak"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"epiverse-trace/simulist"</span><span class="op">)</span></span></code></pre></div>
+<p>Alternatively, install pre-compiled binaries from <a href="https://epiverse-trace.r-universe.dev/simulist" class="external-link">the Epiverse TRACE R-universe</a></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"simulist"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://epiverse-trace.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a></span><span class="op">)</span></span></code></pre></div>
 <p>A line list can be simulated by calling <code><a href="reference/sim_linelist.html">sim_linelist()</a></code>. The function provides sensible defaults to quickly generate a epidemiologically valid data set.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
@@ -136,9 +142,9 @@
 <span><span class="co">#&gt; 5      died   2023-01-23         2023-01-07        2023-01-08     27.1</span></span>
 <span><span class="co">#&gt; 6 recovered         &lt;NA&gt;         2023-01-03        2023-01-06       NA</span></span></code></pre></div>
 <p>However, to simulate a more realistic line list using epidemiological parameters estimated for an infectious disease outbreak we can use previously estimated epidemiological parameters. These can be from the <a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> R package if available, or if these are not in the <a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> database yet (such as the contact distribution for COVID-19) we can define them ourselves. Here we define a contact distribution, period of infectiousness, onset-to-hospitalisation delay, and onset-to-death delay.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create COVID-19 contact distribution</span></span>
 <span><span class="va">contact_distribution</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
@@ -190,7 +196,7 @@
 <span><span class="co">#&gt; To retrieve the citation use the 'get_citation' function</span></span></code></pre></div>
 <p>To simulate a line list for COVID-19 with an Poisson contact distribution with a mean number of contacts of 2 and a probability of infection per contact of 0.5, we use the <code><a href="reference/sim_linelist.html">sim_linelist()</a></code> function. The mean number of contacts and probability of infection determine the outbreak reproduction number, if the resulting reproduction number is around one it means we will likely get a reasonably sized outbreak (10 - 1,000 cases, varying due to the stochastic simulation).</p>
 <p><strong><em>Warning</em></strong>: the reproduction number of the simulation results from the contact distribution (<code>contact_distribution</code>) and the probability of infection (<code>prob_infection</code>); the number of infections is a binomial sample of the number of contacts for each case with the probability of infection (i.e. being sampled) given by <code>prob_infection</code>. If the average number of secondary infections from each primary case is greater than 1 then this can lead to the outbreak becoming extremely large. There is currently no depletion of susceptible individuals in the simulation model, so the maximum outbreak size (second element of the vector supplied to the <code>outbreak_size</code> argument) can be used to return a line list early without producing an excessively large data set.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
@@ -215,7 +221,7 @@
 <span><span class="co">#&gt; 5   2023-01-10         2023-01-01        2023-01-03       NA</span></span>
 <span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-03        2023-01-04       NA</span></span></code></pre></div>
 <p>In this example, the line list is simulated using the default values (see <code><a href="reference/sim_linelist.html">?sim_linelist</a></code>). The default hospitalisation risk is assumed to be 0.2 (i.e. there is a 20% probability an infected individual becomes hospitalised) and the start date of the outbreak is 1st January 2023. To modify either of these, we can specify them in the function.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
@@ -241,7 +247,7 @@
 <span><span class="co">#&gt; 5         &lt;NA&gt;         2019-12-03        2019-12-05       NA</span></span>
 <span><span class="co">#&gt; 6         &lt;NA&gt;         2019-11-30        2019-12-02       NA</span></span></code></pre></div>
 <p>To simulate a table of contacts of cases (i.e. to reflect a contact tracing dataset) we can use the same parameters defined for the example above.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_contacts.html">sim_contacts</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
@@ -263,7 +269,7 @@
 <span><span class="co">#&gt; 5        Y           case</span></span>
 <span><span class="co">#&gt; 6        Y           case</span></span></code></pre></div>
 <p>If both the line list and contacts table are required, they can be jointly simulated using the <code><a href="reference/sim_outbreak.html">sim_outbreak()</a></code> function. This uses the same inputs as <code><a href="reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="reference/sim_contacts.html">sim_contacts()</a></code> to produce a line list and contacts table of the same outbreak (the arguments also have the same default settings as the other functions).</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_outbreak.html">sim_outbreak</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
@@ -320,11 +326,11 @@
 <div class="section level2">
 <h2 id="citing-this-package">Citing this package<a class="anchor" aria-label="anchor" href="#citing-this-package"></a>
 </h2>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"simulist"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite package 'simulist' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Lambert J, Tamayo C (2024). _simulist: Simulate Disease Outbreak Line</span></span>
+<span><span class="co">#&gt;   Lambert J, Tamayo C (2025). _simulist: Simulate Disease Outbreak Line</span></span>
 <span><span class="co">#&gt;   List and Contacts Data_. doi:10.5281/zenodo.10471458</span></span>
 <span><span class="co">#&gt;   &lt;https://doi.org/10.5281/zenodo.10471458&gt;,</span></span>
 <span><span class="co">#&gt;   &lt;https://epiverse-trace.github.io/simulist/&gt;.</span></span>
@@ -334,7 +340,7 @@
 <span><span class="co">#&gt;   @Manual{,</span></span>
 <span><span class="co">#&gt;     title = {simulist: Simulate Disease Outbreak Line List and Contacts Data},</span></span>
 <span><span class="co">#&gt;     author = {Joshua W. Lambert and Carmen Tamayo},</span></span>
-<span><span class="co">#&gt;     year = {2024},</span></span>
+<span><span class="co">#&gt;     year = {2025},</span></span>
 <span><span class="co">#&gt;     doi = {10.5281/zenodo.10471458},</span></span>
 <span><span class="co">#&gt;     url = {https://epiverse-trace.github.io/simulist/},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
