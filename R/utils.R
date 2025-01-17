@@ -96,6 +96,10 @@
                                  onset_to_outcome,
                                  idx) {
   delay <- onset_to_outcome(sum(idx))
+
+  # if outcome times are NA then times don't need to be checked
+  if (all(is.na(delay))) return(.data)
+
   hosp_time <- .data$hospitalisation[idx]
   # set non-hospitalised cases as -Inf for numerical comparison so
   # onset-to-death and onset-to-recovery time cannot be smaller
