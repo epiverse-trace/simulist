@@ -98,17 +98,18 @@
   delay <- onset_to_outcome(sum(idx))
 
   # if outcome times are NA then times don't need to be checked
-  if (all(is.na(delay))) return(.data)
+  if (any(is.na(delay))) return(.data)
 
-  hosp_time <- .data$hospitalisation[idx]
+  # get onset-to-hospitalisation delays from time of hospitalisation in outbreak
+  oth <- .data$hospitalisation[idx] - .data$time[idx]
   # set non-hospitalised cases as -Inf for numerical comparison so
   # onset-to-death and onset-to-recovery time cannot be smaller
-  hosp_time[is.na(hosp_time)] <- -Inf
+  oth[is.na(oth)] <- -Inf
   counter <- 1L
   # outcome (death/recovery) time must be after hospitalisation
-  while (any(delay < hosp_time)) {
+  while (any(delay < oth)) {
     # resample delay to outcome
-    delay[delay < hosp_time] <- onset_to_outcome(sum(delay < hosp_time))
+    delay[delay < oth] <- onset_to_outcome(sum(delay < oth))
     counter <- counter + 1L
     if (counter > 1000L) {
       stop(
