@@ -94,16 +94,27 @@
 #' @keywords internal
 .sample_outcome_time <- function(.data,
                                  onset_to_outcome,
-                                 idx) { #
+                                 idx) {
   delay <- onset_to_outcome(sum(idx))
   hosp_time <- .data$hospitalisation[idx]
   # set non-hospitalised cases as -Inf for numerical comparison so
   # onset-to-death and onset-to-recovery time cannot be smaller
   hosp_time[is.na(hosp_time)] <- -Inf
+  counter <- 1L
   # outcome (death/recovery) time must be after hospitalisation
   while (any(delay < hosp_time)) {
     # resample delay to outcome
     delay[delay < hosp_time] <- onset_to_outcome(sum(delay < hosp_time))
+    counter <- counter + 1L
+    if (counter > 1000L) {
+      stop(
+        "Cannot sample an onset-to-outcome time greater than a ",
+        "onset-to-hospitalisation time.\n Please check `onset_to_hosp`, ",
+        "`onset_to_death` and `onset_to_recovery`.\n Death and recovery times ",
+        "must be greater than hospital admission times.",
+        call. = FALSE
+      )
+    }
   }
   .data$outcome_time[idx] <- .data$time[idx] + delay
 
