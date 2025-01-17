@@ -97,7 +97,15 @@ number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and
 
 If \code{onset_to_death} is set to \code{NULL} then \code{non_hosp_death_risk} and
 \code{hosp_death_risk} will be automatically set to \code{NULL} if not manually
-specified.}
+specified.
+
+For hospitalised cases, the function ensures the onset-to-death time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-death time (from \code{onset_to_death}) cannot be sampled that is
+greater than a onset-to-hospitalisation time (from \code{onset_to_hosp}) then
+the function will error. Due to this conditional sampling, the
+onset-to-death times in the line list may not resemble the distributional
+form input into the function.}
 
 \item{onset_to_recovery}{A \code{function} or an \verb{<epiparameter>} object for the
 onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
@@ -111,7 +119,15 @@ An \verb{<epiparameter>} can be provided. This will be converted into a random
 number generator internally.
 
 The default is \code{NULL} so by default cases that recover get an \code{NA} in the
-\verb{$date_outcome} line list column.}
+\verb{$date_outcome} line list column.
+
+For hospitalised cases, the function ensures the onset-to-recovery time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-recovery time (from \code{onset_to_recovery}) cannot be sampled
+that is greater than a onset-to-hospitalisation time (from \code{onset_to_hosp})
+then the function will error. Due to this conditional sampling, the
+onset-to-recovery times in the line list may not resemble the distributional
+form input into the function.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
