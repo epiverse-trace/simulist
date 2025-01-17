@@ -47,7 +47,15 @@ number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and
 
 If \code{onset_to_death} is set to \code{NULL} then \code{non_hosp_death_risk} and
 \code{hosp_death_risk} will be automatically set to \code{NULL} if not manually
-specified.}
+specified.
+
+For hospitalised cases, the function ensures the onset-to-death time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-death time (from \code{onset_to_death}) cannot be sampled that is
+greater than a onset-to-hospitalisation time (from \code{onset_to_hosp}) then
+the function will error. Due to this conditional sampling, the
+onset-to-death times in the line list may not resemble the distributional
+form input into the function.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific

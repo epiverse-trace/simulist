@@ -96,6 +96,14 @@
 #' `hosp_death_risk` will be automatically set to `NULL` if not manually
 #' specified.
 #'
+#' For hospitalised cases, the function ensures the onset-to-death time is
+#' greater than the onset-to-hospitalisation time. After many (1000) attempts,
+#' if an onset-to-death time (from `onset_to_death`) cannot be sampled that is
+#' greater than a onset-to-hospitalisation time (from `onset_to_hosp`) then
+#' the function will error. Due to this conditional sampling, the
+#' onset-to-death times in the line list may not resemble the distributional
+#' form input into the function.
+#'
 #' @param onset_to_recovery A `function` or an `<epiparameter>` object for the
 #' onset-to-recovery delay distribution. `onset_to_recovery` can also be `NULL`
 #' to not simulate dates for individuals that recovered.
@@ -109,6 +117,14 @@
 #'
 #' The default is `NULL` so by default cases that recover get an `NA` in the
 #' `$date_outcome` line list column.
+#'
+#' For hospitalised cases, the function ensures the onset-to-recovery time is
+#' greater than the onset-to-hospitalisation time. After many (1000) attempts,
+#' if an onset-to-recovery time (from `onset_to_recovery`) cannot be sampled
+#' that is greater than a onset-to-hospitalisation time (from `onset_to_hosp`)
+#' then the function will error. Due to this conditional sampling, the
+#' onset-to-recovery times in the line list may not resemble the distributional
+#' form input into the function.
 #'
 #' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
