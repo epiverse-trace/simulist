@@ -145,8 +145,9 @@ NULL
   .data$outcome <- "contact"
   .data$outcome_time <- NA_real_
   .data$outcome[infected_lgl_idx] <- "recovered"
-  .data$outcome_time[infected_lgl_idx] <- .data$time[infected_lgl_idx] +
-    onset_to_recovery(num_infected)
+  .data <- .sample_outcome_time(
+    .data, onset_to_outcome = onset_to_recovery, idx = infected_lgl_idx
+  )
   hosp_lgl_idx <- !is.na(.data$hospitalisation) & infected_lgl_idx
   non_hosp_lgl_idx <- is.na(.data$hospitalisation) & infected_lgl_idx
 
@@ -204,8 +205,9 @@ NULL
       # died index requires individuals to be in idx group (e.g. hosp)
       died_lgl_idx <- as.logical(died_idx) & idx
       .data$outcome[died_lgl_idx] <- "died"
-      .data$outcome_time[died_lgl_idx] <- .data$time[died_lgl_idx] +
-        onset_to_death(sum(died_lgl_idx))
+      .data <- .sample_outcome_time(
+        .data, onset_to_outcome = onset_to_death, idx = died_lgl_idx
+      )
     }
     .data
   }
