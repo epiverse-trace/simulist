@@ -121,8 +121,8 @@ test_that("sim_linelist gives expected proportion of ages with age struct", {
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
+    onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1, sdlog = 0.5),
+    onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
     population_age = age_struct,
     outbreak_size = c(500, 5000)
   )
