@@ -53,7 +53,7 @@ onset_to_hosp <- epiparameter(
   disease = "COVID-19",
   epi_name = "onset to hospitalisation",
   prob_distribution = create_prob_distribution(
-    prob_distribution = "lnorm", 
+    prob_distribution = "lnorm",
     prob_distribution_params = c(meanlog = 1, sdlog = 0.5)
   )
 )
