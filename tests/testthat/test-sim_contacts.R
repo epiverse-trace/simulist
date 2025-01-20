@@ -3,25 +3,8 @@ test_that("sim_contacts works as expected with defaults", {
   expect_snapshot(sim_contacts())
 })
 
-suppressMessages({
-  contact_distribution <- epiparameter::epiparameter(
-    disease = "COVID-19",
-    epi_name = "contact distribution",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "pois",
-      prob_distribution_params = c(mean = 2)
-    )
-  )
-
-  infectious_period <- epiparameter::epiparameter(
-    disease = "COVID-19",
-    epi_name = "infectious period",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "gamma",
-      prob_distribution_params = c(shape = 1, scale = 1)
-    )
-  )
-})
+contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
+infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
 
 test_that("sim_contacts works as expected", {
   set.seed(1)
