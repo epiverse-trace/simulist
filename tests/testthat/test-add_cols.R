@@ -1,25 +1,10 @@
-suppressMessages({
-  # get onset to hospital admission from {epiparameter} database &
-  # convert to function
-  onset_to_hosp <- as.function(
-    epiparameter::epiparameter_db(
-      disease = "COVID-19",
-      epi_name = "onset to hospitalisation",
-      single_epiparameter = TRUE
-    )
-  )
-
-  # get onset to death from {epiparameter} database
-  onset_to_death <- as.function(
-    epiparameter::epiparameter_db(
-      disease = "COVID-19",
-      epi_name = "onset to death",
-      single_epiparameter = TRUE
-    )
-  )
-
-  onset_to_recovery <- function(x) rep(NA, times = x)
-})
+onset_to_hosp <- function(x) {
+  stats::rlnorm(n = x, meanlog = 0.947, sdlog = 1.628)
+}
+onset_to_death <- function(x) {
+  stats::rlnorm(n = x, meanlog = 2.863, sdlog = 0.534)
+}
+onset_to_recovery <- function(x) rep(NA, times = x)
 
 test_that(".add_date_contact works as expected with contact_type = 'last'", {
   ll <- readRDS(file = file.path("testdata", "pre_date_last_contact.rds"))

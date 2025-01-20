@@ -3,40 +3,14 @@ test_that("sim_linelist works as expected with defaults", {
   expect_snapshot(sim_linelist())
 })
 
-suppressMessages({
-  library(epiparameter)
-  contact_distribution <- epiparameter(
-    disease = "COVID-19",
-    epi_name = "contact distribution",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "pois",
-      prob_distribution_params = c(mean = 2)
-    )
-  )
-
-  infectious_period <- epiparameter(
-    disease = "COVID-19",
-    epi_name = "infectious period",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "gamma",
-      prob_distribution_params = c(shape = 1, scale = 1)
-    )
-  )
-
-  # get onset to hospital admission from {epiparameter} database
-  onset_to_hosp <- epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to hospitalisation",
-    single_epiparameter = TRUE
-  )
-
-  # get onset to death from {epiparameter} database
-  onset_to_death <- epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to death",
-    single_epiparameter = TRUE
-  )
-})
+contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
+infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
+onset_to_hosp <- function(x) {
+  stats::rlnorm(n = x, meanlog = 0.947, sdlog = 1.628)
+}
+onset_to_death <- function(x) {
+  stats::rlnorm(n = x, meanlog = 2.863, sdlog = 0.534)
+}
 
 test_that("sim_linelist works as expected", {
   set.seed(1)
