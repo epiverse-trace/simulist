@@ -141,7 +141,6 @@ NULL
                          non_hosp_death_risk,
                          config) {
   infected_lgl_idx <- .data$infected == "infected"
-  num_infected <- sum(infected_lgl_idx)
   .data$outcome <- "contact"
   .data$outcome_time <- NA_real_
   .data$outcome[infected_lgl_idx] <- "recovered"

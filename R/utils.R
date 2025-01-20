@@ -98,7 +98,7 @@
   delay <- onset_to_outcome(sum(idx))
 
   # if outcome times are NA then times don't need to be checked
-  if (any(is.na(delay))) return(.data)
+  if (anyNA(delay)) return(.data)
 
   # get onset-to-hospitalisation delays from time of hospitalisation in outbreak
   oth <- .data$hospitalisation[idx] - .data$time[idx]
