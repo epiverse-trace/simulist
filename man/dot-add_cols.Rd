@@ -7,6 +7,7 @@
 \alias{.add_outcome}
 \alias{.add_names}
 \alias{.add_ct}
+\alias{.add_reporting_delay}
 \title{Add line list event dates and case information as columns to infectious
 history \verb{<data.frame>}}
 \usage{
@@ -32,6 +33,8 @@ history \verb{<data.frame>}}
 .add_names(.data, anonymise = FALSE)
 
 .add_ct(.data, distribution = c("norm", "lnorm"), ...)
+
+.add_reporting_delay(.data, config)
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
