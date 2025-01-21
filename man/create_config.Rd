@@ -22,8 +22,8 @@ The \code{config} argument in \code{\link[=sim_linelist]{sim_linelist()}} contro
 around time windows around infections (time of first contact and last
 contact with infector), and the distribution of the Cycle threshold (Ct)
 value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
-cases, the network effect in the simulation, and if there is a time-varying
-death risk.
+cases, the network effect in the simulation, if there is a time-varying
+death risk, and if there are reporting delays.
 
 Accepted arguments and their defaults are:
 \itemize{
@@ -35,6 +35,7 @@ Accepted arguments and their defaults are:
 \item \code{ct_distribution_params = c(mean = 25, sd = 2)}
 \item \code{network = "adjusted"}
 \item \code{time_varying_death_risk = NULL}
+\item \code{reporting_delay = NULL}
 }
 
 These parameters do not warrant their own arguments in
@@ -56,6 +57,15 @@ unadjusted contact distribution. Adjusted (default) sampling uses
 density function of a distribution, e.g., Poisson or Negative binomial.
 Unadjusted (\code{network = "unadjusted"}) instead samples contacts directly from
 a probability distribution \eqn{p(n)}.
+
+The \code{reporting_delay} accepts a (random) number generating function to
+create delays between the time of symtom onset (\verb{$date_onset}) and the
+case being reported (\verb{$date_reporting}), e.g.
+\code{function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47)} for a
+lognormally reporting delay with an average of two days and one standard
+deviation. If \code{reporting_delay} is \code{NULL} the line list \verb{<data.frame>} will
+be output with the \verb{$date_reporting} column identical to the \verb{$date_onset}
+column.
 }
 \examples{
 # example with default configuration
