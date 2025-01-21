@@ -153,19 +153,15 @@ delay distributions using the {epiparameter} package.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
 <span></span>
-<span><span class="co"># get onset to hospital admission from {epiparameter} database</span></span>
-<span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span>
+<span><span class="va">onset_to_hosp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html" class="external-link">epiparameter</a></span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"COVID-19"</span>,</span>
 <span>  epi_name <span class="op">=</span> <span class="st">"onset to hospitalisation"</span>,</span>
-<span>  single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  prob_distribution <span class="op">=</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/create_prob_distribution.html" class="external-link">create_prob_distribution</a></span><span class="op">(</span></span>
+<span>    prob_distribution <span class="op">=</span> <span class="st">"lnorm"</span>,</span>
+<span>    prob_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan</span></span>
-<span><span class="co">#&gt; B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other</span></span>
-<span><span class="co">#&gt; Epidemiological Characteristics of 2019 Novel Coronavirus Infections</span></span>
-<span><span class="co">#&gt; with Right Truncation: A Statistical Analysis of Publicly Available</span></span>
-<span><span class="co">#&gt; Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538</span></span>
-<span><span class="co">#&gt; &lt;https://doi.org/10.3390/jcm9020538&gt;.. </span></span>
-<span><span class="co">#&gt; To retrieve the citation use the 'get_citation' function</span></span>
+<span><span class="co">#&gt; Citation cannot be created as author, year, journal or title is missing</span></span>
 <span></span>
 <span><span class="co"># get onset to death from {epiparameter} database</span></span>
 <span><span class="va">onset_to_death</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiverse-trace.github.io/epiparameter/reference/epiparameter_db.html" class="external-link">epiparameter_db</a></span><span class="op">(</span></span>
@@ -211,10 +207,10 @@ times.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id       case_name case_type sex age date_onset date_admission   outcome</span></span>
 <span><span class="co">#&gt; 1  1 Wajdi al-Demian  probable   m  35 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  2   Raaid el-Diab confirmed   m  43 2023-01-01     2023-01-07 recovered</span></span>
+<span><span class="co">#&gt; 2  2   Raaid el-Diab confirmed   m  43 2023-01-01     2023-01-04 recovered</span></span>
 <span><span class="co">#&gt; 3  3  Nickolas Nault suspected   m   1 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt; 4  5     Hee Kennedy confirmed   m  78 2023-01-01     2023-01-03      died</span></span>
-<span><span class="co">#&gt; 5  6     Hope Arshad suspected   f  22 2023-01-01     2023-01-28      died</span></span>
+<span><span class="co">#&gt; 5  6     Hope Arshad suspected   f  22 2023-01-01     2023-01-06      died</span></span>
 <span><span class="co">#&gt; 6  8  Shanta Holiday  probable   f  28 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
 <span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
@@ -242,10 +238,10 @@ hospitalised and non-hospitalised groups is lower.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1      Robert Wanzek suspected   m  80 2023-01-01     2023-01-08 recovered</span></span>
+<span><span class="co">#&gt; 1  1      Robert Wanzek suspected   m  80 2023-01-01     2023-01-04 recovered</span></span>
 <span><span class="co">#&gt; 2  2           Kacy Kim  probable   f  85 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt; 3  4    Jade Goldsberry  probable   f  76 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  8    Brittany Brooks confirmed   f  12 2023-01-01     2023-01-01      died</span></span>
+<span><span class="co">#&gt; 4  8    Brittany Brooks confirmed   f  12 2023-01-01     2023-01-02      died</span></span>
 <span><span class="co">#&gt; 5 11 Fat'hiyaa al-Zafar suspected   f  50 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt; 6 14   Desirae Carranza  probable   f  54 2023-01-01     2023-01-03 recovered</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
@@ -462,7 +458,7 @@ hospital, are all specified.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id        case_name case_type sex age date_onset date_admission   outcome</span></span>
 <span><span class="co">#&gt; 1  1   Afeef al-Saber suspected   m  54 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  3  Duncan Kleinman suspected   m  39 2023-01-02     2023-01-03 recovered</span></span>
+<span><span class="co">#&gt; 2  3  Duncan Kleinman suspected   m  39 2023-01-02     2023-01-04 recovered</span></span>
 <span><span class="co">#&gt; 3  4 Montica Gallegos  probable   f  37 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt; 4  5        Son Ahuna suspected   m  25 2023-01-03           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt; 5  6  Alyssa Gonzalez confirmed   f  10 2023-01-02           &lt;NA&gt; recovered</span></span>

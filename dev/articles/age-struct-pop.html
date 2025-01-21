@@ -219,20 +219,20 @@ the distribution of ages.</p>
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1e4</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id           case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1 George Smith-Dawson confirmed   m  63 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  2    Lataylha Ephraim confirmed   f  56 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 3  3          Emma Smith confirmed   f   7 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  5     Elizabeth Smith confirmed   f  35 2023-01-02     2023-01-06      died</span></span>
-<span><span class="co">#&gt; 5  6  Brandon Van Bemden  probable   m  60 2023-01-02           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 6  8   Riyaal el-Khalili confirmed   m  38 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_admission   outcome</span></span>
+<span><span class="co">#&gt; 1  1   Jez-Mas Sanders suspected   m  63 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 2  2   Megan Cronkhite confirmed   f  56 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 3  3   Jenell Williams suspected   f   7 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 4  5   Erika Hornafius  probable   f  35 2023-01-02     2023-01-06      died</span></span>
+<span><span class="co">#&gt; 5  6 Dillon Cunningham  probable   m  60 2023-01-02           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 6  8         Ian Lopez confirmed   m  38 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     22.6</span></span>
-<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-02        2023-01-03     21.6</span></span>
-<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-04        2023-01-05     26.4</span></span>
-<span><span class="co">#&gt; 4   2023-01-15         2022-12-30        2023-01-04     26.0</span></span>
+<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
+<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-02        2023-01-03     25.5</span></span>
+<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-04        2023-01-05       NA</span></span>
+<span><span class="co">#&gt; 4   2023-01-15         2022-12-30        2023-01-04       NA</span></span>
 <span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-01        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-05        2023-01-07     24.9</span></span></code></pre></div>
+<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-05        2023-01-07     22.8</span></span></code></pre></div>
 <p>We can plot the age distribution for individuals in the line list,
 binned into 5 year categories.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -291,20 +291,20 @@ population younger then 1 or older than 90.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id                  case_name case_type sex age date_onset date_admission</span></span>
-<span><span class="co">#&gt; 1  1 Cassandra Portillo-Sanchez  probable   f  82 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  3              Sean Mcdaniel confirmed   m  41 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  4              Lonnie Forbes suspected   m  17 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  6               Matthew Tang confirmed   m  59 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  7            Jonathan Eggert confirmed   m  31 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6  8              James Briseno suspected   m  49 2023-01-01           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;     outcome date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
-<span><span class="co">#&gt; 2 recovered         &lt;NA&gt;         2023-01-01        2023-01-05     20.7</span></span>
-<span><span class="co">#&gt; 3 recovered         &lt;NA&gt;         2022-12-31        2023-01-04       NA</span></span>
-<span><span class="co">#&gt; 4 recovered         &lt;NA&gt;         2023-01-01        2023-01-02     21.6</span></span>
-<span><span class="co">#&gt; 5 recovered         &lt;NA&gt;         2023-01-05        2023-01-05     25.9</span></span>
-<span><span class="co">#&gt; 6 recovered         &lt;NA&gt;         2023-01-01        2023-01-03       NA</span></span></code></pre></div>
+<span><span class="co">#&gt;   id            case_name case_type sex age date_onset date_admission   outcome</span></span>
+<span><span class="co">#&gt; 1  1        Cycrena Hoots confirmed   f  82 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 2  3       James Manchego  probable   m  41 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 3  4       Jankeith Tatum confirmed   m  17 2023-01-01           &lt;NA&gt;      died</span></span>
+<span><span class="co">#&gt; 4  6       Tyrell Johnson confirmed   m  59 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 5  7          Keywon Mack suspected   m  31 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 6  8 Taajuddeen al-Badour confirmed   m  49 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     27.1</span></span>
+<span><span class="co">#&gt; 2         &lt;NA&gt;         2023-01-01        2023-01-05       NA</span></span>
+<span><span class="co">#&gt; 3   2023-01-11         2022-12-31        2023-01-04     25.6</span></span>
+<span><span class="co">#&gt; 4         &lt;NA&gt;         2023-01-01        2023-01-02     24.2</span></span>
+<span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-05        2023-01-05       NA</span></span>
+<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-01        2023-01-03     24.6</span></span></code></pre></div>
 <p>Again we can plot the age distribution to see the age structure for
 individuals in the line list. Given the relative uniformity of the age
 structure specified it is not greatly different from the uniform age
@@ -371,19 +371,19 @@ error with an informative error message.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_admission   outcome</span></span>
-<span><span class="co">#&gt; 1  1 Saaliha el-Yousef confirmed   f   5 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 2  2       Drew Tharpe suspected   m  43 2023-01-01     2023-01-19      died</span></span>
-<span><span class="co">#&gt; 3  4    Marquise Maunu confirmed   m  52 2023-01-01           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 4  5     Keenan Steele  probable   m   1 2023-01-01     2023-01-10 recovered</span></span>
-<span><span class="co">#&gt; 5  6     Julia Spencer  probable   f  12 2023-01-04           &lt;NA&gt; recovered</span></span>
-<span><span class="co">#&gt; 6  8 Hasana el-Mahfouz confirmed   f  19 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 1  1    Kylie Castillo suspected   f   5 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 2  2 Mu,Aawiya al-Amir  probable   m  43 2023-01-01     2023-01-19      died</span></span>
+<span><span class="co">#&gt; 3  4     Drue Ashworth suspected   m  52 2023-01-01           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 4  5  Anthony Suddreth confirmed   m   1 2023-01-01     2023-01-10 recovered</span></span>
+<span><span class="co">#&gt; 5  6    Victoria Smith  probable   f  12 2023-01-04           &lt;NA&gt; recovered</span></span>
+<span><span class="co">#&gt; 6  8   Naafoora el-Haq  probable   f  19 2023-01-01           &lt;NA&gt; recovered</span></span>
 <span><span class="co">#&gt;   date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     25.9</span></span>
+<span><span class="co">#&gt; 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span></span>
 <span><span class="co">#&gt; 2   2023-01-19         2022-12-28        2023-01-02       NA</span></span>
-<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-02        2023-01-04     27.6</span></span>
-<span><span class="co">#&gt; 4         &lt;NA&gt;         2022-12-31        2023-01-06       NA</span></span>
+<span><span class="co">#&gt; 3         &lt;NA&gt;         2023-01-02        2023-01-04       NA</span></span>
+<span><span class="co">#&gt; 4         &lt;NA&gt;         2022-12-31        2023-01-06     21.8</span></span>
 <span><span class="co">#&gt; 5         &lt;NA&gt;         2023-01-05        2023-01-06       NA</span></span>
-<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-02        2023-01-05     22.6</span></span></code></pre></div>
+<span><span class="co">#&gt; 6         &lt;NA&gt;         2023-01-02        2023-01-05       NA</span></span></code></pre></div>
 <p>A common and useful method for plotting age data is in the form of
 age pyramids. Here we partition the data by sex and plot the age
 distribution.</p>

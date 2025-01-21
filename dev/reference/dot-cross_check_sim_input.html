@@ -155,7 +155,14 @@ number generator internally.</p>
 number generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) with <code>meanlog = 2.5</code> and <code>sdlog = 0.5</code>.</p>
 <p>If <code>onset_to_death</code> is set to <code>NULL</code> then <code>non_hosp_death_risk</code> and
 <code>hosp_death_risk</code> will be automatically set to <code>NULL</code> if not manually
-specified.</p></dd>
+specified.</p>
+<p>For hospitalised cases, the function ensures the onset-to-death time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-death time (from <code>onset_to_death</code>) cannot be sampled that is
+greater than a onset-to-hospitalisation time (from <code>onset_to_hosp</code>) then
+the function will error. Due to this conditional sampling, the
+onset-to-death times in the line list may not resemble the distributional
+form input into the function.</p></dd>
 
 
 <dt id="arg-hosp-risk">hosp_risk<a class="anchor" aria-label="anchor" href="#arg-hosp-risk"></a></dt>

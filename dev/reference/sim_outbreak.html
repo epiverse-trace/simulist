@@ -163,7 +163,14 @@ number generator internally.</p>
 number generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) with <code>meanlog = 2.5</code> and <code>sdlog = 0.5</code>.</p>
 <p>If <code>onset_to_death</code> is set to <code>NULL</code> then <code>non_hosp_death_risk</code> and
 <code>hosp_death_risk</code> will be automatically set to <code>NULL</code> if not manually
-specified.</p></dd>
+specified.</p>
+<p>For hospitalised cases, the function ensures the onset-to-death time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-death time (from <code>onset_to_death</code>) cannot be sampled that is
+greater than a onset-to-hospitalisation time (from <code>onset_to_hosp</code>) then
+the function will error. Due to this conditional sampling, the
+onset-to-death times in the line list may not resemble the distributional
+form input into the function.</p></dd>
 
 
 <dt id="arg-onset-to-recovery">onset_to_recovery<a class="anchor" aria-label="anchor" href="#arg-onset-to-recovery"></a></dt>
@@ -176,7 +183,14 @@ must have a single argument.</p>
 <p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into a random
 number generator internally.</p>
 <p>The default is <code>NULL</code> so by default cases that recover get an <code>NA</code> in the
-<code>$date_outcome</code> line list column.</p></dd>
+<code>$date_outcome</code> line list column.</p>
+<p>For hospitalised cases, the function ensures the onset-to-recovery time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-recovery time (from <code>onset_to_recovery</code>) cannot be sampled
+that is greater than a onset-to-hospitalisation time (from <code>onset_to_hosp</code>)
+then the function will error. Due to this conditional sampling, the
+onset-to-recovery times in the line list may not resemble the distributional
+form input into the function.</p></dd>
 
 
 <dt id="arg-hosp-risk">hosp_risk<a class="anchor" aria-label="anchor" href="#arg-hosp-risk"></a></dt>
@@ -293,35 +307,35 @@ that age group. Proportions must sum to one.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># quickly simulate an outbreak using the function defaults</span></span></span>
 <span class="r-in"><span><span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu">sim_outbreak</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id          case_name case_type sex age date_onset date_admission   outcome</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1  Christie Reynolds  probable   f  17 2023-01-01           &lt;NA&gt; recovered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 Nooriyya al-Mourad  probable   f  46 2023-01-01     2023-01-03 recovered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3        Louis Munoz suspected   m  16 2023-01-01           &lt;NA&gt; recovered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  7       Sean Lathrop  probable   m  12 2023-01-07           &lt;NA&gt; recovered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  9    Yusri al-Saleem  probable   m  86 2023-01-02           &lt;NA&gt; recovered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 10    Haifaaa al-Nasr confirmed   f  87 2023-01-04     2023-01-08 recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id        case_name case_type sex age date_onset date_admission   outcome</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1    Sarah Pearson suspected   f  76 2023-01-01     2023-01-03      died</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  3 Munisa al-Yousef confirmed   f  15 2023-01-05     2023-01-14 recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  4       Dylan Tate confirmed   m  61 2023-01-02           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  6  Joseph Hinojosa suspected   m  53 2023-01-12           &lt;NA&gt; recovered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  9      Thomas Hill confirmed   m  50 2023-01-13     2023-01-17      died</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 11   Dylan Mitchell  probable   m  86 2023-01-20           &lt;NA&gt; recovered</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date_outcome date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         &lt;NA&gt;         2023-01-04        2023-01-05       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         &lt;NA&gt;         2022-12-27        2023-01-02       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         &lt;NA&gt;         2023-01-01        2023-01-04       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         &lt;NA&gt;         2023-01-02        2023-01-04       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         &lt;NA&gt;         2022-12-29        2023-01-03     28.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   2023-01-13               &lt;NA&gt;              &lt;NA&gt;       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         &lt;NA&gt;         2023-01-01        2023-01-04     24.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         &lt;NA&gt;         2023-01-08        2023-01-10     22.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         &lt;NA&gt;         2023-01-01        2023-01-05       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   2023-01-18         2023-01-09        2023-01-15     24.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         &lt;NA&gt;         2023-01-12        2023-01-15       NA</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 from                 to age sex date_first_contact</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Christie Reynolds Nooriyya al-Mourad  46   f         2023-01-04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Christie Reynolds        Louis Munoz  16   m         2022-12-27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  Christie Reynolds  Jared Chounlamany  77   m         2023-01-04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Nooriyya al-Mourad         Maya Ortiz  34   f         2023-01-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Nooriyya al-Mourad     Nizhoni Salido  31   f         2023-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Nooriyya al-Mourad       Sean Lathrop  12   m         2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               from               to age sex date_first_contact</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Sarah Pearson   Arlene Johnson  76   f         2022-12-26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Sarah Pearson Munisa al-Yousef  15   f         2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Sarah Pearson       Dylan Tate  61   m         2023-01-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Sarah Pearson    Lela Alvarado  60   f         2022-12-29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Munisa al-Yousef  Joseph Hinojosa  53   m         2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Munisa al-Yousef Somarrey Alferos  38   f         2023-01-03</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date_last_contact was_case         status</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        2023-01-05        Y           case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2        2023-01-02        Y           case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3        2023-01-07        N        unknown</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4        2023-01-04        N under_followup</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        2023-01-04        N under_followup</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6        2023-01-04        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        2023-01-02        N        unknown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        2023-01-04        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        2023-01-10        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        2023-01-03        N under_followup</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        2023-01-05        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        2023-01-06        N under_followup</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># to simulate a more realistic outbreak load epiparameters from</span></span></span>
 <span class="r-in"><span><span class="co"># {epiparameter}</span></span></span>
