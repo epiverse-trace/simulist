@@ -83,7 +83,7 @@ truncation <- function(linelist,
                        delay_type = c("all", "onset", "admission", "outcome")) {
   stopifnot(
     "linelist must be a data.frame output from `sim_linelist()`" =
-      is.data.frame(linelist) && ncol(linelist) == 12
+      is.data.frame(linelist) && ncol(linelist) == 13
   )
   .check_func_req_args(func = delay, func_name = "delay", n_req_args = 1)
   delay_type <- match.arg(delay_type)
