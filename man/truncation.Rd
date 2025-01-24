@@ -8,7 +8,7 @@ truncation(
   linelist,
   delay = function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47),
   max_date = NULL,
-  delay_type = c("all", "onset", "admission", "outcome")
+  truncation_event = c("reporting", "onset", "admission", "outcome")
 )
 }
 \arguments{
@@ -30,21 +30,24 @@ delays. Default is \code{NULL}, so the maximum date will be automatically
 calculated as the date at the end of the outbreak (i.e. date of the last
 outcome).}
 
-\item{delay_type}{A \code{character} string with which reporting the
-delay should apply to. Default is \code{"all"} whereby if a date of symptom onset
-(\verb{$date_onset}) is more recent than the sampled truncation time then the
-individual (row) is removed from the line list. If the date of symptom onset
-is less recent than the sampled truncation time but either the date of
-hospitalisation (\verb{$date_admission}) or date of outcome (\verb{$date_outcome}) is
-more recent than the sampled truncation time then these dates are converted
-from \code{Date}s to \code{NA}s.
+\item{truncation_event}{A \code{character} string with which event in the line
+list the right-truncation should apply to. The default is \code{"reporting"} for
+the reporting delay, which is likely the most common form of right-truncation
+in real-time outbreak data. When \code{truncation_event = "reporting"} if a date
+of reporting (\verb{$date_reporting}) is more recent than the sampled truncation
+time then the individual (row) is removed from the line list. If the date of
+reporting is less recent than the sampled truncation time but either the
+date of hospitalisation (\verb{$date_admission}) or date of outcome
+(\verb{$date_outcome}) is more recent than the sampled truncation time then these
+dates are convertedfrom \code{Date}s to \code{NA}s.
 
-The other options for \code{delay_type} are \code{"onset"}, \code{"admission"}
-or \code{"outcome"}. If these are chosen then if the truncation point is more
+The other options for \code{truncation_event} are \code{"onset"}, \code{"admission"}
+or \code{"outcome"}.  If these are chosen then if the truncation point is more
 recent than the date of symptom onset, date of hospital admission, or
 date of outcome (death or recovery), respectively, then these individuals
 (rows) will be removed from the line list (i.e. the \verb{<data.frame>} is
-subset).}
+subset). If the event is less recent than the sampled truncation time then
+any events after the truncation point will be set to \code{NA}.}
 }
 \value{
 A line list \verb{<data.frame>}.
@@ -54,7 +57,7 @@ Adjust or subset the line list \verb{<data.frame>} by either changing dates that
 are within the right-truncation window to \code{NA} or removing cases that have
 occurred within a delay period. This occurs to recent cases or outcomes
 that are not yet recorded in the line list and will be revised upwards. See
-\code{delay_type} argument documentation for different types of truncation.
+\code{truncation_event} argument documentation for different types of truncation.
 }
 \details{
 The truncation window is sampled for each individual and is specified by a
@@ -74,11 +77,11 @@ linelist_trunc <- truncation(linelist)
 # set maximum date to apply truncation to 2023-01-01
 linelist_trunc <- truncation(linelist, max_date = "2023-01-01")
 
-# apply longer truncation only to hospital admission
+# apply longer truncation to hospital admission
 linelist_trunc <- truncation(
   linelist,
   delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5),
-  delay_type = "admission"
+  truncation_event = "admission"
 )
 
 # variable right-truncation with mean 2 and sd 1 (default behaviour)
