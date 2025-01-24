@@ -13,6 +13,10 @@ reference:
     contents:
     - starts_with("sim_")
 
+  - title: Right-truncate line list
+    contents:
+    - truncation
+
   - title: Helper functions
     contents:
     - create_config
@@ -24,6 +28,7 @@ articles:
   - age-strat-risks
   - age-struct-pop
   - time-varying-cfr
+  - reporting-delays-truncation
 - title: Wrangling and plotting data
   navbar: Wrangling and plotting data
   contents:
