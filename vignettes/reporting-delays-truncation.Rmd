@@ -2,7 +2,7 @@
 title: "Reporting delays and right-truncation of line list data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{reporting-delays-truncation}
+  %\VignetteIndexEntry{Reporting delays and right-truncation of line list data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,25 +14,34 @@ knitr::opts_chunk$set(
 )
 ```
 
+::: {.alert .alert-info}
+If you are unfamiliar with the {simulist} package or the `sim_linelist()` function [Get Started vignette](simulist.html) is a great place to start.
+:::
+
+This vignette covers reporting delays in line list data, how to use {simulist} to produce line list data with a delay between symptom onset and reporting, explains right-truncation in outbreak data sets and shows how to use the `truncation()` function in {simulist} to augment a simulated line list to resemble real-time outbreak data.
+
+## Reporting delays
+
+Reporting delays in line list data during an infectious disease outbreak refer to the time lag between when an event (e.g., infection, symptom onset, or hospitalisation) occurs and when it is officially recorded or reported. These delays can arise from factors like diagnostic testing turnaround times, administrative processing, or delayed healthcare-seeking behaviour. In line list data sets, these delays are captured as separate times/dates for different event types, such as the dates of symptom onset, specimen collection, laboratory confirmation, or case reporting. For each case, the delay is the difference between these times/dates, allowing researchers to quantify and adjust for reporting delays when analysing outbreak dynamics. Accurate recording of these dates is crucial for reconstructing the epidemic curve and assessing the timeliness of public health responses.
+
+In {simulist}, `sim_linelist()` outputs a line list with a date of reporting (`$date_reporting` column), which by default will be identical to the date of symptom onset (`$date_onset`). However, it is possible to parameterise a reporting delay that can be used by `sim_linelist()` to simulate a delay between symptom onset and reporting. In {simulist} we assume that the reporting delay is the delay between symptom onset and it being reported, it does not reflect reporting of hospitalisation or outcome times.
+
+
 ```{r setup}
 library(simulist)
 library(epiparameter)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(incidence2)
 ```
 
-## Truncation
-
-Right-truncation can occur to epidemiological data when the most recent events are not recorded. This leads to an underestimate of recent cases or death, and is especially relevant for ongoing outbreaks where recent cases might not have been recorded. It can also happen if cases are no longer recorded after a certain point in time. 
-
-Right-truncated outbreak data, in particular line list data, can give the impression that the incidence is decreasing ($R$ < 1), however this can be an artefact resulting from the fact the data is right-truncated, and the outbreak can be stable or growing.
-
-By default {simulist} simulates an outbreak from start to finish. Therefore, the line list or contact data contain all cases and outcomes. In order to get data that is more representative of ongoing outbreak dynamics where recent cases are not yet recorded and will be revised upwards in the future the `truncation()` function can be applied.
-
-First we simulate a simple line list using `sim_linelist()`. We load or construct the contact distribution, infectious period and delay distributions using the {epiparameter} R package.
+First we load the required delay distributions using the {epiparameter} package.
 
 ```{r, read-delay-dists}
 contact_distribution <- epiparameter(
   disease = "COVID-19",
-  epi_name = "contact distribution", 
+  epi_name = "contact distribution",
   prob_distribution = create_prob_distribution(
     prob_distribution = "pois",
     prob_distribution_params = c(mean = 2)
@@ -41,18 +50,20 @@ contact_distribution <- epiparameter(
 
 infectious_period <- epiparameter(
   disease = "COVID-19",
-  epi_name = "infectious period", 
+  epi_name = "infectious period",
   prob_distribution = create_prob_distribution(
     prob_distribution = "gamma",
-    prob_distribution_params = c(shape = 1, scale = 1)  
+    prob_distribution_params = c(shape = 3, scale = 2)
   )
 )
 
-# get onset to hospital admission from {epiparameter} database
-onset_to_hosp <- epiparameter_db(
+onset_to_hosp <- epiparameter(
   disease = "COVID-19",
   epi_name = "onset to hospitalisation",
-  single_epiparameter = TRUE
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 1, sdlog = 0.5)
+  )
 )
 
 # get onset to death from {epiparameter} database
@@ -63,13 +74,137 @@ onset_to_death <- epiparameter_db(
 )
 ```
 
-We set the seed to ensure we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
+Setting the seed ensures we have the same output each time the vignette is rendered. When using {simulist}, setting the seed is not required unless you need to simulate the same line list multiple times.
 
 ```{r, set-seed}
-set.seed(1)
+set.seed(123)
 ```
 
+Using a simple line list simulation without specifying a reporting delay will produce reporting times identical to symptom onset times:
+
+```{r sim-linelist-no-reporting-delay}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+)
+identical(linelist$date_onset, linelist$date_reporting)
+```
+
+The reporting delay can be specified as a (random) number geneating function to the `config` argument in `sim_linelist()`. The function can be defined with the name `reporting_delay` to `create_config()`.
+
+```{r config-variable-reporting-delay}
+config <- create_config(reporting_delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 1))
+```
+
+In this example we assume the reporting delays are distributed according to a lognormal distribution with parameters: `meanlog = 1` and `sdlog = 1` (or a mean of approximately 4.5 days and standard deviation of 5.9 days). 
+
+```{r sim-linelist-variable-reporting-delay}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  config = config
+)
+head(linelist)
+```
+
+Here from the first 6 rows of the line list you can see differences between the `$date_onset` column and the `$date_reporting` column. 
+
+```{r plot-linelist-events, fig.width = 8, fig.height = 5}
+tidy_linelist <- linelist %>%
+  pivot_longer(
+    cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
+  ) %>%
+  mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>%
+  mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE))
+
+ggplot(data = tidy_linelist) +
+  geom_line(
+    mapping = aes(x = value, y = case_name),
+    linewidth = 0.25
+  ) +
+  geom_point(
+    mapping = aes(
+      x = value, 
+      y = case_name, 
+      shape = name, 
+      col = name
+    ), size = 2
+  ) +
+  scale_x_date(name = "Event date", date_breaks = "week") +
+  scale_y_discrete(name = "Case name") +
+  scale_color_brewer(
+    palette = "Set1",
+    name = "Event type",
+    labels = c("Date Admission", "Date Onset", "Date Outcome", "Date Reporting")
+  ) +
+  scale_shape_manual(
+    name = "Event type",
+    labels = c("Date Admission", "Date Onset", "Date Outcome", "Date Reporting"),
+    values = c(15, 16, 17, 18)
+  ) +
+  theme_bw() +
+  theme(legend.position = "bottom", axis.text.y = element_text(size = 4))
+```
+
+If we plot the difference between the date of symptom onset and reporting then the distribution is roughly lognormally distributed.
+
+```{r plot-variable-reporting-delay, fig.width = 8, fig.height = 5}
+ggplot(data = linelist) +
+  geom_histogram(
+    mapping = aes(x = as.numeric(date_reporting - date_onset)), 
+    binwidth = 2
+  ) +
+  scale_x_continuous(
+    name = paste0(
+      "Reporting delay (", 
+      attr(linelist$date_reporting - linelist$date_onset, "units"), 
+      ")"
+    )
+  ) +
+  theme_bw() + 
+  theme(axis.title.y = element_blank())
+```
+
+If instead of a variable reporting delay you want to simulate a fixed reporting delay, for example, the date of reporting is always 5 days after the date of symptom onset, then a different function can be supplied to `create_config(reporting_delay = ...)`. One option is to set the parameter that controls the variance of the probability distribution to zero (in the case of the lognormal distribution, setting `sdlog = 0`), but a simpler and more readable option would be to give a number generating function that always returned 5. 
+
+```{r config-fixed-reporting-delay}
+config <- create_config(reporting_delay = function(x) rep(5, times = x))
+```
+
+We once again simulate to produce a line list with a fixed reporting delay.
+
+```{r sim-linelist-fixed-reporting-delay}
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  config = config
+)
+head(linelist)
+linelist$date_reporting - linelist$date_onset
+```
+
+## Truncation
+
+Right-truncation can occur to epidemiological data when the most recent events are not recorded. This leads to an underestimate of recent cases or death, and is especially relevant for ongoing outbreaks where recent cases might not have been recorded. It can also happen if cases are no longer recorded after a certain point in time. 
+
+Right-truncated outbreak data, in particular line list data, can give the impression that the incidence is decreasing ($R$ < 1), however this can be an artefact resulting from the fact the data is right-truncated, and the outbreak can be stable or growing.
+
+By default {simulist} simulates an outbreak from start to finish. Therefore, the line list or contact data contain all cases and outcomes. In order to get data that is more representative of ongoing outbreak dynamics where recent cases are not yet recorded and may be revised upwards in the future the `truncation()` function can be applied.
+
+Re-simulating a simple line list using `sim_linelist()`.
+
 ```{r, sim-linelist}
+# set seed to produce small line list
+set.seed(1)
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -84,34 +219,239 @@ head(linelist)
 
 ### Variable truncation point (default)
 
-...
+The right-truncation point for each individual (row) in the line list might not be equal, if for example there are regional differences in time taken to input data into a health information system. The `truncation()` function has a `delay` argument, which accepts a function that generates random numbers from which the _truncation point_ can be sampled.
+
+::: {.alert .alert-primary}
+Here we define the time between the latest, or user-specified date, and the time point at which data is truncated as the _truncation point_.
+
+In the plot below we show the truncation points as a cross for each case. If the cross falls before the truncation event, in this case date of reporting, then the case is removed from the linelist, if it falls after the date of reporting but before the hospital admission and/or outcome date they are set to `NA`.
+
+```{r plot-linelist-events-trunc, fig.width = 8, fig.height = 5}
+tidy_linelist <- linelist %>%
+  pivot_longer(
+    cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
+  ) %>%
+  mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>%
+  mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE))
+
+trunc_point <- data.frame(
+  case_name = linelist$case_name,
+  trunc_point = as.Date(
+    max(
+      unlist(linelist[grep(pattern = "date_", x = colnames(linelist))]),
+      na.rm = TRUE
+    ) - rlnorm(n = nrow(linelist), meanlog = 2.75, sdlog = 0.5)
+  )
+)
+
+ggplot(data = tidy_linelist) +
+  geom_line(
+    mapping = aes(x = value, y = case_name),
+    linewidth = 0.25
+  ) +
+  geom_point(
+    mapping = aes(
+      x = value, 
+      y = case_name, 
+      shape = name, 
+      col = name
+    ), 
+    size = 2
+  ) +
+  geom_point(
+    data = trunc_point,
+    mapping = aes(
+      x = trunc_point, 
+      y = case_name
+    ),
+    shape = 4
+  ) +
+  scale_x_date(name = "Event date", date_breaks = "2 week") +
+  scale_y_discrete(name = "Case name") +
+  scale_color_brewer(
+    palette = "Set1",
+    name = "Event type",
+    labels = c("Date Admission", "Date Onset", "Date Outcome", "Date Reporting")
+  ) +
+  scale_shape_manual(
+    name = "Event type",
+    labels = c("Date Admission", "Date Onset", "Date Outcome", "Date Reporting"),
+    values = c(15, 16, 17, 18)
+  ) +
+  theme_bw() +
+  theme(legend.position = "bottom", axis.text.y = element_text(size = 4))
+```
+
+In this example one case is removed (Vladmir Sanchez) and two outcome times are set to `NA` (Benito Redding and Abdul Kadar el-Diab).
+:::
+
+
+```{r truncate-ll-with-delay}
+linelist_trunc <- truncation(
+  linelist = linelist, 
+  delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 0.5)
+)
+```
+
+By default `truncation()` will assume the event which is pertinent to the truncation of the data is the date of reporting (`$date_reporting`), as this is likely the date the data was input, even if this date is before the date of hospital admission (`$date_admission`) or date of outcome (`$date_outcome`). It also assumes that the date you want to sample the truncation times from is the end of the outbreak, which is defined as the latest date in any of the date columns of the line list. 
+
+Right-truncating line list date using {simulist} removes individuals (rows) when the sampled truncation time is less recent than the truncation event time (e.g. reporting date). For cases where the rows are kept because the truncation time is more recent than the truncation event, but there are subsequent events, such as date of hospitalisation, that are more recent than the truncation time, these events dates are set to `NA`. The reasoning being that these events are assumed to have not been reported yet.
+
+### Different truncation events
+
+If the date influencing the right-truncation of line list date is not the date of reporting, but instead the date of symptom onset, date of hospitalisation, or date of outcome then this can be specified in `truncation()` by setting the `truncation_event` argument. This argument accepts `"reporting"` (default), `"onset"`, `"admission"`, `"outcome"`.
+
+```{r truncate-ll-with-truncation-event}
+linelist_trunc <- truncation(
+  linelist = linelist, 
+  delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 0.5),
+  truncation_event = "outcome"
+)
+```
 
 ### Fixed truncation point
 
 The `delay` argument in `truncation()` is flexible to allow the use of a variety of random number generators, such as different parametric probability distributions or different distribution parameters. This enables variability in the truncation. However, it may be warranted that the truncation point is the same for all cases. This could be the case if the reporting of cases during an outbreak stopped on a given date. 
 
-To adjust the line list for right-truncation using a fixed truncation point we can use the same setup of the `delay` argument but specify the variability of the distribution as zero. 
+To adjust the line list for right-truncation using a fixed truncation point we can use the same setup as specifying a fixed `reporting_delay` as outlined above. This will remove all events more recent than this time slice. 
 
 ```{r, rlnorm-zero-sd}
-delay <- function(x) rlnorm(n = x, meanlog = 2, sdlog = 0)
-```
-
-This will produce the same time point at which all the data get right truncated if more recent than. 
-
-```{r, generate-rlnorm-zero-sd}
+delay <- function(x) rep(6, times = x)
 delay(10)
 ```
-
 
 ```{r, truncate-linelist-zero-sd}
 linelist_trunc <- truncation(linelist = linelist, delay = delay)
 ```
 
-Alternatively, a function could be supplied that deterministically generates the same truncation point without using a probability distribution.
+## Truncate to emulate different stages of outbreak
 
-```{r, constant-trunc}
-delay <- function(x) rep(x = 5, times = x)
-delay(10)
-linelist_trunc <- truncation(linelist = linelist, delay = delay)
+It is not possible to simulate a line list with `sim_linelist()` that is mid-way through an outbreak[^1]. This can make it difficult to generate outbreak data sets that resemble early outbreak dynamics where incidence is increasing, or mid-outbreak, or late in an outbreak as the disease approaches extinction. These types of data sets are useful for testing outbreak analytics method that are applied in real-time outbreak scenarios. 
+
+The `truncation()` function enables converting a complete line list from `sim_linelist()` into a within-outbreak line list.
+
+We can simulate another outbreak, this time with more cases, and plot the complete line list by aggregating to daily incidence using the {incidence2} package.
+
+::: {.alert .alert-info}
+For a full overview of how to visualise outbreak data simulated with {simulist} see the [Visualising simulated data](vis-linelist.html) vignette.
+:::
+
+```{r sim-linelist-plot-incidence, fig.cap="Daily incidence of cases from symptom onset including days with zero cases.", fig.width = 8, fig.height = 5}
+# set seed to produce single wave outbreak
+set.seed(3)
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.5,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death, 
+  outbreak_size = c(500, 5000)
+)
+
+# create incidence object
+weekly_inci <- incidence(
+  x = linelist, 
+  date_index = "date_onset",
+  interval = "epiweek",
+  complete_dates = TRUE
+)
+plot(weekly_inci)
 ```
 
+By looking at the outbreak, we can pick three points to truncate: 1) early in the outbreak when the epicurve is growing (1st February 2023, epiweek ?), 2) in the middle of the outbreak (15th March 2023, epiweek ?), and 3) late in the outbreak when the number of cases is declining and the end of the outbreak is near (1st May 2023, epiweek ?).
+
+We use the `max_date` argument in `truncation()` to specify the date we want to apply the right-truncation to, i.e. the sample truncation times are applied to `max_date` and not the day the outbreak is considered over (day of last event, the default setting). For this example we will set the right-truncation delay distribution to zero so it does not remove any cases before the `max_date`, and use the default truncation event (reporting date).
+
+```{r trunc-stages, fig.width = 8, fig.height = 5, fig.show="hold", out.width="30%"}
+linelist_early <- truncation(
+  linelist = linelist, 
+  delay = function(x) rep(0, times = x),
+  max_date = "2023-02-01"
+)
+inci_early <- incidence(
+  x = linelist_early, 
+  date_index = "date_onset", 
+  interval = "epiweek",
+  complete_dates = TRUE
+)
+plot(inci_early) + 
+  ggtitle("Early") + 
+  theme(plot.title = element_text(size = 25, hjust = 0.5))
+linelist_mid <- truncation(
+  linelist = linelist, 
+  delay = function(x) rep(0, times = x),
+  max_date = "2023-03-15"
+)
+inci_mid <- incidence(
+  x = linelist_mid, 
+  date_index = "date_onset", 
+  interval = "epiweek",
+  complete_dates = TRUE
+)
+plot(inci_mid) +
+  ggtitle("Mid") + 
+  theme(plot.title = element_text(size = 25, hjust = 0.5))
+linelist_late <- truncation(
+  linelist = linelist, 
+  delay = function(x) rep(0, times = x),
+  max_date = "2023-05-01"
+)
+inci_late <- incidence(
+  x = linelist_late, 
+  date_index = "date_onset", 
+  interval = "epiweek",
+  complete_dates = TRUE
+)
+plot(inci_late) +
+  ggtitle("Late") + 
+  theme(plot.title = element_text(size = 25, hjust = 0.5))
+```
+
+Next we repeat this procedure of creating data sets for early, mid, and late in the outbreak. For this example we will use the default right-truncation delay distribution (lognormal with `meanlog = 0.58` and `sdlog = 0.47`) and default truncation event (reporting date).
+
+```{r trunc-stages-reporting-delay, fig.width = 8, fig.height = 5, fig.show="hold", out.width="30%"}
+linelist_early <- truncation(linelist = linelist, max_date = "2023-02-01")
+inci_early <- incidence(
+  x = linelist_early, 
+  date_index = "date_onset", 
+  interval = "epiweek",
+  complete_dates = TRUE
+)
+plot(inci_early) +
+  ggtitle("Early") + 
+  theme(plot.title = element_text(size = 25, hjust = 0.5))
+linelist_mid <- truncation(
+  linelist = linelist,
+  delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 0.5),
+  max_date = "2023-03-15"
+)
+inci_mid <- incidence(
+  x = linelist_mid,
+  date_index = "date_onset",
+  interval = "epiweek",
+  complete_dates = TRUE
+)
+plot(inci_mid) + 
+  ggtitle("Mid") + 
+  theme(plot.title = element_text(size = 25, hjust = 0.5))
+linelist_late <- truncation(
+  linelist = linelist, 
+  delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 0.5),
+  max_date = "2023-05-01"
+)
+inci_late <- incidence(
+  x = linelist_late, 
+  date_index = "date_onset", 
+  interval = "epiweek",
+  complete_dates = TRUE
+)
+plot(inci_late) +
+  ggtitle("Late") + 
+  theme(plot.title = element_text(size = 25, hjust = 0.5))
+```
+
+Comparing the two sets of the three plots you can see how in the latter applying right-truncation gives the impression that cases are declining.
+
+These truncated line lists can be used to test methods that estimate the real-time reproduction number such as [{EpiNow2}](https://epiforecasts.io/EpiNow2/) or [{epinowcast}](https://package.epinowcast.org/).
+
+[^1]: `sim_linelist()` simulates an outbreak to extinction exept in cases where the number of infected individuals exceeds the maximum outbreak size specified in the `outbreak_size` argument in `sim_linelist()`, which by default is `r max(eval(formals(sim_linelist)$outbreak_size))` where the line list returned is an ongoing outbreak.
