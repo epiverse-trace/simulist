@@ -5,7 +5,7 @@
 #' are within the right-truncation window to `NA` or removing cases that have
 #' occurred within a delay period. This occurs to recent cases or outcomes
 #' that are not yet recorded in the line list and will be revised upwards. See
-#' `delay_type` argument documentation for different types of truncation.
+#' `truncation_event` argument documentation for different types of truncation.
 #'
 #' @details
 #' The truncation window is sampled for each individual and is specified by a
@@ -32,21 +32,24 @@
 #' delays. Default is `NULL`, so the maximum date will be automatically
 #' calculated as the date at the end of the outbreak (i.e. date of the last
 #' outcome).
-#' @param delay_type A `character` string with which reporting the
-#' delay should apply to. Default is `"all"` whereby if a date of symptom onset
-#' (`$date_onset`) is more recent than the sampled truncation time then the
-#' individual (row) is removed from the line list. If the date of symptom onset
-#' is less recent than the sampled truncation time but either the date of
-#' hospitalisation (`$date_admission`) or date of outcome (`$date_outcome`) is
-#' more recent than the sampled truncation time then these dates are converted
-#' from `Date`s to `NA`s.
+#' @param truncation_event A `character` string with which event in the line
+#' list the right-truncation should apply to. The default is `"reporting"` for
+#' the reporting delay, which is likely the most common form of right-truncation
+#' in real-time outbreak data. When `truncation_event = "reporting"` if a date
+#' of reporting (`$date_reporting`) is more recent than the sampled truncation
+#' time then the individual (row) is removed from the line list. If the date of
+#' reporting is less recent than the sampled truncation time but either the
+#' date of hospitalisation (`$date_admission`) or date of outcome
+#' (`$date_outcome`) is more recent than the sampled truncation time then these
+#' dates are convertedfrom `Date`s to `NA`s.
 #'
-#' The other options for `delay_type` are `"onset"`, `"admission"`
-#' or `"outcome"`. If these are chosen then if the truncation point is more
+#' The other options for `truncation_event` are `"onset"`, `"admission"`
+#' or `"outcome"`.  If these are chosen then if the truncation point is more
 #' recent than the date of symptom onset, date of hospital admission, or
 #' date of outcome (death or recovery), respectively, then these individuals
 #' (rows) will be removed from the line list (i.e. the `<data.frame>` is
-#' subset).
+#' subset). If the event is less recent than the sampled truncation time then
+#' any events after the truncation point will be set to `NA`.
 #'
 #' @return A line list `<data.frame>`.
 #' @export
@@ -59,11 +62,11 @@
 #' # set maximum date to apply truncation to 2023-01-01
 #' linelist_trunc <- truncation(linelist, max_date = "2023-01-01")
 #'
-#' # apply longer truncation only to hospital admission
+#' # apply longer truncation to hospital admission
 #' linelist_trunc <- truncation(
 #'   linelist,
 #'   delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5),
-#'   delay_type = "admission"
+#'   truncation_event = "admission"
 #' )
 #'
 #' # variable right-truncation with mean 2 and sd 1 (default behaviour)
@@ -80,13 +83,14 @@
 truncation <- function(linelist,
                        delay = function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47), # nolint line_length_linter
                        max_date = NULL,
-                       delay_type = c("all", "onset", "admission", "outcome")) {
+                       truncation_event = c("reporting", "onset",
+                                            "admission", "outcome")) {
   stopifnot(
     "linelist must be a data.frame output from `sim_linelist()`" =
       is.data.frame(linelist) && ncol(linelist) == 13
   )
   .check_func_req_args(func = delay, func_name = "delay", n_req_args = 1)
-  delay_type <- match.arg(delay_type)
+  truncation_event <- match.arg(truncation_event)
   if (is.null(max_date)) {
     date_cols <- grep(pattern = "date_", x = colnames(linelist), fixed = TRUE)
     max_date <- as.Date(
@@ -97,12 +101,7 @@ truncation <- function(linelist,
   if (!inherits(max_date, "Date")) {
     max_date <- as.Date(max_date)
   }
-
-  if (delay_type == "all") {
-    col <- "date_onset"
-  } else {
-    col <- paste0("date_", delay_type)
-  }
+  col <- paste0("date_", truncation_event)
   trunc <- delay(nrow(linelist))
   # sample which onset dates are longer than reporting delay (i.e. reported)
   reported_lgl_idx <-
@@ -114,13 +113,15 @@ truncation <- function(linelist,
   # subset truncation times to remove times for individuals removed above
   trunc <- trunc[reported_lgl_idx]
 
-  if (delay_type == "all") {
-    # convert admissions or outcomes more recent than truncation time to NA
-    missing_admission_lgl_idx <- (max_date - linelist$date_admission) < trunc
-    missing_outcome_lgl_idx <- (max_date - linelist$date_outcome) < trunc
-    linelist$date_admission[missing_admission_lgl_idx] <- NA_real_
-    linelist$date_outcome[missing_outcome_lgl_idx] <- NA_real_
-  }
+  # convert events (reporting, admissions & outcomes) more recent than
+  # truncation time to NA
+  missing_outcome_lgl_idx <- (max_date - linelist$date_outcome) < trunc
+  linelist$date_outcome[missing_outcome_lgl_idx] <- NA_real_
+  missing_admission_lgl_idx <- (max_date - linelist$date_admission) < trunc
+  linelist$date_admission[missing_admission_lgl_idx] <- NA_real_
+  missing_reporting_lgl_idx <- (max_date - linelist$date_reporting) < trunc
+  linelist$date_reporting[missing_reporting_lgl_idx] <- NA_real_
+
   row.names(linelist) <- NULL
   linelist
 }
