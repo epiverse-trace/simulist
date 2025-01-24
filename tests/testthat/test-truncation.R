@@ -10,19 +10,10 @@ test_that("truncation works as expected with defaults", {
 test_that("truncation works as expected with modified delay", {
   ll_trunc <- truncation(
     ll,
-    delay = function(x) rlnorm(n = x, meanlog = 5, sdlog = 2)
+    delay = function(x) rlnorm(n = x, meanlog = 3, sdlog = 2)
   )
   # in this example dataset the df is subset
   expect_gt(nrow(ll), nrow(ll_trunc))
-  # some admissions and outcome are set to NA so prop of NAs is higher for trunc
-  expect_lt(
-    sum(is.na(ll$date_admission)) / nrow(ll),
-    sum(is.na(ll_trunc$date_admission)) / nrow(ll_trunc)
-  )
-  expect_lt(
-    sum(is.na(ll$date_outcome)) / nrow(ll),
-    sum(is.na(ll_trunc$date_outcome)) / nrow(ll_trunc)
-  )
 })
 
 test_that("truncation works as expected with max_date", {
@@ -33,9 +24,30 @@ test_that("truncation works as expected with max_date", {
 })
 
 test_that("truncation works as expected with outcome delay_type", {
-  ll_trunc <- truncation(ll, delay_type = "outcome")
+  ll_trunc <- truncation(ll, truncation_event = "outcome")
   # in this example dataset the df is subset
   expect_gt(nrow(ll), nrow(ll_trunc))
+})
+
+test_that("truncation sets dates as NA when between events", {
+  # simulate with high hospitalisation risk and long delay between onset to
+  # hospitalisation and onset to death to truncate between reporting and event
+  ll <- sim_linelist(
+    hosp_risk = 0.9,
+    onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.1),
+    onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 3, sdlog = 0.1)
+  )
+  ll_trunc <- truncation(
+    ll,
+    delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5)
+  )
+  # it is possible that the proportion of NAs in the truncated data is lower
+  # than the complete data if by chance the hospitalised cases are removed
+  # but some NAs should be introduced in truncated data in rows that are kept
+  expect_lte(
+    sum(is.na(ll$date_outcome[ll$id %in% ll_trunc$id])),
+    sum(is.na(ll_trunc$date_outcome))
+  )
 })
 
 test_that("truncation fails as expected for invalid linelist", {
@@ -61,7 +73,7 @@ test_that("truncation fails as expected for invalid max_date", {
 
 test_that("truncation fails as expected for invalid delay_type", {
   expect_error(
-    truncation(ll, delay_type = "random"),
-    regexp = "('arg' should be one of)*(all)*(onset)*(admission)*(outcome)"
+    truncation(ll, truncation_event = "random"),
+    regexp = "(should be one of)*(reporting)*(onset)*(admission)*(outcome)"
   )
 })
