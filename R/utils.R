@@ -268,3 +268,34 @@ as_function <- function(x) {
   }
   contact_infectious_period
 }
+
+#' Introduce spelling mistake in `character` string.
+#'
+#' @description
+#' `.spelling_mistake()` only introduces spelling mistakes on strings with
+#' more than one character.
+#'
+#' @details
+#' A single letter is replaced at random, it is possible the letter is replaced
+#' with the same letter not resulting in a spelling mistake.
+#'
+#' @param char A single `character` string.
+#'
+#' @return A single `character` string.
+#' @keywords internal
+#' @noRd
+.spelling_mistake <- function(char) {
+  checkmate::assert_string(char)
+  if (nchar(char) < 2) return(char)
+  chars <- strsplit(char, "")[[1]]
+  n_chars <- length(chars)
+  letter_idx <- sample(seq_len(n_chars), size = 1)
+  chars[letter_idx] <- ifelse(
+    test = letter_idx == 1,
+    yes = sample(LETTERS, 1),
+    no = sample(letters, 1)
+  )
+  char <- paste(chars, collapse = "")
+  # return character string
+  char
+}
