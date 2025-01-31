@@ -23,6 +23,7 @@ Create messy line list data
 By default \code{messy()}:
 \itemize{
 \item Makes 10\% of values missing, i.e. converts to \code{NA}.
+\item Introduces spelling mistakes in 10\% of \code{character} columns.
 }
 
 To change the defaults of \code{messy()} arguments can be supplied to \code{...}.
@@ -30,6 +31,7 @@ Accepted arguments and their defaults are:
 \itemize{
 \item \code{prop_missing = 0.1}
 \item \code{missing_value = NA}
+\item \code{prop_spelling_mistakes = 0.1}
 }
 }
 \examples{
@@ -38,4 +40,7 @@ messy_linelist <- messy(linelist)
 
 # increasing proportion of missingness to 30\% with a missing value of -99
 messy_linelist <- messy(linelist, prop_missing = 0.3, missing_value = -99)
+
+# increasing proportion of spelling mistakes to 50\%
+messy_linelist <- messy(linelist, prop_spelling_mistakes = 0.5)
 }
