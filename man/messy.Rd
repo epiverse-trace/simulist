@@ -24,6 +24,7 @@ By default \code{messy()}:
 \itemize{
 \item Makes 10\% of values missing, i.e. converts to \code{NA}.
 \item Introduces spelling mistakes in 10\% of \code{character} columns.
+\item Introduce inconsistency in the reporting of \verb{$sex}.
 }
 
 To change the defaults of \code{messy()} arguments can be supplied to \code{...}.
@@ -32,6 +33,7 @@ Accepted arguments and their defaults are:
 \item \code{prop_missing = 0.1}
 \item \code{missing_value = NA}
 \item \code{prop_spelling_mistakes = 0.1}
+\item \code{inconsistent_sex = TRUE}
 }
 }
 \examples{

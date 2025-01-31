@@ -8,6 +8,7 @@
 #'
 #' * Makes 10% of values missing, i.e. converts to `NA`.
 #' * Introduces spelling mistakes in 10% of `character` columns.
+#' * Introduce inconsistency in the reporting of `$sex`.
 #'
 #' To change the defaults of `messy()` arguments can be supplied to `...`.
 #' Accepted arguments and their defaults are:
@@ -15,6 +16,7 @@
 #' * `prop_missing = 0.1`
 #' * `missing_value = NA`
 #' * `prop_spelling_mistakes = 0.1`
+#' * `inconsistent_sex = TRUE`
 #'
 #' @return A messy line list `<data.frame>`.
 #' @export
@@ -32,7 +34,8 @@ messy <- function(linelist, ...) {
   args <- list(
     prop_missing = 0.1,
     missing_value = NA,
-    prop_spelling_mistakes = 0.1
+    prop_spelling_mistakes = 0.1,
+    inconsistent_sex = TRUE
   )
 
   # capture dynamic dots
@@ -50,6 +53,20 @@ messy <- function(linelist, ...) {
 
   # check args list after any user changes
   checkmate::assert_number(args$prop_spelling_mistakes, lower = 0, upper = 1)
+  checkmate::assert_logical(args$inconsistent_sex, any.missing = FALSE, len = 1)
+
+  if (args$inconsistent_sex) {
+    linelist$sex[linelist$sex == "m"] <- sample(
+      x = c("m", "M", "male", "Male"),
+      size = sum(linelist$sex == "m"),
+      replace = TRUE
+    )
+    linelist$sex[linelist$sex == "f"] <- sample(
+      x = c("f", "F", "female", "Female"),
+      size = sum(linelist$sex == "f"),
+      replace = TRUE
+    )
+  }
 
   if (args$prop_spelling_mistakes > 0) {
     # only apply spelling mistakes on character columns
