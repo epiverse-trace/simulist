@@ -31,3 +31,18 @@ test_that("messy works with zero spelling mistakes", {
     all(diag(utils::adist(ll$case_type, messy_ll$case_type)) == 0, na.rm = TRUE)
   )
 })
+
+test_that("messy works with inconsistent sex", {
+  messy_ll <- messy(ll)
+  expect_false(all(messy_ll$sex %in% c("m", "f", NA_character_)))
+  expect_true(all(
+    messy_ll$sex %in% c(
+      "m", "f", "M", "F", "male", "female", "Male", "Female", NA_character_
+    )
+  ))
+})
+
+test_that("messy works without inconsistent sex", {
+  messy_ll <- messy(ll, inconsistent_sex = FALSE)
+  expect_true(all(messy_ll$sex %in% c("m", "f", NA_character_)))
+})
