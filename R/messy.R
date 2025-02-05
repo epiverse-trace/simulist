@@ -17,6 +17,11 @@
 #' * `missing_value = NA`
 #' * `prop_spelling_mistakes = 0.1`
 #' * `inconsistent_sex = TRUE`
+#' * `sex_as_numeric = FALSE`
+#'
+#' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
+#' to `1`. Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`,
+#' otherwise the function will error.
 #'
 #' @return A messy line list `<data.frame>`.
 #' @export
@@ -30,12 +35,20 @@
 #'
 #' # increasing proportion of spelling mistakes to 50%
 #' messy_linelist <- messy(linelist, prop_spelling_mistakes = 0.5)
+#'
+#' # encode `$sex` as `numeric`
+#' messy_linelist <- messy(
+#'   linelist,
+#'   sex_as_numeric = TRUE,
+#'   inconsistent_sex = FALSE
+#' )
 messy <- function(linelist, ...) {
   args <- list(
     prop_missing = 0.1,
     missing_value = NA,
     prop_spelling_mistakes = 0.1,
-    inconsistent_sex = TRUE
+    inconsistent_sex = TRUE,
+    sex_as_numeric = FALSE
   )
 
   # capture dynamic dots
@@ -54,6 +67,11 @@ messy <- function(linelist, ...) {
   # check args list after any user changes
   checkmate::assert_number(args$prop_spelling_mistakes, lower = 0, upper = 1)
   checkmate::assert_logical(args$inconsistent_sex, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(args$sex_as_numeric, any.missing = FALSE, len = 1)
+  stopifnot(
+    "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`." =
+      !(args$inconsistent_sex && args$sex_as_numeric)
+  )
 
   if (args$inconsistent_sex) {
     linelist$sex[linelist$sex == "m"] <- sample(
@@ -65,6 +83,11 @@ messy <- function(linelist, ...) {
       x = c("f", "F", "female", "Female"),
       size = sum(linelist$sex == "f"),
       replace = TRUE
+    )
+  } else if (args$sex_as_numeric) {
+    # vectorised switch
+    linelist$sex <- vapply(
+      linelist$sex, switch, m = 0L, f = 1L, FUN.VALUE = numeric(1)
     )
   }
 
