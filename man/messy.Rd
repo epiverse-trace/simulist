@@ -26,6 +26,7 @@ By default \code{messy()}:
 \item Introduces spelling mistakes in 10\% of \code{character} columns.
 \item Introduce inconsistency in the reporting of \verb{$sex}.
 \item Converts \code{numeric} columns (\code{double} & \code{integer}) to \code{character}.
+\item Converts \code{Date} columns to \code{character}.
 }
 
 To change the defaults of \code{messy()} arguments can be supplied to \code{...}.
@@ -37,6 +38,7 @@ Accepted arguments and their defaults are:
 \item \code{inconsistent_sex = TRUE}
 \item \code{sex_as_numeric = FALSE}
 \item \code{numeric_as_char = TRUE}
+\item \code{date_as_char = TRUE}
 }
 
 When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female
@@ -47,7 +49,9 @@ If \code{numeric_as_char = TRUE} and \code{sex_as_numeric = TRUE} then the sex e
 as 0 or 1 is converted to \code{character}. If \code{prop_spelling_mistake} > 0 and
 \code{numeric_as_char = TRUE} the columns that are converted from \code{numeric} to
 \code{character} do not have spelling mistakes introduced, because they are
-numeric characters stored as character strings.
+numeric characters stored as character strings. If
+\code{prop_spelling_mistake} > 0 and \code{date_as_char = TRUE} spelling mistakes are
+not introduced into dates.
 }
 \examples{
 linelist <- sim_linelist()

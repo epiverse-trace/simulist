@@ -10,6 +10,7 @@
 #' * Introduces spelling mistakes in 10% of `character` columns.
 #' * Introduce inconsistency in the reporting of `$sex`.
 #' * Converts `numeric` columns (`double` & `integer`) to `character`.
+#' * Converts `Date` columns to `character`.
 #'
 #' To change the defaults of `messy()` arguments can be supplied to `...`.
 #' Accepted arguments and their defaults are:
@@ -20,6 +21,7 @@
 #' * `inconsistent_sex = TRUE`
 #' * `sex_as_numeric = FALSE`
 #' * `numeric_as_char = TRUE`
+#' * `date_as_char = TRUE`
 #'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
 #' to `1`. Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`,
@@ -29,7 +31,9 @@
 #' as 0 or 1 is converted to `character`. If `prop_spelling_mistake` > 0 and
 #' `numeric_as_char = TRUE` the columns that are converted from `numeric` to
 #' `character` do not have spelling mistakes introduced, because they are
-#' numeric characters stored as character strings.
+#' numeric characters stored as character strings. If
+#' `prop_spelling_mistake` > 0 and `date_as_char = TRUE` spelling mistakes are
+#' not introduced into dates.
 #'
 #' @return A messy line list `<data.frame>`.
 #' @export
@@ -57,7 +61,8 @@ messy <- function(linelist, ...) {
     prop_spelling_mistakes = 0.1,
     inconsistent_sex = TRUE,
     sex_as_numeric = FALSE,
-    numeric_as_char = TRUE
+    numeric_as_char = TRUE,
+    date_as_char = TRUE
   )
 
   # capture dynamic dots
@@ -78,6 +83,7 @@ messy <- function(linelist, ...) {
   checkmate::assert_logical(args$inconsistent_sex, any.missing = FALSE, len = 1)
   checkmate::assert_logical(args$sex_as_numeric, any.missing = FALSE, len = 1)
   checkmate::assert_logical(args$numeric_as_char, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(args$date_as_char, any.missing = FALSE, len = 1)
   stopifnot(
     "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`." =
       !(args$inconsistent_sex && args$sex_as_numeric)
@@ -119,6 +125,18 @@ messy <- function(linelist, ...) {
     numeric_col <- vapply(linelist, is.numeric, FUN.VALUE = logical(1))
     linelist[, numeric_col] <- vapply(
       linelist[, numeric_col],
+      as.character,
+      FUN.VALUE = character(nrow(linelist))
+    )
+  }
+
+  # call after prop_spelling_mistakes to not create mistakes to date chars
+  if (args$date_as_char) {
+    date_col <- vapply(
+      linelist, function(x) inherits(x, "Date"), FUN.VALUE = logical(1)
+    )
+    linelist[, date_col] <- vapply(
+      linelist[, date_col],
       as.character,
       FUN.VALUE = character(nrow(linelist))
     )
