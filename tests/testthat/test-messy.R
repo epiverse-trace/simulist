@@ -86,9 +86,29 @@ test_that("messy works without date_as_char", {
   expect_true(all(col_class[startsWith(names(col_class), "date_")] == "Date"))
 })
 
+test_that("messy works with inconsistent_dates", {
+  messy_ll <- messy(ll, inconsistent_dates = TRUE)
+  expect_true(all(
+    grepl(
+      pattern = paste0(
+        "^\\d{4}([-/]\\d{2}[-/]\\d{2})$|", # "%Y-%m-%d", "%Y/%m/%d"
+        "^\\d{2}([-/]\\d{2}[-/]\\d{4})$|", # "%d-%m-%Y", "%d/%m/%Y"
+        "^\\d{2} (\\w{3,9}) \\d{4}$" # "%d %B %Y", "%d %b %Y"
+      ),
+      x = messy_ll$date_onset
+    )))
+})
+
 test_that("messy errors when sex_as_numeric & inconsistent_sex are TRUE", {
   expect_error(
     messy(ll, sex_as_numeric = TRUE),
     regexp = "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`."
+  )
+})
+
+test_that("messy errors when date_as_char is FALSE & inconsistent_dates is TRUE", {
+  expect_error(
+    messy(ll, date_as_char = FALSE, inconsistent_dates = TRUE),
+    regexp = "`date_as_char` must be TRUE when `inconsistent_dates = TRUE`."
   )
 })
