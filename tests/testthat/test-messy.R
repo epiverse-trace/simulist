@@ -8,10 +8,9 @@ test_that("messy works as expected by default", {
   expect_identical(dim(ll), dim(messy_ll))
   expect_identical(colnames(ll), colnames(messy_ll))
   expect_gt(sum(is.na(messy_ll)), sum(is.na(ll)))
-  expect_false(
-    c("numeric", "integer") %in%
-      vapply(messy_ll, class, FUN.VALUE = character(1))
-  )
+  col_class <- vapply(messy_ll, class, FUN.VALUE = character(1))
+  expect_false(c("numeric", "integer") %in% col_class)
+  expect_false("Date" %in% col_class)
 })
 
 test_that("messy works with higher proportion of spelling mistakes", {
@@ -78,6 +77,13 @@ test_that("messy works with numeric_as_char & sex_as_numeric", {
       vapply(messy_ll, class, FUN.VALUE = character(1))
   )
   expect_type(messy_ll$sex, type = "character")
+})
+
+test_that("messy works without date_as_char", {
+  messy_ll <- messy(ll, date_as_char = FALSE)
+  col_class <- vapply(messy_ll, class, FUN.VALUE = character(1))
+  expect_true("Date" %in% col_class)
+  expect_true(all(col_class[startsWith(names(col_class), "date_")] == "Date"))
 })
 
 test_that("messy errors when sex_as_numeric & inconsistent_sex are TRUE", {
