@@ -22,6 +22,7 @@
 #' * `sex_as_numeric = FALSE`
 #' * `numeric_as_char = TRUE`
 #' * `date_as_char = TRUE`
+#' * `inconsistent_dates = FALSE`
 #'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
 #' to `1`. Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`,
@@ -34,6 +35,10 @@
 #' numeric characters stored as character strings. If
 #' `prop_spelling_mistake` > 0 and `date_as_char = TRUE` spelling mistakes are
 #' not introduced into dates.
+#'
+#' The `Date` columns can be converted into an inconsistent format by
+#' setting `inconsistent_dates = TRUE` and it requires `date_as_char = TRUE`,
+#' if the latter is `FALSE` the function will error.
 #'
 #' @return A messy line list `<data.frame>`.
 #' @export
@@ -54,6 +59,9 @@
 #'   sex_as_numeric = TRUE,
 #'   inconsistent_sex = FALSE
 #' )
+#'
+#' # inconsistently formatted dates
+#' messy_linelist <- messy(linelist, inconsistent_dates = TRUE)
 messy <- function(linelist, ...) {
   args <- list(
     prop_missing = 0.1,
@@ -62,7 +70,8 @@ messy <- function(linelist, ...) {
     inconsistent_sex = TRUE,
     sex_as_numeric = FALSE,
     numeric_as_char = TRUE,
-    date_as_char = TRUE
+    date_as_char = TRUE,
+    inconsistent_dates = FALSE
   )
 
   # capture dynamic dots
@@ -84,9 +93,14 @@ messy <- function(linelist, ...) {
   checkmate::assert_logical(args$sex_as_numeric, any.missing = FALSE, len = 1)
   checkmate::assert_logical(args$numeric_as_char, any.missing = FALSE, len = 1)
   checkmate::assert_logical(args$date_as_char, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(
+    args$inconsistent_dates, any.missing = FALSE, len = 1
+  )
   stopifnot(
     "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`." =
-      !(args$inconsistent_sex && args$sex_as_numeric)
+      !(args$inconsistent_sex && args$sex_as_numeric),
+    "`date_as_char` must be TRUE when `inconsistent_dates = TRUE`." =
+      !(args$inconsistent_dates && isFALSE(args$date_as_char))
   )
 
   if (args$inconsistent_sex) {
@@ -140,6 +154,19 @@ messy <- function(linelist, ...) {
       as.character,
       FUN.VALUE = character(nrow(linelist))
     )
+  }
+
+  if (args$inconsistent_dates) {
+    date_col <- startsWith(colnames(linelist), "date_")
+    date_fmt <- sample(
+      c("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y", "%d %B %Y", "%d %b %Y"),
+      size = nrow(linelist),
+      replace = TRUE
+    )
+    for (col in colnames(ll[, date_col])) {
+      # format arg is is vectorised
+      linelist[, col] <- strftime(linelist[, col], format = date_fmt)
+    }
   }
 
   # random missingness introduced across <data.frame>

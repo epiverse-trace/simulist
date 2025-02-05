@@ -39,6 +39,7 @@ Accepted arguments and their defaults are:
 \item \code{sex_as_numeric = FALSE}
 \item \code{numeric_as_char = TRUE}
 \item \code{date_as_char = TRUE}
+\item \code{inconsistent_dates = FALSE}
 }
 
 When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female
@@ -52,6 +53,10 @@ as 0 or 1 is converted to \code{character}. If \code{prop_spelling_mistake} > 0 
 numeric characters stored as character strings. If
 \code{prop_spelling_mistake} > 0 and \code{date_as_char = TRUE} spelling mistakes are
 not introduced into dates.
+
+The \code{Date} columns can be converted into an inconsistent format by
+setting \code{inconsistent_dates = TRUE} and it requires \code{date_as_char = TRUE},
+if the latter is \code{FALSE} the function will error.
 }
 \examples{
 linelist <- sim_linelist()
@@ -69,4 +74,7 @@ messy_linelist <- messy(
   sex_as_numeric = TRUE,
   inconsistent_sex = FALSE
 )
+
+# inconsistently formatted dates
+messy_linelist <- messy(linelist, inconsistent_dates = TRUE)
 }
