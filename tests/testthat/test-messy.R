@@ -46,3 +46,15 @@ test_that("messy works without inconsistent sex", {
   messy_ll <- messy(ll, inconsistent_sex = FALSE)
   expect_true(all(messy_ll$sex %in% c("m", "f", NA_character_)))
 })
+
+test_that("messy works encoding sex as numeric", {
+  messy_ll <- messy(ll, sex_as_numeric = TRUE, inconsistent_sex = FALSE)
+  expect_true(all(messy_ll$sex %in% c(0L, 1L, NA_integer_)))
+})
+
+test_that("messy errors when sex_as_numeric & inconsistent_sex are TRUE", {
+  expect_error(
+    messy(ll, sex_as_numeric = TRUE),
+    regexp = "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`."
+  )
+})
