@@ -34,7 +34,12 @@ Accepted arguments and their defaults are:
 \item \code{missing_value = NA}
 \item \code{prop_spelling_mistakes = 0.1}
 \item \code{inconsistent_sex = TRUE}
+\item \code{sex_as_numeric = FALSE}
 }
+
+When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female
+to \code{1}. Only one of \code{inconsistent_sex} or \code{sex_as_numeric} can be \code{TRUE},
+otherwise the function will error.
 }
 \examples{
 linelist <- sim_linelist()
@@ -45,4 +50,11 @@ messy_linelist <- messy(linelist, prop_missing = 0.3, missing_value = -99)
 
 # increasing proportion of spelling mistakes to 50\%
 messy_linelist <- messy(linelist, prop_spelling_mistakes = 0.5)
+
+# encode `$sex` as `numeric`
+messy_linelist <- messy(
+  linelist,
+  sex_as_numeric = TRUE,
+  inconsistent_sex = FALSE
+)
 }
