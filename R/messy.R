@@ -152,7 +152,7 @@ messy <- function(linelist, ...) {
   # call after prop_spelling_mistakes to not create mistakes to date chars
   if (args$date_as_char) {
     date_col <- vapply(
-      linelist, function(x) inherits(x, "Date"), FUN.VALUE = logical(1)
+      linelist, inherits, FUN.VALUE = logical(1), what = "Date"
     )
     linelist[, date_col] <- vapply(
       linelist[, date_col],
@@ -164,7 +164,7 @@ messy <- function(linelist, ...) {
   if (args$inconsistent_dates) {
     date_col <- startsWith(colnames(linelist), "date_")
     date_fmt <- sample(
-      c("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y", "%d %B %Y", "%d %b %Y"),
+      c("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y", "%d %B %Y", "%d %b %Y"), # nolint nonportable_path_linter
       size = nrow(linelist),
       replace = TRUE
     )
@@ -178,7 +178,10 @@ messy <- function(linelist, ...) {
   num_missing <- round(prod(dim(linelist)) * args$prop_missing)
 
   # matrix of line list dimensions to sample unique index pairs
-  ll_dim_idx <- expand.grid(row = 1:nrow(linelist), col = 1:ncol(linelist))
+  ll_dim_idx <- expand.grid(
+    row = seq_len(nrow(linelist)),
+    col = seq_len(ncol(linelist))
+  )
 
   # sample line list index pairs
   ll_idx <- ll_dim_idx[sample(nrow(ll_dim_idx), num_missing), ]

@@ -287,7 +287,7 @@ as_function <- function(x) {
 .spelling_mistake <- function(char) {
   checkmate::assert_string(char)
   if (nchar(char) < 2) return(char)
-  chars <- strsplit(char, "")[[1]]
+  chars <- strsplit(char, "", fixed = TRUE)[[1]]
   n_chars <- length(chars)
   letter_idx <- sample(seq_len(n_chars), size = 1)
   chars[letter_idx] <- ifelse(
