@@ -17,7 +17,9 @@ otherwise the function errors.}
 A messy line list \verb{<data.frame>}.
 }
 \description{
-Create messy line list data
+Take line list output from \code{\link[=sim_linelist]{sim_linelist()}} and replace elements of
+the \verb{<data.frame>} with missing values (e.g. \code{NA}), introduce spelling
+mistakes and inconsistencies, as well as coerce date types.
 }
 \details{
 By default \code{messy()}:

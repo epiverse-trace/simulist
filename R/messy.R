@@ -1,5 +1,10 @@
 #' Create messy line list data
 #'
+#' @description
+#' Take line list output from [sim_linelist()] and replace elements of
+#' the `<data.frame>` with missing values (e.g. `NA`), introduce spelling
+#' mistakes and inconsistencies, as well as coerce date types.
+#'
 #' @param linelist Line list `<data.frame>` output from [sim_linelist()].
 #' @inheritParams create_config
 #'
