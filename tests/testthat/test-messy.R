@@ -87,7 +87,8 @@ test_that("messy works without date_as_char", {
 })
 
 test_that("messy works with inconsistent_dates", {
-  messy_ll <- messy(ll, inconsistent_dates = TRUE)
+  # no missing values to match every date in regexp
+  messy_ll <- messy(ll, inconsistent_dates = TRUE, prop_missing = 0)
   expect_true(all(
     grepl(
       pattern = paste0(
