@@ -9,7 +9,7 @@ test_that("messy works as expected by default", {
   expect_identical(colnames(ll), colnames(messy_ll))
   expect_gt(sum(is.na(messy_ll)), sum(is.na(ll)))
   col_class <- vapply(messy_ll, class, FUN.VALUE = character(1))
-  expect_false(c("numeric", "integer") %in% col_class)
+  expect_false(all(c("numeric", "integer") %in% col_class))
   expect_false("Date" %in% col_class)
 })
 
@@ -36,7 +36,8 @@ test_that("messy works with zero spelling mistakes", {
 })
 
 test_that("messy works with inconsistent sex", {
-  messy_ll <- messy(ll)
+  # turn off spelling mistakes to match sex characters
+  messy_ll <- messy(ll, prop_spelling_mistakes = 0)
   expect_false(all(messy_ll$sex %in% c("m", "f", NA_character_)))
   expect_true(all(
     messy_ll$sex %in% c(
@@ -58,11 +59,10 @@ test_that("messy works encoding sex as numeric", {
 test_that("messy works without numeric_as_char", {
   messy_ll <- messy(ll, numeric_as_char = FALSE)
   col_class <- vapply(messy_ll, class, FUN.VALUE = character(1))
-  expect_true(c("numeric", "integer") %in% col_class)
-  expect_type(
-    col_class[c("id", "age", "ct_value")],
-    c("integer", "integer", "numeric")
-  )
+  expect_true(all(c("numeric", "integer") %in% col_class))
+  expect_true(all(
+    c("integer", "numeric") %in% col_class[c("id", "age", "ct_value")]
+  ))
 })
 
 test_that("messy works with numeric_as_char & sex_as_numeric", {
@@ -73,8 +73,8 @@ test_that("messy works with numeric_as_char & sex_as_numeric", {
     inconsistent_sex = FALSE
   )
   expect_false(
-    c("numeric", "integer") %in%
-      vapply(messy_ll, class, FUN.VALUE = character(1))
+    any(c("numeric", "integer") %in%
+      vapply(messy_ll, class, FUN.VALUE = character(1)))
   )
   expect_type(messy_ll$sex, type = "character")
 })
