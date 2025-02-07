@@ -50,6 +50,13 @@ test_that("truncation sets dates as NA when between events", {
   )
 })
 
+test_that("truncation prints message as expected for with numeric max_date", {
+  expect_message(
+    truncation(ll, max_date = 10),
+    regexp = "(Truncation max date is:)*(Assuming)*(origin)*('1970-01-01')"
+  )
+})
+
 test_that("truncation fails as expected for invalid linelist", {
   expect_error(
     truncation(data.frame()),
@@ -61,13 +68,6 @@ test_that("truncation fails as expected for invalid delay", {
   expect_error(
     truncation(ll, delay = function(x, y) x + y),
     regexp = "(delay supplied must have 1 argument)"
-  )
-})
-
-test_that("truncation fails as expected for invalid max_date", {
-  expect_error(
-    truncation(ll, max_date = 10),
-    regexp = "(origin)*(must be supplied)"
   )
 })
 
