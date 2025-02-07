@@ -88,16 +88,12 @@ linelist <- sim_linelist(
   infectious_period = infectious_period,
   prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death,
+  onset_to_death = onset_to_death
 )
 identical(linelist$date_onset, linelist$date_reporting)
 ```
 
-The reporting delay can be specified as a (random) number generating function to the `config` argument in `sim_linelist()`. The function can be defined with the name `reporting_delay` to `create_config()`.
-
-```{r config-variable-reporting-delay}
-config <- create_config(reporting_delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 1))
-```
+The reporting delay can be specified as a (random) number generating function to the `reporting_delay` argument in `sim_linelist()`.
 
 In this example we assume the reporting delays are distributed according to a lognormal distribution with parameters: `meanlog = 1` and `sdlog = 1` (or a mean of approximately 4.5 days and standard deviation of 5.9 days). 
 
@@ -108,7 +104,7 @@ linelist <- sim_linelist(
   prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  config = config
+  reporting_delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 1)
 )
 head(linelist)
 ```
@@ -130,9 +126,9 @@ ggplot(data = tidy_linelist) +
   ) +
   geom_point(
     mapping = aes(
-      x = value, 
-      y = case_name, 
-      shape = name, 
+      x = value,
+      y = case_name,
+      shape = name,
       col = name
     ), size = 2
   ) +
@@ -145,7 +141,9 @@ ggplot(data = tidy_linelist) +
   ) +
   scale_shape_manual(
     name = "Event type",
-    labels = c("Date Admission", "Date Onset", "Date Outcome", "Date Reporting"),
+    labels = c(
+      "Date Admission", "Date Onset", "Date Outcome", "Date Reporting"
+    ),
     values = c(15, 16, 17, 18)
   ) +
   theme_bw() +
@@ -157,25 +155,21 @@ If we plot the difference between the date of symptom onset and reporting then t
 ```{r plot-variable-reporting-delay, fig.width = 8, fig.height = 5}
 ggplot(data = linelist) +
   geom_histogram(
-    mapping = aes(x = as.numeric(date_reporting - date_onset)), 
+    mapping = aes(x = as.numeric(date_reporting - date_onset)),
     binwidth = 2
   ) +
   scale_x_continuous(
     name = paste0(
-      "Reporting delay (", 
-      attr(linelist$date_reporting - linelist$date_onset, "units"), 
+      "Reporting delay (",
+      attr(linelist$date_reporting - linelist$date_onset, "units"),
       ")"
     )
   ) +
-  theme_bw() + 
+  theme_bw() +
   theme(axis.title.y = element_blank())
 ```
 
-If instead of a variable reporting delay you want to simulate a fixed reporting delay, for example, the date of reporting is always 5 days after the date of symptom onset, then a different function can be supplied to `create_config(reporting_delay = ...)`. One option is to set the parameter that controls the variance of the probability distribution to zero (in the case of the lognormal distribution, setting `sdlog = 0`), but a simpler and more readable option would be to give a number generating function that always returned 5. 
-
-```{r config-fixed-reporting-delay}
-config <- create_config(reporting_delay = function(x) rep(5, times = x))
-```
+If instead of a variable reporting delay you want to simulate a fixed reporting delay, for example, the date of reporting is always 5 days after the date of symptom onset, then a different function can be supplied. One option is to set the parameter that controls the variance of the probability distribution to zero (in the case of the lognormal distribution, setting `sdlog = 0`), but a simpler and more readable option would be to give a number generating function that always returned 5. 
 
 We once again simulate to produce a line list with a fixed reporting delay.
 
@@ -186,7 +180,7 @@ linelist <- sim_linelist(
   prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  config = config
+  reporting_delay = function(x) rep(5, times = x)
 )
 head(linelist)
 linelist$date_reporting - linelist$date_onset
@@ -238,7 +232,9 @@ trunc_point <- data.frame(
   case_name = linelist$case_name,
   trunc_point = as.Date(
     max(
-      unlist(linelist[grep(pattern = "date_", x = colnames(linelist))]),
+      unlist(
+        linelist[grep(pattern = "date_", x = colnames(linelist), fixed = TRUE)]
+      ),
       na.rm = TRUE
     ) - rlnorm(n = nrow(linelist), meanlog = 2.75, sdlog = 0.5)
   )
@@ -251,17 +247,17 @@ ggplot(data = tidy_linelist) +
   ) +
   geom_point(
     mapping = aes(
-      x = value, 
-      y = case_name, 
-      shape = name, 
+      x = value,
+      y = case_name,
+      shape = name,
       col = name
-    ), 
+    ),
     size = 2
   ) +
   geom_point(
     data = trunc_point,
     mapping = aes(
-      x = trunc_point, 
+      x = trunc_point,
       y = case_name
     ),
     shape = 4
@@ -275,7 +271,9 @@ ggplot(data = tidy_linelist) +
   ) +
   scale_shape_manual(
     name = "Event type",
-    labels = c("Date Admission", "Date Onset", "Date Outcome", "Date Reporting"),
+    labels = c(
+      "Date Admission", "Date Onset", "Date Outcome", "Date Reporting"
+    ),
     values = c(15, 16, 17, 18)
   ) +
   theme_bw() +
@@ -288,7 +286,7 @@ In this example one case is removed (Vladmir Sanchez) and two outcome times are 
 
 ```{r truncate-ll-with-delay}
 linelist_trunc <- truncation(
-  linelist = linelist, 
+  linelist = linelist,
   delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 0.5)
 )
 ```
@@ -303,7 +301,7 @@ If the date influencing the right-truncation of line list date is not the date o
 
 ```{r truncate-ll-with-truncation-event}
 linelist_trunc <- truncation(
-  linelist = linelist, 
+  linelist = linelist,
   delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 0.5),
   truncation_event = "outcome"
 )
@@ -344,13 +342,13 @@ linelist <- sim_linelist(
   infectious_period = infectious_period,
   prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
-  onset_to_death = onset_to_death, 
+  onset_to_death = onset_to_death,
   outbreak_size = c(500, 5000)
 )
 
 # create incidence object
 weekly_inci <- incidence(
-  x = linelist, 
+  x = linelist,
   date_index = "date_onset",
   interval = "epiweek",
   complete_dates = TRUE
@@ -364,46 +362,46 @@ We use the `max_date` argument in `truncation()` to specify the date we want to 
 
 ```{r trunc-stages, fig.width = 8, fig.height = 5, fig.show="hold", out.width="30%"}
 linelist_early <- truncation(
-  linelist = linelist, 
+  linelist = linelist,
   delay = function(x) rep(0, times = x),
   max_date = "2023-02-01"
 )
 inci_early <- incidence(
-  x = linelist_early, 
-  date_index = "date_onset", 
+  x = linelist_early,
+  date_index = "date_onset",
   interval = "epiweek",
   complete_dates = TRUE
 )
-plot(inci_early) + 
-  ggtitle("Early") + 
+plot(inci_early) +
+  ggtitle("Early") +
   theme(plot.title = element_text(size = 25, hjust = 0.5))
 linelist_mid <- truncation(
-  linelist = linelist, 
+  linelist = linelist,
   delay = function(x) rep(0, times = x),
   max_date = "2023-03-15"
 )
 inci_mid <- incidence(
-  x = linelist_mid, 
-  date_index = "date_onset", 
+  x = linelist_mid,
+  date_index = "date_onset",
   interval = "epiweek",
   complete_dates = TRUE
 )
 plot(inci_mid) +
-  ggtitle("Mid") + 
+  ggtitle("Mid") +
   theme(plot.title = element_text(size = 25, hjust = 0.5))
 linelist_late <- truncation(
-  linelist = linelist, 
+  linelist = linelist,
   delay = function(x) rep(0, times = x),
   max_date = "2023-05-01"
 )
 inci_late <- incidence(
-  x = linelist_late, 
-  date_index = "date_onset", 
+  x = linelist_late,
+  date_index = "date_onset",
   interval = "epiweek",
   complete_dates = TRUE
 )
 plot(inci_late) +
-  ggtitle("Late") + 
+  ggtitle("Late") +
   theme(plot.title = element_text(size = 25, hjust = 0.5))
 ```
 
@@ -412,13 +410,13 @@ Next we repeat this procedure of creating data sets for early, mid, and late in 
 ```{r trunc-stages-reporting-delay, fig.width = 8, fig.height = 5, fig.show="hold", out.width="30%"}
 linelist_early <- truncation(linelist = linelist, max_date = "2023-02-01")
 inci_early <- incidence(
-  x = linelist_early, 
-  date_index = "date_onset", 
+  x = linelist_early,
+  date_index = "date_onset",
   interval = "epiweek",
   complete_dates = TRUE
 )
 plot(inci_early) +
-  ggtitle("Early") + 
+  ggtitle("Early") +
   theme(plot.title = element_text(size = 25, hjust = 0.5))
 linelist_mid <- truncation(
   linelist = linelist,
@@ -431,22 +429,22 @@ inci_mid <- incidence(
   interval = "epiweek",
   complete_dates = TRUE
 )
-plot(inci_mid) + 
-  ggtitle("Mid") + 
+plot(inci_mid) +
+  ggtitle("Mid") +
   theme(plot.title = element_text(size = 25, hjust = 0.5))
 linelist_late <- truncation(
-  linelist = linelist, 
+  linelist = linelist,
   delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 0.5),
   max_date = "2023-05-01"
 )
 inci_late <- incidence(
-  x = linelist_late, 
-  date_index = "date_onset", 
+  x = linelist_late,
+  date_index = "date_onset",
   interval = "epiweek",
   complete_dates = TRUE
 )
 plot(inci_late) +
-  ggtitle("Late") + 
+  ggtitle("Late") +
   theme(plot.title = element_text(size = 25, hjust = 0.5))
 ```
 
