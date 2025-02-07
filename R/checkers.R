@@ -357,3 +357,31 @@
 
   invisible(onset_to_hosp)
 }
+
+#' Check if \R object is line list from [sim_linelist()]
+#'
+#' @details
+#' This is a check that the object supplied to `linelist` is from the
+#' [sim_linelist()] or [sim_outbreak()] functions, it is not related to
+#' the class of the object, in other words, it does not check the object is
+#' of class `<linelist>`.
+#'
+#' @inheritParams truncation
+#'
+#' @return Invisibly return the `linelist` `<data.frame>`. The function is
+#' called for its side-effects, which will error if the input is invalid.
+#' @keywords internal
+.check_linelist <- function(linelist) {
+  stopifnot(
+    "linelist must be a data.frame output from `sim_linelist()`" =
+      is.data.frame(linelist) && ncol(linelist) == 13 &&
+      setequal(
+        colnames(linelist), c(
+          "id", "case_name", "case_type", "sex", "age", "date_onset",
+          "date_reporting", "date_admission", "outcome", "date_outcome",
+          "date_first_contact", "date_last_contact", "ct_value"
+        )
+      )
+  )
+  invisible(linelist)
+}
