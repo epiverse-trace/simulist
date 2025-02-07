@@ -42,6 +42,7 @@ The event date could be first contact, last contact or other."><meta property="o
     <li><a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a></li>
     <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a></li>
     <li><a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a></li>
+    <li><a class="dropdown-item" href="../articles/reporting-delays-truncation.html">Reporting delays and right-truncation of line list data</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Wrangling and plotting data</h6></li>
     <li><a class="dropdown-item" href="../articles/wrangling-linelist.html">Wrangling simulated outbreak data</a></li>
@@ -105,7 +106,9 @@ as former function is called later in the simulation).</p>
 <span></span>
 <span><span class="fu">.add_names</span><span class="op">(</span><span class="va">.data</span>, anonymise <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">.add_ct</span><span class="op">(</span><span class="va">.data</span>, distribution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"norm"</span>, <span class="st">"lnorm"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">.add_ct</span><span class="op">(</span><span class="va">.data</span>, distribution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"norm"</span>, <span class="st">"lnorm"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">.add_reporting_delay</span><span class="op">(</span><span class="va">.data</span>, <span class="va">reporting_delay</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -236,6 +239,18 @@ Ct values. See <code><a href="create_config.html">create_config()</a></code> for
 <dt id="arg-anonymise">anonymise<a class="anchor" aria-label="anchor" href="#arg-anonymise"></a></dt>
 <dd><p>A <code>logical</code> boolean for whether case names should be
 anonymised. Default is <code>FALSE</code>.</p></dd>
+
+
+<dt id="arg-reporting-delay">reporting_delay<a class="anchor" aria-label="anchor" href="#arg-reporting-delay"></a></dt>
+<dd><p>A <code>function</code> for the reporting delay distribution or
+<code>NULL</code>. The (random) number generating function creates delays between the
+time of symptom onset (<code>$date_onset</code>) and the case being reported
+(<code>$date_reporting</code>).</p>
+<p>The function can be defined or anonymous. The function must return a vector
+of <code>numeric</code>s for the length of the reporting delay. The function must have
+a single argument.</p>
+<p>The default is <code>NULL</code> so by default there is no reporting delay, and the
+<code>$date_reporting</code> line list column is identical to the <code>$date_onset</code> column.</p></dd>
 
 </dl></div>
     <div class="section level2">
