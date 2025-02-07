@@ -188,7 +188,7 @@ linelist$date_reporting - linelist$date_onset
 
 ## Truncation
 
-Right-truncation can occur to epidemiological data when the most recent events are not recorded. This leads to an underestimate of recent cases or death, and is especially relevant for ongoing outbreaks where recent cases might not have been recorded. It can also happen if cases are no longer recorded after a certain point in time. 
+Right truncation in infectious disease data occurs when only individuals who have experienced a specific event by a certain time can be included in the linelist. This leads to an underestimate of recent cases or death, and is especially relevant for ongoing outbreaks where recent cases might not have been recorded. It can also happen if cases are no longer recorded after a certain point in time. 
 
 Right-truncated outbreak data, in particular line list data, can give the impression that the incidence is decreasing ($R$ < 1), however this can be an artefact resulting from the fact the data is right-truncated, and the outbreak can be stable or growing.
 
