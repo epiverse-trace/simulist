@@ -34,7 +34,7 @@ history \verb{<data.frame>}}
 
 .add_ct(.data, distribution = c("norm", "lnorm"), ...)
 
-.add_reporting_delay(.data, config)
+.add_reporting_delay(.data, reporting_delay)
 }
 \arguments{
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
@@ -149,6 +149,18 @@ Ct values. See \code{\link[=create_config]{create_config()}} for more informatio
 
 \item{anonymise}{A \code{logical} boolean for whether case names should be
 anonymised. Default is \code{FALSE}.}
+
+\item{reporting_delay}{A \code{function} for the reporting delay distribution or
+\code{NULL}. The (random) number generating function creates delays between the
+time of symtom onset (\verb{$date_onset}) and the case being reported
+(\verb{$date_reporting}).
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the reporting delay. The function must have
+a single argument.
+
+The default is \code{NULL} so by default there is no reporting delay, and the
+\verb{$date_reporting} line list column is identical to the \verb{$date_onset} column.}
 }
 \value{
 A \verb{<data.frame>} with one more column than input into \code{.data}.

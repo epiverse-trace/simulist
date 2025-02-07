@@ -4,8 +4,8 @@
 #' around time windows around infections (time of first contact and last
 #' contact with infector), and the distribution of the Cycle threshold (Ct)
 #' value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
-#' cases, the network effect in the simulation, if there is a time-varying
-#' death risk, and if there are reporting delays.
+#' cases, the network effect in the simulation, and if there is a time-varying
+#' death risk.
 #'
 #' Accepted arguments and their defaults are:
 #' * `last_contact_distribution = "pois"`
@@ -16,7 +16,6 @@
 #' * `ct_distribution_params = c(mean = 25, sd = 2)`
 #' * `network = "adjusted"`
 #' * `time_varying_death_risk = NULL`
-#' * `reporting_delay = NULL`
 #'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
@@ -35,15 +34,6 @@
 #' density function of a distribution, e.g., Poisson or Negative binomial.
 #' Unadjusted (`network = "unadjusted"`) instead samples contacts directly from
 #' a probability distribution \eqn{p(n)}.
-#'
-#' The `reporting_delay` accepts a (random) number generating function to
-#' create delays between the time of symptom onset (`$date_onset`) and the
-#' case being reported (`$date_reporting`), e.g.
-#' `function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47)` for a
-#' lognormally reporting delay with an average of two days and one standard
-#' deviation. If `reporting_delay` is `NULL` the line list `<data.frame>` will
-#' be output with the `$date_reporting` column identical to the `$date_onset`
-#' column.
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
 #' default settings. Only if names match exactly are elements replaced,
@@ -70,8 +60,7 @@ create_config <- function(...) {
     ct_distribution = "norm",
     ct_distribution_params = c(mean = 25, sd = 2),
     network = "adjusted",
-    time_varying_death_risk = NULL,
-    reporting_delay = NULL
+    time_varying_death_risk = NULL
   )
 
   # capture dynamic dots

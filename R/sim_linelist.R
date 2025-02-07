@@ -126,6 +126,18 @@
 #' onset-to-recovery times in the line list may not resemble the distributional
 #' form input into the function.
 #'
+#' @param reporting_delay A `function` for the reporting delay distribution or
+#' `NULL`. The (random) number generating function creates delays between the
+#' time of symtom onset (`$date_onset`) and the case being reported
+#' (`$date_reporting`).
+#'
+#' The function can be defined or anonymous. The function must return a vector
+#' of `numeric`s for the length of the reporting delay. The function must have
+#' a single argument.
+#'
+#' The default is `NULL` so by default there is no reporting delay, and the
+#' `$date_reporting` line list column is identical to the `$date_onset` column.
+#'
 #' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
 #' hospitalisation risks. Default is 20% hospitalisation (`0.2`) for the entire
@@ -262,6 +274,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
                          onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
                          onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2.5, sdlog = 0.5), # nolint end line_lenght_linter
                          onset_to_recovery = NULL,
+                         reporting_delay = NULL,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,
                          non_hosp_death_risk = 0.05,
@@ -375,6 +388,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
+    reporting_delay = reporting_delay,
     hosp_risk = hosp_risk,
     hosp_death_risk = hosp_death_risk,
     non_hosp_death_risk = non_hosp_death_risk,
