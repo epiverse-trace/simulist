@@ -236,7 +236,8 @@ trunc_point <- data.frame(
         linelist[grep(pattern = "date_", x = colnames(linelist), fixed = TRUE)]
       ),
       na.rm = TRUE
-    ) - rlnorm(n = nrow(linelist), meanlog = 2.75, sdlog = 0.5)
+    ) - rlnorm(n = nrow(linelist), meanlog = 2.75, sdlog = 0.5),
+    origin = "1970-01-01"
   )
 )
 
