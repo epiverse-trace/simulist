@@ -93,7 +93,7 @@ linelist <- sim_linelist(
 identical(linelist$date_onset, linelist$date_reporting)
 ```
 
-The reporting delay can be specified as a (random) number geneating function to the `config` argument in `sim_linelist()`. The function can be defined with the name `reporting_delay` to `create_config()`.
+The reporting delay can be specified as a (random) number generating function to the `config` argument in `sim_linelist()`. The function can be defined with the name `reporting_delay` to `create_config()`.
 
 ```{r config-variable-reporting-delay}
 config <- create_config(reporting_delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 1))
