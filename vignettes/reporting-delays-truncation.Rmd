@@ -454,4 +454,4 @@ Comparing the two sets of the three plots you can see how in the latter applying
 
 These truncated line lists can be used to test methods that estimate the real-time reproduction number such as [{EpiNow2}](https://epiforecasts.io/EpiNow2/) or [{epinowcast}](https://package.epinowcast.org/).
 
-[^1]: `sim_linelist()` simulates an outbreak to extinction exept in cases where the number of infected individuals exceeds the maximum outbreak size specified in the `outbreak_size` argument in `sim_linelist()`, which by default is `r max(eval(formals(sim_linelist)$outbreak_size))` where the line list returned is an ongoing outbreak.
+[^1]: `sim_linelist()` simulates an outbreak to extinction except in cases where the number of infected individuals exceeds the maximum outbreak size specified in the `outbreak_size` argument in `sim_linelist()`, which by default is `r max(eval(formals(sim_linelist)$outbreak_size))` where the line list returned is an ongoing outbreak.
