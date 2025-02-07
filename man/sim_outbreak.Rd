@@ -134,7 +134,7 @@ form input into the function.}
 
 \item{reporting_delay}{A \code{function} for the reporting delay distribution or
 \code{NULL}. The (random) number generating function creates delays between the
-time of symtom onset (\verb{$date_onset}) and the case being reported
+time of symptom onset (\verb{$date_onset}) and the case being reported
 (\verb{$date_reporting}).
 
 The function can be defined or anonymous. The function must return a vector
