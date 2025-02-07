@@ -41,7 +41,7 @@
 #' reporting is less recent than the sampled truncation time but either the
 #' date of hospitalisation (`$date_admission`) or date of outcome
 #' (`$date_outcome`) is more recent than the sampled truncation time then these
-#' dates are convertedfrom `Date`s to `NA`s.
+#' dates are converted from `Date`s to `NA`s.
 #'
 #' The other options for `truncation_event` are `"onset"`, `"admission"`
 #' or `"outcome"`.  If these are chosen then if the truncation point is more
