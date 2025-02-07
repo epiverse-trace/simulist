@@ -18,6 +18,7 @@
                           onset_to_hosp = NULL,
                           onset_to_death = NULL,
                           onset_to_recovery = NULL,
+                          reporting_delay = NULL,
                           hosp_risk = NULL,
                           hosp_death_risk = NULL,
                           non_hosp_death_risk = NULL,
@@ -57,7 +58,7 @@
   # add delays dates
   .data$date_onset <- .data$time + outbreak_start_date
 
-  .data <- .add_reporting_delay(.data, config)
+  .data <- .add_reporting_delay(.data, reporting_delay)
 
   # add exposure date for cases
   id_time <- data.frame(infector = .data$id, infector_time = .data$time)
