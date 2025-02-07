@@ -1,14 +1,14 @@
 test_that("create_config works as expected with defaults", {
   config <- create_config()
   expect_type(config, type = "list")
-  expect_length(config, 9)
+  expect_length(config, 8)
   expect_named(
     config,
     c(
       "last_contact_distribution", "last_contact_distribution_params",
       "first_contact_distribution", "first_contact_distribution_params",
       "ct_distribution", "ct_distribution_params", "network",
-      "time_varying_death_risk", "reporting_delay"
+      "time_varying_death_risk"
     )
   )
 })
@@ -16,14 +16,14 @@ test_that("create_config works as expected with defaults", {
 test_that("create_config works as expected modifying element", {
   config <- create_config(last_contact_distribution = "geom")
   expect_type(config, type = "list")
-  expect_length(config, 9)
+  expect_length(config, 8)
   expect_named(
     config,
     c(
       "last_contact_distribution", "last_contact_distribution_params",
       "first_contact_distribution", "first_contact_distribution_params",
       "ct_distribution", "ct_distribution_params", "network",
-      "time_varying_death_risk", "reporting_delay"
+      "time_varying_death_risk"
     )
   )
   expect_identical(config$last_contact_distribution, "geom")
@@ -37,14 +37,14 @@ test_that("create_config works as expected with spliced list", {
     )
   )
   expect_type(config, type = "list")
-  expect_length(config, 9)
+  expect_length(config, 8)
   expect_named(
     config,
     c(
       "last_contact_distribution", "last_contact_distribution_params",
       "first_contact_distribution", "first_contact_distribution_params",
       "ct_distribution", "ct_distribution_params", "network",
-      "time_varying_death_risk", "reporting_delay"
+      "time_varying_death_risk"
     )
   )
   expect_identical(config$ct_distribution, "lnorm")
@@ -58,14 +58,14 @@ test_that("create_config works as expected with spliced list", {
     )
   )
   expect_type(config, type = "list")
-  expect_length(config, 9)
+  expect_length(config, 8)
   expect_named(
     config,
     c(
       "last_contact_distribution", "last_contact_distribution_params",
       "first_contact_distribution", "first_contact_distribution_params",
       "ct_distribution", "ct_distribution_params", "network",
-      "time_varying_death_risk", "reporting_delay"
+      "time_varying_death_risk"
     )
   )
   expect_identical(config$last_contact_distribution, "geom")
