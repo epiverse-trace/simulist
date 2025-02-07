@@ -96,7 +96,13 @@ truncation <- function(linelist,
     )
   }
   if (!inherits(max_date, "Date")) {
-    max_date <- as.Date(max_date)
+    # enables numeric max_date for R <4.3.0
+    # https://github.com/wch/r-source/commit/920affdc32cba1baa765fb3a647570d407dfccaa # nolint line_length_linter
+    max_date <- as.Date(max_date, origin = "1970-01-01")
+    message(
+      "Truncation max date is: ", max_date, ".",
+      "Assuming an origin of '1970-01-01' in line with R >= v4.3.0."
+    )
   }
   col <- paste0("date_", truncation_event)
   trunc <- delay(nrow(linelist))
