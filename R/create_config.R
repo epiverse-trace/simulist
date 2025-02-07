@@ -37,7 +37,7 @@
 #' a probability distribution \eqn{p(n)}.
 #'
 #' The `reporting_delay` accepts a (random) number generating function to
-#' create delays between the time of symtom onset (`$date_onset`) and the
+#' create delays between the time of symptom onset (`$date_onset`) and the
 #' case being reported (`$date_reporting`), e.g.
 #' `function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47)` for a
 #' lognormally reporting delay with an average of two days and one standard
