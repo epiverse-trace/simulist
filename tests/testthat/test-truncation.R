@@ -17,7 +17,7 @@ test_that("truncation works as expected with modified delay", {
 })
 
 test_that("truncation works as expected with max_date", {
-  ll_trunc <- truncation(ll, max_date = "2023-02-01")
+  expect_message(ll_trunc <- truncation(ll, max_date = "2023-02-01"))
   # in this example dataset the df is subset
   expect_gt(nrow(ll), nrow(ll_trunc))
   expect_true(all(ll_trunc$date_onset < as.Date("2023-02-01")))
