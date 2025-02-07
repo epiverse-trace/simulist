@@ -85,10 +85,7 @@ truncation <- function(linelist,
                        max_date = NULL,
                        truncation_event = c("reporting", "onset",
                                             "admission", "outcome")) {
-  stopifnot(
-    "linelist must be a data.frame output from `sim_linelist()`" =
-      is.data.frame(linelist) && ncol(linelist) == 13
-  )
+  .check_linelist(linelist)
   .check_func_req_args(func = delay, func_name = "delay", n_req_args = 1)
   truncation_event <- match.arg(truncation_event)
   if (is.null(max_date)) {
