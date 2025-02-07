@@ -39,7 +39,7 @@ time then the individual (row) is removed from the line list. If the date of
 reporting is less recent than the sampled truncation time but either the
 date of hospitalisation (\verb{$date_admission}) or date of outcome
 (\verb{$date_outcome}) is more recent than the sampled truncation time then these
-dates are convertedfrom \code{Date}s to \code{NA}s.
+dates are converted from \code{Date}s to \code{NA}s.
 
 The other options for \code{truncation_event} are \code{"onset"}, \code{"admission"}
 or \code{"outcome"}.  If these are chosen then if the truncation point is more
