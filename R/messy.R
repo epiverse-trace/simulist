@@ -168,7 +168,7 @@ messy <- function(linelist, ...) {
       size = nrow(linelist),
       replace = TRUE
     )
-    for (col in colnames(ll[, date_col])) {
+    for (col in colnames(linelist[, date_col])) {
       # format arg is is vectorised
       linelist[, col] <- strftime(linelist[, col], format = date_fmt)
     }
