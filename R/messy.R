@@ -94,7 +94,7 @@ messy <- function(linelist, ...) {
 
   # check arguments in dots match arg list
   stopifnot(
-    "Incorrect argument names supplied to create_config" =
+    "Incorrect argument names supplied to `messy()`" =
       all(dots_names %in% names(args))
   )
 
