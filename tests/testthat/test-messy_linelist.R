@@ -112,6 +112,13 @@ test_that("messy_linelist works without int_as_words", {
   )
 })
 
+test_that("messy_linelist errors with incorrect linelist", {
+  expect_error(
+    messy_linelist(data.frame(a = 1)),
+    regexp = "(linelist must be a data.frame output from)*(sim_linelist)"
+  )
+})
+
 test_that("messy_linelist errors sex_as_numeric & inconsistent_sex are TRUE", {
   expect_error(
     messy_linelist(ll, sex_as_numeric = TRUE),
