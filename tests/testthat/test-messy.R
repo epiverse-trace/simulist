@@ -100,6 +100,14 @@ test_that("messy works with inconsistent_dates", {
     )))
 })
 
+test_that("messy works without int_as_words", {
+  messy_ll <- messy(ll, int_as_word = FALSE, numeric_as_char = FALSE)
+  expect_identical(
+    vapply(ll, is.integer, FUN.VALUE = logical(1)),
+    vapply(messy_ll, is.integer, FUN.VALUE = logical(1))
+  )
+})
+
 test_that("messy errors when sex_as_numeric & inconsistent_sex are TRUE", {
   expect_error(
     messy(ll, sex_as_numeric = TRUE),
