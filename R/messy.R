@@ -16,6 +16,7 @@
 #' * Introduce inconsistency in the reporting of `$sex`.
 #' * Converts `numeric` columns (`double` & `integer`) to `character`.
 #' * Converts `Date` columns to `character`.
+#' * Converts `integer` columns to (English) words.
 #'
 #' To change the defaults of `messy()` arguments can be supplied to `...`.
 #' Accepted arguments and their defaults are:
@@ -28,6 +29,7 @@
 #' * `numeric_as_char = TRUE`
 #' * `date_as_char = TRUE`
 #' * `inconsistent_dates = FALSE`
+#' * `int_as_word = TRUE`
 #'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
 #' to `1`. Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`,
@@ -44,6 +46,12 @@
 #' The `Date` columns can be converted into an inconsistent format by
 #' setting `inconsistent_dates = TRUE` and it requires `date_as_char = TRUE`,
 #' if the latter is `FALSE` the function will error.
+#'
+#' If `numeric_as_char = FALSE` and `int_as_word = TRUE` then the integer
+#' columns are converted to `character` string words but the other `numeric`
+#' columns are not coerced. Spelling mistakes are not introduced into integers
+#' converted to words when `prop_spelling_mistakes` > 0 and
+#' `int_as_word = TRUE`.
 #'
 #' @return A messy line list `<data.frame>`.
 #' @export
@@ -76,7 +84,8 @@ messy <- function(linelist, ...) {
     sex_as_numeric = FALSE,
     numeric_as_char = TRUE,
     date_as_char = TRUE,
-    inconsistent_dates = FALSE
+    inconsistent_dates = FALSE,
+    int_as_word = TRUE
   )
 
   # capture dynamic dots
@@ -101,6 +110,7 @@ messy <- function(linelist, ...) {
   checkmate::assert_logical(
     args$inconsistent_dates, any.missing = FALSE, len = 1
   )
+  checkmate::assert_logical(args$int_as_word, any.missing = FALSE, len = 1)
   stopifnot(
     "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`." =
       !(args$inconsistent_sex && args$sex_as_numeric),
@@ -172,6 +182,15 @@ messy <- function(linelist, ...) {
       # format arg is is vectorised
       linelist[, col] <- strftime(linelist[, col], format = date_fmt)
     }
+  }
+
+  if (args$int_as_word) {
+    int_col <- vapply(linelist, is.integer, FUN.VALUE = logical(1))
+    linelist[, int_col] <- vapply(
+      linelist[, int_col],
+      english::words,
+      FUN.VALUE = character(nrow(linelist))
+    )
   }
 
   # random missingness introduced across <data.frame>

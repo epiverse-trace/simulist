@@ -29,6 +29,7 @@ By default \code{messy()}:
 \item Introduce inconsistency in the reporting of \verb{$sex}.
 \item Converts \code{numeric} columns (\code{double} & \code{integer}) to \code{character}.
 \item Converts \code{Date} columns to \code{character}.
+\item Converts \code{integer} columns to (English) words.
 }
 
 To change the defaults of \code{messy()} arguments can be supplied to \code{...}.
@@ -42,6 +43,7 @@ Accepted arguments and their defaults are:
 \item \code{numeric_as_char = TRUE}
 \item \code{date_as_char = TRUE}
 \item \code{inconsistent_dates = FALSE}
+\item \code{int_as_word = TRUE}
 }
 
 When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female
@@ -59,6 +61,12 @@ not introduced into dates.
 The \code{Date} columns can be converted into an inconsistent format by
 setting \code{inconsistent_dates = TRUE} and it requires \code{date_as_char = TRUE},
 if the latter is \code{FALSE} the function will error.
+
+If \code{numeric_as_char = FALSE} and \code{int_as_word = TRUE} then the integer
+columns are converted to \code{character} string words but the other \code{numeric}
+columns are not coerced. Spelling mistakes are not introduced into integers
+converted to words when \code{prop_spelling_mistakes} > 0 and
+\code{int_as_word = TRUE}.
 }
 \examples{
 linelist <- sim_linelist()
