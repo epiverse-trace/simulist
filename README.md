@@ -387,7 +387,9 @@ citation("simulist")
 :package: :left_right_arrow: :package:
 [{epicontacts}](https://www.repidemicsconsortium.org/epicontacts/) <br>
 :package: :left_right_arrow: :package:
-[{incidence2}](https://www.reconverse.org/incidence2/) <br>
+[{incidence2}](https://www.reconverse.org/incidence2/) <br> :package:
+:left_right_arrow: :package:
+[{cleanepi}](https://epiverse-trace.github.io/cleanepi/) <br>
 
 ## Related projects
 
@@ -472,6 +474,11 @@ The {outbreaks} package is useful if data from a past outbreak data or
 generic line list data is required. The {ringbp} and {epichains}
 packages can be used to generate case data over time which can then be
 converted into a line list with some manual post-processing.
+
+Another package for creating messy data is the
+[{messy}](https://CRAN.R-project.org/package=messy) package. This can be
+used, either independently or in combination with `messy_linelist()`, to
+create messy line list and contacts data.
 
 [^1]: In this context *Parameterised with epi distributions* means that
     the simulation uses epidemiological distributions (e.g. serial
