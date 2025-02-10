@@ -9,7 +9,7 @@
 #' @inheritParams create_config
 #'
 #' @details
-#' By default `messy()`:
+#' By default `messy_linelist()`:
 #'
 #' * Makes 10% of values missing, i.e. converts to `NA`.
 #' * Introduces spelling mistakes in 10% of `character` columns.
@@ -18,7 +18,9 @@
 #' * Converts `Date` columns to `character`.
 #' * Converts `integer` columns to (English) words.
 #'
-#' To change the defaults of `messy()` arguments can be supplied to `...`.
+#' To change the defaults of `messy_linelist()` arguments can be supplied
+#' to `...`.
+#'
 #' Accepted arguments and their defaults are:
 #'
 #' * `prop_missing = 0.1`
@@ -58,24 +60,28 @@
 #'
 #' @examples
 #' linelist <- sim_linelist()
-#' messy_linelist <- messy(linelist)
+#' messy_linelist <- messy_linelist(linelist)
 #'
 #' # increasing proportion of missingness to 30% with a missing value of -99
-#' messy_linelist <- messy(linelist, prop_missing = 0.3, missing_value = -99)
+#' messy_linelist <- messy_linelist(
+#'   linelist,
+#'   prop_missing = 0.3,
+#'   missing_value = -99
+#' )
 #'
 #' # increasing proportion of spelling mistakes to 50%
-#' messy_linelist <- messy(linelist, prop_spelling_mistakes = 0.5)
+#' messy_linelist <- messy_linelist(linelist, prop_spelling_mistakes = 0.5)
 #'
 #' # encode `$sex` as `numeric`
-#' messy_linelist <- messy(
+#' messy_linelist <- messy_linelist(
 #'   linelist,
 #'   sex_as_numeric = TRUE,
 #'   inconsistent_sex = FALSE
 #' )
 #'
 #' # inconsistently formatted dates
-#' messy_linelist <- messy(linelist, inconsistent_dates = TRUE)
-messy <- function(linelist, ...) {
+#' messy_linelist <- messy_linelist(linelist, inconsistent_dates = TRUE)
+messy_linelist <- function(linelist, ...) {
   args <- list(
     prop_missing = 0.1,
     missing_value = NA,
@@ -94,7 +100,7 @@ messy <- function(linelist, ...) {
 
   # check arguments in dots match arg list
   stopifnot(
-    "Incorrect argument names supplied to `messy()`" =
+    "Incorrect argument names supplied to `messy_linelist()`" =
       all(dots_names %in% names(args))
   )
 
