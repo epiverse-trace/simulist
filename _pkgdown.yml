@@ -17,6 +17,10 @@ reference:
     contents:
     - truncation
 
+  - title: Messy line list
+    contents:
+    - messy_linelist
+
   - title: Helper functions
     contents:
     - create_config
