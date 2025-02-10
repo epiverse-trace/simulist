@@ -231,7 +231,7 @@ In some cases the packages are dedicated to simulating line list and other epide
 | Explicit population size[^pop] | :x: | :white_check_mark: | :white_check_mark: | :x: | :x: | :x: |
 | R package | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
 | Actively maintained[^active] | :white_check_mark: | :x: | :x: | :x: | :x: | :white_check_mark: |
-| On CRAN | :x: | :x: | :x: | :x: | :x: |  NA |
+| On CRAN | :white_check_mark: | :x: | :x: | :x: | :x: |  NA |
 | Unit testing[^tests] | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :x: | NA |
 
 [^dist]: In this context _Parameterised with epi distributions_ means that the simulation uses epidemiological distributions (e.g. serial interval, infectious period) to parameterise the model and the parameters of these epi distributions can be modified by the user.
