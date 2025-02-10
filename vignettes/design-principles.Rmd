@@ -58,10 +58,11 @@ The aim is to restrict the number of dependencies to a minimal required set for 
 
 * {stats}
 * [{checkmate}](https://CRAN.R-project.org/package=checkmate)
+* [{english}](https://CRAN.R-project.org/package=english)
 * [{epiparameter}](https://github.com/epiverse-trace/epiparameter)
 * [{randomNames}](https://CRAN.R-project.org/package=randomNames)
 
-{stats} is distributed with the R language so is viewed as a lightweight dependency, that should already be installed on a user's machine if they have R. {checkmate} is an input checking package widely used across Epiverse-TRACE packages. {epiparameter} is used to easily access epidemiological parameters from the package's library, the package is currently unstable and actively developed, however, by using it in another package it can inform the development path of {epiparameter}. {randomNames} provides a utility function for generating random names for case and contact data. The functionality could be replicated in {simulist}, however the {randomNames} package is maintained and contains a range of name generation settings which warrants its use as a dependency.
+{stats} is distributed with the R language so is viewed as a lightweight dependency, that should already be installed on a user's machine if they have R. {checkmate} is an input checking package widely used across Epiverse-TRACE packages. {english} is a lightweight, (hard) dependency free package which used to converted integers to words. {epiparameter} is used to easily access epidemiological parameters from the package's library, the package is currently unstable and actively developed, however, by using it in another package it can inform the development path of {epiparameter}. {randomNames} provides a utility function for generating random names for case and contact data. The functionality could be replicated in {simulist}, however the {randomNames} package is maintained and contains a range of name generation settings which warrants its use as a dependency.
 
 The soft dependencies (and their minimum version requirements) are:
 
