@@ -82,6 +82,8 @@
 #' # inconsistently formatted dates
 #' messy_linelist <- messy_linelist(linelist, inconsistent_dates = TRUE)
 messy_linelist <- function(linelist, ...) {
+  .check_linelist(linelist)
+
   args <- list(
     prop_missing = 0.1,
     missing_value = NA,
