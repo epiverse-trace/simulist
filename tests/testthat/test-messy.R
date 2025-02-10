@@ -121,3 +121,10 @@ test_that("messy errors when date_as_char is FALSE & inconsistent_dates is TRUE"
     regexp = "`date_as_char` must be TRUE when `inconsistent_dates = TRUE`."
   )
 })
+
+test_that("messy errors when incorrect argument passed to dots", {
+  expect_error(
+    messy(ll, random_arg = TRUE),
+    regexp = "(Incorrect argument names supplied to)*(messy)"
+  )
+})
