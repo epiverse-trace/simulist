@@ -12,7 +12,7 @@
 #' (or probability) of hospitalisation for that age group. Should be between
 #' 0 and 1.
 #'
-#' For an age structured population, a `<data.frame>` with two columns:
+#' For an age-structured population, a `<data.frame>` with two columns:
 #' * `age_range`: a column with characters specifying the lower and upper bound
 #'  of that age group, separated by a hyphen (-). Both bounds are inclusive
 #' (integers). For example, an age group of one to ten would be given as

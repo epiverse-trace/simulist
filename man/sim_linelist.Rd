@@ -219,7 +219,7 @@ arguments. This \verb{<data.frame>} should have two columns:
 0 and 1.
 }
 
-For an age structured population, a \verb{<data.frame>} with two columns:
+For an age-structured population, a \verb{<data.frame>} with two columns:
 \itemize{
 \item \code{age_range}: a column with characters specifying the lower and upper bound
 of that age group, separated by a hyphen (-). Both bounds are inclusive

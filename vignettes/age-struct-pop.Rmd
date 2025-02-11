@@ -1,8 +1,8 @@
 ---
-title: "Age structured population"
+title: "Age-structured population"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Age structured population}
+  %\VignetteIndexEntry{Age-structured population}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -193,7 +193,7 @@ head(linelist)
 ```
 A common and useful method for plotting age data is in the form of age pyramids. Here we partition the data by sex and plot the age distribution.
 
-```{r plot-age-struct-young, fig.cap="Age pyramid for a simulated line list with an age structured population.", fig.width = 8, fig.height = 5}
+```{r plot-age-struct-young, fig.cap="Age pyramid for a simulated line list with an age-structured population.", fig.width = 8, fig.height = 5}
 linelist_m <- subset(linelist, subset = sex == "m")
 age_cats_m <- as.data.frame(table(floor(linelist_m$age / 5) * 5))
 colnames(age_cats_m) <- c("AgeCat", "Population")
@@ -218,4 +218,4 @@ ggplot(age_cats) +
 
 We have used the {ggplot2} package to construct our age pyramid, however the [{apyramid} R package from R4Epi](https://r4epi.github.io/apyramid/) can assist in making these plots; as can the [Applied Epidemiology Handbook chapter on age pyramids](https://www.epirhandbook.com/en/new_pages/age_pyramid.html). The blog post on ["Population Pyramid Plots in ggplot2"](https://www.njtierney.com/post/2022/08/09/ggplot-pyramid/) also contains useful tips on constructing pyramid plots.
 
-As shown in the two age structured examples, the number of age groups is flexible. Therefore a coarse population structure with two or three age groups can be specified, or where precise census demographic data is available, several age groups can be specified.
+As shown in the two age-structured examples, the number of age groups is flexible. Therefore a coarse population structure with two or three age groups can be specified, or where precise census demographic data is available, several age groups can be specified.
