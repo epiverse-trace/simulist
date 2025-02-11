@@ -183,7 +183,7 @@ plot(daily)
 
 ## Demographic data
 
-Please see the [Age structured population vignette](age-struct-pop.html) for examples of how to plot the distribution of ages within a line list data set, including age pyramids. 
+Please see the [Age-structured population vignette](age-struct-pop.html) for examples of how to plot the distribution of ages within a line list data set, including age pyramids. 
 
 The plotting code in vignettes is hidden by default, click the Code button with arrow to reveal the plotting code.
 
