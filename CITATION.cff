@@ -15,7 +15,7 @@ identifiers:
   value: 10.32614/CRAN.package.simulist
 abstract: Tools to simulate realistic raw case data for an epidemic in the form of
   line lists and contacts using a branching process. Simulated outbreaks are parameterised
-  with epidemiological parameters and can have age structured populations, age-stratified
+  with epidemiological parameters and can have age-structured populations, age-stratified
   hospitalisation and death risk and time-varying case fatality risk.
 authors:
 - family-names: Lambert
