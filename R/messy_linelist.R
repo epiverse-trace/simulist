@@ -148,7 +148,7 @@ messy_linelist <- function(linelist, ...) {
     # only apply spelling mistakes on character columns
     char_cols <- names(linelist)[(vapply(linelist, is.character, logical(1)))]
     linelist[char_cols] <- lapply(linelist[char_cols], function(col) {
-      misspell <- runif(length(col)) < args$prop_spelling_mistakes
+      misspell <- stats::runif(length(col)) < args$prop_spelling_mistakes
       ifelse(
         test = misspell,
         yes = vapply(col, .spelling_mistake, character(1)),
