@@ -84,6 +84,15 @@
 messy_linelist <- function(linelist, ...) {
   .check_linelist(linelist)
 
+  subclass <- character(0)
+  # if linelist is a subclass of <data.frame> unclass to <data.frame> for
+  # subsetting
+  if (is.data.frame(linelist) &
+      inherits(linelist, "data.frame", which = TRUE) > 1) {
+    subclass <- class(linelist)
+    linelist <- as.data.frame(linelist)
+  }
+
   args <- list(
     prop_missing = 0.1,
     missing_value = NA,
@@ -222,6 +231,11 @@ messy_linelist <- function(linelist, ...) {
   for (i in seq_len(num_missing)) {
     # check user-specified missing_value causing unwanted type coercion
     linelist[ll_idx[i, 1], ll_idx[i, 2]] <- args$missing_value
+  }
+
+  # restore class
+  if (length(subclass) > 0) {
+    class(linelist) <- subclass
   }
 
   # return line list
