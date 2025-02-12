@@ -28,6 +28,7 @@ Depends:
     R (>= 4.1.0)
 Imports:
     checkmate,
+    english,
     epiparameter (>= 0.4.0),
     randomNames,
     rlang,
