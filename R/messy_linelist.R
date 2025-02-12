@@ -157,13 +157,27 @@ messy_linelist <- function(linelist, ...) {
     })
   }
 
+  # call before numeric_as_char to detect integer cols
+  if (args$int_as_word) {
+    int_col <- vapply(linelist, is.integer, FUN.VALUE = logical(1))
+    linelist[, int_col] <- vapply(
+      linelist[, int_col],
+      english::words,
+      FUN.VALUE = character(nrow(linelist))
+    )
+  }
+
   # call after prop_spelling_mistakes to not create mistakes to numeric chars
   if (args$numeric_as_char) {
     numeric_col <- vapply(linelist, is.numeric, FUN.VALUE = logical(1))
-    linelist[, numeric_col] <- vapply(
-      linelist[, numeric_col],
-      as.character,
-      FUN.VALUE = character(nrow(linelist))
+    # as.data.frame to stop data.frame column inserted as matrix
+    # drop = FALSE as length of FUN.VALUE arg depends on input type
+    linelist[, numeric_col] <- as.data.frame(
+      vapply(
+        linelist[, numeric_col, drop = FALSE],
+        as.character,
+        FUN.VALUE = character(nrow(linelist))
+      )
     )
   }
 
@@ -190,15 +204,6 @@ messy_linelist <- function(linelist, ...) {
       # format arg is is vectorised
       linelist[, col] <- strftime(linelist[, col], format = date_fmt)
     }
-  }
-
-  if (args$int_as_word) {
-    int_col <- vapply(linelist, is.integer, FUN.VALUE = logical(1))
-    linelist[, int_col] <- vapply(
-      linelist[, int_col],
-      english::words,
-      FUN.VALUE = character(nrow(linelist))
-    )
   }
 
   # random missingness introduced across <data.frame>
