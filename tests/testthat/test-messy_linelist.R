@@ -61,7 +61,7 @@ test_that("messy_linelist works encoding sex as numeric", {
 })
 
 test_that("messy_linelist works without numeric_as_char", {
-  messy_ll <- messy_linelist(ll, numeric_as_char = FALSE)
+  messy_ll <- messy_linelist(ll, numeric_as_char = FALSE, int_as_word = FALSE)
   col_class <- vapply(messy_ll, class, FUN.VALUE = character(1))
   expect_true(all(c("numeric", "integer") %in% col_class))
   expect_true(all(
