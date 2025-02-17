@@ -36,16 +36,34 @@ To change the defaults of \code{messy_linelist()} arguments can be supplied
 to \code{...}.
 
 Accepted arguments and their defaults are:
-\itemize{
-\item \code{prop_missing = 0.1}
-\item \code{missing_value = NA}
-\item \code{prop_spelling_mistakes = 0.1}
-\item \code{inconsistent_sex = TRUE}
-\item \code{sex_as_numeric = FALSE}
-\item \code{numeric_as_char = TRUE}
-\item \code{date_as_char = TRUE}
-\item \code{inconsistent_dates = FALSE}
-\item \code{int_as_word = TRUE}
+
+\describe{
+\item{\code{prop_missing}}{A \code{numeric} between 0 and 1 for the proportion of
+missing values. Default is \code{0.1} (10\%).}
+\item{\code{missing_value}}{A single atomic \R object used to represent missing
+values. Default is \code{NA}.}
+\item{\code{prop_spelling_mistakes}}{A \code{numeric} between 0 and 1 used to
+specify the proportion of spelling mistakes in \code{character} columns.
+Default is \code{0.1} (10\%).}
+\item{\code{inconsistent_sex}}{A \code{logical} boolean to specify whether the
+\verb{$sex} column use \code{"m"} and \code{"f"}, or inconsistently use \code{"m"}, \code{"f"},
+\code{"M"}, \code{"F"}, \code{"male"}, \code{"female"}, \code{"Male"} or \code{"Female"}. Default
+is \code{TRUE} so sexes are sampled from the options.}
+\item{\code{sex_as_numeric}}{A \code{logical} boolean used to specify whether
+the values in the \verb{$sex} column should be encoded a binary \code{numeric}
+values (\code{0} and \code{1}). Default is \code{FALSE}. \code{sex_as_numeric} cannot be
+\code{TRUE} if \code{inconsistent_sex = TRUE}.}
+\item{\code{numeric_as_char}}{A \code{logical} boolean used to specify whether
+\code{numeric} columns should be coerced to \code{character}. Default is \code{TRUE}.}
+\item{\code{date_as_char}}{A \code{logical} boolean used to specify whether \code{Date}
+columns should be coerced to \code{character}. Default is \code{TRUE}.}
+\item{\code{inconsistent_dates}}{A \code{logical} boolean used to specify whether
+the values in \code{Date} columns are inconsistently formatted (e.g.
+\code{"\%Y-\%m-\%d"}, \code{"\%Y/\%m/\%d"}, \code{"\%d-\%m-\%Y"}, or \code{"\%d \%B \%Y"}).
+Default is \code{FALSE}.}
+\item{\code{int_as_word}}{A \code{logical} boolean used to specify whether
+\code{integer} columns should be coerced to \code{words} (see
+\code{\link[english:words]{english::words()}}). Default is \code{TRUE}.}
 }
 
 When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female

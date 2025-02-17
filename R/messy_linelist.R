@@ -23,15 +23,34 @@
 #'
 #' Accepted arguments and their defaults are:
 #'
-#' * `prop_missing = 0.1`
-#' * `missing_value = NA`
-#' * `prop_spelling_mistakes = 0.1`
-#' * `inconsistent_sex = TRUE`
-#' * `sex_as_numeric = FALSE`
-#' * `numeric_as_char = TRUE`
-#' * `date_as_char = TRUE`
-#' * `inconsistent_dates = FALSE`
-#' * `int_as_word = TRUE`
+#' \describe{
+#'   \item{`prop_missing`}{A `numeric` between 0 and 1 for the proportion of
+#'   missing values. Default is `0.1` (10%).}
+#'   \item{`missing_value`}{A single atomic \R object used to represent missing
+#'   values. Default is `NA`.}
+#'   \item{`prop_spelling_mistakes`}{A `numeric` between 0 and 1 used to
+#'   specify the proportion of spelling mistakes in `character` columns.
+#'   Default is `0.1` (10%).}
+#'   \item{`inconsistent_sex`}{A `logical` boolean to specify whether the
+#'   `$sex` column uses `"m"` and `"f"`, or inconsistently uses `"m"`, `"f"`,
+#'   `"M"`, `"F"`, `"male"`, `"female"`, `"Male"` or `"Female"`. Default
+#'   is `TRUE` so sexes are sampled from the options.}
+#'   \item{`sex_as_numeric`}{A `logical` boolean used to specify whether
+#'   the values in the `$sex` column should be encoded as `numeric`
+#'   values (`0` and `1`). Default is `FALSE`. `sex_as_numeric` cannot be
+#'   `TRUE` if `inconsistent_sex = TRUE`.}
+#'   \item{`numeric_as_char`}{A `logical` boolean used to specify whether
+#'   `numeric` columns should be coerced to `character`. Default is `TRUE`.}
+#'   \item{`date_as_char`}{A `logical` boolean used to specify whether `Date`
+#'   columns should be coerced to `character`. Default is `TRUE`.}
+#'   \item{`inconsistent_dates`}{A `logical` boolean used to specify whether
+#'   the values in `Date` columns are inconsistently formatted (e.g.
+#'   `"%Y-%m-%d"`, `"%Y/%m/%d"`, `"%d-%m-%Y"`, or `"%d %B %Y"`).
+#'   Default is `FALSE`.}
+#'   \item{`int_as_word`}{A `logical` boolean used to specify whether
+#'   `integer` columns should be coerced to `words` (see
+#'   [english::words()]). Default is `TRUE`.}
+#' }
 #'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
 #' to `1`. Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`,
