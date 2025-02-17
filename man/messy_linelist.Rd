@@ -46,11 +46,11 @@ values. Default is \code{NA}.}
 specify the proportion of spelling mistakes in \code{character} columns.
 Default is \code{0.1} (10\%).}
 \item{\code{inconsistent_sex}}{A \code{logical} boolean to specify whether the
-\verb{$sex} column use \code{"m"} and \code{"f"}, or inconsistently use \code{"m"}, \code{"f"},
+\verb{$sex} column uses \code{"m"} and \code{"f"}, or inconsistently uses \code{"m"}, \code{"f"},
 \code{"M"}, \code{"F"}, \code{"male"}, \code{"female"}, \code{"Male"} or \code{"Female"}. Default
 is \code{TRUE} so sexes are sampled from the options.}
 \item{\code{sex_as_numeric}}{A \code{logical} boolean used to specify whether
-the values in the \verb{$sex} column should be encoded a binary \code{numeric}
+the values in the \verb{$sex} column should be encoded as \code{numeric}
 values (\code{0} and \code{1}). Default is \code{FALSE}. \code{sex_as_numeric} cannot be
 \code{TRUE} if \code{inconsistent_sex = TRUE}.}
 \item{\code{numeric_as_char}}{A \code{logical} boolean used to specify whether

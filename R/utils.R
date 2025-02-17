@@ -299,3 +299,36 @@ as_function <- function(x) {
   # return character string
   char
 }
+
+#' Coerce and store `<data.frame>` subclass to `<data.frame>` and
+#' restore `<data.frame>` subclass to `<data.frame>` from attribute.
+#'
+#' @param x An \R object.
+#'
+#' @return A `<data.frame>` or subclass of `<data.frame>`.
+#' @keywords internal
+#' @name coerce-df
+NULL
+
+#' @rdname coerce-df
+.as_df <- function(x) {
+  stopifnot("Object must be a <data.frame>." = is.data.frame(x))
+  # if object is a subclass of <data.frame> store classes in attribute and
+  # unclass to <data.frame>
+  if (inherits(x, "data.frame", which = TRUE) > 1) {
+    # `.class` is not a reserved/special attribute see `?attributes`
+    attr(x, ".class") <- class(x)
+    x <- as.data.frame(x)
+  }
+  x
+}
+
+#' @rdname coerce-df
+.restore_df_subclass <- function(x) {
+  stopifnot("Object must be a <data.frame>." =  is.data.frame(x))
+  if (!is.null(attr(x, ".class"))) {
+    class(x) <- attr(x, ".class")
+    attr(x, ".class") <- NULL
+  }
+  x
+}
