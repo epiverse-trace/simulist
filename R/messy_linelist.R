@@ -87,7 +87,7 @@ messy_linelist <- function(linelist, ...) {
   subclass <- character(0)
   # if linelist is a subclass of <data.frame> unclass to <data.frame> for
   # subsetting
-  if (is.data.frame(linelist) &
+  if (is.data.frame(linelist) &&
       inherits(linelist, "data.frame", which = TRUE) > 1) {
     subclass <- class(linelist)
     linelist <- as.data.frame(linelist)
