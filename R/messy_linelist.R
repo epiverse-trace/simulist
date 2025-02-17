@@ -102,15 +102,7 @@
 #' messy_linelist <- messy_linelist(linelist, inconsistent_dates = TRUE)
 messy_linelist <- function(linelist, ...) {
   .check_linelist(linelist)
-
-  subclass <- character(0)
-  # if linelist is a subclass of <data.frame> unclass to <data.frame> for
-  # subsetting
-  if (is.data.frame(linelist) &&
-      inherits(linelist, "data.frame", which = TRUE) > 1) {
-    subclass <- class(linelist)
-    linelist <- as.data.frame(linelist)
-  }
+  linelist <- .as_df(linelist)
 
   args <- list(
     prop_missing = 0.1,
@@ -252,10 +244,7 @@ messy_linelist <- function(linelist, ...) {
     linelist[ll_idx[i, 1], ll_idx[i, 2]] <- args$missing_value
   }
 
-  # restore class
-  if (length(subclass) > 0) {
-    class(linelist) <- subclass
-  }
+  linelist <- .restore_df_subclass(linelist)
 
   # return line list
   linelist
