@@ -57,34 +57,34 @@
 #' @examples
 #' set.seed(1)
 #' linelist <- sim_linelist()
-#' linelist_trunc <- truncation(linelist)
+#' linelist_trunc <- truncate_linelist(linelist)
 #'
 #' # set maximum date to apply truncation to 2023-01-01
-#' linelist_trunc <- truncation(linelist, max_date = "2023-01-01")
+#' linelist_trunc <- truncate_linelist(linelist, max_date = "2023-01-01")
 #'
 #' # apply longer truncation to hospital admission
-#' linelist_trunc <- truncation(
+#' linelist_trunc <- truncate_linelist(
 #'   linelist,
 #'   delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5),
 #'   truncation_event = "admission"
 #' )
 #'
 #' # variable right-truncation with mean 2 and sd 1 (default behaviour)
-#' linelist_trunc <- truncation(
+#' linelist_trunc <- truncate_linelist(
 #'   linelist,
 #'   delay = function(x) rlnorm(n = x, meanlog = 0.58, sdlog = 0.47)
 #' )
 #'
 #' # fixed right-truncation of 5 days
-#' linelist_trunc <- truncation(
+#' linelist_trunc <- truncate_linelist(
 #'   linelist,
 #'   delay = function(x) rep(5, n = x)
 #' )
-truncation <- function(linelist,
-                       delay = function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47), # nolint line_length_linter
-                       max_date = NULL,
-                       truncation_event = c("reporting", "onset",
-                                            "admission", "outcome")) {
+truncate_linelist <- function(linelist,
+                              delay = function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47), # nolint line_length_linter
+                              max_date = NULL,
+                              truncation_event = c("reporting", "onset",
+                                                   "admission", "outcome")) {
   .check_linelist(linelist)
   .check_func_req_args(func = delay, func_name = "delay", n_req_args = 1)
   truncation_event <- match.arg(truncation_event)

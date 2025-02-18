@@ -15,7 +15,7 @@ reference:
 
   - title: Right-truncate line list
     contents:
-    - truncation
+    - truncate_linelist
 
   - title: Messy line list
     contents:
