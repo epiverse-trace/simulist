@@ -5,16 +5,21 @@ ll <- sim_linelist()
 test_that("messy_linelist works as expected by default", {
   messy_ll <- messy_linelist(ll)
   expect_s3_class(messy_ll, "data.frame")
-  expect_identical(dim(ll), dim(messy_ll))
+  expect_identical(nrow(ll) + 1L, nrow(messy_ll))
   expect_identical(colnames(ll), colnames(messy_ll))
   expect_gt(sum(is.na(messy_ll)), sum(is.na(ll)))
   col_class <- vapply(messy_ll, class, FUN.VALUE = character(1))
   expect_false(all(c("numeric", "integer") %in% col_class))
   expect_false("Date" %in% col_class)
+  expect_gt(anyDuplicated(messy_ll), 0)
 })
 
 test_that("messy_linelist works with higher proportion of spelling mistakes", {
-  messy_ll <- messy_linelist(ll, prop_spelling_mistakes = 1)
+  messy_ll <- messy_linelist(
+    ll,
+    prop_spelling_mistakes = 1,
+    prop_duplicate_row = 0
+  )
   # Levenshtein distance between clean and messy strings should be 1
   expect_true(
     all(diag(utils::adist(ll$case_name, messy_ll$case_name)) == 1, na.rm = TRUE)
@@ -25,7 +30,11 @@ test_that("messy_linelist works with higher proportion of spelling mistakes", {
 })
 
 test_that("messy_linelist works with zero spelling mistakes", {
-  messy_ll <- messy_linelist(ll, prop_spelling_mistakes = 0)
+  messy_ll <- messy_linelist(
+    ll,
+    prop_spelling_mistakes = 0,
+    prop_duplicate_row = 0
+  )
   # Levenshtein distance between clean and messy strings should be 0
   expect_true(
     all(diag(utils::adist(ll$case_name, messy_ll$case_name)) == 0, na.rm = TRUE)
@@ -110,6 +119,11 @@ test_that("messy_linelist works without int_as_words", {
     vapply(ll, is.integer, FUN.VALUE = logical(1)),
     vapply(messy_ll, is.integer, FUN.VALUE = logical(1))
   )
+})
+
+test_that("messy_linelist works with zero duplicate rows", {
+  messy_ll <- messy_linelist(ll, prop_duplicate_row = 0)
+  expect_identical(anyDuplicated(messy_ll), 0L)
 })
 
 test_that("messy_linelist errors with incorrect linelist", {
