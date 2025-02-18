@@ -67,7 +67,7 @@ Default is \code{FALSE}.}
 \code{\link[english:words]{english::words()}}). Default is \code{TRUE}.}
 \item{\code{prop_duplicate_row}}{A \code{numeric} between 0 and 1 for the
 proportion of rows to duplicate. Default is \code{0.01} (1\%). If
-\code{prop_duplicate_row} > 0 then it is guarenteed that at least one row will
+\code{prop_duplicate_row} > 0 then it is guaranteed that at least one row will
 be duplicated.}
 }
 

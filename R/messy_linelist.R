@@ -53,7 +53,7 @@
 #'   [english::words()]). Default is `TRUE`.}
 #'   \item{`prop_duplicate_row`}{A `numeric` between 0 and 1 for the
 #'   proportion of rows to duplicate. Default is `0.01` (1%). If
-#'   `prop_duplicate_row` > 0 then it is guarenteed that at least one row will
+#'   `prop_duplicate_row` > 0 then it is guaranteed that at least one row will
 #'   be duplicated.}
 #' }
 #'
