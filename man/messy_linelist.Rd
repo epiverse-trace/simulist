@@ -30,6 +30,7 @@ By default \code{messy_linelist()}:
 \item Converts \code{numeric} columns (\code{double} & \code{integer}) to \code{character}.
 \item Converts \code{Date} columns to \code{character}.
 \item Converts \code{integer} columns to (English) words.
+\item Duplicates 1\% of rows
 }
 
 To change the defaults of \code{messy_linelist()} arguments can be supplied
@@ -64,6 +65,10 @@ Default is \code{FALSE}.}
 \item{\code{int_as_word}}{A \code{logical} boolean used to specify whether
 \code{integer} columns should be coerced to \code{words} (see
 \code{\link[english:words]{english::words()}}). Default is \code{TRUE}.}
+\item{\code{prop_duplicate_row}}{A \code{numeric} between 0 and 1 for the
+proportion of rows to duplicate. Default is \code{0.01} (1\%). If
+\code{prop_duplicate_row} > 0 then it is guarenteed that at least one row will
+be duplicated.}
 }
 
 When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female
@@ -87,6 +92,9 @@ columns are converted to \code{character} string words but the other \code{numer
 columns are not coerced. Spelling mistakes are not introduced into integers
 converted to words when \code{prop_spelling_mistakes} > 0 and
 \code{int_as_word = TRUE}.
+
+Rows are duplicated after other \emph{messy} modifications so the duplicated row
+contains identical \emph{messy} elements.
 }
 \examples{
 linelist <- sim_linelist()
