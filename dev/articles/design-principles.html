@@ -178,6 +178,15 @@ functions that simulate have a dot (<code>.</code>) prefix
 (e.g. <code><a href="../reference/dot-sim_internal.html">.sim_internal()</a></code>). Functions that create fixed data
 structures (i.e. data factory functions) have the naming convention
 (<code>create_*()</code> or <code>.create_*()</code>).</p></li>
+<li><p>Exported post-processing functions, i.e. those that are applied
+to the output of <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, use the naming convention
+<code>*_linelist()</code>. Where the <code>*</code> placeholder is a
+verb or adjective, e.g. <code><a href="../reference/messy_linelist.html">messy_linelist()</a></code> or
+<code>truncate_linelist()</code>. This naming convention makes it clear
+that the functions operate on a line list
+<code>&lt;data.frame&gt;</code> and tries to minimise namespace
+conflicts e.g. <code>messy()</code> function from the <a href="https://cran.r-project.org/package=messy" class="external-link">{messy}</a>
+package.</p></li>
 <li><p>The use of a <code>config</code> argument in the simulation
 function is to reduce the number of arguments in the exported functions
 and provide as simple a user-interface as possible. The choice of what
@@ -249,21 +258,23 @@ are:</p>
 <ul>
 <li>{stats}</li>
 <li><a href="https://CRAN.R-project.org/package=checkmate" class="external-link">{checkmate}</a></li>
+<li><a href="https://CRAN.R-project.org/package=english" class="external-link">{english}</a></li>
 <li><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">{epiparameter}</a></li>
 <li><a href="https://CRAN.R-project.org/package=randomNames" class="external-link">{randomNames}</a></li>
 </ul>
 <p>{stats} is distributed with the R language so is viewed as a
 lightweight dependency, that should already be installed on a user’s
 machine if they have R. {checkmate} is an input checking package widely
-used across Epiverse-TRACE packages. {epiparameter} is used to easily
-access epidemiological parameters from the package’s library, the
-package is currently unstable and actively developed, however, by using
-it in another package it can inform the development path of
-{epiparameter}. {randomNames} provides a utility function for generating
-random names for case and contact data. The functionality could be
-replicated in {simulist}, however the {randomNames} package is
-maintained and contains a range of name generation settings which
-warrants its use as a dependency.</p>
+used across Epiverse-TRACE packages. {english} is a lightweight, (hard)
+dependency free package which used to converted integers to words.
+{epiparameter} is used to easily access epidemiological parameters from
+the package’s library, the package is currently unstable and actively
+developed, however, by using it in another package it can inform the
+development path of {epiparameter}. {randomNames} provides a utility
+function for generating random names for case and contact data. The
+functionality could be replicated in {simulist}, however the
+{randomNames} package is maintained and contains a range of name
+generation settings which warrants its use as a dependency.</p>
 <p>The soft dependencies (and their minimum version requirements)
 are:</p>
 <ul>
