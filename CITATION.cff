@@ -82,6 +82,22 @@ references:
   year: '2025'
   doi: 10.32614/CRAN.package.checkmate
 - type: software
+  title: english
+  abstract: 'english: Translate Integers into English'
+  notes: Imports
+  repository: https://CRAN.R-project.org/package=english
+  authors:
+  - family-names: Fox
+    given-names: John
+  - family-names: Venables
+    given-names: Bill
+  - family-names: Damico
+    given-names: Anthony
+  - family-names: Salverda
+    given-names: Anne Pier
+  year: '2025'
+  doi: 10.32614/CRAN.package.english
+- type: software
   title: epiparameter
   abstract: 'epiparameter: Classes and Helper Functions for Working with Epidemiological
     Parameters'
