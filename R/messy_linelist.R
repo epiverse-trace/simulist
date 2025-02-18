@@ -17,6 +17,7 @@
 #' * Converts `numeric` columns (`double` & `integer`) to `character`.
 #' * Converts `Date` columns to `character`.
 #' * Converts `integer` columns to (English) words.
+#' * Duplicates 1% of rows
 #'
 #' To change the defaults of `messy_linelist()` arguments can be supplied
 #' to `...`.
@@ -50,6 +51,10 @@
 #'   \item{`int_as_word`}{A `logical` boolean used to specify whether
 #'   `integer` columns should be coerced to `words` (see
 #'   [english::words()]). Default is `TRUE`.}
+#'   \item{`prop_duplicate_row`}{A `numeric` between 0 and 1 for the
+#'   proportion of rows to duplicate. Default is `0.01` (1%). If
+#'   `prop_duplicate_row` > 0 then it is guarenteed that at least one row will
+#'   be duplicated.}
 #' }
 #'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
@@ -73,6 +78,9 @@
 #' columns are not coerced. Spelling mistakes are not introduced into integers
 #' converted to words when `prop_spelling_mistakes` > 0 and
 #' `int_as_word = TRUE`.
+#'
+#' Rows are duplicated after other _messy_ modifications so the duplicated row
+#' contains identical _messy_ elements.
 #'
 #' @return A messy line list `<data.frame>`.
 #' @export
@@ -113,7 +121,8 @@ messy_linelist <- function(linelist, ...) {
     numeric_as_char = TRUE,
     date_as_char = TRUE,
     inconsistent_dates = FALSE,
-    int_as_word = TRUE
+    int_as_word = TRUE,
+    prop_duplicate_row = 0.1
   )
 
   # capture dynamic dots
@@ -139,6 +148,7 @@ messy_linelist <- function(linelist, ...) {
     args$inconsistent_dates, any.missing = FALSE, len = 1
   )
   checkmate::assert_logical(args$int_as_word, any.missing = FALSE, len = 1)
+  checkmate::assert_number(args$prop_duplicate_row, lower = 0, upper = 1)
   stopifnot(
     "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`." =
       !(args$inconsistent_sex && args$sex_as_numeric),
@@ -242,6 +252,14 @@ messy_linelist <- function(linelist, ...) {
   for (i in seq_len(num_missing)) {
     # check user-specified missing_value causing unwanted type coercion
     linelist[ll_idx[i, 1], ll_idx[i, 2]] <- args$missing_value
+  }
+
+  if (args$prop_duplicate_row > 0) {
+    n_row <- nrow(linelist)
+    row_idx <- sample(x = n_row,size = ceiling(args$prop_duplicate_row * n_row))
+    row_idx <- sort(c(seq_len(n_row), row_idx), decreasing = FALSE)
+    linelist <- linelist[row_idx, ]
+    row.names(linelist) <- NULL
   }
 
   linelist <- .restore_df_subclass(linelist)
