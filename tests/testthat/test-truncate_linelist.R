@@ -1,14 +1,14 @@
 set.seed(123)
 ll <- sim_linelist()
 
-test_that("truncation works as expected with defaults", {
-  ll_trunc <- truncation(ll)
-  # in this example dataset only the outcome col is adjusted from truncation
+test_that("truncate_linelist works as expected with defaults", {
+  ll_trunc <- truncate_linelist(ll)
+  # in this example dataset only the outcome col is adjusted from truncate_linelist
   expect_false(identical(ll$date_outcome, ll_trunc$date_outcome))
 })
 
-test_that("truncation works as expected with modified delay", {
-  ll_trunc <- truncation(
+test_that("truncate_linelist works as expected with modified delay", {
+  ll_trunc <- truncate_linelist(
     ll,
     delay = function(x) rlnorm(n = x, meanlog = 3, sdlog = 2)
   )
@@ -16,20 +16,20 @@ test_that("truncation works as expected with modified delay", {
   expect_gt(nrow(ll), nrow(ll_trunc))
 })
 
-test_that("truncation works as expected with max_date", {
-  expect_message(ll_trunc <- truncation(ll, max_date = "2023-02-01"))
+test_that("truncate_linelist works as expected with max_date", {
+  expect_message(ll_trunc <- truncate_linelist(ll, max_date = "2023-02-01"))
   # in this example dataset the df is subset
   expect_gt(nrow(ll), nrow(ll_trunc))
   expect_true(all(ll_trunc$date_onset < as.Date("2023-02-01")))
 })
 
-test_that("truncation works as expected with outcome delay_type", {
-  ll_trunc <- truncation(ll, truncation_event = "outcome")
+test_that("truncate_linelist works as expected with outcome delay_type", {
+  ll_trunc <- truncate_linelist(ll, truncation_event = "outcome")
   # in this example dataset the df is subset
   expect_gt(nrow(ll), nrow(ll_trunc))
 })
 
-test_that("truncation sets dates as NA when between events", {
+test_that("truncate_linelist sets dates as NA when between events", {
   # simulate with high hospitalisation risk and long delay between onset to
   # hospitalisation and onset to death to truncate between reporting and event
   ll <- sim_linelist(
@@ -37,7 +37,7 @@ test_that("truncation sets dates as NA when between events", {
     onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.1),
     onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 3, sdlog = 0.1)
   )
-  ll_trunc <- truncation(
+  ll_trunc <- truncate_linelist(
     ll,
     delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5)
   )
@@ -50,30 +50,30 @@ test_that("truncation sets dates as NA when between events", {
   )
 })
 
-test_that("truncation prints message as expected for with numeric max_date", {
+test_that("truncate_linelist prints message as expected for with numeric max_date", {
   expect_message(
-    truncation(ll, max_date = 10),
+    truncate_linelist(ll, max_date = 10),
     regexp = "(Truncation max date is:)*(Assuming)*(origin)*('1970-01-01')"
   )
 })
 
-test_that("truncation fails as expected for invalid linelist", {
+test_that("truncate_linelist fails as expected for invalid linelist", {
   expect_error(
-    truncation(data.frame()),
+    truncate_linelist(data.frame()),
     regexp = "(linelist must be a data.frame output from)*(sim_linelist)"
   )
 })
 
-test_that("truncation fails as expected for invalid delay", {
+test_that("truncate_linelist fails as expected for invalid delay", {
   expect_error(
-    truncation(ll, delay = function(x, y) x + y),
+    truncate_linelist(ll, delay = function(x, y) x + y),
     regexp = "(delay supplied must have 1 argument)"
   )
 })
 
-test_that("truncation fails as expected for invalid delay_type", {
+test_that("truncate_linelist fails as expected for invalid delay_type", {
   expect_error(
-    truncation(ll, truncation_event = "random"),
+    truncate_linelist(ll, truncation_event = "random"),
     regexp = "(should be one of)*(reporting)*(onset)*(admission)*(outcome)"
   )
 })
