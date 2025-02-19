@@ -240,7 +240,7 @@ not be known for confirmed cases.</p>
 
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove column by name</span></span>
-<span><span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># nolint one_call_pipe_linter</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">ct_value</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    id         case_name case_type sex age date_onset date_reporting</span></span>
 <span><span class="co">#&gt; 1   1       Rafael Diaz confirmed   m  39 2023-01-01     2023-01-01</span></span>
