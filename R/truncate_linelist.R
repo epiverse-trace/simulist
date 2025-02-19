@@ -17,7 +17,7 @@
 #' to the variability in the reporting delays. See examples for variable or
 #' fixed `delay` functions.
 #'
-#' @param linelist A `<data.frame>` output from [sim_linelist()].
+#' @inheritParams messy_linelist
 #' @param delay A `function` (either anonymous or predefined) that
 #' has a single argument and generates random numbers given a probability
 #' distribution. The function must return a vector of real numbers for

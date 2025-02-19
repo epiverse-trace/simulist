@@ -366,7 +366,7 @@
 #' the class of the object, in other words, it does not check the object is
 #' of class `<linelist>`.
 #'
-#' @inheritParams truncate_linelist
+#' @inheritParams messy_linelist
 #'
 #' @return Invisibly return the `linelist` `<data.frame>`. The function is
 #' called for its side-effects, which will error if the input is invalid.

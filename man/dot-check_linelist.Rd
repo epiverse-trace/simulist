@@ -7,7 +7,7 @@
 .check_linelist(linelist)
 }
 \arguments{
-\item{linelist}{A \verb{<data.frame>} output from \code{\link[=sim_linelist]{sim_linelist()}}.}
+\item{linelist}{Line list \verb{<data.frame>} output from \code{\link[=sim_linelist]{sim_linelist()}}.}
 }
 \value{
 Invisibly return the \code{linelist} \verb{<data.frame>}. The function is
