@@ -6,32 +6,22 @@
 #' mistakes and inconsistencies, as well as coerce date types.
 #'
 #' @param linelist Line list `<data.frame>` output from [sim_linelist()].
-#' @inheritParams create_config
-#'
-#' @details
-#' By default `messy_linelist()`:
-#'
-#' * Makes 10% of values missing, i.e. converts to `NA`.
-#' * Introduces spelling mistakes in 10% of `character` columns.
-#' * Introduce inconsistency in the reporting of `$sex`.
-#' * Converts `numeric` columns (`double` & `integer`) to `character`.
-#' * Converts `Date` columns to `character`.
-#' * Converts `integer` columns to (English) words.
-#' * Duplicates 1% of rows
-#'
-#' To change the defaults of `messy_linelist()` arguments can be supplied
-#' to `...`.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
+#' default settings. Only if names match exactly are elements replaced,
+#' otherwise the function errors.
 #'
 #' Accepted arguments and their defaults are:
 #'
 #' \describe{
 #'   \item{`prop_missing`}{A `numeric` between 0 and 1 for the proportion of
-#'   missing values. Default is `0.1` (10%).}
+#'   missing values. Default is `0.1` (10%).
+#'   }
 #'   \item{`missing_value`}{A single atomic \R object used to represent missing
 #'   values. Default is `NA`.}
 #'   \item{`prop_spelling_mistakes`}{A `numeric` between 0 and 1 used to
 #'   specify the proportion of spelling mistakes in `character` columns.
-#'   Default is `0.1` (10%).}
+#'   Default is `0.1` (10%).
+#'   }
 #'   \item{`inconsistent_sex`}{A `logical` boolean to specify whether the
 #'   `$sex` column uses `"m"` and `"f"`, or inconsistently uses `"m"`, `"f"`,
 #'   `"M"`, `"F"`, `"male"`, `"female"`, `"Male"` or `"Female"`. Default
@@ -56,6 +46,17 @@
 #'   `prop_duplicate_row` > 0 then it is guaranteed that at least one row will
 #'   be duplicated.}
 #' }
+#'
+#' @details
+#' By default `messy_linelist()`:
+#'
+#' * Makes 10% of values missing, i.e. converts to `NA`.
+#' * Introduces spelling mistakes in 10% of `character` columns.
+#' * Introduce inconsistency in the reporting of `$sex`.
+#' * Converts `numeric` columns (`double` & `integer`) to `character`.
+#' * Converts `Date` columns to `character`.
+#' * Converts `integer` columns to (English) words.
+#' * Duplicates 1% of rows
 #'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
 #' to `1`. Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`,
