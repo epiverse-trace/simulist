@@ -105,7 +105,7 @@ Not every column in the simulated line list may be required for the use case at 
 
 ```{r, rm-ct-col-tidyverse}
 # remove column by name
-linelist %>%
+linelist %>% # nolint one_call_pipe_linter
   select(!ct_value)
 ```
 

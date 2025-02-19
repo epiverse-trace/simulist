@@ -156,8 +156,7 @@ linelist <- linelist %>%
   tidyr::pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  )
-linelist <- linelist %>%
+  ) %>%
   dplyr::rename(
     date_death = died,
     date_recovery = recovered
@@ -280,7 +279,7 @@ outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case == "Y", ]
 
 ```{r, subset-linelist-tidyverse}
 library(dplyr)
-outbreak$contacts <- outbreak$contacts %>%
+outbreak$contacts <- outbreak$contacts %>% # nolint one_call_pipe_linter
   dplyr::filter(was_case == "Y")
 ```
 
