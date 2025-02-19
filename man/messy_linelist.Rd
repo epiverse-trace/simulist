@@ -11,41 +11,20 @@ messy_linelist(linelist, ...)
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named elements to replace
 default settings. Only if names match exactly are elements replaced,
-otherwise the function errors.}
-}
-\value{
-A messy line list \verb{<data.frame>}.
-}
-\description{
-Take line list output from \code{\link[=sim_linelist]{sim_linelist()}} and replace elements of
-the \verb{<data.frame>} with missing values (e.g. \code{NA}), introduce spelling
-mistakes and inconsistencies, as well as coerce date types.
-}
-\details{
-By default \code{messy_linelist()}:
-\itemize{
-\item Makes 10\% of values missing, i.e. converts to \code{NA}.
-\item Introduces spelling mistakes in 10\% of \code{character} columns.
-\item Introduce inconsistency in the reporting of \verb{$sex}.
-\item Converts \code{numeric} columns (\code{double} & \code{integer}) to \code{character}.
-\item Converts \code{Date} columns to \code{character}.
-\item Converts \code{integer} columns to (English) words.
-\item Duplicates 1\% of rows
-}
-
-To change the defaults of \code{messy_linelist()} arguments can be supplied
-to \code{...}.
+otherwise the function errors.
 
 Accepted arguments and their defaults are:
 
 \describe{
 \item{\code{prop_missing}}{A \code{numeric} between 0 and 1 for the proportion of
-missing values. Default is \code{0.1} (10\%).}
+missing values. Default is \code{0.1} (10\%).
+}
 \item{\code{missing_value}}{A single atomic \R object used to represent missing
 values. Default is \code{NA}.}
 \item{\code{prop_spelling_mistakes}}{A \code{numeric} between 0 and 1 used to
 specify the proportion of spelling mistakes in \code{character} columns.
-Default is \code{0.1} (10\%).}
+Default is \code{0.1} (10\%).
+}
 \item{\code{inconsistent_sex}}{A \code{logical} boolean to specify whether the
 \verb{$sex} column uses \code{"m"} and \code{"f"}, or inconsistently uses \code{"m"}, \code{"f"},
 \code{"M"}, \code{"F"}, \code{"male"}, \code{"female"}, \code{"Male"} or \code{"Female"}. Default
@@ -69,6 +48,26 @@ Default is \code{FALSE}.}
 proportion of rows to duplicate. Default is \code{0.01} (1\%). If
 \code{prop_duplicate_row} > 0 then it is guaranteed that at least one row will
 be duplicated.}
+}}
+}
+\value{
+A messy line list \verb{<data.frame>}.
+}
+\description{
+Take line list output from \code{\link[=sim_linelist]{sim_linelist()}} and replace elements of
+the \verb{<data.frame>} with missing values (e.g. \code{NA}), introduce spelling
+mistakes and inconsistencies, as well as coerce date types.
+}
+\details{
+By default \code{messy_linelist()}:
+\itemize{
+\item Makes 10\% of values missing, i.e. converts to \code{NA}.
+\item Introduces spelling mistakes in 10\% of \code{character} columns.
+\item Introduce inconsistency in the reporting of \verb{$sex}.
+\item Converts \code{numeric} columns (\code{double} & \code{integer}) to \code{character}.
+\item Converts \code{Date} columns to \code{character}.
+\item Converts \code{integer} columns to (English) words.
+\item Duplicates 1\% of rows
 }
 
 When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female
