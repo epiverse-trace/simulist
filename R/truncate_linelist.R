@@ -104,11 +104,11 @@ truncate_linelist <- function(linelist,
       "Assuming an origin of '1970-01-01' in line with R >= v4.3.0."
     )
   }
-  col <- paste0("date_", truncation_event)
+  col_name <- paste0("date_", truncation_event)
   trunc <- delay(nrow(linelist))
   # sample which onset dates are longer than reporting delay (i.e. reported)
   reported_lgl_idx <-
-    (max_date - linelist[[col]]) > trunc
+    (max_date - linelist[[col_name]]) > trunc
   # convert NAs to TRUE to prevent issues with subsetting with NAs
   reported_lgl_idx[is.na(reported_lgl_idx)] <- TRUE
   linelist <- linelist[reported_lgl_idx, ]
