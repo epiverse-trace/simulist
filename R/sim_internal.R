@@ -191,17 +191,16 @@
 
   if (sim_type == "contacts") {
     return(contacts_tbl)
-  } else {
-    .data <- .data[.data$infected == "infected", ]
-    .data <- .data[, linelist_cols]
-    row.names(.data) <- NULL
-
-    switch(sim_type,
-      linelist = return(.data),
-      outbreak = return(list(
-        linelist = .data,
-        contacts = contacts_tbl
-      ))
-    )
   }
+  .data <- .data[.data$infected == "infected", ]
+  .data <- .data[, linelist_cols]
+  row.names(.data) <- NULL
+
+  switch(sim_type,
+    linelist = return(.data),
+    outbreak = return(list(
+      linelist = .data,
+      contacts = contacts_tbl
+    ))
+  )
 }
