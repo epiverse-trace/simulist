@@ -112,7 +112,7 @@ messy_linelist <- function(linelist, ...) {
   .check_linelist(linelist)
   linelist <- .as_df(linelist)
 
-  args <- list(
+  .args <- list(
     prop_missing = 0.1,
     missing_value = NA,
     prop_spelling_mistakes = 0.1,
@@ -132,31 +132,31 @@ messy_linelist <- function(linelist, ...) {
   # check arguments in dots match arg list
   stopifnot(
     "Incorrect argument names supplied to `messy_linelist()`" =
-      all(dots_names %in% names(args))
+      all(dots_names %in% names(.args))
   )
 
   # replace default args if in dots
-  args <- utils::modifyList(args, dots)
+  .args <- utils::modifyList(.args, dots)
 
   # check args list after any user changes
-  checkmate::assert_number(args$prop_spelling_mistakes, lower = 0, upper = 1)
-  checkmate::assert_logical(args$inconsistent_sex, any.missing = FALSE, len = 1)
-  checkmate::assert_logical(args$sex_as_numeric, any.missing = FALSE, len = 1)
-  checkmate::assert_logical(args$numeric_as_char, any.missing = FALSE, len = 1)
-  checkmate::assert_logical(args$date_as_char, any.missing = FALSE, len = 1)
+  checkmate::assert_number(.args$prop_spelling_mistakes, lower = 0, upper = 1)
+  checkmate::assert_logical(.args$inconsistent_sex, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(.args$sex_as_numeric, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(.args$numeric_as_char, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(.args$date_as_char, any.missing = FALSE, len = 1)
   checkmate::assert_logical(
-    args$inconsistent_dates, any.missing = FALSE, len = 1
+    .args$inconsistent_dates, any.missing = FALSE, len = 1
   )
-  checkmate::assert_logical(args$int_as_word, any.missing = FALSE, len = 1)
-  checkmate::assert_number(args$prop_duplicate_row, lower = 0, upper = 1)
+  checkmate::assert_logical(.args$int_as_word, any.missing = FALSE, len = 1)
+  checkmate::assert_number(.args$prop_duplicate_row, lower = 0, upper = 1)
   stopifnot(
     "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`." =
-      !(args$inconsistent_sex && args$sex_as_numeric),
+      !(.args$inconsistent_sex && .args$sex_as_numeric),
     "`date_as_char` must be TRUE when `inconsistent_dates = TRUE`." =
-      !(args$inconsistent_dates && isFALSE(args$date_as_char))
+      !(.args$inconsistent_dates && isFALSE(.args$date_as_char))
   )
 
-  if (args$inconsistent_sex) {
+  if (.args$inconsistent_sex) {
     linelist$sex[linelist$sex == "m"] <- sample(
       x = c("m", "M", "male", "Male"),
       size = sum(linelist$sex == "m"),
@@ -167,18 +167,18 @@ messy_linelist <- function(linelist, ...) {
       size = sum(linelist$sex == "f"),
       replace = TRUE
     )
-  } else if (args$sex_as_numeric) {
+  } else if (.args$sex_as_numeric) {
     # vectorised switch
     linelist$sex <- vapply(
       linelist$sex, switch, m = 0L, f = 1L, FUN.VALUE = numeric(1)
     )
   }
 
-  if (args$prop_spelling_mistakes > 0) {
+  if (.args$prop_spelling_mistakes > 0) {
     # only apply spelling mistakes on character columns
     char_cols <- names(linelist)[(vapply(linelist, is.character, logical(1)))]
     linelist[char_cols] <- lapply(linelist[char_cols], function(col) {
-      misspell <- stats::runif(length(col)) < args$prop_spelling_mistakes
+      misspell <- stats::runif(length(col)) < .args$prop_spelling_mistakes
       ifelse(
         test = misspell,
         yes = vapply(col, .spelling_mistake, character(1)),
@@ -188,7 +188,7 @@ messy_linelist <- function(linelist, ...) {
   }
 
   # call before numeric_as_char to detect integer cols
-  if (args$int_as_word) {
+  if (.args$int_as_word) {
     int_col <- vapply(linelist, is.integer, FUN.VALUE = logical(1))
     linelist[, int_col] <- vapply(
       linelist[, int_col],
@@ -198,7 +198,7 @@ messy_linelist <- function(linelist, ...) {
   }
 
   # call after prop_spelling_mistakes to not create mistakes to numeric chars
-  if (args$numeric_as_char) {
+  if (.args$numeric_as_char) {
     numeric_col <- vapply(linelist, is.numeric, FUN.VALUE = logical(1))
     # as.data.frame to stop data.frame column inserted as matrix
     # drop = FALSE as length of FUN.VALUE arg depends on input type
@@ -212,7 +212,7 @@ messy_linelist <- function(linelist, ...) {
   }
 
   # call after prop_spelling_mistakes to not create mistakes to date chars
-  if (args$date_as_char) {
+  if (.args$date_as_char) {
     date_col <- vapply(
       linelist, inherits, FUN.VALUE = logical(1), what = "Date"
     )
@@ -223,7 +223,7 @@ messy_linelist <- function(linelist, ...) {
     )
   }
 
-  if (args$inconsistent_dates) {
+  if (.args$inconsistent_dates) {
     date_col <- startsWith(colnames(linelist), "date_")
     date_fmt <- sample(
       c("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y", "%d %B %Y", "%d %b %Y"), # nolint nonportable_path_linter
@@ -237,7 +237,7 @@ messy_linelist <- function(linelist, ...) {
   }
 
   # random missingness introduced across <data.frame>
-  num_missing <- round(prod(dim(linelist)) * args$prop_missing)
+  num_missing <- round(prod(dim(linelist)) * .args$prop_missing)
 
   # matrix of line list dimensions to sample unique index pairs
   ll_dim_idx <- expand.grid(
@@ -251,12 +251,12 @@ messy_linelist <- function(linelist, ...) {
   # set sampled index pairs to missing
   for (i in seq_len(num_missing)) {
     # check user-specified missing_value causing unwanted type coercion
-    linelist[ll_idx[i, 1], ll_idx[i, 2]] <- args$missing_value
+    linelist[ll_idx[i, 1], ll_idx[i, 2]] <- .args$missing_value
   }
 
-  if (args$prop_duplicate_row > 0) {
+  if (.args$prop_duplicate_row > 0) {
     n_row <- nrow(linelist)
-    row_idx <- sample(x = n_row,size = ceiling(args$prop_duplicate_row * n_row))
+    row_idx <- sample(x = n_row,size = ceiling(.args$prop_duplicate_row * n_row))
     row_idx <- sort(c(seq_len(n_row), row_idx), decreasing = FALSE)
     linelist <- linelist[row_idx, ]
     row.names(linelist) <- NULL

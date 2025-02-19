@@ -56,10 +56,10 @@ NULL
   }
 
   # name list elements with vec names to ensure arg matching in do.call
-  args <- c(nrow(.data), list(...))
+  .args <- c(nrow(.data), list(...))
 
   contact_delay <- tryCatch(
-    do.call(rdist, args = args),
+    do.call(rdist, args = .args),
     error = function(cnd) {
       stop(
         "Incorrect parameterisation of distribution, check config",
@@ -260,13 +260,13 @@ NULL
 
   # name list elements with vec names to ensure arg matching in do.call
   # as.list(c(...)) ensures that ... can be a list, vector or multiple args
-  args <- c(
+  .args <- c(
     n = sum(.data$case_type == "confirmed", na.rm = TRUE),
     as.list(c(...))
   )
 
   ct_value <- tryCatch(
-    do.call(rdist, args = args),
+    do.call(rdist, args = .args),
     error = function(cnd) {
       stop(
         "Incorrect parameterisation of distribution, check config",

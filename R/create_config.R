@@ -52,7 +52,7 @@
 #'   ct_distribution_params = c(meanlog = 2, sdlog = 1)
 #' )
 create_config <- function(...) {
-  args <- list(
+  .args <- list(
     last_contact_distribution = "pois",
     last_contact_distribution_params = c(lambda = 3),
     first_contact_distribution = "pois",
@@ -70,12 +70,12 @@ create_config <- function(...) {
   # check arguments in dots match arg list
   stopifnot(
     "Incorrect argument names supplied to create_config" =
-      all(dots_names %in% names(args))
+      all(dots_names %in% names(.args))
   )
 
   # replace default args if in dots
-  args <- utils::modifyList(args, dots)
+  .args <- utils::modifyList(.args, dots)
 
   # return args list
-  args
+  .args
 }
