@@ -36,14 +36,14 @@
   ancestor <- vector(mode = "integer", 1e5)
   generation <- vector(mode = "integer", 1e5)
   infected <- vector(mode = "integer", 1e5)
-  .time <- vector(mode = "double", 1e5)
+  time_vec <- vector(mode = "double", 1e5)
 
   # store initial individual
   ancestor[1] <- NA_integer_
   generation[1] <- 1L
   # 1 is infected, 0 is non-infected contact
   infected[1] <- 1L
-  .time[1] <- 0
+  time_vec[1] <- 0
 
   # initialise counters
   next_gen_size <- 1L
@@ -86,7 +86,7 @@
             ancestor <- c(ancestor, vector(mode = "integer", 1e5))
             generation <- c(generation, vector(mode = "integer", 1e5))
             infected <- c(infected, vector(mode = "integer", 1e5))
-            .time <- c(.time, vector(mode = "double", 1e5))
+            time_vec <- c(time_vec, vector(mode = "double", 1e5))
           }
 
           generation[vec_idx] <- chain_generation
@@ -111,7 +111,7 @@
             min = 0,
             max = contact_infectious_period
           )
-          .time[vec_idx] <- contact_times + .time[ancestor_idx[i]]
+          time_vec[vec_idx] <- contact_times + time_vec[ancestor_idx[i]]
         }
       }
       ancestor_idx <- setdiff(which(infected == 1), prev_ancestors)
@@ -140,7 +140,7 @@
   # if the outcome names are changed, please find and update all
   # logical expressions, e.g., x == "infected" or x == "contact"
   infected <- ifelse(test = infected, yes = "infected", no = "contact")
-  .time <- .time[seq_along(generation)]
+  time_vec <- time_vec[seq_along(generation)]
 
   # return chain as <data.frame>
   data.frame(
@@ -148,6 +148,6 @@
     ancestor = ancestor,
     generation = generation,
     infected = infected,
-    time = .time
+    time = time_vec
   )
 }
