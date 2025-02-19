@@ -12,7 +12,7 @@ truncate_linelist(
 )
 }
 \arguments{
-\item{linelist}{A \verb{<data.frame>} output from \code{\link[=sim_linelist]{sim_linelist()}}.}
+\item{linelist}{Line list \verb{<data.frame>} output from \code{\link[=sim_linelist]{sim_linelist()}}.}
 
 \item{delay}{A \code{function} (either anonymous or predefined) that
 has a single argument and generates random numbers given a probability
