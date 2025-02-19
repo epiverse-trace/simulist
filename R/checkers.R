@@ -79,7 +79,7 @@
     "Age groups should be non-overlapping" =
       anyDuplicated(age_groups) == 0,
     "Age groups should be contiguous" =
-      all(min(age_groups):max(age_groups) %in% age_groups),
+      min(age_groups):max(age_groups) %in% age_groups,
     "Age groups should include only positive integers" =
       checkmate::test_integerish(unlist(age_bounds), lower = 0)
   )
