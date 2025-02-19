@@ -289,7 +289,7 @@ as_function <- function(x) {
   if (nchar(char) < 2) return(char)
   chars <- strsplit(char, "", fixed = TRUE)[[1]]
   n_chars <- length(chars)
-  letter_idx <- sample(seq_len(n_chars), size = 1)
+  letter_idx <- sample.int(n = n_chars, size = 1)
   chars[letter_idx] <- ifelse(
     test = letter_idx == 1,
     yes = sample(LETTERS, 1),
