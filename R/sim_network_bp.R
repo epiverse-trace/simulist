@@ -55,15 +55,20 @@
 
   if (config$network == "adjusted") {
     # sample contact distribution (excess degree distribution)
-    q <- contact_distribution(0:1e4 + 1) * (0:1e4 + 1)
-    q <- q / sum(q)
+    contact_dist_prob <- contact_distribution(0:1e4 + 1) * (0:1e4 + 1)
+    contact_dist_prob <- contact_dist_prob / sum(contact_dist_prob)
   } else {
-    q <- contact_distribution(0:1e4)
+    contact_dist_prob <- contact_distribution(0:1e4)
   }
 
   # run loop until no more individuals are sampled
   while (next_gen_size > 0) {
-    contacts <- sample(0:1e4, size = next_gen_size, replace = TRUE, prob = q)
+    contacts <- sample(
+      0:1e4,
+      size = next_gen_size,
+      replace = TRUE,
+      prob = contact_dist_prob
+    )
     # add contacts if sampled
     if (sum(contacts) > 0L) {
       chain_size <- chain_size + sum(contacts)
