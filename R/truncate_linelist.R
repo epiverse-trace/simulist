@@ -1,4 +1,4 @@
-#' Adjust or subset a line list to account for right-truncation
+#' Adjust or subset a line list to account for right truncation
 #'
 #' @description
 #' Adjust or subset the line list `<data.frame>` by either changing dates that
@@ -33,8 +33,8 @@
 #' calculated as the date at the end of the outbreak (i.e. date of the last
 #' outcome).
 #' @param truncation_event A `character` string with which event in the line
-#' list the right-truncation should apply to. The default is `"reporting"` for
-#' the reporting delay, which is likely the most common form of right-truncation
+#' list the right truncation should apply to. The default is `"reporting"` for
+#' the reporting delay, which is likely the most common form of right truncation
 #' in real-time outbreak data. When `truncation_event = "reporting"` if a date
 #' of reporting (`$date_reporting`) is more recent than the sampled truncation
 #' time then the individual (row) is removed from the line list. If the date of
@@ -69,13 +69,13 @@
 #'   truncation_event = "admission"
 #' )
 #'
-#' # variable right-truncation with mean 2 and sd 1 (default behaviour)
+#' # variable right truncation with mean 2 and sd 1 (default behaviour)
 #' linelist_trunc <- truncate_linelist(
 #'   linelist,
 #'   delay = function(x) rlnorm(n = x, meanlog = 0.58, sdlog = 0.47)
 #' )
 #'
-#' # fixed right-truncation of 5 days
+#' # fixed right truncation of 5 days
 #' linelist_trunc <- truncate_linelist(
 #'   linelist,
 #'   delay = function(x) rep(5, n = x)

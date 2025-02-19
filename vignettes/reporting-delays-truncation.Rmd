@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 If you are unfamiliar with the {simulist} package or the `sim_linelist()` function [Get Started vignette](simulist.html) is a great place to start.
 :::
 
-This vignette covers reporting delays in line list data, how to use {simulist} to produce line list data with a delay between symptom onset and reporting, explains right-truncation in outbreak data sets and shows how to use the `truncate_linelist()` function in {simulist} to augment a simulated line list to resemble real-time outbreak data.
+This vignette covers reporting delays in line list data, how to use {simulist} to produce line list data with a delay between symptom onset and reporting, explains right truncation in outbreak data sets and shows how to use the `truncate_linelist()` function in {simulist} to augment a simulated line list to resemble real-time outbreak data.
 
 ## Reporting delays
 
@@ -312,7 +312,7 @@ linelist_trunc <- truncate_linelist(
 
 The `delay` argument in `truncate_linelist()` is flexible to allow the use of a variety of random number generators, such as different parametric probability distributions or different distribution parameters. This enables variability in the truncation. However, it may be warranted that the truncation point is the same for all cases. This could be the case if the reporting of cases during an outbreak stopped on a given date. 
 
-To adjust the line list for right-truncation using a fixed truncation point we can use the same setup as specifying a fixed `reporting_delay` as outlined above. This will remove all events more recent than this time slice. 
+To adjust the line list for right truncation using a fixed truncation point we can use the same setup as specifying a fixed `reporting_delay` as outlined above. This will remove all events more recent than this time slice. 
 
 ```{r, rlnorm-zero-sd}
 delay <- function(x) rep(6, times = x)
@@ -359,7 +359,7 @@ plot(weekly_inci)
 
 By looking at the outbreak, we can pick three points to truncate: 1) early in the outbreak when the epicurve is growing (1st February 2023, epiweek 5), 2) in the middle of the outbreak (15th March 2023, epiweek 11), and 3) late in the outbreak when the number of cases is declining and the end of the outbreak is near (1st May 2023, epiweek 18).
 
-We use the `max_date` argument in `truncate_linelist()` to specify the date we want to apply the right-truncation to, i.e. the sample truncation times are applied to `max_date` and not the day the outbreak is considered over (day of last event, the default setting). For this example we will set the right-truncation delay distribution to zero so it does not remove any cases before the `max_date`, and use the default truncation event (reporting date).
+We use the `max_date` argument in `truncate_linelist()` to specify the date we want to apply the right truncation to, i.e. the sample truncation times are applied to `max_date` and not the day the outbreak is considered over (day of last event, the default setting). For this example we will set the right-truncation delay distribution to zero so it does not remove any cases before the `max_date`, and use the default truncation event (reporting date).
 
 ```{r trunc-stages, fig.width = 8, fig.height = 5, fig.show="hold", out.width="30%"}
 linelist_early <- truncate_linelist(
@@ -449,7 +449,7 @@ plot(inci_late) +
   theme(plot.title = element_text(size = 25, hjust = 0.5))
 ```
 
-Comparing the two sets of the three plots you can see how in the latter applying right-truncation gives the impression that cases are declining.
+Comparing the two sets of the three plots you can see how in the latter applying right truncation gives the impression that cases are declining.
 
 These truncated line lists can be used to test methods that estimate the real-time reproduction number such as [{EpiNow2}](https://epiforecasts.io/EpiNow2/) or [{epinowcast}](https://package.epinowcast.org/).
 
