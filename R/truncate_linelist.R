@@ -105,24 +105,24 @@ truncate_linelist <- function(linelist,
     )
   }
   col_name <- paste0("date_", truncation_event)
-  trunc <- delay(nrow(linelist))
+  trunc_time <- delay(nrow(linelist))
   # sample which onset dates are longer than reporting delay (i.e. reported)
   reported_lgl_idx <-
-    (max_date - linelist[[col_name]]) > trunc
+    (max_date - linelist[[col_name]]) > trunc_time
   # convert NAs to TRUE to prevent issues with subsetting with NAs
   reported_lgl_idx[is.na(reported_lgl_idx)] <- TRUE
   linelist <- linelist[reported_lgl_idx, ]
 
   # subset truncation times to remove times for individuals removed above
-  trunc <- trunc[reported_lgl_idx]
+  trunc_time <- trunc_time[reported_lgl_idx]
 
   # convert events (reporting, admissions & outcomes) more recent than
   # truncation time to NA
-  missing_outcome_lgl_idx <- (max_date - linelist$date_outcome) < trunc
+  missing_outcome_lgl_idx <- (max_date - linelist$date_outcome) < trunc_time
   linelist$date_outcome[missing_outcome_lgl_idx] <- NA_real_
-  missing_admission_lgl_idx <- (max_date - linelist$date_admission) < trunc
+  missing_admission_lgl_idx <- (max_date - linelist$date_admission) < trunc_time
   linelist$date_admission[missing_admission_lgl_idx] <- NA_real_
-  missing_reporting_lgl_idx <- (max_date - linelist$date_reporting) < trunc
+  missing_reporting_lgl_idx <- (max_date - linelist$date_reporting) < trunc_time
   linelist$date_reporting[missing_reporting_lgl_idx] <- NA_real_
 
   row.names(linelist) <- NULL
