@@ -116,8 +116,8 @@ tidy_linelist <- linelist %>%
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
   ) %>%
-  mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>%
-  mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE))
+  mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>% # nolint consecutive_mutate_linter
+  mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)) # nolint consecutive_mutate_linter
 
 ggplot(data = tidy_linelist) +
   geom_line(
@@ -225,8 +225,8 @@ tidy_linelist <- linelist %>%
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
   ) %>%
-  mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>%
-  mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE))
+  mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>% # nolint consecutive_mutate_linter
+  mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)) # nolint consecutive_mutate_linter
 
 trunc_point <- data.frame(
   case_name = linelist$case_name,
