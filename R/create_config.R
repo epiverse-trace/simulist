@@ -70,7 +70,7 @@ create_config <- function(...) {
   # check arguments in dots match arg list
   stopifnot(
     "Incorrect argument names supplied to create_config" =
-      all(dots_names %in% names(.args))
+      dots_names %in% names(.args)
   )
 
   # replace default args if in dots
