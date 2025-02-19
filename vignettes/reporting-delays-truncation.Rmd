@@ -409,7 +409,10 @@ plot(inci_late) +
 Next we repeat this procedure of creating data sets for early, mid, and late in the outbreak. For this example we will use the default right-truncation delay distribution (lognormal with `meanlog = 0.58` and `sdlog = 0.47`) and default truncation event (reporting date).
 
 ```{r trunc-stages-reporting-delay, fig.width = 8, fig.height = 5, fig.show="hold", out.width="30%"}
-linelist_early <- truncate_linelist(linelist = linelist, max_date = "2023-02-01")
+linelist_early <- truncate_linelist(
+  linelist = linelist,
+  max_date = "2023-02-01"
+)
 inci_early <- incidence(
   x = linelist_early,
   date_index = "date_onset",
