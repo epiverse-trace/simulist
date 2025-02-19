@@ -140,7 +140,9 @@ messy_linelist <- function(linelist, ...) {
 
   # check args list after any user changes
   checkmate::assert_number(.args$prop_spelling_mistakes, lower = 0, upper = 1)
-  checkmate::assert_logical(.args$inconsistent_sex, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(
+    .args$inconsistent_sex, any.missing = FALSE, len = 1
+  )
   checkmate::assert_logical(.args$sex_as_numeric, any.missing = FALSE, len = 1)
   checkmate::assert_logical(.args$numeric_as_char, any.missing = FALSE, len = 1)
   checkmate::assert_logical(.args$date_as_char, any.missing = FALSE, len = 1)
@@ -256,7 +258,10 @@ messy_linelist <- function(linelist, ...) {
 
   if (.args$prop_duplicate_row > 0) {
     n_row <- nrow(linelist)
-    row_idx <- sample(x = n_row,size = ceiling(.args$prop_duplicate_row * n_row))
+    row_idx <- sample(
+      x = n_row,
+      size = ceiling(.args$prop_duplicate_row * n_row)
+    )
     row_idx <- sort(c(seq_len(n_row), row_idx), decreasing = FALSE)
     linelist <- linelist[row_idx, ]
     row.names(linelist) <- NULL
