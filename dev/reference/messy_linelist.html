@@ -87,24 +87,7 @@ mistakes and inconsistencies, as well as coerce date types.</p>
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt; Named elements to replace
 default settings. Only if names match exactly are elements replaced,
-otherwise the function errors.</p></dd>
-
-</dl></div>
-    <div class="section level2">
-    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A messy line list <code>&lt;data.frame&gt;</code>.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>By default <code>messy_linelist()</code>:</p><ul><li><p>Makes 10% of values missing, i.e. converts to <code>NA</code>.</p></li>
-<li><p>Introduces spelling mistakes in 10% of <code>character</code> columns.</p></li>
-<li><p>Introduce inconsistency in the reporting of <code>$sex</code>.</p></li>
-<li><p>Converts <code>numeric</code> columns (<code>double</code> &amp; <code>integer</code>) to <code>character</code>.</p></li>
-<li><p>Converts <code>Date</code> columns to <code>character</code>.</p></li>
-<li><p>Converts <code>integer</code> columns to (English) words.</p></li>
-<li><p>Duplicates 1% of rows</p></li>
-</ul><p>To change the defaults of <code>messy_linelist()</code> arguments can be supplied
-to <code>...</code>.</p>
+otherwise the function errors.</p>
 <p>Accepted arguments and their defaults are:</p>
 <dl><dt><code>prop_missing</code></dt>
 <dd><p>A <code>numeric</code> between 0 and 1 for the proportion of
@@ -157,7 +140,23 @@ proportion of rows to duplicate. Default is <code>0.01</code> (1%). If
 be duplicated.</p></dd>
 
 
-</dl><p>When setting <code>sex_as_numeric</code> to <code>TRUE</code>, male is set to <code>0</code> and female
+</dl></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A messy line list <code>&lt;data.frame&gt;</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>By default <code>messy_linelist()</code>:</p><ul><li><p>Makes 10% of values missing, i.e. converts to <code>NA</code>.</p></li>
+<li><p>Introduces spelling mistakes in 10% of <code>character</code> columns.</p></li>
+<li><p>Introduce inconsistency in the reporting of <code>$sex</code>.</p></li>
+<li><p>Converts <code>numeric</code> columns (<code>double</code> &amp; <code>integer</code>) to <code>character</code>.</p></li>
+<li><p>Converts <code>Date</code> columns to <code>character</code>.</p></li>
+<li><p>Converts <code>integer</code> columns to (English) words.</p></li>
+<li><p>Duplicates 1% of rows</p></li>
+</ul><p>When setting <code>sex_as_numeric</code> to <code>TRUE</code>, male is set to <code>0</code> and female
 to <code>1</code>. Only one of <code>inconsistent_sex</code> or <code>sex_as_numeric</code> can be <code>TRUE</code>,
 otherwise the function will error.</p>
 <p>If <code>numeric_as_char = TRUE</code> and <code>sex_as_numeric = TRUE</code> then the sex encoded
