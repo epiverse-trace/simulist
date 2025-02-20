@@ -14,7 +14,7 @@
 #'
 #' \describe{
 #'   \item{`prop_missing`}{A `numeric` between 0 and 1 for the proportion of
-#'   missing values. Default is `0.1` (10%).
+#'   missing values introduced. Default is `0.1` (10%).
 #'   }
 #'   \item{`missing_value`}{A single atomic \R object used to represent missing
 #'   values. Default is `NA`.}
@@ -56,13 +56,13 @@
 #' @details
 #' By default `messy_linelist()`:
 #'
-#' * Makes 10% of values missing, i.e. converts to `NA`.
+#' * Introduces 10% of values missing, i.e. converts to `NA`.
 #' * Introduces spelling mistakes in 10% of `character` columns.
 #' * Introduce inconsistency in the reporting of `$sex`.
 #' * Converts `numeric` columns (`double` & `integer`) to `character`.
 #' * Converts `Date` columns to `character`.
 #' * Converts 50% of `integer`s to (English) words.
-#' * Duplicates 1% of rows
+#' * Duplicates 1% of rows.
 #'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
 #' to `1`. Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`,
@@ -276,22 +276,20 @@ messy_linelist <- function(linelist, ...) {
     }
   }
 
-  # random missingness introduced across <data.frame>
-  num_missing <- round(prod(dim(linelist)) * .args$prop_missing)
-
-  # matrix of line list dimensions to sample unique index pairs
-  ll_dim_idx <- expand.grid(
-    row = seq_len(nrow(linelist)),
-    col = seq_len(ncol(linelist))
+  na_idx <- which(!is.na(linelist))
+  # prevent sampling more than once per index (no replacement)
+  n_samples <- min(
+    ceiling(prod(dim(linelist)) * .args$prop_missing),
+    length(na_idx)
   )
-
-  # sample line list index pairs
-  ll_idx <- ll_dim_idx[sample(nrow(ll_dim_idx), num_missing), ]
-
+  # sample without replacement indices that are not already NA to make missing
+  missing_idx <- sample(x = na_idx, size = n_samples)
+  # convert 1D index to 2D row-col index
+  missing_idx <- arrayInd(ind = missing_idx, .dim = dim(linelist))
   # set sampled index pairs to missing
-  for (i in seq_len(num_missing)) {
+  for (i in seq_len(nrow(missing_idx))) {
     # check user-specified missing_value causing unwanted type coercion
-    linelist[ll_idx[i, 1], ll_idx[i, 2]] <- .args$missing_value
+    linelist[missing_idx[i, 1], missing_idx[i, 2]] <- .args$missing_value
   }
 
   if (.args$prop_duplicate_row > 0) {
