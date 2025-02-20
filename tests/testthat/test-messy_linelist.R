@@ -126,6 +126,11 @@ test_that("messy_linelist works with zero duplicate rows", {
   expect_identical(anyDuplicated(messy_ll), 0L)
 })
 
+test_that("messy_linelist works with inconsistent_id", {
+  messy_ll <- messy_linelist(ll, inconsistent_id = TRUE, prop_int_as_word = 0)
+  expect_false(identical(ll$id, messy_ll$id))
+})
+
 test_that("messy_linelist errors with incorrect linelist", {
   expect_error(
     messy_linelist(data.frame(a = 1)),
