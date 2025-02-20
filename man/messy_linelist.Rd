@@ -49,6 +49,11 @@ of elements in \code{integer} columns should that are coerced to \code{words} (s
 proportion of rows to duplicate. Default is \code{0.01} (1\%). If
 \code{prop_duplicate_row} > 0 then it is guaranteed that at least one row will
 be duplicated.}
+\item{\code{inconsistent_id}}{A \code{logical} boolean used to specify whether the
+\verb{$id} column has inconsistent formatting by appending random prefixes and
+suffixes to a random sample (~10\%) of IDs. Default is \code{FALSE}, so IDs
+are numbers (\code{numeric}, \code{characters} or words depending on
+\code{prop_int_as_word} and \code{numeric_as_char}).}
 }}
 }
 \value{

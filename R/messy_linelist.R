@@ -46,6 +46,11 @@
 #'   proportion of rows to duplicate. Default is `0.01` (1%). If
 #'   `prop_duplicate_row` > 0 then it is guaranteed that at least one row will
 #'   be duplicated.}
+#'   \item{`inconsistent_id`}{A `logical` boolean used to specify whether the
+#'   `$id` column has inconsistent formatting by appending random prefixes and
+#'   suffixes to a random sample (~10%) of IDs. Default is `FALSE`, so IDs
+#'   are numbers (`numeric`, `characters` or words depending on
+#'   `prop_int_as_word` and `numeric_as_char`).}
 #' }
 #'
 #' @details
@@ -124,7 +129,8 @@ messy_linelist <- function(linelist, ...) {
     date_as_char = TRUE,
     inconsistent_dates = FALSE,
     prop_int_as_word = 0.5,
-    prop_duplicate_row = 0.1
+    prop_duplicate_row = 0.1,
+    inconsistent_id = FALSE
   )
 
   # capture dynamic dots
@@ -153,6 +159,7 @@ messy_linelist <- function(linelist, ...) {
   )
   checkmate::assert_number(.args$prop_int_as_word, lower = 0, upper = 1)
   checkmate::assert_number(.args$prop_duplicate_row, lower = 0, upper = 1)
+  checkmate::assert_logical(.args$inconsistent_id, any.missing = FALSE, len = 1)
   stopifnot(
     "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`." =
       !(.args$inconsistent_sex && .args$sex_as_numeric),
@@ -205,6 +212,28 @@ messy_linelist <- function(linelist, ...) {
         x
       },
       FUN.VALUE = character(nrow(linelist))
+    )
+  }
+
+  # call after prop_int_as_word and before adding missing values
+  if (.args$inconsistent_id) {
+    idx <- list(prefix = NULL, suffix = NULL)
+    idx <- lapply(
+      idx,
+      sample.int,
+      n = nrow(linelist),
+      size = ceiling(0.1 * nrow(linelist)),
+      replace = FALSE
+    )
+    linelist$id[idx$prefix] <- paste(
+      .anonymise(linelist$id[idx$prefix], string_len = 3),
+      linelist$id[idx$prefix],
+      sep = "_"
+    )
+    linelist$id[idx$suffix] <- paste(
+      linelist$id[idx$suffix],
+      .anonymise(linelist$id[idx$suffix], string_len = 3),
+      sep = "_"
     )
   }
 
