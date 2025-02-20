@@ -70,7 +70,7 @@ test_that("messy_linelist works encoding sex as numeric", {
 })
 
 test_that("messy_linelist works without numeric_as_char", {
-  messy_ll <- messy_linelist(ll, numeric_as_char = FALSE, int_as_word = FALSE)
+  messy_ll <- messy_linelist(ll, numeric_as_char = FALSE, prop_int_as_word = 0)
   col_class <- vapply(messy_ll, class, FUN.VALUE = character(1))
   expect_true(all(c("numeric", "integer") %in% col_class))
   expect_true(all(
@@ -113,8 +113,8 @@ test_that("messy_linelist works with inconsistent_dates", {
     )))
 })
 
-test_that("messy_linelist works without int_as_words", {
-  messy_ll <- messy_linelist(ll, int_as_word = FALSE, numeric_as_char = FALSE)
+test_that("messy_linelist works with zero prop_int_as_words", {
+  messy_ll <- messy_linelist(ll, prop_int_as_word = 0, numeric_as_char = FALSE)
   expect_identical(
     vapply(ll, is.integer, FUN.VALUE = logical(1)),
     vapply(messy_ll, is.integer, FUN.VALUE = logical(1))
