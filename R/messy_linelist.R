@@ -38,9 +38,10 @@
 #'   the values in `Date` columns are inconsistently formatted (e.g.
 #'   `"%Y-%m-%d"`, `"%Y/%m/%d"`, `"%d-%m-%Y"`, or `"%d %B %Y"`).
 #'   Default is `FALSE`.}
-#'   \item{`int_as_word`}{A `logical` boolean used to specify whether
-#'   `integer` columns should be coerced to `words` (see
-#'   [english::words()]). Default is `TRUE`.}
+#'   \item{`prop_int_as_word`}{A `numeric` between 0 and 1 for the proportion
+#'   of elements in `integer` columns should that are coerced to `words` (see
+#'   [english::words()]). Default is `0.5` (50%).
+#'   }
 #'   \item{`prop_duplicate_row`}{A `numeric` between 0 and 1 for the
 #'   proportion of rows to duplicate. Default is `0.01` (1%). If
 #'   `prop_duplicate_row` > 0 then it is guaranteed that at least one row will
@@ -55,7 +56,7 @@
 #' * Introduce inconsistency in the reporting of `$sex`.
 #' * Converts `numeric` columns (`double` & `integer`) to `character`.
 #' * Converts `Date` columns to `character`.
-#' * Converts `integer` columns to (English) words.
+#' * Converts 50% of `integer`s to (English) words.
 #' * Duplicates 1% of rows
 #'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
@@ -74,11 +75,11 @@
 #' setting `inconsistent_dates = TRUE` and it requires `date_as_char = TRUE`,
 #' if the latter is `FALSE` the function will error.
 #'
-#' If `numeric_as_char = FALSE` and `int_as_word = TRUE` then the integer
-#' columns are converted to `character` string words but the other `numeric`
-#' columns are not coerced. Spelling mistakes are not introduced into integers
-#' converted to words when `prop_spelling_mistakes` > 0 and
-#' `int_as_word = TRUE`.
+#' If `numeric_as_char = FALSE` and `prop_int_as_word` > 0 then the integer
+#' columns are converted to `character` string (either `character` numbers or
+#' words) but the other `numeric` columns are not coerced. Spelling mistakes
+#' are not introduced into integers converted to words when
+#' `prop_spelling_mistakes` > 0 and `prop_int_as_word` > 0.
 #'
 #' Rows are duplicated after other _messy_ modifications so the duplicated row
 #' contains identical _messy_ elements.
@@ -122,7 +123,7 @@ messy_linelist <- function(linelist, ...) {
     numeric_as_char = TRUE,
     date_as_char = TRUE,
     inconsistent_dates = FALSE,
-    int_as_word = TRUE,
+    prop_int_as_word = 0.5,
     prop_duplicate_row = 0.1
   )
 
@@ -150,7 +151,7 @@ messy_linelist <- function(linelist, ...) {
   checkmate::assert_logical(
     .args$inconsistent_dates, any.missing = FALSE, len = 1
   )
-  checkmate::assert_logical(.args$int_as_word, any.missing = FALSE, len = 1)
+  checkmate::assert_number(.args$prop_int_as_word, lower = 0, upper = 1)
   checkmate::assert_number(.args$prop_duplicate_row, lower = 0, upper = 1)
   stopifnot(
     "Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`." =
@@ -191,11 +192,18 @@ messy_linelist <- function(linelist, ...) {
   }
 
   # call before numeric_as_char to detect integer cols
-  if (.args$int_as_word) {
+  if (.args$prop_int_as_word > 0) {
     int_col <- vapply(linelist, is.integer, FUN.VALUE = logical(1))
     linelist[, int_col] <- vapply(
-      linelist[, int_col],
-      english::words,
+      linelist[, int_col], function(x) {
+        idx <- sample.int(
+          n = length(x),
+          size = round(.args$prop_int_as_word * length(x)),
+          replace = FALSE
+        )
+        x[idx] <- english::words(x[idx])
+        x
+      },
       FUN.VALUE = character(nrow(linelist))
     )
   }
