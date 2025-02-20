@@ -67,13 +67,13 @@ mistakes and inconsistencies, as well as coerce date types.
 \details{
 By default \code{messy_linelist()}:
 \itemize{
-\item Makes 10\% of values missing, i.e. converts to \code{NA}.
+\item Introduces 10\% of values missing, i.e. converts to \code{NA}.
 \item Introduces spelling mistakes in 10\% of \code{character} columns.
 \item Introduce inconsistency in the reporting of \verb{$sex}.
 \item Converts \code{numeric} columns (\code{double} & \code{integer}) to \code{character}.
 \item Converts \code{Date} columns to \code{character}.
 \item Converts 50\% of \code{integer}s to (English) words.
-\item Duplicates 1\% of rows
+\item Duplicates 1\% of rows.
 }
 
 When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female
