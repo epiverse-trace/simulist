@@ -332,3 +332,62 @@ NULL
   }
   x
 }
+
+#' Introduce user-specified proportion of custom missing values into a
+#' `<data.frame>`
+#'
+#' @inheritParams messy_linelist
+#' @param .args A list of setting from [messy_linelist()].
+#'
+#' @return A line list `<data.frame>`
+#' @keywords internal
+.add_missing <- function(linelist, .args) {
+  if (rlang::is_na(.args$missing_value)) {
+    # sample from non-NA elements if missing_value is NA
+    sample_idx <- which(!is.na(linelist))
+    # prevent sampling more than once per index (no replacement)
+    n_samples <- min(
+      ceiling(prod(dim(linelist)) * .args$prop_missing),
+      length(sample_idx)
+    )
+  } else {
+    # sample from all elements if missing_value is not NA
+    sample_idx <- seq_len(prod(dim(linelist)))
+    n_samples <- ceiling(prod(dim(linelist)) * .args$prop_missing)
+  }
+  # sample without replacement indices to make missing
+  missing_idx <- sample(x = sample_idx, size = n_samples)
+  # convert 1D index to 2D row-col index
+  missing_idx <- arrayInd(ind = missing_idx, .dim = dim(linelist))
+
+  msg <- character(0)
+  # set sampled index pairs to missing
+  for (i in seq_len(nrow(missing_idx))) {
+    missing_value <- .args$missing_value
+    ll_col <- missing_idx[i, 2]
+    # check and warn if user-specified missing_value causes type coercion
+    if (class(.args$missing_value) != class(linelist[, ll_col]) && # nolint class_equals_linter
+        !rlang::is_na(.args$missing_value)) {
+      # when types don't match convert to character to avoid unwanted coercion
+      # logical -> integer -> numeric -> character # nolint commented_code_linter
+      # not perfect, e.g. integer & numeric -> character
+      missing_value <- as.character(.args$missing_value)
+      # only convert column and append to warning msg if not character
+      if (!is.character(linelist[, ll_col])) {
+        linelist[, ll_col] <- as.character(linelist[, ll_col])
+        msg <- c(msg, colnames(linelist)[ll_col])
+      }
+    }
+    linelist[missing_idx[i, 1], missing_idx[i, 2]] <- missing_value
+  }
+  if (length(msg) > 0) {
+    # multiple of the same warnings can be appended only print each warning once
+    warning(
+      "The linelist columns:", "\n", sprintf("  - %s\n", unique(msg)),
+      " are being coerced to character due to type differences with ",
+      "`missing_value` supplied to `messy_linelist()`.",
+      call. = FALSE
+    )
+  }
+  linelist
+}
