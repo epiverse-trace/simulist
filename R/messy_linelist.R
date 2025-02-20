@@ -64,6 +64,10 @@
 #' * Converts 50% of `integer`s to (English) words.
 #' * Duplicates 1% of rows.
 #'
+#' Setting `missing_value` to something other than `NA` will likely cause
+#' type coercion in the line list `<data.frame>` columns, most likely to
+#' `character`.
+#'
 #' When setting `sex_as_numeric` to `TRUE`, male is set to `0` and female
 #' to `1`. Only one of `inconsistent_sex` or `sex_as_numeric` can be `TRUE`,
 #' otherwise the function will error.
@@ -147,6 +151,8 @@ messy_linelist <- function(linelist, ...) {
   .args <- utils::modifyList(.args, dots)
 
   # check args list after any user changes
+  checkmate::assert_number(.args$prop_missing, lower = 0, upper = 1)
+  checkmate::assert_atomic(.args$missing_value, len = 1)
   checkmate::assert_number(.args$prop_spelling_mistakes, lower = 0, upper = 1)
   checkmate::assert_logical(
     .args$inconsistent_sex, any.missing = FALSE, len = 1
@@ -276,21 +282,7 @@ messy_linelist <- function(linelist, ...) {
     }
   }
 
-  na_idx <- which(!is.na(linelist))
-  # prevent sampling more than once per index (no replacement)
-  n_samples <- min(
-    ceiling(prod(dim(linelist)) * .args$prop_missing),
-    length(na_idx)
-  )
-  # sample without replacement indices that are not already NA to make missing
-  missing_idx <- sample(x = na_idx, size = n_samples)
-  # convert 1D index to 2D row-col index
-  missing_idx <- arrayInd(ind = missing_idx, .dim = dim(linelist))
-  # set sampled index pairs to missing
-  for (i in seq_len(nrow(missing_idx))) {
-    # check user-specified missing_value causing unwanted type coercion
-    linelist[missing_idx[i, 1], missing_idx[i, 2]] <- .args$missing_value
-  }
+  linelist <- .add_missing(linelist, .args = .args)
 
   if (.args$prop_duplicate_row > 0) {
     n_row <- nrow(linelist)
