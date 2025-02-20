@@ -17,7 +17,7 @@ Accepted arguments and their defaults are:
 
 \describe{
 \item{\code{prop_missing}}{A \code{numeric} between 0 and 1 for the proportion of
-missing values. Default is \code{0.1} (10\%).
+missing values introduced. Default is \code{0.1} (10\%).
 }
 \item{\code{missing_value}}{A single atomic \R object used to represent missing
 values. Default is \code{NA}.}
@@ -75,6 +75,10 @@ By default \code{messy_linelist()}:
 \item Converts 50\% of \code{integer}s to (English) words.
 \item Duplicates 1\% of rows.
 }
+
+Setting \code{missing_value} to something other than \code{NA} will likely cause
+type coercion in the line list \verb{<data.frame>} columns, most likely to
+\code{character}.
 
 When setting \code{sex_as_numeric} to \code{TRUE}, male is set to \code{0} and female
 to \code{1}. Only one of \code{inconsistent_sex} or \code{sex_as_numeric} can be \code{TRUE},
