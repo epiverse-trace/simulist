@@ -41,9 +41,10 @@ columns should be coerced to \code{character}. Default is \code{TRUE}.}
 the values in \code{Date} columns are inconsistently formatted (e.g.
 \code{"\%Y-\%m-\%d"}, \code{"\%Y/\%m/\%d"}, \code{"\%d-\%m-\%Y"}, or \code{"\%d \%B \%Y"}).
 Default is \code{FALSE}.}
-\item{\code{int_as_word}}{A \code{logical} boolean used to specify whether
-\code{integer} columns should be coerced to \code{words} (see
-\code{\link[english:words]{english::words()}}). Default is \code{TRUE}.}
+\item{\code{prop_int_as_word}}{A \code{numeric} between 0 and 1 for the proportion
+of elements in \code{integer} columns should that are coerced to \code{words} (see
+\code{\link[english:words]{english::words()}}). Default is \code{0.5} (50\%).
+}
 \item{\code{prop_duplicate_row}}{A \code{numeric} between 0 and 1 for the
 proportion of rows to duplicate. Default is \code{0.01} (1\%). If
 \code{prop_duplicate_row} > 0 then it is guaranteed that at least one row will
@@ -66,7 +67,7 @@ By default \code{messy_linelist()}:
 \item Introduce inconsistency in the reporting of \verb{$sex}.
 \item Converts \code{numeric} columns (\code{double} & \code{integer}) to \code{character}.
 \item Converts \code{Date} columns to \code{character}.
-\item Converts \code{integer} columns to (English) words.
+\item Converts 50\% of \code{integer}s to (English) words.
 \item Duplicates 1\% of rows
 }
 
@@ -86,11 +87,11 @@ The \code{Date} columns can be converted into an inconsistent format by
 setting \code{inconsistent_dates = TRUE} and it requires \code{date_as_char = TRUE},
 if the latter is \code{FALSE} the function will error.
 
-If \code{numeric_as_char = FALSE} and \code{int_as_word = TRUE} then the integer
-columns are converted to \code{character} string words but the other \code{numeric}
-columns are not coerced. Spelling mistakes are not introduced into integers
-converted to words when \code{prop_spelling_mistakes} > 0 and
-\code{int_as_word = TRUE}.
+If \code{numeric_as_char = FALSE} and \code{prop_int_as_word} > 0 then the integer
+columns are converted to \code{character} string (either \code{character} numbers or
+words) but the other \code{numeric} columns are not coerced. Spelling mistakes
+are not introduced into integers converted to words when
+\code{prop_spelling_mistakes} > 0 and \code{prop_int_as_word} > 0.
 
 Rows are duplicated after other \emph{messy} modifications so the duplicated row
 contains identical \emph{messy} elements.
