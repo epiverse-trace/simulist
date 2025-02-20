@@ -14,6 +14,22 @@ test_that("messy_linelist works as expected by default", {
   expect_gt(anyDuplicated(messy_ll), 0)
 })
 
+test_that("messy_linelist works with different missing_value", {
+  messy_ll <- suppressWarnings(
+    messy_linelist(
+      ll,
+      prop_missing = 0.8,
+      missing_value = -99L,
+      numeric_as_char = FALSE,
+      prop_int_as_word = 0
+    )
+  )
+  expect_type(messy_ll$id, "integer")
+  expect_type(messy_ll$age, "integer")
+  expect_type(messy_ll$date_onset, "character")
+  expect_type(messy_ll$case_name, "character")
+})
+
 test_that("messy_linelist works with higher proportion of spelling mistakes", {
   messy_ll <- messy_linelist(
     ll,
@@ -129,6 +145,18 @@ test_that("messy_linelist works with zero duplicate rows", {
 test_that("messy_linelist works with inconsistent_id", {
   messy_ll <- messy_linelist(ll, inconsistent_id = TRUE, prop_int_as_word = 0)
   expect_false(identical(ll$id, messy_ll$id))
+})
+
+test_that("messy_linelist warns when coercing from missing_value", {
+  expect_warning(
+    messy_linelist(
+      ll,
+      missing_value = "n/a",
+      numeric_as_char = FALSE,
+      date_as_char = FALSE
+    ),
+    regexp = "(The linelist columns)*(date_)*(are being coerced to character)"
+  )
 })
 
 test_that("messy_linelist errors with incorrect linelist", {
