@@ -91,7 +91,7 @@ otherwise the function errors.</p>
 <p>Accepted arguments and their defaults are:</p>
 <dl><dt><code>prop_missing</code></dt>
 <dd><p>A <code>numeric</code> between 0 and 1 for the proportion of
-missing values. Default is <code>0.1</code> (10%).</p></dd>
+missing values introduced. Default is <code>0.1</code> (10%).</p></dd>
 
 <dt><code>missing_value</code></dt>
 <dd><p>A single atomic <span style="R">R</span> object used to represent missing
@@ -128,16 +128,23 @@ the values in <code>Date</code> columns are inconsistently formatted (e.g.
 <code>"%Y-%m-%d"</code>, <code>"%Y/%m/%d"</code>, <code>"%d-%m-%Y"</code>, or <code>"%d %B %Y"</code>).
 Default is <code>FALSE</code>.</p></dd>
 
-<dt><code>int_as_word</code></dt>
-<dd><p>A <code>logical</code> boolean used to specify whether
-<code>integer</code> columns should be coerced to <code>words</code> (see
-<code><a href="https://rdrr.io/pkg/english/man/words.html" class="external-link">english::words()</a></code>). Default is <code>TRUE</code>.</p></dd>
+<dt><code>prop_int_as_word</code></dt>
+<dd><p>A <code>numeric</code> between 0 and 1 for the proportion
+of elements in <code>integer</code> columns should that are coerced to <code>words</code> (see
+<code><a href="https://rdrr.io/pkg/english/man/words.html" class="external-link">english::words()</a></code>). Default is <code>0.5</code> (50%).</p></dd>
 
 <dt><code>prop_duplicate_row</code></dt>
 <dd><p>A <code>numeric</code> between 0 and 1 for the
 proportion of rows to duplicate. Default is <code>0.01</code> (1%). If
 <code>prop_duplicate_row</code> &gt; 0 then it is guaranteed that at least one row will
 be duplicated.</p></dd>
+
+<dt><code>inconsistent_id</code></dt>
+<dd><p>A <code>logical</code> boolean used to specify whether the
+<code>$id</code> column has inconsistent formatting by appending random prefixes and
+suffixes to a random sample (~10%) of IDs. Default is <code>FALSE</code>, so IDs
+are numbers (<code>numeric</code>, <code>characters</code> or words depending on
+<code>prop_int_as_word</code> and <code>numeric_as_char</code>).</p></dd>
 
 
 </dl></dd>
@@ -149,14 +156,17 @@ be duplicated.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>By default <code>messy_linelist()</code>:</p><ul><li><p>Makes 10% of values missing, i.e. converts to <code>NA</code>.</p></li>
+    <p>By default <code>messy_linelist()</code>:</p><ul><li><p>Introduces 10% of values missing, i.e. converts to <code>NA</code>.</p></li>
 <li><p>Introduces spelling mistakes in 10% of <code>character</code> columns.</p></li>
 <li><p>Introduce inconsistency in the reporting of <code>$sex</code>.</p></li>
 <li><p>Converts <code>numeric</code> columns (<code>double</code> &amp; <code>integer</code>) to <code>character</code>.</p></li>
 <li><p>Converts <code>Date</code> columns to <code>character</code>.</p></li>
-<li><p>Converts <code>integer</code> columns to (English) words.</p></li>
-<li><p>Duplicates 1% of rows</p></li>
-</ul><p>When setting <code>sex_as_numeric</code> to <code>TRUE</code>, male is set to <code>0</code> and female
+<li><p>Converts 50% of <code>integer</code>s to (English) words.</p></li>
+<li><p>Duplicates 1% of rows.</p></li>
+</ul><p>Setting <code>missing_value</code> to something other than <code>NA</code> will likely cause
+type coercion in the line list <code>&lt;data.frame&gt;</code> columns, most likely to
+<code>character</code>.</p>
+<p>When setting <code>sex_as_numeric</code> to <code>TRUE</code>, male is set to <code>0</code> and female
 to <code>1</code>. Only one of <code>inconsistent_sex</code> or <code>sex_as_numeric</code> can be <code>TRUE</code>,
 otherwise the function will error.</p>
 <p>If <code>numeric_as_char = TRUE</code> and <code>sex_as_numeric = TRUE</code> then the sex encoded
@@ -169,11 +179,11 @@ not introduced into dates.</p>
 <p>The <code>Date</code> columns can be converted into an inconsistent format by
 setting <code>inconsistent_dates = TRUE</code> and it requires <code>date_as_char = TRUE</code>,
 if the latter is <code>FALSE</code> the function will error.</p>
-<p>If <code>numeric_as_char = FALSE</code> and <code>int_as_word = TRUE</code> then the integer
-columns are converted to <code>character</code> string words but the other <code>numeric</code>
-columns are not coerced. Spelling mistakes are not introduced into integers
-converted to words when <code>prop_spelling_mistakes</code> &gt; 0 and
-<code>int_as_word = TRUE</code>.</p>
+<p>If <code>numeric_as_char = FALSE</code> and <code>prop_int_as_word</code> &gt; 0 then the integer
+columns are converted to <code>character</code> string (either <code>character</code> numbers or
+words) but the other <code>numeric</code> columns are not coerced. Spelling mistakes
+are not introduced into integers converted to words when
+<code>prop_spelling_mistakes</code> &gt; 0 and <code>prop_int_as_word</code> &gt; 0.</p>
 <p>Rows are duplicated after other <em>messy</em> modifications so the duplicated row
 contains identical <em>messy</em> elements.</p>
     </div>

@@ -321,35 +321,42 @@ that age group. Proportions must sum to one.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># quickly simulate an outbreak using the function defaults</span></span></span>
 <span class="r-in"><span><span class="va">outbreak</span> <span class="op">&lt;-</span> <span class="fu">sim_outbreak</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">linelist</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   id       case_name case_type sex age date_onset date_reporting date_admission</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1    Erik Grajeda suspected   m  88 2023-01-01     2023-01-01           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2    Nahom Gibson suspected   m   8 2023-01-01     2023-01-01     2023-01-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3     Cory Jordan  probable   m   6 2023-01-02     2023-01-02           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  8  Jacob Hamalian confirmed   m  40 2023-01-02     2023-01-02           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 10 Kaitlynne Flynn suspected   f  43 2023-01-02     2023-01-02           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 12  Mitchell Riggs  probable   m  71 2023-01-06     2023-01-06           &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     outcome date_outcome date_first_contact date_last_contact ct_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 recovered         &lt;NA&gt;         2023-01-04        2023-01-07       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3      died   2023-01-08         2023-01-01        2023-01-02       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 recovered         &lt;NA&gt;         2023-01-01        2023-01-06     22.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 recovered         &lt;NA&gt;         2023-01-03        2023-01-04       NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 recovered         &lt;NA&gt;         2023-01-03        2023-01-06       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id        case_name case_type sex age date_onset date_reporting</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1  Austin Richards  probable   m   4 2023-01-01     2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2      Ronald Ross suspected   m  80 2023-01-02     2023-01-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  4 Yudith Rodriguez confirmed   f  52 2023-01-07     2023-01-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  5      Taylor Crum suspected   m  57 2023-01-11     2023-01-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  6    Andrea Hansen suspected   f  70 2023-01-07     2023-01-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  8 Asghar el-Firman confirmed   m  74 2023-01-07     2023-01-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date_admission   outcome date_outcome date_first_contact date_last_contact</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     2023-01-08      died   2023-01-18               &lt;NA&gt;              &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     2023-01-19      died   2023-01-22         2023-01-02        2023-01-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-03        2023-01-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6           &lt;NA&gt;      died   2023-01-19         2023-01-05        2023-01-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ct_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     26.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     27.0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           from                to age sex date_first_contact date_last_contact</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Erik Grajeda      Nahom Gibson   8   m         2023-01-04        2023-01-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Erik Grajeda       Cory Jordan   6   m         2023-01-01        2023-01-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Erik Grajeda Tareefa al-Akhtar  75   f         2023-01-03        2023-01-04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Erik Grajeda        Jase Bohol  89   m         2022-12-29        2023-01-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Nahom Gibson  Springwind James  30   f         2022-12-31        2023-01-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Nahom Gibson       Jade Martin  89   m         2023-01-02        2023-01-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   was_case         status</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        Y           case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2        Y           case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3        N under_followup</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4        N under_followup</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        N under_followup</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6        N under_followup</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               from               to age sex date_first_contact</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Austin Richards      Ronald Ross  80   m         2023-01-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Austin Richards  Mauriesha Jones  83   f         2022-12-28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      Ronald Ross Yudith Rodriguez  52   f         2022-12-31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Ronald Ross      Taylor Crum  57   m         2023-01-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      Ronald Ross    Andrea Hansen  70   f         2022-12-29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Yudith Rodriguez   Adan Hernandez  71   m         2023-01-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date_last_contact was_case         status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        2023-01-05        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        2023-01-04        N under_followup</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        2023-01-04        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        2023-01-05        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        2023-01-03        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        2023-01-10        N under_followup</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># to simulate a more realistic outbreak load epiparameters from</span></span></span>
 <span class="r-in"><span><span class="co"># {epiparameter}</span></span></span>
