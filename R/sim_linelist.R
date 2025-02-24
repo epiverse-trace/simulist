@@ -13,10 +13,9 @@
 #' 0 and 1.
 #'
 #' For an age-structured population, a `<data.frame>` with two columns:
-#' * `age_range`: a column with characters specifying the lower and upper bound
-#'  of that age group, separated by a hyphen (-). Both bounds are inclusive
-#' (integers). For example, an age group of one to ten would be given as
-#' `"1-10"`.
+#' * `age_limit`: a column with one `numeric` per cell for the lower bound
+#' (minimum) age of the age group (inclusive), except the last element which is
+#' the upper bound (maximum) of the population.
 #' * `proportion`: a column with the proportion of the population that are in
 #' that age group. Proportions must sum to one.
 #'
