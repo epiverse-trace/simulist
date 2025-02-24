@@ -1,10 +1,11 @@
-test_that(".check_risk_df works as expected", {
+test_that(".check_df works as expected for risk", {
   age_dep_hosp_risk <- data.frame(
     age_limit = c(1, 5, 80),
     risk = c(0.1, 0.05, 0.2)
   )
-  age_dep_hosp_risk <- .check_risk_df(
+  age_dep_hosp_risk <- .check_df(
     age_dep_hosp_risk,
+    df_type = "risk",
     age_range = c(lower = 1, upper = 90)
   )
   expect_s3_class(age_dep_hosp_risk, class = "data.frame")
@@ -16,13 +17,61 @@ test_that(".check_risk_df works as expected", {
   )
 })
 
-test_that(".check_risk_df fails as expected", {
+test_that(".check_df works as expected for age", {
+  age_struct <- data.frame(
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.2, 0)
+  )
+  age_struct <- .check_df(age_struct, df_type = "age")
+  expect_s3_class(age_struct, class = "data.frame")
+  expect_identical(dim(age_struct), c(4L, 3L))
+  expect_identical(colnames(age_struct), c("min_age", "max_age", "proportion"))
+  expect_identical(
+    row.names(age_struct),
+    c("[1,5)", "[5,80)", "[80,90)", "[90,90]")
+  )
+})
+
+test_that(".check_df fails as expected", {
+  expect_error(
+    .check_df(data.frame(), df_type = "other"),
+    regexp = "(arg)*(should be one of)*(risk)*(age)"
+  )
+
+  age_dep_hosp_risk <- data.frame(
+    age_limit = c(1, 5, 5),
+    risk = c(0.1, 0.05, 0.2)
+  )
+  expect_error(
+    .check_df(
+      age_dep_hosp_risk,
+      df_type = "risk",
+      age_range = c(lower = 1, upper = 90)
+    ),
+    regexp = "Age limit in data frame must be unique"
+  )
+
+  age_struct <- data.frame(
+    age_limit = c(1, 5, 5),
+    proportion = c(0.5, 0.5, 0)
+  )
+  expect_error(
+    .check_df(age_struct, df_type = "age"),
+    regexp = "Age limit in data frame must be unique"
+  )
+})
+
+test_that(".check_df fails as expected for risk", {
   age_dep_hosp_risk <- data.frame(
     age_min = c(1, 5, 80),
     hosp_risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 91)),
+    .check_df(
+      age_dep_hosp_risk,
+      df_type = "risk",
+      age_range = c(lower = 1, upper = 91)
+    ),
     regexp = "Column names should be 'age_limit' & 'risk'"
   )
 
@@ -31,7 +80,11 @@ test_that(".check_risk_df fails as expected", {
     risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
+    .check_df(
+      age_dep_hosp_risk,
+      df_type = "risk",
+      age_range = c(lower = 1, upper = 90)
+    ),
     regexp = "Minimum age of lowest age group should match lower age range"
   )
 
@@ -40,7 +93,11 @@ test_that(".check_risk_df fails as expected", {
     risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
+    .check_df(
+      age_dep_hosp_risk,
+      df_type = "risk",
+      age_range = c(lower = 1, upper = 90)
+    ),
     regexp =
       "Lower bound of oldest age group must be lower than highest age range"
   )
@@ -50,17 +107,12 @@ test_that(".check_risk_df fails as expected", {
     risk = c(-0.1, 0.5, 1.1)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
+    .check_df(
+      age_dep_hosp_risk,
+      df_type = "risk",
+      age_range = c(lower = 1, upper = 90)
+    ),
     regexp = "Risk should be between 0 and 1"
-  )
-
-  age_dep_hosp_risk <- data.frame(
-    age_limit = c(1, 5, 5),
-    risk = c(0.1, 0.05, 0.2)
-  )
-  expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
-    regexp = "Age limit in risk data frame must be unique"
   )
 
   age_dep_hosp_risk <- data.frame(
@@ -68,29 +120,24 @@ test_that(".check_risk_df fails as expected", {
     risk = c(0.1, 0.05, NA)
   )
   expect_error(
-    .check_risk_df(age_dep_hosp_risk, age_range = c(lower = 1, upper = 90)),
+    .check_df(
+      age_dep_hosp_risk,
+      df_type = "risk",
+      age_range = c(lower = 1, upper = 90)
+    ),
     regexp = "Age limit or risk cannot be NA or NaN"
   )
 })
 
-test_that(".check_age_df works as expected", {
-  age_struct <- data.frame(
-    age_limit = c(1, 5, 80, 90),
-    proportion = c(0.1, 0.7, 0.2, 0)
-  )
-  age_struct <- .check_age_df(age_struct)
-  expect_s3_class(age_struct, class = "data.frame")
-  expect_identical(dim(age_struct), c(4L, 3L))
-  expect_identical(colnames(age_struct), c("min_age", "max_age", "proportion"))
-})
 
-test_that(".check_age_df fails as expected", {
+
+test_that(".check_df fails as expected for age", {
   age_struct <- data.frame(
     age_limit = c(1, 5, 80, 90),
     percentage = c(0.1, 0.7, 0.2, 0)
   )
   expect_error(
-    .check_age_df(age_struct),
+    .check_df(age_struct, df_type = "age"),
     regexp = "Column names should be 'age_limit' & 'proportion'"
   )
 
@@ -99,7 +146,7 @@ test_that(".check_age_df fails as expected", {
     proportion = c(0.1, NA, 0.2, 0)
   )
   expect_error(
-    .check_age_df(age_struct),
+    .check_df(age_struct, df_type = "age"),
     regexp = "Age limit or proportion cannot be NA or NaN"
   )
 
@@ -109,7 +156,7 @@ test_that(".check_age_df fails as expected", {
     stringsAsFactors = FALSE
   )
   expect_error(
-    .check_age_df(age_struct),
+    .check_df(age_struct, df_type = "age"),
     regexp = "Proportions of each age bracket should sum to 1"
   )
 })
