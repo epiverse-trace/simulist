@@ -232,30 +232,30 @@
         prob_infection = 0.5, population_age = age_struct)
     Output
                         from                      to age sex date_first_contact
-      1          Ramon Burch             Job Cabrera  62   m         2022-12-30
+      1          Ramon Burch             Job Cabrera  61   m         2022-12-30
       2          Ramon Burch       Raihaana el-Irani  24   f         2023-01-01
-      3    Raihaana el-Irani          Joshua Puckett  52   m         2023-01-02
-      4    Raihaana el-Irani      Katherine Benjamin  74   f         2023-01-04
-      5    Raihaana el-Irani         Destiny Cornejo  76   f         2022-12-29
-      6       Joshua Puckett      Ashleigh Contreras  26   f         2023-01-03
-      7       Joshua Puckett        Miguel Maldonado  25   m         2023-01-02
-      8       Joshua Puckett Christian Siewiyumptewa  69   m         2023-01-03
-      9       Joshua Puckett         Lilliana Garcia  53   f         2023-01-02
-      10      Joshua Puckett           Diego Trevino  19   m         2023-01-02
-      11      Joshua Puckett                Eric Tat  49   m         2023-01-03
-      12    Miguel Maldonado       Robert Drazkowski  68   m         2023-01-02
-      13    Miguel Maldonado          Chumron Lummis  82   m         2023-01-02
-      14       Diego Trevino         Mufeeda el-Ozer  84   f         2023-01-07
-      15       Diego Trevino          Carina Beltran  79   f         2023-01-02
-      16       Diego Trevino         Tiffanie Falcon   5   f         2023-01-03
-      17   Robert Drazkowski     Hannah Zhang Cheung  78   f         2023-01-04
-      18     Mufeeda el-Ozer           Rebeca Chavez  85   f         2023-01-03
-      19     Mufeeda el-Ozer              Hyungu Han  36   m         2023-01-03
-      20     Mufeeda el-Ozer        Matthew Silevani  62   m         2023-01-03
-      21     Mufeeda el-Ozer     Jesse-Reese Burukie  66   m         2023-01-07
-      22      Carina Beltran          Johannah Costa  43   f         2023-01-04
-      23     Tiffanie Falcon            Austin Pinch  61   m         2022-12-29
-      24     Tiffanie Falcon             Neil Dorado  26   m         2023-01-03
+      3    Raihaana el-Irani          Joshua Puckett  51   m         2023-01-02
+      4    Raihaana el-Irani      Katherine Benjamin  73   f         2023-01-04
+      5    Raihaana el-Irani         Destiny Cornejo  75   f         2022-12-29
+      6       Joshua Puckett      Ashleigh Contreras  25   f         2023-01-03
+      7       Joshua Puckett        Miguel Maldonado  48   m         2023-01-02
+      8       Joshua Puckett Christian Siewiyumptewa  79   m         2023-01-03
+      9       Joshua Puckett         Lilliana Garcia  52   f         2023-01-02
+      10      Joshua Puckett           Diego Trevino  63   m         2023-01-02
+      11      Joshua Puckett                Eric Tat  37   m         2023-01-03
+      12    Miguel Maldonado       Robert Drazkowski  34   m         2023-01-02
+      13    Miguel Maldonado          Chumron Lummis  88   m         2023-01-02
+      14       Diego Trevino         Mufeeda el-Ozer  80   f         2023-01-07
+      15       Diego Trevino          Carina Beltran  78   f         2023-01-02
+      16       Diego Trevino         Tiffanie Falcon  10   f         2023-01-03
+      17   Robert Drazkowski     Hannah Zhang Cheung  77   f         2023-01-04
+      18     Mufeeda el-Ozer           Rebeca Chavez  80   f         2023-01-03
+      19     Mufeeda el-Ozer              Hyungu Han  18   m         2023-01-03
+      20     Mufeeda el-Ozer        Matthew Silevani  61   m         2023-01-03
+      21     Mufeeda el-Ozer     Jesse-Reese Burukie  33   m         2023-01-07
+      22      Carina Beltran          Johannah Costa  42   f         2023-01-04
+      23     Tiffanie Falcon            Austin Pinch  60   m         2022-12-29
+      24     Tiffanie Falcon             Neil Dorado  25   m         2023-01-03
       25 Jesse-Reese Burukie             Ruby Gaspar  81   f         2022-12-31
          date_last_contact was_case         status
       1         2023-01-03        N under_followup

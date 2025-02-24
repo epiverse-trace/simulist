@@ -69,9 +69,8 @@ test_that("sim_linelist works as expected with anonymous", {
 
 test_that("sim_linelist works as expected with age structure", {
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.2, 0)
   )
   set.seed(1)
   expect_snapshot(
@@ -92,9 +91,8 @@ test_that("sim_linelist works as expected with age-strat risks & age struct", {
     risk = c(0.1, 0.05, 0.2)
   )
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.2, 0)
   )
   set.seed(1)
   expect_snapshot(
@@ -112,9 +110,8 @@ test_that("sim_linelist works as expected with age-strat risks & age struct", {
 
 test_that("sim_linelist gives expected proportion of ages with age struct", {
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.2, 0.5, 0.3),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.2, 0.5, 0.3, 0)
   )
   set.seed(1)
   linelist <- sim_linelist(

@@ -70,9 +70,8 @@ test_that("sim_outbreak works as expected with age-strat risks", {
 
 test_that("sim_outbreak works as expected with age structure", {
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.2, 0)
   )
   set.seed(1)
   expect_snapshot(
