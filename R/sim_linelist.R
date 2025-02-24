@@ -350,7 +350,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
   )
 
   if (is.data.frame(population_age)) {
-    population_age <- .check_age_df(population_age)
+    population_age <- .check_df(population_age, df_type = "age")
     age_range <- c(
       lower = min(population_age[, "min_age"]),
       upper = max(population_age[, "max_age"])
@@ -361,20 +361,23 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
     age_range <- population_age
   }
   if (is.data.frame(hosp_risk)) {
-    hosp_risk <- .check_risk_df(
+    hosp_risk <- .check_df(
       hosp_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
   if (is.data.frame(hosp_death_risk)) {
-    hosp_death_risk <- .check_risk_df(
+    hosp_death_risk <- .check_df(
       hosp_death_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
   if (is.data.frame(non_hosp_death_risk)) {
-    non_hosp_death_risk <- .check_risk_df(
+    non_hosp_death_risk <- .check_df(
       non_hosp_death_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
