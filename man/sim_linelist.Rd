@@ -221,10 +221,9 @@ arguments. This \verb{<data.frame>} should have two columns:
 
 For an age-structured population, a \verb{<data.frame>} with two columns:
 \itemize{
-\item \code{age_range}: a column with characters specifying the lower and upper bound
-of that age group, separated by a hyphen (-). Both bounds are inclusive
-(integers). For example, an age group of one to ten would be given as
-\code{"1-10"}.
+\item \code{age_limit}: a column with one \code{numeric} per cell for the lower bound
+(minimum) age of the age group (inclusive), except the last element which is
+the upper bound (maximum) of the population.
 \item \code{proportion}: a column with the proportion of the population that are in
 that age group. Proportions must sum to one.
 }

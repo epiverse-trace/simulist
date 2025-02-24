@@ -59,36 +59,35 @@
 .check_age_df <- function(x) {
   # check input
   stopifnot(
-    "Column names should be 'age_range' & 'proportion'" =
-      setequal(c("age_range", "proportion"), colnames(x)),
-    "Age range or proportion cannot be NA or NaN" =
+    "Column names should be 'age_limit' & 'proportion'" =
+      setequal(c("age_limit", "proportion"), colnames(x)),
+    "Minimum age of lowest age group must be greater than zero" =
+      min(x$age_limit) > 0,
+    "Age limit or proportion cannot be NA or NaN" =
       !anyNA(x),
     "Proportions of each age bracket should sum to 1" =
       all.equal(sum(x$proportion), 1),
-    "All age groups should be separated with a '-' (e.g. '1-5')" =
-      all(grepl(pattern = "^\\d+(-)\\d+$", x = x$age_range)) # nolint nonportable_path_linter
+    "Age limit in age data frame must be unique" =
+      anyDuplicated(x$age_limit) == 0
   )
 
   # extract bounds and groups
-  age_bounds <- strsplit(x$age_range, split = "-", fixed = TRUE)
-  age_bounds <- lapply(age_bounds, as.numeric)
-  age_groups <- unlist(lapply(age_bounds, function(y) y[1]:y[2]))
-
-  # check age input
-  stopifnot(
-    "Age groups should be non-overlapping" =
-      anyDuplicated(age_groups) == 0,
-    "Age groups should be contiguous" =
-      min(age_groups):max(age_groups) %in% age_groups,
-    "Age groups should include only positive integers" =
-      checkmate::test_integerish(unlist(age_bounds), lower = 0)
-  )
+  age_range_ <- min(x$age_limit):max(x$age_limit)
+  # findInterval inclusive/exclusive bound rules match age bracket
+  age_groups <- unname(split(age_range_, findInterval(age_range_, x$age_limit)))
 
   # add and sort data frames cols
-  x <- data.frame(
-    min_age = vapply(age_bounds, "[[", FUN.VALUE = numeric(1), 1),
-    max_age = vapply(age_bounds, "[[", FUN.VALUE = numeric(1), 2),
-    proportion = x$proportion
+  x$max_age <- vapply(age_groups, max, FUN.VALUE = numeric(1))
+  colnames(x) <- c("min_age", "proportion", "max_age")
+  x <- x[, c("min_age", "max_age", "proportion")]
+
+  # add informative row names
+  row.names(x) <- paste0(
+    "[", x$min_age, ",", (x$max_age + 1), ")"
+  )
+  # last age bracket has inclusive upper bound
+  row.names(x)[nrow(x)] <- paste0(
+    "[", x$min_age[nrow(x)], ",", x$max_age[nrow(x)], "]"
   )
 
   # return age data frame
