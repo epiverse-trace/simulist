@@ -78,7 +78,7 @@ sim_contacts <- function(contact_distribution = function(x) stats::dpois(x = x, 
   )
 
   if (is.data.frame(population_age)) {
-    population_age <- .check_age_df(population_age)
+    population_age <- .check_df(population_age, df_type = "age")
   } else {
     population_age <- sort(population_age)
     names(population_age) <- c("lower", "upper")
