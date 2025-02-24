@@ -617,18 +617,18 @@
         population_age = age_struct)
     Output
          id          case_name case_type sex age date_onset date_reporting
-      1   1      Gabriel Black  probable   m  44 2023-01-01     2023-01-01
+      1   1      Gabriel Black  probable   m  43 2023-01-01     2023-01-01
       2   2       Tyler Kelley confirmed   m  13 2023-01-01     2023-01-01
-      3   3       Cody Morales suspected   m  22 2023-01-01     2023-01-01
-      4   5          Joewid Le  probable   m  85 2023-01-01     2023-01-01
-      5   6      Carolyn Moore confirmed   f  41 2023-01-01     2023-01-01
-      6   8  Cheyenne Sayavong confirmed   f  89 2023-01-01     2023-01-01
-      7  11 Pierce Khanthavong confirmed   m  69 2023-01-01     2023-01-01
-      8  12          Kendra To suspected   f  23 2023-01-01     2023-01-01
-      9  13  Preston Barringer confirmed   m   9 2023-01-01     2023-01-01
-      10 18  Dominique Raymond confirmed   f  62 2023-01-02     2023-01-02
-      11 20   Bassaam el-Majid  probable   m  52 2023-01-02     2023-01-02
-      12 22      Susana Varela  probable   f  76 2023-01-02     2023-01-02
+      3   3       Cody Morales suspected   m  11 2023-01-01     2023-01-01
+      4   5          Joewid Le  probable   m  80 2023-01-01     2023-01-01
+      5   6      Carolyn Moore confirmed   f  19 2023-01-01     2023-01-01
+      6   8  Cheyenne Sayavong confirmed   f  84 2023-01-01     2023-01-01
+      7  11 Pierce Khanthavong confirmed   m  79 2023-01-01     2023-01-01
+      8  12          Kendra To suspected   f  31 2023-01-01     2023-01-01
+      9  13  Preston Barringer confirmed   m  71 2023-01-01     2023-01-01
+      10 18  Dominique Raymond confirmed   f  61 2023-01-02     2023-01-02
+      11 20   Bassaam el-Majid  probable   m  51 2023-01-02     2023-01-02
+      12 22      Susana Varela  probable   f  75 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1      2023-01-02 recovered         <NA>               <NA>              <NA>
       2            <NA> recovered         <NA>         2022-12-30        2023-01-05
@@ -664,18 +664,18 @@
         hosp_risk = age_dep_hosp_risk, population_age = age_struct)
     Output
          id           case_name case_type sex age date_onset date_reporting
-      1   1        Bryce Kelley confirmed   m  44 2023-01-01     2023-01-01
+      1   1        Bryce Kelley confirmed   m  43 2023-01-01     2023-01-01
       2   2 Khristopher Carlson confirmed   m  13 2023-01-01     2023-01-01
-      3   3       Cleatus Black suspected   m  22 2023-01-01     2023-01-01
-      4   5       Tyler Spencer confirmed   m  85 2023-01-01     2023-01-01
-      5   6    Sajiyya el-Bahri confirmed   f  41 2023-01-01     2023-01-01
-      6   8   Shameema al-Fayad confirmed   f  89 2023-01-01     2023-01-01
-      7  11           Jelani Le confirmed   m  69 2023-01-01     2023-01-01
-      8  12    Ashley Depoyster confirmed   f  23 2023-01-01     2023-01-01
-      9  13     Rushdi el-Amara  probable   m   9 2023-01-01     2023-01-01
-      10 18      Sabrina Catlin suspected   f  62 2023-01-02     2023-01-02
-      11 20       Jackson Sheek confirmed   m  52 2023-01-02     2023-01-02
-      12 22       Talia Cousins  probable   f  76 2023-01-02     2023-01-02
+      3   3       Cleatus Black suspected   m  11 2023-01-01     2023-01-01
+      4   5       Tyler Spencer confirmed   m  80 2023-01-01     2023-01-01
+      5   6    Sajiyya el-Bahri confirmed   f  19 2023-01-01     2023-01-01
+      6   8   Shameema al-Fayad confirmed   f  84 2023-01-01     2023-01-01
+      7  11           Jelani Le confirmed   m  79 2023-01-01     2023-01-01
+      8  12    Ashley Depoyster confirmed   f  31 2023-01-01     2023-01-01
+      9  13     Rushdi el-Amara  probable   m  71 2023-01-01     2023-01-01
+      10 18      Sabrina Catlin suspected   f  61 2023-01-02     2023-01-02
+      11 20       Jackson Sheek confirmed   m  51 2023-01-02     2023-01-02
+      12 22       Talia Cousins  probable   f  75 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1            <NA> recovered         <NA>               <NA>              <NA>
       2            <NA> recovered         <NA>         2022-12-30        2023-01-05

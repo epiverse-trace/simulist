@@ -1420,18 +1420,18 @@
     Output
       $linelist
          id          case_name case_type sex age date_onset date_reporting
-      1   1      Gabriel Black  probable   m  44 2023-01-01     2023-01-01
+      1   1      Gabriel Black  probable   m  43 2023-01-01     2023-01-01
       2   2       Tyler Kelley confirmed   m  13 2023-01-01     2023-01-01
-      3   3       Cody Morales suspected   m  22 2023-01-01     2023-01-01
-      4   5          Joewid Le  probable   m  85 2023-01-01     2023-01-01
-      5   6      Carolyn Moore confirmed   f  41 2023-01-01     2023-01-01
-      6   8  Cheyenne Sayavong confirmed   f  89 2023-01-01     2023-01-01
-      7  11 Pierce Khanthavong confirmed   m  69 2023-01-01     2023-01-01
-      8  12          Kendra To suspected   f  23 2023-01-01     2023-01-01
-      9  13  Preston Barringer confirmed   m   9 2023-01-01     2023-01-01
-      10 18  Dominique Raymond confirmed   f  62 2023-01-02     2023-01-02
-      11 20   Bassaam el-Majid  probable   m  52 2023-01-02     2023-01-02
-      12 22      Susana Varela  probable   f  76 2023-01-02     2023-01-02
+      3   3       Cody Morales suspected   m  11 2023-01-01     2023-01-01
+      4   5          Joewid Le  probable   m  80 2023-01-01     2023-01-01
+      5   6      Carolyn Moore confirmed   f  19 2023-01-01     2023-01-01
+      6   8  Cheyenne Sayavong confirmed   f  84 2023-01-01     2023-01-01
+      7  11 Pierce Khanthavong confirmed   m  79 2023-01-01     2023-01-01
+      8  12          Kendra To suspected   f  31 2023-01-01     2023-01-01
+      9  13  Preston Barringer confirmed   m  71 2023-01-01     2023-01-01
+      10 18  Dominique Raymond confirmed   f  61 2023-01-02     2023-01-02
+      11 20   Bassaam el-Majid  probable   m  51 2023-01-02     2023-01-02
+      12 22      Susana Varela  probable   f  75 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1      2023-01-02 recovered         <NA>               <NA>              <NA>
       2            <NA> recovered         <NA>         2022-12-30        2023-01-05
@@ -1462,26 +1462,26 @@
       $contacts
                        from                        to age sex date_first_contact
       1       Gabriel Black              Tyler Kelley  13   m         2022-12-30
-      2       Gabriel Black              Cody Morales  22   m         2022-12-30
-      3        Tyler Kelley             Taylor Graves   5   f         2022-12-27
-      4        Tyler Kelley                 Joewid Le  85   m         2022-12-29
-      5        Cody Morales             Carolyn Moore  41   f         2023-01-01
-      6        Cody Morales           Rushdi al-Ishak   2   m         2022-12-30
-      7        Cody Morales         Cheyenne Sayavong  89   f         2023-01-03
+      2       Gabriel Black              Cody Morales  11   m         2022-12-30
+      3        Tyler Kelley             Taylor Graves  10   f         2022-12-27
+      4        Tyler Kelley                 Joewid Le  80   m         2022-12-29
+      5        Cody Morales             Carolyn Moore  19   f         2023-01-01
+      6        Cody Morales           Rushdi al-Ishak   4   m         2022-12-30
+      7        Cody Morales         Cheyenne Sayavong  84   f         2023-01-03
       8           Joewid Le         Mercedes Lovelace  86   f         2023-01-06
-      9       Carolyn Moore Chantelle Vazquez-Luevano  82   f         2023-01-01
-      10  Cheyenne Sayavong        Pierce Khanthavong  69   m         2023-01-04
-      11  Cheyenne Sayavong                 Kendra To  23   f         2023-01-01
-      12  Cheyenne Sayavong         Preston Barringer   9   m         2022-12-31
-      13 Pierce Khanthavong           Jackson Carlson  79   m         2022-12-28
-      14 Pierce Khanthavong               Megan Hayes  29   f         2023-01-01
-      15 Pierce Khanthavong               Sam Spencer   4   m         2023-01-02
+      9       Carolyn Moore Chantelle Vazquez-Luevano  88   f         2023-01-01
+      10  Cheyenne Sayavong        Pierce Khanthavong  79   m         2023-01-04
+      11  Cheyenne Sayavong                 Kendra To  31   f         2023-01-01
+      12  Cheyenne Sayavong         Preston Barringer  71   m         2022-12-31
+      13 Pierce Khanthavong           Jackson Carlson  78   m         2022-12-28
+      14 Pierce Khanthavong               Megan Hayes  28   f         2023-01-01
+      15 Pierce Khanthavong               Sam Spencer   1   m         2023-01-02
       16          Kendra To         Amanda Larochelle  13   f         2023-01-02
-      17  Preston Barringer         Dominique Raymond  62   f         2022-12-30
+      17  Preston Barringer         Dominique Raymond  61   f         2022-12-30
       18  Preston Barringer            Natalie Newton  24   f         2023-01-06
-      19  Preston Barringer          Bassaam el-Majid  52   m         2023-01-01
-      20  Preston Barringer           Qaaid al-Madani  74   m         2023-01-01
-      21  Dominique Raymond             Susana Varela  76   f         2023-01-01
+      19  Preston Barringer          Bassaam el-Majid  51   m         2023-01-01
+      20  Preston Barringer           Qaaid al-Madani  73   m         2023-01-01
+      21  Dominique Raymond             Susana Varela  75   f         2023-01-01
          date_last_contact was_case           status
       1         2023-01-05        Y             case
       2         2023-01-02        Y             case

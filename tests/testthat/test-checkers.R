@@ -75,65 +75,42 @@ test_that(".check_risk_df fails as expected", {
 
 test_that(".check_age_df works as expected", {
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.2, 0)
   )
   age_struct <- .check_age_df(age_struct)
   expect_s3_class(age_struct, class = "data.frame")
-  expect_identical(dim(age_struct), c(3L, 3L))
+  expect_identical(dim(age_struct), c(4L, 3L))
   expect_identical(colnames(age_struct), c("min_age", "max_age", "proportion"))
 })
 
 test_that(".check_age_df fails as expected", {
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    percentage = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    percentage = c(0.1, 0.7, 0.2, 0)
   )
   expect_error(
     .check_age_df(age_struct),
-    regexp = "Column names should be 'age_range' & 'proportion'"
+    regexp = "Column names should be 'age_limit' & 'proportion'"
   )
 
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, NA, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, NA, 0.2, 0)
   )
   expect_error(
     .check_age_df(age_struct),
-    regexp = "Age range or proportion cannot be NA or NaN"
+    regexp = "Age limit or proportion cannot be NA or NaN"
   )
 
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.3),
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.3, 0),
     stringsAsFactors = FALSE
   )
   expect_error(
     .check_age_df(age_struct),
     regexp = "Proportions of each age bracket should sum to 1"
-  )
-
-  age_struct <- data.frame(
-    age_range = c("1_4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
-  )
-  expect_error(
-    .check_age_df(age_struct),
-    regexp = "(All age groups should be separated with a)*(-)"
-  )
-
-  age_struct <- data.frame(
-    age_range = c("1-4", "52-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
-  )
-  expect_error(
-    .check_age_df(age_struct),
-    regexp = "Age groups should be contiguous"
   )
 })
 
