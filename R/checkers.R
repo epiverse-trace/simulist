@@ -1,40 +1,71 @@
-#' Check if `<data.frame>` defining age-stratified hospitalisation or death risk
-#' is correct
+#' Check if `<data.frame>` defining either age-stratified hospitalisation or
+#' death risk, or defining age structure of population is correct
 #'
 #' @param x A `<data.frame>`.
+#' @param df_type A `character` string, either `"risk"` or `"age"` to specify
+#' which input `<data.frame>` is being checked.
+#' @param age_range A `numeric` vector of length 2. Only required when
+#' `df_type = risk`, `NULL` by default.
 #'
 #' @return A `<data.frame>`, also called for error side-effects when input is
 #' invalid.
 #' @keywords internal
-.check_risk_df <- function(x, age_range) {
-  # check input
+.check_df <- function(x, df_type = c("risk", "age"), age_range = NULL) {
+  df_type <- match.arg(df_type)
+  col_name <- switch(df_type,
+    risk = "risk",
+    age = "proportion"
+  )
   stopifnot(
-    "Column names should be 'age_limit' & 'risk'" =
-      setequal(c("age_limit", "risk"), colnames(x)),
-    "Minimum age of lowest age group should match lower age range" =
-      age_range[["lower"]] == min(x$age_limit),
-    "Lower bound of oldest age group must be lower than highest age range" =
-      age_range[["upper"]] > max(x$age_limit),
-    "Age limit or risk cannot be NA or NaN" =
-      !anyNA(x),
-    "Risk should be between 0 and 1" =
-      min(x$risk) >= 0 && max(x$risk) <= 1,
-    "Age limit in risk data frame must be unique" =
+    "Age limit in data frame must be unique" =
       anyDuplicated(x$age_limit) == 0
   )
+  if (df_type == "risk") {
+    stopifnot(
+      "Column names should be 'age_limit' & 'risk'" =
+        setequal(c("age_limit", col_name), colnames(x)),
+      "Age limit or risk cannot be NA or NaN" =
+        !anyNA(x),
+      "`age_range` argument must be specified for risk <data.frame>" =
+        !is.null(age_range),
+      "Minimum age of lowest age group should match lower age range" =
+        age_range[["lower"]] == min(x$age_limit),
+      "Lower bound of oldest age group must be lower than highest age range" =
+        age_range[["upper"]] > max(x$age_limit),
+      "Risk should be between 0 and 1" =
+        min(x$risk) >= 0 && max(x$risk) <= 1
+    )
+  } else {
+    stopifnot(
+      "Column names should be 'age_limit' & 'proportion'" =
+        setequal(c("age_limit", col_name), colnames(x)),
+      "Age limit or proportion cannot be NA or NaN" =
+        !anyNA(x),
+      "Minimum age of lowest age group must be greater than zero" =
+        min(x$age_limit) > 0,
+      "Proportions of each age bracket should sum to 1" =
+        all.equal(sum(x$proportion), 1)
+    )
+  }
 
   # order risk df on age_limit
   x <- x[order(x$age_limit), ]
 
-  # format risk data frame
-  age_range_ <- age_range[["lower"]]:age_range[["upper"]]
+  if (df_type == "risk") {
+    # format risk data frame
+    age_range_ <- age_range[["lower"]]:age_range[["upper"]]
+  } else {
+    # extract bounds and groups
+    age_range_ <- min(x$age_limit):max(x$age_limit)
+  }
+
   # findInterval inclusive/exclusive bound rules match age bracket
   age_groups <- unname(split(age_range_, findInterval(age_range_, x$age_limit)))
 
   # add and sort data frames cols
   x$max_age <- vapply(age_groups, max, FUN.VALUE = numeric(1))
-  colnames(x) <- c("min_age", "risk", "max_age")
-  x <- x[, c("min_age", "max_age", "risk")]
+  colnames(x) <- c("min_age", col_name, "max_age")
+  x <- x[, c("min_age", "max_age", col_name)]
 
   # add informative row names
   row.names(x) <- paste0(
@@ -44,53 +75,7 @@
   row.names(x)[nrow(x)] <- paste0(
     "[", x$min_age[nrow(x)], ",", x$max_age[nrow(x)], "]"
   )
-
-  # return risk data frame
-  x
-}
-
-#' Check if `<data.frame>` defining age structure of population is correct
-#'
-#' @param x A `<data.frame>`.
-#'
-#' @return A `<data.frame>`, also called for error side-effects when input is
-#' invalid.
-#' @keywords internal
-.check_age_df <- function(x) {
-  # check input
-  stopifnot(
-    "Column names should be 'age_limit' & 'proportion'" =
-      setequal(c("age_limit", "proportion"), colnames(x)),
-    "Minimum age of lowest age group must be greater than zero" =
-      min(x$age_limit) > 0,
-    "Age limit or proportion cannot be NA or NaN" =
-      !anyNA(x),
-    "Proportions of each age bracket should sum to 1" =
-      all.equal(sum(x$proportion), 1),
-    "Age limit in age data frame must be unique" =
-      anyDuplicated(x$age_limit) == 0
-  )
-
-  # extract bounds and groups
-  age_range_ <- min(x$age_limit):max(x$age_limit)
-  # findInterval inclusive/exclusive bound rules match age bracket
-  age_groups <- unname(split(age_range_, findInterval(age_range_, x$age_limit)))
-
-  # add and sort data frames cols
-  x$max_age <- vapply(age_groups, max, FUN.VALUE = numeric(1))
-  colnames(x) <- c("min_age", "proportion", "max_age")
-  x <- x[, c("min_age", "max_age", "proportion")]
-
-  # add informative row names
-  row.names(x) <- paste0(
-    "[", x$min_age, ",", (x$max_age + 1), ")"
-  )
-  # last age bracket has inclusive upper bound
-  row.names(x)[nrow(x)] <- paste0(
-    "[", x$min_age[nrow(x)], ",", x$max_age[nrow(x)], "]"
-  )
-
-  # return age data frame
+  # return data frame
   x
 }
 
