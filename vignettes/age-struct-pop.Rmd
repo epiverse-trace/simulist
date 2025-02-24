@@ -112,15 +112,20 @@ If the `population_age` argument was left unspecified, it would have assumed the
 
 ## Structured population age
 
-To simulate with a non-uniform age structure we create a table (`<data.frame>`) containing the age range of each age bracket in the population and the proportion of the population made up by that age group.
+To simulate with a non-uniform age structure we create a table (`<data.frame>`) containing the age bounds of each age bracket in the population and the proportion of the population made up by that age group.
 
-For this example we will simulate a population where 30% of the population are between 1 and 19, 40% of the population are between 20 and 59, and 30% are between 60 and 90. The age groups are inclusive so the age brackets should not overlap. There will be no individuals in the population younger then 1 or older than 90.
+::: {.alert .alert-warning}
+The upper bound (maximum) of the population also needs to be specified in the age structure `<data.frame>`, therefore, the last element in the age limits column is taken as the upper bound of the age in the population. All elements before the last one are the lower bound of each age group. 
+
+The simplest way to set the maximum population age is to set the proportion to zero.
+:::
+
+For this example we will simulate a population where 30% of the population are between 1 and 19, 40% of the population are between 20 and 59, and 30% are between 60 and 89. The age limits (`$age_limit` column) is inclusive. There will be no individuals in the population younger then 1 or older than 90.
 
 ```{r, make-age-struct-df}
 age_struct <- data.frame(
-  age_range = c("1-19", "20-59", "60-90"),
-  proportion = c(0.3, 0.4, 0.3),
-  stringsAsFactors = FALSE
+  age_limit = c(1, 20, 60, 90),
+  proportion = c(0.3, 0.4, 0.3, 0)
 )
 age_struct
 ```
@@ -155,12 +160,6 @@ ggplot(linelist[, c("sex", "age")]) +
   facet_wrap(vars(sex))
 ```
 
-::: {.alert .alert-warning}
-
-The age groups specified in the `<data.frame>` must be non-overlapping and be contiguous between the minimum age of the youngest age group and the maximum age of the oldest age group. In order words, there cannot be any missing age groups (e.g. 20-40 year olds) without a specified proportion. If this is the case the function will error with an informative error message.
-
-:::
-
 An example for a much younger population could instead specify:
 
 * `0.4` (or 40%) for 1-9 years old
@@ -168,12 +167,10 @@ An example for a much younger population could instead specify:
 * `0.2` (or 20%) for 30-59 years old
 * `0.1` (or 10%) for 60-75 years old
 
-
 ```{r, make-age-struct-df-young}
 age_struct <- data.frame(
-  age_range = c("1-9", "10-29", "30-59", "60-75"),
-  proportion = c(0.4, 0.3, 0.2, 0.1),
-  stringsAsFactors = FALSE
+  age_limit = c(1, 10, 30, 60, 75),
+  proportion = c(0.4, 0.3, 0.2, 0.1, 0)
 )
 age_struct
 ```
