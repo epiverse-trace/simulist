@@ -1,55 +1,39 @@
 #' Adjust or subset a line list to account for right truncation
 #'
 #' @description
-#' Adjust or subset the line list `<data.frame>` by either changing dates that
-#' are within the right-truncation window to `NA` or removing cases that have
-#' occurred within a delay period. This occurs to recent cases or outcomes
-#' that are not yet recorded in the line list and will be revised upwards. See
-#' `truncation_event` argument documentation for different types of truncation.
+#' Adjust or subset the line list `<data.frame>` by removing cases that
+#' have not been reported by the truncation time and setting hospitalisation
+#' admission or outcome dates that are after the truncation point to `NA`.
+#'
+#' This is to replicate real-time outbreak data where recent cases or outcomes
+#' are not yet observed or reported (right truncation).
 #'
 #' @details
-#' The truncation window is sampled for each individual and is specified by a
-#' (random) number generating function supplied to the `delay`
-#' argument. Therefore, if this function has variability
-#' (e.g. a probability distribution) it will not be a fixed time window for
-#' all individuals. It is possible that someone with a more recent date of
-#' onset is kept but someone with a less recent date of onset is removed due
-#' to the variability in the reporting delays. See examples for variable or
-#' fixed `delay` functions.
+#' The point at which the line list is right-truncated is the same for
+#' all individuals in the line list, and is specified by the
+#' `truncation_time` and `unit` arguments.
 #'
 #' @inheritParams messy_linelist
-#' @param delay A `function` (either anonymous or predefined) that
-#' has a single argument and generates random numbers given a probability
-#' distribution. The function must return a vector of real numbers for
-#' representing the reporting delay between the right-truncation point and the
-#' cut off date (`max_date`).
+#' @param truncation_time A single `numeric` specifying the number of
+#' days (default), weeks, months or years before the end of the outbreak
+#' (default) or since the start of the outbreak (see `direction` argument)
+#' to truncate the line list at. By default it is 14 days before the end
+#' of the outbreak.
 #'
-#' Default is a random number generator that is lognormally
-#' distributed ([rlnorm()]) delay with parameters `meanlog = 0.58` and
-#' `sdlog = 0.47`, which corresponds to a mean of 2 and a standard deviation
-#' of 1.
-#' @param max_date A maximum date to cut off the outbreak and apply reporting
-#' delays. Default is `NULL`, so the maximum date will be automatically
-#' calculated as the date at the end of the outbreak (i.e. date of the last
-#' outcome).
-#' @param truncation_event A `character` string with which event in the line
-#' list the right truncation should apply to. The default is `"reporting"` for
-#' the reporting delay, which is likely the most common form of right truncation
-#' in real-time outbreak data. When `truncation_event = "reporting"` if a date
-#' of reporting (`$date_reporting`) is more recent than the sampled truncation
-#' time then the individual (row) is removed from the line list. If the date of
-#' reporting is less recent than the sampled truncation time but either the
-#' date of hospitalisation (`$date_admission`) or date of outcome
-#' (`$date_outcome`) is more recent than the sampled truncation time then these
-#' dates are converted from `Date`s to `NA`s.
+#' Alternatively, `truncation_time` can accept a `<Date>` and this is
+#' used as the `truncation_time` and the `unit` and `direction` is ignored.
 #'
-#' The other options for `truncation_event` are `"onset"`, `"admission"`
-#' or `"outcome"`.  If these are chosen then if the truncation point is more
-#' recent than the date of symptom onset, date of hospital admission, or
-#' date of outcome (death or recovery), respectively, then these individuals
-#' (rows) will be removed from the line list (i.e. the `<data.frame>` is
-#' subset). If the event is less recent than the sampled truncation time then
-#' any events after the truncation point will be set to `NA`.
+#' @param unit A `character` string, either `"days"` (default),
+#' `"weeks"`, `"months"`, or `"years"`, specifying the units of the
+#' `truncation_time` argument.
+#'
+#' Years are assumed to be 365.25 days and months are assumed to be 365.25 / 12
+#' days (same as \pkg{lubridate}).
+#'
+#' @param direction A `character` string, either `"backwards"` (default) or
+#' `"forwards"`. `direction = backwards` defines the `truncation_time` as
+#' the time before the end of the outbreak. `direction = forwards` defines
+#' the `truncation_time` as the time since the start of the outbreak.
 #'
 #' @return A line list `<data.frame>`.
 #' @export
@@ -59,71 +43,84 @@
 #' linelist <- sim_linelist()
 #' linelist_trunc <- truncate_linelist(linelist)
 #'
-#' # set maximum date to apply truncation to 2023-01-01
-#' linelist_trunc <- truncate_linelist(linelist, max_date = "2023-01-01")
-#'
-#' # apply longer truncation to hospital admission
+#' # set truncation point 3 weeks before the end of outbreak
 #' linelist_trunc <- truncate_linelist(
 #'   linelist,
-#'   delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5),
-#'   truncation_event = "admission"
+#'   truncation_time = 3,
+#'   unit = "weeks"
 #' )
 #'
-#' # variable right truncation with mean 2 and sd 1 (default behaviour)
+#' # set truncation point to 2 months since the start of outbreak
 #' linelist_trunc <- truncate_linelist(
 #'   linelist,
-#'   delay = function(x) rlnorm(n = x, meanlog = 0.58, sdlog = 0.47)
+#'   truncation_time = 2,
+#'   unit = "months",
+#'   direction = "forwards"
 #' )
 #'
-#' # fixed right truncation of 5 days
+#' # set truncation point to 2023-03-01
 #' linelist_trunc <- truncate_linelist(
 #'   linelist,
-#'   delay = function(x) rep(5, n = x)
+#'   truncation_time = as.Date("2023-03-01")
 #' )
 truncate_linelist <- function(linelist,
-                              delay = function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47), # nolint line_length_linter
-                              max_date = NULL,
-                              truncation_event = c("reporting", "onset",
-                                                   "admission", "outcome")) {
+                              truncation_time = 14,
+                              unit = c("days", "weeks", "months", "years"),
+                              direction = c("backwards", "forwards")) {
+  arg_ignore <- missing(unit) && missing(direction)
   .check_linelist(linelist)
-  .check_func_req_args(func = delay, func_name = "delay", n_req_args = 1)
-  truncation_event <- match.arg(truncation_event)
-  if (is.null(max_date)) {
-    date_cols <- grep(pattern = "date_", x = colnames(linelist), fixed = TRUE)
-    max_date <- as.Date(
-      max(unlist(linelist[, date_cols]), na.rm = TRUE),
-      origin = "1970-01-01"
+  stopifnot(
+    "`truncation_time` must be a single positive numeric or a <Date> object." =
+      checkmate::test_number(truncation_time, lower = 0, finite = TRUE) ||
+      checkmate::test_date(truncation_time, any.missing = FALSE, len = 1)
     )
-  }
-  if (!inherits(max_date, "Date")) {
-    # enables numeric max_date for R <4.3.0
-    # https://github.com/wch/r-source/commit/920affdc32cba1baa765fb3a647570d407dfccaa # nolint line_length_linter
-    max_date <- as.Date(max_date, origin = "1970-01-01")
-    message(
-      "Truncation max date is: ", max_date, ".\n",
-      "Assuming an origin of '1970-01-01' in line with R >= v4.3.0."
-    )
-  }
-  col_name <- paste0("date_", truncation_event)
-  trunc_time <- delay(nrow(linelist))
-  # sample which onset dates are longer than reporting delay (i.e. reported)
-  reported_lgl_idx <-
-    (max_date - linelist[[col_name]]) > trunc_time
-  # convert NAs to TRUE to prevent issues with subsetting with NAs
-  reported_lgl_idx[is.na(reported_lgl_idx)] <- TRUE
-  linelist <- linelist[reported_lgl_idx, ]
+  unit <- match.arg(unit)
+  direction <- match.arg(direction)
 
-  # subset truncation times to remove times for individuals removed above
-  trunc_time <- trunc_time[reported_lgl_idx]
+  if (is.numeric(truncation_time)) {
+    # convert truncation_time to days
+    truncation_time <- switch(unit,
+      days = truncation_time,
+      weeks = truncation_time * 7,
+      months = truncation_time * (365.25 / 12),
+      years = truncation_time * 365.25
+    )
+
+    date_cols <- grep(pattern = "date_", x = colnames(linelist), fixed = TRUE)
+    if (direction == "backwards") {
+      # get present as maximum date in line list
+      max_date <- as.Date(
+        max(unlist(linelist[, date_cols]), na.rm = TRUE),
+        origin = "1970-01-01"
+      )
+      trunc_date <- max_date - truncation_time
+    } else {
+      # get outbreak start date as minimum date in line list
+      min_date <- as.Date(
+        min(unlist(linelist[, date_cols]), na.rm = TRUE),
+        origin = "1970-01-01"
+      )
+      trunc_date <- min_date + truncation_time
+    }
+  } else {
+    trunc_date <- truncation_time
+    if (!arg_ignore) {
+      warning(
+        "When `truncation_time` is given as a <Date>, ",
+        "`unit` and `direction` are ignored.",
+        call. = FALSE
+      )
+    }
+  }
+
+  # which cases are reported before the truncation date (i.e. included)
+  reported_lgl_idx <- trunc_date > linelist$date_reporting
+  linelist <- linelist[reported_lgl_idx, ]
 
   # convert events (reporting, admissions & outcomes) more recent than
   # truncation time to NA
-  missing_outcome_lgl_idx <- (max_date - linelist$date_outcome) < trunc_time
-  linelist$date_outcome[missing_outcome_lgl_idx] <- NA_real_
-  missing_admission_lgl_idx <- (max_date - linelist$date_admission) < trunc_time
-  linelist$date_admission[missing_admission_lgl_idx] <- NA_real_
-  missing_reporting_lgl_idx <- (max_date - linelist$date_reporting) < trunc_time
-  linelist$date_reporting[missing_reporting_lgl_idx] <- NA_real_
+  linelist$date_outcome[linelist$date_outcome > trunc_date] <- NA_real_
+  linelist$date_admission[linelist$date_admission > trunc_date] <- NA_real_
 
   row.names(linelist) <- NULL
   linelist

@@ -6,93 +6,74 @@
 \usage{
 truncate_linelist(
   linelist,
-  delay = function(x) stats::rlnorm(n = x, meanlog = 0.58, sdlog = 0.47),
-  max_date = NULL,
-  truncation_event = c("reporting", "onset", "admission", "outcome")
+  truncation_time = 14,
+  unit = c("days", "weeks", "months", "years"),
+  direction = c("backwards", "forwards")
 )
 }
 \arguments{
 \item{linelist}{Line list \verb{<data.frame>} output from \code{\link[=sim_linelist]{sim_linelist()}}.}
 
-\item{delay}{A \code{function} (either anonymous or predefined) that
-has a single argument and generates random numbers given a probability
-distribution. The function must return a vector of real numbers for
-representing the reporting delay between the right-truncation point and the
-cut off date (\code{max_date}).
+\item{truncation_time}{A single \code{numeric} specifying the number of
+days (default), weeks, months or years before the end of the outbreak
+(default) or since the start of the outbreak (see \code{direction} argument)
+to truncate the line list at. By default it is 14 days before the end
+of the outbreak.
 
-Default is a random number generator that is lognormally
-distributed (\code{\link[=rlnorm]{rlnorm()}}) delay with parameters \code{meanlog = 0.58} and
-\code{sdlog = 0.47}, which corresponds to a mean of 2 and a standard deviation
-of 1.}
+Alternatively, \code{truncation_time} can accept a \verb{<Date>} and this is
+used as the \code{truncation_time} and the \code{unit} and \code{direction} is ignored.}
 
-\item{max_date}{A maximum date to cut off the outbreak and apply reporting
-delays. Default is \code{NULL}, so the maximum date will be automatically
-calculated as the date at the end of the outbreak (i.e. date of the last
-outcome).}
+\item{unit}{A \code{character} string, either \code{"days"} (default),
+\code{"weeks"}, \code{"months"}, or \code{"years"}, specifying the units of the
+\code{truncation_time} argument.
 
-\item{truncation_event}{A \code{character} string with which event in the line
-list the right truncation should apply to. The default is \code{"reporting"} for
-the reporting delay, which is likely the most common form of right truncation
-in real-time outbreak data. When \code{truncation_event = "reporting"} if a date
-of reporting (\verb{$date_reporting}) is more recent than the sampled truncation
-time then the individual (row) is removed from the line list. If the date of
-reporting is less recent than the sampled truncation time but either the
-date of hospitalisation (\verb{$date_admission}) or date of outcome
-(\verb{$date_outcome}) is more recent than the sampled truncation time then these
-dates are converted from \code{Date}s to \code{NA}s.
+Years are assumed to be 365.25 days and months are assumed to be 365.25 / 12
+days (same as \pkg{lubridate}).}
 
-The other options for \code{truncation_event} are \code{"onset"}, \code{"admission"}
-or \code{"outcome"}.  If these are chosen then if the truncation point is more
-recent than the date of symptom onset, date of hospital admission, or
-date of outcome (death or recovery), respectively, then these individuals
-(rows) will be removed from the line list (i.e. the \verb{<data.frame>} is
-subset). If the event is less recent than the sampled truncation time then
-any events after the truncation point will be set to \code{NA}.}
+\item{direction}{A \code{character} string, either \code{"backwards"} (default) or
+\code{"forwards"}. \code{direction = backwards} defines the \code{truncation_time} as
+the time before the end of the outbreak. \code{direction = forwards} defines
+the \code{truncation_time} as the time since the start of the outbreak.}
 }
 \value{
 A line list \verb{<data.frame>}.
 }
 \description{
-Adjust or subset the line list \verb{<data.frame>} by either changing dates that
-are within the right-truncation window to \code{NA} or removing cases that have
-occurred within a delay period. This occurs to recent cases or outcomes
-that are not yet recorded in the line list and will be revised upwards. See
-\code{truncation_event} argument documentation for different types of truncation.
+Adjust or subset the line list \verb{<data.frame>} by removing cases that
+have not been reported by the truncation time and setting hospitalisation
+admission or outcome dates that are after the truncation point to \code{NA}.
+
+This is to replicate real-time outbreak data where recent cases or outcomes
+are not yet observed or reported (right truncation).
 }
 \details{
-The truncation window is sampled for each individual and is specified by a
-(random) number generating function supplied to the \code{delay}
-argument. Therefore, if this function has variability
-(e.g. a probability distribution) it will not be a fixed time window for
-all individuals. It is possible that someone with a more recent date of
-onset is kept but someone with a less recent date of onset is removed due
-to the variability in the reporting delays. See examples for variable or
-fixed \code{delay} functions.
+The point at which the line list is right-truncated is the same for
+all individuals in the line list, and is specified by the
+\code{truncation_time} and \code{unit} arguments.
 }
 \examples{
 set.seed(1)
 linelist <- sim_linelist()
 linelist_trunc <- truncate_linelist(linelist)
 
-# set maximum date to apply truncation to 2023-01-01
-linelist_trunc <- truncate_linelist(linelist, max_date = "2023-01-01")
-
-# apply longer truncation to hospital admission
+# set truncation point 3 weeks before the end of outbreak
 linelist_trunc <- truncate_linelist(
   linelist,
-  delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5),
-  truncation_event = "admission"
+  truncation_time = 3,
+  unit = "weeks"
 )
 
-# variable right truncation with mean 2 and sd 1 (default behaviour)
+# set truncation point to 2 months since the start of outbreak
 linelist_trunc <- truncate_linelist(
   linelist,
-  delay = function(x) rlnorm(n = x, meanlog = 0.58, sdlog = 0.47)
+  truncation_time = 2,
+  unit = "months",
+  direction = "forwards"
 )
 
-# fixed right truncation of 5 days
+# set truncation point to 2023-03-01
 linelist_trunc <- truncate_linelist(
   linelist,
-  delay = function(x) rep(5, n = x)
+  truncation_time = as.Date("2023-03-01")
 )
 }
