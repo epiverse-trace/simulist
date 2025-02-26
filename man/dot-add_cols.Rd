@@ -157,9 +157,6 @@ a single argument.
 
 The default is \code{NULL} so by default there is no reporting delay, and the
 \verb{$date_reporting} line list column is identical to the \verb{$date_onset} column.}
-
-\item{...}{\link{dots} Extra arguments to be passed to the distribution function
-given in the \code{distribution} argument.}
 }
 \value{
 A \verb{<data.frame>} with one more column than input into \code{.data}.
