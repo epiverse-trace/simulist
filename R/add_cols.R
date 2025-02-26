@@ -33,11 +33,22 @@ NULL
 #' @name .add_cols
 .add_date_contact <- function(.data,
                               contact_type = c("first", "last"),
-                              distribution = c("pois", "geom"),
-                              ...,
+                              distribution,
                               outbreak_start_date = NULL) {
   contact_type <- match.arg(contact_type)
-  distribution <- match.arg(distribution)
+  .check_func_req_args(
+    distribution,
+    func_name = paste0(contact_type, "_contact_distribution")
+  )
+  distribution_eval <- distribution(1)
+  # random numbers generated from discrete distributions produce integers
+  if (!is.integer(distribution_eval) || distribution_eval < 0) {
+    stop(
+      "First or last contact distribution specified in `config` must be a ",
+      "(random) number generating functions that produces positive integers.",
+      call. = FALSE
+    )
+  }
 
   stopifnot(
     "outbreak_start_date is only required for adding date of last contact" =
@@ -45,34 +56,7 @@ NULL
       contact_type == "first" && is.null(outbreak_start_date)
   )
 
-  rdist <- switch(distribution,
-    pois = stats::rpois,
-    geom = stats::rgeom
-  )
-
-  # c() over ...length() to ensure NULL is not counted by length
-  if (length(c(...)) == 0) {
-    stop("Distribution parameters are missing, check config", call. = FALSE)
-  }
-
-  # name list elements with vec names to ensure arg matching in do.call
-  .args <- c(nrow(.data), list(...))
-
-  contact_delay <- tryCatch(
-    do.call(rdist, args = .args),
-    error = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    },
-    warning = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    }
-  )
+  contact_delay <- distribution(nrow(.data))
 
   if (contact_type == "first") {
     # add date of first contact with infector
@@ -245,41 +229,18 @@ NULL
 }
 
 #' @name .add_cols
-.add_ct <- function(.data, distribution = c("norm", "lnorm"), ...) {
-  distribution <- match.arg(distribution)
-
-  rdist <- switch(distribution,
-    norm = stats::rnorm,
-    lnorm = stats::rlnorm
-  )
-
-  # c() over ...length() to ensure NULL is not counted by length
-  if (length(c(...)) == 0) {
-    stop("Distribution parameters are missing, check config", call. = FALSE)
+.add_ct <- function(.data, distribution) {
+  .check_func_req_args(distribution, func_name = "ct_distribution")
+  distribution_eval <- distribution(1)
+  if (!is.numeric(distribution_eval) || distribution_eval < 0) {
+    stop(
+      "Ct distribution specified in `config` must be a ",
+      "(random) number generating functions that produces positive numbers.",
+      call. = FALSE
+    )
   }
 
-  # name list elements with vec names to ensure arg matching in do.call
-  # as.list(c(...)) ensures that ... can be a list, vector or multiple args
-  .args <- c(
-    n = sum(.data$case_type == "confirmed", na.rm = TRUE),
-    as.list(c(...))
-  )
-
-  ct_value <- tryCatch(
-    do.call(rdist, args = .args),
-    error = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    },
-    warning = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    }
-  )
+  ct_value <- distribution(sum(.data$case_type == "confirmed", na.rm = TRUE))
   ct_value <- signif(ct_value, digits = 3)
 
   .data$ct_value <- NA_real_
