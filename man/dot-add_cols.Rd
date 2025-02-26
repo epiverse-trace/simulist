@@ -14,8 +14,7 @@ history \verb{<data.frame>}}
 .add_date_contact(
   .data,
   contact_type = c("first", "last"),
-  distribution = c("pois", "geom"),
-  ...,
+  distribution,
   outbreak_start_date = NULL
 )
 
@@ -32,7 +31,7 @@ history \verb{<data.frame>}}
 
 .add_names(.data, anonymise = FALSE)
 
-.add_ct(.data, distribution = c("norm", "lnorm"), ...)
+.add_ct(.data, distribution)
 
 .add_reporting_delay(.data, reporting_delay)
 }
@@ -46,9 +45,6 @@ contact (\code{"first"}), or last contact (\code{"last"}).}
 \item{distribution}{A \code{character} with the name of the distribution,
 following the base R convention for distribution naming (e.g. Poisson
 is \code{pois}).}
-
-\item{...}{\link{dots} Extra arguments to be passed to the distribution function
-given in the \code{distribution} argument.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
@@ -161,6 +157,9 @@ a single argument.
 
 The default is \code{NULL} so by default there is no reporting delay, and the
 \verb{$date_reporting} line list column is identical to the \verb{$date_onset} column.}
+
+\item{...}{\link{dots} Extra arguments to be passed to the distribution function
+given in the \code{distribution} argument.}
 }
 \value{
 A \verb{<data.frame>} with one more column than input into \code{.data}.
