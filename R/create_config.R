@@ -7,26 +7,17 @@
 #' cases, the network effect in the simulation, and if there is a time-varying
 #' death risk.
 #'
-#' Accepted arguments and their defaults are:
-#' * `last_contact_distribution = "pois"`
-#' * `last_contact_distribution_params = c(lambda = 3)`
-#' * `first_contact_distribution = "pois"`
-#' * `first_contact_distribution_params = c(lambda = 3)`
-#' * `ct_distribution = "norm"`
-#' * `ct_distribution_params = c(mean = 25, sd = 2)`
-#' * `network = "adjusted"`
-#' * `time_varying_death_risk = NULL`
-#'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
 #' setting. Therefore it is not worth increasing the number of [sim_linelist()]
 #' arguments to accommodate these and the `config` argument keeps the function
 #' signature simpler and more readable.
 #'
-#' The accepted distributions are:
-#' * `last_contact_distribution = c("pois", "geom")`
-#' * `first_contact_distribution = c("pois", "geom")`
-#' * `ct_distribution = c("norm", "lnorm")`
+#' The `last_contact_distribution` and `first_contact_distribution` can accept
+#' any function that generates positive integers (e.g. discrete probability
+#' distribution, [rpois()] or [rgeom()]). The `ct_distribution` can accept
+#' any function that generates real numbers (e.g. continuous or discrete
+#' probability distribution, [rnorm()], [rlnorm()]).
 #'
 #' The `network` option controls whether to sample contacts from a adjusted or
 #' unadjusted contact distribution. Adjusted (default) sampling uses
@@ -39,6 +30,27 @@
 #' default settings. Only if names match exactly are elements replaced,
 #' otherwise the function errors.
 #'
+#' Accepted arguments and their defaults are:
+#'
+#' \describe{
+#'   \item{`last_contact_distribution`}{A `function` to generate the
+#'   time for last contact. Default parameterisation is a Poisson
+#'   distribution with a \eqn{\lambda} of 3.}
+#'   \item{`first_contact_distribution`}{A `function` to generate the time
+#'   for the first contact. Default parameterisation is a Poisson
+#'   distribution with a \eqn{\lambda} of 3.}
+#'   \item{`ct_distribution`}{A `function` to generate Ct values for each
+#'   confirmed case. Default parameterisation is a Normal distribution with
+#'   a mean (\eqn{\mu}) of 25 and a standard deviation (\eqn{\sigma}) of 2.}
+#'   \item{`network`}{A `character` string, either `"adjusted"` (default) or
+#'   `"unadjusted"`.}
+#'   \item{`time_varying_death_risk`}{By default is `NULL`, but can also accept
+#'   a `function` with two arguments, `risk` and `time`, to apply a
+#'   time varying death risk of hospitalised and non-hospitalised cases in
+#'   the outbreak simulation. See
+#'   `vignette("time-varying-cfr", package = "simulist")`.}
+#' }
+#'
 #' @return A list of settings for [sim_linelist()]
 #' @export
 #'
@@ -48,17 +60,13 @@
 #'
 #' # example with customised Ct distribution
 #' create_config(
-#'   ct_distribution = "lnorm",
-#'   ct_distribution_params = c(meanlog = 2, sdlog = 1)
+#'   ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
 #' )
 create_config <- function(...) {
   .args <- list(
-    last_contact_distribution = "pois",
-    last_contact_distribution_params = c(lambda = 3),
-    first_contact_distribution = "pois",
-    first_contact_distribution_params = c(lambda = 3),
-    ct_distribution = "norm",
-    ct_distribution_params = c(mean = 25, sd = 2),
+    last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+    first_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+    ct_distribution = function(x) stats::rnorm(n = x, mean = 25, sd = 2),
     network = "adjusted",
     time_varying_death_risk = NULL
   )
