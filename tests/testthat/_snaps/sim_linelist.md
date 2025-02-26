@@ -616,21 +616,19 @@
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         population_age = age_struct)
     Output
-
          id                 case_name case_type sex age date_onset date_reporting
-      1   1             Gabriel Black  probable   m  22 2023-01-01     2023-01-01
-      2   2             Taylor Graves confirmed   f   5 2023-01-01     2023-01-01
-      3   3              Tyler Kelley suspected   m  85 2023-01-01     2023-01-01
-      4   5              Cody Morales  probable   m   2 2023-01-01     2023-01-01
-      5   6         Cheyenne Sayavong confirmed   f  89 2023-01-01     2023-01-01
-      6   8 Chantelle Vazquez-Luevano confirmed   f  82 2023-01-01     2023-01-01
-      7  11           Rushdi al-Ishak confirmed   m   9 2023-01-01     2023-01-01
-      8  12        Pierce Khanthavong suspected   m  79 2023-01-01     2023-01-01
-      9  13               Megan Hayes confirmed   f  29 2023-01-01     2023-01-01
-      10 18           Jackson Carlson confirmed   m  52 2023-01-02     2023-01-02
-      11 20             Susana Varela  probable   f  76 2023-01-02     2023-01-02
-      12 22           Qaaid al-Madani  probable   m  25 2023-01-02     2023-01-02
-
+      1   1             Gabriel Black  probable   m  11 2023-01-01     2023-01-01
+      2   2             Taylor Graves confirmed   f  10 2023-01-01     2023-01-01
+      3   3              Tyler Kelley suspected   m  80 2023-01-01     2023-01-01
+      4   5              Cody Morales  probable   m   4 2023-01-01     2023-01-01
+      5   6         Cheyenne Sayavong confirmed   f  84 2023-01-01     2023-01-01
+      6   8 Chantelle Vazquez-Luevano confirmed   f  88 2023-01-01     2023-01-01
+      7  11           Rushdi al-Ishak confirmed   m  71 2023-01-01     2023-01-01
+      8  12        Pierce Khanthavong suspected   m  78 2023-01-01     2023-01-01
+      9  13               Megan Hayes confirmed   f  28 2023-01-01     2023-01-01
+      10 18           Jackson Carlson confirmed   m  51 2023-01-02     2023-01-02
+      11 20             Susana Varela  probable   f  75 2023-01-02     2023-01-02
+      12 22           Qaaid al-Madani  probable   m  48 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1            <NA> recovered         <NA>               <NA>              <NA>
       2            <NA> recovered         <NA>         2022-12-26        2023-01-02
@@ -665,21 +663,19 @@
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         hosp_risk = age_dep_hosp_risk, population_age = age_struct)
     Output
-
          id                 case_name case_type sex age date_onset date_reporting
-      1   1             Gabriel Black  probable   m  22 2023-01-01     2023-01-01
-      2   2             Taylor Graves confirmed   f   5 2023-01-01     2023-01-01
-      3   3              Tyler Kelley suspected   m  85 2023-01-01     2023-01-01
-      4   5              Cody Morales  probable   m   2 2023-01-01     2023-01-01
-      5   6         Cheyenne Sayavong confirmed   f  89 2023-01-01     2023-01-01
-      6   8 Chantelle Vazquez-Luevano confirmed   f  82 2023-01-01     2023-01-01
-      7  11           Rushdi al-Ishak confirmed   m   9 2023-01-01     2023-01-01
-      8  12        Pierce Khanthavong suspected   m  79 2023-01-01     2023-01-01
-      9  13               Megan Hayes confirmed   f  29 2023-01-01     2023-01-01
-      10 18           Jackson Carlson confirmed   m  52 2023-01-02     2023-01-02
-      11 20             Susana Varela  probable   f  76 2023-01-02     2023-01-02
-      12 22           Qaaid al-Madani  probable   m  25 2023-01-02     2023-01-02
-
+      1   1             Gabriel Black  probable   m  11 2023-01-01     2023-01-01
+      2   2             Taylor Graves confirmed   f  10 2023-01-01     2023-01-01
+      3   3              Tyler Kelley suspected   m  80 2023-01-01     2023-01-01
+      4   5              Cody Morales  probable   m   4 2023-01-01     2023-01-01
+      5   6         Cheyenne Sayavong confirmed   f  84 2023-01-01     2023-01-01
+      6   8 Chantelle Vazquez-Luevano confirmed   f  88 2023-01-01     2023-01-01
+      7  11           Rushdi al-Ishak confirmed   m  71 2023-01-01     2023-01-01
+      8  12        Pierce Khanthavong suspected   m  78 2023-01-01     2023-01-01
+      9  13               Megan Hayes confirmed   f  28 2023-01-01     2023-01-01
+      10 18           Jackson Carlson confirmed   m  51 2023-01-02     2023-01-02
+      11 20             Susana Varela  probable   f  75 2023-01-02     2023-01-02
+      12 22           Qaaid al-Madani  probable   m  48 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1            <NA> recovered         <NA>               <NA>              <NA>
       2            <NA> recovered         <NA>         2022-12-26        2023-01-02

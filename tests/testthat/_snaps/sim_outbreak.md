@@ -1419,21 +1419,19 @@
         population_age = age_struct)
     Output
       $linelist
-
          id                 case_name case_type sex age date_onset date_reporting
-      1   1             Gabriel Black  probable   m  22 2023-01-01     2023-01-01
-      2   2             Taylor Graves confirmed   f   5 2023-01-01     2023-01-01
-      3   3              Tyler Kelley suspected   m  85 2023-01-01     2023-01-01
-      4   5              Cody Morales  probable   m   2 2023-01-01     2023-01-01
-      5   6         Cheyenne Sayavong confirmed   f  89 2023-01-01     2023-01-01
-      6   8 Chantelle Vazquez-Luevano confirmed   f  82 2023-01-01     2023-01-01
-      7  11           Rushdi al-Ishak confirmed   m   9 2023-01-01     2023-01-01
-      8  12        Pierce Khanthavong suspected   m  79 2023-01-01     2023-01-01
-      9  13               Megan Hayes confirmed   f  29 2023-01-01     2023-01-01
-      10 18           Jackson Carlson confirmed   m  52 2023-01-02     2023-01-02
-      11 20             Susana Varela  probable   f  76 2023-01-02     2023-01-02
-      12 22           Qaaid al-Madani  probable   m  25 2023-01-02     2023-01-02
-
+      1   1             Gabriel Black  probable   m  11 2023-01-01     2023-01-01
+      2   2             Taylor Graves confirmed   f  10 2023-01-01     2023-01-01
+      3   3              Tyler Kelley suspected   m  80 2023-01-01     2023-01-01
+      4   5              Cody Morales  probable   m   4 2023-01-01     2023-01-01
+      5   6         Cheyenne Sayavong confirmed   f  84 2023-01-01     2023-01-01
+      6   8 Chantelle Vazquez-Luevano confirmed   f  88 2023-01-01     2023-01-01
+      7  11           Rushdi al-Ishak confirmed   m  71 2023-01-01     2023-01-01
+      8  12        Pierce Khanthavong suspected   m  78 2023-01-01     2023-01-01
+      9  13               Megan Hayes confirmed   f  28 2023-01-01     2023-01-01
+      10 18           Jackson Carlson confirmed   m  51 2023-01-02     2023-01-02
+      11 20             Susana Varela  probable   f  75 2023-01-02     2023-01-02
+      12 22           Qaaid al-Madani  probable   m  48 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1            <NA> recovered         <NA>               <NA>              <NA>
       2            <NA> recovered         <NA>         2022-12-26        2023-01-02
@@ -1462,29 +1460,28 @@
       12       NA
       
       $contacts
-
                               from                        to age sex
-      1              Gabriel Black             Taylor Graves   5   f
-      2              Gabriel Black              Tyler Kelley  85   m
-      3              Taylor Graves             Carolyn Moore  41   f
-      4              Taylor Graves              Cody Morales   2   m
-      5               Tyler Kelley         Cheyenne Sayavong  89   f
+      1              Gabriel Black             Taylor Graves  10   f
+      2              Gabriel Black              Tyler Kelley  80   m
+      3              Taylor Graves             Carolyn Moore  19   f
+      4              Taylor Graves              Cody Morales   4   m
+      5               Tyler Kelley         Cheyenne Sayavong  84   f
       6               Tyler Kelley         Mercedes Lovelace  86   f
-      7               Tyler Kelley Chantelle Vazquez-Luevano  82   f
-      8               Cody Morales                 Joewid Le  69   m
-      9          Cheyenne Sayavong                 Kendra To  23   f
-      10 Chantelle Vazquez-Luevano           Rushdi al-Ishak   9   m
-      11 Chantelle Vazquez-Luevano        Pierce Khanthavong  79   m
-      12 Chantelle Vazquez-Luevano               Megan Hayes  29   f
-      13           Rushdi al-Ishak         Preston Barringer   4   m
+      7               Tyler Kelley Chantelle Vazquez-Luevano  88   f
+      8               Cody Morales                 Joewid Le  79   m
+      9          Cheyenne Sayavong                 Kendra To  31   f
+      10 Chantelle Vazquez-Luevano           Rushdi al-Ishak  71   m
+      11 Chantelle Vazquez-Luevano        Pierce Khanthavong  78   m
+      12 Chantelle Vazquez-Luevano               Megan Hayes  28   f
+      13           Rushdi al-Ishak         Preston Barringer   1   m
       14           Rushdi al-Ishak         Amanda Larochelle  13   f
-      15           Rushdi al-Ishak         Dominique Raymond  62   f
+      15           Rushdi al-Ishak         Dominique Raymond  61   f
       16        Pierce Khanthavong            Natalie Newton  24   f
-      17               Megan Hayes           Jackson Carlson  52   m
-      18               Megan Hayes               Sam Spencer  74   m
-      19               Megan Hayes             Susana Varela  76   f
-      20               Megan Hayes          Bassaam el-Majid  26   m
-      21           Jackson Carlson           Qaaid al-Madani  25   m
+      17               Megan Hayes           Jackson Carlson  51   m
+      18               Megan Hayes               Sam Spencer  73   m
+      19               Megan Hayes             Susana Varela  75   f
+      20               Megan Hayes          Bassaam el-Majid  25   m
+      21           Jackson Carlson           Qaaid al-Madani  48   m
          date_first_contact date_last_contact was_case           status
       1          2022-12-26        2023-01-02        Y             case
       2          2022-12-30        2023-01-03        Y             case
@@ -1507,6 +1504,5 @@
       19         2023-01-01        2023-01-03        Y             case
       20         2022-12-30        2023-01-02        N   under_followup
       21         2023-01-02        2023-01-05        Y             case
-
       
 
