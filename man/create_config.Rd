@@ -9,7 +9,28 @@ create_config(...)
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named elements to replace
 default settings. Only if names match exactly are elements replaced,
-otherwise the function errors.}
+otherwise the function errors.
+
+Accepted arguments and their defaults are:
+
+\describe{
+\item{\code{last_contact_distribution}}{A \code{function} to generate the
+time for last contact. Default parameterisation is a Poisson
+distribution with a \eqn{\lambda} of 3.}
+\item{\code{first_contact_distribution}}{A \code{function} to generate the time
+for the first contact. Default parameterisation is a Poisson
+distribution with a \eqn{\lambda} of 3.}
+\item{\code{ct_distribution}}{A \code{function} to generate Ct values for each
+confirmed case. Default parameterisation is a Normal distribution with
+a mean (\eqn{\mu}) of 25 and a standard deviation (\eqn{\sigma}) of 2.}
+\item{\code{network}}{A \code{character} string, either \code{"adjusted"} (default) or
+\code{"unadjusted"}.}
+\item{\code{time_varying_death_risk}}{By default is \code{NULL}, but can also accept
+a \code{function} with two arguments, \code{risk} and \code{time}, to apply a
+time varying death risk of hospitalised and non-hospitalised cases in
+the outbreak simulation. See
+\code{vignette("time-varying-cfr", package = "simulist")}.}
+}}
 }
 \value{
 A list of settings for \code{\link[=sim_linelist]{sim_linelist()}}
@@ -25,30 +46,17 @@ value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 cases, the network effect in the simulation, and if there is a time-varying
 death risk.
 
-Accepted arguments and their defaults are:
-\itemize{
-\item \code{last_contact_distribution = "pois"}
-\item \code{last_contact_distribution_params = c(lambda = 3)}
-\item \code{first_contact_distribution = "pois"}
-\item \code{first_contact_distribution_params = c(lambda = 3)}
-\item \code{ct_distribution = "norm"}
-\item \code{ct_distribution_params = c(mean = 25, sd = 2)}
-\item \code{network = "adjusted"}
-\item \code{time_varying_death_risk = NULL}
-}
-
 These parameters do not warrant their own arguments in
 \code{\link[=sim_linelist]{sim_linelist()}} as they rarely need to be changed from their default
 setting. Therefore it is not worth increasing the number of \code{\link[=sim_linelist]{sim_linelist()}}
 arguments to accommodate these and the \code{config} argument keeps the function
 signature simpler and more readable.
 
-The accepted distributions are:
-\itemize{
-\item \code{last_contact_distribution = c("pois", "geom")}
-\item \code{first_contact_distribution = c("pois", "geom")}
-\item \code{ct_distribution = c("norm", "lnorm")}
-}
+The \code{last_contact_distribution} and \code{first_contact_distribution} can accept
+any function that generates positive integers (e.g. discrete probability
+distribution, \code{\link[=rpois]{rpois()}} or \code{\link[=rgeom]{rgeom()}}). The \code{ct_distribution} can accept
+any function that generates real numbers (e.g. continuous or discrete
+probability distribution, \code{\link[=rnorm]{rnorm()}}, \code{\link[=rlnorm]{rlnorm()}}).
 
 The \code{network} option controls whether to sample contacts from a adjusted or
 unadjusted contact distribution. Adjusted (default) sampling uses
@@ -63,7 +71,6 @@ create_config()
 
 # example with customised Ct distribution
 create_config(
-  ct_distribution = "lnorm",
-  ct_distribution_params = c(meanlog = 2, sdlog = 1)
+  ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
 )
 }
