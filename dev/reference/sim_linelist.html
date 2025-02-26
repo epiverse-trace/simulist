@@ -294,10 +294,9 @@ arguments. This <code>&lt;data.frame&gt;</code> should have two columns:</p><ul>
 <li><p><code>risk</code>: a column with one <code>numeric</code> per cell for the proportion
 (or probability) of hospitalisation for that age group. Should be between
 0 and 1.</p></li>
-</ul><p>For an age-structured population, a <code>&lt;data.frame&gt;</code> with two columns:</p><ul><li><p><code>age_range</code>: a column with characters specifying the lower and upper bound
-of that age group, separated by a hyphen (-). Both bounds are inclusive
-(integers). For example, an age group of one to ten would be given as
-<code>"1-10"</code>.</p></li>
+</ul><p>For an age-structured population, a <code>&lt;data.frame&gt;</code> with two columns:</p><ul><li><p><code>age_limit</code>: a column with one <code>numeric</code> per cell for the lower bound
+(minimum) age of the age group (inclusive), except the last element which is
+the upper bound (maximum) of the population.</p></li>
 <li><p><code>proportion</code>: a column with the proportion of the population that are in
 that age group. Proportions must sum to one.</p></li>
 </ul></div>

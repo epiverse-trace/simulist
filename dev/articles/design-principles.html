@@ -137,6 +137,41 @@ well-known data structure makes it easy to understand for users.</p>
 <h2 id="design-decisions">Design decisions<a class="anchor" aria-label="anchor" href="#design-decisions"></a>
 </h2>
 <ul>
+<li>
+<p>The age-stratified risks of hospitalisation and deaths via
+<code>*_risk</code> function arguments, and age-structured population
+via <code>population_age</code> function argument both accept
+<code>&lt;data.frame&gt;</code>s to specify the age groups. The age
+groups are specified by an <code>$age_limit</code> column in the
+<code>&lt;data.frame&gt;</code>. This design follows <a href="https://github.com/epiforecasts/socialmixr/blob/main/R/contact_matrix.R" class="external-link">{socialmixr}</a>
+for defining age bounds was implemented in <a href="https://github.com/epiverse-trace/simulist/pull/14" class="external-link">pull request
+#14</a> for the <code>*_risk</code> arguments and in <a href="https://github.com/epiverse-trace/simulist/pull/200" class="external-link">pull request
+#200</a> for the <code>population_age</code> argument. The previous
+implementation used a <code>&lt;data.frame&gt;</code> structure that had
+two columns, one for a lower age limit and one for an upper age limit.
+Using age limits is judged to be preferred as it prevents input errors
+by the user when the age bounds are overlapping or non-contiguous
+(i.e. missing age groups). Since {simulist} v0.5.0, both approaches have
+a consistent structure with an age limits column and either a risk or
+proportion column. The specification of age groups using limits comes
+with some trade-offs which are documented here:</p>
+<ol style="list-style-type: decimal">
+<li><p>There is a small difference in the requirements of the
+<code>$age_limit</code> column when passing a
+<code>&lt;data.frame&gt;</code> to to either a <code>*_risk</code>
+argument or <code>population_age</code>. The default
+<code>population_age</code> is a two element <code>numeric</code> vector
+specifying the age range of the population. When supplying an
+age-structure <code>&lt;data.frame&gt;</code> to
+<code>population_age</code>, the <code>$age_limit</code> column contains
+the lower bound of each age group, but the upper range of the population
+is still required, so the last element in the <code>$age_limit</code>
+column is taken as the upper population age. This differs from the
+<code>$age_limit</code> column in the <code>&lt;data.frame&gt;</code>
+required for age-stratified risk, where each element is the lower age
+limit, and the upper range of the population age is taken from the
+<code>population_age</code> argument. This interaction of arguments is
+documented in the next point.</p></li>
 <li><p>When using age-stratified risks of hospitalisation and deaths
 (see <a href="age-strat-risks.html">Age-stratified hospitalisation and
 death risks vignette</a> for details) there is an interaction between
@@ -150,16 +185,9 @@ oldest age group is defined by the upper age given to the
 not ideal, as it can be more difficult to understand for users (as
 outlined in <a href="https://design.tidyverse.org/independent-meaning.html#whats-the-problem" class="external-link">The
 Tidy Design book</a>), however, the interaction does not change the
-interpretation of each argument which would be more convoluted. This
-design decision was taken when we changed the structure of the
-<code>&lt;data.frame&gt;</code> accepted as input to the
-<code>*_risk</code> arguments from having two columns for a lower and
-upper age limit, to a single column of lower age bounds. This change was
-made in <a href="https://github.com/epiverse-trace/simulist/pull/14" class="external-link">pull request
-#14</a> and follows the design of <a href="https://github.com/epiforecasts/socialmixr/blob/main/R/contact_matrix.R" class="external-link">{socialmixr}</a>
-for defining age bounds. The newer structure is judged to be preferred
-as it prevents input errors by the user when the age bounds are
-overlapping or non-contiguous (i.e. missing age groups).</p></li>
+interpretation of each argument which would be more convoluted.</p></li>
+</ol>
+</li>
 <li><p>The column names of the contact relationships (edges of the
 network) are called <code>from</code> and <code>to</code>. Names of the
 contacts table match {epicontacts} <code>&lt;epicontacts&gt;</code>

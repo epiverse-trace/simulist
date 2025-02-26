@@ -268,25 +268,34 @@ would have assumed the default age range of 1 to 90
 <h2 id="structured-population-age">Structured population age<a class="anchor" aria-label="anchor" href="#structured-population-age"></a>
 </h2>
 <p>To simulate with a non-uniform age structure we create a table
-(<code>&lt;data.frame&gt;</code>) containing the age range of each age
+(<code>&lt;data.frame&gt;</code>) containing the age bounds of each age
 bracket in the population and the proportion of the population made up
 by that age group.</p>
+<div class="alert alert-warning">
+<p>The upper bound (maximum) of the population also needs to be
+specified in the age structure <code>&lt;data.frame&gt;</code>,
+therefore, the last element in the age limits column is taken as the
+upper bound of the age in the population. All elements before the last
+one are the lower bound of each age group.</p>
+<p>The simplest way to set the maximum population age is to set the
+proportion to zero.</p>
+</div>
 <p>For this example we will simulate a population where 30% of the
 population are between 1 and 19, 40% of the population are between 20
-and 59, and 30% are between 60 and 90. The age groups are inclusive so
-the age brackets should not overlap. There will be no individuals in the
-population younger then 1 or older than 90.</p>
+and 59, and 30% are between 60 and 89. The age limits
+(<code>$age_limit</code> column) is inclusive. There will be no
+individuals in the population younger then 1 or older than 90.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1-19"</span>, <span class="st">"20-59"</span>, <span class="st">"60-90"</span><span class="op">)</span>,</span>
-<span>  proportion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.3</span><span class="op">)</span>,</span>
-<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">20</span>, <span class="fl">60</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  proportion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_struct</span></span>
-<span><span class="co">#&gt;   age_range proportion</span></span>
-<span><span class="co">#&gt; 1      1-19        0.3</span></span>
-<span><span class="co">#&gt; 2     20-59        0.4</span></span>
-<span><span class="co">#&gt; 3     60-90        0.3</span></span></code></pre></div>
+<span><span class="co">#&gt;   age_limit proportion</span></span>
+<span><span class="co">#&gt; 1         1        0.3</span></span>
+<span><span class="co">#&gt; 2        20        0.4</span></span>
+<span><span class="co">#&gt; 3        60        0.3</span></span>
+<span><span class="co">#&gt; 4        90        0.0</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
@@ -300,12 +309,12 @@ population younger then 1 or older than 90.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id            case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1        Cycrena Hoots confirmed   f  82 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  3       James Manchego  probable   m  41 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  4       Jankeith Tatum confirmed   m  17 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 1  1        Cycrena Hoots confirmed   f  68 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  3       James Manchego  probable   m  22 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 3  4       Jankeith Tatum confirmed   m  16 2023-01-01     2023-01-01</span></span>
 <span><span class="co">#&gt; 4  6       Tyrell Johnson confirmed   m  59 2023-01-01     2023-01-01</span></span>
 <span><span class="co">#&gt; 5  7          Keywon Mack suspected   m  31 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 6  8 Taajuddeen al-Badour confirmed   m  49 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 6  8 Taajuddeen al-Badour confirmed   m  60 2023-01-01     2023-01-01</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-01        2023-01-05</span></span>
@@ -342,14 +351,6 @@ data is binned into 5 year categories and facetted by sex.</p>
 Age distribution of line list cases facetted by sex
 </p>
 </div>
-<div class="alert alert-warning">
-<p>The age groups specified in the <code>&lt;data.frame&gt;</code> must
-be non-overlapping and be contiguous between the minimum age of the
-youngest age group and the maximum age of the oldest age group. In order
-words, there cannot be any missing age groups (e.g. 20-40 year olds)
-without a specified proportion. If this is the case the function will
-error with an informative error message.</p>
-</div>
 <p>An example for a much younger population could instead specify:</p>
 <ul>
 <li>
@@ -363,16 +364,16 @@ error with an informative error message.</p>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1-9"</span>, <span class="st">"10-29"</span>, <span class="st">"30-59"</span>, <span class="st">"60-75"</span><span class="op">)</span>,</span>
-<span>  proportion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
-<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">60</span>, <span class="fl">75</span><span class="op">)</span>,</span>
+<span>  proportion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>, <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_struct</span></span>
-<span><span class="co">#&gt;   age_range proportion</span></span>
-<span><span class="co">#&gt; 1       1-9        0.4</span></span>
-<span><span class="co">#&gt; 2     10-29        0.3</span></span>
-<span><span class="co">#&gt; 3     30-59        0.2</span></span>
-<span><span class="co">#&gt; 4     60-75        0.1</span></span></code></pre></div>
+<span><span class="co">#&gt;   age_limit proportion</span></span>
+<span><span class="co">#&gt; 1         1        0.4</span></span>
+<span><span class="co">#&gt; 2        10        0.3</span></span>
+<span><span class="co">#&gt; 3        30        0.2</span></span>
+<span><span class="co">#&gt; 4        60        0.1</span></span>
+<span><span class="co">#&gt; 5        75        0.0</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
@@ -386,12 +387,12 @@ error with an informative error message.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1    Kylie Castillo suspected   f   5 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  2 Mu,Aawiya al-Amir  probable   m  43 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  4     Drue Ashworth suspected   m  52 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 4  5  Anthony Suddreth confirmed   m   1 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 5  6    Victoria Smith  probable   f  12 2023-01-04     2023-01-04</span></span>
-<span><span class="co">#&gt; 6  8   Naafoora el-Haq  probable   f  19 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 1  1    Kylie Castillo suspected   f   7 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  2 Mu,Aawiya al-Amir  probable   m  45 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 3  4     Drue Ashworth suspected   m  53 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 4  5  Anthony Suddreth confirmed   m   3 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 5  6    Victoria Smith  probable   f  20 2023-01-04     2023-01-04</span></span>
+<span><span class="co">#&gt; 6  8   Naafoora el-Haq  probable   f  14 2023-01-01     2023-01-01</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2     2023-01-19      died   2023-01-19         2022-12-28        2023-01-02</span></span>
