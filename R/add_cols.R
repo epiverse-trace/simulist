@@ -17,8 +17,6 @@
 #' @param distribution A `character` with the name of the distribution,
 #' following the base R convention for distribution naming (e.g. Poisson
 #' is `pois`).
-#' @param ... [dots] Extra arguments to be passed to the distribution function
-#' given in the `distribution` argument.
 #' @inheritParams sim_linelist
 #'
 #' @name .add_cols
