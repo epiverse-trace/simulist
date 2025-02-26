@@ -12,8 +12,7 @@ test_that(".add_date_contact works as expected with contact_type = 'last'", {
     .data = ll,
     contact_type = "last",
     outbreak_start_date = as.Date("2023-01-01"),
-    distribution = "pois",
-    lambda = 3
+    distribution = function(x) stats::rpois(n = x, lambda = 3)
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_last_contact, class = "Date")
@@ -26,8 +25,7 @@ test_that(".add_date_contact works as expected with contact_type = 'first'", {
   linelist <- .add_date_contact(
     .data = ll,
     contact_type = "first",
-    distribution = "pois",
-    lambda = 3
+    distribution = function(x) stats::rpois(n = x, lambda = 3)
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_first_contact, class = "Date")
@@ -41,8 +39,7 @@ test_that(".add_date_contact (last) works as expected with different param", {
     .data = ll,
     contact_type = "last",
     outbreak_start_date = as.Date("2023-01-01"),
-    distribution = "pois",
-    lambda = 1
+    distribution = function(x) stats::rpois(n = x, lambda = 1)
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_last_contact, class = "Date")
@@ -55,8 +52,7 @@ test_that(".add_date_contact (first) works as expected with different param", {
   linelist <- .add_date_contact(
     .data = ll,
     contact_type = "first",
-    distribution = "pois",
-    lambda = 1
+    distribution = function(x) stats::rpois(n = x, lambda = 1)
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_first_contact, class = "Date")
@@ -64,18 +60,26 @@ test_that(".add_date_contact (first) works as expected with different param", {
   expect_identical(colnames(linelist), c(colnames(ll), "date_first_contact"))
 })
 
-test_that(".add_date_contact fails as expected", {
+test_that(".add_date_contact fails as expected for non-integers", {
   ll <- readRDS(file.path("testdata", "pre_date_last_contact.rds"))
   expect_error(
     .add_date_contact(
       .data = ll,
       contact_type = "last",
       outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "nbinom",
-      size = 10,
-      prob = 0.5
+      distribution = function(x) stats::rlnorm(n = x, meanlog = 1, sdlog = 1)
     ),
-    regexp = "(arg)*(should be)*(pois)"
+    regexp = "(contact distribution)*(must)*(produce)*(positive integers)"
+  )
+
+  expect_error(
+    .add_date_contact(
+      .data = ll,
+      contact_type = "last",
+      outbreak_start_date = as.Date("2023-01-01"),
+      distribution = function(x) "x"
+    ),
+    regexp = "(contact distribution)*(must)*(produce)*(positive integers)"
   )
 
   expect_error(
@@ -85,29 +89,7 @@ test_that(".add_date_contact fails as expected", {
       outbreak_start_date = as.Date("2023-01-01"),
       distribution = "pois"
     ),
-    regexp = "Distribution parameters are missing, check config"
-  )
-
-  expect_error(
-    .add_date_contact(
-      .data = ll,
-      contact_type = "last",
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "pois",
-      prob = 0.5
-    ),
-    regexp = "Incorrect parameterisation of distribution, check config"
-  )
-
-  expect_error(
-    .add_date_contact(
-      .data = ll,
-      contact_type = "last",
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "pois",
-      lambda = NA
-    ),
-    regexp = "Incorrect parameterisation of distribution, check config"
+    regexp = "(Assertion)*(failed)*(Must be a function, not 'character')"
   )
 })
 
@@ -262,7 +244,10 @@ test_that(".add_names works as expected with anonymise = TRUE", {
 
 test_that(".add_ct works as expected", {
   ll <- readRDS(file.path("testdata", "pre_ct.rds"))
-  linelist <- .add_ct(.data = ll, distribution = "norm", mean = 3, sd = 0.5)
+  linelist <- .add_ct(
+    .data = ll,
+    distribution = function(x) stats::rnorm(n = x, mean = 3, sd = 0.5)
+  )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$ct_value, type = "double")
   expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
@@ -271,7 +256,10 @@ test_that(".add_ct works as expected", {
 
 test_that(".add_ct works as expected with different parameter", {
   ll <- readRDS(file.path("testdata", "pre_ct.rds"))
-  linelist <- .add_ct(.data = ll, distribution = "norm", mean = 1, sd = 2)
+  linelist <- .add_ct(
+    .data = ll,
+    distribution = function(x) stats::rnorm(n = x, mean = 1, sd = 2)
+  )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$ct_value, type = "double")
   expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
@@ -281,22 +269,17 @@ test_that(".add_ct works as expected with different parameter", {
 test_that(".add_ct fails as expected", {
   ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   expect_error(
-    .add_ct(.data = ll, distribution = "gamma", shape = 1, scale = 1),
-    regexp = "(arg)*(should be)*(norm)*(lnorm)"
+    .add_ct(.data = ll, distribution = function(x) "x"),
+    regexp = "(Ct distribution)*(must)*(produce)*(positive numbers)"
+  )
+
+  expect_error(
+    .add_ct(.data = ll, distribution = function(x) -1),
+    regexp = "(Ct distribution)*(must)*(produce)*(positive numbers)"
   )
 
   expect_error(
     .add_ct(.data = ll, distribution = "norm"),
-    regexp = "Distribution parameters are missing, check config"
-  )
-
-  expect_error(
-    .add_ct(.data = ll, distribution = "norm", men = 1, sd = 1),
-    regexp = "Incorrect parameterisation of distribution, check config"
-  )
-
-  expect_error(
-    .add_ct(.data = ll, distribution = "norm", mean = NA),
-    regexp = "Incorrect parameterisation of distribution, check config"
+    regexp = "(Assertion)*(failed)*(Must be a function, not 'character')"
   )
 })
