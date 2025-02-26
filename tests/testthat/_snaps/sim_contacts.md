@@ -231,34 +231,32 @@
       sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, population_age = age_struct)
     Output
-
                       from                  to age sex date_first_contact
-      1    Lilliana Urbina    Christian Havlik  52   m         2022-12-30
-      2    Lilliana Urbina   Raihaana al-Samra  74   f         2023-01-01
-      3  Raihaana al-Samra         Carina Baca  76   f         2022-12-30
-      4  Raihaana al-Samra     Tiffanie Cahill  26   f         2023-01-03
-      5  Raihaana al-Samra    Antonio Quintana  25   m         2023-01-03
-      6        Carina Baca         Austin John  69   m         2023-01-04
-      7        Carina Baca      Jamie Stilwell  53   f         2022-12-31
-      8        Carina Baca      Luis Hernandez  19   m         2023-01-03
-      9        Carina Baca       Hyungu Dorado  49   m         2023-01-02
-      10       Carina Baca     Brentt Spangler  68   m         2023-01-04
-      11       Carina Baca        Matthew Cree  82   m         2023-01-02
-      12    Jamie Stilwell       Rebeca Chavez  84   f         2023-01-01
-      13    Jamie Stilwell     Katelyn Harrier  79   f         2023-01-07
-      14   Brentt Spangler         Ruby Gaspar   5   f         2023-01-04
-      15   Brentt Spangler     Mufeeda el-Ozer  78   f         2023-01-04
-      16   Brentt Spangler       Natasha Vigil  85   f         2022-12-31
-      17     Rebeca Chavez         Neil Yousaf  36   m         2022-12-31
-      18       Ruby Gaspar        Shympia Kwak  62   m         2023-01-06
-      19       Ruby Gaspar        Julian Berry  66   m         2023-01-03
-      20       Ruby Gaspar          Sara Young  43   f         2023-01-07
-      21       Ruby Gaspar     Wallace Eriacho  61   m         2022-12-31
-      22   Mufeeda el-Ozer            Andy Lee  26   m         2023-01-02
+      1    Lilliana Urbina    Christian Havlik  51   m         2022-12-30
+      2    Lilliana Urbina   Raihaana al-Samra  73   f         2023-01-01
+      3  Raihaana al-Samra         Carina Baca  75   f         2022-12-30
+      4  Raihaana al-Samra     Tiffanie Cahill  25   f         2023-01-03
+      5  Raihaana al-Samra    Antonio Quintana  48   m         2023-01-03
+      6        Carina Baca         Austin John  79   m         2023-01-04
+      7        Carina Baca      Jamie Stilwell  52   f         2022-12-31
+      8        Carina Baca      Luis Hernandez  63   m         2023-01-03
+      9        Carina Baca       Hyungu Dorado  37   m         2023-01-02
+      10       Carina Baca     Brentt Spangler  34   m         2023-01-04
+      11       Carina Baca        Matthew Cree  88   m         2023-01-02
+      12    Jamie Stilwell       Rebeca Chavez  80   f         2023-01-01
+      13    Jamie Stilwell     Katelyn Harrier  78   f         2023-01-07
+      14   Brentt Spangler         Ruby Gaspar  10   f         2023-01-04
+      15   Brentt Spangler     Mufeeda el-Ozer  77   f         2023-01-04
+      16   Brentt Spangler       Natasha Vigil  80   f         2022-12-31
+      17     Rebeca Chavez         Neil Yousaf  18   m         2022-12-31
+      18       Ruby Gaspar        Shympia Kwak  61   m         2023-01-06
+      19       Ruby Gaspar        Julian Berry  33   m         2023-01-03
+      20       Ruby Gaspar          Sara Young  42   f         2023-01-07
+      21       Ruby Gaspar     Wallace Eriacho  60   m         2022-12-31
+      22   Mufeeda el-Ozer            Andy Lee  25   m         2023-01-02
       23     Natasha Vigil     Adrianna Torres  81   f         2023-01-02
-      24     Natasha Vigil James Wilson-Parson  67   m         2023-01-01
-      25   Wallace Eriacho     Anthony Johnson  82   m         2023-01-01
-
+      24     Natasha Vigil James Wilson-Parson  66   m         2023-01-01
+      25   Wallace Eriacho     Anthony Johnson  88   m         2023-01-01
          date_last_contact was_case         status
       1         2023-01-02        N under_followup
       2         2023-01-04        Y           case
