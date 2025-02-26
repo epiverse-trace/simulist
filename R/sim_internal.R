@@ -74,14 +74,12 @@
     .data = .data,
     contact_type = "last",
     distribution = config$last_contact_distribution,
-    config$last_contact_distribution_params,
     outbreak_start_date = outbreak_start_date
   )
   .data <- .add_date_contact(
     .data = .data,
     contact_type = "first",
-    distribution = config$first_contact_distribution,
-    config$first_contact_distribution_params
+    distribution = config$first_contact_distribution
   )
 
   # add random age and sex
@@ -143,11 +141,7 @@
     )
 
     # add Ct if confirmed
-    .data <- .add_ct(
-      .data = .data,
-      distribution = config$ct_distribution,
-      config$ct_distribution_params
-    )
+    .data <- .add_ct(.data = .data, distribution = config$ct_distribution)
     linelist_cols <- c(linelist_cols, "ct_value")
   }
 
