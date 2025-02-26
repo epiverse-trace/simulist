@@ -258,7 +258,7 @@ test_that(".add_ct works as expected with different parameter", {
   ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   linelist <- .add_ct(
     .data = ll,
-    distribution = function(x) stats::rnorm(n = x, mean = 1, sd = 2)
+    distribution = function(x) stats::rnorm(n = x, mean = 30, sd = 2)
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$ct_value, type = "double")
