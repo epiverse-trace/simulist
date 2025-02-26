@@ -25,8 +25,7 @@ test_that("sim_contacts works as expected with modified config", {
       infectious_period = infectious_period,
       prob_infection = 0.5,
       config = create_config(
-        last_contact_distribution = "geom",
-        last_contact_distribution_params = c(prob = 0.5)
+        last_contact_distribution = function(x) stats::rgeom(n = x, prob = 0.5)
       )
     )
   )
@@ -40,7 +39,7 @@ test_that("sim_contacts works as expected with modified config parameters", {
       infectious_period = infectious_period,
       prob_infection = 0.5,
       config = create_config(
-        last_contact_distribution_params = c(lambda = 5)
+        last_contact_distribution = function(x) stats::rpois(n = x, lambda = 5)
       )
     )
   )
@@ -53,10 +52,10 @@ test_that("sim_contacts fails as expected with modified config", {
       infectious_period = infectious_period,
       prob_infection = 0.5,
       config = create_config(
-        last_contact_distribution = "geom"
+        last_contact_distribution = function(x) stats::rgeom(n = x, lambda = 1)
       )
     ),
-    regexp = "Incorrect parameterisation of distribution, check config"
+    regexp = "(used argument)*(lambda = 1)"
   )
 })
 

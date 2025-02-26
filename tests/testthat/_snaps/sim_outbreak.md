@@ -4,1139 +4,1139 @@
       sim_outbreak()
     Output
       $linelist
-           id                case_name case_type sex age date_onset date_reporting
-      1     1              James Manis suspected   m  59 2023-01-01     2023-01-01
-      2     2            Anisa Hatcher confirmed   f  90 2023-01-01     2023-01-01
-      3     3              Morgan Bohn confirmed   f   4 2023-01-02     2023-01-02
-      4     5             David Welter confirmed   m  29 2023-01-04     2023-01-04
-      5     6            Sade Phillips suspected   f  14 2023-01-05     2023-01-05
-      6     7          Sameeha al-Zaki  probable   f  85 2023-01-06     2023-01-06
-      7    10    Cornelius Stadelbauer  probable   m  25 2023-01-13     2023-01-13
-      8    11          Hafsa al-Arshad confirmed   f  34 2023-01-11     2023-01-11
-      9    12                Maiya Kim suspected   f  89 2023-01-13     2023-01-13
-      10   14           Desmond Ibarra suspected   m  63 2023-01-11     2023-01-11
-      11   18  Carlo Ceazar Strausburg confirmed   m  74 2023-01-14     2023-01-14
-      12   19    Jennifer Vathanavarin  probable   f  34 2023-01-12     2023-01-12
-      13   22              Deisha Wall confirmed   f  29 2023-01-12     2023-01-12
-      14   24          Qamraaa el-Ally  probable   f  46 2023-01-13     2023-01-13
-      15   27          Jaylynn Baldwin confirmed   f  24 2023-01-14     2023-01-14
-      16   29       Nafeesa al-Massoud suspected   f  41 2023-01-21     2023-01-21
-      17   30          Dalicia Wilkins confirmed   f  72 2023-01-19     2023-01-19
-      18   31      Sulaimaan al-Farooq suspected   m   6 2023-01-20     2023-01-20
-      19   33           James Colligan confirmed   m  61 2023-01-14     2023-01-14
-      20   34         Crystal Sandoval confirmed   f  44 2023-01-14     2023-01-14
-      21   35        Chandel Aviado II confirmed   f  71 2023-01-27     2023-01-27
-      22   38          Utkarsh Hammond confirmed   m  69 2023-01-23     2023-01-23
-      23   39           Orville Mosher  probable   m  61 2023-01-23     2023-01-23
-      24   41        Nawwaara al-Rahim confirmed   f  64 2023-01-24     2023-01-24
-      25   44           Shuaib al-Kaba suspected   m  61 2023-01-22     2023-01-22
-      26   45         Lauren Caramillo  probable   f  66 2023-01-22     2023-01-22
-      27   47          Jamaal el-Sarah confirmed   m  81 2023-01-28     2023-01-28
-      28   50          Jameel Scurlock  probable   m  53 2023-01-28     2023-01-28
-      29   51          Khongmong Ahmad confirmed   m  45 2023-01-29     2023-01-29
-      30   53           Nichole Gilroy confirmed   f  42 2023-02-02     2023-02-02
-      31   54     Collin Rangel Mendez  probable   m  78 2023-02-03     2023-02-03
-      32   55          Ronnie Maryland confirmed   m  35 2023-01-24     2023-01-24
-      33   56              Itzel Jiron  probable   f  54 2023-01-26     2023-01-26
-      34   58         Brandon Trammell  probable   m  68 2023-01-25     2023-01-25
-      35   59              Shane Huang  probable   m   3 2023-01-23     2023-01-23
-      36   60       Mu,Aawiya al-Amiri confirmed   m  44 2023-01-29     2023-01-29
-      37   63 Joshua Valencia Anchondo  probable   m  62 2023-01-31     2023-01-31
-      38   64            Cairra Curtis confirmed   m  35 2023-01-29     2023-01-29
-      39   65        Nadheera el-Pasha confirmed   f  90 2023-02-03     2023-02-03
-      40   66        Sapphire Freeland confirmed   f  25 2023-02-01     2023-02-01
-      41   71              Medhavi Kim suspected   f  46 2023-01-29     2023-01-29
-      42   73        Madelyn Mcfarland confirmed   f   8 2023-02-01     2023-02-01
-      43   77                Kevin Cha  probable   m  63 2023-01-30     2023-01-30
-      44   78         Laraena Sturgeon  probable   f  54 2023-01-29     2023-01-29
-      45   80            Taylor Nguyen  probable   f  67 2023-02-03     2023-02-03
-      46   85         Markese Marchman confirmed   m  37 2023-02-02     2023-02-02
-      47   88         Christian Molina confirmed   m  73 2023-01-30     2023-01-30
-      48   89            Mark Espinosa  probable   m  13 2023-02-02     2023-02-02
-      49   90          Cassandra Lange  probable   f  72 2023-02-01     2023-02-01
-      50   93         Alexander Naylor confirmed   m  61 2023-02-04     2023-02-04
-      51   97                Micah San confirmed   m  22 2023-02-05     2023-02-05
-      52   98         Carmelita Huizar suspected   f  29 2023-02-04     2023-02-04
-      53  101        Daniel Goodfellow  probable   m  17 2023-02-07     2023-02-07
-      54  108           Samuel Johnson  probable   m  71 2023-02-14     2023-02-14
-      55  111           Bertha Montoya confirmed   f  90 2023-02-09     2023-02-09
-      56  113           Taaj al-Rahimi  probable   m  23 2023-02-12     2023-02-12
-      57  114             Lafaith Bean  probable   f  35 2023-02-16     2023-02-16
-      58  116              Joshua Khan  probable   m  62 2023-02-24     2023-02-24
-      59  119             Billye Cohen  probable   f  57 2023-02-23     2023-02-23
-      60  120         Madison Mcdonald confirmed   f  44 2023-02-18     2023-02-18
-      61  122           Wen Kang Zheng confirmed   m  57 2023-03-02     2023-03-02
-      62  123            Sidqi el-Reza  probable   m  63 2023-03-08     2023-03-08
-      63  125           Rebekah Norman confirmed   f  46 2023-02-28     2023-02-28
-      64  126              Ryan Fukuda  probable   m  66 2023-02-26     2023-02-26
-      65  130         Jumail al-Salame confirmed   m  68 2023-03-07     2023-03-07
-      66  131            Jez-Mas Woods confirmed   m  12 2023-03-09     2023-03-09
-      67  133          Mikayla Hopkins confirmed   f  51 2023-03-18     2023-03-18
-      68  138             Rosemary Lor suspected   f   2 2023-03-10     2023-03-10
-      69  139       Mansoor al-Hussein confirmed   m  53 2023-03-09     2023-03-09
-      70  142           Nawfa el-Ahmad suspected   f  76 2023-03-23     2023-03-23
-      71  143              Raul Millan suspected   m  82 2023-03-21     2023-03-21
-      72  145         Najlaa el-Yassin suspected   f  25 2023-03-15     2023-03-15
-      73  146         Sakeena el-Anwar  probable   f  76 2023-03-13     2023-03-13
-      74  147             Rida al-Ozer  probable   m  14 2023-03-13     2023-03-13
-      75  150          Tanya Tollivoro confirmed   f  76 2023-03-11     2023-03-11
-      76  153           Shawn Videtzky confirmed   m  78 2023-03-15     2023-03-15
-      77  154         Kailey Scharnell  probable   f  75 2023-03-24     2023-03-24
-      78  155            Orilea Medina  probable   f  76 2023-03-24     2023-03-24
-      79  157            Unique Tinoco confirmed   f  80 2023-03-18     2023-03-18
-      80  158         Raadiya al-Abdoo confirmed   f  41 2023-03-18     2023-03-18
-      81  159              Janie Mohar suspected   f  78 2023-03-19     2023-03-19
-      82  163        Keeman Stockinger confirmed   m  28 2023-03-15     2023-03-15
-      83  164         Frankie Griffith confirmed   f   2 2023-03-21     2023-03-21
-      84  166           Sharon Harding confirmed   f  82 2023-03-26     2023-03-26
-      85  171          Alvaro Vikingur confirmed   m   5 2023-03-22     2023-03-22
-      86  172       Nadheera al-Jafari confirmed   f   1 2023-03-20     2023-03-20
-      87  173     Lane Martinez-Deleon suspected   m  44 2023-03-19     2023-03-19
-      88  174                 Ka Ahsan confirmed   m  76 2023-03-16     2023-03-16
-      89  175          Munsif el-Salem confirmed   m   3 2023-03-29     2023-03-29
-      90  176  Abdur Rasheed al-Akbari suspected   m  15 2023-03-25     2023-03-25
-      91  177   Abdul Kareem al-Firman confirmed   m  19 2023-03-26     2023-03-26
-      92  178            Yesenia Diego  probable   f  76 2023-03-25     2023-03-25
-      93  182   Abdul Ghafoor el-Aslam  probable   m  90 2023-03-27     2023-03-27
-      94  186           Raul Rodriguez confirmed   m  64 2023-04-03     2023-04-03
-      95  189             T'Koia Myers confirmed   f  35 2023-03-29     2023-03-29
-      96  195             Ashley Coles suspected   f  84 2023-03-27     2023-03-27
-      97  196            Mason Mcgrier suspected   m  18 2023-03-30     2023-03-30
-      98  197                Cam Tu Vu  probable   f  79 2023-03-28     2023-03-28
-      99  199          Bao-Tran Suetos confirmed   f  49 2023-04-07     2023-04-07
-      100 200         Sandra Ouellette confirmed   f  56 2023-04-05     2023-04-05
-      101 201           Gina Dalrymple confirmed   f  76 2023-04-07     2023-04-07
-      102 202          Razeen el-Karam confirmed   m  41 2023-04-03     2023-04-03
-      103 205         Ashley Armstrong confirmed   f  29 2023-04-01     2023-04-01
-      104 209      Damian Murillo-Soto confirmed   m  39 2023-04-05     2023-04-05
-      105 210           Yahya al-Saidi confirmed   m  32 2023-04-01     2023-04-01
-      106 211               Rusty Asad suspected   m   9 2023-04-06     2023-04-06
-      107 213         Manaara el-Bilal suspected   f  39 2023-04-11     2023-04-11
-      108 214              Fisayo Rice  probable   m  12 2023-04-17     2023-04-17
-      109 219            Jacob Barrett confirmed   m  52 2023-04-10     2023-04-10
-      110 221          Jordan Redhorse confirmed   f  22 2023-04-02     2023-04-02
-      111 224         Laaiqa al-Farrah suspected   f  68 2023-04-08     2023-04-08
-      112 226          Ameen al-Semaan suspected   m  57 2023-04-06     2023-04-06
-      113 229         Azmi el-Abdallah confirmed   m   8 2023-04-12     2023-04-12
-      114 230           Khyleah Dotson suspected   f  28 2023-04-12     2023-04-12
-      115 232            Khampane Behr confirmed   m   2 2023-04-02     2023-04-02
-      116 233        Jose Delgado Diaz confirmed   m  84 2023-04-09     2023-04-09
-      117 234            Eliora Braden confirmed   f  52 2023-04-09     2023-04-09
-      118 235               Kevin Tran confirmed   m  58 2023-04-12     2023-04-12
-      119 236         Haakima el-Azizi  probable   f  29 2023-04-10     2023-04-10
-      120 238              Amanda Dodd confirmed   f  30 2023-04-14     2023-04-14
-      121 240     Alex Zaragoza-Madrid confirmed   m  71 2023-04-15     2023-04-15
-      122 243            Marques Cross confirmed   m  43 2023-04-13     2023-04-13
-      123 245           Andrew Lefholz suspected   m  40 2023-04-15     2023-04-15
-      124 250             Roy Williams confirmed   m  46 2023-04-16     2023-04-16
-      125 251              Jason Hoyle confirmed   m  69 2023-04-11     2023-04-11
-      126 252       Yeun Jung Hasegawa confirmed   f  69 2023-04-20     2023-04-20
-      127 253              Yeeleng Sun suspected   m  38 2023-04-20     2023-04-20
-      128 254             Isaac Stuart confirmed   m  28 2023-04-16     2023-04-16
-      129 255         Lawrence Jenkins confirmed   m  82 2023-04-16     2023-04-16
-      130 258            Jasmine Jones suspected   f  19 2023-04-14     2023-04-14
-      131 261                Jose Maez confirmed   m  46 2023-04-26     2023-04-26
-      132 262          Bryanna Herrera suspected   f  71 2023-04-13     2023-04-13
-      133 264               Lael Vigil suspected   f   4 2023-04-25     2023-04-25
-      134 265         Gericko Martinez suspected   m  31 2023-04-25     2023-04-25
-      135 267           Asiah Marshall  probable   f  16 2023-04-20     2023-04-20
-      136 268             Javon Reeves  probable   m  53 2023-04-21     2023-04-21
-      137 277            Zachary Major confirmed   m  14 2023-05-01     2023-05-01
-      138 278             Jane Solberg confirmed   f  48 2023-04-28     2023-04-28
-      139 279          Razeen al-Shaer confirmed   m  89 2023-04-25     2023-04-25
-      140 280            Ismad al-Azad confirmed   m  39 2023-04-26     2023-04-26
-      141 282             Marcus Ellis confirmed   m  20 2023-04-21     2023-04-21
-      142 284        Firdaus el-Satter confirmed   f   6 2023-05-03     2023-05-03
-      143 285  Haley Iron Cloud-Gresko  probable   f  28 2023-05-05     2023-05-05
-      144 291        Justin Cunningham confirmed   m  42 2023-05-01     2023-05-01
-      145 292               Judy David confirmed   f  71 2023-04-23     2023-04-23
-      146 293          Sanaaa el-Farha confirmed   f   9 2023-05-05     2023-05-05
-      147 296        Alexandra Medrano confirmed   f  61 2023-05-06     2023-05-06
-      148 298          Andrew Kelemeni suspected   m  53 2023-05-02     2023-05-02
-      149 301      Alexzandria Holguin  probable   f  76 2023-04-23     2023-04-23
-      150 302             Jazmyn Evans  probable   f  69 2023-04-26     2023-04-26
-      151 304             Ty Gutierrez  probable   m  50 2023-05-07     2023-05-07
-      152 307        Jennifer Valverde suspected   f   7 2023-05-09     2023-05-09
-      153 310         Naseera el-Saidi confirmed   f  45 2023-04-24     2023-04-24
-      154 311              Luis Taylor  probable   m  83 2023-04-25     2023-04-25
-      155 313              Kylie Berry suspected   f  41 2023-04-27     2023-04-27
-      156 316            Laneece Ahuna confirmed   f  88 2023-05-10     2023-05-10
-      157 320     John Gonzalez Vargas confirmed   m  79 2023-05-01     2023-05-01
-      158 326            Stephon White confirmed   m  82 2023-05-08     2023-05-08
+           id                   case_name case_type sex age date_onset date_reporting
+      1     1            Lolette Phillips suspected   f  59 2023-01-01     2023-01-01
+      2     2                  James Jack suspected   m  90 2023-01-01     2023-01-01
+      3     3                 Chen Kantha confirmed   m   4 2023-01-02     2023-01-02
+      4     5             Saleema al-Zaki  probable   f  29 2023-01-04     2023-01-04
+      5     6                David Ponzio confirmed   m  14 2023-01-05     2023-01-05
+      6     7            Christopher Ward  probable   m  85 2023-01-06     2023-01-06
+      7    10                 Laura Ilaoa confirmed   f  25 2023-01-13     2023-01-13
+      8    11                Morgan Mason suspected   f  34 2023-01-11     2023-01-11
+      9    12            Cornelius Turner confirmed   m  89 2023-01-13     2023-01-13
+      10   14          Shaddaad el-Younes suspected   m  63 2023-01-11     2023-01-11
+      11   18         Carlo Ceazar Corpuz confirmed   m  74 2023-01-14     2023-01-14
+      12   19              Bishr al-Qasim confirmed   m  34 2023-01-12     2023-01-12
+      13   22           Nichole Mcfarland confirmed   f  29 2023-01-12     2023-01-12
+      14   24               Jubair el-Aly confirmed   m  46 2023-01-13     2023-01-13
+      15   27            Hafsa al-Massoud  probable   f  24 2023-01-14     2023-01-14
+      16   29                Trever Manis confirmed   m  41 2023-01-21     2023-01-21
+      17   30          Maiya Vathanavarin suspected   f  72 2023-01-19     2023-01-19
+      18   31            Ghaamid el-Zafar  probable   m   6 2023-01-20     2023-01-20
+      19   33      Kelly Runningbear-Paul confirmed   f  61 2023-01-14     2023-01-14
+      20   34                James Welter  probable   m  44 2023-01-14     2023-01-14
+      21   35            Austin Manheimer confirmed   m  71 2023-01-27     2023-01-27
+      22   38         Orville Stadelbauer confirmed   m  69 2023-01-23     2023-01-23
+      23   39                Jennifer Ouk  probable   f  61 2023-01-23     2023-01-23
+      24   41            Nafeesa al-Zaher confirmed   f  64 2023-01-24     2023-01-24
+      25   44           Nawwaara el-Pasha  probable   f  61 2023-01-22     2023-01-22
+      26   45          Saleet el-Mohammed  probable   m  66 2023-01-22     2023-01-22
+      27   47           Christian Mendoza  probable   m  81 2023-01-28     2023-01-28
+      28   50                Eraina Mcgee confirmed   f  53 2023-01-28     2023-01-28
+      29   51                   Mia Floyd  probable   f  45 2023-01-29     2023-01-29
+      30   53               Collin Chavez confirmed   m  42 2023-02-02     2023-02-02
+      31   54              Itzel Gonzales confirmed   f  78 2023-02-03     2023-02-03
+      32   55            Alexis Caramillo confirmed   f  35 2023-01-24     2023-01-24
+      33   56             Ronnie Scurlock suspected   m  54 2023-01-26     2023-01-26
+      34   58                 Shane Ahmad confirmed   m  68 2023-01-25     2023-01-25
+      35   59         Ghaaliya al-Shaheed  probable   f   3 2023-01-23     2023-01-23
+      36   60               Exzinia Smith  probable   f  44 2023-01-29     2023-01-29
+      37   63           Rhiannon Freeland  probable   f  62 2023-01-31     2023-01-31
+      38   64              Deisha Beckner confirmed   f  35 2023-01-29     2023-01-29
+      39   65                 Nelly Reyez confirmed   f  90 2023-02-03     2023-02-03
+      40   66       Nadheera el-Mohiuddin  probable   f  25 2023-02-01     2023-02-01
+      41   71        Caroline Vargas Pena  probable   f  46 2023-01-29     2023-01-29
+      42   73             Mathurin Curtis confirmed   m   8 2023-02-01     2023-02-01
+      43   77                 Kevin Shahi confirmed   m  63 2023-01-30     2023-01-30
+      44   78              Diksha Reichal suspected   f  54 2023-01-29     2023-01-29
+      45   80            Jazmine Sturgeon  probable   f  67 2023-02-03     2023-02-03
+      46   85            Sally Richardson  probable   f  37 2023-02-02     2023-02-02
+      47   88              Laraena Batson confirmed   f  73 2023-01-30     2023-01-30
+      48   89                   Monica Ye  probable   f  13 2023-02-02     2023-02-02
+      49   90              Kashauna Yorks  probable   f  72 2023-02-01     2023-02-01
+      50   93           Carmelita Montoya  probable   f  61 2023-02-04     2023-02-04
+      51   97            Aliyya el-Yassin  probable   f  22 2023-02-05     2023-02-05
+      52   98                  Alicia Vue confirmed   f  29 2023-02-04     2023-02-04
+      53  101            Rashele Williams confirmed   f  17 2023-02-07     2023-02-07
+      54  108             Isabella Medina  probable   f  71 2023-02-14     2023-02-14
+      55  111           Samuel Goodfellow confirmed   m  90 2023-02-09     2023-02-09
+      56  113                Bertha Mohar  probable   f  23 2023-02-12     2023-02-12
+      57  114           Mu,Aawiya al-Kaba confirmed   m  35 2023-02-16     2023-02-16
+      58  116               Andrew Garcia confirmed   m  62 2023-02-24     2023-02-24
+      59  119             Trevor Colligan confirmed   m  57 2023-02-23     2023-02-23
+      60  120               Taaj el-Sarah suspected   m  44 2023-02-18     2023-02-18
+      61  122              Savannah Cohen confirmed   f  57 2023-03-02     2023-03-02
+      62  123              Nawfa el-Anwar suspected   f  63 2023-03-08     2023-03-08
+      63  125                  Ryan Zheng suspected   m  46 2023-02-28     2023-02-28
+      64  126              Henry Reichman suspected   m  66 2023-02-26     2023-02-26
+      65  130            Shannon Armbrust  probable   f  68 2023-03-07     2023-03-07
+      66  131                Orilea Diego  probable   f  12 2023-03-09     2023-03-09
+      67  133                  Kloe Avila confirmed   f  51 2023-03-18     2023-03-18
+      68  138              Sarah Griffith confirmed   f   2 2023-03-10     2023-03-10
+      69  139                 Kara Finken  probable   f  53 2023-03-09     2023-03-09
+      70  142         Raul Aguirre Molina  probable   m  76 2023-03-23     2023-03-23
+      71  143               Mikayla Smith confirmed   f  82 2023-03-21     2023-03-21
+      72  145         Mansoor al-Siddique confirmed   m  25 2023-03-15     2023-03-15
+      73  146            Nizaam al-Salame suspected   m  76 2023-03-13     2023-03-13
+      74  147              Alexis Harding confirmed   f  14 2023-03-13     2023-03-13
+      75  150                Unique Vigil confirmed   f  76 2023-03-11     2023-03-11
+      76  153                Tanya Mcadoo confirmed   f  78 2023-03-15     2023-03-15
+      77  154                Shawn Morgan confirmed   m  75 2023-03-24     2023-03-24
+      78  155              Asysa Robinson confirmed   f  76 2023-03-24     2023-03-24
+      79  157            Sakeena al-Abdoo suspected   f  80 2023-03-18     2023-03-18
+      80  158                Richard Prum confirmed   m  41 2023-03-18     2023-03-18
+      81  159            Shahla al-Jaffer confirmed   f  78 2023-03-19     2023-03-19
+      82  163               Kailey Braden suspected   f  28 2023-03-15     2023-03-15
+      83  164          Raadiya el-Chahine confirmed   f   2 2023-03-21     2023-03-21
+      84  166            Janie Santa Cruz  probable   f  82 2023-03-26     2023-03-26
+      85  171               Alvaro Romero  probable   m   5 2023-03-22     2023-03-22
+      86  172              Lane Rodriguez confirmed   m   1 2023-03-20     2023-03-20
+      87  173                      Ka Lee confirmed   m  44 2023-03-19     2023-03-19
+      88  174             Qaaid al-Shaker suspected   m  76 2023-03-16     2023-03-16
+      89  175              Munsif al-Ozer suspected   m   3 2023-03-29     2023-03-29
+      90  176               Sharon Watson  probable   f  15 2023-03-25     2023-03-25
+      91  177          Danielle Ouellette confirmed   f  19 2023-03-26     2023-03-26
+      92  178 Abdur Rasheed al-Salahuddin confirmed   m  76 2023-03-25     2023-03-25
+      93  182             Samuel Videtzky confirmed   m  90 2023-03-27     2023-03-27
+      94  186        Shalise Peters-Maloy confirmed   f  64 2023-04-03     2023-04-03
+      95  189                  Jay Herman confirmed   m  35 2023-03-29     2023-03-29
+      96  195             Manaara el-Saba confirmed   f  84 2023-03-27     2023-03-27
+      97  196             Amelia Gallegos confirmed   f  18 2023-03-30     2023-03-30
+      98  197             Brieannah Coles suspected   f  79 2023-03-28     2023-03-28
+      99  199                    Sarah Vu suspected   f  49 2023-04-07     2023-04-07
+      100 200               Mason Powells  probable   m  56 2023-04-05     2023-04-05
+      101 201               Ashley Dotson confirmed   f  76 2023-04-07     2023-04-07
+      102 202     Abdul Ghafoor al-Firman confirmed   m  41 2023-04-03     2023-04-03
+      103 205              Vincent Arnick suspected   m  29 2023-04-01     2023-04-01
+      104 209              Razeen al-Sala suspected   m  39 2023-04-05     2023-04-05
+      105 210              Rusty Figueroa confirmed   m  32 2023-04-01     2023-04-01
+      106 211                  Emma Jones suspected   f   9 2023-04-06     2023-04-06
+      107 213               Cam Tu Quilon confirmed   f  39 2023-04-11     2023-04-11
+      108 214              Fisayo Wallace confirmed   m  12 2023-04-17     2023-04-17
+      109 219           Alejandra Purdham confirmed   f  52 2023-04-10     2023-04-10
+      110 221              Yahya el-Aslam confirmed   m  22 2023-04-02     2023-04-02
+      111 224             Nabeel el-Karam  probable   m  68 2023-04-08     2023-04-08
+      112 226            Sandra Rodriquez confirmed   f  57 2023-04-06     2023-04-06
+      113 229             Ameen al-Shakir confirmed   m   8 2023-04-12     2023-04-12
+      114 230               Azmi el-Safar confirmed   m  28 2023-04-12     2023-04-12
+      115 232             Laaiqa el-Azizi suspected   f   2 2023-04-02     2023-04-02
+      116 233                  Jose Lopez confirmed   m  84 2023-04-09     2023-04-09
+      117 234             Mreenal Solberg confirmed   f  52 2023-04-09     2023-04-09
+      118 235                  Kevin Behr confirmed   m  58 2023-04-12     2023-04-12
+      119 236               Khyleah Jones suspected   f  29 2023-04-10     2023-04-10
+      120 238               Quinn Barrett confirmed   m  30 2023-04-14     2023-04-14
+      121 240             Bryanna Medrano confirmed   f  71 2023-04-15     2023-04-15
+      122 243                Marques Rice suspected   m  43 2023-04-13     2023-04-13
+      123 245      Andrew Zaragoza-Madrid confirmed   m  40 2023-04-15     2023-04-15
+      124 250             Julanne El-Amin suspected   f  46 2023-04-16     2023-04-16
+      125 251               Jason Sowards suspected   m  69 2023-04-11     2023-04-11
+      126 252                Yeeleng Tran suspected   m  69 2023-04-20     2023-04-20
+      127 253                  Isaac Reid  probable   m  38 2023-04-20     2023-04-20
+      128 254           Lawrence Williams  probable   m  28 2023-04-16     2023-04-16
+      129 255                Adrian Anaya confirmed   m  82 2023-04-16     2023-04-16
+      130 258              Colette Torres confirmed   f  19 2023-04-14     2023-04-14
+      131 261                   Jose Luna confirmed   m  46 2023-04-26     2023-04-26
+      132 262   Ummu Kulthoom al-Ghaffari confirmed   f  71 2023-04-13     2023-04-13
+      133 264                  Luna Vigil confirmed   f   4 2023-04-25     2023-04-25
+      134 265               Jasmine Evans confirmed   f  31 2023-04-25     2023-04-25
+      135 267               Javon Jenkins  probable   m  16 2023-04-20     2023-04-20
+      136 268             Clifton Charron confirmed   m  53 2023-04-21     2023-04-21
+      137 277              Zachary Stuart confirmed   m  14 2023-05-01     2023-05-01
+      138 278             Naseer el-Javed confirmed   m  48 2023-04-28     2023-04-28
+      139 279             Alexis Stafford confirmed   f  89 2023-04-25     2023-04-25
+      140 280              Razeen el-Azad suspected   m  39 2023-04-26     2023-04-26
+      141 282             Jordan Marshall  probable   f  20 2023-04-21     2023-04-21
+      142 284                Marcus Erman  probable   m   6 2023-05-03     2023-05-03
+      143 285             Ismad al-Badour  probable   m  28 2023-05-05     2023-05-05
+      144 291            Firdaus el-Farha suspected   f  42 2023-05-01     2023-05-01
+      145 292                  Jane David confirmed   f  71 2023-04-23     2023-04-23
+      146 293              Corina Morales  probable   f   9 2023-05-05     2023-05-05
+      147 296               Justin Delori suspected   m  61 2023-05-06     2023-05-06
+      148 298              Janalen Nguyen confirmed   f  53 2023-05-02     2023-05-02
+      149 301             Naseera al-Arif confirmed   f  76 2023-04-23     2023-04-23
+      150 302                  Andrew Sun confirmed   m  69 2023-04-26     2023-04-26
+      151 304                    Ty Rains confirmed   m  50 2023-05-07     2023-05-07
+      152 307               Javier Valdez  probable   m   7 2023-05-09     2023-05-09
+      153 310                Kyana Ludwig confirmed   f  45 2023-04-24     2023-04-24
+      154 311                Jessie Berry confirmed   f  83 2023-04-25     2023-04-25
+      155 313               Jazmyn Guyton confirmed   f  41 2023-04-27     2023-04-27
+      156 316                  Gia Garcia confirmed   f  88 2023-05-10     2023-05-10
+      157 320               John Trujillo  probable   m  79 2023-05-01     2023-05-01
+      158 326                Haley Hamlin  probable   f  82 2023-05-08     2023-05-08
           date_admission   outcome date_outcome date_first_contact date_last_contact
       1       2023-01-09      died   2023-01-13               <NA>              <NA>
-      2             <NA> recovered         <NA>         2022-12-31        2023-01-05
-      3             <NA> recovered         <NA>         2022-12-30        2023-01-01
-      4             <NA> recovered         <NA>         2023-01-05        2023-01-05
-      5       2023-01-09      died   2023-01-23         2023-01-07        2023-01-08
-      6       2023-01-08 recovered         <NA>         2023-01-03        2023-01-06
-      7             <NA> recovered         <NA>         2023-01-06        2023-01-06
-      8       2023-01-24      died   2023-01-27         2023-01-01        2023-01-06
-      9             <NA> recovered         <NA>         2023-01-06        2023-01-08
-      10            <NA> recovered         <NA>         2023-01-02        2023-01-08
-      11            <NA> recovered         <NA>         2023-01-12        2023-01-17
-      12            <NA> recovered         <NA>         2023-01-09        2023-01-11
-      13            <NA> recovered         <NA>         2023-01-12        2023-01-14
-      14            <NA> recovered         <NA>         2023-01-10        2023-01-16
-      15      2023-01-19      died   2023-01-27         2023-01-11        2023-01-13
-      16            <NA> recovered         <NA>         2023-01-11        2023-01-15
-      17            <NA> recovered         <NA>         2023-01-14        2023-01-17
-      18            <NA> recovered         <NA>         2023-01-14        2023-01-16
-      19            <NA> recovered         <NA>         2023-01-12        2023-01-16
-      20      2023-02-10 recovered         <NA>         2023-01-13        2023-01-17
-      21            <NA>      died   2023-02-05         2023-01-22        2023-01-23
-      22            <NA> recovered         <NA>         2023-01-20        2023-01-22
-      23            <NA> recovered         <NA>         2023-01-19        2023-01-23
-      24            <NA> recovered         <NA>         2023-01-19        2023-01-22
-      25            <NA> recovered         <NA>         2023-01-23        2023-01-24
-      26            <NA> recovered         <NA>         2023-01-23        2023-01-25
-      27            <NA> recovered         <NA>         2023-01-23        2023-01-28
-      28      2023-01-30      died   2023-02-16         2023-01-22        2023-01-24
-      29            <NA> recovered         <NA>         2023-01-23        2023-01-28
-      30      2023-02-11 recovered         <NA>         2023-01-25        2023-01-26
-      31            <NA> recovered         <NA>         2023-01-24        2023-01-26
-      32            <NA> recovered         <NA>         2023-01-23        2023-01-26
-      33            <NA>      died   2023-02-14         2023-01-18        2023-01-23
-      34      2023-01-29 recovered         <NA>         2023-01-19        2023-01-23
-      35            <NA> recovered         <NA>         2023-01-22        2023-01-26
-      36      2023-02-02      died   2023-02-09         2023-01-27        2023-01-27
-      37            <NA> recovered         <NA>         2023-01-26        2023-01-28
-      38            <NA> recovered         <NA>         2023-01-25        2023-01-30
-      39      2023-02-08      died   2023-02-21         2023-01-27        2023-01-30
-      40      2023-02-05 recovered         <NA>         2023-01-27        2023-01-31
-      41            <NA> recovered         <NA>         2023-01-30        2023-01-31
-      42            <NA>      died   2023-02-15         2023-02-01        2023-02-04
-      43            <NA> recovered         <NA>         2023-01-28        2023-02-02
-      44            <NA> recovered         <NA>         2023-01-27        2023-02-02
-      45            <NA> recovered         <NA>         2023-02-03        2023-02-04
-      46            <NA> recovered         <NA>         2023-02-01        2023-02-03
-      47            <NA> recovered         <NA>         2023-01-31        2023-02-01
-      48            <NA> recovered         <NA>         2023-01-30        2023-02-02
-      49            <NA> recovered         <NA>         2023-01-31        2023-01-31
-      50            <NA> recovered         <NA>         2023-01-30        2023-02-04
-      51            <NA>      died   2023-02-14         2023-02-04        2023-02-06
-      52            <NA>      died   2023-02-13         2023-02-03        2023-02-05
-      53            <NA> recovered         <NA>         2023-01-30        2023-02-04
-      54            <NA>      died   2023-02-28         2023-02-05        2023-02-08
-      55            <NA> recovered         <NA>         2023-02-06        2023-02-08
-      56            <NA> recovered         <NA>         2023-02-10        2023-02-11
-      57            <NA> recovered         <NA>         2023-02-14        2023-02-19
-      58            <NA> recovered         <NA>         2023-02-13        2023-02-16
-      59            <NA> recovered         <NA>         2023-02-10        2023-02-13
-      60            <NA> recovered         <NA>         2023-02-16        2023-02-18
-      61            <NA> recovered         <NA>         2023-03-02        2023-03-02
-      62      2023-03-11      died   2023-03-25         2023-02-26        2023-03-03
-      63            <NA> recovered         <NA>         2023-02-24        2023-02-26
-      64            <NA> recovered         <NA>         2023-02-17        2023-02-23
-      65            <NA> recovered         <NA>         2023-03-06        2023-03-07
-      66            <NA> recovered         <NA>         2023-03-03        2023-03-04
-      67            <NA> recovered         <NA>         2023-03-07        2023-03-09
-      68            <NA> recovered         <NA>         2023-03-06        2023-03-11
-      69      2023-03-16      died   2023-03-22         2023-03-07        2023-03-11
-      70            <NA> recovered         <NA>         2023-03-18        2023-03-23
-      71            <NA> recovered         <NA>         2023-03-20        2023-03-20
-      72            <NA> recovered         <NA>         2023-03-07        2023-03-12
-      73            <NA> recovered         <NA>         2023-03-10        2023-03-14
-      74      2023-03-17 recovered         <NA>         2023-03-06        2023-03-11
-      75            <NA> recovered         <NA>         2023-03-10        2023-03-11
-      76            <NA> recovered         <NA>         2023-03-16        2023-03-21
-      77      2023-03-31 recovered         <NA>         2023-03-16        2023-03-19
-      78            <NA> recovered         <NA>         2023-03-12        2023-03-19
-      79            <NA> recovered         <NA>         2023-03-13        2023-03-14
-      80            <NA> recovered         <NA>         2023-03-12        2023-03-14
-      81            <NA> recovered         <NA>         2023-03-12        2023-03-17
-      82            <NA> recovered         <NA>         2023-03-12        2023-03-17
-      83            <NA> recovered         <NA>         2023-03-15        2023-03-18
-      84            <NA> recovered         <NA>         2023-03-21        2023-03-25
-      85            <NA> recovered         <NA>         2023-03-16        2023-03-20
-      86            <NA> recovered         <NA>         2023-03-18        2023-03-21
-      87      2023-03-22      died   2023-04-03         2023-03-17        2023-03-18
-      88            <NA> recovered         <NA>         2023-03-20        2023-03-21
-      89            <NA> recovered         <NA>         2023-03-26        2023-03-27
-      90            <NA> recovered         <NA>         2023-03-24        2023-03-24
-      91            <NA> recovered         <NA>         2023-03-22        2023-03-24
-      92            <NA> recovered         <NA>         2023-03-19        2023-03-24
-      93            <NA> recovered         <NA>         2023-03-20        2023-03-20
-      94            <NA>      died   2023-04-12         2023-03-29        2023-04-01
-      95            <NA>      died   2023-04-20         2023-03-27        2023-03-28
-      96            <NA> recovered         <NA>         2023-03-23        2023-03-28
-      97      2023-04-03 recovered         <NA>         2023-03-25        2023-03-29
-      98      2023-04-03 recovered         <NA>         2023-03-26        2023-03-28
-      99            <NA> recovered         <NA>         2023-04-02        2023-04-07
-      100           <NA> recovered         <NA>         2023-04-03        2023-04-06
-      101     2023-04-12 recovered         <NA>         2023-03-31        2023-04-03
-      102           <NA> recovered         <NA>         2023-03-28        2023-04-01
-      103           <NA> recovered         <NA>         2023-03-24        2023-03-29
-      104     2023-04-12 recovered         <NA>         2023-03-28        2023-04-01
-      105           <NA> recovered         <NA>         2023-03-30        2023-04-06
-      106           <NA> recovered         <NA>         2023-04-03        2023-04-05
-      107     2023-04-13      died   2023-04-14         2023-04-07        2023-04-08
+      2             <NA> recovered         <NA>         2022-12-30        2023-01-01
+      3             <NA> recovered         <NA>         2023-01-04        2023-01-04
+      4             <NA> recovered         <NA>         2023-01-04        2023-01-07
+      5       2023-01-09      died   2023-01-23         2023-01-04        2023-01-06
+      6       2023-01-08 recovered         <NA>         2022-12-31        2023-01-04
+      7             <NA> recovered         <NA>         2023-01-04        2023-01-06
+      8       2023-01-24      died   2023-01-27         2023-01-06        2023-01-08
+      9             <NA> recovered         <NA>         2023-01-01        2023-01-07
+      10            <NA> recovered         <NA>         2023-01-09        2023-01-12
+      11            <NA> recovered         <NA>         2023-01-09        2023-01-13
+      12            <NA> recovered         <NA>         2023-01-12        2023-01-15
+      13            <NA> recovered         <NA>         2023-01-07        2023-01-13
+      14            <NA> recovered         <NA>         2023-01-11        2023-01-14
+      15      2023-01-19      died   2023-01-27         2023-01-12        2023-01-16
+      16            <NA> recovered         <NA>         2023-01-15        2023-01-17
+      17            <NA> recovered         <NA>         2023-01-15        2023-01-16
+      18            <NA> recovered         <NA>         2023-01-13        2023-01-17
+      19            <NA> recovered         <NA>         2023-01-16        2023-01-17
+      20      2023-02-10 recovered         <NA>         2023-01-12        2023-01-16
+      21            <NA>      died   2023-02-05         2023-01-23        2023-01-23
+      22            <NA> recovered         <NA>         2023-01-21        2023-01-23
+      23            <NA> recovered         <NA>         2023-01-20        2023-01-23
+      24            <NA> recovered         <NA>         2023-01-18        2023-01-20
+      25            <NA> recovered         <NA>         2023-01-24        2023-01-25
+      26            <NA> recovered         <NA>         2023-01-17        2023-01-22
+      27            <NA> recovered         <NA>         2023-01-28        2023-01-29
+      28      2023-01-30      died   2023-02-16         2023-01-22        2023-01-27
+      29            <NA> recovered         <NA>         2023-01-26        2023-01-27
+      30      2023-02-11 recovered         <NA>         2023-01-23        2023-01-26
+      31            <NA> recovered         <NA>         2023-01-23        2023-01-28
+      32            <NA> recovered         <NA>         2023-01-21        2023-01-23
+      33            <NA>      died   2023-02-14         2023-01-23        2023-01-27
+      34      2023-01-29 recovered         <NA>         2023-01-26        2023-01-26
+      35            <NA> recovered         <NA>         2023-01-27        2023-01-27
+      36      2023-02-02      died   2023-02-09         2023-01-28        2023-01-29
+      37            <NA> recovered         <NA>         2023-01-27        2023-01-30
+      38            <NA> recovered         <NA>         2023-01-25        2023-01-29
+      39      2023-02-08      died   2023-02-21         2023-01-27        2023-01-31
+      40      2023-02-05 recovered         <NA>         2023-01-29        2023-01-30
+      41            <NA> recovered         <NA>         2023-01-24        2023-01-27
+      42            <NA>      died   2023-02-15         2023-01-27        2023-01-31
+      43            <NA> recovered         <NA>         2023-01-30        2023-02-02
+      44            <NA> recovered         <NA>         2023-01-31        2023-02-01
+      45            <NA> recovered         <NA>         2023-02-04        2023-02-05
+      46            <NA> recovered         <NA>         2023-01-28        2023-02-01
+      47            <NA> recovered         <NA>         2023-02-02        2023-02-02
+      48            <NA> recovered         <NA>         2023-01-28        2023-02-01
+      49            <NA> recovered         <NA>         2023-01-28        2023-02-04
+      50            <NA> recovered         <NA>         2023-02-04        2023-02-06
+      51            <NA>      died   2023-02-14         2023-02-06        2023-02-08
+      52            <NA>      died   2023-02-13         2023-01-29        2023-02-01
+      53            <NA> recovered         <NA>         2023-02-01        2023-02-08
+      54            <NA>      died   2023-02-28         2023-02-04        2023-02-10
+      55            <NA> recovered         <NA>         2023-02-08        2023-02-09
+      56            <NA> recovered         <NA>         2023-02-11        2023-02-12
+      57            <NA> recovered         <NA>         2023-02-14        2023-02-17
+      58            <NA> recovered         <NA>         2023-02-12        2023-02-13
+      59            <NA> recovered         <NA>         2023-02-14        2023-02-14
+      60            <NA> recovered         <NA>         2023-02-18        2023-02-18
+      61            <NA> recovered         <NA>         2023-02-26        2023-03-03
+      62      2023-03-11      died   2023-03-25         2023-02-22        2023-02-24
+      63            <NA> recovered         <NA>         2023-02-20        2023-02-23
+      64            <NA> recovered         <NA>         2023-02-23        2023-02-26
+      65            <NA> recovered         <NA>         2023-02-27        2023-03-04
+      66            <NA> recovered         <NA>         2023-03-01        2023-03-03
+      67            <NA> recovered         <NA>         2023-03-05        2023-03-10
+      68            <NA> recovered         <NA>         2023-03-09        2023-03-11
+      69      2023-03-16      died   2023-03-22         2023-03-05        2023-03-09
+      70            <NA> recovered         <NA>         2023-03-18        2023-03-20
+      71            <NA> recovered         <NA>         2023-03-16        2023-03-21
+      72            <NA> recovered         <NA>         2023-03-09        2023-03-14
+      73            <NA> recovered         <NA>         2023-03-08        2023-03-12
+      74      2023-03-17 recovered         <NA>         2023-03-10        2023-03-12
+      75            <NA> recovered         <NA>         2023-03-11        2023-03-15
+      76            <NA> recovered         <NA>         2023-03-12        2023-03-19
+      77      2023-03-31 recovered         <NA>         2023-03-15        2023-03-19
+      78            <NA> recovered         <NA>         2023-03-15        2023-03-16
+      79            <NA> recovered         <NA>         2023-03-09        2023-03-14
+      80            <NA> recovered         <NA>         2023-03-14        2023-03-17
+      81            <NA> recovered         <NA>         2023-03-13        2023-03-18
+      82            <NA> recovered         <NA>         2023-03-15        2023-03-18
+      83            <NA> recovered         <NA>         2023-03-16        2023-03-20
+      84            <NA> recovered         <NA>         2023-03-23        2023-03-25
+      85            <NA> recovered         <NA>         2023-03-19        2023-03-20
+      86            <NA> recovered         <NA>         2023-03-21        2023-03-22
+      87      2023-03-22      died   2023-04-03         2023-03-20        2023-03-21
+      88            <NA> recovered         <NA>         2023-03-16        2023-03-16
+      89            <NA> recovered         <NA>         2023-03-26        2023-03-28
+      90            <NA> recovered         <NA>         2023-03-19        2023-03-24
+      91            <NA> recovered         <NA>         2023-03-23        2023-03-24
+      92            <NA> recovered         <NA>         2023-03-25        2023-03-26
+      93            <NA> recovered         <NA>         2023-03-12        2023-03-17
+      94            <NA>      died   2023-04-12         2023-03-24        2023-03-26
+      95            <NA>      died   2023-04-20         2023-03-26        2023-03-30
+      96            <NA> recovered         <NA>         2023-03-25        2023-03-27
+      97      2023-04-03 recovered         <NA>         2023-03-28        2023-03-28
+      98      2023-04-03 recovered         <NA>         2023-03-27        2023-04-01
+      99            <NA> recovered         <NA>         2023-04-03        2023-04-06
+      100           <NA> recovered         <NA>         2023-03-30        2023-04-03
+      101     2023-04-12 recovered         <NA>         2023-04-05        2023-04-06
+      102           <NA> recovered         <NA>         2023-03-27        2023-03-31
+      103           <NA> recovered         <NA>         2023-03-21        2023-03-27
+      104     2023-04-12 recovered         <NA>         2023-04-04        2023-04-06
+      105           <NA> recovered         <NA>         2023-04-01        2023-04-05
+      106           <NA> recovered         <NA>         2023-04-02        2023-04-03
+      107     2023-04-13      died   2023-04-14         2023-04-07        2023-04-10
       108     2023-04-20      died   2023-04-28         2023-04-08        2023-04-08
-      109           <NA> recovered         <NA>         2023-04-06        2023-04-06
-      110           <NA> recovered         <NA>         2023-04-01        2023-04-05
-      111           <NA>      died   2023-04-19         2023-04-03        2023-04-06
+      109           <NA> recovered         <NA>         2023-04-03        2023-04-07
+      110           <NA> recovered         <NA>         2023-04-03        2023-04-05
+      111           <NA>      died   2023-04-19         2023-04-06        2023-04-09
       112           <NA> recovered         <NA>         2023-04-01        2023-04-04
-      113           <NA> recovered         <NA>         2023-04-11        2023-04-16
-      114           <NA> recovered         <NA>         2023-04-09        2023-04-12
-      115           <NA> recovered         <NA>         2023-04-05        2023-04-06
-      116           <NA> recovered         <NA>         2023-04-01        2023-04-03
-      117     2023-04-13      died   2023-04-18         2023-04-01        2023-04-09
-      118           <NA> recovered         <NA>         2023-04-04        2023-04-08
-      119           <NA> recovered         <NA>         2023-04-12        2023-04-13
-      120           <NA> recovered         <NA>         2023-04-14        2023-04-17
-      121           <NA> recovered         <NA>         2023-04-03        2023-04-05
-      122           <NA> recovered         <NA>         2023-04-09        2023-04-12
-      123           <NA> recovered         <NA>         2023-04-10        2023-04-16
-      124           <NA> recovered         <NA>         2023-04-06        2023-04-11
-      125           <NA> recovered         <NA>         2023-04-07        2023-04-12
-      126           <NA> recovered         <NA>         2023-04-04        2023-04-11
-      127           <NA> recovered         <NA>         2023-04-10        2023-04-11
-      128           <NA>      died   2023-04-25         2023-04-13        2023-04-16
-      129           <NA> recovered         <NA>         2023-04-14        2023-04-18
-      130           <NA> recovered         <NA>         2023-04-13        2023-04-14
-      131           <NA> recovered         <NA>         2023-04-15        2023-04-18
-      132     2023-04-18      died   2023-05-02         2023-04-14        2023-04-14
-      133     2023-04-27 recovered         <NA>         2023-04-12        2023-04-21
-      134           <NA> recovered         <NA>         2023-04-16        2023-04-21
-      135     2023-04-24 recovered         <NA>         2023-04-19        2023-04-25
-      136     2023-04-29      died   2023-05-05         2023-04-23        2023-04-25
-      137           <NA> recovered         <NA>         2023-04-11        2023-04-15
-      138     2023-05-01 recovered         <NA>         2023-04-23        2023-04-26
-      139           <NA> recovered         <NA>         2023-04-21        2023-04-22
-      140           <NA> recovered         <NA>         2023-04-18        2023-04-22
-      141     2023-04-26 recovered         <NA>         2023-04-21        2023-04-25
-      142           <NA> recovered         <NA>         2023-05-05        2023-05-06
-      143           <NA> recovered         <NA>         2023-04-28        2023-04-29
-      144           <NA> recovered         <NA>         2023-04-19        2023-04-21
-      145           <NA> recovered         <NA>         2023-04-21        2023-04-23
-      146           <NA> recovered         <NA>         2023-05-03        2023-05-05
+      113           <NA> recovered         <NA>         2023-04-12        2023-04-13
+      114           <NA> recovered         <NA>         2023-04-11        2023-04-12
+      115           <NA> recovered         <NA>         2023-03-26        2023-04-03
+      116           <NA> recovered         <NA>         2023-03-30        2023-04-03
+      117     2023-04-13      died   2023-04-18         2023-04-07        2023-04-08
+      118           <NA> recovered         <NA>         2023-04-10        2023-04-13
+      119           <NA> recovered         <NA>         2023-04-07        2023-04-10
+      120           <NA> recovered         <NA>         2023-04-11        2023-04-13
+      121           <NA> recovered         <NA>         2023-03-31        2023-04-06
+      122           <NA> recovered         <NA>         2023-04-08        2023-04-14
+      123           <NA> recovered         <NA>         2023-04-08        2023-04-11
+      124           <NA> recovered         <NA>         2023-04-05        2023-04-12
+      125           <NA> recovered         <NA>         2023-04-10        2023-04-11
+      126           <NA> recovered         <NA>         2023-04-08        2023-04-11
+      127           <NA> recovered         <NA>         2023-04-08        2023-04-12
+      128           <NA>      died   2023-04-25         2023-04-17        2023-04-18
+      129           <NA> recovered         <NA>         2023-04-12        2023-04-17
+      130           <NA> recovered         <NA>         2023-04-07        2023-04-14
+      131           <NA> recovered         <NA>         2023-04-14        2023-04-19
+      132     2023-04-18      died   2023-05-02         2023-04-05        2023-04-14
+      133     2023-04-27 recovered         <NA>         2023-04-19        2023-04-21
+      134           <NA> recovered         <NA>         2023-04-20        2023-04-26
+      135     2023-04-24 recovered         <NA>         2023-04-18        2023-04-25
+      136     2023-04-29      died   2023-05-05         2023-04-18        2023-04-21
+      137           <NA> recovered         <NA>         2023-04-13        2023-04-14
+      138     2023-05-01 recovered         <NA>         2023-04-23        2023-04-27
+      139           <NA> recovered         <NA>         2023-04-18        2023-04-22
+      140           <NA> recovered         <NA>         2023-04-21        2023-04-25
+      141     2023-04-26 recovered         <NA>         2023-04-26        2023-04-27
+      142           <NA> recovered         <NA>         2023-05-02        2023-05-02
+      143           <NA> recovered         <NA>         2023-04-28        2023-05-01
+      144           <NA> recovered         <NA>         2023-04-21        2023-04-23
+      145           <NA> recovered         <NA>         2023-04-22        2023-04-23
+      146           <NA> recovered         <NA>         2023-05-02        2023-05-08
       147           <NA> recovered         <NA>         2023-05-06        2023-05-08
-      148           <NA> recovered         <NA>         2023-05-01        2023-05-03
-      149           <NA> recovered         <NA>         2023-04-25        2023-04-27
-      150           <NA> recovered         <NA>         2023-04-20        2023-04-25
-      151     2023-05-11 recovered         <NA>         2023-05-08        2023-05-10
-      152           <NA> recovered         <NA>         2023-04-28        2023-05-04
-      153           <NA> recovered         <NA>         2023-04-19        2023-04-25
-      154           <NA> recovered         <NA>         2023-04-25        2023-04-26
-      155           <NA> recovered         <NA>         2023-04-25        2023-04-29
+      148           <NA> recovered         <NA>         2023-04-27        2023-05-01
+      149           <NA> recovered         <NA>         2023-04-16        2023-04-25
+      150           <NA> recovered         <NA>         2023-04-25        2023-04-27
+      151     2023-05-11 recovered         <NA>         2023-05-05        2023-05-07
+      152           <NA> recovered         <NA>         2023-05-02        2023-05-06
+      153           <NA> recovered         <NA>         2023-04-23        2023-04-26
+      154           <NA> recovered         <NA>         2023-04-23        2023-04-27
+      155           <NA> recovered         <NA>         2023-04-23        2023-04-27
       156           <NA> recovered         <NA>         2023-05-05        2023-05-08
-      157           <NA> recovered         <NA>         2023-04-22        2023-04-28
-      158     2023-05-21      died   2023-05-22         2023-05-01        2023-05-03
+      157           <NA> recovered         <NA>         2023-04-24        2023-04-27
+      158     2023-05-21      died   2023-05-22         2023-05-05        2023-05-07
           ct_value
       1         NA
-      2       22.3
-      3       24.5
-      4       24.8
-      5         NA
+      2         NA
+      3       24.8
+      4         NA
+      5       24.6
       6         NA
-      7         NA
-      8       25.4
-      9         NA
+      7       26.5
+      8         NA
+      9       24.7
       10        NA
       11      24.5
-      12        NA
-      13      24.8
-      14        NA
-      15      24.6
-      16        NA
-      17      26.5
+      12      21.7
+      13      21.5
+      14      24.2
+      15        NA
+      16      23.1
+      17        NA
       18        NA
-      19      24.7
-      20      24.5
-      21      21.7
-      22      21.5
+      19      21.5
+      20        NA
+      21      21.5
+      22      26.4
       23        NA
-      24      24.2
+      24      25.2
       25        NA
       26        NA
-      27      23.1
-      28        NA
-      29      21.5
-      30      21.5
-      31        NA
-      32      26.4
+      27        NA
+      28      25.8
+      29        NA
+      30      21.7
+      31      23.7
+      32      24.8
       33        NA
-      34        NA
+      34      23.6
       35        NA
-      36      25.2
+      36        NA
       37        NA
-      38      25.8
-      39      21.7
-      40      23.7
+      38      25.3
+      39      23.9
+      40        NA
       41        NA
-      42      24.8
-      43        NA
+      42      27.8
+      43      26.1
       44        NA
       45        NA
-      46      23.6
-      47      25.3
+      46        NA
+      47      24.3
       48        NA
       49        NA
-      50      23.9
-      51      27.8
-      52        NA
-      53        NA
+      50        NA
+      51        NA
+      52      25.9
+      53      24.2
       54        NA
-      55      26.1
+      55      27.1
       56        NA
-      57        NA
-      58        NA
-      59        NA
-      60      24.3
-      61      25.9
+      57      27.1
+      58      24.3
+      59      24.5
+      60        NA
+      61      30.3
       62        NA
-      63      24.2
+      63        NA
       64        NA
-      65      27.1
-      66      27.1
-      67      24.3
-      68        NA
-      69      24.5
+      65        NA
+      66        NA
+      67      25.2
+      68      23.0
+      69        NA
       70        NA
-      71        NA
-      72        NA
+      71      25.7
+      72      25.1
       73        NA
-      74        NA
-      75      30.3
-      76      25.2
-      77        NA
-      78        NA
-      79      23.0
-      80      25.7
-      81        NA
-      82      25.1
-      83      20.0
-      84      25.7
-      85      27.2
-      86      24.2
-      87        NA
-      88      27.5
-      89      25.3
+      74      20.0
+      75      25.7
+      76      27.2
+      77      24.2
+      78      27.5
+      79        NA
+      80      25.3
+      81      27.2
+      82        NA
+      83      24.9
+      84        NA
+      85        NA
+      86      25.2
+      87      24.0
+      88        NA
+      89        NA
       90        NA
-      91      27.2
-      92        NA
-      93        NA
-      94      24.9
-      95      25.2
-      96        NA
-      97        NA
+      91      26.8
+      92      24.2
+      93      29.1
+      94      24.1
+      95      23.7
+      96      23.4
+      97      25.2
       98        NA
-      99      24.0
-      100     26.8
-      101     24.2
-      102     29.1
-      103     24.1
-      104     23.7
-      105     23.4
+      99        NA
+      100       NA
+      101     26.7
+      102     27.8
+      103       NA
+      104       NA
+      105     26.4
       106       NA
-      107       NA
-      108       NA
-      109     25.2
-      110     26.7
+      107     20.5
+      108     26.4
+      109     28.1
+      110     25.6
       111       NA
-      112       NA
-      113     27.8
-      114       NA
-      115     26.4
-      116     20.5
-      117     26.4
-      118     28.1
+      112     18.6
+      113     25.9
+      114     23.8
+      115       NA
+      116     24.9
+      117     23.2
+      118     24.0
       119       NA
-      120     25.6
-      121     18.6
-      122     25.9
-      123       NA
-      124     23.8
-      125     24.9
-      126     23.2
+      120     25.3
+      121     22.3
+      122       NA
+      123     25.3
+      124       NA
+      125       NA
+      126       NA
       127       NA
-      128     24.0
-      129     25.3
-      130       NA
-      131     22.3
-      132       NA
-      133       NA
-      134       NA
+      128       NA
+      129     23.9
+      130     25.8
+      131     22.5
+      132     27.2
+      133     25.1
+      134     18.6
       135       NA
-      136       NA
-      137     25.3
-      138     23.9
-      139     25.8
-      140     22.5
-      141     27.2
-      142     25.1
+      136     23.1
+      137     24.6
+      138     25.7
+      139     26.2
+      140       NA
+      141       NA
+      142       NA
       143       NA
-      144     18.6
-      145     23.1
-      146     24.6
-      147     25.7
-      148       NA
-      149       NA
-      150       NA
-      151       NA
+      144       NA
+      145     28.1
+      146       NA
+      147       NA
+      148     23.7
+      149     26.7
+      150     22.0
+      151     24.2
       152       NA
-      153     26.2
-      154       NA
-      155       NA
-      156     28.1
-      157     23.7
-      158     26.7
+      153     23.7
+      154     25.4
+      155     22.5
+      156     29.0
+      157       NA
+      158       NA
       
       $contacts
-                              from                       to age sex
-      1                James Manis            Anisa Hatcher  90   f
-      2                James Manis              Morgan Bohn   4   f
-      3              Anisa Hatcher                Chen Moua  86   m
-      4              Anisa Hatcher             David Welter  29   m
-      5                Morgan Bohn            Sade Phillips  14   f
-      6                Morgan Bohn          Sameeha al-Zaki  85   f
-      7                Morgan Bohn       Christopher Turner  18   m
-      8               David Welter          Yutitham Corpuz  59   m
-      9              Sade Phillips    Cornelius Stadelbauer  25   m
-      10             Sade Phillips          Hafsa al-Arshad  34   f
-      11             Sade Phillips                Maiya Kim  89   f
-      12             Sade Phillips            Nimesha Ilaoa   5   f
-      13           Sameeha al-Zaki           Desmond Ibarra  63   m
-      14           Hafsa al-Arshad          Junaid al-Hoque  50   m
-      15           Hafsa al-Arshad             Bishr el-Aly   5   m
-      16           Hafsa al-Arshad            Kaile Shaheen  89   f
-      17                 Maiya Kim  Carlo Ceazar Strausburg  74   m
-      18            Desmond Ibarra    Jennifer Vathanavarin  34   f
-      19            Desmond Ibarra         Aabdeen al-Amara  47   m
-      20            Desmond Ibarra            Edward Castro  85   m
-      21            Desmond Ibarra              Deisha Wall  29   f
-      22   Carlo Ceazar Strausburg          Jubair el-Zafar  24   m
-      23     Jennifer Vathanavarin          Qamraaa el-Ally  46   f
-      24     Jennifer Vathanavarin  Abdul Jaleel al-Shabazz  63   m
-      25     Jennifer Vathanavarin      Ghaamid el-Mohammed  19   m
-      26     Jennifer Vathanavarin          Jaylynn Baldwin  24   f
-      27               Deisha Wall            Trever Bailey   9   m
-      28               Deisha Wall       Nafeesa al-Massoud  41   f
-      29               Deisha Wall          Dalicia Wilkins  72   f
-      30               Deisha Wall      Sulaimaan al-Farooq   6   m
-      31           Qamraaa el-Ally            Mia Grossaint   9   f
-      32           Jaylynn Baldwin           James Colligan  61   m
-      33           Jaylynn Baldwin         Crystal Sandoval  44   f
-      34        Nafeesa al-Massoud        Chandel Aviado II  71   f
-      35        Nafeesa al-Massoud           Austin Lathrop  34   m
-      36        Nafeesa al-Massoud              Marco Lopez  75   m
-      37        Nafeesa al-Massoud          Utkarsh Hammond  69   m
-      38        Nafeesa al-Massoud           Orville Mosher  61   m
-      39        Nafeesa al-Massoud       Saleet el-Shehadeh  67   m
-      40           Dalicia Wilkins        Nawwaara al-Rahim  64   f
-      41           Dalicia Wilkins             Eraina Smith  11   f
-      42           Dalicia Wilkins           Rashele Cooper  59   f
-      43       Sulaimaan al-Farooq           Shuaib al-Kaba  61   m
-      44       Sulaimaan al-Farooq         Lauren Caramillo  66   f
-      45          Crystal Sandoval             Savanna Sena  16   f
-      46         Chandel Aviado II          Jamaal el-Sarah  81   m
-      47         Chandel Aviado II Christian Gomez-Buchanan  88   m
-      48            Orville Mosher      Alexander Rodriguez  53   m
-      49            Orville Mosher          Jameel Scurlock  53   m
-      50         Nawwaara al-Rahim          Khongmong Ahmad  45   m
-      51         Nawwaara al-Rahim        Ghaaliya al-Zaher  42   f
-      52         Nawwaara al-Rahim           Nichole Gilroy  42   f
-      53         Nawwaara al-Rahim     Collin Rangel Mendez  78   m
-      54            Shuaib al-Kaba          Ronnie Maryland  35   m
-      55            Shuaib al-Kaba              Itzel Jiron  54   f
-      56            Shuaib al-Kaba              Renae Mason  54   f
-      57          Lauren Caramillo         Brandon Trammell  68   m
-      58          Lauren Caramillo              Shane Huang   3   m
-      59          Lauren Caramillo       Mu,Aawiya al-Amiri  44   m
-      60           Jamaal el-Sarah          Nelly Andreatta  35   f
-      61           Jameel Scurlock              Whitney Ouk  23   f
-      62           Jameel Scurlock Joshua Valencia Anchondo  62   m
-      63           Jameel Scurlock            Cairra Curtis  35   m
-      64           Khongmong Ahmad        Nadheera el-Pasha  90   f
-      65           Khongmong Ahmad        Sapphire Freeland  25   f
-      66      Collin Rangel Mendez             Diksha Floyd  41   f
-      67               Itzel Jiron        Exzinia O'Donnell  17   f
-      68               Itzel Jiron         Hissa al-Shaheed  26   f
-      69          Brandon Trammell         Mathurin Labadie  61   m
-      70          Brandon Trammell              Medhavi Kim  46   f
-      71               Shane Huang            Jazmine Mcgee  57   f
-      72        Mu,Aawiya al-Amiri        Madelyn Mcfarland   8   f
-      73        Mu,Aawiya al-Amiri             Kimiko Smith  11   f
-      74  Joshua Valencia Anchondo             Yuvorn Shahi  56   m
-      75             Cairra Curtis           Monica Reichal  32   f
-      76             Cairra Curtis                Kevin Cha  63   m
-      77             Cairra Curtis         Laraena Sturgeon  54   f
-      78             Cairra Curtis                 Yusuf La  22   m
-      79         Sapphire Freeland            Taylor Nguyen  67   f
-      80         Sapphire Freeland              Russell Roy  83   m
-      81         Sapphire Freeland          Nakrista Chacon  16   f
-      82         Sapphire Freeland            Caroline Cano  38   f
-      83               Medhavi Kim       Afaaf el-Mohiuddin  19   f
-      84         Madelyn Mcfarland         Markese Marchman  37   m
-      85         Madelyn Mcfarland        Habeeba al-Hammad  46   f
-      86         Madelyn Mcfarland                Alicia Ye  64   f
-      87                 Kevin Cha         Christian Molina  73   m
-      88                 Kevin Cha            Mark Espinosa  13   m
-      89          Laraena Sturgeon          Cassandra Lange  72   f
-      90          Laraena Sturgeon            Megan Beckner  12   f
-      91             Taylor Nguyen              Sally Joyce  52   f
-      92             Taylor Nguyen         Alexander Naylor  61   m
-      93             Taylor Nguyen        Kashauna Thompson   9   f
-      94             Taylor Nguyen           Shamari Batson   9   f
-      95             Taylor Nguyen          De'Chelle Yorks  42   f
-      96          Markese Marchman                Micah San  22   m
-      97          Christian Molina         Carmelita Huizar  29   f
-      98             Mark Espinosa          Savannah Duling  15   f
-      99             Mark Espinosa          Gloria Zaragoza  69   f
-      100            Mark Espinosa        Daniel Goodfellow  17   m
-      101            Mark Espinosa            Kloe Williams  21   f
-      102            Mark Espinosa         Isabella Alvarez  54   f
-      103            Mark Espinosa       Shelby Vargas Pena  20   f
-      104            Mark Espinosa          Connor Reichman   9   m
-      105         Alexander Naylor            Sarah Etsitty  26   f
-      106         Alexander Naylor             Deliah Bison  80   f
-      107         Alexander Naylor           Samuel Johnson  71   m
-      108         Alexander Naylor           Aliyya al-Azzi  57   f
-      109         Alexander Naylor          Deviny Mckinney  77   f
-      110         Carmelita Huizar           Bertha Montoya  90   f
-      111        Daniel Goodfellow           Danielle Begay  58   f
-      112        Daniel Goodfellow           Taaj al-Rahimi  23   m
-      113           Samuel Johnson             Lafaith Bean  35   f
-      114           Bertha Montoya       Shannon Richardson  66   f
-      115           Taaj al-Rahimi              Joshua Khan  62   m
-      116           Taaj al-Rahimi   Andrew Macias-Monarrez  62   m
-      117           Taaj al-Rahimi        Trevor Feuerstein  34   m
-      118           Taaj al-Rahimi             Billye Cohen  57   f
-      119             Lafaith Bean         Madison Mcdonald  44   f
-      120             Lafaith Bean            Yusri al-Imam  22   m
-      121              Joshua Khan           Wen Kang Zheng  57   m
-      122              Joshua Khan            Sidqi el-Reza  63   m
-      123             Billye Cohen                Elyse Vue   7   f
-      124             Billye Cohen           Rebekah Norman  46   f
-      125             Billye Cohen              Ryan Fukuda  66   m
-      126         Madison Mcdonald             Henry Morgan   4   m
-      127         Madison Mcdonald         Mastoor al-Murad  10   m
-      128           Wen Kang Zheng     Muhaajir al-Siddique  68   m
-      129           Wen Kang Zheng         Jumail al-Salame  68   m
-      130           Wen Kang Zheng            Jez-Mas Woods  12   m
-      131            Sidqi el-Reza            Kara Armbrust  51   f
-      132            Sidqi el-Reza          Mikayla Hopkins  51   f
-      133           Rebekah Norman              Weston Hahs   8   m
-      134              Ryan Fukuda             Marissa Osse  55   f
-      135         Jumail al-Salame         Merrill Jr Baker  77   m
-      136         Jumail al-Salame         Jennifer Johnson  22   f
-      137            Jez-Mas Woods             Rosemary Lor   2   f
-      138            Jez-Mas Woods       Mansoor al-Hussein  53   m
-      139          Mikayla Hopkins            Amanda Finken  31   f
-      140          Mikayla Hopkins          Alexis Jones Jr  77   f
-      141          Mikayla Hopkins           Nawfa el-Ahmad  76   f
-      142          Mikayla Hopkins              Raul Millan  82   m
-      143          Mikayla Hopkins         Nizaam al-Shaker  12   m
-      144             Rosemary Lor         Najlaa el-Yassin  25   f
-      145             Rosemary Lor         Sakeena el-Anwar  76   f
-      146       Mansoor al-Hussein             Rida al-Ozer  14   m
-      147       Mansoor al-Hussein             Jaesung Prum  31   m
-      148       Mansoor al-Hussein          Alejandra Avila  90   f
-      149       Mansoor al-Hussein          Tanya Tollivoro  76   f
-      150           Nawfa el-Ahmad              Aldo Campos  30   m
-      151              Raul Millan          Shahla al-Salam  32   f
-      152         Najlaa el-Yassin           Shawn Videtzky  78   m
-      153         Najlaa el-Yassin         Kailey Scharnell  75   f
-      154         Najlaa el-Yassin            Orilea Medina  76   f
-      155         Sakeena el-Anwar              Richard Lee  88   m
-      156             Rida al-Ozer            Unique Tinoco  80   f
-      157             Rida al-Ozer         Raadiya al-Abdoo  41   f
-      158             Rida al-Ozer              Janie Mohar  78   f
-      159             Rida al-Ozer           Jaycee Conners  11   m
-      160             Rida al-Ozer              Asysa Smith  57   f
-      161          Tanya Tollivoro      Qaaid al-Salahuddin  79   m
-      162           Shawn Videtzky        Keeman Stockinger  28   m
-      163           Shawn Videtzky         Frankie Griffith   2   f
-      164         Kailey Scharnell       Shabeeba al-Jaffer  16   f
-      165            Orilea Medina           Sharon Harding  82   f
-      166            Unique Tinoco            Maritza Silva  51   f
-      167            Unique Tinoco         Shalise Robinson  54   f
-      168         Raadiya al-Abdoo         Fikra el-Chahine  76   f
-      169         Raadiya al-Abdoo              Yael Watson  56   f
-      170         Raadiya al-Abdoo          Alvaro Vikingur   5   m
-      171              Janie Mohar       Nadheera al-Jafari   1   f
-      172        Keeman Stockinger     Lane Martinez-Deleon  44   m
-      173        Keeman Stockinger                 Ka Ahsan  76   m
-      174           Sharon Harding          Munsif el-Salem   3   m
-      175          Alvaro Vikingur  Abdur Rasheed al-Akbari  15   m
-      176          Alvaro Vikingur   Abdul Kareem al-Firman  19   m
-      177          Alvaro Vikingur            Yesenia Diego  76   f
-      178       Nadheera al-Jafari    Brittany Peters-Maloy  12   f
-      179                 Ka Ahsan            Trevor Arnick  43   m
-      180                 Ka Ahsan           Sharaf al-Sala   9   m
-      181                 Ka Ahsan   Abdul Ghafoor el-Aslam  90   m
-      182                 Ka Ahsan           Samuel Henzler   7   m
-      183          Munsif el-Salem            Jeremy Herman  15   m
-      184          Munsif el-Salem         Brieannah Pruitt  54   f
-      185   Abdul Kareem al-Firman           Raul Rodriguez  64   m
-      186   Abdul Kareem al-Firman                Jay Jiron  21   m
-      187   Abdul Kareem al-Firman               Sarah Tran  37   f
-      188   Abdul Kareem al-Firman             T'Koia Myers  35   f
-      189   Abdul Kareem al-Firman       Chasity Thammarath  70   f
-      190            Yesenia Diego           Jason Figueroa  70   m
-      191            Yesenia Diego        Katherine Vannice  59   f
-      192            Yesenia Diego              Grant Vigil  77   m
-      193            Yesenia Diego            Tracy Powells  75   m
-      194            Yesenia Diego             Ashley Coles  84   f
-      195   Abdul Ghafoor el-Aslam            Mason Mcgrier  18   m
-      196   Abdul Ghafoor el-Aslam                Cam Tu Vu  79   f
-      197           Raul Rodriguez            Lizbeth Vigil  14   f
-      198           Raul Rodriguez          Bao-Tran Suetos  49   f
-      199           Raul Rodriguez         Sandra Ouellette  56   f
-      200           Raul Rodriguez           Gina Dalrymple  76   f
-      201             T'Koia Myers          Razeen el-Karam  41   m
-      202             T'Koia Myers             Luna Purdham  16   f
-      203             T'Koia Myers           Tyler John III   3   m
-      204             Ashley Coles         Ashley Armstrong  29   f
-      205             Ashley Coles           Vincent Miller  89   m
-      206             Ashley Coles       Devundrick Wallace  24   m
-      207             Ashley Coles        Amelia Santa Cruz  31   f
-      208            Mason Mcgrier      Damian Murillo-Soto  39   m
-      209            Mason Mcgrier           Yahya al-Saidi  32   m
-      210            Mason Mcgrier               Rusty Asad   9   m
-      211                Cam Tu Vu           Randall Kazemi  82   m
-      212          Bao-Tran Suetos         Manaara el-Bilal  39   f
-      213         Sandra Ouellette              Fisayo Rice  12   m
-      214           Gina Dalrymple           Mreenal Quilon  54   f
-      215           Gina Dalrymple           Antonio Helfer  68   m
-      216          Razeen el-Karam             Emma Waddles  73   f
-      217          Razeen el-Karam            Payton Mcadoo  85   f
-      218          Razeen el-Karam            Jacob Barrett  52   m
-      219          Razeen el-Karam         Nabeel al-Shakir   3   m
-      220         Ashley Armstrong          Jordan Redhorse  22   f
-      221         Ashley Armstrong           Bianca Winkler   5   f
-      222      Damian Murillo-Soto            Oscar Salazar  66   m
-      223      Damian Murillo-Soto         Laaiqa al-Farrah  68   f
-      224           Yahya al-Saidi    Kamaaluddeen el-Safar  38   m
-      225           Yahya al-Saidi          Ameen al-Semaan  57   m
-      226           Yahya al-Saidi              Joshua Reid  48   m
-      227               Rusty Asad            Abeer el-Saba  75   f
-      228         Manaara el-Bilal         Azmi el-Abdallah   8   m
-      229            Jacob Barrett           Khyleah Dotson  28   f
-      230            Jacob Barrett  Kamaaluddeen al-Noorani  21   m
-      231          Jordan Redhorse            Khampane Behr   2   m
-      232          Jordan Redhorse        Jose Delgado Diaz  84   m
-      233         Laaiqa al-Farrah            Eliora Braden  52   f
-      234         Laaiqa al-Farrah               Kevin Tran  58   m
-      235         Laaiqa al-Farrah         Haakima el-Azizi  29   f
-      236          Ameen al-Semaan              Quinn Salaz   7   m
-      237         Azmi el-Abdallah              Amanda Dodd  30   f
-      238         Azmi el-Abdallah         Julisa Alexander  11   f
-      239            Khampane Behr     Alex Zaragoza-Madrid  71   m
-      240            Khampane Behr             Azza el-Kazi  50   f
-      241        Jose Delgado Diaz        Marissa Rodriquez  77   f
-      242        Jose Delgado Diaz            Marques Cross  43   m
-      243        Jose Delgado Diaz            Julanne Jones  19   f
-      244        Jose Delgado Diaz           Andrew Lefholz  40   m
-      245        Jose Delgado Diaz           Lydia Mcmaster  49   f
-      246        Jose Delgado Diaz             Alec Coleman  11   m
-      247        Jose Delgado Diaz           Braxton Griego  15   m
-      248        Jose Delgado Diaz        Richard Mcclaskey  61   m
-      249         Haakima el-Azizi             Roy Williams  46   m
-      250         Haakima el-Azizi              Jason Hoyle  69   m
-      251         Haakima el-Azizi       Yeun Jung Hasegawa  69   f
-      252         Haakima el-Azizi              Yeeleng Sun  38   m
-      253              Amanda Dodd             Isaac Stuart  28   m
-      254              Amanda Dodd         Lawrence Jenkins  82   m
-      255     Alex Zaragoza-Madrid            Adrian Romero  45   m
-      256     Alex Zaragoza-Madrid           Saeed el-Javed  47   m
-      257            Marques Cross            Jasmine Jones  19   f
-      258           Andrew Lefholz   Ummu Kulthoom el-Kanan  85   f
-      259             Roy Williams          Colette Baldwin  24   f
-      260             Roy Williams                Jose Maez  46   m
-      261              Jason Hoyle          Bryanna Herrera  71   f
-      262              Jason Hoyle            Samuel Delori  69   m
-      263       Yeun Jung Hasegawa               Lael Vigil   4   f
-      264       Yeun Jung Hasegawa         Gericko Martinez  31   m
-      265              Yeeleng Sun             Jessie Allen  18   f
-      266              Yeeleng Sun           Asiah Marshall  16   f
-      267              Yeeleng Sun             Javon Reeves  53   m
-      268             Isaac Stuart             Clifton Haro  62   m
-      269             Isaac Stuart          Tawheed el-Azad  87   m
-      270         Lawrence Jenkins        Zuhaira el-Husain  28   f
-      271         Lawrence Jenkins              Tyree Erman  42   m
-      272            Jasmine Jones        Fidda al-Ghaffari  42   f
-      273                Jose Maez        Farhat al-Mohamed  84   f
-      274                Jose Maez        Cuauhtemoc Moreno  29   m
-      275          Bryanna Herrera         Naseer al-Badour  47   m
-      276          Bryanna Herrera            Zachary Major  14   m
-      277               Lael Vigil             Jane Solberg  48   f
-      278           Asiah Marshall          Razeen al-Shaer  89   m
-      279           Asiah Marshall            Ismad al-Azad  39   m
-      280           Asiah Marshall       Esmeralda Gallegos  17   f
-      281             Javon Reeves             Marcus Ellis  20   m
-      282             Javon Reeves            Kaylee Gaytan  61   f
-      283            Zachary Major        Firdaus el-Satter   6   f
-      284             Jane Solberg  Haley Iron Cloud-Gresko  28   f
-      285          Razeen al-Shaer       Daifallah el-Zaman  83   m
-      286          Razeen al-Shaer              Colin Rains  68   m
-      287          Razeen al-Shaer          Azzaam el-Mousa  47   m
-      288             Marcus Ellis           Janalen Khanom  73   f
-      289             Marcus Ellis          Raabia al-Masih  24   f
-      290             Marcus Ellis        Justin Cunningham  42   m
-      291             Marcus Ellis               Judy David  71   f
-      292        Firdaus el-Satter          Sanaaa el-Farha   9   f
-      293        Firdaus el-Satter            Alexis Wilson  78   f
-      294  Haley Iron Cloud-Gresko            Corina Cortez  24   f
-      295  Haley Iron Cloud-Gresko        Alexandra Medrano  61   f
-      296        Justin Cunningham            Bailey Torres  49   f
-      297        Justin Cunningham          Andrew Kelemeni  53   m
-      298        Justin Cunningham            Kristin Major  63   f
-      299               Judy David          Jazmine El-Amin  29   f
-      300               Judy David      Alexzandria Holguin  76   f
-      301               Judy David             Jazmyn Evans  69   f
-      302          Sanaaa el-Farha          Maribel Escobar  63   f
-      303          Sanaaa el-Farha             Ty Gutierrez  50   m
-      304          Sanaaa el-Farha           Kyana Stafford  58   f
-      305          Andrew Kelemeni            Logan Ehrlich  88   m
-      306          Andrew Kelemeni        Jennifer Valverde   7   f
-      307          Andrew Kelemeni            Javier Lucero  51   m
-      308      Alexzandria Holguin           Richard Lawson  47   m
-      309      Alexzandria Holguin         Naseera el-Saidi  45   f
-      310      Alexzandria Holguin              Luis Taylor  83   m
-      311      Alexzandria Holguin         Stephanie Nguyen  30   f
-      312             Jazmyn Evans              Kylie Berry  41   f
-      313             Ty Gutierrez           Ryan Singleton  15   m
-      314             Ty Gutierrez              Gia Morales  27   f
-      315             Ty Gutierrez            Laneece Ahuna  88   f
-      316        Jennifer Valverde           Binyu Vincelet  74   f
-      317         Naseera el-Saidi            Katryna Berry   1   f
-      318         Naseera el-Saidi            Autumn Lucero  84   f
-      319              Luis Taylor     John Gonzalez Vargas  79   m
-      320              Kylie Berry           Jacey Sheppard  54   f
-      321              Kylie Berry        Mujahid al-Salehi  24   m
-      322              Kylie Berry        Nicholas Johnston  37   m
-      323            Laneece Ahuna            Hannah Hamlin   3   f
-      324            Laneece Ahuna     Muhyddeen al-Barakat  48   m
-      325     John Gonzalez Vargas            Stephon White  82   m
-      326            Stephon White      Saafiyya el-Mohamed  30   f
+                                 from                          to age sex
+      1              Lolette Phillips                  James Jack  90   m
+      2              Lolette Phillips                 Chen Kantha   4   m
+      3                    James Jack               Anisa Wilkins  86   f
+      4                    James Jack             Saleema al-Zaki  29   f
+      5                   Chen Kantha                David Ponzio  14   m
+      6                   Chen Kantha            Christopher Ward  85   m
+      7                   Chen Kantha               Yutitham Moua  18   m
+      8               Saleema al-Zaki      Crystal Estrada-Chavez  59   f
+      9                  David Ponzio                 Laura Ilaoa  25   f
+      10                 David Ponzio                Morgan Mason  34   f
+      11                 David Ponzio            Cornelius Turner  89   m
+      12                 David Ponzio               Desmond Angel   5   m
+      13             Christopher Ward          Shaddaad el-Younes  63   m
+      14                 Morgan Mason           Jameela al-Arshad  50   f
+      15                 Morgan Mason             Junaid el-Zaman   5   m
+      16                 Morgan Mason             Sameeha el-Ally  89   f
+      17             Cornelius Turner         Carlo Ceazar Corpuz  74   m
+      18           Shaddaad el-Younes              Bishr al-Qasim  34   m
+      19           Shaddaad el-Younes                  Sade Smith  47   f
+      20           Shaddaad el-Younes             Edward Estrella  85   m
+      21           Shaddaad el-Younes           Nichole Mcfarland  29   f
+      22          Carlo Ceazar Corpuz            Aabdeen al-Hoque  24   m
+      23               Bishr al-Qasim               Jubair el-Aly  46   m
+      24               Bishr al-Qasim           Dalicia O'Donnell  63   f
+      25               Bishr al-Qasim       Abdul Jaleel al-Amara  19   m
+      26               Bishr al-Qasim            Hafsa al-Massoud  24   f
+      27            Nichole Mcfarland            Qamraaa al-Rahim   9   f
+      28            Nichole Mcfarland                Trever Manis  41   m
+      29            Nichole Mcfarland          Maiya Vathanavarin  72   f
+      30            Nichole Mcfarland            Ghaamid el-Zafar   6   m
+      31                Jubair el-Aly           Nimesha Grossaint   9   f
+      32             Hafsa al-Massoud      Kelly Runningbear-Paul  61   f
+      33             Hafsa al-Massoud                James Welter  44   m
+      34                 Trever Manis            Austin Manheimer  71   m
+      35                 Trever Manis              Marco Martinez  34   m
+      36                 Trever Manis          Utkarsh Strausburg  75   m
+      37                 Trever Manis         Orville Stadelbauer  69   m
+      38                 Trever Manis                Jennifer Ouk  61   f
+      39                 Trever Manis               Amanda Cooper  67   f
+      40           Maiya Vathanavarin            Nafeesa al-Zaher  64   f
+      41           Maiya Vathanavarin        Sulaimaan al-Shabazz  11   m
+      42           Maiya Vathanavarin    Savanna Gonzalez-Sanchez  59   f
+      43             Ghaamid el-Zafar           Nawwaara el-Pasha  61   f
+      44             Ghaamid el-Zafar          Saleet el-Mohammed  66   m
+      45                 James Welter            Shuaib al-Farooq  16   m
+      46             Austin Manheimer           Christian Mendoza  81   m
+      47             Austin Manheimer            Alexander Rivera  88   m
+      48                 Jennifer Ouk               Jameel Mosher  53   m
+      49                 Jennifer Ouk                Eraina Mcgee  53   f
+      50             Nafeesa al-Zaher                   Mia Floyd  45   f
+      51             Nafeesa al-Zaher           Khongmong Hammond  42   m
+      52             Nafeesa al-Zaher               Collin Chavez  42   m
+      53             Nafeesa al-Zaher              Itzel Gonzales  78   f
+      54            Nawwaara el-Pasha            Alexis Caramillo  35   f
+      55            Nawwaara el-Pasha             Ronnie Scurlock  54   m
+      56            Nawwaara el-Pasha            Brandon Maryland  54   m
+      57           Saleet el-Mohammed                 Shane Ahmad  68   m
+      58           Saleet el-Mohammed         Ghaaliya al-Shaheed   3   f
+      59           Saleet el-Mohammed               Exzinia Smith  44   f
+      60            Christian Mendoza          Jamaal el-Shehadeh  35   m
+      61                 Eraina Mcgee          Joshua Nava Quiroz  23   m
+      62                 Eraina Mcgee           Rhiannon Freeland  62   f
+      63                 Eraina Mcgee              Deisha Beckner  35   f
+      64                    Mia Floyd                 Nelly Reyez  90   f
+      65                    Mia Floyd       Nadheera el-Mohiuddin  25   f
+      66               Itzel Gonzales                 Renae Joyce  41   f
+      67              Ronnie Scurlock             Cairra Trammell  17   m
+      68              Ronnie Scurlock      Nakrista Ramirez-Solis  26   f
+      69                  Shane Ahmad            Madelyn Mckinney  61   f
+      70                  Shane Ahmad        Caroline Vargas Pena  46   f
+      71          Ghaaliya al-Shaheed                 Whitney Kim  57   f
+      72                Exzinia Smith             Mathurin Curtis   8   m
+      73                Exzinia Smith             Hissa al-Hammad  11   f
+      74            Rhiannon Freeland                Yuvorn Huang  56   m
+      75               Deisha Beckner              Chandel Duling  32   f
+      76               Deisha Beckner                 Kevin Shahi  63   m
+      77               Deisha Beckner              Diksha Reichal  54   f
+      78               Deisha Beckner                   Yusuf Cha  22   m
+      79        Nadheera el-Mohiuddin            Jazmine Sturgeon  67   f
+      80        Nadheera el-Mohiuddin               Afaaf al-Azzi  83   f
+      81        Nadheera el-Mohiuddin              Medhavi Nguyen  16   f
+      82        Nadheera el-Mohiuddin             Russell Lathrop  38   m
+      83         Caroline Vargas Pena             Kimiko Thompson  19   f
+      84              Mathurin Curtis            Sally Richardson  37   f
+      85              Mathurin Curtis             Markese Labadie  46   m
+      86              Mathurin Curtis         Christian Maldonado  64   m
+      87                  Kevin Shahi              Laraena Batson  73   f
+      88                  Kevin Shahi                   Monica Ye  13   f
+      89               Diksha Reichal              Kashauna Yorks  72   f
+      90               Diksha Reichal                 Mark Miller  12   m
+      91             Jazmine Sturgeon                Taylor Lange  52   f
+      92             Jazmine Sturgeon           Carmelita Montoya  61   f
+      93             Jazmine Sturgeon              Gloria Johnson   9   f
+      94             Jazmine Sturgeon               Alexander Roy   9   m
+      95             Jazmine Sturgeon            Habeeba el-Ahmad  42   f
+      96             Sally Richardson            Aliyya el-Yassin  22   f
+      97               Laraena Batson                  Alicia Vue  29   f
+      98                    Monica Ye                    Micah La  15   m
+      99                    Monica Ye               Cassandra Lor  69   f
+      100                   Monica Ye            Rashele Williams  17   f
+      101                   Monica Ye             Deviny Mcdonald  21   f
+      102                   Monica Ye                  Daniel San  54   m
+      103                   Monica Ye                Shamari Bean  20   f
+      104                   Monica Ye            De'Chelle Norman   9   f
+      105           Carmelita Montoya               Connor Bailey  26   m
+      106           Carmelita Montoya             Lafaith Hopkins  80   f
+      107           Carmelita Montoya             Isabella Medina  71   f
+      108           Carmelita Montoya              Lauren Etsitty  57   f
+      109           Carmelita Montoya               Shelby Tinoco  77   f
+      110                  Alicia Vue           Samuel Goodfellow  90   m
+      111            Rashele Williams              Sapphire Bison  58   f
+      112            Rashele Williams                Bertha Mohar  23   f
+      113             Isabella Medina           Mu,Aawiya al-Kaba  35   m
+      114           Samuel Goodfellow              Joshua Johnson  66   m
+      115                Bertha Mohar               Andrew Garcia  62   m
+      116                Bertha Mohar              Jennifer Silva  62   f
+      117                Bertha Mohar                 Megan Begay  34   f
+      118                Bertha Mohar             Trevor Colligan  57   m
+      119           Mu,Aawiya al-Kaba               Taaj el-Sarah  44   m
+      120           Mu,Aawiya al-Kaba               Wen Kang Khan  22   m
+      121               Andrew Garcia              Savannah Cohen  57   f
+      122               Andrew Garcia              Nawfa el-Anwar  63   f
+      123             Trevor Colligan              Yusri al-Amiri   7   m
+      124             Trevor Colligan                  Ryan Zheng  46   m
+      125             Trevor Colligan              Henry Reichman  66   m
+      126               Taaj el-Sarah             Sidqi al-Rahimi   4   m
+      127               Taaj el-Sarah             Mastoor al-Imam  10   m
+      128              Savannah Cohen            Muhaajir el-Reza  68   m
+      129              Savannah Cohen            Shannon Armbrust  68   f
+      130              Savannah Cohen                Orilea Diego  12   f
+      131              Nawfa el-Anwar            Jez-Mas Marchman  51   m
+      132              Nawfa el-Anwar                  Kloe Avila  51   f
+      133                  Ryan Zheng           Weston Feuerstein   8   m
+      134              Henry Reichman            Rebekah Jones Jr  55   f
+      135            Shannon Armbrust                Madison Osse  77   f
+      136            Shannon Armbrust            Merrill Jr Woods  22   m
+      137                Orilea Diego              Sarah Griffith   2   f
+      138                Orilea Diego                 Kara Finken  53   f
+      139                  Kloe Avila                  Elyse Tran  31   f
+      140                  Kloe Avila             Jumail al-Murad  77   m
+      141                  Kloe Avila         Raul Aguirre Molina  76   m
+      142                  Kloe Avila               Mikayla Smith  82   f
+      143                  Kloe Avila           Marissa Tollivoro  12   f
+      144              Sarah Griffith         Mansoor al-Siddique  25   m
+      145              Sarah Griffith            Nizaam al-Salame  76   m
+      146                 Kara Finken              Alexis Harding  14   f
+      147                 Kara Finken            Amanda Scharnell  31   f
+      148                 Kara Finken              Jaesung Fukuda  90   m
+      149                 Kara Finken                Unique Vigil  76   f
+      150         Raul Aguirre Molina         Aldo Rodriguez-Ruiz  30   m
+      151               Mikayla Smith         Rosemary Thammarath  32   f
+      152         Mansoor al-Siddique                Tanya Mcadoo  78   f
+      153         Mansoor al-Siddique                Shawn Morgan  75   m
+      154         Mansoor al-Siddique              Asysa Robinson  76   f
+      155            Nizaam al-Salame             Najlaa al-Salam  88   f
+      156              Alexis Harding            Sakeena al-Abdoo  80   f
+      157              Alexis Harding                Richard Prum  41   m
+      158              Alexis Harding            Shahla al-Jaffer  78   f
+      159              Alexis Harding                Jaycee Baker  11   m
+      160              Alexis Harding             Rida al-Hussein  57   m
+      161                Unique Vigil              Deliah Vannice  79   f
+      162                Tanya Mcadoo               Kailey Braden  28   f
+      163                Tanya Mcadoo          Raadiya el-Chahine   2   f
+      164                Shawn Morgan                 Payton Dodd  16   f
+      165              Asysa Robinson            Janie Santa Cruz  82   f
+      166            Sakeena al-Abdoo             Maritza Winkler  51   f
+      167            Sakeena al-Abdoo          Shabeeba al-Jafari  54   f
+      168                Richard Prum               Keeman Naylor  76   m
+      169                Richard Prum           Yesenia Alexander  56   f
+      170                Richard Prum               Alvaro Romero   5   m
+      171            Shahla al-Jaffer              Lane Rodriguez   1   m
+      172               Kailey Braden                      Ka Lee  44   m
+      173               Kailey Braden             Qaaid al-Shaker  76   m
+      174            Janie Santa Cruz              Munsif al-Ozer   3   m
+      175               Alvaro Romero               Sharon Watson  15   f
+      176               Alvaro Romero          Danielle Ouellette  19   f
+      177               Alvaro Romero Abdur Rasheed al-Salahuddin  76   m
+      178              Lane Rodriguez                 Trevor Hahs  12   m
+      179             Qaaid al-Shaker       Abdul Kareem el-Salem  43   m
+      180             Qaaid al-Shaker            Sharaf al-Akbari   9   m
+      181             Qaaid al-Shaker             Samuel Videtzky  90   m
+      182             Qaaid al-Shaker              Fikra el-Bilal   7   f
+      183              Munsif al-Ozer           Jeremy Stockinger  15   m
+      184              Munsif al-Ozer                 Raul Chavez  54   m
+      185          Danielle Ouellette        Shalise Peters-Maloy  64   f
+      186          Danielle Ouellette             Lizbeth Herrera  21   f
+      187          Danielle Ouellette                 Yael Pruitt  37   f
+      188          Danielle Ouellette                  Jay Herman  35   m
+      189          Danielle Ouellette          Nadheera al-Farrah  70   f
+      190 Abdur Rasheed al-Salahuddin                 Jason Ahsan  70   m
+      191 Abdur Rasheed al-Salahuddin                 Grant Jiron  59   m
+      192 Abdur Rasheed al-Salahuddin              Brittany Myers  77   f
+      193 Abdur Rasheed al-Salahuddin               Tracy Conners  75   m
+      194 Abdur Rasheed al-Salahuddin             Manaara el-Saba  84   f
+      195             Samuel Videtzky             Amelia Gallegos  18   f
+      196             Samuel Videtzky             Brieannah Coles  79   f
+      197        Shalise Peters-Maloy              T'Koia Waddles  14   f
+      198        Shalise Peters-Maloy                    Sarah Vu  49   f
+      199        Shalise Peters-Maloy               Mason Powells  56   m
+      200        Shalise Peters-Maloy               Ashley Dotson  76   f
+      201                  Jay Herman     Abdul Ghafoor al-Firman  41   m
+      202                  Jay Herman              Chasity Suetos  16   f
+      203                  Jay Herman                 Tyler Vigil   3   m
+      204             Manaara el-Saba              Vincent Arnick  29   m
+      205             Manaara el-Saba            Billye Dalrymple  89   f
+      206             Manaara el-Saba          Devundrick Mcgrier  24   m
+      207             Manaara el-Saba               Damian Sotelo  31   m
+      208             Amelia Gallegos              Razeen al-Sala  39   m
+      209             Amelia Gallegos              Rusty Figueroa  32   m
+      210             Amelia Gallegos                  Emma Jones   9   f
+      211             Brieannah Coles                Randall Asad  82   m
+      212                    Sarah Vu               Cam Tu Quilon  39   f
+      213               Mason Powells              Fisayo Wallace  12   m
+      214               Ashley Dotson               Bianca Gaytan  54   f
+      215               Ashley Dotson           Bao-Tran Hasegawa  68   f
+      216     Abdul Ghafoor al-Firman            Antonio John III  73   m
+      217     Abdul Ghafoor al-Firman                Jacob Helfer  85   m
+      218     Abdul Ghafoor al-Firman           Alejandra Purdham  52   f
+      219     Abdul Ghafoor al-Firman           Frankie Armstrong   3   f
+      220              Vincent Arnick              Yahya el-Aslam  22   m
+      221              Vincent Arnick          Katherine Redhorse   5   f
+      222              Razeen al-Sala                  Oscar Mora  66   m
+      223              Razeen al-Sala             Nabeel el-Karam  68   m
+      224              Rusty Figueroa       Kamaaluddeen al-Saidi  38   m
+      225              Rusty Figueroa            Sandra Rodriquez  57   f
+      226              Rusty Figueroa              Joshua Henzler  48   m
+      227                  Emma Jones               Julisa Cortez  75   f
+      228               Cam Tu Quilon             Ameen al-Shakir   8   m
+      229           Alejandra Purdham               Azmi el-Safar  28   m
+      230           Alejandra Purdham             Khampane Kazemi  21   m
+      231              Yahya el-Aslam             Laaiqa el-Azizi   2   f
+      232              Yahya el-Aslam                  Jose Lopez  84   m
+      233             Nabeel el-Karam             Mreenal Solberg  52   f
+      234             Nabeel el-Karam                  Kevin Behr  58   m
+      235             Nabeel el-Karam               Khyleah Jones  29   f
+      236            Sandra Rodriquez              Eliora Baldwin   7   f
+      237             Ameen al-Shakir               Quinn Barrett  30   m
+      238             Ameen al-Shakir               Gina Mcmaster  11   f
+      239             Laaiqa el-Azizi             Bryanna Medrano  71   f
+      240             Laaiqa el-Azizi                  Alex Salaz  50   m
+      241                  Jose Lopez               Abeer el-Kazi  77   f
+      242                  Jose Lopez                Marques Rice  43   m
+      243                  Jose Lopez            Haakima el-Kanan  19   f
+      244                  Jose Lopez      Andrew Zaragoza-Madrid  40   m
+      245                  Jose Lopez                  Alec Cross  49   m
+      246                  Jose Lopez             Braxton Lefholz  11   m
+      247                  Jose Lopez              Richard Miller  15   m
+      248                  Jose Lopez                 Roy Coleman  61   m
+      249               Khyleah Jones             Julanne El-Amin  46   f
+      250               Khyleah Jones               Jason Sowards  69   m
+      251               Khyleah Jones                Yeeleng Tran  69   m
+      252               Khyleah Jones                  Isaac Reid  38   m
+      253               Quinn Barrett           Lawrence Williams  28   m
+      254               Quinn Barrett                Adrian Anaya  82   m
+      255             Bryanna Medrano               Amanda Wilson  45   f
+      256             Bryanna Medrano              Azza el-Husain  47   f
+      257                Marques Rice              Colette Torres  19   f
+      258      Andrew Zaragoza-Madrid      Kamaaluddeen al-Semaan  85   m
+      259             Julanne El-Amin           Esmeralda Escobar  24   f
+      260             Julanne El-Amin                   Jose Luna  46   m
+      261               Jason Sowards   Ummu Kulthoom al-Ghaffari  71   f
+      262               Jason Sowards            Samuel Mcclaskey  69   m
+      263                Yeeleng Tran                  Luna Vigil   4   f
+      264                Yeeleng Tran               Jasmine Evans  31   f
+      265                  Isaac Reid              Gericko Griego  18   m
+      266                  Isaac Reid               Javon Jenkins  16   m
+      267                  Isaac Reid             Clifton Charron  53   m
+      268           Lawrence Williams                Ashley Allen  62   f
+      269           Lawrence Williams           Saeed el-Abdallah  87   m
+      270                Adrian Anaya            Yeun Jung Khanom  28   f
+      271                Adrian Anaya               Jazmine Berry  42   f
+      272              Colette Torres                Tyree Reeves  42   m
+      273                   Jose Luna         Cuauhtemoc Martinez  84   m
+      274                   Jose Luna          Tawheed al-Noorani  29   m
+      275   Ummu Kulthoom al-Ghaffari          Zuhaira al-Mohamed  47   f
+      276   Ummu Kulthoom al-Ghaffari              Zachary Stuart  14   m
+      277                  Luna Vigil             Naseer el-Javed  48   m
+      278               Javon Jenkins             Alexis Stafford  89   f
+      279               Javon Jenkins              Razeen el-Azad  39   m
+      280               Javon Jenkins             Kaylee Valverde  17   f
+      281             Clifton Charron             Jordan Marshall  20   f
+      282             Clifton Charron   Marissa Iron Cloud-Gresko  61   f
+      283              Zachary Stuart                Marcus Erman   6   m
+      284             Naseer el-Javed             Ismad al-Badour  28   m
+      285             Alexis Stafford                Colin Moreno  83   m
+      286             Alexis Stafford                 Lydia Major  68   f
+      287             Alexis Stafford             Fidda el-Satter  47   f
+      288             Jordan Marshall          Daifallah al-Shaer  73   m
+      289             Jordan Marshall             Farhat al-Masih  24   f
+      290             Jordan Marshall            Firdaus el-Farha  42   f
+      291             Jordan Marshall                  Jane David  71   f
+      292                Marcus Erman              Corina Morales   9   f
+      293                Marcus Erman            Alexandra Lucero  78   f
+      294             Ismad al-Badour             Raabia el-Saidi  24   f
+      295             Ismad al-Badour               Justin Delori  61   m
+      296            Firdaus el-Farha                Lael Holguin  49   f
+      297            Firdaus el-Farha              Janalen Nguyen  53   f
+      298            Firdaus el-Farha           Sanaaa el-Mohamed  63   f
+      299                  Jane David                  Judy Ahuna  29   f
+      300                  Jane David             Naseera al-Arif  76   f
+      301                  Jane David                  Andrew Sun  69   m
+      302              Corina Morales               Bailey Walker  63   f
+      303              Corina Morales                    Ty Rains  50   m
+      304              Corina Morales              Maribel Rangel  58   f
+      305              Janalen Nguyen                 Logan Major  88   m
+      306              Janalen Nguyen               Javier Valdez   7   m
+      307              Janalen Nguyen             Jennifer Mallot  51   f
+      308             Naseera al-Arif            Richard Kelemeni  47   m
+      309             Naseera al-Arif                Kyana Ludwig  45   f
+      310             Naseera al-Arif                Jessie Berry  83   f
+      311             Naseera al-Arif                  Luis Ellis  30   m
+      312                  Andrew Sun               Jazmyn Guyton  41   f
+      313                    Ty Rains              Asiah Sheppard  15   f
+      314                    Ty Rains             Katryna Stevens  27   f
+      315                    Ty Rains                  Gia Garcia  88   f
+      316               Javier Valdez               Hannah Wright  74   f
+      317                Kyana Ludwig              Ryan Gutierrez   1   m
+      318                Kyana Ludwig         Autumn Perez-Lozano  84   f
+      319                Jessie Berry               John Trujillo  79   m
+      320               Jazmyn Guyton              Azzaam al-Azad  54   m
+      321               Jazmyn Guyton           Saafiyya el-Idris  24   f
+      322               Jazmyn Guyton             Nicholas Taylor  37   m
+      323                  Gia Garcia            Mujahid el-Zaman   3   m
+      324                  Gia Garcia          Stephanie Vincelet  48   f
+      325               John Trujillo                Haley Hamlin  82   f
+      326                Haley Hamlin             Larissa Herrera  30   f
           date_first_contact date_last_contact was_case           status
-      1           2022-12-31        2023-01-05        Y             case
-      2           2022-12-30        2023-01-01        Y             case
-      3           2023-01-02        2023-01-04        N   under_followup
-      4           2023-01-05        2023-01-05        Y             case
-      5           2023-01-07        2023-01-08        Y             case
-      6           2023-01-03        2023-01-06        Y             case
-      7           2023-01-02        2023-01-04        N lost_to_followup
-      8           2023-01-02        2023-01-06        N   under_followup
-      9           2023-01-06        2023-01-06        Y             case
-      10          2023-01-01        2023-01-06        Y             case
-      11          2023-01-06        2023-01-08        Y             case
-      12          2023-01-05        2023-01-07        N   under_followup
-      13          2023-01-02        2023-01-08        Y             case
-      14          2023-01-14        2023-01-17        N   under_followup
-      15          2023-01-10        2023-01-13        N lost_to_followup
-      16          2023-01-07        2023-01-13        N   under_followup
-      17          2023-01-12        2023-01-17        Y             case
-      18          2023-01-09        2023-01-11        Y             case
-      19          2023-01-11        2023-01-15        N          unknown
-      20          2023-01-12        2023-01-15        N   under_followup
-      21          2023-01-12        2023-01-14        Y             case
-      22          2023-01-12        2023-01-16        N lost_to_followup
-      23          2023-01-10        2023-01-16        Y             case
-      24          2023-01-12        2023-01-14        N          unknown
-      25          2023-01-13        2023-01-16        N   under_followup
-      26          2023-01-11        2023-01-13        Y             case
-      27          2023-01-15        2023-01-16        N lost_to_followup
-      28          2023-01-11        2023-01-15        Y             case
-      29          2023-01-14        2023-01-17        Y             case
-      30          2023-01-14        2023-01-16        Y             case
-      31          2023-01-17        2023-01-18        N   under_followup
-      32          2023-01-12        2023-01-16        Y             case
-      33          2023-01-13        2023-01-17        Y             case
-      34          2023-01-22        2023-01-23        Y             case
-      35          2023-01-19        2023-01-23        N   under_followup
-      36          2023-01-26        2023-01-26        N   under_followup
-      37          2023-01-20        2023-01-22        Y             case
-      38          2023-01-19        2023-01-23        Y             case
-      39          2023-01-21        2023-01-23        N   under_followup
-      40          2023-01-19        2023-01-22        Y             case
-      41          2023-01-15        2023-01-20        N   under_followup
-      42          2023-01-19        2023-01-21        N   under_followup
-      43          2023-01-23        2023-01-24        Y             case
-      44          2023-01-23        2023-01-25        Y             case
-      45          2023-01-15        2023-01-16        N   under_followup
-      46          2023-01-23        2023-01-28        Y             case
-      47          2023-01-25        2023-01-29        N   under_followup
-      48          2023-01-26        2023-01-27        N   under_followup
-      49          2023-01-22        2023-01-24        Y             case
-      50          2023-01-23        2023-01-28        Y             case
-      51          2023-01-22        2023-01-27        N   under_followup
-      52          2023-01-25        2023-01-26        Y             case
-      53          2023-01-24        2023-01-26        Y             case
-      54          2023-01-23        2023-01-26        Y             case
-      55          2023-01-18        2023-01-23        Y             case
-      56          2023-01-25        2023-01-27        N lost_to_followup
-      57          2023-01-19        2023-01-23        Y             case
-      58          2023-01-22        2023-01-26        Y             case
-      59          2023-01-27        2023-01-27        Y             case
-      60          2023-02-04        2023-02-04        N   under_followup
-      61          2023-01-29        2023-01-30        N   under_followup
-      62          2023-01-26        2023-01-28        Y             case
-      63          2023-01-25        2023-01-30        Y             case
-      64          2023-01-27        2023-01-30        Y             case
-      65          2023-01-27        2023-01-31        Y             case
-      66          2023-01-31        2023-02-04        N lost_to_followup
-      67          2023-01-27        2023-01-28        N lost_to_followup
-      68          2023-01-24        2023-01-29        N lost_to_followup
-      69          2023-01-26        2023-01-27        N   under_followup
-      70          2023-01-30        2023-01-31        Y             case
-      71          2023-01-20        2023-01-25        N   under_followup
-      72          2023-02-01        2023-02-04        Y             case
-      73          2023-01-29        2023-01-31        N   under_followup
-      74          2023-01-31        2023-02-04        N   under_followup
-      75          2023-01-24        2023-01-30        N lost_to_followup
-      76          2023-01-28        2023-02-02        Y             case
-      77          2023-01-27        2023-02-02        Y             case
-      78          2023-01-29        2023-02-01        N   under_followup
-      79          2023-02-03        2023-02-04        Y             case
-      80          2023-01-31        2023-02-05        N   under_followup
-      81          2023-02-01        2023-02-02        N   under_followup
-      82          2023-02-01        2023-02-04        N          unknown
-      83          2023-02-01        2023-02-02        N   under_followup
-      84          2023-02-01        2023-02-03        Y             case
-      85          2023-01-28        2023-02-01        N   under_followup
-      86          2023-01-30        2023-02-03        N lost_to_followup
-      87          2023-01-31        2023-02-01        Y             case
-      88          2023-01-30        2023-02-02        Y             case
-      89          2023-01-31        2023-01-31        Y             case
-      90          2023-01-31        2023-02-04        N   under_followup
-      91          2023-01-28        2023-02-04        N lost_to_followup
-      92          2023-01-30        2023-02-04        Y             case
-      93          2023-02-01        2023-02-06        N lost_to_followup
-      94          2023-02-01        2023-02-03        N   under_followup
-      95          2023-01-31        2023-02-04        N   under_followup
-      96          2023-02-04        2023-02-06        Y             case
-      97          2023-02-03        2023-02-05        Y             case
-      98          2023-02-02        2023-02-04        N lost_to_followup
-      99          2023-02-02        2023-02-05        N   under_followup
-      100         2023-01-30        2023-02-04        Y             case
-      101         2023-02-04        2023-02-08        N   under_followup
-      102         2023-01-31        2023-02-07        N   under_followup
-      103         2023-02-05        2023-02-06        N   under_followup
-      104         2023-01-30        2023-02-04        N   under_followup
-      105         2023-02-01        2023-02-04        N          unknown
-      106         2023-02-01        2023-02-06        N   under_followup
-      107         2023-02-05        2023-02-08        Y             case
-      108         2023-02-04        2023-02-10        N          unknown
-      109         2023-02-02        2023-02-08        N   under_followup
-      110         2023-02-06        2023-02-08        Y             case
-      111         2023-02-08        2023-02-12        N lost_to_followup
-      112         2023-02-10        2023-02-11        Y             case
-      113         2023-02-14        2023-02-19        Y             case
-      114         2023-02-11        2023-02-12        N   under_followup
-      115         2023-02-13        2023-02-16        Y             case
-      116         2023-02-10        2023-02-13        N   under_followup
-      117         2023-02-15        2023-02-16        N   under_followup
-      118         2023-02-10        2023-02-13        Y             case
-      119         2023-02-16        2023-02-18        Y             case
-      120         2023-02-18        2023-02-18        N   under_followup
-      121         2023-03-02        2023-03-02        Y             case
-      122         2023-02-26        2023-03-03        Y             case
-      123         2023-02-18        2023-02-23        N lost_to_followup
-      124         2023-02-24        2023-02-26        Y             case
-      125         2023-02-17        2023-02-23        Y             case
-      126         2023-02-18        2023-02-21        N   under_followup
-      127         2023-02-16        2023-02-19        N   under_followup
-      128         2023-03-01        2023-03-05        N   under_followup
-      129         2023-03-06        2023-03-07        Y             case
-      130         2023-03-03        2023-03-04        Y             case
-      131         2023-03-04        2023-03-09        N   under_followup
-      132         2023-03-07        2023-03-09        Y             case
-      133         2023-02-27        2023-03-02        N   under_followup
-      134         2023-03-02        2023-03-07        N   under_followup
-      135         2023-03-08        2023-03-10        N   under_followup
-      136         2023-03-02        2023-03-09        N lost_to_followup
-      137         2023-03-06        2023-03-11        Y             case
-      138         2023-03-07        2023-03-11        Y             case
-      139         2023-03-16        2023-03-18        N   under_followup
-      140         2023-03-14        2023-03-18        N   under_followup
-      141         2023-03-18        2023-03-23        Y             case
-      142         2023-03-20        2023-03-20        Y             case
-      143         2023-03-19        2023-03-21        N   under_followup
-      144         2023-03-07        2023-03-12        Y             case
-      145         2023-03-10        2023-03-14        Y             case
-      146         2023-03-06        2023-03-11        Y             case
-      147         2023-03-08        2023-03-12        N lost_to_followup
-      148         2023-03-07        2023-03-09        N          unknown
-      149         2023-03-10        2023-03-11        Y             case
-      150         2023-03-26        2023-03-29        N   under_followup
-      151         2023-03-23        2023-03-27        N   under_followup
-      152         2023-03-16        2023-03-21        Y             case
-      153         2023-03-16        2023-03-19        Y             case
-      154         2023-03-12        2023-03-19        Y             case
-      155         2023-03-10        2023-03-14        N   under_followup
-      156         2023-03-13        2023-03-14        Y             case
-      157         2023-03-12        2023-03-14        Y             case
-      158         2023-03-12        2023-03-17        Y             case
-      159         2023-03-15        2023-03-18        N   under_followup
-      160         2023-03-10        2023-03-15        N   under_followup
-      161         2023-03-06        2023-03-12        N   under_followup
-      162         2023-03-12        2023-03-17        Y             case
-      163         2023-03-15        2023-03-18        Y             case
-      164         2023-03-26        2023-03-29        N   under_followup
-      165         2023-03-21        2023-03-25        Y             case
-      166         2023-03-16        2023-03-19        N lost_to_followup
-      167         2023-03-20        2023-03-22        N lost_to_followup
-      168         2023-03-17        2023-03-20        N   under_followup
-      169         2023-03-21        2023-03-22        N   under_followup
-      170         2023-03-16        2023-03-20        Y             case
-      171         2023-03-18        2023-03-21        Y             case
-      172         2023-03-17        2023-03-18        Y             case
-      173         2023-03-20        2023-03-21        Y             case
-      174         2023-03-26        2023-03-27        Y             case
-      175         2023-03-24        2023-03-24        Y             case
-      176         2023-03-22        2023-03-24        Y             case
-      177         2023-03-19        2023-03-24        Y             case
-      178         2023-03-23        2023-03-24        N          unknown
-      179         2023-03-20        2023-03-21        N   under_followup
-      180         2023-03-20        2023-03-20        N   under_followup
-      181         2023-03-20        2023-03-20        Y             case
-      182         2023-03-11        2023-03-17        N   under_followup
-      183         2023-03-28        2023-04-02        N   under_followup
-      184         2023-04-01        2023-04-02        N   under_followup
-      185         2023-03-29        2023-04-01        Y             case
-      186         2023-03-24        2023-03-26        N   under_followup
-      187         2023-03-27        2023-03-29        N lost_to_followup
-      188         2023-03-27        2023-03-28        Y             case
-      189         2023-03-27        2023-03-30        N   under_followup
-      190         2023-03-25        2023-03-29        N   under_followup
-      191         2023-03-25        2023-03-27        N   under_followup
-      192         2023-03-23        2023-03-27        N   under_followup
-      193         2023-03-24        2023-03-29        N   under_followup
-      194         2023-03-23        2023-03-28        Y             case
-      195         2023-03-25        2023-03-29        Y             case
-      196         2023-03-26        2023-03-28        Y             case
-      197         2023-04-08        2023-04-08        N   under_followup
-      198         2023-04-02        2023-04-07        Y             case
-      199         2023-04-03        2023-04-06        Y             case
-      200         2023-03-31        2023-04-03        Y             case
-      201         2023-03-28        2023-04-01        Y             case
-      202         2023-03-30        2023-03-31        N   under_followup
-      203         2023-03-28        2023-04-01        N   under_followup
-      204         2023-03-24        2023-03-29        Y             case
-      205         2023-03-27        2023-03-27        N lost_to_followup
-      206         2023-03-24        2023-03-30        N lost_to_followup
-      207         2023-03-26        2023-03-28        N          unknown
-      208         2023-03-28        2023-04-01        Y             case
-      209         2023-03-30        2023-04-06        Y             case
-      210         2023-04-03        2023-04-05        Y             case
-      211         2023-03-28        2023-04-01        N   under_followup
-      212         2023-04-07        2023-04-08        Y             case
+      1           2022-12-30        2023-01-01        Y             case
+      2           2023-01-04        2023-01-04        Y             case
+      3           2023-01-04        2023-01-05        N lost_to_followup
+      4           2023-01-04        2023-01-07        Y             case
+      5           2023-01-04        2023-01-06        Y             case
+      6           2022-12-31        2023-01-04        Y             case
+      7           2023-01-04        2023-01-04        N   under_followup
+      8           2022-12-31        2023-01-05        N   under_followup
+      9           2023-01-04        2023-01-06        Y             case
+      10          2023-01-06        2023-01-08        Y             case
+      11          2023-01-01        2023-01-07        Y             case
+      12          2023-01-04        2023-01-07        N   under_followup
+      13          2023-01-09        2023-01-12        Y             case
+      14          2023-01-07        2023-01-13        N   under_followup
+      15          2023-01-08        2023-01-13        N   under_followup
+      16          2023-01-13        2023-01-15        N   under_followup
+      17          2023-01-09        2023-01-13        Y             case
+      18          2023-01-12        2023-01-15        Y             case
+      19          2023-01-13        2023-01-15        N   under_followup
+      20          2023-01-10        2023-01-14        N   under_followup
+      21          2023-01-07        2023-01-13        Y             case
+      22          2023-01-16        2023-01-18        N   under_followup
+      23          2023-01-11        2023-01-14        Y             case
+      24          2023-01-14        2023-01-16        N   under_followup
+      25          2023-01-12        2023-01-13        N lost_to_followup
+      26          2023-01-12        2023-01-16        Y             case
+      27          2023-01-12        2023-01-15        N   under_followup
+      28          2023-01-15        2023-01-17        Y             case
+      29          2023-01-15        2023-01-16        Y             case
+      30          2023-01-13        2023-01-17        Y             case
+      31          2023-01-11        2023-01-15        N   under_followup
+      32          2023-01-16        2023-01-17        Y             case
+      33          2023-01-12        2023-01-16        Y             case
+      34          2023-01-23        2023-01-23        Y             case
+      35          2023-01-24        2023-01-26        N lost_to_followup
+      36          2023-01-18        2023-01-22        N lost_to_followup
+      37          2023-01-21        2023-01-23        Y             case
+      38          2023-01-20        2023-01-23        Y             case
+      39          2023-01-19        2023-01-24        N lost_to_followup
+      40          2023-01-18        2023-01-20        Y             case
+      41          2023-01-20        2023-01-21        N   under_followup
+      42          2023-01-21        2023-01-23        N   under_followup
+      43          2023-01-24        2023-01-25        Y             case
+      44          2023-01-17        2023-01-22        Y             case
+      45          2023-01-11        2023-01-15        N   under_followup
+      46          2023-01-28        2023-01-29        Y             case
+      47          2023-01-29        2023-01-31        N   under_followup
+      48          2023-01-19        2023-01-24        N lost_to_followup
+      49          2023-01-22        2023-01-27        Y             case
+      50          2023-01-26        2023-01-27        Y             case
+      51          2023-01-24        2023-01-26        N   under_followup
+      52          2023-01-23        2023-01-26        Y             case
+      53          2023-01-23        2023-01-28        Y             case
+      54          2023-01-21        2023-01-23        Y             case
+      55          2023-01-23        2023-01-27        Y             case
+      56          2023-01-19        2023-01-23        N   under_followup
+      57          2023-01-26        2023-01-26        Y             case
+      58          2023-01-27        2023-01-27        Y             case
+      59          2023-01-28        2023-01-29        Y             case
+      60          2023-01-28        2023-01-30        N   under_followup
+      61          2023-01-23        2023-01-28        N          unknown
+      62          2023-01-27        2023-01-30        Y             case
+      63          2023-01-25        2023-01-29        Y             case
+      64          2023-01-27        2023-01-31        Y             case
+      65          2023-01-29        2023-01-30        Y             case
+      66          2023-01-31        2023-02-05        N   under_followup
+      67          2023-01-28        2023-01-29        N   under_followup
+      68          2023-01-27        2023-01-28        N lost_to_followup
+      69          2023-01-26        2023-01-31        N   under_followup
+      70          2023-01-24        2023-01-27        Y             case
+      71          2023-01-27        2023-01-29        N lost_to_followup
+      72          2023-01-27        2023-01-31        Y             case
+      73          2023-01-27        2023-02-02        N lost_to_followup
+      74          2023-01-27        2023-02-01        N   under_followup
+      75          2023-01-27        2023-02-02        N   under_followup
+      76          2023-01-30        2023-02-02        Y             case
+      77          2023-01-31        2023-02-01        Y             case
+      78          2023-01-27        2023-02-01        N lost_to_followup
+      79          2023-02-04        2023-02-05        Y             case
+      80          2023-01-30        2023-02-02        N   under_followup
+      81          2023-02-03        2023-02-04        N   under_followup
+      82          2023-02-03        2023-02-05        N   under_followup
+      83          2023-01-27        2023-01-31        N   under_followup
+      84          2023-01-28        2023-02-01        Y             case
+      85          2023-02-02        2023-02-03        N   under_followup
+      86          2023-01-31        2023-02-03        N          unknown
+      87          2023-02-02        2023-02-02        Y             case
+      88          2023-01-28        2023-02-01        Y             case
+      89          2023-01-28        2023-02-04        Y             case
+      90          2023-01-25        2023-01-30        N   under_followup
+      91          2023-01-30        2023-02-04        N          unknown
+      92          2023-02-04        2023-02-06        Y             case
+      93          2023-01-30        2023-02-03        N   under_followup
+      94          2023-02-02        2023-02-04        N lost_to_followup
+      95          2023-02-05        2023-02-07        N   under_followup
+      96          2023-02-06        2023-02-08        Y             case
+      97          2023-01-29        2023-02-01        Y             case
+      98          2023-01-31        2023-02-05        N   under_followup
+      99          2023-01-31        2023-02-04        N   under_followup
+      100         2023-02-01        2023-02-08        Y             case
+      101         2023-02-06        2023-02-07        N   under_followup
+      102         2023-02-01        2023-02-06        N lost_to_followup
+      103         2023-02-01        2023-02-04        N   under_followup
+      104         2023-01-28        2023-02-02        N   under_followup
+      105         2023-02-03        2023-02-06        N   under_followup
+      106         2023-02-02        2023-02-08        N   under_followup
+      107         2023-02-04        2023-02-10        Y             case
+      108         2023-02-06        2023-02-08        N   under_followup
+      109         2023-02-04        2023-02-08        N   under_followup
+      110         2023-02-08        2023-02-09        Y             case
+      111         2023-02-06        2023-02-11        N   under_followup
+      112         2023-02-11        2023-02-12        Y             case
+      113         2023-02-14        2023-02-17        Y             case
+      114         2023-02-10        2023-02-13        N lost_to_followup
+      115         2023-02-12        2023-02-13        Y             case
+      116         2023-02-13        2023-02-16        N   under_followup
+      117         2023-02-11        2023-02-13        N   under_followup
+      118         2023-02-14        2023-02-14        Y             case
+      119         2023-02-18        2023-02-18        Y             case
+      120         2023-02-17        2023-02-22        N   under_followup
+      121         2023-02-26        2023-03-03        Y             case
+      122         2023-02-22        2023-02-24        Y             case
+      123         2023-02-20        2023-02-26        N lost_to_followup
+      124         2023-02-20        2023-02-23        Y             case
+      125         2023-02-23        2023-02-26        Y             case
+      126         2023-02-15        2023-02-19        N          unknown
+      127         2023-02-20        2023-02-21        N   under_followup
+      128         2023-03-06        2023-03-07        N   under_followup
+      129         2023-02-27        2023-03-04        Y             case
+      130         2023-03-01        2023-03-03        Y             case
+      131         2023-03-06        2023-03-09        N   under_followup
+      132         2023-03-05        2023-03-10        Y             case
+      133         2023-03-07        2023-03-09        N   under_followup
+      134         2023-02-22        2023-03-01        N   under_followup
+      135         2023-03-04        2023-03-09        N   under_followup
+      136         2023-03-05        2023-03-09        N   under_followup
+      137         2023-03-09        2023-03-11        Y             case
+      138         2023-03-05        2023-03-09        Y             case
+      139         2023-03-13        2023-03-18        N lost_to_followup
+      140         2023-03-23        2023-03-23        N lost_to_followup
+      141         2023-03-18        2023-03-20        Y             case
+      142         2023-03-16        2023-03-21        Y             case
+      143         2023-03-16        2023-03-20        N   under_followup
+      144         2023-03-09        2023-03-14        Y             case
+      145         2023-03-08        2023-03-12        Y             case
+      146         2023-03-10        2023-03-12        Y             case
+      147         2023-03-08        2023-03-09        N   under_followup
+      148         2023-03-08        2023-03-11        N          unknown
+      149         2023-03-11        2023-03-15        Y             case
+      150         2023-03-24        2023-03-29        N   under_followup
+      151         2023-03-24        2023-03-27        N   under_followup
+      152         2023-03-12        2023-03-19        Y             case
+      153         2023-03-15        2023-03-19        Y             case
+      154         2023-03-15        2023-03-16        Y             case
+      155         2023-03-12        2023-03-14        N   under_followup
+      156         2023-03-09        2023-03-14        Y             case
+      157         2023-03-14        2023-03-17        Y             case
+      158         2023-03-13        2023-03-18        Y             case
+      159         2023-03-09        2023-03-15        N   under_followup
+      160         2023-03-09        2023-03-14        N   under_followup
+      161         2023-03-10        2023-03-13        N   under_followup
+      162         2023-03-15        2023-03-18        Y             case
+      163         2023-03-16        2023-03-20        Y             case
+      164         2023-03-22        2023-03-25        N lost_to_followup
+      165         2023-03-23        2023-03-25        Y             case
+      166         2023-03-19        2023-03-22        N   under_followup
+      167         2023-03-19        2023-03-20        N   under_followup
+      168         2023-03-18        2023-03-22        N   under_followup
+      169         2023-03-17        2023-03-20        N   under_followup
+      170         2023-03-19        2023-03-20        Y             case
+      171         2023-03-21        2023-03-22        Y             case
+      172         2023-03-20        2023-03-21        Y             case
+      173         2023-03-16        2023-03-16        Y             case
+      174         2023-03-26        2023-03-28        Y             case
+      175         2023-03-19        2023-03-24        Y             case
+      176         2023-03-23        2023-03-24        Y             case
+      177         2023-03-25        2023-03-26        Y             case
+      178         2023-03-25        2023-03-25        N   under_followup
+      179         2023-03-20        2023-03-20        N   under_followup
+      180         2023-03-14        2023-03-20        N   under_followup
+      181         2023-03-12        2023-03-17        Y             case
+      182         2023-03-19        2023-03-20        N   under_followup
+      183         2023-03-30        2023-04-02        N lost_to_followup
+      184         2023-04-02        2023-04-04        N lost_to_followup
+      185         2023-03-24        2023-03-26        Y             case
+      186         2023-03-28        2023-03-29        N          unknown
+      187         2023-03-25        2023-03-28        N   under_followup
+      188         2023-03-26        2023-03-30        Y             case
+      189         2023-03-28        2023-03-30        N   under_followup
+      190         2023-03-23        2023-03-27        N   under_followup
+      191         2023-03-22        2023-03-27        N   under_followup
+      192         2023-03-24        2023-03-29        N   under_followup
+      193         2023-03-24        2023-03-28        N   under_followup
+      194         2023-03-25        2023-03-27        Y             case
+      195         2023-03-28        2023-03-28        Y             case
+      196         2023-03-27        2023-04-01        Y             case
+      197         2023-04-04        2023-04-07        N   under_followup
+      198         2023-04-03        2023-04-06        Y             case
+      199         2023-03-30        2023-04-03        Y             case
+      200         2023-04-05        2023-04-06        Y             case
+      201         2023-03-27        2023-03-31        Y             case
+      202         2023-03-27        2023-04-01        N   under_followup
+      203         2023-03-31        2023-03-31        N   under_followup
+      204         2023-03-21        2023-03-27        Y             case
+      205         2023-03-28        2023-03-30        N   under_followup
+      206         2023-03-24        2023-03-28        N   under_followup
+      207         2023-03-22        2023-03-29        N   under_followup
+      208         2023-04-04        2023-04-06        Y             case
+      209         2023-04-01        2023-04-05        Y             case
+      210         2023-04-02        2023-04-03        Y             case
+      211         2023-03-29        2023-03-29        N   under_followup
+      212         2023-04-07        2023-04-10        Y             case
       213         2023-04-08        2023-04-08        Y             case
-      214         2023-04-07        2023-04-10        N   under_followup
-      215         2023-04-10        2023-04-10        N   under_followup
-      216         2023-04-02        2023-04-03        N   under_followup
-      217         2023-04-02        2023-04-06        N   under_followup
-      218         2023-04-06        2023-04-06        Y             case
-      219         2023-04-04        2023-04-07        N   under_followup
-      220         2023-04-01        2023-04-05        Y             case
-      221         2023-03-31        2023-04-05        N   under_followup
+      214         2023-04-09        2023-04-10        N   under_followup
+      215         2023-04-03        2023-04-07        N   under_followup
+      216         2023-04-06        2023-04-06        N   under_followup
+      217         2023-04-03        2023-04-06        N   under_followup
+      218         2023-04-03        2023-04-07        Y             case
+      219         2023-04-02        2023-04-07        N   under_followup
+      220         2023-04-03        2023-04-05        Y             case
+      221         2023-03-30        2023-04-02        N lost_to_followup
       222         2023-04-04        2023-04-06        N   under_followup
-      223         2023-04-03        2023-04-06        Y             case
-      224         2023-04-03        2023-04-05        N   under_followup
+      223         2023-04-06        2023-04-09        Y             case
+      224         2023-04-02        2023-04-04        N lost_to_followup
       225         2023-04-01        2023-04-04        Y             case
-      226         2023-04-02        2023-04-04        N   under_followup
-      227         2023-04-04        2023-04-07        N   under_followup
-      228         2023-04-11        2023-04-16        Y             case
-      229         2023-04-09        2023-04-12        Y             case
-      230         2023-04-11        2023-04-12        N   under_followup
-      231         2023-04-05        2023-04-06        Y             case
-      232         2023-04-01        2023-04-03        Y             case
-      233         2023-04-01        2023-04-09        Y             case
-      234         2023-04-04        2023-04-08        Y             case
-      235         2023-04-12        2023-04-13        Y             case
-      236         2023-04-05        2023-04-08        N   under_followup
-      237         2023-04-14        2023-04-17        Y             case
-      238         2023-04-11        2023-04-13        N   under_followup
-      239         2023-04-03        2023-04-05        Y             case
-      240         2023-04-03        2023-04-06        N   under_followup
-      241         2023-04-06        2023-04-12        N   under_followup
-      242         2023-04-09        2023-04-12        Y             case
-      243         2023-04-09        2023-04-14        N   under_followup
-      244         2023-04-10        2023-04-16        Y             case
-      245         2023-04-09        2023-04-11        N   under_followup
-      246         2023-04-07        2023-04-10        N lost_to_followup
-      247         2023-04-07        2023-04-10        N   under_followup
-      248         2023-04-12        2023-04-14        N lost_to_followup
-      249         2023-04-06        2023-04-11        Y             case
-      250         2023-04-07        2023-04-12        Y             case
-      251         2023-04-04        2023-04-11        Y             case
-      252         2023-04-10        2023-04-11        Y             case
-      253         2023-04-13        2023-04-16        Y             case
-      254         2023-04-14        2023-04-18        Y             case
-      255         2023-04-17        2023-04-18        N   under_followup
-      256         2023-04-11        2023-04-16        N   under_followup
-      257         2023-04-13        2023-04-14        Y             case
-      258         2023-04-15        2023-04-16        N   under_followup
-      259         2023-04-11        2023-04-18        N          unknown
-      260         2023-04-15        2023-04-18        Y             case
-      261         2023-04-14        2023-04-14        Y             case
-      262         2023-04-09        2023-04-14        N          unknown
-      263         2023-04-12        2023-04-21        Y             case
-      264         2023-04-16        2023-04-21        Y             case
-      265         2023-04-24        2023-04-26        N lost_to_followup
-      266         2023-04-19        2023-04-25        Y             case
-      267         2023-04-23        2023-04-25        Y             case
-      268         2023-04-10        2023-04-17        N   under_followup
-      269         2023-04-13        2023-04-16        N          unknown
-      270         2023-04-16        2023-04-19        N   under_followup
-      271         2023-04-13        2023-04-18        N   under_followup
-      272         2023-04-16        2023-04-17        N   under_followup
-      273         2023-04-25        2023-04-28        N lost_to_followup
-      274         2023-04-25        2023-04-27        N lost_to_followup
-      275         2023-04-16        2023-04-16        N   under_followup
-      276         2023-04-11        2023-04-15        Y             case
-      277         2023-04-23        2023-04-26        Y             case
-      278         2023-04-21        2023-04-22        Y             case
-      279         2023-04-18        2023-04-22        Y             case
-      280         2023-04-21        2023-04-25        N lost_to_followup
-      281         2023-04-21        2023-04-25        Y             case
-      282         2023-04-26        2023-04-27        N   under_followup
-      283         2023-05-05        2023-05-06        Y             case
-      284         2023-04-28        2023-04-29        Y             case
-      285         2023-04-28        2023-04-28        N          unknown
-      286         2023-04-27        2023-04-30        N          unknown
-      287         2023-04-26        2023-04-28        N lost_to_followup
-      288         2023-04-22        2023-04-24        N   under_followup
-      289         2023-04-22        2023-04-23        N   under_followup
-      290         2023-04-19        2023-04-21        Y             case
-      291         2023-04-21        2023-04-23        Y             case
-      292         2023-05-03        2023-05-05        Y             case
-      293         2023-05-07        2023-05-08        N   under_followup
-      294         2023-05-03        2023-05-09        N lost_to_followup
+      226         2023-03-28        2023-04-02        N   under_followup
+      227         2023-04-08        2023-04-11        N   under_followup
+      228         2023-04-12        2023-04-13        Y             case
+      229         2023-04-11        2023-04-12        Y             case
+      230         2023-04-12        2023-04-14        N   under_followup
+      231         2023-03-26        2023-04-03        Y             case
+      232         2023-03-30        2023-04-03        Y             case
+      233         2023-04-07        2023-04-08        Y             case
+      234         2023-04-10        2023-04-13        Y             case
+      235         2023-04-07        2023-04-10        Y             case
+      236         2023-04-09        2023-04-11        N          unknown
+      237         2023-04-11        2023-04-13        Y             case
+      238         2023-04-12        2023-04-15        N          unknown
+      239         2023-03-31        2023-04-06        Y             case
+      240         2023-04-02        2023-04-05        N lost_to_followup
+      241         2023-04-07        2023-04-12        N   under_followup
+      242         2023-04-08        2023-04-14        Y             case
+      243         2023-04-14        2023-04-16        N          unknown
+      244         2023-04-08        2023-04-11        Y             case
+      245         2023-04-07        2023-04-10        N   under_followup
+      246         2023-04-08        2023-04-10        N   under_followup
+      247         2023-04-09        2023-04-14        N   under_followup
+      248         2023-04-05        2023-04-10        N lost_to_followup
+      249         2023-04-05        2023-04-12        Y             case
+      250         2023-04-10        2023-04-11        Y             case
+      251         2023-04-08        2023-04-11        Y             case
+      252         2023-04-08        2023-04-12        Y             case
+      253         2023-04-17        2023-04-18        Y             case
+      254         2023-04-12        2023-04-17        Y             case
+      255         2023-04-15        2023-04-16        N lost_to_followup
+      256         2023-04-15        2023-04-16        N   under_followup
+      257         2023-04-07        2023-04-14        Y             case
+      258         2023-04-14        2023-04-17        N lost_to_followup
+      259         2023-04-18        2023-04-18        N   under_followup
+      260         2023-04-14        2023-04-19        Y             case
+      261         2023-04-05        2023-04-14        Y             case
+      262         2023-04-07        2023-04-12        N          unknown
+      263         2023-04-19        2023-04-21        Y             case
+      264         2023-04-20        2023-04-26        Y             case
+      265         2023-04-23        2023-04-25        N          unknown
+      266         2023-04-18        2023-04-25        Y             case
+      267         2023-04-18        2023-04-21        Y             case
+      268         2023-04-13        2023-04-16        N lost_to_followup
+      269         2023-04-14        2023-04-19        N   under_followup
+      270         2023-04-17        2023-04-18        N   under_followup
+      271         2023-04-16        2023-04-19        N   under_followup
+      272         2023-04-14        2023-04-16        N lost_to_followup
+      273         2023-04-27        2023-04-27        N   under_followup
+      274         2023-04-25        2023-04-29        N   under_followup
+      275         2023-04-12        2023-04-15        N   under_followup
+      276         2023-04-13        2023-04-14        Y             case
+      277         2023-04-23        2023-04-27        Y             case
+      278         2023-04-18        2023-04-22        Y             case
+      279         2023-04-21        2023-04-25        Y             case
+      280         2023-04-23        2023-04-24        N          unknown
+      281         2023-04-26        2023-04-27        Y             case
+      282         2023-04-25        2023-04-26        N   under_followup
+      283         2023-05-02        2023-05-02        Y             case
+      284         2023-04-28        2023-05-01        Y             case
+      285         2023-04-28        2023-04-30        N   under_followup
+      286         2023-04-26        2023-04-28        N   under_followup
+      287         2023-04-27        2023-04-28        N   under_followup
+      288         2023-04-21        2023-04-23        N   under_followup
+      289         2023-04-19        2023-04-21        N   under_followup
+      290         2023-04-21        2023-04-23        Y             case
+      291         2023-04-22        2023-04-23        Y             case
+      292         2023-05-02        2023-05-08        Y             case
+      293         2023-05-05        2023-05-07        N   under_followup
+      294         2023-05-07        2023-05-08        N   under_followup
       295         2023-05-06        2023-05-08        Y             case
-      296         2023-05-03        2023-05-04        N   under_followup
-      297         2023-05-01        2023-05-03        Y             case
-      298         2023-04-28        2023-05-01        N   under_followup
-      299         2023-04-25        2023-04-29        N   under_followup
-      300         2023-04-25        2023-04-27        Y             case
-      301         2023-04-20        2023-04-25        Y             case
-      302         2023-04-30        2023-05-09        N          unknown
-      303         2023-05-08        2023-05-10        Y             case
-      304         2023-05-04        2023-05-07        N   under_followup
-      305         2023-05-04        2023-05-06        N   under_followup
-      306         2023-04-28        2023-05-04        Y             case
-      307         2023-05-03        2023-05-06        N   under_followup
-      308         2023-04-26        2023-04-30        N   under_followup
-      309         2023-04-19        2023-04-25        Y             case
-      310         2023-04-25        2023-04-26        Y             case
-      311         2023-04-24        2023-04-27        N   under_followup
-      312         2023-04-25        2023-04-29        Y             case
-      313         2023-05-08        2023-05-08        N   under_followup
-      314         2023-05-04        2023-05-08        N   under_followup
+      296         2023-04-30        2023-05-03        N   under_followup
+      297         2023-04-27        2023-05-01        Y             case
+      298         2023-05-05        2023-05-07        N lost_to_followup
+      299         2023-04-22        2023-04-27        N          unknown
+      300         2023-04-16        2023-04-25        Y             case
+      301         2023-04-25        2023-04-27        Y             case
+      302         2023-05-07        2023-05-10        N          unknown
+      303         2023-05-05        2023-05-07        Y             case
+      304         2023-05-03        2023-05-09        N          unknown
+      305         2023-05-01        2023-05-04        N lost_to_followup
+      306         2023-05-02        2023-05-06        Y             case
+      307         2023-05-03        2023-05-09        N   under_followup
+      308         2023-04-24        2023-04-25        N lost_to_followup
+      309         2023-04-23        2023-04-26        Y             case
+      310         2023-04-23        2023-04-27        Y             case
+      311         2023-04-26        2023-04-26        N   under_followup
+      312         2023-04-23        2023-04-27        Y             case
+      313         2023-05-05        2023-05-08        N lost_to_followup
+      314         2023-05-05        2023-05-08        N lost_to_followup
       315         2023-05-05        2023-05-08        Y             case
-      316         2023-05-07        2023-05-10        N   under_followup
-      317         2023-04-23        2023-04-26        N   under_followup
-      318         2023-04-25        2023-04-25        N lost_to_followup
-      319         2023-04-22        2023-04-28        Y             case
-      320         2023-04-22        2023-04-29        N          unknown
-      321         2023-04-27        2023-04-30        N          unknown
-      322         2023-04-29        2023-05-02        N          unknown
-      323         2023-05-10        2023-05-12        N lost_to_followup
-      324         2023-05-15        2023-05-16        N   under_followup
-      325         2023-05-01        2023-05-03        Y             case
-      326         2023-05-09        2023-05-14        N lost_to_followup
+      316         2023-05-11        2023-05-11        N   under_followup
+      317         2023-04-19        2023-04-25        N   under_followup
+      318         2023-04-20        2023-04-27        N   under_followup
+      319         2023-04-24        2023-04-27        Y             case
+      320         2023-04-27        2023-04-30        N   under_followup
+      321         2023-04-30        2023-05-02        N   under_followup
+      322         2023-04-28        2023-04-29        N lost_to_followup
+      323         2023-05-14        2023-05-16        N   under_followup
+      324         2023-05-07        2023-05-12        N          unknown
+      325         2023-05-05        2023-05-07        Y             case
+      326         2023-05-10        2023-05-12        N   under_followup
       
 
 # sim_outbreak works as expected
@@ -1146,91 +1146,91 @@
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death)
     Output
       $linelist
-         id        case_name case_type sex age date_onset date_reporting
-      1   1     Kevin Pullen suspected   m  35 2023-01-01     2023-01-01
-      2   2 Maazin el-Othman confirmed   m  43 2023-01-01     2023-01-01
-      3   3 Faisal el-Vaziri confirmed   m   1 2023-01-01     2023-01-01
-      4   5     Jorge Marten suspected   m  78 2023-01-01     2023-01-01
-      5   6   Katelyn Catlin confirmed   f  22 2023-01-01     2023-01-01
-      6   8     Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
-      7  11   Collin Stimack confirmed   m  46 2023-01-01     2023-01-01
-      8  12     Jacy Cousins confirmed   f  67 2023-01-01     2023-01-01
-      9  13  Nicholas Orgill confirmed   m  86 2023-01-01     2023-01-01
-      10 18   Maria Eberhart  probable   f  60 2023-01-02     2023-01-02
-      11 20       Kevin Waid suspected   m  49 2023-01-02     2023-01-02
-      12 22      Erin Payson confirmed   f   7 2023-01-02     2023-01-02
+         id              case_name case_type sex age date_onset date_reporting
+      1   1           Kevin Pullen suspected   m   1 2023-01-01     2023-01-01
+      2   2 Carisa Flores-Gonzalez confirmed   f  29 2023-01-01     2023-01-01
+      3   3       Maazin el-Othman confirmed   m  78 2023-01-01     2023-01-01
+      4   5       Faisal el-Vaziri suspected   m  70 2023-01-01     2023-01-01
+      5   6           Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
+      6   8         Lilibeth Black confirmed   f  61 2023-01-01     2023-01-01
+      7  11        Kaleb Natarelli confirmed   m  86 2023-01-01     2023-01-01
+      8  12         Collin Stimack confirmed   m  71 2023-01-01     2023-01-01
+      9  13       Marquaja Johnson confirmed   f  51 2023-01-01     2023-01-01
+      10 18           Corey Alcala  probable   m  49 2023-01-02     2023-01-02
+      11 20            Erin Payson suspected   f   7 2023-01-02     2023-01-02
+      12 22          Sean Shrestha confirmed   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1            <NA> recovered         <NA>               <NA>              <NA>
-      2      2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4      2023-01-03      died   2023-01-21         2022-12-29        2023-01-02
-      5      2023-01-28      died   2023-02-09         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10           <NA> recovered         <NA>         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      1      2023-01-04      died   2023-01-18               <NA>              <NA>
+      2      2023-01-02      died   2023-02-09         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
+      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8      2023-01-02 recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
       1        NA
-      2      25.3
-      3      25.8
+      2      25.8
+      3      24.9
       4        NA
-      5      24.9
-      6      24.5
-      7      26.4
-      8      27.3
-      9      20.2
+      5      24.5
+      6      26.4
+      7      27.3
+      8      20.2
+      9      26.1
       10       NA
       11       NA
-      12     26.1
+      12     25.7
       
       $contacts
-                     from                       to age sex date_first_contact
-      1      Kevin Pullen         Maazin el-Othman  43   m         2022-12-30
-      2      Kevin Pullen         Faisal el-Vaziri   1   m         2022-12-30
-      3  Maazin el-Othman   Carisa Flores-Gonzalez  29   f         2022-12-27
-      4  Maazin el-Othman             Jorge Marten  78   m         2022-12-29
-      5  Faisal el-Vaziri           Katelyn Catlin  22   f         2023-01-01
-      6  Faisal el-Vaziri          Kaleb Natarelli  70   m         2022-12-30
-      7  Faisal el-Vaziri             Lynsey Duron  28   f         2023-01-03
-      8      Jorge Marten          Amaani al-Gaber  37   f         2023-01-06
-      9    Katelyn Catlin           Lilibeth Black  61   f         2023-01-01
-      10     Lynsey Duron           Collin Stimack  46   m         2023-01-04
-      11     Lynsey Duron             Jacy Cousins  67   f         2023-01-01
-      12     Lynsey Duron          Nicholas Orgill  86   m         2022-12-31
-      13   Collin Stimack             Corey Alcala  71   m         2022-12-28
-      14   Collin Stimack         Marquaja Johnson  51   f         2023-01-01
-      15   Collin Stimack Francisco Zapata Morales  44   m         2023-01-02
-      16     Jacy Cousins              Kayla Tudor  49   f         2023-01-02
-      17  Nicholas Orgill           Maria Eberhart  60   f         2022-12-30
-      18  Nicholas Orgill              Katja Muetz  56   f         2023-01-06
-      19  Nicholas Orgill               Kevin Waid  49   m         2023-01-01
-      20  Nicholas Orgill            Sean Shrestha  50   m         2023-01-01
-      21   Maria Eberhart              Erin Payson   7   f         2023-01-01
+                           from                       to age sex date_first_contact
+      1            Kevin Pullen   Carisa Flores-Gonzalez  29   f         2022-12-26
+      2            Kevin Pullen         Maazin el-Othman  78   m         2022-12-30
+      3  Carisa Flores-Gonzalez           Katelyn Catlin  22   f         2022-12-31
+      4  Carisa Flores-Gonzalez         Faisal el-Vaziri  70   m         2022-12-31
+      5        Maazin el-Othman             Lynsey Duron  28   f         2023-01-01
+      6        Maazin el-Othman          Amaani al-Gaber  37   f         2023-01-04
+      7        Maazin el-Othman           Lilibeth Black  61   f         2023-01-02
+      8        Faisal el-Vaziri             Jorge Marten  46   m         2023-01-04
+      9            Lynsey Duron             Jacy Cousins  67   f         2023-01-02
+      10         Lilibeth Black          Kaleb Natarelli  86   m         2023-01-01
+      11         Lilibeth Black           Collin Stimack  71   m         2022-12-26
+      12         Lilibeth Black         Marquaja Johnson  51   f         2023-01-02
+      13        Kaleb Natarelli          Nicholas Orgill  44   m         2023-01-01
+      14        Kaleb Natarelli              Kayla Tudor  49   f         2023-01-04
+      15        Kaleb Natarelli           Maria Eberhart  60   f         2022-12-30
+      16         Collin Stimack              Katja Muetz  56   f         2022-12-31
+      17       Marquaja Johnson             Corey Alcala  49   m         2023-01-06
+      18       Marquaja Johnson Francisco Zapata Morales  50   m         2023-01-02
+      19       Marquaja Johnson              Erin Payson   7   f         2023-01-01
+      20       Marquaja Johnson               Kevin Waid  20   m         2022-12-30
+      21           Corey Alcala            Sean Shrestha  24   m         2023-01-02
          date_last_contact was_case           status
-      1         2023-01-05        Y             case
-      2         2023-01-02        Y             case
-      3         2023-01-03        N   under_followup
-      4         2023-01-02        Y             case
-      5         2023-01-03        Y             case
-      6         2023-01-02        N   under_followup
-      7         2023-01-04        Y             case
-      8         2023-01-06        N   under_followup
-      9         2023-01-05        N   under_followup
-      10        2023-01-05        Y             case
-      11        2023-01-04        Y             case
-      12        2023-01-03        Y             case
-      13        2023-01-05        N lost_to_followup
-      14        2023-01-04        N lost_to_followup
-      15        2023-01-05        N   under_followup
-      16        2023-01-03        N   under_followup
-      17        2023-01-03        Y             case
-      18        2023-01-09        N   under_followup
-      19        2023-01-04        Y             case
-      20        2023-01-03        N          unknown
-      21        2023-01-03        Y             case
+      1         2023-01-02        Y             case
+      2         2023-01-03        Y             case
+      3         2023-01-02        N   under_followup
+      4         2023-01-03        Y             case
+      5         2023-01-02        Y             case
+      6         2023-01-04        N   under_followup
+      7         2023-01-06        Y             case
+      8         2023-01-05        N lost_to_followup
+      9         2023-01-05        N lost_to_followup
+      10        2023-01-04        Y             case
+      11        2023-01-03        Y             case
+      12        2023-01-05        Y             case
+      13        2023-01-04        N   under_followup
+      14        2023-01-05        N   under_followup
+      15        2023-01-03        N   under_followup
+      16        2023-01-03        N          unknown
+      17        2023-01-09        Y             case
+      18        2023-01-04        N lost_to_followup
+      19        2023-01-03        Y             case
+      20        2023-01-02        N lost_to_followup
+      21        2023-01-05        Y             case
       
 
 # sim_outbreak works as expected with anonymised
@@ -1242,55 +1242,55 @@
     Output
       $linelist
          id  case_name case_type sex age date_onset date_reporting date_admission
-      1   1 OvsRrRMCAJ confirmed   m  35 2023-01-01     2023-01-01           <NA>
-      2   2 FEY3qKY39Z  probable   m  43 2023-01-01     2023-01-01     2023-01-07
-      3   3 yiuuoY8Kxn confirmed   m   1 2023-01-01     2023-01-01           <NA>
-      4   5 Huaqm1SzNb  probable   m  78 2023-01-01     2023-01-01     2023-01-03
-      5   6 O5h4yEtT6t suspected   f  22 2023-01-01     2023-01-01     2023-01-28
-      6   8 8e6yKFNmyd  probable   f  28 2023-01-01     2023-01-01           <NA>
-      7  11 Lkhw9tYeb1 confirmed   m  46 2023-01-01     2023-01-01           <NA>
-      8  12 elczXnmE3U suspected   f  67 2023-01-01     2023-01-01           <NA>
-      9  13 4HDzSVgVAW confirmed   m  86 2023-01-01     2023-01-01           <NA>
-      10 18 To9HLY9VZd  probable   f  60 2023-01-02     2023-01-02           <NA>
-      11 20 czwJ3WvUcV confirmed   m  49 2023-01-02     2023-01-02           <NA>
-      12 22 vu5Ak6RZkf confirmed   f   7 2023-01-02     2023-01-02           <NA>
+      1   1 OvsRrRMCAJ confirmed   m   1 2023-01-01     2023-01-01     2023-01-04
+      2   2 FEY3qKY39Z  probable   f  29 2023-01-01     2023-01-01     2023-01-02
+      3   3 yiuuoY8Kxn confirmed   m  78 2023-01-01     2023-01-01           <NA>
+      4   5 Huaqm1SzNb  probable   m  70 2023-01-01     2023-01-01     2023-01-05
+      5   6 O5h4yEtT6t suspected   f  28 2023-01-01     2023-01-01     2023-01-14
+      6   8 8e6yKFNmyd  probable   f  61 2023-01-01     2023-01-01           <NA>
+      7  11 Lkhw9tYeb1 confirmed   m  86 2023-01-01     2023-01-01           <NA>
+      8  12 elczXnmE3U suspected   m  71 2023-01-01     2023-01-01     2023-01-02
+      9  13 4HDzSVgVAW confirmed   f  51 2023-01-01     2023-01-01           <NA>
+      10 18 To9HLY9VZd  probable   m  49 2023-01-02     2023-01-02           <NA>
+      11 20 czwJ3WvUcV confirmed   f   7 2023-01-02     2023-01-02           <NA>
+      12 22 vu5Ak6RZkf confirmed   m  24 2023-01-02     2023-01-02           <NA>
            outcome date_outcome date_first_contact date_last_contact ct_value
-      1  recovered         <NA>               <NA>              <NA>     26.2
-      2  recovered         <NA>         2022-12-30        2023-01-05       NA
-      3  recovered         <NA>         2022-12-30        2023-01-02     26.4
-      4       died   2023-01-21         2022-12-29        2023-01-02       NA
-      5       died   2023-02-09         2023-01-01        2023-01-03       NA
-      6  recovered         <NA>         2023-01-03        2023-01-04       NA
-      7  recovered         <NA>         2023-01-04        2023-01-05     26.1
-      8  recovered         <NA>         2023-01-01        2023-01-04       NA
-      9  recovered         <NA>         2022-12-31        2023-01-03     23.9
-      10 recovered         <NA>         2022-12-30        2023-01-03       NA
-      11 recovered         <NA>         2023-01-01        2023-01-04     22.3
-      12 recovered         <NA>         2023-01-01        2023-01-03     24.2
+      1       died   2023-01-18               <NA>              <NA>     26.4
+      2       died   2023-02-09         2022-12-26        2023-01-02       NA
+      3  recovered         <NA>         2022-12-30        2023-01-03     26.1
+      4  recovered         <NA>         2022-12-31        2023-01-03       NA
+      5  recovered         <NA>         2023-01-01        2023-01-02       NA
+      6  recovered         <NA>         2023-01-02        2023-01-06       NA
+      7  recovered         <NA>         2023-01-01        2023-01-04     23.9
+      8  recovered         <NA>         2022-12-26        2023-01-03       NA
+      9  recovered         <NA>         2023-01-02        2023-01-05     22.3
+      10 recovered         <NA>         2023-01-06        2023-01-09       NA
+      11 recovered         <NA>         2023-01-01        2023-01-03     24.2
+      12 recovered         <NA>         2023-01-02        2023-01-05     25.6
       
       $contacts
                from         to age sex date_first_contact date_last_contact was_case
-      1  OvsRrRMCAJ FEY3qKY39Z  43   m         2022-12-30        2023-01-05        Y
-      2  OvsRrRMCAJ yiuuoY8Kxn   1   m         2022-12-30        2023-01-02        Y
-      3  FEY3qKY39Z g7AzDS6oXf  29   f         2022-12-27        2023-01-03        N
-      4  FEY3qKY39Z Huaqm1SzNb  78   m         2022-12-29        2023-01-02        Y
-      5  yiuuoY8Kxn O5h4yEtT6t  22   f         2023-01-01        2023-01-03        Y
-      6  yiuuoY8Kxn ejRt34oCba  70   m         2022-12-30        2023-01-02        N
-      7  yiuuoY8Kxn 8e6yKFNmyd  28   f         2023-01-03        2023-01-04        Y
-      8  Huaqm1SzNb PL7XeZaLTm  37   f         2023-01-06        2023-01-06        N
-      9  O5h4yEtT6t hWsVUBVWYT  61   f         2023-01-01        2023-01-05        N
-      10 8e6yKFNmyd Lkhw9tYeb1  46   m         2023-01-04        2023-01-05        Y
-      11 8e6yKFNmyd elczXnmE3U  67   f         2023-01-01        2023-01-04        Y
-      12 8e6yKFNmyd 4HDzSVgVAW  86   m         2022-12-31        2023-01-03        Y
-      13 Lkhw9tYeb1 QihvSfYVAR  71   m         2022-12-28        2023-01-05        N
-      14 Lkhw9tYeb1 DjDafq8m2z  51   f         2023-01-01        2023-01-04        N
-      15 Lkhw9tYeb1 bFUJRewLYt  44   m         2023-01-02        2023-01-05        N
-      16 elczXnmE3U BBlIdUTzmc  49   f         2023-01-02        2023-01-03        N
-      17 4HDzSVgVAW To9HLY9VZd  60   f         2022-12-30        2023-01-03        Y
-      18 4HDzSVgVAW zuuT3p6Kxu  56   f         2023-01-06        2023-01-09        N
-      19 4HDzSVgVAW czwJ3WvUcV  49   m         2023-01-01        2023-01-04        Y
-      20 4HDzSVgVAW V4dJ6ZKaUK  50   m         2023-01-01        2023-01-03        N
-      21 To9HLY9VZd vu5Ak6RZkf   7   f         2023-01-01        2023-01-03        Y
+      1  OvsRrRMCAJ FEY3qKY39Z  29   f         2022-12-26        2023-01-02        Y
+      2  OvsRrRMCAJ yiuuoY8Kxn  78   m         2022-12-30        2023-01-03        Y
+      3  FEY3qKY39Z g7AzDS6oXf  22   f         2022-12-31        2023-01-02        N
+      4  FEY3qKY39Z Huaqm1SzNb  70   m         2022-12-31        2023-01-03        Y
+      5  yiuuoY8Kxn O5h4yEtT6t  28   f         2023-01-01        2023-01-02        Y
+      6  yiuuoY8Kxn ejRt34oCba  37   f         2023-01-04        2023-01-04        N
+      7  yiuuoY8Kxn 8e6yKFNmyd  61   f         2023-01-02        2023-01-06        Y
+      8  Huaqm1SzNb PL7XeZaLTm  46   m         2023-01-04        2023-01-05        N
+      9  O5h4yEtT6t hWsVUBVWYT  67   f         2023-01-02        2023-01-05        N
+      10 8e6yKFNmyd Lkhw9tYeb1  86   m         2023-01-01        2023-01-04        Y
+      11 8e6yKFNmyd elczXnmE3U  71   m         2022-12-26        2023-01-03        Y
+      12 8e6yKFNmyd 4HDzSVgVAW  51   f         2023-01-02        2023-01-05        Y
+      13 Lkhw9tYeb1 QihvSfYVAR  44   m         2023-01-01        2023-01-04        N
+      14 Lkhw9tYeb1 DjDafq8m2z  49   f         2023-01-04        2023-01-05        N
+      15 Lkhw9tYeb1 bFUJRewLYt  60   f         2022-12-30        2023-01-03        N
+      16 elczXnmE3U BBlIdUTzmc  56   f         2022-12-31        2023-01-03        N
+      17 4HDzSVgVAW To9HLY9VZd  49   m         2023-01-06        2023-01-09        Y
+      18 4HDzSVgVAW zuuT3p6Kxu  50   m         2023-01-02        2023-01-04        N
+      19 4HDzSVgVAW czwJ3WvUcV   7   f         2023-01-01        2023-01-03        Y
+      20 4HDzSVgVAW V4dJ6ZKaUK  20   m         2022-12-30        2023-01-02        N
+      21 To9HLY9VZd vu5Ak6RZkf  24   m         2023-01-02        2023-01-05        Y
                    status
       1              case
       2              case
@@ -1300,18 +1300,18 @@
       6    under_followup
       7              case
       8    under_followup
-      9    under_followup
+      9  lost_to_followup
       10             case
       11             case
       12             case
       13   under_followup
-      14 lost_to_followup
+      14   under_followup
       15   under_followup
-      16   under_followup
+      16          unknown
       17             case
       18   under_followup
       19             case
-      20          unknown
+      20   under_followup
       21             case
       
 
@@ -1324,91 +1324,91 @@
         non_hosp_death_risk = age_dep_non_hosp_death_risk)
     Output
       $linelist
-         id          case_name case_type sex age date_onset date_reporting
-      1   1         Kyle Crane suspected   m  35 2023-01-01     2023-01-01
-      2   2 Ghaamid el-Ishmael confirmed   m  43 2023-01-01     2023-01-01
-      3   3   Faatih el-Kaiser confirmed   m   1 2023-01-01     2023-01-01
-      4   5   Va'Aahi Galligan suspected   m  78 2023-01-01     2023-01-01
-      5   6     Katelyn Catlin confirmed   f  22 2023-01-01     2023-01-01
-      6   8       Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
-      7  11    Wajdi al-Demian confirmed   m  46 2023-01-01     2023-01-01
-      8  12       Jacy Cousins confirmed   f  67 2023-01-01     2023-01-01
-      9  13      Travis Foster confirmed   m  86 2023-01-01     2023-01-01
-      10 18     Maria Eberhart  probable   f  60 2023-01-02     2023-01-02
-      11 20  Mubarak el-Vaziri suspected   m  49 2023-01-02     2023-01-02
-      12 22        Erin Payson confirmed   f   7 2023-01-02     2023-01-02
+         id         case_name case_type sex age date_onset date_reporting
+      1   1   Wajdi al-Demian  probable   m   1 2023-01-01     2023-01-01
+      2   2       Durine Cobb confirmed   f  29 2023-01-01     2023-01-01
+      3   3     Raaid el-Diab suspected   m  78 2023-01-01     2023-01-01
+      4   5    Nickolas Nault confirmed   m  70 2023-01-01     2023-01-01
+      5   6    Shanta Holiday suspected   f  28 2023-01-01     2023-01-01
+      6   8     Mackenzie Ahn  probable   f  61 2023-01-01     2023-01-01
+      7  11 Mubarak el-Vaziri  probable   m  86 2023-01-01     2023-01-01
+      8  12  Raakaan al-Shams suspected   m  71 2023-01-01     2023-01-01
+      9  13  Mikhaila Carlson confirmed   f  51 2023-01-01     2023-01-01
+      10 18    Tae Woo Nguyen confirmed   m  49 2023-01-02     2023-01-02
+      11 20      Annie Carter  probable   f   7 2023-01-02     2023-01-02
+      12 22    Thomas Morales  probable   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1            <NA> recovered         <NA>               <NA>              <NA>
-      2      2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4            <NA> recovered         <NA>         2022-12-29        2023-01-02
-      5            <NA> recovered         <NA>         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10           <NA> recovered         <NA>         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      1      2023-01-04 recovered         <NA>               <NA>              <NA>
+      2            <NA> recovered         <NA>         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
+      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8            <NA> recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
       1        NA
-      2      25.3
-      3      25.8
-      4        NA
-      5      24.9
-      6      24.5
-      7      26.4
-      8      27.3
-      9      20.2
-      10       NA
+      2      25.2
+      3        NA
+      4      25.7
+      5        NA
+      6        NA
+      7        NA
+      8        NA
+      9      26.1
+      10     22.7
       11       NA
-      12     26.1
+      12       NA
       
       $contacts
-                       from                     to age sex date_first_contact
-      1          Kyle Crane     Ghaamid el-Ishmael  43   m         2022-12-30
-      2          Kyle Crane       Faatih el-Kaiser   1   m         2022-12-30
-      3  Ghaamid el-Ishmael Carisa Flores-Gonzalez  29   f         2022-12-27
-      4  Ghaamid el-Ishmael       Va'Aahi Galligan  78   m         2022-12-29
-      5    Faatih el-Kaiser         Katelyn Catlin  22   f         2023-01-01
-      6    Faatih el-Kaiser          Aiman el-Riaz  70   m         2022-12-30
-      7    Faatih el-Kaiser           Lynsey Duron  28   f         2023-01-03
-      8    Va'Aahi Galligan        Amaani al-Gaber  37   f         2023-01-06
-      9      Katelyn Catlin         Lilibeth Black  61   f         2023-01-01
-      10       Lynsey Duron        Wajdi al-Demian  46   m         2023-01-04
-      11       Lynsey Duron           Jacy Cousins  67   f         2023-01-01
-      12       Lynsey Duron          Travis Foster  86   m         2022-12-31
-      13    Wajdi al-Demian         Raymond Murray  71   m         2022-12-28
-      14    Wajdi al-Demian       Marquaja Johnson  51   f         2023-01-01
-      15    Wajdi al-Demian          Raaid el-Diab  44   m         2023-01-02
-      16       Jacy Cousins            Kayla Tudor  49   f         2023-01-02
-      17      Travis Foster         Maria Eberhart  60   f         2022-12-30
-      18      Travis Foster            Katja Muetz  56   f         2023-01-06
-      19      Travis Foster      Mubarak el-Vaziri  49   m         2023-01-01
-      20      Travis Foster     Alexandre Guerrero  50   m         2023-01-01
-      21     Maria Eberhart            Erin Payson   7   f         2023-01-01
+                      from                     to age sex date_first_contact
+      1    Wajdi al-Demian            Durine Cobb  29   f         2022-12-26
+      2    Wajdi al-Demian          Raaid el-Diab  78   m         2022-12-30
+      3        Durine Cobb            Hope Arshad  22   f         2022-12-31
+      4        Durine Cobb         Nickolas Nault  70   m         2022-12-31
+      5      Raaid el-Diab         Shanta Holiday  28   f         2023-01-01
+      6      Raaid el-Diab           Darian Guyon  37   f         2023-01-04
+      7      Raaid el-Diab          Mackenzie Ahn  61   f         2023-01-02
+      8     Nickolas Nault            Hee Kennedy  46   m         2023-01-04
+      9     Shanta Holiday         Chandra Kilian  67   f         2023-01-02
+      10     Mackenzie Ahn      Mubarak el-Vaziri  86   m         2023-01-01
+      11     Mackenzie Ahn       Raakaan al-Shams  71   m         2022-12-26
+      12     Mackenzie Ahn       Mikhaila Carlson  51   f         2023-01-02
+      13 Mubarak el-Vaziri        Ricardo Sanchez  44   m         2023-01-01
+      14 Mubarak el-Vaziri      Alexandra Johnson  49   f         2023-01-04
+      15 Mubarak el-Vaziri          Kanani Nguyen  60   f         2022-12-30
+      16  Raakaan al-Shams Nirvana Elizalde Villa  56   f         2022-12-31
+      17  Mikhaila Carlson         Tae Woo Nguyen  49   m         2023-01-06
+      18  Mikhaila Carlson         Alexander Orio  50   m         2023-01-02
+      19  Mikhaila Carlson           Annie Carter   7   f         2023-01-01
+      20  Mikhaila Carlson         Jared Chambers  20   m         2022-12-30
+      21    Tae Woo Nguyen         Thomas Morales  24   m         2023-01-02
          date_last_contact was_case           status
-      1         2023-01-05        Y             case
-      2         2023-01-02        Y             case
-      3         2023-01-03        N   under_followup
-      4         2023-01-02        Y             case
-      5         2023-01-03        Y             case
-      6         2023-01-02        N   under_followup
-      7         2023-01-04        Y             case
-      8         2023-01-06        N   under_followup
-      9         2023-01-05        N   under_followup
-      10        2023-01-05        Y             case
-      11        2023-01-04        Y             case
-      12        2023-01-03        Y             case
-      13        2023-01-05        N lost_to_followup
-      14        2023-01-04        N lost_to_followup
-      15        2023-01-05        N   under_followup
+      1         2023-01-02        Y             case
+      2         2023-01-03        Y             case
+      3         2023-01-02        N          unknown
+      4         2023-01-03        Y             case
+      5         2023-01-02        Y             case
+      6         2023-01-04        N lost_to_followup
+      7         2023-01-06        Y             case
+      8         2023-01-05        N lost_to_followup
+      9         2023-01-05        N          unknown
+      10        2023-01-04        Y             case
+      11        2023-01-03        Y             case
+      12        2023-01-05        Y             case
+      13        2023-01-04        N          unknown
+      14        2023-01-05        N   under_followup
+      15        2023-01-03        N   under_followup
       16        2023-01-03        N   under_followup
-      17        2023-01-03        Y             case
-      18        2023-01-09        N   under_followup
-      19        2023-01-04        Y             case
-      20        2023-01-03        N          unknown
-      21        2023-01-03        Y             case
+      17        2023-01-09        Y             case
+      18        2023-01-04        N   under_followup
+      19        2023-01-03        Y             case
+      20        2023-01-02        N   under_followup
+      21        2023-01-05        Y             case
       
 
 # sim_outbreak works as expected with age structure
@@ -1419,90 +1419,94 @@
         population_age = age_struct)
     Output
       $linelist
-         id          case_name case_type sex age date_onset date_reporting
-      1   1      Gabriel Black  probable   m  43 2023-01-01     2023-01-01
-      2   2       Tyler Kelley confirmed   m  13 2023-01-01     2023-01-01
-      3   3       Cody Morales suspected   m  11 2023-01-01     2023-01-01
-      4   5          Joewid Le  probable   m  80 2023-01-01     2023-01-01
-      5   6      Carolyn Moore confirmed   f  19 2023-01-01     2023-01-01
-      6   8  Cheyenne Sayavong confirmed   f  84 2023-01-01     2023-01-01
-      7  11 Pierce Khanthavong confirmed   m  79 2023-01-01     2023-01-01
-      8  12          Kendra To suspected   f  31 2023-01-01     2023-01-01
-      9  13  Preston Barringer confirmed   m  71 2023-01-01     2023-01-01
-      10 18  Dominique Raymond confirmed   f  61 2023-01-02     2023-01-02
-      11 20   Bassaam el-Majid  probable   m  51 2023-01-02     2023-01-02
-      12 22      Susana Varela  probable   f  75 2023-01-02     2023-01-02
+
+         id                 case_name case_type sex age date_onset date_reporting
+      1   1             Gabriel Black  probable   m  22 2023-01-01     2023-01-01
+      2   2             Taylor Graves confirmed   f   5 2023-01-01     2023-01-01
+      3   3              Tyler Kelley suspected   m  85 2023-01-01     2023-01-01
+      4   5              Cody Morales  probable   m   2 2023-01-01     2023-01-01
+      5   6         Cheyenne Sayavong confirmed   f  89 2023-01-01     2023-01-01
+      6   8 Chantelle Vazquez-Luevano confirmed   f  82 2023-01-01     2023-01-01
+      7  11           Rushdi al-Ishak confirmed   m   9 2023-01-01     2023-01-01
+      8  12        Pierce Khanthavong suspected   m  79 2023-01-01     2023-01-01
+      9  13               Megan Hayes confirmed   f  29 2023-01-01     2023-01-01
+      10 18           Jackson Carlson confirmed   m  52 2023-01-02     2023-01-02
+      11 20             Susana Varela  probable   f  76 2023-01-02     2023-01-02
+      12 22           Qaaid al-Madani  probable   m  25 2023-01-02     2023-01-02
+
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1      2023-01-02 recovered         <NA>               <NA>              <NA>
-      2            <NA> recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4            <NA> recovered         <NA>         2022-12-29        2023-01-02
-      5            <NA> recovered         <NA>         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10     2023-01-03      died   2023-01-21         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12     2023-01-05 recovered         <NA>         2023-01-01        2023-01-03
+      1            <NA> recovered         <NA>               <NA>              <NA>
+      2            <NA> recovered         <NA>         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4            <NA> recovered         <NA>         2022-12-31        2023-01-03
+      5            <NA> recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8      2023-01-04 recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11     2023-01-06 recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
       1        NA
-      2      23.0
+      2      28.2
       3        NA
       4        NA
-      5      28.2
-      6      25.0
-      7      19.2
+      5      25.0
+      6      19.2
+      7      22.8
       8        NA
-      9      22.8
-      10     28.1
+      9      28.1
+      10     23.0
       11       NA
       12       NA
       
       $contacts
-                       from                        to age sex date_first_contact
-      1       Gabriel Black              Tyler Kelley  13   m         2022-12-30
-      2       Gabriel Black              Cody Morales  11   m         2022-12-30
-      3        Tyler Kelley             Taylor Graves  10   f         2022-12-27
-      4        Tyler Kelley                 Joewid Le  80   m         2022-12-29
-      5        Cody Morales             Carolyn Moore  19   f         2023-01-01
-      6        Cody Morales           Rushdi al-Ishak   4   m         2022-12-30
-      7        Cody Morales         Cheyenne Sayavong  84   f         2023-01-03
-      8           Joewid Le         Mercedes Lovelace  86   f         2023-01-06
-      9       Carolyn Moore Chantelle Vazquez-Luevano  88   f         2023-01-01
-      10  Cheyenne Sayavong        Pierce Khanthavong  79   m         2023-01-04
-      11  Cheyenne Sayavong                 Kendra To  31   f         2023-01-01
-      12  Cheyenne Sayavong         Preston Barringer  71   m         2022-12-31
-      13 Pierce Khanthavong           Jackson Carlson  78   m         2022-12-28
-      14 Pierce Khanthavong               Megan Hayes  28   f         2023-01-01
-      15 Pierce Khanthavong               Sam Spencer   1   m         2023-01-02
-      16          Kendra To         Amanda Larochelle  13   f         2023-01-02
-      17  Preston Barringer         Dominique Raymond  61   f         2022-12-30
-      18  Preston Barringer            Natalie Newton  24   f         2023-01-06
-      19  Preston Barringer          Bassaam el-Majid  51   m         2023-01-01
-      20  Preston Barringer           Qaaid al-Madani  73   m         2023-01-01
-      21  Dominique Raymond             Susana Varela  75   f         2023-01-01
-         date_last_contact was_case           status
-      1         2023-01-05        Y             case
-      2         2023-01-02        Y             case
-      3         2023-01-03        N   under_followup
-      4         2023-01-02        Y             case
-      5         2023-01-03        Y             case
-      6         2023-01-02        N   under_followup
-      7         2023-01-04        Y             case
-      8         2023-01-06        N   under_followup
-      9         2023-01-05        N   under_followup
-      10        2023-01-05        Y             case
-      11        2023-01-04        Y             case
-      12        2023-01-03        Y             case
-      13        2023-01-05        N   under_followup
-      14        2023-01-04        N lost_to_followup
-      15        2023-01-05        N   under_followup
-      16        2023-01-03        N   under_followup
-      17        2023-01-03        Y             case
-      18        2023-01-09        N   under_followup
-      19        2023-01-04        Y             case
-      20        2023-01-03        N   under_followup
-      21        2023-01-03        Y             case
+
+                              from                        to age sex
+      1              Gabriel Black             Taylor Graves   5   f
+      2              Gabriel Black              Tyler Kelley  85   m
+      3              Taylor Graves             Carolyn Moore  41   f
+      4              Taylor Graves              Cody Morales   2   m
+      5               Tyler Kelley         Cheyenne Sayavong  89   f
+      6               Tyler Kelley         Mercedes Lovelace  86   f
+      7               Tyler Kelley Chantelle Vazquez-Luevano  82   f
+      8               Cody Morales                 Joewid Le  69   m
+      9          Cheyenne Sayavong                 Kendra To  23   f
+      10 Chantelle Vazquez-Luevano           Rushdi al-Ishak   9   m
+      11 Chantelle Vazquez-Luevano        Pierce Khanthavong  79   m
+      12 Chantelle Vazquez-Luevano               Megan Hayes  29   f
+      13           Rushdi al-Ishak         Preston Barringer   4   m
+      14           Rushdi al-Ishak         Amanda Larochelle  13   f
+      15           Rushdi al-Ishak         Dominique Raymond  62   f
+      16        Pierce Khanthavong            Natalie Newton  24   f
+      17               Megan Hayes           Jackson Carlson  52   m
+      18               Megan Hayes               Sam Spencer  74   m
+      19               Megan Hayes             Susana Varela  76   f
+      20               Megan Hayes          Bassaam el-Majid  26   m
+      21           Jackson Carlson           Qaaid al-Madani  25   m
+         date_first_contact date_last_contact was_case           status
+      1          2022-12-26        2023-01-02        Y             case
+      2          2022-12-30        2023-01-03        Y             case
+      3          2022-12-31        2023-01-02        N   under_followup
+      4          2022-12-31        2023-01-03        Y             case
+      5          2023-01-01        2023-01-02        Y             case
+      6          2023-01-04        2023-01-04        N   under_followup
+      7          2023-01-02        2023-01-06        Y             case
+      8          2023-01-04        2023-01-05        N   under_followup
+      9          2023-01-02        2023-01-05        N lost_to_followup
+      10         2023-01-01        2023-01-04        Y             case
+      11         2022-12-26        2023-01-03        Y             case
+      12         2023-01-02        2023-01-05        Y             case
+      13         2023-01-01        2023-01-04        N   under_followup
+      14         2023-01-04        2023-01-05        N   under_followup
+      15         2022-12-30        2023-01-03        N   under_followup
+      16         2022-12-31        2023-01-03        N   under_followup
+      17         2023-01-06        2023-01-09        Y             case
+      18         2023-01-02        2023-01-04        N   under_followup
+      19         2023-01-01        2023-01-03        Y             case
+      20         2022-12-30        2023-01-02        N   under_followup
+      21         2023-01-02        2023-01-05        Y             case
+
       
 

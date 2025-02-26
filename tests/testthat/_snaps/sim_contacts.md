@@ -3,48 +3,48 @@
     Code
       sim_contacts()
     Output
-                             from                       to age sex date_first_contact
-      1     Naasiruddeen al-Jafri          Naadir al-Saleh  26   m         2023-01-04
-      2     Naasiruddeen al-Jafri Louis Baltazar-Francisco  15   m         2023-01-02
-      3  Louis Baltazar-Francisco       Kalia Lubthisophon  58   f         2023-01-16
-      4  Louis Baltazar-Francisco           Skylinn Topaha  29   f         2023-01-11
-      5  Louis Baltazar-Francisco           Aurreana Salas  24   f         2023-01-12
-      6        Kalia Lubthisophon           Rachel Stevens  42   f         2023-01-15
-      7        Kalia Lubthisophon        Mitchell Sandoval  48   m         2023-01-18
-      8        Kalia Lubthisophon          Haala al-Akhter  76   f         2023-01-19
-      9            Rachel Stevens       Mersadez Barringer  39   f         2023-01-24
-      10          Haala al-Akhter           Yulisa Estrada  24   f         2023-01-21
-      11          Haala al-Akhter        Bethany Mccracken  53   f         2023-01-22
-      12           Yulisa Estrada             Cade Amerson  86   m         2023-01-24
-      13           Yulisa Estrada             Andrew Wixom  40   m         2023-01-25
-      14             Cade Amerson             Celsa Torres  83   f         2023-01-26
-      15             Celsa Torres         Tristan Stockton  90   m         2023-02-02
-      16             Celsa Torres         Bassaam al-Faris  35   m         2023-02-05
-      17             Celsa Torres         Triana Henderson  43   f         2023-02-04
-      18         Bassaam al-Faris        Jennifer Gallegos   1   f         2023-02-06
-      19         Bassaam al-Faris           Patrick Martin  29   m         2023-01-31
-      20         Bassaam al-Faris            Bryant Taylor  78   m         2023-02-04
+                             from                     to age sex date_first_contact
+      1  Louis Baltazar-Francisco        Masooma Sheldon  58   f         2022-12-31
+      2  Louis Baltazar-Francisco      Rachel Fredericks  29   f         2023-01-01
+      3         Rachel Fredericks          Makiah Thomas  24   f         2023-01-12
+      4         Rachel Fredericks         Mersadez Swift  42   f         2023-01-12
+      5         Rachel Fredericks      Mitchell Sandoval  48   m         2023-01-14
+      6             Makiah Thomas       Saahira el-Laham  76   f         2023-01-19
+      7             Makiah Thomas           Celsa Bellow  39   f         2023-01-17
+      8             Makiah Thomas Stephanie Garcia Mayen  24   f         2023-01-15
+      9          Saahira el-Laham        Laurel Lehmkuhl  53   f         2023-01-26
+      10   Stephanie Garcia Mayen           Cade Amerson  86   m         2023-01-24
+      11   Stephanie Garcia Mayen         Tristan Thomas  40   m         2023-01-21
+      12             Cade Amerson Nohelia Kills In Sight  83   f         2023-01-19
+      13             Cade Amerson       Sage Wachtendorf  90   m         2023-01-22
+      14   Nohelia Kills In Sight        Faalih al-Saleh  35   m         2023-02-01
+      15          Faalih al-Saleh            Nasteh Long  43   f         2023-02-06
+      16          Faalih al-Saleh        Dominica Abeyta   1   f         2023-02-02
+      17          Faalih al-Saleh         Patrick Martin  29   m         2023-02-01
+      18          Dominica Abeyta          Bryant Taylor  78   m         2023-02-03
+      19          Dominica Abeyta        Arkaan al-Faris  22   m         2023-01-31
+      20          Dominica Abeyta          Olivia Carson  70   f         2023-02-02
          date_last_contact was_case           status
-      1         2023-01-06        N   under_followup
-      2         2023-01-03        Y             case
-      3         2023-01-19        Y             case
+      1         2023-01-03        N   under_followup
+      2         2023-01-06        Y             case
+      3         2023-01-16        Y             case
       4         2023-01-16        N lost_to_followup
-      5         2023-01-16        N   under_followup
-      6         2023-01-19        Y             case
-      7         2023-01-21        N   under_followup
-      8         2023-01-21        Y             case
-      9         2023-01-28        N lost_to_followup
-      10        2023-01-24        Y             case
-      11        2023-01-26        N   under_followup
-      12        2023-01-26        Y             case
-      13        2023-01-27        N          unknown
+      5         2023-01-17        N   under_followup
+      6         2023-01-21        Y             case
+      7         2023-01-21        N lost_to_followup
+      8         2023-01-18        Y             case
+      9         2023-01-30        N   under_followup
+      10        2023-01-26        Y             case
+      11        2023-01-23        N   under_followup
+      12        2023-01-27        Y             case
+      13        2023-01-25        N   under_followup
       14        2023-02-03        Y             case
-      15        2023-02-05        N   under_followup
-      16        2023-02-07        Y             case
-      17        2023-02-05        N lost_to_followup
-      18        2023-02-09        N   under_followup
-      19        2023-02-06        Y             case
-      20        2023-02-07        N lost_to_followup
+      15        2023-02-07        N lost_to_followup
+      16        2023-02-05        Y             case
+      17        2023-02-07        N   under_followup
+      18        2023-02-06        N   under_followup
+      19        2023-02-07        Y             case
+      20        2023-02-06        N lost_to_followup
 
 # sim_contacts works as expected
 
@@ -52,116 +52,116 @@
       sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5)
     Output
-                            from                      to age sex date_first_contact
-      1       Barrington Johnson       Nykalous Shumpert  51   m         2022-12-30
-      2       Barrington Johnson            Alivia Perez  44   f         2023-01-01
-      3             Alivia Perez          Arshad al-Basa  49   m         2023-01-02
-      4             Alivia Perez          Madison Krause  60   f         2023-01-04
-      5             Alivia Perez            Ashlan Allen  56   f         2022-12-29
-      6           Arshad al-Basa          Turfa el-Farah  49   f         2023-01-03
-      7           Arshad al-Basa            Ronald Welch  50   m         2023-01-02
-      8           Arshad al-Basa           Simon Pickett   7   m         2023-01-03
-      9           Arshad al-Basa            Destiny Hart  20   f         2023-01-02
-      10          Arshad al-Basa            Jeramy Fitch  24   m         2023-01-02
-      11          Arshad al-Basa          Joshua Ryckman  51   m         2023-01-03
-      12            Ronald Welch             Adrian Wang  53   m         2023-01-02
-      13            Ronald Welch           Luis Quintana  16   m         2023-01-02
-      14            Jeramy Fitch        Janayva Ambrozic  83   f         2023-01-07
-      15            Jeramy Fitch Nicole Vazquez Pallares   2   f         2023-01-02
-      16            Jeramy Fitch        Nusaiba al-Rassi  48   f         2023-01-03
-      17             Adrian Wang            Korren Watts  65   f         2023-01-04
-      18        Janayva Ambrozic           Shan Saldanha  44   f         2023-01-03
-      19        Janayva Ambrozic       Jonathan Krishnan  77   m         2023-01-03
-      20        Janayva Ambrozic         Alexander Brown  90   m         2023-01-03
-      21        Janayva Ambrozic          Cruz Hernandez  66   m         2023-01-07
-      22 Nicole Vazquez Pallares        Ryanna Vialpando  19   f         2023-01-04
-      23        Nusaiba al-Rassi           Preston Miles  17   m         2022-12-29
-      24        Nusaiba al-Rassi              Drue White  34   m         2023-01-03
-      25          Cruz Hernandez        Breanna Crandall  75   f         2022-12-31
+                     from                      to age sex date_first_contact
+      1      Alivia Perez      Barrington Johnson  44   m         2022-12-30
+      2      Alivia Perez          Madison Krause  49   f         2023-01-01
+      3    Madison Krause            Ashlan Allen  60   f         2022-12-30
+      4    Madison Krause          Turfa el-Farah  56   f         2023-01-03
+      5    Madison Krause       Nykalous Shumpert  49   m         2023-01-03
+      6      Ashlan Allen          Arshad al-Basa  50   m         2023-01-04
+      7      Ashlan Allen            Destiny Hart   7   f         2022-12-31
+      8      Ashlan Allen            Ronald Welch  20   m         2023-01-03
+      9      Ashlan Allen           Simon Pickett  24   m         2023-01-02
+      10     Ashlan Allen            Jeramy Fitch  51   m         2023-01-04
+      11     Ashlan Allen          Joshua Ryckman  53   m         2023-01-02
+      12     Destiny Hart        Janayva Ambrozic  16   f         2023-01-01
+      13     Destiny Hart Nicole Vazquez Pallares  83   f         2023-01-07
+      14     Jeramy Fitch        Nusaiba al-Rassi   2   f         2023-01-04
+      15     Jeramy Fitch            Korren Watts  48   f         2023-01-04
+      16     Jeramy Fitch           Shan Saldanha  65   f         2022-12-31
+      17 Janayva Ambrozic             Adrian Wang  44   m         2022-12-31
+      18 Nusaiba al-Rassi           Luis Quintana  77   m         2023-01-06
+      19 Nusaiba al-Rassi       Jonathan Krishnan  90   m         2023-01-03
+      20 Nusaiba al-Rassi        Ryanna Vialpando  66   f         2023-01-07
+      21 Nusaiba al-Rassi         Alexander Brown  19   m         2022-12-31
+      22     Korren Watts          Cruz Hernandez  17   m         2023-01-02
+      23    Shan Saldanha        Breanna Crandall  34   f         2023-01-02
+      24    Shan Saldanha           Preston Miles  75   m         2023-01-01
+      25  Alexander Brown              Drue White  31   m         2023-01-01
          date_last_contact was_case           status
-      1         2023-01-03        N   under_followup
-      2         2023-01-02        Y             case
-      3         2023-01-05        Y             case
-      4         2023-01-07        N   under_followup
+      1         2023-01-02        N   under_followup
+      2         2023-01-04        Y             case
+      3         2023-01-07        Y             case
+      4         2023-01-06        N   under_followup
       5         2023-01-06        N   under_followup
-      6         2023-01-06        N          unknown
-      7         2023-01-05        Y             case
-      8         2023-01-04        Y             case
-      9         2023-01-06        N lost_to_followup
-      10        2023-01-05        Y             case
-      11        2023-01-06        N   under_followup
+      6         2023-01-05        N          unknown
+      7         2023-01-04        Y             case
+      8         2023-01-06        Y             case
+      9         2023-01-05        N lost_to_followup
+      10        2023-01-06        Y             case
+      11        2023-01-04        N   under_followup
       12        2023-01-04        Y             case
-      13        2023-01-04        N   under_followup
-      14        2023-01-10        Y             case
-      15        2023-01-05        Y             case
-      16        2023-01-04        Y             case
-      17        2023-01-04        N   under_followup
-      18        2023-01-06        N   under_followup
-      19        2023-01-09        N          unknown
-      20        2023-01-06        N lost_to_followup
-      21        2023-01-10        Y             case
-      22        2023-01-07        N   under_followup
-      23        2023-01-05        N   under_followup
-      24        2023-01-06        Y             case
-      25        2023-01-04        N   under_followup
+      13        2023-01-10        N   under_followup
+      14        2023-01-05        Y             case
+      15        2023-01-04        Y             case
+      16        2023-01-03        Y             case
+      17        2023-01-06        N   under_followup
+      18        2023-01-09        N   under_followup
+      19        2023-01-06        N          unknown
+      20        2023-01-10        N lost_to_followup
+      21        2023-01-07        Y             case
+      22        2023-01-05        N   under_followup
+      23        2023-01-06        N   under_followup
+      24        2023-01-04        Y             case
+      25        2023-01-03        N   under_followup
 
 # sim_contacts works as expected with modified config
 
     Code
       sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
-        prob_infection = 0.5, config = create_config(last_contact_distribution = "geom",
-          last_contact_distribution_params = c(prob = 0.5)))
+        prob_infection = 0.5, config = create_config(last_contact_distribution = function(
+          x) stats::rgeom(n = x, prob = 0.5)))
     Output
-                      from                       to age sex date_first_contact
-      1        Marcus Lane            Noyami Alonzo  46   f         2023-01-04
-      2        Marcus Lane        Raynaldo Dorrance  19   m         2022-12-27
-      3  Raynaldo Dorrance             Keeley Brown  75   f         2023-01-01
-      4  Raynaldo Dorrance           Jackson Foster  16   m         2022-12-29
-      5  Raynaldo Dorrance              Cody Flores  40   m         2022-12-28
-      6       Keeley Brown Hannah Aguirre-Rodriquez   9   f         2022-12-31
-      7       Keeley Brown           Rory O'Dorisio  50   m         2023-01-02
-      8       Keeley Brown        Hilmiyya al-Amiri  24   f         2023-01-01
-      9       Keeley Brown          Margaret Tucker  10   f         2022-12-29
-      10      Keeley Brown             Naomi Holley  79   f         2022-12-31
-      11      Keeley Brown           Sheldon Salido  32   m         2022-12-31
-      12    Rory O'Dorisio           Aquilah Santos  39   f         2022-12-29
-      13    Rory O'Dorisio              Sam Summers  37   m         2022-12-29
-      14      Naomi Holley             Brandon Hall  12   m         2022-12-31
-      15      Naomi Holley             Deidra Byers  14   f         2022-12-31
-      16      Naomi Holley           Danita Griffin  16   f         2022-12-29
-      17    Aquilah Santos          Cleatus Edwards  15   m         2022-12-31
-      18      Brandon Hall            Mariah Nguyen   2   f         2022-12-31
-      19      Brandon Hall            Hailey Kilian  65   f         2022-12-31
-      20      Brandon Hall        Elizabeth Damiana  67   f         2022-12-29
-      21      Brandon Hall                Kyle Orio  73   m         2023-01-02
-      22      Deidra Byers             Diego Fierro  17   m         2023-01-02
-      23    Danita Griffin             Alexa Minter  84   f         2022-12-29
-      24    Danita Griffin         Jelani Takahashi   5   m         2023-01-01
-      25         Kyle Orio        Khaleel al-Demian  41   m         2022-12-30
+                            from                      to age sex date_first_contact
+      1            Gabriel Berry        Kaitlynne Rieger  16   f         2022-12-30
+      2            Gabriel Berry          Preston Larson  40   m         2023-01-02
+      3           Preston Larson       Danika Shangreaux   9   f         2022-12-31
+      4           Preston Larson            Hope Johnson  50   f         2022-12-29
+      5           Preston Larson             Kanani Hong  24   f         2022-12-31
+      6        Danika Shangreaux          Jackson Foster  10   m         2022-12-31
+      7        Danika Shangreaux          Nirvana Sierra  79   f         2022-12-29
+      8        Danika Shangreaux             Sam Summers  32   m         2022-12-28
+      9        Danika Shangreaux           Walter Mcgill  39   m         2022-12-31
+      10       Danika Shangreaux             Kelly Dalke  37   f         2023-01-01
+      11       Danika Shangreaux      Alexandra Clements  12   f         2022-12-29
+      12          Nirvana Sierra            Brandon Hall  14   m         2022-12-31
+      13          Nirvana Sierra         Cicely Anderson  16   f         2022-12-29
+      14             Kelly Dalke Marzooqa el-Abdelrahman  15   f         2022-12-30
+      15             Kelly Dalke        Kaitlin Gonzalez   2   f         2022-12-29
+      16             Kelly Dalke            Jose Sanchez  65   m         2022-12-31
+      17            Brandon Hall             Gienry Sena  67   m         2023-01-03
+      18 Marzooqa el-Abdelrahman           Erika Segarra  73   f         2022-12-29
+      19 Marzooqa el-Abdelrahman       Khaleel al-Demian  17   m         2022-12-31
+      20 Marzooqa el-Abdelrahman         Raymond Kennedy  84   m         2022-12-30
+      21 Marzooqa el-Abdelrahman            Jakob Galvan   5   m         2023-01-02
+      22        Kaitlin Gonzalez               Kyle Orio  41   m         2022-12-30
+      23            Jose Sanchez           Jennifer Tran  31   f         2022-12-31
+      24            Jose Sanchez         Travis Chambers  72   m         2022-12-29
+      25            Jakob Galvan           Alawi el-Diab  36   m         2023-01-01
          date_last_contact was_case           status
-      1         2023-01-06        N          unknown
-      2         2023-01-01        Y             case
-      3         2023-01-04        Y             case
-      4         2023-01-02        N   under_followup
+      1         2023-01-01        N   under_followup
+      2         2023-01-03        Y             case
+      3         2023-01-02        Y             case
+      4         2023-01-02        N lost_to_followup
       5         2023-01-02        N lost_to_followup
-      6         2023-01-02        N lost_to_followup
+      6         2023-01-03        N   under_followup
       7         2023-01-03        Y             case
-      8         2023-01-03        Y             case
+      8         2023-01-02        Y             case
       9         2023-01-02        N   under_followup
-      10        2023-01-02        Y             case
-      11        2023-01-03        N lost_to_followup
+      10        2023-01-03        Y             case
+      11        2023-01-03        N   under_followup
       12        2023-01-03        Y             case
-      13        2023-01-03        N   under_followup
+      13        2023-01-02        N          unknown
       14        2023-01-02        Y             case
-      15        2023-01-02        Y             case
-      16        2023-01-03        Y             case
-      17        2023-01-03        N   under_followup
-      18        2023-01-04        N lost_to_followup
-      19        2023-01-03        N lost_to_followup
-      20        2023-01-03        N   under_followup
-      21        2023-01-04        Y             case
+      15        2023-01-03        Y             case
+      16        2023-01-02        Y             case
+      17        2023-01-04        N lost_to_followup
+      18        2023-01-03        N lost_to_followup
+      19        2023-01-03        N          unknown
+      20        2023-01-04        N          unknown
+      21        2023-01-03        Y             case
       22        2023-01-03        N   under_followup
-      23        2023-01-03        N   under_followup
+      23        2023-01-04        N   under_followup
       24        2023-01-04        Y             case
       25        2023-01-04        N   under_followup
 
@@ -169,61 +169,61 @@
 
     Code
       sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
-        prob_infection = 0.5, config = create_config(
-          last_contact_distribution_params = c(lambda = 5)))
+        prob_infection = 0.5, config = create_config(last_contact_distribution = function(
+          x) stats::rpois(n = x, lambda = 5)))
     Output
-                            from                      to age sex date_first_contact
-      1       Barrington Johnson       Nykalous Shumpert  51   m         2022-12-31
-      2       Barrington Johnson            Alivia Perez  44   f         2023-01-02
-      3             Alivia Perez          Arshad al-Basa  49   m         2023-01-05
-      4             Alivia Perez          Madison Krause  60   f         2023-01-07
-      5             Alivia Perez            Ashlan Allen  56   f         2023-01-01
-      6           Arshad al-Basa          Turfa el-Farah  49   f         2023-01-06
-      7           Arshad al-Basa            Ronald Welch  50   m         2023-01-04
-      8           Arshad al-Basa           Simon Pickett   7   m         2023-01-05
-      9           Arshad al-Basa            Destiny Hart  20   f         2023-01-05
-      10          Arshad al-Basa            Jeramy Fitch  24   m         2023-01-04
-      11          Arshad al-Basa          Joshua Ryckman  51   m         2023-01-05
-      12            Ronald Welch             Adrian Wang  53   m         2023-01-04
-      13            Ronald Welch           Luis Quintana  16   m         2023-01-04
-      14            Jeramy Fitch        Janayva Ambrozic  83   f         2023-01-10
-      15            Jeramy Fitch Nicole Vazquez Pallares   2   f         2023-01-05
-      16            Jeramy Fitch        Nusaiba al-Rassi  48   f         2023-01-04
-      17             Adrian Wang            Korren Watts  65   f         2023-01-06
-      18        Janayva Ambrozic           Shan Saldanha  44   f         2023-01-05
-      19        Janayva Ambrozic       Jonathan Krishnan  77   m         2023-01-05
-      20        Janayva Ambrozic         Alexander Brown  90   m         2023-01-05
-      21        Janayva Ambrozic          Cruz Hernandez  66   m         2023-01-10
-      22 Nicole Vazquez Pallares        Ryanna Vialpando  19   f         2023-01-06
-      23        Nusaiba al-Rassi           Preston Miles  17   m         2022-12-31
-      24        Nusaiba al-Rassi              Drue White  34   m         2023-01-04
-      25          Cruz Hernandez        Breanna Crandall  75   f         2023-01-02
+                     from                      to age sex date_first_contact
+      1      Alivia Perez      Barrington Johnson  44   m         2022-12-31
+      2      Alivia Perez          Madison Krause  49   f         2023-01-04
+      3    Madison Krause            Ashlan Allen  60   f         2023-01-02
+      4    Madison Krause          Turfa el-Farah  56   f         2023-01-06
+      5    Madison Krause       Nykalous Shumpert  49   m         2023-01-06
+      6      Ashlan Allen          Arshad al-Basa  50   m         2023-01-06
+      7      Ashlan Allen            Destiny Hart   7   f         2023-01-02
+      8      Ashlan Allen            Ronald Welch  20   m         2023-01-06
+      9      Ashlan Allen           Simon Pickett  24   m         2023-01-04
+      10     Ashlan Allen            Jeramy Fitch  51   m         2023-01-06
+      11     Ashlan Allen          Joshua Ryckman  53   m         2023-01-04
+      12     Destiny Hart        Janayva Ambrozic  16   f         2023-01-03
+      13     Destiny Hart Nicole Vazquez Pallares  83   f         2023-01-10
+      14     Jeramy Fitch        Nusaiba al-Rassi   2   f         2023-01-07
+      15     Jeramy Fitch            Korren Watts  48   f         2023-01-05
+      16     Jeramy Fitch           Shan Saldanha  65   f         2023-01-02
+      17 Janayva Ambrozic             Adrian Wang  44   m         2023-01-02
+      18 Nusaiba al-Rassi           Luis Quintana  77   m         2023-01-08
+      19 Nusaiba al-Rassi       Jonathan Krishnan  90   m         2023-01-05
+      20 Nusaiba al-Rassi        Ryanna Vialpando  66   f         2023-01-10
+      21 Nusaiba al-Rassi         Alexander Brown  19   m         2023-01-02
+      22     Korren Watts          Cruz Hernandez  17   m         2023-01-04
+      23    Shan Saldanha        Breanna Crandall  34   f         2023-01-03
+      24    Shan Saldanha           Preston Miles  75   m         2023-01-03
+      25  Alexander Brown              Drue White  31   m         2023-01-02
          date_last_contact was_case           status
-      1         2023-01-04        N   under_followup
-      2         2023-01-03        Y             case
-      3         2023-01-08        Y             case
-      4         2023-01-10        N   under_followup
+      1         2023-01-03        N   under_followup
+      2         2023-01-07        Y             case
+      3         2023-01-10        Y             case
+      4         2023-01-09        N   under_followup
       5         2023-01-09        N   under_followup
-      6         2023-01-09        N          unknown
-      7         2023-01-07        Y             case
-      8         2023-01-06        Y             case
-      9         2023-01-09        N lost_to_followup
-      10        2023-01-07        Y             case
-      11        2023-01-08        N   under_followup
+      6         2023-01-07        N          unknown
+      7         2023-01-06        Y             case
+      8         2023-01-09        Y             case
+      9         2023-01-07        N lost_to_followup
+      10        2023-01-08        Y             case
+      11        2023-01-06        N   under_followup
       12        2023-01-06        Y             case
-      13        2023-01-06        N   under_followup
-      14        2023-01-13        Y             case
-      15        2023-01-08        Y             case
+      13        2023-01-13        N   under_followup
+      14        2023-01-08        Y             case
+      15        2023-01-05        Y             case
       16        2023-01-05        Y             case
-      17        2023-01-06        N   under_followup
-      18        2023-01-08        N   under_followup
-      19        2023-01-11        N          unknown
-      20        2023-01-08        N lost_to_followup
-      21        2023-01-13        Y             case
-      22        2023-01-09        N   under_followup
+      17        2023-01-08        N   under_followup
+      18        2023-01-11        N   under_followup
+      19        2023-01-08        N          unknown
+      20        2023-01-13        N lost_to_followup
+      21        2023-01-09        Y             case
+      22        2023-01-07        N   under_followup
       23        2023-01-07        N   under_followup
-      24        2023-01-07        Y             case
-      25        2023-01-06        N   under_followup
+      24        2023-01-06        Y             case
+      25        2023-01-04        N   under_followup
 
 # sim_contacts works as expected with age structure
 
@@ -231,56 +231,58 @@
       sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, population_age = age_struct)
     Output
-                        from                      to age sex date_first_contact
-      1          Ramon Burch             Job Cabrera  61   m         2022-12-30
-      2          Ramon Burch       Raihaana el-Irani  24   f         2023-01-01
-      3    Raihaana el-Irani          Joshua Puckett  51   m         2023-01-02
-      4    Raihaana el-Irani      Katherine Benjamin  73   f         2023-01-04
-      5    Raihaana el-Irani         Destiny Cornejo  75   f         2022-12-29
-      6       Joshua Puckett      Ashleigh Contreras  25   f         2023-01-03
-      7       Joshua Puckett        Miguel Maldonado  48   m         2023-01-02
-      8       Joshua Puckett Christian Siewiyumptewa  79   m         2023-01-03
-      9       Joshua Puckett         Lilliana Garcia  52   f         2023-01-02
-      10      Joshua Puckett           Diego Trevino  63   m         2023-01-02
-      11      Joshua Puckett                Eric Tat  37   m         2023-01-03
-      12    Miguel Maldonado       Robert Drazkowski  34   m         2023-01-02
-      13    Miguel Maldonado          Chumron Lummis  88   m         2023-01-02
-      14       Diego Trevino         Mufeeda el-Ozer  80   f         2023-01-07
-      15       Diego Trevino          Carina Beltran  78   f         2023-01-02
-      16       Diego Trevino         Tiffanie Falcon  10   f         2023-01-03
-      17   Robert Drazkowski     Hannah Zhang Cheung  77   f         2023-01-04
-      18     Mufeeda el-Ozer           Rebeca Chavez  80   f         2023-01-03
-      19     Mufeeda el-Ozer              Hyungu Han  18   m         2023-01-03
-      20     Mufeeda el-Ozer        Matthew Silevani  61   m         2023-01-03
-      21     Mufeeda el-Ozer     Jesse-Reese Burukie  33   m         2023-01-07
-      22      Carina Beltran          Johannah Costa  42   f         2023-01-04
-      23     Tiffanie Falcon            Austin Pinch  60   m         2022-12-29
-      24     Tiffanie Falcon             Neil Dorado  25   m         2023-01-03
-      25 Jesse-Reese Burukie             Ruby Gaspar  81   f         2022-12-31
+
+                      from                  to age sex date_first_contact
+      1    Lilliana Urbina    Christian Havlik  52   m         2022-12-30
+      2    Lilliana Urbina   Raihaana al-Samra  74   f         2023-01-01
+      3  Raihaana al-Samra         Carina Baca  76   f         2022-12-30
+      4  Raihaana al-Samra     Tiffanie Cahill  26   f         2023-01-03
+      5  Raihaana al-Samra    Antonio Quintana  25   m         2023-01-03
+      6        Carina Baca         Austin John  69   m         2023-01-04
+      7        Carina Baca      Jamie Stilwell  53   f         2022-12-31
+      8        Carina Baca      Luis Hernandez  19   m         2023-01-03
+      9        Carina Baca       Hyungu Dorado  49   m         2023-01-02
+      10       Carina Baca     Brentt Spangler  68   m         2023-01-04
+      11       Carina Baca        Matthew Cree  82   m         2023-01-02
+      12    Jamie Stilwell       Rebeca Chavez  84   f         2023-01-01
+      13    Jamie Stilwell     Katelyn Harrier  79   f         2023-01-07
+      14   Brentt Spangler         Ruby Gaspar   5   f         2023-01-04
+      15   Brentt Spangler     Mufeeda el-Ozer  78   f         2023-01-04
+      16   Brentt Spangler       Natasha Vigil  85   f         2022-12-31
+      17     Rebeca Chavez         Neil Yousaf  36   m         2022-12-31
+      18       Ruby Gaspar        Shympia Kwak  62   m         2023-01-06
+      19       Ruby Gaspar        Julian Berry  66   m         2023-01-03
+      20       Ruby Gaspar          Sara Young  43   f         2023-01-07
+      21       Ruby Gaspar     Wallace Eriacho  61   m         2022-12-31
+      22   Mufeeda el-Ozer            Andy Lee  26   m         2023-01-02
+      23     Natasha Vigil     Adrianna Torres  81   f         2023-01-02
+      24     Natasha Vigil James Wilson-Parson  67   m         2023-01-01
+      25   Wallace Eriacho     Anthony Johnson  82   m         2023-01-01
+
          date_last_contact was_case         status
-      1         2023-01-03        N under_followup
-      2         2023-01-02        Y           case
-      3         2023-01-05        Y           case
-      4         2023-01-07        N under_followup
+      1         2023-01-02        N under_followup
+      2         2023-01-04        Y           case
+      3         2023-01-07        Y           case
+      4         2023-01-06        N under_followup
       5         2023-01-06        N under_followup
-      6         2023-01-06        N under_followup
-      7         2023-01-05        Y           case
-      8         2023-01-04        Y           case
-      9         2023-01-06        N under_followup
-      10        2023-01-05        Y           case
-      11        2023-01-06        N        unknown
+      6         2023-01-05        N under_followup
+      7         2023-01-04        Y           case
+      8         2023-01-06        Y           case
+      9         2023-01-05        N under_followup
+      10        2023-01-06        Y           case
+      11        2023-01-04        N under_followup
       12        2023-01-04        Y           case
-      13        2023-01-04        N under_followup
-      14        2023-01-10        Y           case
-      15        2023-01-05        Y           case
-      16        2023-01-04        Y           case
-      17        2023-01-04        N under_followup
-      18        2023-01-06        N        unknown
-      19        2023-01-09        N under_followup
-      20        2023-01-06        N under_followup
-      21        2023-01-10        Y           case
-      22        2023-01-07        N under_followup
-      23        2023-01-05        N under_followup
-      24        2023-01-06        Y           case
-      25        2023-01-04        N under_followup
+      13        2023-01-10        N under_followup
+      14        2023-01-05        Y           case
+      15        2023-01-04        Y           case
+      16        2023-01-03        Y           case
+      17        2023-01-06        N        unknown
+      18        2023-01-09        N under_followup
+      19        2023-01-06        N under_followup
+      20        2023-01-10        N        unknown
+      21        2023-01-07        Y           case
+      22        2023-01-05        N under_followup
+      23        2023-01-06        N under_followup
+      24        2023-01-04        Y           case
+      25        2023-01-03        N under_followup
 

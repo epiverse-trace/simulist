@@ -153,8 +153,7 @@ test_that("sim_linelist works as expected with modified config", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution = "geom",
-        last_contact_distribution_params = c(prob = 0.5)
+        last_contact_distribution = function(x) stats::rgeom(n = x, prob = 0.5)
       )
     )
   )
@@ -170,7 +169,7 @@ test_that("sim_linelist works as expected with modified config parameters", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution_params = c(lambda = 5)
+        last_contact_distribution = function(x) stats::rpois(n = x, lambda = 5)
       )
     )
   )
@@ -200,24 +199,10 @@ test_that("sim_linelist fails as expected with modified config", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution = "geom"
+        last_contact_distribution = function(x) stats::rgeom(n = x, lambda = 1)
       )
     ),
-    regexp = "Incorrect parameterisation of distribution, check config"
-  )
-
-  expect_error(
-    sim_linelist(
-      contact_distribution = contact_distribution,
-      infectious_period = infectious_period,
-      prob_infection = 0.5,
-      onset_to_hosp = onset_to_hosp,
-      onset_to_death = onset_to_death,
-      config = create_config(
-        ct_distribution = "gamma"
-      )
-    ),
-    regexp = "(arg)*(should be one of)"
+    regexp = "(unused argument)*(lambda = 1)"
   )
 })
 

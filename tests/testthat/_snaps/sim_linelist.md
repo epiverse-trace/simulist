@@ -3,483 +3,483 @@
     Code
       sim_linelist()
     Output
-           id                case_name case_type sex age date_onset date_reporting
-      1     1              James Manis suspected   m  59 2023-01-01     2023-01-01
-      2     2            Anisa Hatcher confirmed   f  90 2023-01-01     2023-01-01
-      3     3              Morgan Bohn confirmed   f   4 2023-01-02     2023-01-02
-      4     5             David Welter confirmed   m  29 2023-01-04     2023-01-04
-      5     6            Sade Phillips suspected   f  14 2023-01-05     2023-01-05
-      6     7          Sameeha al-Zaki  probable   f  85 2023-01-06     2023-01-06
-      7    10    Cornelius Stadelbauer  probable   m  25 2023-01-13     2023-01-13
-      8    11          Hafsa al-Arshad confirmed   f  34 2023-01-11     2023-01-11
-      9    12                Maiya Kim suspected   f  89 2023-01-13     2023-01-13
-      10   14           Desmond Ibarra suspected   m  63 2023-01-11     2023-01-11
-      11   18  Carlo Ceazar Strausburg confirmed   m  74 2023-01-14     2023-01-14
-      12   19    Jennifer Vathanavarin  probable   f  34 2023-01-12     2023-01-12
-      13   22              Deisha Wall confirmed   f  29 2023-01-12     2023-01-12
-      14   24          Qamraaa el-Ally  probable   f  46 2023-01-13     2023-01-13
-      15   27          Jaylynn Baldwin confirmed   f  24 2023-01-14     2023-01-14
-      16   29       Nafeesa al-Massoud suspected   f  41 2023-01-21     2023-01-21
-      17   30          Dalicia Wilkins confirmed   f  72 2023-01-19     2023-01-19
-      18   31      Sulaimaan al-Farooq suspected   m   6 2023-01-20     2023-01-20
-      19   33           James Colligan confirmed   m  61 2023-01-14     2023-01-14
-      20   34         Crystal Sandoval confirmed   f  44 2023-01-14     2023-01-14
-      21   35        Chandel Aviado II confirmed   f  71 2023-01-27     2023-01-27
-      22   38          Utkarsh Hammond confirmed   m  69 2023-01-23     2023-01-23
-      23   39           Orville Mosher  probable   m  61 2023-01-23     2023-01-23
-      24   41        Nawwaara al-Rahim confirmed   f  64 2023-01-24     2023-01-24
-      25   44           Shuaib al-Kaba suspected   m  61 2023-01-22     2023-01-22
-      26   45         Lauren Caramillo  probable   f  66 2023-01-22     2023-01-22
-      27   47          Jamaal el-Sarah confirmed   m  81 2023-01-28     2023-01-28
-      28   50          Jameel Scurlock  probable   m  53 2023-01-28     2023-01-28
-      29   51          Khongmong Ahmad confirmed   m  45 2023-01-29     2023-01-29
-      30   53           Nichole Gilroy confirmed   f  42 2023-02-02     2023-02-02
-      31   54     Collin Rangel Mendez  probable   m  78 2023-02-03     2023-02-03
-      32   55          Ronnie Maryland confirmed   m  35 2023-01-24     2023-01-24
-      33   56              Itzel Jiron  probable   f  54 2023-01-26     2023-01-26
-      34   58         Brandon Trammell  probable   m  68 2023-01-25     2023-01-25
-      35   59              Shane Huang  probable   m   3 2023-01-23     2023-01-23
-      36   60       Mu,Aawiya al-Amiri confirmed   m  44 2023-01-29     2023-01-29
-      37   63 Joshua Valencia Anchondo  probable   m  62 2023-01-31     2023-01-31
-      38   64            Cairra Curtis confirmed   m  35 2023-01-29     2023-01-29
-      39   65        Nadheera el-Pasha confirmed   f  90 2023-02-03     2023-02-03
-      40   66        Sapphire Freeland confirmed   f  25 2023-02-01     2023-02-01
-      41   71              Medhavi Kim suspected   f  46 2023-01-29     2023-01-29
-      42   73        Madelyn Mcfarland confirmed   f   8 2023-02-01     2023-02-01
-      43   77                Kevin Cha  probable   m  63 2023-01-30     2023-01-30
-      44   78         Laraena Sturgeon  probable   f  54 2023-01-29     2023-01-29
-      45   80            Taylor Nguyen  probable   f  67 2023-02-03     2023-02-03
-      46   85         Markese Marchman confirmed   m  37 2023-02-02     2023-02-02
-      47   88         Christian Molina confirmed   m  73 2023-01-30     2023-01-30
-      48   89            Mark Espinosa  probable   m  13 2023-02-02     2023-02-02
-      49   90          Cassandra Lange  probable   f  72 2023-02-01     2023-02-01
-      50   93         Alexander Naylor confirmed   m  61 2023-02-04     2023-02-04
-      51   97                Micah San confirmed   m  22 2023-02-05     2023-02-05
-      52   98         Carmelita Huizar suspected   f  29 2023-02-04     2023-02-04
-      53  101        Daniel Goodfellow  probable   m  17 2023-02-07     2023-02-07
-      54  108           Samuel Johnson  probable   m  71 2023-02-14     2023-02-14
-      55  111           Bertha Montoya confirmed   f  90 2023-02-09     2023-02-09
-      56  113           Taaj al-Rahimi  probable   m  23 2023-02-12     2023-02-12
-      57  114             Lafaith Bean  probable   f  35 2023-02-16     2023-02-16
-      58  116              Joshua Khan  probable   m  62 2023-02-24     2023-02-24
-      59  119             Billye Cohen  probable   f  57 2023-02-23     2023-02-23
-      60  120         Madison Mcdonald confirmed   f  44 2023-02-18     2023-02-18
-      61  122           Wen Kang Zheng confirmed   m  57 2023-03-02     2023-03-02
-      62  123            Sidqi el-Reza  probable   m  63 2023-03-08     2023-03-08
-      63  125           Rebekah Norman confirmed   f  46 2023-02-28     2023-02-28
-      64  126              Ryan Fukuda  probable   m  66 2023-02-26     2023-02-26
-      65  130         Jumail al-Salame confirmed   m  68 2023-03-07     2023-03-07
-      66  131            Jez-Mas Woods confirmed   m  12 2023-03-09     2023-03-09
-      67  133          Mikayla Hopkins confirmed   f  51 2023-03-18     2023-03-18
-      68  138             Rosemary Lor suspected   f   2 2023-03-10     2023-03-10
-      69  139       Mansoor al-Hussein confirmed   m  53 2023-03-09     2023-03-09
-      70  142           Nawfa el-Ahmad suspected   f  76 2023-03-23     2023-03-23
-      71  143              Raul Millan suspected   m  82 2023-03-21     2023-03-21
-      72  145         Najlaa el-Yassin suspected   f  25 2023-03-15     2023-03-15
-      73  146         Sakeena el-Anwar  probable   f  76 2023-03-13     2023-03-13
-      74  147             Rida al-Ozer  probable   m  14 2023-03-13     2023-03-13
-      75  150          Tanya Tollivoro confirmed   f  76 2023-03-11     2023-03-11
-      76  153           Shawn Videtzky confirmed   m  78 2023-03-15     2023-03-15
-      77  154         Kailey Scharnell  probable   f  75 2023-03-24     2023-03-24
-      78  155            Orilea Medina  probable   f  76 2023-03-24     2023-03-24
-      79  157            Unique Tinoco confirmed   f  80 2023-03-18     2023-03-18
-      80  158         Raadiya al-Abdoo confirmed   f  41 2023-03-18     2023-03-18
-      81  159              Janie Mohar suspected   f  78 2023-03-19     2023-03-19
-      82  163        Keeman Stockinger confirmed   m  28 2023-03-15     2023-03-15
-      83  164         Frankie Griffith confirmed   f   2 2023-03-21     2023-03-21
-      84  166           Sharon Harding confirmed   f  82 2023-03-26     2023-03-26
-      85  171          Alvaro Vikingur confirmed   m   5 2023-03-22     2023-03-22
-      86  172       Nadheera al-Jafari confirmed   f   1 2023-03-20     2023-03-20
-      87  173     Lane Martinez-Deleon suspected   m  44 2023-03-19     2023-03-19
-      88  174                 Ka Ahsan confirmed   m  76 2023-03-16     2023-03-16
-      89  175          Munsif el-Salem confirmed   m   3 2023-03-29     2023-03-29
-      90  176  Abdur Rasheed al-Akbari suspected   m  15 2023-03-25     2023-03-25
-      91  177   Abdul Kareem al-Firman confirmed   m  19 2023-03-26     2023-03-26
-      92  178            Yesenia Diego  probable   f  76 2023-03-25     2023-03-25
-      93  182   Abdul Ghafoor el-Aslam  probable   m  90 2023-03-27     2023-03-27
-      94  186           Raul Rodriguez confirmed   m  64 2023-04-03     2023-04-03
-      95  189             T'Koia Myers confirmed   f  35 2023-03-29     2023-03-29
-      96  195             Ashley Coles suspected   f  84 2023-03-27     2023-03-27
-      97  196            Mason Mcgrier suspected   m  18 2023-03-30     2023-03-30
-      98  197                Cam Tu Vu  probable   f  79 2023-03-28     2023-03-28
-      99  199          Bao-Tran Suetos confirmed   f  49 2023-04-07     2023-04-07
-      100 200         Sandra Ouellette confirmed   f  56 2023-04-05     2023-04-05
-      101 201           Gina Dalrymple confirmed   f  76 2023-04-07     2023-04-07
-      102 202          Razeen el-Karam confirmed   m  41 2023-04-03     2023-04-03
-      103 205         Ashley Armstrong confirmed   f  29 2023-04-01     2023-04-01
-      104 209      Damian Murillo-Soto confirmed   m  39 2023-04-05     2023-04-05
-      105 210           Yahya al-Saidi confirmed   m  32 2023-04-01     2023-04-01
-      106 211               Rusty Asad suspected   m   9 2023-04-06     2023-04-06
-      107 213         Manaara el-Bilal suspected   f  39 2023-04-11     2023-04-11
-      108 214              Fisayo Rice  probable   m  12 2023-04-17     2023-04-17
-      109 219            Jacob Barrett confirmed   m  52 2023-04-10     2023-04-10
-      110 221          Jordan Redhorse confirmed   f  22 2023-04-02     2023-04-02
-      111 224         Laaiqa al-Farrah suspected   f  68 2023-04-08     2023-04-08
-      112 226          Ameen al-Semaan suspected   m  57 2023-04-06     2023-04-06
-      113 229         Azmi el-Abdallah confirmed   m   8 2023-04-12     2023-04-12
-      114 230           Khyleah Dotson suspected   f  28 2023-04-12     2023-04-12
-      115 232            Khampane Behr confirmed   m   2 2023-04-02     2023-04-02
-      116 233        Jose Delgado Diaz confirmed   m  84 2023-04-09     2023-04-09
-      117 234            Eliora Braden confirmed   f  52 2023-04-09     2023-04-09
-      118 235               Kevin Tran confirmed   m  58 2023-04-12     2023-04-12
-      119 236         Haakima el-Azizi  probable   f  29 2023-04-10     2023-04-10
-      120 238              Amanda Dodd confirmed   f  30 2023-04-14     2023-04-14
-      121 240     Alex Zaragoza-Madrid confirmed   m  71 2023-04-15     2023-04-15
-      122 243            Marques Cross confirmed   m  43 2023-04-13     2023-04-13
-      123 245           Andrew Lefholz suspected   m  40 2023-04-15     2023-04-15
-      124 250             Roy Williams confirmed   m  46 2023-04-16     2023-04-16
-      125 251              Jason Hoyle confirmed   m  69 2023-04-11     2023-04-11
-      126 252       Yeun Jung Hasegawa confirmed   f  69 2023-04-20     2023-04-20
-      127 253              Yeeleng Sun suspected   m  38 2023-04-20     2023-04-20
-      128 254             Isaac Stuart confirmed   m  28 2023-04-16     2023-04-16
-      129 255         Lawrence Jenkins confirmed   m  82 2023-04-16     2023-04-16
-      130 258            Jasmine Jones suspected   f  19 2023-04-14     2023-04-14
-      131 261                Jose Maez confirmed   m  46 2023-04-26     2023-04-26
-      132 262          Bryanna Herrera suspected   f  71 2023-04-13     2023-04-13
-      133 264               Lael Vigil suspected   f   4 2023-04-25     2023-04-25
-      134 265         Gericko Martinez suspected   m  31 2023-04-25     2023-04-25
-      135 267           Asiah Marshall  probable   f  16 2023-04-20     2023-04-20
-      136 268             Javon Reeves  probable   m  53 2023-04-21     2023-04-21
-      137 277            Zachary Major confirmed   m  14 2023-05-01     2023-05-01
-      138 278             Jane Solberg confirmed   f  48 2023-04-28     2023-04-28
-      139 279          Razeen al-Shaer confirmed   m  89 2023-04-25     2023-04-25
-      140 280            Ismad al-Azad confirmed   m  39 2023-04-26     2023-04-26
-      141 282             Marcus Ellis confirmed   m  20 2023-04-21     2023-04-21
-      142 284        Firdaus el-Satter confirmed   f   6 2023-05-03     2023-05-03
-      143 285  Haley Iron Cloud-Gresko  probable   f  28 2023-05-05     2023-05-05
-      144 291        Justin Cunningham confirmed   m  42 2023-05-01     2023-05-01
-      145 292               Judy David confirmed   f  71 2023-04-23     2023-04-23
-      146 293          Sanaaa el-Farha confirmed   f   9 2023-05-05     2023-05-05
-      147 296        Alexandra Medrano confirmed   f  61 2023-05-06     2023-05-06
-      148 298          Andrew Kelemeni suspected   m  53 2023-05-02     2023-05-02
-      149 301      Alexzandria Holguin  probable   f  76 2023-04-23     2023-04-23
-      150 302             Jazmyn Evans  probable   f  69 2023-04-26     2023-04-26
-      151 304             Ty Gutierrez  probable   m  50 2023-05-07     2023-05-07
-      152 307        Jennifer Valverde suspected   f   7 2023-05-09     2023-05-09
-      153 310         Naseera el-Saidi confirmed   f  45 2023-04-24     2023-04-24
-      154 311              Luis Taylor  probable   m  83 2023-04-25     2023-04-25
-      155 313              Kylie Berry suspected   f  41 2023-04-27     2023-04-27
-      156 316            Laneece Ahuna confirmed   f  88 2023-05-10     2023-05-10
-      157 320     John Gonzalez Vargas confirmed   m  79 2023-05-01     2023-05-01
-      158 326            Stephon White confirmed   m  82 2023-05-08     2023-05-08
+           id                   case_name case_type sex age date_onset date_reporting
+      1     1            Lolette Phillips suspected   f  59 2023-01-01     2023-01-01
+      2     2                  James Jack suspected   m  90 2023-01-01     2023-01-01
+      3     3                 Chen Kantha confirmed   m   4 2023-01-02     2023-01-02
+      4     5             Saleema al-Zaki  probable   f  29 2023-01-04     2023-01-04
+      5     6                David Ponzio confirmed   m  14 2023-01-05     2023-01-05
+      6     7            Christopher Ward  probable   m  85 2023-01-06     2023-01-06
+      7    10                 Laura Ilaoa confirmed   f  25 2023-01-13     2023-01-13
+      8    11                Morgan Mason suspected   f  34 2023-01-11     2023-01-11
+      9    12            Cornelius Turner confirmed   m  89 2023-01-13     2023-01-13
+      10   14          Shaddaad el-Younes suspected   m  63 2023-01-11     2023-01-11
+      11   18         Carlo Ceazar Corpuz confirmed   m  74 2023-01-14     2023-01-14
+      12   19              Bishr al-Qasim confirmed   m  34 2023-01-12     2023-01-12
+      13   22           Nichole Mcfarland confirmed   f  29 2023-01-12     2023-01-12
+      14   24               Jubair el-Aly confirmed   m  46 2023-01-13     2023-01-13
+      15   27            Hafsa al-Massoud  probable   f  24 2023-01-14     2023-01-14
+      16   29                Trever Manis confirmed   m  41 2023-01-21     2023-01-21
+      17   30          Maiya Vathanavarin suspected   f  72 2023-01-19     2023-01-19
+      18   31            Ghaamid el-Zafar  probable   m   6 2023-01-20     2023-01-20
+      19   33      Kelly Runningbear-Paul confirmed   f  61 2023-01-14     2023-01-14
+      20   34                James Welter  probable   m  44 2023-01-14     2023-01-14
+      21   35            Austin Manheimer confirmed   m  71 2023-01-27     2023-01-27
+      22   38         Orville Stadelbauer confirmed   m  69 2023-01-23     2023-01-23
+      23   39                Jennifer Ouk  probable   f  61 2023-01-23     2023-01-23
+      24   41            Nafeesa al-Zaher confirmed   f  64 2023-01-24     2023-01-24
+      25   44           Nawwaara el-Pasha  probable   f  61 2023-01-22     2023-01-22
+      26   45          Saleet el-Mohammed  probable   m  66 2023-01-22     2023-01-22
+      27   47           Christian Mendoza  probable   m  81 2023-01-28     2023-01-28
+      28   50                Eraina Mcgee confirmed   f  53 2023-01-28     2023-01-28
+      29   51                   Mia Floyd  probable   f  45 2023-01-29     2023-01-29
+      30   53               Collin Chavez confirmed   m  42 2023-02-02     2023-02-02
+      31   54              Itzel Gonzales confirmed   f  78 2023-02-03     2023-02-03
+      32   55            Alexis Caramillo confirmed   f  35 2023-01-24     2023-01-24
+      33   56             Ronnie Scurlock suspected   m  54 2023-01-26     2023-01-26
+      34   58                 Shane Ahmad confirmed   m  68 2023-01-25     2023-01-25
+      35   59         Ghaaliya al-Shaheed  probable   f   3 2023-01-23     2023-01-23
+      36   60               Exzinia Smith  probable   f  44 2023-01-29     2023-01-29
+      37   63           Rhiannon Freeland  probable   f  62 2023-01-31     2023-01-31
+      38   64              Deisha Beckner confirmed   f  35 2023-01-29     2023-01-29
+      39   65                 Nelly Reyez confirmed   f  90 2023-02-03     2023-02-03
+      40   66       Nadheera el-Mohiuddin  probable   f  25 2023-02-01     2023-02-01
+      41   71        Caroline Vargas Pena  probable   f  46 2023-01-29     2023-01-29
+      42   73             Mathurin Curtis confirmed   m   8 2023-02-01     2023-02-01
+      43   77                 Kevin Shahi confirmed   m  63 2023-01-30     2023-01-30
+      44   78              Diksha Reichal suspected   f  54 2023-01-29     2023-01-29
+      45   80            Jazmine Sturgeon  probable   f  67 2023-02-03     2023-02-03
+      46   85            Sally Richardson  probable   f  37 2023-02-02     2023-02-02
+      47   88              Laraena Batson confirmed   f  73 2023-01-30     2023-01-30
+      48   89                   Monica Ye  probable   f  13 2023-02-02     2023-02-02
+      49   90              Kashauna Yorks  probable   f  72 2023-02-01     2023-02-01
+      50   93           Carmelita Montoya  probable   f  61 2023-02-04     2023-02-04
+      51   97            Aliyya el-Yassin  probable   f  22 2023-02-05     2023-02-05
+      52   98                  Alicia Vue confirmed   f  29 2023-02-04     2023-02-04
+      53  101            Rashele Williams confirmed   f  17 2023-02-07     2023-02-07
+      54  108             Isabella Medina  probable   f  71 2023-02-14     2023-02-14
+      55  111           Samuel Goodfellow confirmed   m  90 2023-02-09     2023-02-09
+      56  113                Bertha Mohar  probable   f  23 2023-02-12     2023-02-12
+      57  114           Mu,Aawiya al-Kaba confirmed   m  35 2023-02-16     2023-02-16
+      58  116               Andrew Garcia confirmed   m  62 2023-02-24     2023-02-24
+      59  119             Trevor Colligan confirmed   m  57 2023-02-23     2023-02-23
+      60  120               Taaj el-Sarah suspected   m  44 2023-02-18     2023-02-18
+      61  122              Savannah Cohen confirmed   f  57 2023-03-02     2023-03-02
+      62  123              Nawfa el-Anwar suspected   f  63 2023-03-08     2023-03-08
+      63  125                  Ryan Zheng suspected   m  46 2023-02-28     2023-02-28
+      64  126              Henry Reichman suspected   m  66 2023-02-26     2023-02-26
+      65  130            Shannon Armbrust  probable   f  68 2023-03-07     2023-03-07
+      66  131                Orilea Diego  probable   f  12 2023-03-09     2023-03-09
+      67  133                  Kloe Avila confirmed   f  51 2023-03-18     2023-03-18
+      68  138              Sarah Griffith confirmed   f   2 2023-03-10     2023-03-10
+      69  139                 Kara Finken  probable   f  53 2023-03-09     2023-03-09
+      70  142         Raul Aguirre Molina  probable   m  76 2023-03-23     2023-03-23
+      71  143               Mikayla Smith confirmed   f  82 2023-03-21     2023-03-21
+      72  145         Mansoor al-Siddique confirmed   m  25 2023-03-15     2023-03-15
+      73  146            Nizaam al-Salame suspected   m  76 2023-03-13     2023-03-13
+      74  147              Alexis Harding confirmed   f  14 2023-03-13     2023-03-13
+      75  150                Unique Vigil confirmed   f  76 2023-03-11     2023-03-11
+      76  153                Tanya Mcadoo confirmed   f  78 2023-03-15     2023-03-15
+      77  154                Shawn Morgan confirmed   m  75 2023-03-24     2023-03-24
+      78  155              Asysa Robinson confirmed   f  76 2023-03-24     2023-03-24
+      79  157            Sakeena al-Abdoo suspected   f  80 2023-03-18     2023-03-18
+      80  158                Richard Prum confirmed   m  41 2023-03-18     2023-03-18
+      81  159            Shahla al-Jaffer confirmed   f  78 2023-03-19     2023-03-19
+      82  163               Kailey Braden suspected   f  28 2023-03-15     2023-03-15
+      83  164          Raadiya el-Chahine confirmed   f   2 2023-03-21     2023-03-21
+      84  166            Janie Santa Cruz  probable   f  82 2023-03-26     2023-03-26
+      85  171               Alvaro Romero  probable   m   5 2023-03-22     2023-03-22
+      86  172              Lane Rodriguez confirmed   m   1 2023-03-20     2023-03-20
+      87  173                      Ka Lee confirmed   m  44 2023-03-19     2023-03-19
+      88  174             Qaaid al-Shaker suspected   m  76 2023-03-16     2023-03-16
+      89  175              Munsif al-Ozer suspected   m   3 2023-03-29     2023-03-29
+      90  176               Sharon Watson  probable   f  15 2023-03-25     2023-03-25
+      91  177          Danielle Ouellette confirmed   f  19 2023-03-26     2023-03-26
+      92  178 Abdur Rasheed al-Salahuddin confirmed   m  76 2023-03-25     2023-03-25
+      93  182             Samuel Videtzky confirmed   m  90 2023-03-27     2023-03-27
+      94  186        Shalise Peters-Maloy confirmed   f  64 2023-04-03     2023-04-03
+      95  189                  Jay Herman confirmed   m  35 2023-03-29     2023-03-29
+      96  195             Manaara el-Saba confirmed   f  84 2023-03-27     2023-03-27
+      97  196             Amelia Gallegos confirmed   f  18 2023-03-30     2023-03-30
+      98  197             Brieannah Coles suspected   f  79 2023-03-28     2023-03-28
+      99  199                    Sarah Vu suspected   f  49 2023-04-07     2023-04-07
+      100 200               Mason Powells  probable   m  56 2023-04-05     2023-04-05
+      101 201               Ashley Dotson confirmed   f  76 2023-04-07     2023-04-07
+      102 202     Abdul Ghafoor al-Firman confirmed   m  41 2023-04-03     2023-04-03
+      103 205              Vincent Arnick suspected   m  29 2023-04-01     2023-04-01
+      104 209              Razeen al-Sala suspected   m  39 2023-04-05     2023-04-05
+      105 210              Rusty Figueroa confirmed   m  32 2023-04-01     2023-04-01
+      106 211                  Emma Jones suspected   f   9 2023-04-06     2023-04-06
+      107 213               Cam Tu Quilon confirmed   f  39 2023-04-11     2023-04-11
+      108 214              Fisayo Wallace confirmed   m  12 2023-04-17     2023-04-17
+      109 219           Alejandra Purdham confirmed   f  52 2023-04-10     2023-04-10
+      110 221              Yahya el-Aslam confirmed   m  22 2023-04-02     2023-04-02
+      111 224             Nabeel el-Karam  probable   m  68 2023-04-08     2023-04-08
+      112 226            Sandra Rodriquez confirmed   f  57 2023-04-06     2023-04-06
+      113 229             Ameen al-Shakir confirmed   m   8 2023-04-12     2023-04-12
+      114 230               Azmi el-Safar confirmed   m  28 2023-04-12     2023-04-12
+      115 232             Laaiqa el-Azizi suspected   f   2 2023-04-02     2023-04-02
+      116 233                  Jose Lopez confirmed   m  84 2023-04-09     2023-04-09
+      117 234             Mreenal Solberg confirmed   f  52 2023-04-09     2023-04-09
+      118 235                  Kevin Behr confirmed   m  58 2023-04-12     2023-04-12
+      119 236               Khyleah Jones suspected   f  29 2023-04-10     2023-04-10
+      120 238               Quinn Barrett confirmed   m  30 2023-04-14     2023-04-14
+      121 240             Bryanna Medrano confirmed   f  71 2023-04-15     2023-04-15
+      122 243                Marques Rice suspected   m  43 2023-04-13     2023-04-13
+      123 245      Andrew Zaragoza-Madrid confirmed   m  40 2023-04-15     2023-04-15
+      124 250             Julanne El-Amin suspected   f  46 2023-04-16     2023-04-16
+      125 251               Jason Sowards suspected   m  69 2023-04-11     2023-04-11
+      126 252                Yeeleng Tran suspected   m  69 2023-04-20     2023-04-20
+      127 253                  Isaac Reid  probable   m  38 2023-04-20     2023-04-20
+      128 254           Lawrence Williams  probable   m  28 2023-04-16     2023-04-16
+      129 255                Adrian Anaya confirmed   m  82 2023-04-16     2023-04-16
+      130 258              Colette Torres confirmed   f  19 2023-04-14     2023-04-14
+      131 261                   Jose Luna confirmed   m  46 2023-04-26     2023-04-26
+      132 262   Ummu Kulthoom al-Ghaffari confirmed   f  71 2023-04-13     2023-04-13
+      133 264                  Luna Vigil confirmed   f   4 2023-04-25     2023-04-25
+      134 265               Jasmine Evans confirmed   f  31 2023-04-25     2023-04-25
+      135 267               Javon Jenkins  probable   m  16 2023-04-20     2023-04-20
+      136 268             Clifton Charron confirmed   m  53 2023-04-21     2023-04-21
+      137 277              Zachary Stuart confirmed   m  14 2023-05-01     2023-05-01
+      138 278             Naseer el-Javed confirmed   m  48 2023-04-28     2023-04-28
+      139 279             Alexis Stafford confirmed   f  89 2023-04-25     2023-04-25
+      140 280              Razeen el-Azad suspected   m  39 2023-04-26     2023-04-26
+      141 282             Jordan Marshall  probable   f  20 2023-04-21     2023-04-21
+      142 284                Marcus Erman  probable   m   6 2023-05-03     2023-05-03
+      143 285             Ismad al-Badour  probable   m  28 2023-05-05     2023-05-05
+      144 291            Firdaus el-Farha suspected   f  42 2023-05-01     2023-05-01
+      145 292                  Jane David confirmed   f  71 2023-04-23     2023-04-23
+      146 293              Corina Morales  probable   f   9 2023-05-05     2023-05-05
+      147 296               Justin Delori suspected   m  61 2023-05-06     2023-05-06
+      148 298              Janalen Nguyen confirmed   f  53 2023-05-02     2023-05-02
+      149 301             Naseera al-Arif confirmed   f  76 2023-04-23     2023-04-23
+      150 302                  Andrew Sun confirmed   m  69 2023-04-26     2023-04-26
+      151 304                    Ty Rains confirmed   m  50 2023-05-07     2023-05-07
+      152 307               Javier Valdez  probable   m   7 2023-05-09     2023-05-09
+      153 310                Kyana Ludwig confirmed   f  45 2023-04-24     2023-04-24
+      154 311                Jessie Berry confirmed   f  83 2023-04-25     2023-04-25
+      155 313               Jazmyn Guyton confirmed   f  41 2023-04-27     2023-04-27
+      156 316                  Gia Garcia confirmed   f  88 2023-05-10     2023-05-10
+      157 320               John Trujillo  probable   m  79 2023-05-01     2023-05-01
+      158 326                Haley Hamlin  probable   f  82 2023-05-08     2023-05-08
           date_admission   outcome date_outcome date_first_contact date_last_contact
       1       2023-01-09      died   2023-01-13               <NA>              <NA>
-      2             <NA> recovered         <NA>         2022-12-31        2023-01-05
-      3             <NA> recovered         <NA>         2022-12-30        2023-01-01
-      4             <NA> recovered         <NA>         2023-01-05        2023-01-05
-      5       2023-01-09      died   2023-01-23         2023-01-07        2023-01-08
-      6       2023-01-08 recovered         <NA>         2023-01-03        2023-01-06
-      7             <NA> recovered         <NA>         2023-01-06        2023-01-06
-      8       2023-01-24      died   2023-01-27         2023-01-01        2023-01-06
-      9             <NA> recovered         <NA>         2023-01-06        2023-01-08
-      10            <NA> recovered         <NA>         2023-01-02        2023-01-08
-      11            <NA> recovered         <NA>         2023-01-12        2023-01-17
-      12            <NA> recovered         <NA>         2023-01-09        2023-01-11
-      13            <NA> recovered         <NA>         2023-01-12        2023-01-14
-      14            <NA> recovered         <NA>         2023-01-10        2023-01-16
-      15      2023-01-19      died   2023-01-27         2023-01-11        2023-01-13
-      16            <NA> recovered         <NA>         2023-01-11        2023-01-15
-      17            <NA> recovered         <NA>         2023-01-14        2023-01-17
-      18            <NA> recovered         <NA>         2023-01-14        2023-01-16
-      19            <NA> recovered         <NA>         2023-01-12        2023-01-16
-      20      2023-02-10 recovered         <NA>         2023-01-13        2023-01-17
-      21            <NA>      died   2023-02-05         2023-01-22        2023-01-23
-      22            <NA> recovered         <NA>         2023-01-20        2023-01-22
-      23            <NA> recovered         <NA>         2023-01-19        2023-01-23
-      24            <NA> recovered         <NA>         2023-01-19        2023-01-22
-      25            <NA> recovered         <NA>         2023-01-23        2023-01-24
-      26            <NA> recovered         <NA>         2023-01-23        2023-01-25
-      27            <NA> recovered         <NA>         2023-01-23        2023-01-28
-      28      2023-01-30      died   2023-02-16         2023-01-22        2023-01-24
-      29            <NA> recovered         <NA>         2023-01-23        2023-01-28
-      30      2023-02-11 recovered         <NA>         2023-01-25        2023-01-26
-      31            <NA> recovered         <NA>         2023-01-24        2023-01-26
-      32            <NA> recovered         <NA>         2023-01-23        2023-01-26
-      33            <NA>      died   2023-02-14         2023-01-18        2023-01-23
-      34      2023-01-29 recovered         <NA>         2023-01-19        2023-01-23
-      35            <NA> recovered         <NA>         2023-01-22        2023-01-26
-      36      2023-02-02      died   2023-02-09         2023-01-27        2023-01-27
-      37            <NA> recovered         <NA>         2023-01-26        2023-01-28
-      38            <NA> recovered         <NA>         2023-01-25        2023-01-30
-      39      2023-02-08      died   2023-02-21         2023-01-27        2023-01-30
-      40      2023-02-05 recovered         <NA>         2023-01-27        2023-01-31
-      41            <NA> recovered         <NA>         2023-01-30        2023-01-31
-      42            <NA>      died   2023-02-15         2023-02-01        2023-02-04
-      43            <NA> recovered         <NA>         2023-01-28        2023-02-02
-      44            <NA> recovered         <NA>         2023-01-27        2023-02-02
-      45            <NA> recovered         <NA>         2023-02-03        2023-02-04
-      46            <NA> recovered         <NA>         2023-02-01        2023-02-03
-      47            <NA> recovered         <NA>         2023-01-31        2023-02-01
-      48            <NA> recovered         <NA>         2023-01-30        2023-02-02
-      49            <NA> recovered         <NA>         2023-01-31        2023-01-31
-      50            <NA> recovered         <NA>         2023-01-30        2023-02-04
-      51            <NA>      died   2023-02-14         2023-02-04        2023-02-06
-      52            <NA>      died   2023-02-13         2023-02-03        2023-02-05
-      53            <NA> recovered         <NA>         2023-01-30        2023-02-04
-      54            <NA>      died   2023-02-28         2023-02-05        2023-02-08
-      55            <NA> recovered         <NA>         2023-02-06        2023-02-08
-      56            <NA> recovered         <NA>         2023-02-10        2023-02-11
-      57            <NA> recovered         <NA>         2023-02-14        2023-02-19
-      58            <NA> recovered         <NA>         2023-02-13        2023-02-16
-      59            <NA> recovered         <NA>         2023-02-10        2023-02-13
-      60            <NA> recovered         <NA>         2023-02-16        2023-02-18
-      61            <NA> recovered         <NA>         2023-03-02        2023-03-02
-      62      2023-03-11      died   2023-03-25         2023-02-26        2023-03-03
-      63            <NA> recovered         <NA>         2023-02-24        2023-02-26
-      64            <NA> recovered         <NA>         2023-02-17        2023-02-23
-      65            <NA> recovered         <NA>         2023-03-06        2023-03-07
-      66            <NA> recovered         <NA>         2023-03-03        2023-03-04
-      67            <NA> recovered         <NA>         2023-03-07        2023-03-09
-      68            <NA> recovered         <NA>         2023-03-06        2023-03-11
-      69      2023-03-16      died   2023-03-22         2023-03-07        2023-03-11
-      70            <NA> recovered         <NA>         2023-03-18        2023-03-23
-      71            <NA> recovered         <NA>         2023-03-20        2023-03-20
-      72            <NA> recovered         <NA>         2023-03-07        2023-03-12
-      73            <NA> recovered         <NA>         2023-03-10        2023-03-14
-      74      2023-03-17 recovered         <NA>         2023-03-06        2023-03-11
-      75            <NA> recovered         <NA>         2023-03-10        2023-03-11
-      76            <NA> recovered         <NA>         2023-03-16        2023-03-21
-      77      2023-03-31 recovered         <NA>         2023-03-16        2023-03-19
-      78            <NA> recovered         <NA>         2023-03-12        2023-03-19
-      79            <NA> recovered         <NA>         2023-03-13        2023-03-14
-      80            <NA> recovered         <NA>         2023-03-12        2023-03-14
-      81            <NA> recovered         <NA>         2023-03-12        2023-03-17
-      82            <NA> recovered         <NA>         2023-03-12        2023-03-17
-      83            <NA> recovered         <NA>         2023-03-15        2023-03-18
-      84            <NA> recovered         <NA>         2023-03-21        2023-03-25
-      85            <NA> recovered         <NA>         2023-03-16        2023-03-20
-      86            <NA> recovered         <NA>         2023-03-18        2023-03-21
-      87      2023-03-22      died   2023-04-03         2023-03-17        2023-03-18
-      88            <NA> recovered         <NA>         2023-03-20        2023-03-21
-      89            <NA> recovered         <NA>         2023-03-26        2023-03-27
-      90            <NA> recovered         <NA>         2023-03-24        2023-03-24
-      91            <NA> recovered         <NA>         2023-03-22        2023-03-24
-      92            <NA> recovered         <NA>         2023-03-19        2023-03-24
-      93            <NA> recovered         <NA>         2023-03-20        2023-03-20
-      94            <NA>      died   2023-04-12         2023-03-29        2023-04-01
-      95            <NA>      died   2023-04-20         2023-03-27        2023-03-28
-      96            <NA> recovered         <NA>         2023-03-23        2023-03-28
-      97      2023-04-03 recovered         <NA>         2023-03-25        2023-03-29
-      98      2023-04-03 recovered         <NA>         2023-03-26        2023-03-28
-      99            <NA> recovered         <NA>         2023-04-02        2023-04-07
-      100           <NA> recovered         <NA>         2023-04-03        2023-04-06
-      101     2023-04-12 recovered         <NA>         2023-03-31        2023-04-03
-      102           <NA> recovered         <NA>         2023-03-28        2023-04-01
-      103           <NA> recovered         <NA>         2023-03-24        2023-03-29
-      104     2023-04-12 recovered         <NA>         2023-03-28        2023-04-01
-      105           <NA> recovered         <NA>         2023-03-30        2023-04-06
-      106           <NA> recovered         <NA>         2023-04-03        2023-04-05
-      107     2023-04-13      died   2023-04-14         2023-04-07        2023-04-08
+      2             <NA> recovered         <NA>         2022-12-30        2023-01-01
+      3             <NA> recovered         <NA>         2023-01-04        2023-01-04
+      4             <NA> recovered         <NA>         2023-01-04        2023-01-07
+      5       2023-01-09      died   2023-01-23         2023-01-04        2023-01-06
+      6       2023-01-08 recovered         <NA>         2022-12-31        2023-01-04
+      7             <NA> recovered         <NA>         2023-01-04        2023-01-06
+      8       2023-01-24      died   2023-01-27         2023-01-06        2023-01-08
+      9             <NA> recovered         <NA>         2023-01-01        2023-01-07
+      10            <NA> recovered         <NA>         2023-01-09        2023-01-12
+      11            <NA> recovered         <NA>         2023-01-09        2023-01-13
+      12            <NA> recovered         <NA>         2023-01-12        2023-01-15
+      13            <NA> recovered         <NA>         2023-01-07        2023-01-13
+      14            <NA> recovered         <NA>         2023-01-11        2023-01-14
+      15      2023-01-19      died   2023-01-27         2023-01-12        2023-01-16
+      16            <NA> recovered         <NA>         2023-01-15        2023-01-17
+      17            <NA> recovered         <NA>         2023-01-15        2023-01-16
+      18            <NA> recovered         <NA>         2023-01-13        2023-01-17
+      19            <NA> recovered         <NA>         2023-01-16        2023-01-17
+      20      2023-02-10 recovered         <NA>         2023-01-12        2023-01-16
+      21            <NA>      died   2023-02-05         2023-01-23        2023-01-23
+      22            <NA> recovered         <NA>         2023-01-21        2023-01-23
+      23            <NA> recovered         <NA>         2023-01-20        2023-01-23
+      24            <NA> recovered         <NA>         2023-01-18        2023-01-20
+      25            <NA> recovered         <NA>         2023-01-24        2023-01-25
+      26            <NA> recovered         <NA>         2023-01-17        2023-01-22
+      27            <NA> recovered         <NA>         2023-01-28        2023-01-29
+      28      2023-01-30      died   2023-02-16         2023-01-22        2023-01-27
+      29            <NA> recovered         <NA>         2023-01-26        2023-01-27
+      30      2023-02-11 recovered         <NA>         2023-01-23        2023-01-26
+      31            <NA> recovered         <NA>         2023-01-23        2023-01-28
+      32            <NA> recovered         <NA>         2023-01-21        2023-01-23
+      33            <NA>      died   2023-02-14         2023-01-23        2023-01-27
+      34      2023-01-29 recovered         <NA>         2023-01-26        2023-01-26
+      35            <NA> recovered         <NA>         2023-01-27        2023-01-27
+      36      2023-02-02      died   2023-02-09         2023-01-28        2023-01-29
+      37            <NA> recovered         <NA>         2023-01-27        2023-01-30
+      38            <NA> recovered         <NA>         2023-01-25        2023-01-29
+      39      2023-02-08      died   2023-02-21         2023-01-27        2023-01-31
+      40      2023-02-05 recovered         <NA>         2023-01-29        2023-01-30
+      41            <NA> recovered         <NA>         2023-01-24        2023-01-27
+      42            <NA>      died   2023-02-15         2023-01-27        2023-01-31
+      43            <NA> recovered         <NA>         2023-01-30        2023-02-02
+      44            <NA> recovered         <NA>         2023-01-31        2023-02-01
+      45            <NA> recovered         <NA>         2023-02-04        2023-02-05
+      46            <NA> recovered         <NA>         2023-01-28        2023-02-01
+      47            <NA> recovered         <NA>         2023-02-02        2023-02-02
+      48            <NA> recovered         <NA>         2023-01-28        2023-02-01
+      49            <NA> recovered         <NA>         2023-01-28        2023-02-04
+      50            <NA> recovered         <NA>         2023-02-04        2023-02-06
+      51            <NA>      died   2023-02-14         2023-02-06        2023-02-08
+      52            <NA>      died   2023-02-13         2023-01-29        2023-02-01
+      53            <NA> recovered         <NA>         2023-02-01        2023-02-08
+      54            <NA>      died   2023-02-28         2023-02-04        2023-02-10
+      55            <NA> recovered         <NA>         2023-02-08        2023-02-09
+      56            <NA> recovered         <NA>         2023-02-11        2023-02-12
+      57            <NA> recovered         <NA>         2023-02-14        2023-02-17
+      58            <NA> recovered         <NA>         2023-02-12        2023-02-13
+      59            <NA> recovered         <NA>         2023-02-14        2023-02-14
+      60            <NA> recovered         <NA>         2023-02-18        2023-02-18
+      61            <NA> recovered         <NA>         2023-02-26        2023-03-03
+      62      2023-03-11      died   2023-03-25         2023-02-22        2023-02-24
+      63            <NA> recovered         <NA>         2023-02-20        2023-02-23
+      64            <NA> recovered         <NA>         2023-02-23        2023-02-26
+      65            <NA> recovered         <NA>         2023-02-27        2023-03-04
+      66            <NA> recovered         <NA>         2023-03-01        2023-03-03
+      67            <NA> recovered         <NA>         2023-03-05        2023-03-10
+      68            <NA> recovered         <NA>         2023-03-09        2023-03-11
+      69      2023-03-16      died   2023-03-22         2023-03-05        2023-03-09
+      70            <NA> recovered         <NA>         2023-03-18        2023-03-20
+      71            <NA> recovered         <NA>         2023-03-16        2023-03-21
+      72            <NA> recovered         <NA>         2023-03-09        2023-03-14
+      73            <NA> recovered         <NA>         2023-03-08        2023-03-12
+      74      2023-03-17 recovered         <NA>         2023-03-10        2023-03-12
+      75            <NA> recovered         <NA>         2023-03-11        2023-03-15
+      76            <NA> recovered         <NA>         2023-03-12        2023-03-19
+      77      2023-03-31 recovered         <NA>         2023-03-15        2023-03-19
+      78            <NA> recovered         <NA>         2023-03-15        2023-03-16
+      79            <NA> recovered         <NA>         2023-03-09        2023-03-14
+      80            <NA> recovered         <NA>         2023-03-14        2023-03-17
+      81            <NA> recovered         <NA>         2023-03-13        2023-03-18
+      82            <NA> recovered         <NA>         2023-03-15        2023-03-18
+      83            <NA> recovered         <NA>         2023-03-16        2023-03-20
+      84            <NA> recovered         <NA>         2023-03-23        2023-03-25
+      85            <NA> recovered         <NA>         2023-03-19        2023-03-20
+      86            <NA> recovered         <NA>         2023-03-21        2023-03-22
+      87      2023-03-22      died   2023-04-03         2023-03-20        2023-03-21
+      88            <NA> recovered         <NA>         2023-03-16        2023-03-16
+      89            <NA> recovered         <NA>         2023-03-26        2023-03-28
+      90            <NA> recovered         <NA>         2023-03-19        2023-03-24
+      91            <NA> recovered         <NA>         2023-03-23        2023-03-24
+      92            <NA> recovered         <NA>         2023-03-25        2023-03-26
+      93            <NA> recovered         <NA>         2023-03-12        2023-03-17
+      94            <NA>      died   2023-04-12         2023-03-24        2023-03-26
+      95            <NA>      died   2023-04-20         2023-03-26        2023-03-30
+      96            <NA> recovered         <NA>         2023-03-25        2023-03-27
+      97      2023-04-03 recovered         <NA>         2023-03-28        2023-03-28
+      98      2023-04-03 recovered         <NA>         2023-03-27        2023-04-01
+      99            <NA> recovered         <NA>         2023-04-03        2023-04-06
+      100           <NA> recovered         <NA>         2023-03-30        2023-04-03
+      101     2023-04-12 recovered         <NA>         2023-04-05        2023-04-06
+      102           <NA> recovered         <NA>         2023-03-27        2023-03-31
+      103           <NA> recovered         <NA>         2023-03-21        2023-03-27
+      104     2023-04-12 recovered         <NA>         2023-04-04        2023-04-06
+      105           <NA> recovered         <NA>         2023-04-01        2023-04-05
+      106           <NA> recovered         <NA>         2023-04-02        2023-04-03
+      107     2023-04-13      died   2023-04-14         2023-04-07        2023-04-10
       108     2023-04-20      died   2023-04-28         2023-04-08        2023-04-08
-      109           <NA> recovered         <NA>         2023-04-06        2023-04-06
-      110           <NA> recovered         <NA>         2023-04-01        2023-04-05
-      111           <NA>      died   2023-04-19         2023-04-03        2023-04-06
+      109           <NA> recovered         <NA>         2023-04-03        2023-04-07
+      110           <NA> recovered         <NA>         2023-04-03        2023-04-05
+      111           <NA>      died   2023-04-19         2023-04-06        2023-04-09
       112           <NA> recovered         <NA>         2023-04-01        2023-04-04
-      113           <NA> recovered         <NA>         2023-04-11        2023-04-16
-      114           <NA> recovered         <NA>         2023-04-09        2023-04-12
-      115           <NA> recovered         <NA>         2023-04-05        2023-04-06
-      116           <NA> recovered         <NA>         2023-04-01        2023-04-03
-      117     2023-04-13      died   2023-04-18         2023-04-01        2023-04-09
-      118           <NA> recovered         <NA>         2023-04-04        2023-04-08
-      119           <NA> recovered         <NA>         2023-04-12        2023-04-13
-      120           <NA> recovered         <NA>         2023-04-14        2023-04-17
-      121           <NA> recovered         <NA>         2023-04-03        2023-04-05
-      122           <NA> recovered         <NA>         2023-04-09        2023-04-12
-      123           <NA> recovered         <NA>         2023-04-10        2023-04-16
-      124           <NA> recovered         <NA>         2023-04-06        2023-04-11
-      125           <NA> recovered         <NA>         2023-04-07        2023-04-12
-      126           <NA> recovered         <NA>         2023-04-04        2023-04-11
-      127           <NA> recovered         <NA>         2023-04-10        2023-04-11
-      128           <NA>      died   2023-04-25         2023-04-13        2023-04-16
-      129           <NA> recovered         <NA>         2023-04-14        2023-04-18
-      130           <NA> recovered         <NA>         2023-04-13        2023-04-14
-      131           <NA> recovered         <NA>         2023-04-15        2023-04-18
-      132     2023-04-18      died   2023-05-02         2023-04-14        2023-04-14
-      133     2023-04-27 recovered         <NA>         2023-04-12        2023-04-21
-      134           <NA> recovered         <NA>         2023-04-16        2023-04-21
-      135     2023-04-24 recovered         <NA>         2023-04-19        2023-04-25
-      136     2023-04-29      died   2023-05-05         2023-04-23        2023-04-25
-      137           <NA> recovered         <NA>         2023-04-11        2023-04-15
-      138     2023-05-01 recovered         <NA>         2023-04-23        2023-04-26
-      139           <NA> recovered         <NA>         2023-04-21        2023-04-22
-      140           <NA> recovered         <NA>         2023-04-18        2023-04-22
-      141     2023-04-26 recovered         <NA>         2023-04-21        2023-04-25
-      142           <NA> recovered         <NA>         2023-05-05        2023-05-06
-      143           <NA> recovered         <NA>         2023-04-28        2023-04-29
-      144           <NA> recovered         <NA>         2023-04-19        2023-04-21
-      145           <NA> recovered         <NA>         2023-04-21        2023-04-23
-      146           <NA> recovered         <NA>         2023-05-03        2023-05-05
+      113           <NA> recovered         <NA>         2023-04-12        2023-04-13
+      114           <NA> recovered         <NA>         2023-04-11        2023-04-12
+      115           <NA> recovered         <NA>         2023-03-26        2023-04-03
+      116           <NA> recovered         <NA>         2023-03-30        2023-04-03
+      117     2023-04-13      died   2023-04-18         2023-04-07        2023-04-08
+      118           <NA> recovered         <NA>         2023-04-10        2023-04-13
+      119           <NA> recovered         <NA>         2023-04-07        2023-04-10
+      120           <NA> recovered         <NA>         2023-04-11        2023-04-13
+      121           <NA> recovered         <NA>         2023-03-31        2023-04-06
+      122           <NA> recovered         <NA>         2023-04-08        2023-04-14
+      123           <NA> recovered         <NA>         2023-04-08        2023-04-11
+      124           <NA> recovered         <NA>         2023-04-05        2023-04-12
+      125           <NA> recovered         <NA>         2023-04-10        2023-04-11
+      126           <NA> recovered         <NA>         2023-04-08        2023-04-11
+      127           <NA> recovered         <NA>         2023-04-08        2023-04-12
+      128           <NA>      died   2023-04-25         2023-04-17        2023-04-18
+      129           <NA> recovered         <NA>         2023-04-12        2023-04-17
+      130           <NA> recovered         <NA>         2023-04-07        2023-04-14
+      131           <NA> recovered         <NA>         2023-04-14        2023-04-19
+      132     2023-04-18      died   2023-05-02         2023-04-05        2023-04-14
+      133     2023-04-27 recovered         <NA>         2023-04-19        2023-04-21
+      134           <NA> recovered         <NA>         2023-04-20        2023-04-26
+      135     2023-04-24 recovered         <NA>         2023-04-18        2023-04-25
+      136     2023-04-29      died   2023-05-05         2023-04-18        2023-04-21
+      137           <NA> recovered         <NA>         2023-04-13        2023-04-14
+      138     2023-05-01 recovered         <NA>         2023-04-23        2023-04-27
+      139           <NA> recovered         <NA>         2023-04-18        2023-04-22
+      140           <NA> recovered         <NA>         2023-04-21        2023-04-25
+      141     2023-04-26 recovered         <NA>         2023-04-26        2023-04-27
+      142           <NA> recovered         <NA>         2023-05-02        2023-05-02
+      143           <NA> recovered         <NA>         2023-04-28        2023-05-01
+      144           <NA> recovered         <NA>         2023-04-21        2023-04-23
+      145           <NA> recovered         <NA>         2023-04-22        2023-04-23
+      146           <NA> recovered         <NA>         2023-05-02        2023-05-08
       147           <NA> recovered         <NA>         2023-05-06        2023-05-08
-      148           <NA> recovered         <NA>         2023-05-01        2023-05-03
-      149           <NA> recovered         <NA>         2023-04-25        2023-04-27
-      150           <NA> recovered         <NA>         2023-04-20        2023-04-25
-      151     2023-05-11 recovered         <NA>         2023-05-08        2023-05-10
-      152           <NA> recovered         <NA>         2023-04-28        2023-05-04
-      153           <NA> recovered         <NA>         2023-04-19        2023-04-25
-      154           <NA> recovered         <NA>         2023-04-25        2023-04-26
-      155           <NA> recovered         <NA>         2023-04-25        2023-04-29
+      148           <NA> recovered         <NA>         2023-04-27        2023-05-01
+      149           <NA> recovered         <NA>         2023-04-16        2023-04-25
+      150           <NA> recovered         <NA>         2023-04-25        2023-04-27
+      151     2023-05-11 recovered         <NA>         2023-05-05        2023-05-07
+      152           <NA> recovered         <NA>         2023-05-02        2023-05-06
+      153           <NA> recovered         <NA>         2023-04-23        2023-04-26
+      154           <NA> recovered         <NA>         2023-04-23        2023-04-27
+      155           <NA> recovered         <NA>         2023-04-23        2023-04-27
       156           <NA> recovered         <NA>         2023-05-05        2023-05-08
-      157           <NA> recovered         <NA>         2023-04-22        2023-04-28
-      158     2023-05-21      died   2023-05-22         2023-05-01        2023-05-03
+      157           <NA> recovered         <NA>         2023-04-24        2023-04-27
+      158     2023-05-21      died   2023-05-22         2023-05-05        2023-05-07
           ct_value
       1         NA
-      2       22.3
-      3       24.5
-      4       24.8
-      5         NA
+      2         NA
+      3       24.8
+      4         NA
+      5       24.6
       6         NA
-      7         NA
-      8       25.4
-      9         NA
+      7       26.5
+      8         NA
+      9       24.7
       10        NA
       11      24.5
-      12        NA
-      13      24.8
-      14        NA
-      15      24.6
-      16        NA
-      17      26.5
+      12      21.7
+      13      21.5
+      14      24.2
+      15        NA
+      16      23.1
+      17        NA
       18        NA
-      19      24.7
-      20      24.5
-      21      21.7
-      22      21.5
+      19      21.5
+      20        NA
+      21      21.5
+      22      26.4
       23        NA
-      24      24.2
+      24      25.2
       25        NA
       26        NA
-      27      23.1
-      28        NA
-      29      21.5
-      30      21.5
-      31        NA
-      32      26.4
+      27        NA
+      28      25.8
+      29        NA
+      30      21.7
+      31      23.7
+      32      24.8
       33        NA
-      34        NA
+      34      23.6
       35        NA
-      36      25.2
+      36        NA
       37        NA
-      38      25.8
-      39      21.7
-      40      23.7
+      38      25.3
+      39      23.9
+      40        NA
       41        NA
-      42      24.8
-      43        NA
+      42      27.8
+      43      26.1
       44        NA
       45        NA
-      46      23.6
-      47      25.3
+      46        NA
+      47      24.3
       48        NA
       49        NA
-      50      23.9
-      51      27.8
-      52        NA
-      53        NA
+      50        NA
+      51        NA
+      52      25.9
+      53      24.2
       54        NA
-      55      26.1
+      55      27.1
       56        NA
-      57        NA
-      58        NA
-      59        NA
-      60      24.3
-      61      25.9
+      57      27.1
+      58      24.3
+      59      24.5
+      60        NA
+      61      30.3
       62        NA
-      63      24.2
+      63        NA
       64        NA
-      65      27.1
-      66      27.1
-      67      24.3
-      68        NA
-      69      24.5
+      65        NA
+      66        NA
+      67      25.2
+      68      23.0
+      69        NA
       70        NA
-      71        NA
-      72        NA
+      71      25.7
+      72      25.1
       73        NA
-      74        NA
-      75      30.3
-      76      25.2
-      77        NA
-      78        NA
-      79      23.0
-      80      25.7
-      81        NA
-      82      25.1
-      83      20.0
-      84      25.7
-      85      27.2
-      86      24.2
-      87        NA
-      88      27.5
-      89      25.3
+      74      20.0
+      75      25.7
+      76      27.2
+      77      24.2
+      78      27.5
+      79        NA
+      80      25.3
+      81      27.2
+      82        NA
+      83      24.9
+      84        NA
+      85        NA
+      86      25.2
+      87      24.0
+      88        NA
+      89        NA
       90        NA
-      91      27.2
-      92        NA
-      93        NA
-      94      24.9
-      95      25.2
-      96        NA
-      97        NA
+      91      26.8
+      92      24.2
+      93      29.1
+      94      24.1
+      95      23.7
+      96      23.4
+      97      25.2
       98        NA
-      99      24.0
-      100     26.8
-      101     24.2
-      102     29.1
-      103     24.1
-      104     23.7
-      105     23.4
+      99        NA
+      100       NA
+      101     26.7
+      102     27.8
+      103       NA
+      104       NA
+      105     26.4
       106       NA
-      107       NA
-      108       NA
-      109     25.2
-      110     26.7
+      107     20.5
+      108     26.4
+      109     28.1
+      110     25.6
       111       NA
-      112       NA
-      113     27.8
-      114       NA
-      115     26.4
-      116     20.5
-      117     26.4
-      118     28.1
+      112     18.6
+      113     25.9
+      114     23.8
+      115       NA
+      116     24.9
+      117     23.2
+      118     24.0
       119       NA
-      120     25.6
-      121     18.6
-      122     25.9
-      123       NA
-      124     23.8
-      125     24.9
-      126     23.2
+      120     25.3
+      121     22.3
+      122       NA
+      123     25.3
+      124       NA
+      125       NA
+      126       NA
       127       NA
-      128     24.0
-      129     25.3
-      130       NA
-      131     22.3
-      132       NA
-      133       NA
-      134       NA
+      128       NA
+      129     23.9
+      130     25.8
+      131     22.5
+      132     27.2
+      133     25.1
+      134     18.6
       135       NA
-      136       NA
-      137     25.3
-      138     23.9
-      139     25.8
-      140     22.5
-      141     27.2
-      142     25.1
+      136     23.1
+      137     24.6
+      138     25.7
+      139     26.2
+      140       NA
+      141       NA
+      142       NA
       143       NA
-      144     18.6
-      145     23.1
-      146     24.6
-      147     25.7
-      148       NA
-      149       NA
-      150       NA
-      151       NA
+      144       NA
+      145     28.1
+      146       NA
+      147       NA
+      148     23.7
+      149     26.7
+      150     22.0
+      151     24.2
       152       NA
-      153     26.2
-      154       NA
-      155       NA
-      156     28.1
-      157     23.7
-      158     26.7
+      153     23.7
+      154     25.4
+      155     22.5
+      156     29.0
+      157       NA
+      158       NA
 
 # sim_linelist works as expected
 
@@ -487,45 +487,45 @@
       sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death)
     Output
-         id        case_name case_type sex age date_onset date_reporting
-      1   1     Kevin Pullen suspected   m  35 2023-01-01     2023-01-01
-      2   2 Maazin el-Othman confirmed   m  43 2023-01-01     2023-01-01
-      3   3 Faisal el-Vaziri confirmed   m   1 2023-01-01     2023-01-01
-      4   5     Jorge Marten suspected   m  78 2023-01-01     2023-01-01
-      5   6   Katelyn Catlin confirmed   f  22 2023-01-01     2023-01-01
-      6   8     Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
-      7  11   Collin Stimack confirmed   m  46 2023-01-01     2023-01-01
-      8  12     Jacy Cousins confirmed   f  67 2023-01-01     2023-01-01
-      9  13  Nicholas Orgill confirmed   m  86 2023-01-01     2023-01-01
-      10 18   Maria Eberhart  probable   f  60 2023-01-02     2023-01-02
-      11 20       Kevin Waid suspected   m  49 2023-01-02     2023-01-02
-      12 22      Erin Payson confirmed   f   7 2023-01-02     2023-01-02
+         id              case_name case_type sex age date_onset date_reporting
+      1   1           Kevin Pullen suspected   m   1 2023-01-01     2023-01-01
+      2   2 Carisa Flores-Gonzalez confirmed   f  29 2023-01-01     2023-01-01
+      3   3       Maazin el-Othman confirmed   m  78 2023-01-01     2023-01-01
+      4   5       Faisal el-Vaziri suspected   m  70 2023-01-01     2023-01-01
+      5   6           Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
+      6   8         Lilibeth Black confirmed   f  61 2023-01-01     2023-01-01
+      7  11        Kaleb Natarelli confirmed   m  86 2023-01-01     2023-01-01
+      8  12         Collin Stimack confirmed   m  71 2023-01-01     2023-01-01
+      9  13       Marquaja Johnson confirmed   f  51 2023-01-01     2023-01-01
+      10 18           Corey Alcala  probable   m  49 2023-01-02     2023-01-02
+      11 20            Erin Payson suspected   f   7 2023-01-02     2023-01-02
+      12 22          Sean Shrestha confirmed   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1            <NA> recovered         <NA>               <NA>              <NA>
-      2      2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4      2023-01-03      died   2023-01-21         2022-12-29        2023-01-02
-      5      2023-01-28      died   2023-02-09         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10           <NA> recovered         <NA>         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      1      2023-01-04      died   2023-01-18               <NA>              <NA>
+      2      2023-01-02      died   2023-02-09         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
+      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8      2023-01-02 recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
       1        NA
-      2      25.3
-      3      25.8
+      2      25.8
+      3      24.9
       4        NA
-      5      24.9
-      6      24.5
-      7      26.4
-      8      27.3
-      9      20.2
+      5      24.5
+      6      26.4
+      7      27.3
+      8      20.2
+      9      26.1
       10       NA
       11       NA
-      12     26.1
+      12     25.7
 
 # sim_linelist works as expected with age-strat risks
 
@@ -535,45 +535,45 @@
         hosp_risk = age_dep_hosp_risk, hosp_death_risk = age_dep_hosp_death_risk,
         non_hosp_death_risk = age_dep_non_hosp_death_risk)
     Output
-         id          case_name case_type sex age date_onset date_reporting
-      1   1         Kyle Crane suspected   m  35 2023-01-01     2023-01-01
-      2   2 Ghaamid el-Ishmael confirmed   m  43 2023-01-01     2023-01-01
-      3   3   Faatih el-Kaiser confirmed   m   1 2023-01-01     2023-01-01
-      4   5   Va'Aahi Galligan suspected   m  78 2023-01-01     2023-01-01
-      5   6     Katelyn Catlin confirmed   f  22 2023-01-01     2023-01-01
-      6   8       Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
-      7  11    Wajdi al-Demian confirmed   m  46 2023-01-01     2023-01-01
-      8  12       Jacy Cousins confirmed   f  67 2023-01-01     2023-01-01
-      9  13      Travis Foster confirmed   m  86 2023-01-01     2023-01-01
-      10 18     Maria Eberhart  probable   f  60 2023-01-02     2023-01-02
-      11 20  Mubarak el-Vaziri suspected   m  49 2023-01-02     2023-01-02
-      12 22        Erin Payson confirmed   f   7 2023-01-02     2023-01-02
+         id         case_name case_type sex age date_onset date_reporting
+      1   1   Wajdi al-Demian  probable   m   1 2023-01-01     2023-01-01
+      2   2       Durine Cobb confirmed   f  29 2023-01-01     2023-01-01
+      3   3     Raaid el-Diab suspected   m  78 2023-01-01     2023-01-01
+      4   5    Nickolas Nault confirmed   m  70 2023-01-01     2023-01-01
+      5   6    Shanta Holiday suspected   f  28 2023-01-01     2023-01-01
+      6   8     Mackenzie Ahn  probable   f  61 2023-01-01     2023-01-01
+      7  11 Mubarak el-Vaziri  probable   m  86 2023-01-01     2023-01-01
+      8  12  Raakaan al-Shams suspected   m  71 2023-01-01     2023-01-01
+      9  13  Mikhaila Carlson confirmed   f  51 2023-01-01     2023-01-01
+      10 18    Tae Woo Nguyen confirmed   m  49 2023-01-02     2023-01-02
+      11 20      Annie Carter  probable   f   7 2023-01-02     2023-01-02
+      12 22    Thomas Morales  probable   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1            <NA> recovered         <NA>               <NA>              <NA>
-      2      2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4            <NA> recovered         <NA>         2022-12-29        2023-01-02
-      5            <NA> recovered         <NA>         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10           <NA> recovered         <NA>         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      1      2023-01-04 recovered         <NA>               <NA>              <NA>
+      2            <NA> recovered         <NA>         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
+      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8            <NA> recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
       1        NA
-      2      25.3
-      3      25.8
-      4        NA
-      5      24.9
-      6      24.5
-      7      26.4
-      8      27.3
-      9      20.2
-      10       NA
+      2      25.2
+      3        NA
+      4      25.7
+      5        NA
+      6        NA
+      7        NA
+      8        NA
+      9      26.1
+      10     22.7
       11       NA
-      12     26.1
+      12       NA
 
 # sim_linelist works as expected with anonymous
 
@@ -583,31 +583,31 @@
         anonymise = TRUE)
     Output
          id  case_name case_type sex age date_onset date_reporting date_admission
-      1   1 OvsRrRMCAJ confirmed   m  35 2023-01-01     2023-01-01           <NA>
-      2   2 FEY3qKY39Z  probable   m  43 2023-01-01     2023-01-01     2023-01-07
-      3   3 yiuuoY8Kxn confirmed   m   1 2023-01-01     2023-01-01           <NA>
-      4   5 Huaqm1SzNb  probable   m  78 2023-01-01     2023-01-01     2023-01-03
-      5   6 O5h4yEtT6t suspected   f  22 2023-01-01     2023-01-01     2023-01-28
-      6   8 8e6yKFNmyd  probable   f  28 2023-01-01     2023-01-01           <NA>
-      7  11 Lkhw9tYeb1 confirmed   m  46 2023-01-01     2023-01-01           <NA>
-      8  12 elczXnmE3U suspected   f  67 2023-01-01     2023-01-01           <NA>
-      9  13 4HDzSVgVAW confirmed   m  86 2023-01-01     2023-01-01           <NA>
-      10 18 To9HLY9VZd  probable   f  60 2023-01-02     2023-01-02           <NA>
-      11 20 czwJ3WvUcV confirmed   m  49 2023-01-02     2023-01-02           <NA>
-      12 22 vu5Ak6RZkf confirmed   f   7 2023-01-02     2023-01-02           <NA>
+      1   1 OvsRrRMCAJ confirmed   m   1 2023-01-01     2023-01-01     2023-01-04
+      2   2 FEY3qKY39Z  probable   f  29 2023-01-01     2023-01-01     2023-01-02
+      3   3 yiuuoY8Kxn confirmed   m  78 2023-01-01     2023-01-01           <NA>
+      4   5 Huaqm1SzNb  probable   m  70 2023-01-01     2023-01-01     2023-01-05
+      5   6 O5h4yEtT6t suspected   f  28 2023-01-01     2023-01-01     2023-01-14
+      6   8 8e6yKFNmyd  probable   f  61 2023-01-01     2023-01-01           <NA>
+      7  11 Lkhw9tYeb1 confirmed   m  86 2023-01-01     2023-01-01           <NA>
+      8  12 elczXnmE3U suspected   m  71 2023-01-01     2023-01-01     2023-01-02
+      9  13 4HDzSVgVAW confirmed   f  51 2023-01-01     2023-01-01           <NA>
+      10 18 To9HLY9VZd  probable   m  49 2023-01-02     2023-01-02           <NA>
+      11 20 czwJ3WvUcV confirmed   f   7 2023-01-02     2023-01-02           <NA>
+      12 22 vu5Ak6RZkf confirmed   m  24 2023-01-02     2023-01-02           <NA>
            outcome date_outcome date_first_contact date_last_contact ct_value
-      1  recovered         <NA>               <NA>              <NA>     26.2
-      2  recovered         <NA>         2022-12-30        2023-01-05       NA
-      3  recovered         <NA>         2022-12-30        2023-01-02     26.4
-      4       died   2023-01-21         2022-12-29        2023-01-02       NA
-      5       died   2023-02-09         2023-01-01        2023-01-03       NA
-      6  recovered         <NA>         2023-01-03        2023-01-04       NA
-      7  recovered         <NA>         2023-01-04        2023-01-05     26.1
-      8  recovered         <NA>         2023-01-01        2023-01-04       NA
-      9  recovered         <NA>         2022-12-31        2023-01-03     23.9
-      10 recovered         <NA>         2022-12-30        2023-01-03       NA
-      11 recovered         <NA>         2023-01-01        2023-01-04     22.3
-      12 recovered         <NA>         2023-01-01        2023-01-03     24.2
+      1       died   2023-01-18               <NA>              <NA>     26.4
+      2       died   2023-02-09         2022-12-26        2023-01-02       NA
+      3  recovered         <NA>         2022-12-30        2023-01-03     26.1
+      4  recovered         <NA>         2022-12-31        2023-01-03       NA
+      5  recovered         <NA>         2023-01-01        2023-01-02       NA
+      6  recovered         <NA>         2023-01-02        2023-01-06       NA
+      7  recovered         <NA>         2023-01-01        2023-01-04     23.9
+      8  recovered         <NA>         2022-12-26        2023-01-03       NA
+      9  recovered         <NA>         2023-01-02        2023-01-05     22.3
+      10 recovered         <NA>         2023-01-06        2023-01-09       NA
+      11 recovered         <NA>         2023-01-01        2023-01-03     24.2
+      12 recovered         <NA>         2023-01-02        2023-01-05     25.6
 
 # sim_linelist works as expected with age structure
 
@@ -616,43 +616,45 @@
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         population_age = age_struct)
     Output
-         id          case_name case_type sex age date_onset date_reporting
-      1   1      Gabriel Black  probable   m  43 2023-01-01     2023-01-01
-      2   2       Tyler Kelley confirmed   m  13 2023-01-01     2023-01-01
-      3   3       Cody Morales suspected   m  11 2023-01-01     2023-01-01
-      4   5          Joewid Le  probable   m  80 2023-01-01     2023-01-01
-      5   6      Carolyn Moore confirmed   f  19 2023-01-01     2023-01-01
-      6   8  Cheyenne Sayavong confirmed   f  84 2023-01-01     2023-01-01
-      7  11 Pierce Khanthavong confirmed   m  79 2023-01-01     2023-01-01
-      8  12          Kendra To suspected   f  31 2023-01-01     2023-01-01
-      9  13  Preston Barringer confirmed   m  71 2023-01-01     2023-01-01
-      10 18  Dominique Raymond confirmed   f  61 2023-01-02     2023-01-02
-      11 20   Bassaam el-Majid  probable   m  51 2023-01-02     2023-01-02
-      12 22      Susana Varela  probable   f  75 2023-01-02     2023-01-02
+
+         id                 case_name case_type sex age date_onset date_reporting
+      1   1             Gabriel Black  probable   m  22 2023-01-01     2023-01-01
+      2   2             Taylor Graves confirmed   f   5 2023-01-01     2023-01-01
+      3   3              Tyler Kelley suspected   m  85 2023-01-01     2023-01-01
+      4   5              Cody Morales  probable   m   2 2023-01-01     2023-01-01
+      5   6         Cheyenne Sayavong confirmed   f  89 2023-01-01     2023-01-01
+      6   8 Chantelle Vazquez-Luevano confirmed   f  82 2023-01-01     2023-01-01
+      7  11           Rushdi al-Ishak confirmed   m   9 2023-01-01     2023-01-01
+      8  12        Pierce Khanthavong suspected   m  79 2023-01-01     2023-01-01
+      9  13               Megan Hayes confirmed   f  29 2023-01-01     2023-01-01
+      10 18           Jackson Carlson confirmed   m  52 2023-01-02     2023-01-02
+      11 20             Susana Varela  probable   f  76 2023-01-02     2023-01-02
+      12 22           Qaaid al-Madani  probable   m  25 2023-01-02     2023-01-02
+
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1      2023-01-02 recovered         <NA>               <NA>              <NA>
-      2            <NA> recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4            <NA> recovered         <NA>         2022-12-29        2023-01-02
-      5            <NA> recovered         <NA>         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10     2023-01-03      died   2023-01-21         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12     2023-01-05 recovered         <NA>         2023-01-01        2023-01-03
+      1            <NA> recovered         <NA>               <NA>              <NA>
+      2            <NA> recovered         <NA>         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4            <NA> recovered         <NA>         2022-12-31        2023-01-03
+      5            <NA> recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8      2023-01-04 recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11     2023-01-06 recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
       1        NA
-      2      23.0
+      2      28.2
       3        NA
       4        NA
-      5      28.2
-      6      25.0
-      7      19.2
+      5      25.0
+      6      19.2
+      7      22.8
       8        NA
-      9      22.8
-      10     28.1
+      9      28.1
+      10     23.0
       11       NA
       12       NA
 
@@ -663,44 +665,46 @@
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
         hosp_risk = age_dep_hosp_risk, population_age = age_struct)
     Output
-         id           case_name case_type sex age date_onset date_reporting
-      1   1        Bryce Kelley confirmed   m  43 2023-01-01     2023-01-01
-      2   2 Khristopher Carlson confirmed   m  13 2023-01-01     2023-01-01
-      3   3       Cleatus Black suspected   m  11 2023-01-01     2023-01-01
-      4   5       Tyler Spencer confirmed   m  80 2023-01-01     2023-01-01
-      5   6    Sajiyya el-Bahri confirmed   f  19 2023-01-01     2023-01-01
-      6   8   Shameema al-Fayad confirmed   f  84 2023-01-01     2023-01-01
-      7  11           Jelani Le confirmed   m  79 2023-01-01     2023-01-01
-      8  12    Ashley Depoyster confirmed   f  31 2023-01-01     2023-01-01
-      9  13     Rushdi el-Amara  probable   m  71 2023-01-01     2023-01-01
-      10 18      Sabrina Catlin suspected   f  61 2023-01-02     2023-01-02
-      11 20       Jackson Sheek confirmed   m  51 2023-01-02     2023-01-02
-      12 22       Talia Cousins  probable   f  75 2023-01-02     2023-01-02
+
+         id                 case_name case_type sex age date_onset date_reporting
+      1   1             Gabriel Black  probable   m  22 2023-01-01     2023-01-01
+      2   2             Taylor Graves confirmed   f   5 2023-01-01     2023-01-01
+      3   3              Tyler Kelley suspected   m  85 2023-01-01     2023-01-01
+      4   5              Cody Morales  probable   m   2 2023-01-01     2023-01-01
+      5   6         Cheyenne Sayavong confirmed   f  89 2023-01-01     2023-01-01
+      6   8 Chantelle Vazquez-Luevano confirmed   f  82 2023-01-01     2023-01-01
+      7  11           Rushdi al-Ishak confirmed   m   9 2023-01-01     2023-01-01
+      8  12        Pierce Khanthavong suspected   m  79 2023-01-01     2023-01-01
+      9  13               Megan Hayes confirmed   f  29 2023-01-01     2023-01-01
+      10 18           Jackson Carlson confirmed   m  52 2023-01-02     2023-01-02
+      11 20             Susana Varela  probable   f  76 2023-01-02     2023-01-02
+      12 22           Qaaid al-Madani  probable   m  25 2023-01-02     2023-01-02
+
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1            <NA> recovered         <NA>               <NA>              <NA>
-      2            <NA> recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4            <NA> recovered         <NA>         2022-12-29        2023-01-02
-      5            <NA> recovered         <NA>         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10           <NA> recovered         <NA>         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12     2023-01-05 recovered         <NA>         2023-01-01        2023-01-03
+      2            <NA> recovered         <NA>         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4            <NA> recovered         <NA>         2022-12-31        2023-01-03
+      5            <NA> recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8      2023-01-04 recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11     2023-01-06 recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
-      1      26.0
-      2      25.8
+      1        NA
+      2      28.2
       3        NA
-      4      28.7
-      5      27.1
-      6      25.2
-      7      24.8
-      8      26.2
-      9        NA
-      10       NA
-      11     23.2
+      4        NA
+      5      25.0
+      6      19.2
+      7      22.8
+      8        NA
+      9      28.1
+      10     23.0
+      11       NA
       12       NA
 
 # sim_linelist works as expected with modified config
@@ -708,95 +712,96 @@
     Code
       sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
-        config = create_config(last_contact_distribution = "geom",
-          last_contact_distribution_params = c(prob = 0.5)))
+        config = create_config(last_contact_distribution = function(x) stats::rgeom(
+          n = x, prob = 0.5)))
     Output
-         id           case_name case_type sex age date_onset date_reporting
-      1   1        Lily Camacho confirmed   f  20 2023-01-01     2023-01-01
-      2   2 Charles Stuart Rasi suspected   m  24 2023-01-01     2023-01-01
-      3   3        Jonah Burden suspected   m  51 2023-01-01     2023-01-01
-      4   5          Craig Agee  probable   m  16 2023-01-01     2023-01-01
-      5   6 Christopher Lohrenz suspected   m  83 2023-01-01     2023-01-01
-      6   8      Kevin Saunders suspected   m  48 2023-01-01     2023-01-01
-      7  11     Saabiq al-Samra  probable   m  77 2023-01-01     2023-01-01
-      8  12      Kenneth Cahill confirmed   m  90 2023-01-01     2023-01-01
-      9  13    Halle Batchelder confirmed   f  66 2023-01-01     2023-01-01
-      10 18  Morgan Grant-Perry confirmed   f  31 2023-01-02     2023-01-02
-      11 20      Enrique Galvan confirmed   m  46 2023-01-02     2023-01-02
-      12 22     Robert Chaparro confirmed   m  75 2023-01-02     2023-01-02
+         id         case_name case_type sex age date_onset date_reporting
+      1   1      Lily Camacho confirmed   f  24 2023-01-01     2023-01-01
+      2   2      Sad el-Irani suspected   m  51 2023-01-01     2023-01-01
+      3   3  Tristan Benjamin suspected   m  53 2023-01-01     2023-01-01
+      4   5    Treven Cornejo  probable   m  83 2023-01-01     2023-01-01
+      5   6   Kevin Contreras suspected   m   2 2023-01-01     2023-01-01
+      6   8      Tyler Garcia suspected   m  65 2023-01-01     2023-01-01
+      7  11  Halle Batchelder  probable   f  90 2023-01-01     2023-01-01
+      8  12  Tayyiba el-Hamid confirmed   f  66 2023-01-01     2023-01-01
+      9  13   Mahaa el-Moussa confirmed   f  19 2023-01-01     2023-01-01
+      10 18    Matthew Chavez confirmed   m  35 2023-01-02     2023-01-02
+      11 20     Martin Gaspar confirmed   m  19 2023-01-02     2023-01-02
+      12 22 Haaroon el-Firman confirmed   m  16 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1            <NA> recovered         <NA>               <NA>              <NA>
-      2      2023-01-02      died   2023-01-10         2022-12-30        2023-01-01
-      3            <NA> recovered         <NA>         2022-12-31        2023-01-02
-      4            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      5            <NA>      died   2023-01-16         2022-12-31        2023-01-01
-      6            <NA> recovered         <NA>         2022-12-31        2023-01-01
-      7      2023-01-15 recovered         <NA>         2022-12-30        2023-01-02
-      8            <NA> recovered         <NA>         2022-12-30        2023-01-01
-      9            <NA> recovered         <NA>         2022-12-29        2023-01-01
-      10           <NA> recovered         <NA>         2022-12-30        2023-01-01
-      11           <NA> recovered         <NA>         2022-12-30        2023-01-01
-      12           <NA> recovered         <NA>         2022-12-30        2023-01-02
+      1      2023-02-09      died   2023-02-23               <NA>              <NA>
+      2            <NA> recovered         <NA>         2022-12-30        2023-01-02
+      3            <NA> recovered         <NA>         2023-01-01        2023-01-02
+      4            <NA> recovered         <NA>         2022-12-31        2023-01-01
+      5            <NA> recovered         <NA>         2022-12-31        2023-01-05
+      6      2023-01-03 recovered         <NA>         2022-12-30        2023-01-02
+      7            <NA> recovered         <NA>         2022-12-29        2023-01-01
+      8            <NA>      died   2023-01-09         2022-12-31        2023-01-01
+      9            <NA> recovered         <NA>         2022-12-30        2023-01-02
+      10     2023-01-07      died   2023-01-11         2022-12-28        2023-01-02
+      11           <NA> recovered         <NA>         2022-12-29        2023-01-02
+      12           <NA> recovered         <NA>         2022-12-31        2023-01-02
          ct_value
-      1      24.3
+      1      23.1
       2        NA
       3        NA
       4        NA
       5        NA
       6        NA
       7        NA
-      8      23.1
-      9      24.5
-      10     25.8
-      11     23.3
-      12     30.3
+      8      24.5
+      9      25.8
+      10     23.3
+      11     30.3
+      12     25.3
 
 # sim_linelist works as expected with modified config parameters
 
     Code
       sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
-        config = create_config(last_contact_distribution_params = c(lambda = 5)))
+        config = create_config(last_contact_distribution = function(x) stats::rpois(
+          n = x, lambda = 5)))
     Output
-         id        case_name case_type sex age date_onset date_reporting
-      1   1     Kevin Pullen suspected   m  35 2023-01-01     2023-01-01
-      2   2 Maazin el-Othman confirmed   m  43 2023-01-01     2023-01-01
-      3   3 Faisal el-Vaziri confirmed   m   1 2023-01-01     2023-01-01
-      4   5     Jorge Marten suspected   m  78 2023-01-01     2023-01-01
-      5   6   Katelyn Catlin confirmed   f  22 2023-01-01     2023-01-01
-      6   8     Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
-      7  11   Collin Stimack confirmed   m  46 2023-01-01     2023-01-01
-      8  12     Jacy Cousins confirmed   f  67 2023-01-01     2023-01-01
-      9  13  Nicholas Orgill confirmed   m  86 2023-01-01     2023-01-01
-      10 18   Maria Eberhart  probable   f  60 2023-01-02     2023-01-02
-      11 20       Kevin Waid suspected   m  49 2023-01-02     2023-01-02
-      12 22      Erin Payson confirmed   f   7 2023-01-02     2023-01-02
+         id              case_name case_type sex age date_onset date_reporting
+      1   1           Kevin Pullen suspected   m   1 2023-01-01     2023-01-01
+      2   2 Carisa Flores-Gonzalez confirmed   f  29 2023-01-01     2023-01-01
+      3   3       Maazin el-Othman confirmed   m  78 2023-01-01     2023-01-01
+      4   5       Faisal el-Vaziri suspected   m  70 2023-01-01     2023-01-01
+      5   6           Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
+      6   8         Lilibeth Black confirmed   f  61 2023-01-01     2023-01-01
+      7  11        Kaleb Natarelli confirmed   m  86 2023-01-01     2023-01-01
+      8  12         Collin Stimack confirmed   m  71 2023-01-01     2023-01-01
+      9  13       Marquaja Johnson confirmed   f  51 2023-01-01     2023-01-01
+      10 18           Corey Alcala  probable   m  49 2023-01-02     2023-01-02
+      11 20            Erin Payson suspected   f   7 2023-01-02     2023-01-02
+      12 22          Sean Shrestha confirmed   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1            <NA> recovered         <NA>               <NA>              <NA>
-      2      2023-01-07 recovered         <NA>         2023-01-01        2023-01-07
-      3            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      4      2023-01-03      died   2023-01-21         2022-12-31        2023-01-04
-      5      2023-01-28      died   2023-02-09         2023-01-02        2023-01-04
-      6            <NA> recovered         <NA>         2023-01-06        2023-01-07
-      7            <NA> recovered         <NA>         2023-01-07        2023-01-08
-      8            <NA> recovered         <NA>         2023-01-03        2023-01-06
-      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
-      10           <NA> recovered         <NA>         2023-01-01        2023-01-05
-      11           <NA> recovered         <NA>         2023-01-04        2023-01-07
-      12           <NA> recovered         <NA>         2023-01-03        2023-01-05
+      1      2023-01-04      died   2023-01-18               <NA>              <NA>
+      2      2023-01-02      died   2023-02-09         2022-12-27        2023-01-03
+      3            <NA> recovered         <NA>         2022-12-31        2023-01-04
+      4      2023-01-05 recovered         <NA>         2023-01-01        2023-01-04
+      5      2023-01-14 recovered         <NA>         2023-01-02        2023-01-03
+      6            <NA> recovered         <NA>         2023-01-05        2023-01-09
+      7            <NA> recovered         <NA>         2023-01-03        2023-01-06
+      8      2023-01-02 recovered         <NA>         2022-12-28        2023-01-05
+      9            <NA> recovered         <NA>         2023-01-05        2023-01-08
+      10           <NA> recovered         <NA>         2023-01-09        2023-01-12
+      11           <NA> recovered         <NA>         2023-01-02        2023-01-04
+      12           <NA> recovered         <NA>         2023-01-04        2023-01-07
          ct_value
       1        NA
-      2      25.3
-      3      25.8
+      2      25.8
+      3      24.9
       4        NA
-      5      24.9
-      6      24.5
-      7      26.4
-      8      27.3
-      9      20.2
+      5      24.5
+      6      26.4
+      7      27.3
+      8      20.2
+      9      26.1
       10       NA
       11       NA
-      12     26.1
+      12     25.7
 
 # sim_linelist works as expected with time-varying cfr
 
@@ -806,45 +811,45 @@
         config = create_config(time_varying_death_risk = function(risk, time) risk *
           exp(-time)))
     Output
-         id        case_name case_type sex age date_onset date_reporting
-      1   1     Kevin Pullen suspected   m  35 2023-01-01     2023-01-01
-      2   2 Maazin el-Othman confirmed   m  43 2023-01-01     2023-01-01
-      3   3 Faisal el-Vaziri confirmed   m   1 2023-01-01     2023-01-01
-      4   5     Jorge Marten suspected   m  78 2023-01-01     2023-01-01
-      5   6   Katelyn Catlin confirmed   f  22 2023-01-01     2023-01-01
-      6   8     Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
-      7  11   Collin Stimack confirmed   m  46 2023-01-01     2023-01-01
-      8  12     Jacy Cousins confirmed   f  67 2023-01-01     2023-01-01
-      9  13  Nicholas Orgill confirmed   m  86 2023-01-01     2023-01-01
-      10 18   Maria Eberhart  probable   f  60 2023-01-02     2023-01-02
-      11 20       Kevin Waid suspected   m  49 2023-01-02     2023-01-02
-      12 22      Erin Payson confirmed   f   7 2023-01-02     2023-01-02
+         id              case_name case_type sex age date_onset date_reporting
+      1   1           Kevin Pullen suspected   m   1 2023-01-01     2023-01-01
+      2   2 Carisa Flores-Gonzalez confirmed   f  29 2023-01-01     2023-01-01
+      3   3       Maazin el-Othman confirmed   m  78 2023-01-01     2023-01-01
+      4   5       Faisal el-Vaziri suspected   m  70 2023-01-01     2023-01-01
+      5   6           Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
+      6   8         Lilibeth Black confirmed   f  61 2023-01-01     2023-01-01
+      7  11        Kaleb Natarelli confirmed   m  86 2023-01-01     2023-01-01
+      8  12         Collin Stimack confirmed   m  71 2023-01-01     2023-01-01
+      9  13       Marquaja Johnson confirmed   f  51 2023-01-01     2023-01-01
+      10 18           Corey Alcala  probable   m  49 2023-01-02     2023-01-02
+      11 20            Erin Payson suspected   f   7 2023-01-02     2023-01-02
+      12 22          Sean Shrestha confirmed   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1            <NA> recovered         <NA>               <NA>              <NA>
-      2      2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4      2023-01-03      died   2023-01-21         2022-12-29        2023-01-02
-      5      2023-01-28      died   2023-02-09         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10           <NA> recovered         <NA>         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      1      2023-01-04      died   2023-01-18               <NA>              <NA>
+      2      2023-01-02      died   2023-02-09         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
+      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8      2023-01-02 recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
       1        NA
-      2      25.3
-      3      25.8
+      2      25.8
+      3      24.9
       4        NA
-      5      24.9
-      6      24.5
-      7      26.4
-      8      27.3
-      9      20.2
+      5      24.5
+      6      26.4
+      7      27.3
+      8      20.2
+      9      26.1
       10       NA
       11       NA
-      12     26.1
+      12     25.7
 
 # sim_linelist works as expected with time-varying cfr & age-strat
 
@@ -854,43 +859,43 @@
         hosp_death_risk = age_dep_hosp_death_risk, config = create_config(
           time_varying_death_risk = function(risk, time) risk * exp(-time)))
     Output
-         id          case_name case_type sex age date_onset date_reporting
-      1   1         Kyle Crane suspected   m  35 2023-01-01     2023-01-01
-      2   2 Ghaamid el-Ishmael confirmed   m  43 2023-01-01     2023-01-01
-      3   3   Faatih el-Kaiser confirmed   m   1 2023-01-01     2023-01-01
-      4   5   Va'Aahi Galligan suspected   m  78 2023-01-01     2023-01-01
-      5   6     Katelyn Catlin confirmed   f  22 2023-01-01     2023-01-01
-      6   8       Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
-      7  11    Wajdi al-Demian confirmed   m  46 2023-01-01     2023-01-01
-      8  12       Jacy Cousins confirmed   f  67 2023-01-01     2023-01-01
-      9  13      Travis Foster confirmed   m  86 2023-01-01     2023-01-01
-      10 18     Maria Eberhart  probable   f  60 2023-01-02     2023-01-02
-      11 20  Mubarak el-Vaziri suspected   m  49 2023-01-02     2023-01-02
-      12 22        Erin Payson confirmed   f   7 2023-01-02     2023-01-02
+         id         case_name case_type sex age date_onset date_reporting
+      1   1   Wajdi al-Demian  probable   m   1 2023-01-01     2023-01-01
+      2   2       Durine Cobb confirmed   f  29 2023-01-01     2023-01-01
+      3   3     Raaid el-Diab suspected   m  78 2023-01-01     2023-01-01
+      4   5    Nickolas Nault confirmed   m  70 2023-01-01     2023-01-01
+      5   6    Shanta Holiday suspected   f  28 2023-01-01     2023-01-01
+      6   8     Mackenzie Ahn  probable   f  61 2023-01-01     2023-01-01
+      7  11 Mubarak el-Vaziri  probable   m  86 2023-01-01     2023-01-01
+      8  12  Raakaan al-Shams suspected   m  71 2023-01-01     2023-01-01
+      9  13  Mikhaila Carlson confirmed   f  51 2023-01-01     2023-01-01
+      10 18    Tae Woo Nguyen confirmed   m  49 2023-01-02     2023-01-02
+      11 20      Annie Carter  probable   f   7 2023-01-02     2023-01-02
+      12 22    Thomas Morales  probable   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1            <NA> recovered         <NA>               <NA>              <NA>
-      2      2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      4      2023-01-03 recovered         <NA>         2022-12-29        2023-01-02
-      5      2023-01-28 recovered         <NA>         2023-01-01        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-03        2023-01-04
-      7            <NA> recovered         <NA>         2023-01-04        2023-01-05
-      8            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      9            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      10           <NA> recovered         <NA>         2022-12-30        2023-01-03
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-04
-      12           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      1      2023-01-04 recovered         <NA>               <NA>              <NA>
+      2      2023-01-02 recovered         <NA>         2022-12-26        2023-01-02
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
+      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
+      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
+      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
+      8      2023-01-02 recovered         <NA>         2022-12-26        2023-01-03
+      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
+      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
+      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
+      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
          ct_value
       1        NA
-      2      25.3
-      3      25.8
-      4        NA
-      5      24.9
-      6      24.5
-      7      26.4
-      8      27.3
-      9      20.2
-      10       NA
+      2      25.2
+      3        NA
+      4      25.7
+      5        NA
+      6        NA
+      7        NA
+      8        NA
+      9      26.1
+      10     22.7
       11       NA
-      12     26.1
+      12       NA
 
