@@ -88,8 +88,7 @@ as former function is called later in the simulation).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.add_date_contact</span><span class="op">(</span></span>
 <span>  <span class="va">.data</span>,</span>
 <span>  contact_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"first"</span>, <span class="st">"last"</span><span class="op">)</span>,</span>
-<span>  distribution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pois"</span>, <span class="st">"geom"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">distribution</span>,</span>
 <span>  outbreak_start_date <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -106,7 +105,7 @@ as former function is called later in the simulation).</p>
 <span></span>
 <span><span class="fu">.add_names</span><span class="op">(</span><span class="va">.data</span>, anonymise <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">.add_ct</span><span class="op">(</span><span class="va">.data</span>, distribution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"norm"</span>, <span class="st">"lnorm"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">.add_ct</span><span class="op">(</span><span class="va">.data</span>, <span class="va">distribution</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">.add_reporting_delay</span><span class="op">(</span><span class="va">.data</span>, <span class="va">reporting_delay</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -129,11 +128,6 @@ contact (<code>"first"</code>), or last contact (<code>"last"</code>).</p></dd>
 <dd><p>A <code>character</code> with the name of the distribution,
 following the base R convention for distribution naming (e.g. Poisson
 is <code>pois</code>).</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p><a href="https://rdrr.io/r/base/dots.html" class="external-link">dots</a> Extra arguments to be passed to the distribution function
-given in the <code>distribution</code> argument.</p></dd>
 
 
 <dt id="arg-outbreak-start-date">outbreak_start_date<a class="anchor" aria-label="anchor" href="#arg-outbreak-start-date"></a></dt>

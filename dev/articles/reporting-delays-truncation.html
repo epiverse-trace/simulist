@@ -233,27 +233,27 @@ approximately 4.5 days and standard deviation of 5.9 days).</p>
 <span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id        case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1  Oscar Jaracuaro  probable   m  66 2023-01-01     2023-01-06</span></span>
-<span><span class="co">#&gt; 2  2     Jose Herrera  probable   m  21 2023-01-04     2023-01-17</span></span>
-<span><span class="co">#&gt; 3  3 Mamoon el-Hakeem confirmed   m   8 2023-01-05     2023-01-19</span></span>
-<span><span class="co">#&gt; 4  4     Gettay Penny confirmed   f  33 2023-01-05     2023-01-16</span></span>
-<span><span class="co">#&gt; 5  5     Miguel Leyba confirmed   m  79 2023-01-05     2023-01-06</span></span>
-<span><span class="co">#&gt; 6  6     Mary Monahan confirmed   f  88 2023-01-11     2023-01-16</span></span>
+<span><span class="co">#&gt;   id            case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1       Yoonus al-Azam suspected   m  51 2023-01-01     2023-01-07</span></span>
+<span><span class="co">#&gt; 2  2       Kristina Clark confirmed   f  53 2023-01-04     2023-01-06</span></span>
+<span><span class="co">#&gt; 3  3         Karen Meehan confirmed   f  16 2023-01-05     2023-01-20</span></span>
+<span><span class="co">#&gt; 4  4 Ritika Brandenburger suspected   f  41 2023-01-05     2023-01-09</span></span>
+<span><span class="co">#&gt; 5  5       Steven Kaliski confirmed   m   4 2023-01-04     2023-01-09</span></span>
+<span><span class="co">#&gt; 6  6          Keely Atene suspected   f  68 2023-01-05     2023-01-12</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1     2023-01-05 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-03        2023-01-04</span></span>
-<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-07        2023-01-09</span></span>
-<span><span class="co">#&gt; 4     2023-01-10 recovered         &lt;NA&gt;         2023-01-03        2023-01-06</span></span>
-<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-04        2023-01-07</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-06        2023-01-08</span></span>
+<span><span class="co">#&gt; 1     2023-01-03      died   2023-01-26               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-04        2023-01-06</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-06        2023-01-08</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-09        2023-01-10</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-07        2023-01-08</span></span>
+<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-06        2023-01-07</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
 <span><span class="co">#&gt; 1       NA</span></span>
-<span><span class="co">#&gt; 2       NA</span></span>
-<span><span class="co">#&gt; 3     26.5</span></span>
-<span><span class="co">#&gt; 4     25.2</span></span>
-<span><span class="co">#&gt; 5     24.0</span></span>
-<span><span class="co">#&gt; 6     28.7</span></span></code></pre></div>
+<span><span class="co">#&gt; 2     26.1</span></span>
+<span><span class="co">#&gt; 3     26.6</span></span>
+<span><span class="co">#&gt; 4       NA</span></span>
+<span><span class="co">#&gt; 5     25.0</span></span>
+<span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
 <p>Here from the first 6 rows of the line list you can see differences
 between the <code>$date_onset</code> column and the
 <code>$date_reporting</code> column.</p>
@@ -294,9 +294,9 @@ between the <code>$date_onset</code> column and the
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>, axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 159 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 1519 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_line()`).</span></span>
-<span><span class="co">#&gt; Warning: Removed 159 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 1519 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
 <p><img src="reporting-delays-truncation_files/figure-html/plot-linelist-events-1.png" width="768"></p>
 <p>If we plot the difference between the date of symptom onset and
@@ -338,29 +338,43 @@ delay.</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1 Francisco Gardunio  probable   m  26 2023-01-01     2023-01-06</span></span>
-<span><span class="co">#&gt; 2  4       Kiley Morris confirmed   f  73 2023-01-04     2023-01-09</span></span>
-<span><span class="co">#&gt; 3  5      Joseph Abrams confirmed   m  14 2023-01-02     2023-01-07</span></span>
-<span><span class="co">#&gt; 4  7    Allison Worsham  probable   f   3 2023-01-04     2023-01-09</span></span>
-<span><span class="co">#&gt; 5  8       Sou Guerrero confirmed   m  85 2023-01-08     2023-01-13</span></span>
-<span><span class="co">#&gt; 6  9    Kayla Crawleigh confirmed   f  68 2023-01-04     2023-01-09</span></span>
+<span><span class="co">#&gt; 1  1       Caleb Froome confirmed   m  47 2023-01-01     2023-01-06</span></span>
+<span><span class="co">#&gt; 2  2    Zubair el-Kalil  probable   m  41 2023-01-07     2023-01-12</span></span>
+<span><span class="co">#&gt; 3  3   Cameron Williams  probable   m  79 2023-01-09     2023-01-14</span></span>
+<span><span class="co">#&gt; 4  4      Aiyana Garcia confirmed   f  70 2023-01-10     2023-01-15</span></span>
+<span><span class="co">#&gt; 5  6 Miguel Line-Torres suspected   m  50 2023-01-10     2023-01-15</span></span>
+<span><span class="co">#&gt; 6  7       Teagan Dixon confirmed   f  80 2023-01-10     2023-01-15</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1     2023-01-04 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-03        2023-01-05</span></span>
-<span><span class="co">#&gt; 3     2023-01-04 recovered         &lt;NA&gt;         2022-12-31        2023-01-03</span></span>
-<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-06        2023-01-06</span></span>
-<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-09        2023-01-11</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-03        2023-01-05</span></span>
+<span><span class="co">#&gt; 1     2023-01-05      died   2023-01-26               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-03        2023-01-04</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-09        2023-01-13</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-08        2023-01-11</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-08        2023-01-10</span></span>
+<span><span class="co">#&gt; 6     2023-01-13      died   2023-01-30         2023-01-10        2023-01-11</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
-<span><span class="co">#&gt; 1       NA</span></span>
-<span><span class="co">#&gt; 2     26.8</span></span>
-<span><span class="co">#&gt; 3     23.5</span></span>
-<span><span class="co">#&gt; 4       NA</span></span>
-<span><span class="co">#&gt; 5     24.0</span></span>
-<span><span class="co">#&gt; 6     23.7</span></span>
+<span><span class="co">#&gt; 1     23.6</span></span>
+<span><span class="co">#&gt; 2       NA</span></span>
+<span><span class="co">#&gt; 3       NA</span></span>
+<span><span class="co">#&gt; 4     28.2</span></span>
+<span><span class="co">#&gt; 5       NA</span></span>
+<span><span class="co">#&gt; 6     26.9</span></span>
 <span><span class="va">linelist</span><span class="op">$</span><span class="va">date_reporting</span> <span class="op">-</span> <span class="va">linelist</span><span class="op">$</span><span class="va">date_onset</span></span>
 <span><span class="co">#&gt; Time differences in days</span></span>
-<span><span class="co">#&gt;  [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt;  [38] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt;  [75] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [112] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [149] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [186] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [223] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [260] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [297] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [334] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [371] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [408] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [445] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [482] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [519] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="truncation">Truncation<a class="anchor" aria-label="anchor" href="#truncation"></a>
@@ -397,27 +411,27 @@ be applied.</p>
 <span></span>
 <span><span class="co"># first 6 rows of linelist</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id           case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1    Munsif al-Demian suspected   m  35 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  2       Zachary Nault confirmed   m  43 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  3      Tae Woo Ralpho confirmed   m   1 2023-01-02     2023-01-02</span></span>
-<span><span class="co">#&gt; 4  5 Abdul Kader el-Diab suspected   m  78 2023-01-05     2023-01-05</span></span>
-<span><span class="co">#&gt; 5  6      Katelyn Catlin confirmed   f  22 2023-01-02     2023-01-02</span></span>
-<span><span class="co">#&gt; 6  8        Lynsey Duron confirmed   f  28 2023-01-04     2023-01-04</span></span>
+<span><span class="co">#&gt;   id              case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1           Kevin Pullen suspected   m   1 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  2 Carisa Flores-Gonzalez confirmed   f  29 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 3  3       Maazin el-Othman confirmed   m  78 2023-01-02     2023-01-02</span></span>
+<span><span class="co">#&gt; 4  5       Faisal el-Vaziri suspected   m  70 2023-01-05     2023-01-05</span></span>
+<span><span class="co">#&gt; 5  6           Lynsey Duron confirmed   f  28 2023-01-02     2023-01-02</span></span>
+<span><span class="co">#&gt; 6  8         Lilibeth Black confirmed   f  61 2023-01-04     2023-01-04</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2     2023-01-05 recovered         &lt;NA&gt;         2022-12-30        2023-01-05</span></span>
-<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-02</span></span>
-<span><span class="co">#&gt; 4     2023-01-07      died   2023-01-25         2022-12-29        2023-01-02</span></span>
-<span><span class="co">#&gt; 5     2023-01-07      died   2023-01-11         2023-01-02        2023-01-04</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-04        2023-01-05</span></span>
+<span><span class="co">#&gt; 1     2023-01-03      died   2023-01-18               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2     2023-01-03      died   2023-02-09         2022-12-26        2023-01-02</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-03</span></span>
+<span><span class="co">#&gt; 4     2023-01-08 recovered         &lt;NA&gt;         2022-12-31        2023-01-03</span></span>
+<span><span class="co">#&gt; 5     2023-01-06 recovered         &lt;NA&gt;         2023-01-02        2023-01-03</span></span>
+<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-03        2023-01-07</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
 <span><span class="co">#&gt; 1       NA</span></span>
-<span><span class="co">#&gt; 2     25.3</span></span>
-<span><span class="co">#&gt; 3     25.8</span></span>
+<span><span class="co">#&gt; 2     25.8</span></span>
+<span><span class="co">#&gt; 3     24.9</span></span>
 <span><span class="co">#&gt; 4       NA</span></span>
-<span><span class="co">#&gt; 5     24.9</span></span>
-<span><span class="co">#&gt; 6     24.5</span></span></code></pre></div>
+<span><span class="co">#&gt; 5     24.5</span></span>
+<span><span class="co">#&gt; 6     26.4</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="variable-truncation-point-default">Variable truncation point (default)<a class="anchor" aria-label="anchor" href="#variable-truncation-point-default"></a>
 </h3>
