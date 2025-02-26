@@ -48,7 +48,6 @@ infectious_period <- epiparameter(
   )
 )
 
-# get onset to hospital admission from {epiparameter} database
 onset_to_hosp <- epiparameter(
   disease = "COVID-19",
   epi_name = "onset to hospitalisation",
