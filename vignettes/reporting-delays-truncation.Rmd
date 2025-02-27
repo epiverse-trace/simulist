@@ -227,8 +227,8 @@ tidy_linelist <- linelist %>%
   mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>% # nolint consecutive_mutate_linter
   mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)) # nolint consecutive_mutate_linter
 
-truncation_time <- 14
-trunc_date <- max(tidy_linelist$value, na.rm = TRUE) - truncation_time
+truncation_day <- 14
+trunc_date <- max(tidy_linelist$value, na.rm = TRUE) - truncation_day
 
 ggplot(data = tidy_linelist) +
   geom_line(
@@ -281,7 +281,7 @@ It is also possible to specify the _truncation time_ as the number of days, week
 ```{r truncate-ll-forward}
 linelist_trunc <- truncate_linelist(
   linelist = linelist,
-  truncation_time = 3,
+  truncation_day = 3,
   unit = "months",
   direction = "forward"
 )
@@ -323,12 +323,12 @@ plot(weekly_inci)
 
 By looking at the outbreak, we can pick three points to truncate: 1) early in the outbreak when the epicurve is growing (1st February 2023, epiweek 5), 2) in the middle of the outbreak (15th March 2023, epiweek 11), and 3) late in the outbreak when the number of cases is declining and the end of the outbreak is near (1st May 2023, epiweek 18).
 
-We can specify a `<Date>` object to the `truncation_time` argument in `truncate_linelist()` to specify the date we want to apply the right truncation to.
+We can specify a `<Date>` object to the `truncation_day` argument in `truncate_linelist()` to specify the date we want to apply the right truncation to.
 
 ```{r trunc-stages, fig.width = 8, fig.height = 5, fig.show="hold", out.width="30%"}
 linelist_early <- truncate_linelist(
   linelist = linelist,
-  truncation_time = as.Date("2023-02-01")
+  truncation_day = as.Date("2023-02-01")
 )
 inci_early <- incidence(
   x = linelist_early,
@@ -342,7 +342,7 @@ plot(inci_early) +
 
 linelist_mid <- truncate_linelist(
   linelist = linelist,
-  truncation_time = as.Date("2023-03-15")
+  truncation_day = as.Date("2023-03-15")
 )
 inci_mid <- incidence(
   x = linelist_mid,
@@ -356,7 +356,7 @@ plot(inci_mid) +
 
 linelist_late <- truncate_linelist(
   linelist = linelist,
-  truncation_time = as.Date("2023-05-01")
+  truncation_day = as.Date("2023-05-01")
 )
 inci_late <- incidence(
   x = linelist_late,
@@ -388,7 +388,7 @@ linelist <- sim_linelist(
 ```{r trunc-stages-reporting-delay, fig.width = 8, fig.height = 5, fig.show="hold", out.width="30%"}
 linelist_early <- truncate_linelist(
   linelist = linelist,
-  truncation_time = as.Date("2023-02-01")
+  truncation_day = as.Date("2023-02-01")
 )
 inci_early <- incidence(
   x = linelist_early,
@@ -402,7 +402,7 @@ plot(inci_early) +
 
 linelist_mid <- truncate_linelist(
   linelist = linelist,
-  truncation_time = as.Date("2023-03-15")
+  truncation_day = as.Date("2023-03-15")
 )
 inci_mid <- incidence(
   x = linelist_mid,
@@ -416,7 +416,7 @@ plot(inci_mid) +
 
 linelist_late <- truncate_linelist(
   linelist = linelist,
-  truncation_time = as.Date("2023-05-01")
+  truncation_day = as.Date("2023-05-01")
 )
 inci_late <- incidence(
   x = linelist_late,
