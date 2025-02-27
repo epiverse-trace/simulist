@@ -6,7 +6,7 @@
 \usage{
 truncate_linelist(
   linelist,
-  truncation_time = 14,
+  truncation_day = 14,
   unit = c("days", "weeks", "months", "years"),
   direction = c("backwards", "forwards")
 )
@@ -14,26 +14,26 @@ truncate_linelist(
 \arguments{
 \item{linelist}{Line list \verb{<data.frame>} output from \code{\link[=sim_linelist]{sim_linelist()}}.}
 
-\item{truncation_time}{A single \code{numeric} specifying the number of
+\item{truncation_day}{A single \code{numeric} specifying the number of
 days (default), weeks, months or years before the end of the outbreak
 (default) or since the start of the outbreak (see \code{direction} argument)
 to truncate the line list at. By default it is 14 days before the end
 of the outbreak.
 
-Alternatively, \code{truncation_time} can accept a \verb{<Date>} and this is
-used as the \code{truncation_time} and the \code{unit} and \code{direction} is ignored.}
+Alternatively, \code{truncation_day} can accept a \verb{<Date>} and this is
+used as the \code{truncation_day} and the \code{unit} and \code{direction} is ignored.}
 
 \item{unit}{A \code{character} string, either \code{"days"} (default),
 \code{"weeks"}, \code{"months"}, or \code{"years"}, specifying the units of the
-\code{truncation_time} argument.
+\code{truncation_day} argument.
 
 Years are assumed to be 365.25 days and months are assumed to be 365.25 / 12
 days (same as \pkg{lubridate}).}
 
 \item{direction}{A \code{character} string, either \code{"backwards"} (default) or
-\code{"forwards"}. \code{direction = backwards} defines the \code{truncation_time} as
+\code{"forwards"}. \code{direction = backwards} defines the \code{truncation_day} as
 the time before the end of the outbreak. \code{direction = forwards} defines
-the \code{truncation_time} as the time since the start of the outbreak.}
+the \code{truncation_day} as the time since the start of the outbreak.}
 }
 \value{
 A line list \verb{<data.frame>}.
@@ -49,7 +49,7 @@ are not yet observed or reported (right truncation).
 \details{
 The point at which the line list is right-truncated is the same for
 all individuals in the line list, and is specified by the
-\code{truncation_time} and \code{unit} arguments.
+\code{truncation_day} and \code{unit} arguments.
 }
 \examples{
 set.seed(1)
@@ -59,14 +59,14 @@ linelist_trunc <- truncate_linelist(linelist)
 # set truncation point 3 weeks before the end of outbreak
 linelist_trunc <- truncate_linelist(
   linelist,
-  truncation_time = 3,
+  truncation_day = 3,
   unit = "weeks"
 )
 
 # set truncation point to 2 months since the start of outbreak
 linelist_trunc <- truncate_linelist(
   linelist,
-  truncation_time = 2,
+  truncation_day = 2,
   unit = "months",
   direction = "forwards"
 )
@@ -74,6 +74,6 @@ linelist_trunc <- truncate_linelist(
 # set truncation point to 2023-03-01
 linelist_trunc <- truncate_linelist(
   linelist,
-  truncation_time = as.Date("2023-03-01")
+  truncation_day = as.Date("2023-03-01")
 )
 }
