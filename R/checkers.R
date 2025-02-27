@@ -367,7 +367,7 @@
         )
       ),
     "`linelist$date_reporting` column cannot contain any NAs." =
-      anyNA(linelist$date_reporting)
+      !anyNA(linelist$date_reporting)
   )
   invisible(linelist)
 }
