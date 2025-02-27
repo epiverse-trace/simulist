@@ -86,7 +86,7 @@ test_that("truncate_linelist fails as expected for invalid linelist", {
 test_that("truncate_linelist fails as expected for invalid truncation_day", {
   expect_error(
     truncate_linelist(ll, truncation_day = -1),
-    regexp = "(truncation_day)*(single positive numeric or)*(Date)"
+    regexp = "(truncation_day)*(single nonnegative numeric or)*(Date)"
   )
 })
 

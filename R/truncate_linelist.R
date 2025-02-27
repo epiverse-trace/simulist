@@ -6,8 +6,8 @@
 #' admission or outcome dates that are after the truncation point to `NA`.
 #'
 #' This is to replicate real-time outbreak data where recent cases or outcomes
-#' are not yet observed or reported (right truncation). It implies an assumption 
-#' that symptom onsets are reported with a delay but hospitalisations are 
+#' are not yet observed or reported (right truncation). It implies an assumption
+#' that symptom onsets are reported with a delay but hospitalisations are
 #' reported instantly.
 #'
 #' @details
@@ -72,7 +72,7 @@ truncate_linelist <- function(linelist,
   arg_ignore <- missing(unit) && missing(direction)
   .check_linelist(linelist)
   stopifnot(
-    "`truncation_day` must be a single positive numeric or a <Date> object." =
+    "`truncation_day` must be a single nonnegative numeric or <Date> object." =
       checkmate::test_number(truncation_day, lower = 0, finite = TRUE) ||
       checkmate::test_date(truncation_day, any.missing = FALSE, len = 1)
     )
