@@ -357,7 +357,7 @@
 #' @keywords internal
 .check_linelist <- function(linelist) {
   stopifnot(
-    "linelist must be a data.frame output from `sim_linelist()`" =
+    "linelist must be a data.frame output from `sim_linelist()`." =
       is.data.frame(linelist) && ncol(linelist) == 13 &&
       setequal(
         colnames(linelist), c(
@@ -365,7 +365,9 @@
           "date_reporting", "date_admission", "outcome", "date_outcome",
           "date_first_contact", "date_last_contact", "ct_value"
         )
-      )
+      ),
+    "`linelist$date_reporting` column cannot contain any NAs." =
+      anyNA(linelist$date_reporting)
   )
   invisible(linelist)
 }
