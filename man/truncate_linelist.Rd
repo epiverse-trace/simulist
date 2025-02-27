@@ -44,10 +44,12 @@ have not been reported by the truncation time and setting hospitalisation
 admission or outcome dates that are after the truncation point to \code{NA}.
 
 This is to replicate real-time outbreak data where recent cases or outcomes
-are not yet observed or reported (right truncation).
+are not yet observed or reported (right truncation). It implies an assumption
+that symptom onsets are reported with a delay but hospitalisations are
+reported instantly.
 }
 \details{
-The point at which the line list is right-truncated is the same for
+The day on which the line list is truncated is the same for
 all individuals in the line list, and is specified by the
 \code{truncation_day} and \code{unit} arguments.
 }
