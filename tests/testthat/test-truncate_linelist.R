@@ -1,11 +1,28 @@
 set.seed(123)
 ll <- sim_linelist()
+# get max and min date to test truncation removes correct rows
+date_cols <- grep(pattern = "date_", x = colnames(ll), fixed = TRUE)
+max_date <- as.Date(
+  max(unlist(ll[, date_cols]), na.rm = TRUE),
+  origin = "1970-01-01"
+)
+min_date <- as.Date(
+  min(unlist(ll[, date_cols]), na.rm = TRUE),
+  origin = "1970-01-01"
+)
 
 test_that("truncate_linelist works as expected with defaults", {
   ll_trunc <- truncate_linelist(ll)
-  # in this example dataset one case is removed
-  expect_false(identical(ll$date_outcome, ll_trunc$date_outcome))
   expect_gt(nrow(ll), nrow(ll_trunc))
+  # truncated line list has no dates after truncation day (14 days default)
+  expect_true(
+    all(unlist(ll_trunc[, date_cols]) < (max_date - 14), na.rm = TRUE)
+  )
+  # original line list has dates between truncation day and max date
+  expect_true(
+    all(unlist(ll[, date_cols]) <= max_date, na.rm = TRUE) &&
+    any(unlist(ll[, date_cols]) > (max_date - 14), na.rm = TRUE)
+  )
 })
 
 test_that("truncate_linelist works as expected with modified truncation_day", {
@@ -14,6 +31,15 @@ test_that("truncate_linelist works as expected with modified truncation_day", {
     truncation_day = 60
   )
   expect_gt(nrow(ll), nrow(ll_trunc))
+  # truncated line list has no dates after truncation day
+  expect_true(
+    all(unlist(ll_trunc[, date_cols]) < (max_date - 60), na.rm = TRUE)
+  )
+  # original line list has dates between truncation day and max date
+  expect_true(
+    all(unlist(ll[, date_cols]) <= max_date, na.rm = TRUE) &&
+      any(unlist(ll[, date_cols]) > (max_date - 60), na.rm = TRUE)
+  )
 })
 
 test_that("truncate_linelist works as expected with different units", {
@@ -23,11 +49,30 @@ test_that("truncate_linelist works as expected with different units", {
     unit = "weeks"
   )
   expect_gt(nrow(ll), nrow(ll_trunc))
+  # truncated line list has no dates after truncation day
+  expect_true(
+    all(unlist(ll_trunc[, date_cols]) < (max_date - 21), na.rm = TRUE)
+  )
+  # original line list has dates between truncation day and max date
+  expect_true(
+    all(unlist(ll[, date_cols]) <= max_date, na.rm = TRUE) &&
+      any(unlist(ll[, date_cols]) > (max_date - 21), na.rm = TRUE)
+  )
 })
 
 test_that("truncate_linelist works as expected with forward direction", {
   ll_trunc <- truncate_linelist(linelist = ll, direction = "forward")
   expect_gt(nrow(ll), nrow(ll_trunc))
+  # truncated line list has no dates after truncation day
+  trunc_date <- min_date + 14
+  expect_true(
+    all(unlist(ll_trunc[, date_cols]) < (trunc_date), na.rm = TRUE)
+  )
+  # original line list has dates between truncation day and max date
+  expect_true(
+    all(unlist(ll[, date_cols]) <= trunc_date, na.rm = TRUE) &&
+      any(unlist(ll[, date_cols]) > (trunc_date), na.rm = TRUE)
+  )
 })
 
 test_that("truncate_linelist workds as expected with <Date> truncation_day", {
