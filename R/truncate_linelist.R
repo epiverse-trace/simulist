@@ -11,7 +11,7 @@
 #' reported instantly.
 #'
 #' @details
-#' The point at which the line list is right-truncated is the same for
+#' The day on which the line list is truncated is the same for
 #' all individuals in the line list, and is specified by the
 #' `truncation_time` and `unit` arguments.
 #'
