@@ -164,163 +164,163 @@
       158 326                Haley Hamlin  probable   f  82 2023-05-08     2023-05-08
           date_admission   outcome date_outcome date_first_contact date_last_contact
       1       2023-01-09      died   2023-01-13               <NA>              <NA>
-      2             <NA> recovered         <NA>         2022-12-30        2023-01-01
-      3             <NA> recovered         <NA>         2023-01-04        2023-01-04
-      4             <NA> recovered         <NA>         2023-01-04        2023-01-07
-      5       2023-01-09      died   2023-01-23         2023-01-04        2023-01-06
-      6       2023-01-08 recovered         <NA>         2022-12-31        2023-01-04
-      7             <NA> recovered         <NA>         2023-01-04        2023-01-06
-      8       2023-01-24      died   2023-01-27         2023-01-06        2023-01-08
-      9             <NA> recovered         <NA>         2023-01-01        2023-01-07
-      10            <NA> recovered         <NA>         2023-01-09        2023-01-12
-      11            <NA> recovered         <NA>         2023-01-09        2023-01-13
-      12            <NA> recovered         <NA>         2023-01-12        2023-01-15
-      13            <NA> recovered         <NA>         2023-01-07        2023-01-13
-      14            <NA> recovered         <NA>         2023-01-11        2023-01-14
-      15      2023-01-19      died   2023-01-27         2023-01-12        2023-01-16
-      16            <NA> recovered         <NA>         2023-01-15        2023-01-17
-      17            <NA> recovered         <NA>         2023-01-15        2023-01-16
-      18            <NA> recovered         <NA>         2023-01-13        2023-01-17
-      19            <NA> recovered         <NA>         2023-01-16        2023-01-17
-      20      2023-02-10 recovered         <NA>         2023-01-12        2023-01-16
-      21            <NA>      died   2023-02-05         2023-01-23        2023-01-23
-      22            <NA> recovered         <NA>         2023-01-21        2023-01-23
-      23            <NA> recovered         <NA>         2023-01-20        2023-01-23
-      24            <NA> recovered         <NA>         2023-01-18        2023-01-20
-      25            <NA> recovered         <NA>         2023-01-24        2023-01-25
-      26            <NA> recovered         <NA>         2023-01-17        2023-01-22
-      27            <NA> recovered         <NA>         2023-01-28        2023-01-29
-      28      2023-01-30      died   2023-02-16         2023-01-22        2023-01-27
-      29            <NA> recovered         <NA>         2023-01-26        2023-01-27
-      30      2023-02-11 recovered         <NA>         2023-01-23        2023-01-26
-      31            <NA> recovered         <NA>         2023-01-23        2023-01-28
-      32            <NA> recovered         <NA>         2023-01-21        2023-01-23
-      33            <NA>      died   2023-02-14         2023-01-23        2023-01-27
-      34      2023-01-29 recovered         <NA>         2023-01-26        2023-01-26
-      35            <NA> recovered         <NA>         2023-01-27        2023-01-27
-      36      2023-02-02      died   2023-02-09         2023-01-28        2023-01-29
-      37            <NA> recovered         <NA>         2023-01-27        2023-01-30
-      38            <NA> recovered         <NA>         2023-01-25        2023-01-29
-      39      2023-02-08      died   2023-02-21         2023-01-27        2023-01-31
-      40      2023-02-05 recovered         <NA>         2023-01-29        2023-01-30
-      41            <NA> recovered         <NA>         2023-01-24        2023-01-27
-      42            <NA>      died   2023-02-15         2023-01-27        2023-01-31
-      43            <NA> recovered         <NA>         2023-01-30        2023-02-02
-      44            <NA> recovered         <NA>         2023-01-31        2023-02-01
-      45            <NA> recovered         <NA>         2023-02-04        2023-02-05
-      46            <NA> recovered         <NA>         2023-01-28        2023-02-01
-      47            <NA> recovered         <NA>         2023-02-02        2023-02-02
-      48            <NA> recovered         <NA>         2023-01-28        2023-02-01
-      49            <NA> recovered         <NA>         2023-01-28        2023-02-04
-      50            <NA> recovered         <NA>         2023-02-04        2023-02-06
-      51            <NA>      died   2023-02-14         2023-02-06        2023-02-08
-      52            <NA>      died   2023-02-13         2023-01-29        2023-02-01
-      53            <NA> recovered         <NA>         2023-02-01        2023-02-08
-      54            <NA>      died   2023-02-28         2023-02-04        2023-02-10
-      55            <NA> recovered         <NA>         2023-02-08        2023-02-09
-      56            <NA> recovered         <NA>         2023-02-11        2023-02-12
-      57            <NA> recovered         <NA>         2023-02-14        2023-02-17
-      58            <NA> recovered         <NA>         2023-02-12        2023-02-13
-      59            <NA> recovered         <NA>         2023-02-14        2023-02-14
-      60            <NA> recovered         <NA>         2023-02-18        2023-02-18
-      61            <NA> recovered         <NA>         2023-02-26        2023-03-03
-      62      2023-03-11      died   2023-03-25         2023-02-22        2023-02-24
-      63            <NA> recovered         <NA>         2023-02-20        2023-02-23
-      64            <NA> recovered         <NA>         2023-02-23        2023-02-26
-      65            <NA> recovered         <NA>         2023-02-27        2023-03-04
-      66            <NA> recovered         <NA>         2023-03-01        2023-03-03
-      67            <NA> recovered         <NA>         2023-03-05        2023-03-10
+      2             <NA> recovered         <NA>         2022-12-29        2023-01-03
+      3             <NA> recovered         <NA>         2022-12-28        2023-01-01
+      4             <NA> recovered         <NA>         2022-12-28        2023-01-04
+      5       2023-01-09      died   2023-01-23         2022-12-31        2023-01-04
+      6       2023-01-08 recovered         <NA>         2022-12-31        2023-01-06
+      7             <NA> recovered         <NA>         2023-01-02        2023-01-07
+      8       2023-01-24      died   2023-01-27         2023-01-03        2023-01-07
+      9             <NA> recovered         <NA>         2023-01-03        2023-01-11
+      10            <NA> recovered         <NA>         2023-01-04        2023-01-09
+      11            <NA> recovered         <NA>         2023-01-09        2023-01-17
+      12            <NA> recovered         <NA>         2023-01-07        2023-01-14
+      13            <NA> recovered         <NA>         2023-01-07        2023-01-17
+      14            <NA> recovered         <NA>         2023-01-08        2023-01-15
+      15      2023-01-19      died   2023-01-27         2023-01-09        2023-01-16
+      16            <NA> recovered         <NA>         2023-01-08        2023-01-14
+      17            <NA> recovered         <NA>         2023-01-07        2023-01-13
+      18            <NA> recovered         <NA>         2023-01-10        2023-01-16
+      19            <NA> recovered         <NA>         2023-01-12        2023-01-15
+      20      2023-02-10 recovered         <NA>         2023-01-12        2023-01-18
+      21            <NA>      died   2023-02-05         2023-01-16        2023-01-21
+      22            <NA> recovered         <NA>         2023-01-19        2023-01-23
+      23            <NA> recovered         <NA>         2023-01-18        2023-01-24
+      24            <NA> recovered         <NA>         2023-01-17        2023-01-21
+      25            <NA> recovered         <NA>         2023-01-18        2023-01-21
+      26            <NA> recovered         <NA>         2023-01-19        2023-01-25
+      27            <NA> recovered         <NA>         2023-01-23        2023-01-28
+      28      2023-01-30      died   2023-02-16         2023-01-20        2023-01-28
+      29            <NA> recovered         <NA>         2023-01-22        2023-01-25
+      30      2023-02-11 recovered         <NA>         2023-01-20        2023-01-27
+      31            <NA> recovered         <NA>         2023-01-23        2023-01-29
+      32            <NA> recovered         <NA>         2023-01-17        2023-01-24
+      33            <NA>      died   2023-02-14         2023-01-21        2023-01-26
+      34      2023-01-29 recovered         <NA>         2023-01-17        2023-01-22
+      35            <NA> recovered         <NA>         2023-01-15        2023-01-22
+      36      2023-02-02      died   2023-02-09         2023-01-20        2023-01-23
+      37            <NA> recovered         <NA>         2023-01-27        2023-01-31
+      38            <NA> recovered         <NA>         2023-01-26        2023-02-01
+      39      2023-02-08      died   2023-02-21         2023-01-28        2023-02-02
+      40      2023-02-05 recovered         <NA>         2023-01-27        2023-01-30
+      41            <NA> recovered         <NA>         2023-01-19        2023-01-28
+      42            <NA>      died   2023-02-15         2023-01-25        2023-02-02
+      43            <NA> recovered         <NA>         2023-01-26        2023-02-01
+      44            <NA> recovered         <NA>         2023-01-26        2023-01-30
+      45            <NA> recovered         <NA>         2023-01-31        2023-02-02
+      46            <NA> recovered         <NA>         2023-01-30        2023-02-05
+      47            <NA> recovered         <NA>         2023-01-28        2023-01-30
+      48            <NA> recovered         <NA>         2023-01-24        2023-02-03
+      49            <NA> recovered         <NA>         2023-01-28        2023-02-05
+      50            <NA> recovered         <NA>         2023-02-03        2023-02-05
+      51            <NA>      died   2023-02-14         2023-01-31        2023-02-04
+      52            <NA>      died   2023-02-13         2023-01-27        2023-02-02
+      53            <NA> recovered         <NA>         2023-01-28        2023-02-09
+      54            <NA>      died   2023-02-28         2023-01-31        2023-02-10
+      55            <NA> recovered         <NA>         2023-01-31        2023-02-05
+      56            <NA> recovered         <NA>         2023-02-04        2023-02-08
+      57            <NA> recovered         <NA>         2023-02-10        2023-02-17
+      58            <NA> recovered         <NA>         2023-02-08        2023-02-13
+      59            <NA> recovered         <NA>         2023-02-10        2023-02-12
+      60            <NA> recovered         <NA>         2023-02-10        2023-02-16
+      61            <NA> recovered         <NA>         2023-02-24        2023-03-01
+      62      2023-03-11      died   2023-03-25         2023-02-21        2023-02-26
+      63            <NA> recovered         <NA>         2023-02-20        2023-02-26
+      64            <NA> recovered         <NA>         2023-02-22        2023-02-26
+      65            <NA> recovered         <NA>         2023-03-01        2023-03-07
+      66            <NA> recovered         <NA>         2023-03-01        2023-03-04
+      67            <NA> recovered         <NA>         2023-02-27        2023-03-13
       68            <NA> recovered         <NA>         2023-03-09        2023-03-11
-      69      2023-03-16      died   2023-03-22         2023-03-05        2023-03-09
-      70            <NA> recovered         <NA>         2023-03-18        2023-03-20
-      71            <NA> recovered         <NA>         2023-03-16        2023-03-21
-      72            <NA> recovered         <NA>         2023-03-09        2023-03-14
-      73            <NA> recovered         <NA>         2023-03-08        2023-03-12
-      74      2023-03-17 recovered         <NA>         2023-03-10        2023-03-12
-      75            <NA> recovered         <NA>         2023-03-11        2023-03-15
-      76            <NA> recovered         <NA>         2023-03-12        2023-03-19
-      77      2023-03-31 recovered         <NA>         2023-03-15        2023-03-19
-      78            <NA> recovered         <NA>         2023-03-15        2023-03-16
-      79            <NA> recovered         <NA>         2023-03-09        2023-03-14
-      80            <NA> recovered         <NA>         2023-03-14        2023-03-17
-      81            <NA> recovered         <NA>         2023-03-13        2023-03-18
-      82            <NA> recovered         <NA>         2023-03-15        2023-03-18
-      83            <NA> recovered         <NA>         2023-03-16        2023-03-20
-      84            <NA> recovered         <NA>         2023-03-23        2023-03-25
-      85            <NA> recovered         <NA>         2023-03-19        2023-03-20
-      86            <NA> recovered         <NA>         2023-03-21        2023-03-22
-      87      2023-03-22      died   2023-04-03         2023-03-20        2023-03-21
-      88            <NA> recovered         <NA>         2023-03-16        2023-03-16
-      89            <NA> recovered         <NA>         2023-03-26        2023-03-28
-      90            <NA> recovered         <NA>         2023-03-19        2023-03-24
-      91            <NA> recovered         <NA>         2023-03-23        2023-03-24
-      92            <NA> recovered         <NA>         2023-03-25        2023-03-26
-      93            <NA> recovered         <NA>         2023-03-12        2023-03-17
-      94            <NA>      died   2023-04-12         2023-03-24        2023-03-26
-      95            <NA>      died   2023-04-20         2023-03-26        2023-03-30
-      96            <NA> recovered         <NA>         2023-03-25        2023-03-27
-      97      2023-04-03 recovered         <NA>         2023-03-28        2023-03-28
-      98      2023-04-03 recovered         <NA>         2023-03-27        2023-04-01
+      69      2023-03-16      died   2023-03-22         2023-03-09        2023-03-13
+      70            <NA> recovered         <NA>         2023-03-15        2023-03-20
+      71            <NA> recovered         <NA>         2023-03-16        2023-03-23
+      72            <NA> recovered         <NA>         2023-03-08        2023-03-15
+      73            <NA> recovered         <NA>         2023-03-07        2023-03-14
+      74      2023-03-17 recovered         <NA>         2023-03-09        2023-03-11
+      75            <NA> recovered         <NA>         2023-03-03        2023-03-13
+      76            <NA> recovered         <NA>         2023-03-11        2023-03-22
+      77      2023-03-31 recovered         <NA>         2023-03-14        2023-03-19
+      78            <NA> recovered         <NA>         2023-03-14        2023-03-16
+      79            <NA> recovered         <NA>         2023-03-09        2023-03-18
+      80            <NA> recovered         <NA>         2023-03-08        2023-03-16
+      81            <NA> recovered         <NA>         2023-03-11        2023-03-18
+      82            <NA> recovered         <NA>         2023-03-10        2023-03-18
+      83            <NA> recovered         <NA>         2023-03-14        2023-03-19
+      84            <NA> recovered         <NA>         2023-03-20        2023-03-26
+      85            <NA> recovered         <NA>         2023-03-15        2023-03-19
+      86            <NA> recovered         <NA>         2023-03-13        2023-03-20
+      87      2023-03-22      died   2023-04-03         2023-03-14        2023-03-16
+      88            <NA> recovered         <NA>         2023-03-13        2023-03-15
+      89            <NA> recovered         <NA>         2023-03-24        2023-03-28
+      90            <NA> recovered         <NA>         2023-03-20        2023-03-27
+      91            <NA> recovered         <NA>         2023-03-18        2023-03-23
+      92            <NA> recovered         <NA>         2023-03-17        2023-03-23
+      93            <NA> recovered         <NA>         2023-03-12        2023-03-21
+      94            <NA>      died   2023-04-12         2023-03-23        2023-03-28
+      95            <NA>      died   2023-04-20         2023-03-22        2023-03-30
+      96            <NA> recovered         <NA>         2023-03-24        2023-03-27
+      97      2023-04-03 recovered         <NA>         2023-03-22        2023-03-27
+      98      2023-04-03 recovered         <NA>         2023-03-23        2023-04-01
       99            <NA> recovered         <NA>         2023-04-03        2023-04-06
-      100           <NA> recovered         <NA>         2023-03-30        2023-04-03
-      101     2023-04-12 recovered         <NA>         2023-04-05        2023-04-06
-      102           <NA> recovered         <NA>         2023-03-27        2023-03-31
-      103           <NA> recovered         <NA>         2023-03-21        2023-03-27
-      104     2023-04-12 recovered         <NA>         2023-04-04        2023-04-06
-      105           <NA> recovered         <NA>         2023-04-01        2023-04-05
-      106           <NA> recovered         <NA>         2023-04-02        2023-04-03
-      107     2023-04-13      died   2023-04-14         2023-04-07        2023-04-10
-      108     2023-04-20      died   2023-04-28         2023-04-08        2023-04-08
-      109           <NA> recovered         <NA>         2023-04-03        2023-04-07
-      110           <NA> recovered         <NA>         2023-04-03        2023-04-05
-      111           <NA>      died   2023-04-19         2023-04-06        2023-04-09
-      112           <NA> recovered         <NA>         2023-04-01        2023-04-04
-      113           <NA> recovered         <NA>         2023-04-12        2023-04-13
-      114           <NA> recovered         <NA>         2023-04-11        2023-04-12
-      115           <NA> recovered         <NA>         2023-03-26        2023-04-03
-      116           <NA> recovered         <NA>         2023-03-30        2023-04-03
-      117     2023-04-13      died   2023-04-18         2023-04-07        2023-04-08
-      118           <NA> recovered         <NA>         2023-04-10        2023-04-13
-      119           <NA> recovered         <NA>         2023-04-07        2023-04-10
-      120           <NA> recovered         <NA>         2023-04-11        2023-04-13
-      121           <NA> recovered         <NA>         2023-03-31        2023-04-06
-      122           <NA> recovered         <NA>         2023-04-08        2023-04-14
-      123           <NA> recovered         <NA>         2023-04-08        2023-04-11
-      124           <NA> recovered         <NA>         2023-04-05        2023-04-12
-      125           <NA> recovered         <NA>         2023-04-10        2023-04-11
-      126           <NA> recovered         <NA>         2023-04-08        2023-04-11
-      127           <NA> recovered         <NA>         2023-04-08        2023-04-12
-      128           <NA>      died   2023-04-25         2023-04-17        2023-04-18
-      129           <NA> recovered         <NA>         2023-04-12        2023-04-17
-      130           <NA> recovered         <NA>         2023-04-07        2023-04-14
-      131           <NA> recovered         <NA>         2023-04-14        2023-04-19
-      132     2023-04-18      died   2023-05-02         2023-04-05        2023-04-14
-      133     2023-04-27 recovered         <NA>         2023-04-19        2023-04-21
-      134           <NA> recovered         <NA>         2023-04-20        2023-04-26
-      135     2023-04-24 recovered         <NA>         2023-04-18        2023-04-25
-      136     2023-04-29      died   2023-05-05         2023-04-18        2023-04-21
-      137           <NA> recovered         <NA>         2023-04-13        2023-04-14
-      138     2023-05-01 recovered         <NA>         2023-04-23        2023-04-27
-      139           <NA> recovered         <NA>         2023-04-18        2023-04-22
-      140           <NA> recovered         <NA>         2023-04-21        2023-04-25
-      141     2023-04-26 recovered         <NA>         2023-04-26        2023-04-27
-      142           <NA> recovered         <NA>         2023-05-02        2023-05-02
-      143           <NA> recovered         <NA>         2023-04-28        2023-05-01
-      144           <NA> recovered         <NA>         2023-04-21        2023-04-23
-      145           <NA> recovered         <NA>         2023-04-22        2023-04-23
-      146           <NA> recovered         <NA>         2023-05-02        2023-05-08
-      147           <NA> recovered         <NA>         2023-05-06        2023-05-08
-      148           <NA> recovered         <NA>         2023-04-27        2023-05-01
-      149           <NA> recovered         <NA>         2023-04-16        2023-04-25
-      150           <NA> recovered         <NA>         2023-04-25        2023-04-27
-      151     2023-05-11 recovered         <NA>         2023-05-05        2023-05-07
-      152           <NA> recovered         <NA>         2023-05-02        2023-05-06
-      153           <NA> recovered         <NA>         2023-04-23        2023-04-26
-      154           <NA> recovered         <NA>         2023-04-23        2023-04-27
-      155           <NA> recovered         <NA>         2023-04-23        2023-04-27
-      156           <NA> recovered         <NA>         2023-05-05        2023-05-08
-      157           <NA> recovered         <NA>         2023-04-24        2023-04-27
-      158     2023-05-21      died   2023-05-22         2023-05-05        2023-05-07
+      100           <NA> recovered         <NA>         2023-03-31        2023-04-07
+      101     2023-04-12 recovered         <NA>         2023-04-01        2023-04-04
+      102           <NA> recovered         <NA>         2023-03-26        2023-04-02
+      103           <NA> recovered         <NA>         2023-03-24        2023-04-02
+      104     2023-04-12 recovered         <NA>         2023-03-24        2023-04-01
+      105           <NA> recovered         <NA>         2023-03-26        2023-04-03
+      106           <NA> recovered         <NA>         2023-03-29        2023-03-31
+      107     2023-04-13      died   2023-04-14         2023-04-04        2023-04-10
+      108     2023-04-20      died   2023-04-28         2023-04-02        2023-04-05
+      109           <NA> recovered         <NA>         2023-03-30        2023-04-07
+      110           <NA> recovered         <NA>         2023-03-31        2023-04-03
+      111           <NA>      died   2023-04-19         2023-04-02        2023-04-08
+      112           <NA> recovered         <NA>         2023-03-31        2023-04-04
+      113           <NA> recovered         <NA>         2023-04-09        2023-04-12
+      114           <NA> recovered         <NA>         2023-04-06        2023-04-11
+      115           <NA> recovered         <NA>         2023-04-01        2023-04-10
+      116           <NA> recovered         <NA>         2023-04-02        2023-04-06
+      117     2023-04-13      died   2023-04-18         2023-04-03        2023-04-09
+      118           <NA> recovered         <NA>         2023-04-06        2023-04-11
+      119           <NA> recovered         <NA>         2023-04-03        2023-04-11
+      120           <NA> recovered         <NA>         2023-04-09        2023-04-14
+      121           <NA> recovered         <NA>         2023-03-30        2023-04-08
+      122           <NA> recovered         <NA>         2023-04-02        2023-04-15
+      123           <NA> recovered         <NA>         2023-04-08        2023-04-12
+      124           <NA> recovered         <NA>         2023-04-09        2023-04-17
+      125           <NA> recovered         <NA>         2023-04-09        2023-04-11
+      126           <NA> recovered         <NA>         2023-04-08        2023-04-13
+      127           <NA> recovered         <NA>         2023-04-06        2023-04-14
+      128           <NA>      died   2023-04-25         2023-04-11        2023-04-15
+      129           <NA> recovered         <NA>         2023-04-13        2023-04-19
+      130           <NA> recovered         <NA>         2023-04-11        2023-04-20
+      131           <NA> recovered         <NA>         2023-04-13        2023-04-21
+      132     2023-04-18      died   2023-05-02         2023-04-10        2023-04-20
+      133     2023-04-27 recovered         <NA>         2023-04-14        2023-04-22
+      134           <NA> recovered         <NA>         2023-04-15        2023-04-26
+      135     2023-04-24 recovered         <NA>         2023-04-19        2023-04-27
+      136     2023-04-29      died   2023-05-05         2023-04-20        2023-04-23
+      137           <NA> recovered         <NA>         2023-04-11        2023-04-14
+      138     2023-05-01 recovered         <NA>         2023-04-23        2023-04-29
+      139           <NA> recovered         <NA>         2023-04-15        2023-04-24
+      140           <NA> recovered         <NA>         2023-04-16        2023-04-24
+      141     2023-04-26 recovered         <NA>         2023-04-16        2023-04-22
+      142           <NA> recovered         <NA>         2023-04-28        2023-05-01
+      143           <NA> recovered         <NA>         2023-04-23        2023-05-01
+      144           <NA> recovered         <NA>         2023-04-19        2023-04-23
+      145           <NA> recovered         <NA>         2023-04-16        2023-04-22
+      146           <NA> recovered         <NA>         2023-04-29        2023-05-09
+      147           <NA> recovered         <NA>         2023-05-03        2023-05-07
+      148           <NA> recovered         <NA>         2023-04-25        2023-05-05
+      149           <NA> recovered         <NA>         2023-04-19        2023-05-02
+      150           <NA> recovered         <NA>         2023-04-18        2023-04-25
+      151     2023-05-11 recovered         <NA>         2023-05-01        2023-05-07
+      152           <NA> recovered         <NA>         2023-04-25        2023-05-06
+      153           <NA> recovered         <NA>         2023-04-19        2023-04-26
+      154           <NA> recovered         <NA>         2023-04-20        2023-04-27
+      155           <NA> recovered         <NA>         2023-04-25        2023-04-30
+      156           <NA> recovered         <NA>         2023-05-05        2023-05-10
+      157           <NA> recovered         <NA>         2023-04-22        2023-04-28
+      158     2023-05-21      died   2023-05-22         2023-04-27        2023-05-03
           ct_value
       1         NA
       2         NA
@@ -502,17 +502,17 @@
       12 22          Sean Shrestha confirmed   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1      2023-01-04      died   2023-01-18               <NA>              <NA>
-      2      2023-01-02      died   2023-02-09         2022-12-26        2023-01-02
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
-      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
-      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
-      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
-      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      8      2023-01-02 recovered         <NA>         2022-12-26        2023-01-03
-      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
-      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
-      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
+      2      2023-01-02      died   2023-02-09         2022-12-30        2023-01-08
+      3            <NA> recovered         <NA>         2022-12-31        2023-01-05
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-04
+      5      2023-01-14 recovered         <NA>         2022-12-29        2023-01-02
+      6            <NA> recovered         <NA>         2022-12-28        2023-01-05
+      7            <NA> recovered         <NA>         2022-12-30        2023-01-04
+      8      2023-01-02 recovered         <NA>         2022-12-28        2023-01-09
+      9            <NA> recovered         <NA>         2022-12-29        2023-01-04
+      10           <NA> recovered         <NA>         2022-12-29        2023-01-04
+      11           <NA> recovered         <NA>         2022-12-31        2023-01-03
+      12           <NA> recovered         <NA>         2022-12-27        2023-01-05
          ct_value
       1        NA
       2      25.8
@@ -550,17 +550,17 @@
       12 22    Thomas Morales  probable   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1      2023-01-04 recovered         <NA>               <NA>              <NA>
-      2            <NA> recovered         <NA>         2022-12-26        2023-01-02
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
-      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
-      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
-      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
-      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      8            <NA> recovered         <NA>         2022-12-26        2023-01-03
-      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
-      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
-      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
+      2            <NA> recovered         <NA>         2022-12-30        2023-01-08
+      3            <NA> recovered         <NA>         2022-12-31        2023-01-05
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-04
+      5      2023-01-14 recovered         <NA>         2022-12-29        2023-01-02
+      6            <NA> recovered         <NA>         2022-12-28        2023-01-05
+      7            <NA> recovered         <NA>         2022-12-30        2023-01-04
+      8            <NA> recovered         <NA>         2022-12-28        2023-01-09
+      9            <NA> recovered         <NA>         2022-12-29        2023-01-04
+      10           <NA> recovered         <NA>         2022-12-29        2023-01-04
+      11           <NA> recovered         <NA>         2022-12-31        2023-01-03
+      12           <NA> recovered         <NA>         2022-12-27        2023-01-05
          ct_value
       1        NA
       2      25.2
@@ -597,17 +597,17 @@
       12 22 vu5Ak6RZkf confirmed   m  24 2023-01-02     2023-01-02           <NA>
            outcome date_outcome date_first_contact date_last_contact ct_value
       1       died   2023-01-18               <NA>              <NA>     26.4
-      2       died   2023-02-09         2022-12-26        2023-01-02       NA
-      3  recovered         <NA>         2022-12-30        2023-01-03     26.1
-      4  recovered         <NA>         2022-12-31        2023-01-03       NA
-      5  recovered         <NA>         2023-01-01        2023-01-02       NA
-      6  recovered         <NA>         2023-01-02        2023-01-06       NA
-      7  recovered         <NA>         2023-01-01        2023-01-04     23.9
-      8  recovered         <NA>         2022-12-26        2023-01-03       NA
-      9  recovered         <NA>         2023-01-02        2023-01-05     22.3
-      10 recovered         <NA>         2023-01-06        2023-01-09       NA
-      11 recovered         <NA>         2023-01-01        2023-01-03     24.2
-      12 recovered         <NA>         2023-01-02        2023-01-05     25.6
+      2       died   2023-02-09         2022-12-30        2023-01-08       NA
+      3  recovered         <NA>         2022-12-31        2023-01-05     26.1
+      4  recovered         <NA>         2022-12-31        2023-01-04       NA
+      5  recovered         <NA>         2022-12-29        2023-01-02       NA
+      6  recovered         <NA>         2022-12-28        2023-01-05       NA
+      7  recovered         <NA>         2022-12-30        2023-01-04     23.9
+      8  recovered         <NA>         2022-12-28        2023-01-09       NA
+      9  recovered         <NA>         2022-12-29        2023-01-04     22.3
+      10 recovered         <NA>         2022-12-29        2023-01-04       NA
+      11 recovered         <NA>         2022-12-31        2023-01-03     24.2
+      12 recovered         <NA>         2022-12-27        2023-01-05     25.6
 
 # sim_linelist works as expected with age structure
 
@@ -631,17 +631,17 @@
       12 22           Qaaid al-Madani  probable   m  48 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1            <NA> recovered         <NA>               <NA>              <NA>
-      2            <NA> recovered         <NA>         2022-12-26        2023-01-02
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
-      4            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      5            <NA> recovered         <NA>         2023-01-01        2023-01-02
-      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
-      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      8      2023-01-04 recovered         <NA>         2022-12-26        2023-01-03
-      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
-      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
-      11     2023-01-06 recovered         <NA>         2023-01-01        2023-01-03
-      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
+      2            <NA> recovered         <NA>         2022-12-30        2023-01-08
+      3            <NA> recovered         <NA>         2022-12-31        2023-01-05
+      4            <NA> recovered         <NA>         2022-12-31        2023-01-04
+      5            <NA> recovered         <NA>         2022-12-29        2023-01-02
+      6            <NA> recovered         <NA>         2022-12-28        2023-01-05
+      7            <NA> recovered         <NA>         2022-12-30        2023-01-04
+      8      2023-01-04 recovered         <NA>         2022-12-28        2023-01-09
+      9            <NA> recovered         <NA>         2022-12-29        2023-01-04
+      10           <NA> recovered         <NA>         2022-12-29        2023-01-04
+      11     2023-01-06 recovered         <NA>         2022-12-31        2023-01-03
+      12           <NA> recovered         <NA>         2022-12-27        2023-01-05
          ct_value
       1        NA
       2      28.2
@@ -678,17 +678,17 @@
       12 22           Qaaid al-Madani  probable   m  48 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1            <NA> recovered         <NA>               <NA>              <NA>
-      2            <NA> recovered         <NA>         2022-12-26        2023-01-02
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
-      4            <NA> recovered         <NA>         2022-12-31        2023-01-03
-      5            <NA> recovered         <NA>         2023-01-01        2023-01-02
-      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
-      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      8      2023-01-04 recovered         <NA>         2022-12-26        2023-01-03
-      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
-      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
-      11     2023-01-06 recovered         <NA>         2023-01-01        2023-01-03
-      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
+      2            <NA> recovered         <NA>         2022-12-30        2023-01-08
+      3            <NA> recovered         <NA>         2022-12-31        2023-01-05
+      4            <NA> recovered         <NA>         2022-12-31        2023-01-04
+      5            <NA> recovered         <NA>         2022-12-29        2023-01-02
+      6            <NA> recovered         <NA>         2022-12-28        2023-01-05
+      7            <NA> recovered         <NA>         2022-12-30        2023-01-04
+      8      2023-01-04 recovered         <NA>         2022-12-28        2023-01-09
+      9            <NA> recovered         <NA>         2022-12-29        2023-01-04
+      10           <NA> recovered         <NA>         2022-12-29        2023-01-04
+      11     2023-01-06 recovered         <NA>         2022-12-31        2023-01-03
+      12           <NA> recovered         <NA>         2022-12-27        2023-01-05
          ct_value
       1        NA
       2      28.2
@@ -711,45 +711,45 @@
         config = create_config(last_contact_distribution = function(x) stats::rgeom(
           n = x, prob = 0.5)))
     Output
-         id         case_name case_type sex age date_onset date_reporting
-      1   1      Lily Camacho confirmed   f  24 2023-01-01     2023-01-01
-      2   2      Sad el-Irani suspected   m  51 2023-01-01     2023-01-01
-      3   3  Tristan Benjamin suspected   m  53 2023-01-01     2023-01-01
-      4   5    Treven Cornejo  probable   m  83 2023-01-01     2023-01-01
-      5   6   Kevin Contreras suspected   m   2 2023-01-01     2023-01-01
-      6   8      Tyler Garcia suspected   m  65 2023-01-01     2023-01-01
-      7  11  Halle Batchelder  probable   f  90 2023-01-01     2023-01-01
-      8  12  Tayyiba el-Hamid confirmed   f  66 2023-01-01     2023-01-01
-      9  13   Mahaa el-Moussa confirmed   f  19 2023-01-01     2023-01-01
-      10 18    Matthew Chavez confirmed   m  35 2023-01-02     2023-01-02
-      11 20     Martin Gaspar confirmed   m  19 2023-01-02     2023-01-02
-      12 22 Haaroon el-Firman confirmed   m  16 2023-01-02     2023-01-02
+         id             case_name case_type sex age date_onset date_reporting
+      1   1          Claire Hicks confirmed   f  44 2023-01-01     2023-01-01
+      2   2           Ashwini Ali confirmed   f  77 2023-01-01     2023-01-01
+      3   3         Danielle Kuhn  probable   f  90 2023-01-01     2023-01-01
+      4   5       Treven Gallegos confirmed   m  19 2023-01-01     2023-01-01
+      5   6         Lauren Nguyen suspected   f  17 2023-01-01     2023-01-01
+      6   8        Mahdi al-Amini  probable   m  75 2023-01-01     2023-01-01
+      7  11      Brandon O'Reilly confirmed   m  46 2023-01-01     2023-01-01
+      8  12           Selena Chun confirmed   f  19 2023-01-01     2023-01-01
+      9  13          Royse Galvan confirmed   m  75 2023-01-01     2023-01-01
+      10 18       Fahmi al-Masood suspected   m  24 2023-01-02     2023-01-02
+      11 20      Kifaaya el-Ameen confirmed   f  79 2023-01-02     2023-01-02
+      12 22 Martin Cavazos Castro  probable   m  39 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
-      1      2023-02-09      died   2023-02-23               <NA>              <NA>
-      2            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      3            <NA> recovered         <NA>         2023-01-01        2023-01-02
-      4            <NA> recovered         <NA>         2022-12-31        2023-01-01
-      5            <NA> recovered         <NA>         2022-12-31        2023-01-05
-      6      2023-01-03 recovered         <NA>         2022-12-30        2023-01-02
-      7            <NA> recovered         <NA>         2022-12-29        2023-01-01
-      8            <NA>      died   2023-01-09         2022-12-31        2023-01-01
-      9            <NA> recovered         <NA>         2022-12-30        2023-01-02
-      10     2023-01-07      died   2023-01-11         2022-12-28        2023-01-02
+      1            <NA> recovered         <NA>               <NA>              <NA>
+      2            <NA> recovered         <NA>         2022-12-31        2023-01-07
+      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
+      4            <NA> recovered         <NA>         2022-12-29        2023-01-02
+      5            <NA>      died   2023-01-16         2022-12-27        2023-01-01
+      6            <NA> recovered         <NA>         2022-12-28        2023-01-04
+      7            <NA> recovered         <NA>         2022-12-28        2023-01-02
+      8            <NA> recovered         <NA>         2022-12-29        2023-01-01
+      9            <NA> recovered         <NA>         2022-12-28        2023-01-01
+      10           <NA> recovered         <NA>         2022-12-30        2023-01-01
       11           <NA> recovered         <NA>         2022-12-29        2023-01-02
-      12           <NA> recovered         <NA>         2022-12-31        2023-01-02
+      12           <NA> recovered         <NA>         2022-12-30        2023-01-03
          ct_value
-      1      23.1
-      2        NA
+      1      25.4
+      2      27.6
       3        NA
-      4        NA
+      4      24.4
       5        NA
       6        NA
-      7        NA
-      8      24.5
-      9      25.8
-      10     23.3
-      11     30.3
-      12     25.3
+      7      21.7
+      8      26.9
+      9      22.8
+      10       NA
+      11     26.2
+      12       NA
 
 # sim_linelist works as expected with modified config parameters
 
@@ -774,17 +774,17 @@
       12 22          Sean Shrestha confirmed   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1      2023-01-04      died   2023-01-18               <NA>              <NA>
-      2      2023-01-02      died   2023-02-09         2022-12-27        2023-01-03
-      3            <NA> recovered         <NA>         2022-12-31        2023-01-04
-      4      2023-01-05 recovered         <NA>         2023-01-01        2023-01-04
-      5      2023-01-14 recovered         <NA>         2023-01-02        2023-01-03
-      6            <NA> recovered         <NA>         2023-01-05        2023-01-09
-      7            <NA> recovered         <NA>         2023-01-03        2023-01-06
-      8      2023-01-02 recovered         <NA>         2022-12-28        2023-01-05
-      9            <NA> recovered         <NA>         2023-01-05        2023-01-08
-      10           <NA> recovered         <NA>         2023-01-09        2023-01-12
-      11           <NA> recovered         <NA>         2023-01-02        2023-01-04
-      12           <NA> recovered         <NA>         2023-01-04        2023-01-07
+      2      2023-01-02      died   2023-02-09         2022-12-30        2023-01-11
+      3            <NA> recovered         <NA>         2022-12-31        2023-01-07
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-05
+      5      2023-01-14 recovered         <NA>         2022-12-29        2023-01-04
+      6            <NA> recovered         <NA>         2022-12-28        2023-01-07
+      7            <NA> recovered         <NA>         2022-12-30        2023-01-07
+      8      2023-01-02 recovered         <NA>         2022-12-28        2023-01-12
+      9            <NA> recovered         <NA>         2022-12-29        2023-01-06
+      10           <NA> recovered         <NA>         2022-12-29        2023-01-06
+      11           <NA> recovered         <NA>         2022-12-31        2023-01-04
+      12           <NA> recovered         <NA>         2022-12-27        2023-01-07
          ct_value
       1        NA
       2      25.8
@@ -822,17 +822,17 @@
       12 22          Sean Shrestha confirmed   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1      2023-01-04      died   2023-01-18               <NA>              <NA>
-      2      2023-01-02      died   2023-02-09         2022-12-26        2023-01-02
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
-      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
-      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
-      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
-      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      8      2023-01-02 recovered         <NA>         2022-12-26        2023-01-03
-      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
-      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
-      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
+      2      2023-01-02      died   2023-02-09         2022-12-30        2023-01-08
+      3            <NA> recovered         <NA>         2022-12-31        2023-01-05
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-04
+      5      2023-01-14 recovered         <NA>         2022-12-29        2023-01-02
+      6            <NA> recovered         <NA>         2022-12-28        2023-01-05
+      7            <NA> recovered         <NA>         2022-12-30        2023-01-04
+      8      2023-01-02 recovered         <NA>         2022-12-28        2023-01-09
+      9            <NA> recovered         <NA>         2022-12-29        2023-01-04
+      10           <NA> recovered         <NA>         2022-12-29        2023-01-04
+      11           <NA> recovered         <NA>         2022-12-31        2023-01-03
+      12           <NA> recovered         <NA>         2022-12-27        2023-01-05
          ct_value
       1        NA
       2      25.8
@@ -870,17 +870,17 @@
       12 22    Thomas Morales  probable   m  24 2023-01-02     2023-01-02
          date_admission   outcome date_outcome date_first_contact date_last_contact
       1      2023-01-04 recovered         <NA>               <NA>              <NA>
-      2      2023-01-02 recovered         <NA>         2022-12-26        2023-01-02
-      3            <NA> recovered         <NA>         2022-12-30        2023-01-03
-      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-03
-      5      2023-01-14 recovered         <NA>         2023-01-01        2023-01-02
-      6            <NA> recovered         <NA>         2023-01-02        2023-01-06
-      7            <NA> recovered         <NA>         2023-01-01        2023-01-04
-      8      2023-01-02 recovered         <NA>         2022-12-26        2023-01-03
-      9            <NA> recovered         <NA>         2023-01-02        2023-01-05
-      10           <NA> recovered         <NA>         2023-01-06        2023-01-09
-      11           <NA> recovered         <NA>         2023-01-01        2023-01-03
-      12           <NA> recovered         <NA>         2023-01-02        2023-01-05
+      2      2023-01-02 recovered         <NA>         2022-12-30        2023-01-08
+      3            <NA> recovered         <NA>         2022-12-31        2023-01-05
+      4      2023-01-05 recovered         <NA>         2022-12-31        2023-01-04
+      5      2023-01-14 recovered         <NA>         2022-12-29        2023-01-02
+      6            <NA> recovered         <NA>         2022-12-28        2023-01-05
+      7            <NA> recovered         <NA>         2022-12-30        2023-01-04
+      8      2023-01-02 recovered         <NA>         2022-12-28        2023-01-09
+      9            <NA> recovered         <NA>         2022-12-29        2023-01-04
+      10           <NA> recovered         <NA>         2022-12-29        2023-01-04
+      11           <NA> recovered         <NA>         2022-12-31        2023-01-03
+      12           <NA> recovered         <NA>         2022-12-27        2023-01-05
          ct_value
       1        NA
       2      25.2

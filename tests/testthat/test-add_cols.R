@@ -6,88 +6,54 @@ onset_to_death <- function(x) {
 }
 onset_to_recovery <- function(x) rep(NA, times = x)
 
-test_that(".add_date_contact works as expected with contact_type = 'last'", {
-  ll <- readRDS(file = file.path("testdata", "pre_date_last_contact.rds"))
+test_that(".add_date_contact works as expected", {
+  ll <- readRDS(file = file.path("testdata", "pre_date_contact.rds"))
   linelist <- .add_date_contact(
     .data = ll,
-    contact_type = "last",
-    outbreak_start_date = as.Date("2023-01-01"),
-    distribution = function(x) stats::rpois(n = x, lambda = 3)
+    first_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+    last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+    outbreak_start_date = as.Date("2023-01-01")
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_last_contact, class = "Date")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
-  expect_identical(colnames(linelist), c(colnames(ll), "date_last_contact"))
-})
-
-test_that(".add_date_contact works as expected with contact_type = 'first'", {
-  ll <- readRDS(file.path("testdata", "pre_date_first_contact.rds"))
-  linelist <- .add_date_contact(
-    .data = ll,
-    contact_type = "first",
-    distribution = function(x) stats::rpois(n = x, lambda = 3)
-  )
-  expect_s3_class(linelist, class = "data.frame")
   expect_s3_class(linelist$date_first_contact, class = "Date")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
-  expect_identical(colnames(linelist), c(colnames(ll), "date_first_contact"))
-})
-
-test_that(".add_date_contact (last) works as expected with different param", {
-  ll <- readRDS(file.path("testdata", "pre_date_last_contact.rds"))
-  linelist <- .add_date_contact(
-    .data = ll,
-    contact_type = "last",
-    outbreak_start_date = as.Date("2023-01-01"),
-    distribution = function(x) stats::rpois(n = x, lambda = 1)
+  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 2L))
+  expect_identical(
+    colnames(linelist),
+    c(colnames(ll), c("date_first_contact", "date_last_contact"))
   )
-  expect_s3_class(linelist, class = "data.frame")
-  expect_s3_class(linelist$date_last_contact, class = "Date")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
-  expect_identical(colnames(linelist), c(colnames(ll), "date_last_contact"))
-})
-
-test_that(".add_date_contact (first) works as expected with different param", {
-  ll <- readRDS(file.path("testdata", "pre_date_first_contact.rds"))
-  linelist <- .add_date_contact(
-    .data = ll,
-    contact_type = "first",
-    distribution = function(x) stats::rpois(n = x, lambda = 1)
-  )
-  expect_s3_class(linelist, class = "data.frame")
-  expect_s3_class(linelist$date_first_contact, class = "Date")
-  expect_identical(dim(linelist), c(nrow(ll), ncol(ll) + 1L))
-  expect_identical(colnames(linelist), c(colnames(ll), "date_first_contact"))
 })
 
 test_that(".add_date_contact fails as expected for non-integers", {
-  ll <- readRDS(file.path("testdata", "pre_date_last_contact.rds"))
+  ll <- readRDS(file.path("testdata", "pre_date_contact.rds"))
   expect_error(
     .add_date_contact(
       .data = ll,
-      contact_type = "last",
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = function(x) stats::rlnorm(n = x, meanlog = 1, sdlog = 1)
+      first_contact_distribution = function(x) {
+        stats::rlnorm(n = x, meanlog = 1, sdlog = 1)
+      },
+      last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+      outbreak_start_date = as.Date("2023-01-01")
     ),
-    regexp = "(contact distribution)*(must)*(produce)*(positive integers)"
+    regexp = "(contact distribution)*(must)*(produce)*(nonnegative integers)"
   )
 
   expect_error(
     .add_date_contact(
       .data = ll,
-      contact_type = "last",
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = function(x) "x"
+      first_contact_distribution = function(x) "x",
+      last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+      outbreak_start_date = as.Date("2023-01-01")
     ),
-    regexp = "(contact distribution)*(must)*(produce)*(positive integers)"
+    regexp = "(contact distribution)*(must)*(produce)*(nonnegative integers)"
   )
 
   expect_error(
     .add_date_contact(
       .data = ll,
-      contact_type = "last",
-      outbreak_start_date = as.Date("2023-01-01"),
-      distribution = "pois"
+      first_contact_distribution = "pois",
+      last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+      outbreak_start_date = as.Date("2023-01-01")
     ),
     regexp = "(Assertion)*(failed)*(Must be a function, not 'character')"
   )
