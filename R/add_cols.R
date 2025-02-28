@@ -12,11 +12,9 @@
 #'
 #' @param .data A `<data.frame>` containing the infectious history from a
 #' branching process simulation ([.sim_network_bp()]).
-#' @param contact_type A `character` with the type of contact, either first
-#' contact (`"first"`), or last contact (`"last"`).
-#' @param distribution A `character` with the name of the distribution,
-#' following the base R convention for distribution naming (e.g. Poisson
-#' is `pois`).
+#' @param first_contact_distribution,last_contact_distribution A `function` to
+#' generate the time for the first or last contact between the infector
+#' and infectee (exposure window). See [create_config()].
 #' @inheritParams sim_linelist
 #'
 #' @name .add_cols
@@ -30,40 +28,38 @@ NULL
 
 #' @name .add_cols
 .add_date_contact <- function(.data,
-                              contact_type = c("first", "last"),
-                              distribution,
-                              outbreak_start_date = NULL) {
-  contact_type <- match.arg(contact_type)
+                              first_contact_distribution,
+                              last_contact_distribution,
+                              outbreak_start_date) {
   .check_func_req_args(
-    distribution,
-    func_name = paste0(contact_type, "_contact_distribution")
+    first_contact_distribution,
+    func_name = "first_contact_distribution"
   )
-  distribution_eval <- distribution(1)
+  .check_func_req_args(
+    last_contact_distribution,
+    func_name = "last_contact_distribution"
+  )
+  distribution_eval <- c(
+    first_contact_distribution(1),
+    last_contact_distribution(1)
+  )
   # random numbers generated from discrete distributions produce integers
-  if (!is.integer(distribution_eval) || distribution_eval < 0) {
+  if (any(!is.integer(distribution_eval) | distribution_eval < 0)) {
     stop(
       "First or last contact distribution specified in `config` must be a ",
-      "(random) number generating functions that produces positive integers.",
+      "(random) number generating functions that produces nonnegative ",
+      "integers.",
       call. = FALSE
     )
   }
 
-  stopifnot(
-    "outbreak_start_date is only required for adding date of last contact" =
-      contact_type == "last" && !is.null(outbreak_start_date) ||
-      contact_type == "first" && is.null(outbreak_start_date)
-  )
+  # add date of first contact with infector
+  .data$date_first_contact <- .data$infector_time -
+    first_contact_distribution(nrow(.data))  + outbreak_start_date
 
-  contact_delay <- distribution(nrow(.data))
-
-  if (contact_type == "first") {
-    # add date of first contact with infector
-    .data$date_first_contact <- .data$date_last_contact - contact_delay
-  } else {
-    # add date of last contact with infector
-    .data$date_last_contact <- .data$infector_time + contact_delay +
-      outbreak_start_date
-  }
+  # add date of last contact with infector
+  .data$date_last_contact <- .data$infector_time +
+    last_contact_distribution(nrow(.data)) + outbreak_start_date
 
   # return data
   .data

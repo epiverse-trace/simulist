@@ -13,9 +13,9 @@ history \verb{<data.frame>}}
 \usage{
 .add_date_contact(
   .data,
-  contact_type = c("first", "last"),
-  distribution,
-  outbreak_start_date = NULL
+  first_contact_distribution,
+  last_contact_distribution,
+  outbreak_start_date
 )
 
 .add_hospitalisation(.data, onset_to_hosp, hosp_risk)
@@ -39,12 +39,9 @@ history \verb{<data.frame>}}
 \item{.data}{A \verb{<data.frame>} containing the infectious history from a
 branching process simulation (\code{\link[=.sim_network_bp]{.sim_network_bp()}}).}
 
-\item{contact_type}{A \code{character} with the type of contact, either first
-contact (\code{"first"}), or last contact (\code{"last"}).}
-
-\item{distribution}{A \code{character} with the name of the distribution,
-following the base R convention for distribution naming (e.g. Poisson
-is \code{pois}).}
+\item{first_contact_distribution, last_contact_distribution}{A \code{function} to
+generate the time for the first or last contact between the infector
+and infectee (exposure window). See \code{\link[=create_config]{create_config()}}.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
