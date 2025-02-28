@@ -72,14 +72,9 @@
 
   .data <- .add_date_contact(
     .data = .data,
-    contact_type = "last",
-    distribution = config$last_contact_distribution,
+    first_contact_distribution = config$first_contact_distribution,
+    last_contact_distribution = config$last_contact_distribution,
     outbreak_start_date = outbreak_start_date
-  )
-  .data <- .add_date_contact(
-    .data = .data,
-    contact_type = "first",
-    distribution = config$first_contact_distribution
   )
 
   # add random age and sex
