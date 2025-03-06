@@ -89,8 +89,12 @@ test_that("truncate_linelist works as expected with non-integer truncation", {
   expect_false(ll[92, "case_name"] %in% ll_trunc_excl$case_name)
 
   # events on 2023-03-16 still in the linelist based on non-integer truncation
-  trunc_date_incl %in% as.character(as.Date(unlist(ll_trunc_incl[, date_cols])))
-  trunc_date_excl %in% as.character(as.Date(unlist(ll_trunc_excl[, date_cols])))
+  trunc_date_incl %in% as.character(
+    as.Date(unlist(ll_trunc_incl[, date_cols]), origin = "1970-01-01")
+  )
+  trunc_date_excl %in% as.character(
+    as.Date(unlist(ll_trunc_excl[, date_cols]),  origin = "1970-01-01")
+  )
 })
 
 test_that("truncate_linelist works as expected with forward direction", {
