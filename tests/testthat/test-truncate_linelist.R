@@ -66,12 +66,12 @@ test_that("truncate_linelist works as expected with forward direction", {
   # truncated line list has no dates after truncation day
   trunc_date <- min_date + 14
   expect_true(
-    all(unlist(ll_trunc[, date_cols]) < (trunc_date), na.rm = TRUE)
+    all(unlist(ll_trunc[, date_cols]) < trunc_date, na.rm = TRUE)
   )
   # original line list has dates between truncation day and max date
   expect_true(
-    all(unlist(ll[, date_cols]) <= trunc_date, na.rm = TRUE) &&
-      any(unlist(ll[, date_cols]) > (trunc_date), na.rm = TRUE)
+    all(unlist(ll[, date_cols]) <= max_date, na.rm = TRUE) &&
+      any(unlist(ll[, date_cols]) > trunc_date, na.rm = TRUE)
   )
 })
 
@@ -81,7 +81,9 @@ test_that("truncate_linelist workds as expected with <Date> truncation_day", {
     truncation_day = as.Date("2023-03-01")
   )
   expect_gt(nrow(ll), nrow(ll_trunc))
-  expect_true(all(ll_trunc$date_reporting < as.Date("2023-03-01")))
+  expect_true(
+    all(unlist(ll_trunc[, date_cols]) < as.Date("2023-03-01"), na.rm = TRUE)
+  )
 })
 
 test_that("truncate_linelist sets dates as NA when between events", {
