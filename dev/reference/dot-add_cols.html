@@ -87,9 +87,9 @@ as former function is called later in the simulation).</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.add_date_contact</span><span class="op">(</span></span>
 <span>  <span class="va">.data</span>,</span>
-<span>  contact_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"first"</span>, <span class="st">"last"</span><span class="op">)</span>,</span>
-<span>  <span class="va">distribution</span>,</span>
-<span>  outbreak_start_date <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  <span class="va">first_contact_distribution</span>,</span>
+<span>  <span class="va">last_contact_distribution</span>,</span>
+<span>  <span class="va">outbreak_start_date</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">.add_hospitalisation</span><span class="op">(</span><span class="va">.data</span>, <span class="va">onset_to_hosp</span>, <span class="va">hosp_risk</span><span class="op">)</span></span>
@@ -119,15 +119,10 @@ as former function is called later in the simulation).</p>
 branching process simulation (<code><a href="dot-sim_network_bp.html">.sim_network_bp()</a></code>).</p></dd>
 
 
-<dt id="arg-contact-type">contact_type<a class="anchor" aria-label="anchor" href="#arg-contact-type"></a></dt>
-<dd><p>A <code>character</code> with the type of contact, either first
-contact (<code>"first"</code>), or last contact (<code>"last"</code>).</p></dd>
-
-
-<dt id="arg-distribution">distribution<a class="anchor" aria-label="anchor" href="#arg-distribution"></a></dt>
-<dd><p>A <code>character</code> with the name of the distribution,
-following the base R convention for distribution naming (e.g. Poisson
-is <code>pois</code>).</p></dd>
+<dt id="arg-first-contact-distribution-last-contact-distribution">first_contact_distribution, last_contact_distribution<a class="anchor" aria-label="anchor" href="#arg-first-contact-distribution-last-contact-distribution"></a></dt>
+<dd><p>A <code>function</code> to
+generate the time for the first or last contact between the infector
+and infectee (exposure window). See <code><a href="create_config.html">create_config()</a></code>.</p></dd>
 
 
 <dt id="arg-outbreak-start-date">outbreak_start_date<a class="anchor" aria-label="anchor" href="#arg-outbreak-start-date"></a></dt>
