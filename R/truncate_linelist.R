@@ -119,10 +119,16 @@ truncate_linelist <- function(linelist,
   reported_lgl_idx <- trunc_date > linelist$date_reporting
   linelist <- linelist[reported_lgl_idx, ]
 
-  # convert events (reporting, admissions & outcomes) more recent than
-  # truncation time to NA
-  linelist$date_outcome[linelist$date_outcome > trunc_date] <- NA_real_
-  linelist$date_admission[linelist$date_admission > trunc_date] <- NA_real_
+  # get date columns to be modified if after truncation time
+  date_col_lgl_idx <- vapply(
+    linelist, inherits, FUN.VALUE = logical(1), what = "Date"
+  )
+  date_cols <- colnames(linelist)[date_col_lgl_idx]
+  for (date_col in date_cols) {
+    # convert events (reporting, admissions & outcomes) more recent than
+    # truncation time to NA
+    linelist[[date_col]][linelist[[date_col]] > trunc_date] <- NA_real_
+  }
 
   row.names(linelist) <- NULL
   linelist
