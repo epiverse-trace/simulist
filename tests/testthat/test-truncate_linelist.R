@@ -60,6 +60,39 @@ test_that("truncate_linelist works as expected with different units", {
   )
 })
 
+test_that("truncate_linelist works as expected with non-integer truncation", {
+  # targetting row 90 & row 92 which are reported on 2023-03-16
+  # but differ by half a day
+  # row 90 max date minus reporting date of 30.85773
+  # row 92 max date minus reporting date of 30.20320
+
+  # both are "2023-03-16"
+  trunc_date_incl <- as.character(max_date - 30.15)
+  trunc_date_excl <- as.character(max_date - 30.5)
+  expect_identical(trunc_date_incl, trunc_date_excl)
+
+  # include both cases
+  ll_trunc_incl <- truncate_linelist(
+    linelist = ll,
+    truncation_day = 30.15
+  )
+  # exclude on case earlier on 2023-03-16 but not other half a day later
+  ll_trunc_excl <- truncate_linelist(
+    linelist = ll,
+    truncation_day = 30.5
+  )
+
+  # cases on the same day are kept or removed based on non-integer time/date
+  expect_true(ll[90, "case_name"] %in% ll_trunc_incl$case_name)
+  expect_true(ll[90, "case_name"] %in% ll_trunc_excl$case_name)
+  expect_true(ll[92, "case_name"] %in% ll_trunc_incl$case_name)
+  expect_false(ll[92, "case_name"] %in% ll_trunc_excl$case_name)
+
+  # events on 2023-03-16 still in the linelist based on non-integer truncation
+  trunc_date_incl %in% as.character(as.Date(unlist(ll_trunc_incl[, date_cols])))
+  trunc_date_excl %in% as.character(as.Date(unlist(ll_trunc_excl[, date_cols])))
+})
+
 test_that("truncate_linelist works as expected with forward direction", {
   ll_trunc <- truncate_linelist(linelist = ll, direction = "forward")
   expect_gt(nrow(ll), nrow(ll_trunc))
