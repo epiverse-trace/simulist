@@ -1,0 +1,87 @@
+---
+title: 'simulist: An R package to simulate disease outbreak line list and contacts data'
+tags:
+  - R
+  - epidemiology
+  - outbreak analytics
+  - simulation
+  - branching process
+  - Epiverse-TRACE
+authors:
+  - name: Joshua W. Lambert
+    orcid: 0000-0001-5218-3046
+    affiliation: "1, 2"
+    corresponding: true
+  - name: Adam J. Kucharski
+    orcid: 0000-0001-8814-9421
+    affiliation: "1, 2"
+  - name: Carmen Tamayo Cuartero
+    orcid: 0000-0003-4184-2864
+    affiliation: "1, 2"
+affiliations:
+  - name: Department of Infectious Disease Epidemiology and Dynamics, London School of Hygiene & Tropical Medicine, London, United Kingdom
+    index: 1
+  - name: Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine, London, United Kingdom
+    index: 2
+date: 7 March 2025
+bibliography: paper.bib
+---
+
+# Summary
+
+![simulist package hex logo, containing the words simulist and underneath, powered by data.org, with overlapping rectangles above the words](../man/figures/logo.svg){ width=240px }\
+
+simulist is an open-source R package for simulating realistic infectious disease outbreak data. It is designed to allow users to generate data with specific disease outbreak characteristics by enabling flexible parameterisation of processes and variables, in particular, infectious disease epidemiology (e.g. delay distributions), contact patterns and demographic information, to simulate two common datasets in outbreak settings: 1) line list data, and 2) contact tracing data. It also offers post-processing of line list data to replicate right-truncation of real-time outbreak data, as well as creating "messy" data. Epidemic and pandemic preparedness requires robust analysis methods and a core understanding of outbreak data, we hope simulist can aid in both by enabling testing analysis models and use in teaching outbreak analytics.
+
+## Statement of need
+
+Synthetic data, with a known generating process, is required in many scenarios, including teaching concepts on data collection, data cleaning and data visualisation; and testing analysis methods for precision, adequacy and robustness. In the analysis of infectious disease outbreaks, termed _outbreak analytics_ [@polonskyOutbreakAnalyticsDeveloping2019a; jombartWhyDevelopmentOutbreak2021; @carterHowImproveOutbreak2021], one of the most common forms of data is a line list. This is a tabular dataset where each row corresponds to a single case in the outbreak recording information on person, place and time. Information for each case can include, but is not limited to, personal information (name, age, sex), key event dates (date of symptom onset, date of hospitalisation, date of outcome), clinical outcomes, and geographic information (coordinates, administrative area). Understanding and characterising the transmissibility and severity of infectious disease outbreaks typically use line list data [@coriKeyDataOutbreak2017]. 
+
+In the ecosystem of R packages for epidemiology, there are a range of tools for simulating and analysing line list data [@jombartCRANTaskView2025], however, there are no stable, actively maintained and tested R packages that simulate epidemiologically realistic outbreak data[^1]. The simulist R package offers functionality to simulate outbreak data (line list and contact tracing) with options for users to define the epidemiological and demographic characteristics of the outbreak, while also being designed on the principle of maximum interoperability with other related R packages, e.g. {epicontacts} [@campbellEpicontactsHandlingVisualisation2017], {epiparameter} [@lambertEpiparameterClassesHelper2025], and {cleanepi} [@maneCleanepiCleanStandardize2024]. Accepting epidemiological parameters directly from {epiparameter} facilitates generating synthetic data with the characteristics of past outbreaks.
+
+## State of the field
+
+The majority of outbreak analytics uses R and R packages extending the language to answer common epidemiological questions in an outbreak (ref). From basic data wrangling and data science using tools such as the tidyverse [@wickhamWelcomeTidyverse2019], to using advanced methods, for example nowcasting/forecasting of transmissibility [@abbottEstimatingTimevaryingReproduction2020a]  This is accompanied by several initiatives that teach epidemiology using R tooling [@batraEpidemiologistHandbook2021; @vallecamposEpiverseTRACETutorials2025] resulting in an active ecosystem of open-source tooling, teaching, and community engagement [@morganWHOHubPandemic2022], for example the [epinowcast community](https://www.epinowcast.org/).
+
+However, there is not to our knowledge a tool that offers an easy method to generate synthetic outbreak data, with a defined and highly customisable simulation model. The simulist R package, part of the Epiverse-TRACE ecosystem [@data.orgEpiverse2022], aims to fill this niche by offering line list simulation functionality that includes: custom parameterisation of epidemiological delay distribution, population-wide or age-stratified hospitalisation and death risks, uniform or age-structured populations, constant or time-varying case fatality risks, and customisable proportions of case types and contact tracing follow-up. This is complimented by post-processing to enable emulation of real-time outbreak dynamics (e.g. right-truncation and outbreak snapshotting) and messying data to mimic the types of issues encounter by people working with empirical outbreak data.
+
+## Key functions
+
+simulist offers two modules of functionality: 1) simulation and 2) post-processing. In the simulation module there are three functions: `sim_linelist()`, `sim_contacts()` and `sim_outbreak()`. Respectively these simulate, an outbreak line list (`data.frame`), a contact tracing data set (`data.frame`), and lastly both an outbreak line list and contact tracing data set that are linked (i.e. from the same outbreak) (`list` of `data.frame`s). All simulation function internally call a branching process model [@farringtonBranchingProcessModels2003a] with optionally a network adjusted to account for the fact that choosing someone at random by following up a contact chooses individuals with probability proportional to their number of contacts (ref). All simulation functions can be run without requiring the user to specify any parameters (function arguments) (e.g. `linelist <- sim_linelist()`), but all functions offer a range of arguments to modify the characteristics of the outbreak data. The parameters that can be specified by the user are organised into two level of importance. The parameters that control the branching process, key epidemiological delays, risks, and demographic parameters are the most important and can be adjusted by function arguments. Parameters of secondary importance, thought to rarely require changing, except for advanced use cases are passed to the `config` argument, to prevent the function signature becoming overly complex. Parameters required by `config` can easily be generated and modified with the `create_config()` function.
+
+![Figure 1: (a) daily incidence of symptom onset, hospital admission and deaths facetted by sex for an outbreak simulated with `sim_linelist()` and aggregated and plotted with incidence2 (Taylor, 2024). (b) an `<epicontacts>` network plotted after converted from the output of `sim_outbreak()` (this network is interactive when rendered in an IDE or online). (c) a connected dot plot of the events in a line list simulated with `sim_linelist()`. .\label{fig:simulist}](simulist-joss-fig.png) \
+
+Here we highlight some of the simulation functionality available:
+
+***Age-stratified hospitalisation and death risks***: the outbreak simulation has three risks: hospitalisation risk (`hosp_risk` argument), death risk in hospital (`hosp_death_risk`) and death risk outside of hospital (`non_hosp_death_risk`), which all, by default accept a single number to define the population risk. In many infectious disease outbreaks risk is non-uniform across ages, so simulist accepts risks stratified by age using a user-defined `data.frame` so any age-stratification is accepted. See the [Age-stratified hospitalisation and death risks vignette](https://epiverse-trace.github.io/simulist/index.html) for a complete explanation.
+
+***Age-structured population***: the outbreak simulation in simulist assumes a uniform population age between a lower and upper age range (0 and 90 by default). However, in order to accurately generate synthetic data for outbreak scenarios where the population age structure is known this can be input into the outbreak simulation, again using a user-defined `data.frame` to flexibility specify an arbitrary number of age groups and proportions. See the [Age-structured population vignette](https://epiverse-trace.github.io/simulist/dev/articles/age-struct-pop.html) for more details and a worked example.
+
+***Time-varying case fatality risk***: In addition to the ability to age-stratify hospitalisation and death risks, as outlined above, it is also possible to vary the fatality risk through time in the outbreak simulation. This is setup to accept a user-defined R function that takes the baseline risk and the simulation time ($t$) and calculates the fatality risk at time $t$. This is again setup in such a way as to maximise flexibility to the users and allows continuously varying (monotonic and non-monotonic functions)or discrete step-wise functions. The aim of this functionality is to phenomenologically mimic vaccination or non-pharmaceutical interventions without mechanistically modelling these in the simulation model. See the [Time-varying case fatality risk vignette](https://epiverse-trace.github.io/simulist/dev/articles/time-varying-cfr.html) for more explanation and examples.
+
+***Simulating empirical outbreak data***
+
+The outbreak simulation produces precise, standardised, and complete data, hereafter referred to as _ideal_ data. However, in reality those working with line list data often encounter a myriad of issues where the data they have available differs from the _ideal_ data. In simulist we offer two post-processing functions that modify _ideal_ line list data output by `sim_linelist()`to include two empirical characteristics, 1) real-time outbreak data and right-truncation and 2) inconsistent, missing, and duplicated data, so-called _messy_ data.
+
+Other functionality is documented in the [Get Started vignette](https://epiverse-trace.github.io/simulist/articles/simulist.html) and [Wrangling simulated outbreak data vignette](https://epiverse-trace.github.io/simulist/articles/wrangling-linelist.html).
+
+## Package Design
+
+The simulist package is developed around certain design principles: _interoperability_ with other R packages for upstream (e.g. {epiparameter}) or downstream (e.g. {epicontacts} \autoref{fig:simulist}) use; _ease of use_ of functions (all simulation functions have sensible defaults for use out-of-the-box); and _transparency_, all design decisions are documented in the [Design Principles vignette](https://epiverse-trace.github.io/simulist/articles/design-principles.html) and help developer onboarding. Simulation functions output a `data.frame` (or `list` of `data.frames` in the case of `sim_outbreak()`) enabling users to easily transform and manipulate the data, for example with
+the tidyverse R packages. 
+
+## Other resources
+
+simulist is documented through [vignettes](https://epiverse-trace.github.io/simulist/articles/), [function documentation](https://epiverse-trace.github.io/simulist/reference/index.html), it is also included within [Epiverse-TRACE open-source tutorials](https://epiverse-trace.github.io/tutorials/). 
+
+## Availability
+
+The simulist R package is open-source and licensed under MIT. The source code is available on GitHub. The package can be downloaded from [CRAN](hazattps://cran.r-project.org/package=simulist), [R-universe](https://epiverse-trace.r-universe.dev/simulist) or [GitHub](https://github.com/epiverse-trace/simulist). 
+
+# Acknowledgements
+
+We would like to thank the entire Epiverse-TRACE team and community. Particular thanks to Hugo Gruson and Pratik Gupte for contributing and reviewing the package; Chris Hartgerink for reviewing the package; Sebastian Funk and James Azam for discussions about the simulation and real-time outbreak data; and Karim Mané, Abdoelnaser Degoot and Andree Valle Campos for discussions around data cleaning. Lastly, we thank the R-core team for the maintenance of the R language and the epidemiology R community. We thank data.org for their funding and support.
+
+# References
+
+[^1]: This was found from an unstructured scoping review we conducted of other outbreak simulation tools, documented here: https://epiverse-trace.github.io/simulist/dev/index.html#related-projects
