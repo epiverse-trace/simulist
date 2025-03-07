@@ -300,7 +300,8 @@ between the <code>$date_onset</code> column and the
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
 <p><img src="reporting-delays-truncation_files/figure-html/plot-linelist-events-1.png" width="768"></p>
 <p>If we plot the difference between the date of symptom onset and
-reporting then the distribution is roughly lognormally distributed.</p>
+reporting then, as expected, the distribution is roughly lognormally
+distributed.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span></span>
@@ -396,60 +397,58 @@ In order to get data that is more representative of ongoing outbreak
 dynamics where recent cases are not yet recorded and may be revised
 upwards in the future the <code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> function can
 be applied.</p>
-<p>Re-simulating a simple line list using
-<code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>.</p>
+<p>Re-simulating a simple line list using <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>
+with a lognormal reporting delay with <code>meanlog = 2</code> and
+<code>sdlog = 0.5</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># set seed to produce small line list</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
 <span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
-<span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span></span>
+<span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
+<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># first 6 rows of linelist</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id              case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1           Kevin Pullen suspected   m   1 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  2 Carisa Flores-Gonzalez confirmed   f  29 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  3       Maazin el-Othman confirmed   m  78 2023-01-02     2023-01-02</span></span>
-<span><span class="co">#&gt; 4  5       Faisal el-Vaziri suspected   m  70 2023-01-05     2023-01-05</span></span>
-<span><span class="co">#&gt; 5  6           Lynsey Duron confirmed   f  28 2023-01-02     2023-01-02</span></span>
-<span><span class="co">#&gt; 6  8         Lilibeth Black confirmed   f  61 2023-01-04     2023-01-04</span></span>
+<span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1 Daiveante Labarrie confirmed   m  59 2023-01-01     2023-01-05</span></span>
+<span><span class="co">#&gt; 2  2       Phayd Garcia confirmed   m   3 2023-01-07     2023-01-13</span></span>
+<span><span class="co">#&gt; 3  3  Jenifer Castaneda suspected   f  53 2023-01-01     2023-01-07</span></span>
+<span><span class="co">#&gt; 4  8      Asya Woolfolk confirmed   f  42 2023-01-14     2023-01-25</span></span>
+<span><span class="co">#&gt; 5  9 Amaani el-Abdullah  probable   f  73 2023-01-03     2023-01-08</span></span>
+<span><span class="co">#&gt; 6 10       Bella Nguyen confirmed   f  89 2023-01-03     2023-01-11</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1     2023-01-03      died   2023-01-18               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2     2023-01-03      died   2023-02-09         2022-12-30        2023-01-08</span></span>
-<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-05</span></span>
-<span><span class="co">#&gt; 4     2023-01-08 recovered         &lt;NA&gt;         2022-12-31        2023-01-04</span></span>
-<span><span class="co">#&gt; 5     2023-01-06 recovered         &lt;NA&gt;         2022-12-30        2023-01-03</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-06</span></span>
+<span><span class="co">#&gt; 1     2023-01-05 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-27        2023-01-06</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-01        2023-01-04</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-07        2023-01-11</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-25        2023-01-04</span></span>
+<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-02</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
-<span><span class="co">#&gt; 1       NA</span></span>
-<span><span class="co">#&gt; 2     25.8</span></span>
-<span><span class="co">#&gt; 3     24.9</span></span>
-<span><span class="co">#&gt; 4       NA</span></span>
-<span><span class="co">#&gt; 5     24.5</span></span>
-<span><span class="co">#&gt; 6     26.4</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="variable-truncation-point-default">Variable truncation point (default)<a class="anchor" aria-label="anchor" href="#variable-truncation-point-default"></a>
-</h3>
-<p>The right-truncation point for each individual (row) in the line list
-might not be equal, if for example there are regional differences in
-time taken to input data into a health information system. The
-<code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> function has a <code>delay</code>
-argument, which accepts a function that generates random numbers from
-which the <em>truncation point</em> can be sampled.</p>
+<span><span class="co">#&gt; 1     22.3</span></span>
+<span><span class="co">#&gt; 2     27.4</span></span>
+<span><span class="co">#&gt; 3       NA</span></span>
+<span><span class="co">#&gt; 4     28.0</span></span>
+<span><span class="co">#&gt; 5       NA</span></span>
+<span><span class="co">#&gt; 6     26.9</span></span></code></pre></div>
+<p>The <em>truncation time</em> is the time/date at which we want to
+take a snapshot of the line list and see what it would have looked like
+on that day (i.e. real-time during the outbreak). By default
+<code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> will truncate from 14 days before the
+end of the outbreak (defined as the maximum date in the line list).</p>
 <div class="alert alert-primary">
 <p>Here we define the time between the latest, or user-specified date,
 and the time point at which data is truncated as the <em>truncation
 point</em>.</p>
-<p>In the plot below we show the truncation points as a cross for each
-case. If the cross falls before the truncation event, in this case date
-of reporting, then the case is removed from the linelist, if it falls
-after the date of reporting but before the hospital admission and/or
-outcome date they are set to <code>NA</code>.</p>
+<p>In the plot below we show the <em>truncation time</em> as a vertical
+line. If the date of reporting falls after the truncation time, then the
+case is removed from the line list, if it falls before the date of
+reporting but after the hospital admission and/or outcome date they are
+set to <code>NA</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy_linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
@@ -458,18 +457,8 @@ outcome date they are set to <code>NA</code>.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>ordering_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"date_onset"</span>, <span class="va">value</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># nolint consecutive_mutate_linter</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>case_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">case_name</span>, <span class="va">ordering_value</span>, <span class="va">min</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># nolint consecutive_mutate_linter</span></span>
 <span></span>
-<span><span class="va">trunc_point</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  case_name <span class="op">=</span> <span class="va">linelist</span><span class="op">$</span><span class="va">case_name</span>,</span>
-<span>  trunc_point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span></span>
-<span>        <span class="va">linelist</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"date_"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
-<span>      <span class="op">)</span>,</span>
-<span>      na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>    <span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span>, meanlog <span class="op">=</span> <span class="fl">2.75</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>    origin <span class="op">=</span> <span class="st">"1970-01-01"</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
+<span><span class="va">truncation_day</span> <span class="op">&lt;-</span> <span class="fl">14</span></span>
+<span><span class="va">trunc_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">tidy_linelist</span><span class="op">$</span><span class="va">value</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="va">truncation_day</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tidy_linelist</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span></span>
@@ -485,14 +474,7 @@ outcome date they are set to <code>NA</code>.</p>
 <span>    <span class="op">)</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">2</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">trunc_point</span>,</span>
-<span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
-<span>      x <span class="op">=</span> <span class="va">trunc_point</span>,</span>
-<span>      y <span class="op">=</span> <span class="va">case_name</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    shape <span class="op">=</span> <span class="fl">4</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">trunc_date</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Event date"</span>, date_breaks <span class="op">=</span> <span class="st">"2 week"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_y_discrete</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Case name"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span></span>
@@ -509,76 +491,44 @@ outcome date they are set to <code>NA</code>.</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>, axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 17 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 22 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_line()`).</span></span>
-<span><span class="co">#&gt; Warning: Removed 17 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 22 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
 <p><img src="reporting-delays-truncation_files/figure-html/plot-linelist-events-trunc-1.png" width="768"></p>
-<p>In this example one case is removed (Vladmir Sanchez) and two outcome
-times are set to <code>NA</code> (Benito Redding and Abdul Kadar
-el-Diab).</p>
+<p>In this example several cases are removed as the reporting date
+occurs after the truncation time.</p>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">linelist_trunc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span></span>
-<span>  linelist <span class="op">=</span> <span class="va">linelist</span>,</span>
-<span>  delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>By default <code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> will assume the event
-which is pertinent to the truncation of the data is the date of
-reporting (<code>$date_reporting</code>), as this is likely the date the
-data was input, even if this date is before the date of hospital
-admission (<code>$date_admission</code>) or date of outcome
-(<code>$date_outcome</code>). It also assumes that the date you want to
-sample the truncation times from is the end of the outbreak, which is
-defined as the latest date in any of the date columns of the line
-list.</p>
+<code class="sourceCode R"><span><span class="va">linelist_trunc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span>linelist <span class="op">=</span> <span class="va">linelist</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> assumes the event which is pertinent
+to the truncation of the data is the date of reporting
+(<code>$date_reporting</code>), as this is likely the date the case was
+first input into the line list, even if this date is before the date of
+hospital admission (<code>$date_admission</code>) or date of outcome
+(<code>$date_outcome</code>).</p>
 <p>Right-truncating line list date using {simulist} removes individuals
 (rows) when the sampled truncation time is less recent than the
-truncation event time (e.g. reporting date). For cases where the rows
-are kept because the truncation time is more recent than the truncation
-event, but there are subsequent events, such as date of hospitalisation,
-that are more recent than the truncation time, these events dates are
-set to <code>NA</code>. The reasoning being that these events are
-assumed to have not been reported yet.</p>
-</div>
-<div class="section level3">
-<h3 id="different-truncation-events">Different truncation events<a class="anchor" aria-label="anchor" href="#different-truncation-events"></a>
-</h3>
-<p>If the date influencing the right-truncation of line list date is not
-the date of reporting, but instead the date of symptom onset, date of
-hospitalisation, or date of outcome then this can be specified in
-<code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> by setting the
-<code>truncation_event</code> argument. This argument accepts
-<code>"reporting"</code> (default), <code>"onset"</code>,
-<code>"admission"</code>, <code>"outcome"</code>.</p>
+reporting date. For cases where the rows are kept because the truncation
+time is more recent than the truncation event, but there are subsequent
+events, such as date of hospitalisation, that are more recent than the
+truncation time, these events dates are set to <code>NA</code>. The
+reasoning being that these events are assumed to have not been reported
+yet.</p>
+<p>The <code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> function can also be used to
+reflect if the reporting of cases during an outbreak stopped on a given
+date.</p>
+<p>It is also possible to specify the <em>truncation time</em> as the
+number of days, weeks, months or years since the start of the outbreak.
+Here we right-truncate the line list 3 months since the start of the
+outbreak.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist_trunc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span></span>
 <span>  linelist <span class="op">=</span> <span class="va">linelist</span>,</span>
-<span>  delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>  truncation_event <span class="op">=</span> <span class="st">"outcome"</span></span>
+<span>  truncation_day <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  unit <span class="op">=</span> <span class="st">"months"</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"forward"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="fixed-truncation-point">Fixed truncation point<a class="anchor" aria-label="anchor" href="#fixed-truncation-point"></a>
-</h3>
-<p>The <code>delay</code> argument in <code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code>
-is flexible to allow the use of a variety of random number generators,
-such as different parametric probability distributions or different
-distribution parameters. This enables variability in the truncation.
-However, it may be warranted that the truncation point is the same for
-all cases. This could be the case if the reporting of cases during an
-outbreak stopped on a given date.</p>
-<p>To adjust the line list for right truncation using a fixed truncation
-point we can use the same setup as specifying a fixed
-<code>reporting_delay</code> as outlined above. This will remove all
-events more recent than this time slice.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">delay</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">6</span>, times <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span><span class="fu">delay</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 6 6 6 6 6 6 6 6 6 6</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">linelist_trunc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span>linelist <span class="op">=</span> <span class="va">linelist</span>, delay <span class="op">=</span> <span class="va">delay</span><span class="op">)</span></span></code></pre></div>
-</div>
 </div>
 <div class="section level2">
 <h2 id="truncate-to-emulate-different-stages-of-outbreak">Truncate to emulate different stages of outbreak<a class="anchor" aria-label="anchor" href="#truncate-to-emulate-different-stages-of-outbreak"></a>
@@ -606,7 +556,7 @@ the complete line list by aggregating to daily incidence using the
 {simulist} see the <a href="vis-linelist.html">Visualising simulated
 data</a> vignette.</p>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># set seed to produce single wave outbreak</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
@@ -637,22 +587,14 @@ early in the outbreak when the epicurve is growing (1st February 2023,
 epiweek 5), 2) in the middle of the outbreak (15th March 2023, epiweek
 11), and 3) late in the outbreak when the number of cases is declining
 and the end of the outbreak is near (1st May 2023, epiweek 18).</p>
-<p>We use the <code>max_date</code> argument in
-<code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> to specify the date we want to apply
-the right truncation to, i.e. the sample truncation times are applied to
-<code>max_date</code> and not the day the outbreak is considered over
-(day of last event, the default setting). For this example we will set
-the right-truncation delay distribution to zero so it does not remove
-any cases before the <code>max_date</code>, and use the default
-truncation event (reporting date).</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<p>We can specify a <code>&lt;Date&gt;</code> object to the
+<code>truncation_day</code> argument in <code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code>
+to specify the date we want to apply the right truncation to.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist_early</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span></span>
 <span>  linelist <span class="op">=</span> <span class="va">linelist</span>,</span>
-<span>  delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, times <span class="op">=</span> <span class="va">x</span><span class="op">)</span>,</span>
-<span>  max_date <span class="op">=</span> <span class="st">"2023-02-01"</span></span>
+<span>  truncation_day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-02-01"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Truncation max date is: 2023-02-01.</span></span>
-<span><span class="co">#&gt; Assuming an origin of '1970-01-01' in line with R &gt;= v4.3.0.</span></span>
 <span><span class="va">inci_early</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">linelist_early</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -662,13 +604,11 @@ truncation event (reporting date).</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">inci_early</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Early"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">25</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">linelist_mid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span></span>
 <span>  linelist <span class="op">=</span> <span class="va">linelist</span>,</span>
-<span>  delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, times <span class="op">=</span> <span class="va">x</span><span class="op">)</span>,</span>
-<span>  max_date <span class="op">=</span> <span class="st">"2023-03-15"</span></span>
+<span>  truncation_day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-03-15"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Truncation max date is: 2023-03-15.</span></span>
-<span><span class="co">#&gt; Assuming an origin of '1970-01-01' in line with R &gt;= v4.3.0.</span></span>
 <span><span class="va">inci_mid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">linelist_mid</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -678,13 +618,11 @@ truncation event (reporting date).</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">inci_mid</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Mid"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">25</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">linelist_late</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span></span>
 <span>  linelist <span class="op">=</span> <span class="va">linelist</span>,</span>
-<span>  delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, times <span class="op">=</span> <span class="va">x</span><span class="op">)</span>,</span>
-<span>  max_date <span class="op">=</span> <span class="st">"2023-05-01"</span></span>
+<span>  truncation_day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-05-01"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Truncation max date is: 2023-05-01.</span></span>
-<span><span class="co">#&gt; Assuming an origin of '1970-01-01' in line with R &gt;= v4.3.0.</span></span>
 <span><span class="va">inci_late</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">linelist_late</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -696,17 +634,26 @@ truncation event (reporting date).</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">25</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reporting-delays-truncation_files/figure-html/trunc-stages-1.png" width="30%"><img src="reporting-delays-truncation_files/figure-html/trunc-stages-2.png" width="30%"><img src="reporting-delays-truncation_files/figure-html/trunc-stages-3.png" width="30%"></p>
 <p>Next we repeat this procedure of creating data sets for early, mid,
-and late in the outbreak. For this example we will use the default
-right-truncation delay distribution (lognormal with
-<code>meanlog = 0.58</code> and <code>sdlog = 0.47</code>) and default
-truncation event (reporting date).</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+and late in the outbreak. For this example we will use a reporting delay
+to illustrate the issue of under-reporting of recent cases when there is
+a time delay between symptom onset and reporting.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># set seed to produce single wave outbreak</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
+<span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
+<span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
+<span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
+<span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
+<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">5000</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist_early</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span></span>
 <span>  linelist <span class="op">=</span> <span class="va">linelist</span>,</span>
-<span>  max_date <span class="op">=</span> <span class="st">"2023-02-01"</span></span>
+<span>  truncation_day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-02-01"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Truncation max date is: 2023-02-01.</span></span>
-<span><span class="co">#&gt; Assuming an origin of '1970-01-01' in line with R &gt;= v4.3.0.</span></span>
 <span><span class="va">inci_early</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">linelist_early</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -716,13 +663,11 @@ truncation event (reporting date).</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">inci_early</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Early"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">25</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">linelist_mid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span></span>
 <span>  linelist <span class="op">=</span> <span class="va">linelist</span>,</span>
-<span>  delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>  max_date <span class="op">=</span> <span class="st">"2023-03-15"</span></span>
+<span>  truncation_day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-03-15"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Truncation max date is: 2023-03-15.</span></span>
-<span><span class="co">#&gt; Assuming an origin of '1970-01-01' in line with R &gt;= v4.3.0.</span></span>
 <span><span class="va">inci_mid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">linelist_mid</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -732,13 +677,11 @@ truncation event (reporting date).</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">inci_mid</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Mid"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">25</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">linelist_late</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/truncate_linelist.html">truncate_linelist</a></span><span class="op">(</span></span>
 <span>  linelist <span class="op">=</span> <span class="va">linelist</span>,</span>
-<span>  delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>  max_date <span class="op">=</span> <span class="st">"2023-05-01"</span></span>
+<span>  truncation_day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-05-01"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Truncation max date is: 2023-05-01.</span></span>
-<span><span class="co">#&gt; Assuming an origin of '1970-01-01' in line with R &gt;= v4.3.0.</span></span>
 <span><span class="va">inci_late</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://www.reconverse.org/incidence2/reference/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">linelist_late</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
