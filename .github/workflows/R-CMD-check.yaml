@@ -54,6 +54,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
+          # Test with the 3 R versions and the 3 platforms from CRAN checks
           - {os: macOS-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
