@@ -58,8 +58,6 @@
   # add delays dates
   .data$date_onset <- .data$time + outbreak_start_date
 
-  .data <- .add_reporting_delay(.data, reporting_delay)
-
   # add exposure date for cases
   id_time <- data.frame(infector = .data$id, infector_time = .data$time)
 
@@ -117,6 +115,12 @@
     # add hospitalisation and death dates
     .data$date_admission <- .data$hospitalisation + outbreak_start_date
     .data$date_outcome <- .data$outcome_time + outbreak_start_date
+
+    .data <- .add_reporting_delay(
+      .data,
+      reporting_delay = reporting_delay,
+      data_entry_event = config$data_entry_event
+    )
 
     linelist_cols <- c(
       "id", "case_type", "sex", "age", "date_onset", "date_reporting",
