@@ -1,14 +1,14 @@
+config_length <- 6
+config_names <- c(
+  "last_contact_distribution", "first_contact_distribution",
+  "ct_distribution", "network", "time_varying_death_risk", "data_entry_event"
+)
+
 test_that("create_config works as expected with defaults", {
   config <- create_config()
   expect_type(config, type = "list")
-  expect_length(config, 5)
-  expect_named(
-    config,
-    c(
-      "last_contact_distribution", "first_contact_distribution",
-      "ct_distribution", "network", "time_varying_death_risk"
-    )
-  )
+  expect_length(config, config_length)
+  expect_named(config, config_names)
 })
 
 test_that("create_config works as expected modifying element", {
@@ -16,14 +16,8 @@ test_that("create_config works as expected modifying element", {
     last_contact_distribution = function(x) rgeom(n = x, prob = 0.5)
   )
   expect_type(config, type = "list")
-  expect_length(config, 5)
-  expect_named(
-    config,
-    c(
-      "last_contact_distribution", "first_contact_distribution",
-      "ct_distribution", "network", "time_varying_death_risk"
-    )
-  )
+  expect_length(config, config_length)
+  expect_named(config, config_names)
   expect_identical(
     config$last_contact_distribution,
     function(x) rgeom(n = x, prob = 0.5)
@@ -38,14 +32,8 @@ test_that("create_config works as expected with spliced list", {
     )
   )
   expect_type(config, type = "list")
-  expect_length(config, 5)
-  expect_named(
-    config,
-    c(
-      "last_contact_distribution", "first_contact_distribution",
-      "ct_distribution", "network", "time_varying_death_risk"
-    )
-  )
+  expect_length(config, config_length)
+  expect_named(config, config_names)
   expect_identical(
     config$last_contact_distribution,
     function(x) rpois(n = x, lambda = 2)
@@ -62,14 +50,8 @@ test_that("create_config works as expected with spliced list", {
     )
   )
   expect_type(config, type = "list")
-  expect_length(config, 5)
-  expect_named(
-    config,
-    c(
-      "last_contact_distribution", "first_contact_distribution",
-      "ct_distribution", "network", "time_varying_death_risk"
-    )
-  )
+  expect_length(config, config_length)
+  expect_named(config, config_names)
   expect_identical(
     config$last_contact_distribution,
     function(x) rpois(n = x, lambda = 4)
