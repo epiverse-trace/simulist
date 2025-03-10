@@ -155,13 +155,13 @@ a single argument.
 The default is \code{NULL} so by default there is no reporting delay, and the
 \verb{$date_reporting} line list column is identical to the \verb{$date_onset} column.}
 
-\item{A}{\code{character} string, either \code{"onset"} (default), \code{"admission"},
-or \code{"outcome"}. This controls which event the reporting date is based on.
-If the \code{reporting_delay = NULL} then the \verb{$date_reporting} column in the
-output line list will be identical to the date of the event specified by
-\code{data_entry_event}, either \verb{$date_onset} (default), \verb{$date_admission},
-or \verb{$date_outcome}. If a \code{reporting_delay} is specified then this will
-be added to the event specified by \code{data_entry_event}.}
+\item{data_entry_event}{A \code{character} string, either \code{"onset"} (default),
+\code{"admission"}, or \code{"outcome"}. This controls which event the reporting date
+is based on. If the \code{reporting_delay = NULL} then the \verb{$date_reporting}
+column in the output line list will be identical to the date of the event
+specified by \code{data_entry_event}, either \verb{$date_onset} (default),
+\verb{$date_admission}, or \verb{$date_outcome}. If a \code{reporting_delay} is specified
+then this will be added to the event specified by \code{data_entry_event}.}
 }
 \value{
 A \verb{<data.frame>} with one more column than input into \code{.data}.

@@ -16,13 +16,13 @@
 #' generate the time for the first or last contact between the infector
 #' and infectee (exposure window). See [create_config()].
 #' @inheritParams sim_linelist
-#' @param A `character` string, either `"onset"` (default), `"admission"`,
-#' or `"outcome"`. This controls which event the reporting date is based on.
-#' If the `reporting_delay = NULL` then the `$date_reporting` column in the
-#' output line list will be identical to the date of the event specified by
-#' `data_entry_event`, either `$date_onset` (default), `$date_admission`,
-#' or `$date_outcome`. If a `reporting_delay` is specified then this will
-#' be added to the event specified by `data_entry_event`.
+#' @param data_entry_event  A `character` string, either `"onset"` (default),
+#' `"admission"`, or `"outcome"`. This controls which event the reporting date
+#' is based on. If the `reporting_delay = NULL` then the `$date_reporting`
+#' column in the output line list will be identical to the date of the event
+#' specified by `data_entry_event`, either `$date_onset` (default),
+#' `$date_admission`, or `$date_outcome`. If a `reporting_delay` is specified
+#' then this will be added to the event specified by `data_entry_event`.
 #'
 #' @name .add_cols
 #'
