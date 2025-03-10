@@ -30,6 +30,14 @@ a \code{function} with two arguments, \code{risk} and \code{time}, to apply a
 time varying death risk of hospitalised and non-hospitalised cases in
 the outbreak simulation. See
 \code{vignette("time-varying-cfr", package = "simulist")}.}
+\item{\code{data_entry_event}}{A \code{character} string, either \code{"onset"}
+(default), \code{"admission"}, or \code{"outcome"}. This controls which event the
+reporting date is based on. If the \code{reporting_delay = NULL} then the
+\verb{$date_reporting} column in the output line list will be identical to
+the date of the event specified by \code{data_entry_event}, either
+\verb{$date_onset} (default), \verb{$date_admission}, or \verb{$date_outcome}. If
+a \code{reporting_delay} is specified then this will be added to the event
+specified by \code{data_entry_event}.}
 }}
 }
 \value{
@@ -44,7 +52,9 @@ around time windows around infections (time of first contact and last
 contact with infector), and the distribution of the Cycle threshold (Ct)
 value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 cases, the network effect in the simulation, and if there is a time-varying
-death risk.
+death risk, as well as the event (e.g. symptom onset or hospital admission)
+that triggers data to be entered into the line list, affecting the reporting
+date.
 
 These parameters do not warrant their own arguments in
 \code{\link[=sim_linelist]{sim_linelist()}} as they rarely need to be changed from their default
@@ -64,6 +74,15 @@ unadjusted contact distribution. Adjusted (default) sampling uses
 density function of a distribution, e.g., Poisson or Negative binomial.
 Unadjusted (\code{network = "unadjusted"}) instead samples contacts directly from
 a probability distribution \eqn{p(n)}.
+
+The \code{data_entry_event} allows user control of which event in the clinical
+progression (symptom onset, hospital admission, outcome) triggers the data
+to be entered into the line list. By default it is \code{"onset"} to cases are
+input once they show symptoms, and any hospitalisation or outcome date is
+added afterwards. Alternatively, if data entry is only triggered after a
+case is hospitalised or has a recorded outcome, these scenarios can be
+simulated by setting \code{data_entry_event} to \code{"admission"} or \code{"outcome"},
+respectively.
 }
 \examples{
 # example with default configuration

@@ -5,7 +5,9 @@
 #' contact with infector), and the distribution of the Cycle threshold (Ct)
 #' value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 #' cases, the network effect in the simulation, and if there is a time-varying
-#' death risk.
+#' death risk, as well as the event (e.g. symptom onset or hospital admission)
+#' that triggers data to be entered into the line list, affecting the reporting
+#' date.
 #'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
@@ -25,6 +27,15 @@
 #' density function of a distribution, e.g., Poisson or Negative binomial.
 #' Unadjusted (`network = "unadjusted"`) instead samples contacts directly from
 #' a probability distribution \eqn{p(n)}.
+#'
+#' The `data_entry_event` allows user control of which event in the clinical
+#' progression (symptom onset, hospital admission, outcome) triggers the data
+#' to be entered into the line list. By default it is `"onset"` to cases are
+#' input once they show symptoms, and any hospitalisation or outcome date is
+#' added afterwards. Alternatively, if data entry is only triggered after a
+#' case is hospitalised or has a recorded outcome, these scenarios can be
+#' simulated by setting `data_entry_event` to `"admission"` or `"outcome"`,
+#' respectively.
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named elements to replace
 #' default settings. Only if names match exactly are elements replaced,
@@ -49,6 +60,14 @@
 #'   time varying death risk of hospitalised and non-hospitalised cases in
 #'   the outbreak simulation. See
 #'   `vignette("time-varying-cfr", package = "simulist")`.}
+#'   \item{`data_entry_event`}{A `character` string, either `"onset"`
+#'   (default), `"admission"`, or `"outcome"`. This controls which event the
+#'   reporting date is based on. If the `reporting_delay = NULL` then the
+#'   `$date_reporting` column in the output line list will be identical to
+#'   the date of the event specified by `data_entry_event`, either
+#'   `$date_onset` (default), `$date_admission`, or `$date_outcome`. If
+#'   a `reporting_delay` is specified then this will be added to the event
+#'   specified by `data_entry_event`.}
 #' }
 #'
 #' @return A list of settings for [sim_linelist()].
@@ -68,7 +87,8 @@ create_config <- function(...) {
     first_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
     ct_distribution = function(x) stats::rnorm(n = x, mean = 25, sd = 2),
     network = "adjusted",
-    time_varying_death_risk = NULL
+    time_varying_death_risk = NULL,
+    data_entry_event = "onset"
   )
 
   # capture dynamic dots
