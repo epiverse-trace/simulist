@@ -16,6 +16,13 @@
 #' generate the time for the first or last contact between the infector
 #' and infectee (exposure window). See [create_config()].
 #' @inheritParams sim_linelist
+#' @param A `character` string, either `"onset"` (default), `"admission"`,
+#' or `"outcome"`. This controls which event the reporting date is based on.
+#' If the `reporting_delay = NULL` then the `$date_reporting` column in the
+#' output line list will be identical to the date of the event specified by
+#' `data_entry_event`, either `$date_onset` (default), `$date_admission`,
+#' or `$date_outcome`. If a `reporting_delay` is specified then this will
+#' be added to the event specified by `data_entry_event`.
 #'
 #' @name .add_cols
 #'
@@ -246,9 +253,13 @@ NULL
 }
 
 #' @name .add_cols
-.add_reporting_delay <- function(.data, reporting_delay) {
+.add_reporting_delay <- function(.data, reporting_delay, data_entry_event) {
+  # order of data_entry_events matters as used in loop below
+  data_entry_events <- c("outcome", "admission", "onset")
+  data_entry_event <- match.arg(data_entry_event, choices = data_entry_events)
+  col_name <- paste("date", data_entry_event, sep = "_")
   if (is.null(reporting_delay)) {
-    .data$date_reporting <- .data$date_onset
+    .data$date_reporting <- .data[[col_name]]
     return(.data)
   }
   .check_func_req_args(reporting_delay, func_name = "reportin_delay")
@@ -261,8 +272,24 @@ NULL
       call. = FALSE
     )
   }
-  # add reporting delays
-  .data$date_reporting <- .data$date_onset + reporting_delay(nrow(.data))
+
+  # admissions and outcomes can be NA, in those cases fall back on the previous
+  # event, events happen in the order onset -> admission -> outcome
+  # there are no NAs in $date_onset so will break loop
+  date_reporting <- rep(NA_real_, times = nrow(.data))
+  event_idx <- which(data_entry_events %in% data_entry_event)
+  while (anyNA(date_reporting)) {
+    # idx to sample reporting dates for dates that are not already sampled
+    date_lgl_idx <- !is.na(.data[[col_name]]) & is.na(date_reporting)
+    date_reporting[date_lgl_idx] <- .data[[col_name]][date_lgl_idx] +
+      reporting_delay(sum(date_lgl_idx))
+    # use next event, 3 events in total, min avoids out-of-bound indexing
+    event_idx <- min(event_idx + 1, 3)
+    col_name <- paste("date", data_entry_events[event_idx], sep = "_")
+  }
+
+  # as.Date ensures <Date> in case coerced to numeric
+  .data$date_reporting <- as.Date(date_reporting)
 
   # return data
   .data
