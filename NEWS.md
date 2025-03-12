@@ -1,5 +1,57 @@
 # simulist (development version)
 
+This minor version release expands the scope of _simulist_ to include two new post-processing functions: `truncate_linelist()` and `messy_linelist()`. Both of these functions modify a line list `<data.frame>` from `sim_linelist()` or `sim_outbreak()`, the line list now also includes a `$date_reporting` column.
+
+This release has also focused on making the package interface more consistent and contains bugs fixes.
+
+## New features
+
+### External
+
+* The `messy_linelist()` function is added. This takes a simulated line list and creates a _"messy"_ line list with inconsistencies, irregularities and missingness found in empirical outbreak data (#187 & #196 & #199)
+
+* A reporting delay argument (`reporting_delay`) is now included in `sim_linelist()` and `sim_outbreak()` to simulate reporting delays from the date of symptom onset (`$date_onset`) to date of reporting (`$date_reporting`) (#179).
+
+* The `truncate_linelist()` function is added. This takes a simulated line list and can create outbreak snapshots and right-truncation of real-time outbreak data (#179 & #193 & #201).
+
+* A new vignette, `reporting_dekays-truncation.Rmd`, on reporting delays and right-truncation for line list data has been added (#179 & #201).
+
+### Internal
+
+* `{english}` is added as a package dependency for `messy_linelist()` (#187).
+
+* R CMD check CI is now run on R v4.1, the minimum required R version for the package (#180).
+
+* `{epiparameter}` is no longer used in testing (#177).
+
+* `.check_linelist()` is added for input checking in post-processing functions (#179).
+
+* `.check_age_df()` and `.check_risk_df()` have been merged into `.check_df()` thanks to the standardisation of the structure of `<data.frame>` objects required by `sim_*()` function arguments (#200).
+
+## Breaking changes
+
+* `create_config()` has been updated to accepted `function`s instead of a distribution name and a vector of parameters. This now matches the design of arguments that accept a function in `sim_*()` functions (#202).
+
+* The structure of the age-structured population `<data.frame>` input into `sim_*()` functions has been standardised with age-stratified risk `<data.frame>`s by to use `$age_limit` column (#200).
+
+* The line list `<data.frame>` output by `sim_linelist()` and `sim_outbreak()` now contain a `$date_reporting` column (#179).
+
+* Outcome time is now conditioned to be after hospitalisation time. This is a breaking change as previously hospitalisation times could be before outcome times, `sim_linelist()` can now error if an outcome time after the hospitalisation time cannot be sampled (#178).
+
+* The date of first contact is now sampled as the number of days before infection time (equal to symptom onset in the model) rather than days before date of last contact, as this could lead to first contact before after infection (#206).
+
+* The minimum required R version for _simulist_ is increased to v4.1.0 from v3.6.0 due to package dependencies (#180).
+
+## Bug fixes
+
+* Date of symptom onset can no longer occur before date of first contact (#206).
+
+* Outcome times can no longer occur before hospitalisation times (#178).
+
+## Deprecated and defunct
+
+* None
+
 # simulist 0.4.0
 
 A minor version release of _simulist_ containing various minor improvements to the functions and documentation, as well as removing some triggers for warning users. There are also a few bug fixes and internal enhancements.
@@ -11,7 +63,7 @@ A minor version release of _simulist_ containing various minor improvements to t
 * Defaults have been added to all `sim_*()` arguments that previously did not have one. Allowing functions to be run without specifying any arguments (e.g. `linelist <- sim_linelist()`) (#149).
 * Documentation for `sim_*()` function arguments that accept either a `function` or an `<epiparameter>` object has been improved (#149).
 * `sim_*()` functions no longer warn if the user has not specified `*_risk` arguments and have set `onset_to_*` arguments to `NULL` (#149).
-* All vignettes now use `rmarkdown::html_vignette` for to correctly render the website and for maximum compatibility with {pkgdown} >= 2.1.0. This removes figure numbering and code folding (#153).
+* All vignettes now use `rmarkdown::html_vignette` for to correctly render the website and for maximum compatibility with `{pkgdown}` >= 2.1.0. This removes figure numbering and code folding (#153).
 
 ### Internal
 
@@ -27,7 +79,7 @@ A minor version release of _simulist_ containing various minor improvements to t
 * A new function, `.sample_infect_period()` is added that errors if the infectious period function generates a negative number (#142).
 * `sim_linelist()` no longer errors when `hosp_death_risk` is `NULL` and `onset_to_death` is parameterised as a delay distribution (#144). 
 * `.add_ct()` generates the correct number of values and does not duplicate Ct values due to vector recycling (#158). 
-* Update {epiparameter} usage (#159).
+* Update `{epiparameter}` usage (#159).
 
 ## Deprecated and defunct
 
@@ -146,7 +198,7 @@ Initial release of _simulist_, an R package containing tools to simulate epidemi
   - Visualising simulated data (`vis-linelist.Rmd`)
 
 * One developer focused vignette
-  - Design Principles for {simulist} (`design-principles.Rmd`)
+  - Design Principles for _simulist_ (`design-principles.Rmd`)
 
 * Unit tests (100% code coverage) and documentation files.
 * Continuous integration workflows for R package checks, rendering the README.md, calculating test coverage, deploying the pkgdown website, updating the citation file, and checking new package or system dependencies.
