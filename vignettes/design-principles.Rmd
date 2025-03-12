@@ -27,8 +27,8 @@ The {simulist} package aims to simulate data on infectious disease outbreaks, pr
 The simulation functions either return a `<data.frame>` or a `list` of `<data.frame>`s. This consistency across functions of a well-known data structure makes it easy to understand for users.
 
 ## Package architecture
-
- <img src="../man/figures/simulist_archi.png" width="700" />
+ 
+ ![Package architecture diagram for the simulist R package for exported and internal functions, showing the call stack of all exported functions](../man/figures/simulist_archi.svg){width=800px}\
  
 ## Design decisions
 
