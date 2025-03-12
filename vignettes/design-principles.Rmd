@@ -29,8 +29,8 @@ The simulation functions either return a `<data.frame>` or a `list` of `<data.fr
 Before the first stable release (v1.0.0) of {simulist} we cannot guarantee that two versions of the package will produce identical output when using the same function with the same seed (i.e. _output breaking change_ as opposed to _API breaking change_). Given the many random number generation calls in the simulation code, it is too constraining to ensure reproducibility of function output between versions. We aim to ensure consistent and reproducible output from `sim_*()` functions between minor version releases after v1.0.0.
 
 ## Package architecture
-
- <img src="../man/figures/simulist_archi.png" width="700" />
+ 
+ ![Package architecture diagram for the simulist R package for exported and internal functions, showing the call stack of all exported functions](../man/figures/simulist_archi.svg){width=800px}\
  
 ## Design decisions
 
