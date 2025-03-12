@@ -71,6 +71,7 @@ truncate_linelist <- function(linelist,
                               direction = c("backwards", "forwards")) {
   arg_ignore <- missing(unit) && missing(direction)
   .check_linelist(linelist)
+  linelist <- .as_df(linelist)
   stopifnot(
     "`truncation_day` must be a single nonnegative numeric or <Date> object." =
       checkmate::test_number(truncation_day, lower = 0, finite = TRUE) ||
@@ -131,5 +132,6 @@ truncate_linelist <- function(linelist,
   }
 
   row.names(linelist) <- NULL
+  linelist <- .restore_df_subclass(linelist)
   linelist
 }
