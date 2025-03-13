@@ -8,11 +8,14 @@ message: 'To cite package "simulist" in publications use:'
 type: software
 license: MIT
 title: 'simulist: Simulate Disease Outbreak Line List and Contacts Data'
-version: 0.3.0.9000
+version: 0.4.0.9000
 doi: 10.5281/zenodo.10471458
+identifiers:
+- type: doi
+  value: 10.32614/CRAN.package.simulist
 abstract: Tools to simulate realistic raw case data for an epidemic in the form of
   line lists and contacts using a branching process. Simulated outbreaks are parameterised
-  with epidemiological parameters and can have age structured populations, age-stratified
+  with epidemiological parameters and can have age-structured populations, age-stratified
   hospitalisation and death risk and time-varying case fatality risk.
 authors:
 - family-names: Lambert
@@ -35,9 +38,10 @@ preferred-citation:
     given-names: Carmen
     email: carmen.tamayo-cuartero@lshtm.ac.uk
     orcid: https://orcid.org/0000-0003-4184-2864
-  year: '2024'
+  year: '2025'
   doi: 10.5281/zenodo.10471458
   url: https://epiverse-trace.github.io/simulist/
+repository: https://CRAN.R-project.org/package=simulist
 repository-code: https://github.com/epiverse-trace/simulist
 url: https://epiverse-trace.github.io/simulist/
 contact:
@@ -62,8 +66,8 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
-  version: '>= 3.6.0'
+  year: '2025'
+  version: '>= 4.1.0'
 - type: software
   title: checkmate
   abstract: 'checkmate: Fast and Versatile Argument Checks'
@@ -75,14 +79,31 @@ references:
     given-names: Michel
     email: michellang@gmail.com
     orcid: https://orcid.org/0000-0001-9754-0393
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.checkmate
 - type: software
+  title: english
+  abstract: 'english: Translate Integers into English'
+  notes: Imports
+  repository: https://CRAN.R-project.org/package=english
+  authors:
+  - family-names: Fox
+    given-names: John
+  - family-names: Venables
+    given-names: Bill
+  - family-names: Damico
+    given-names: Anthony
+  - family-names: Salverda
+    given-names: Anne Pier
+  year: '2025'
+  doi: 10.32614/CRAN.package.english
+- type: software
   title: epiparameter
-  abstract: 'epiparameter: Library of Epidemiological Parameters with Helper Functions
-    and Classes'
+  abstract: 'epiparameter: Classes and Helper Functions for Working with Epidemiological
+    Parameters'
   notes: Imports
   url: https://github.com/epiverse-trace/epiparameter/
+  repository: https://CRAN.R-project.org/package=epiparameter
   authors:
   - family-names: Lambert
     given-names: Joshua W.
@@ -96,7 +117,9 @@ references:
     given-names: Carmen
     email: carmen.tamayo-cuartero@lshtm.ac.uk
     orcid: https://orcid.org/0000-0003-4184-2864
-  year: '2024'
+  year: '2025'
+  doi: 10.32614/CRAN.package.epiparameter
+  version: '>= 0.4.0'
 - type: software
   title: randomNames
   abstract: 'randomNames: Generate Random Given and Surnames'
@@ -107,7 +130,7 @@ references:
   - family-names: Betebenner
     given-names: Damian W.
     email: dbetebenner@nciea.org
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.randomNames
 - type: software
   title: rlang
@@ -122,7 +145,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.rlang
 - type: software
   title: stats
@@ -133,7 +156,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
@@ -157,7 +180,7 @@ references:
     given-names: Davis
     email: davis@posit.co
     orcid: https://orcid.org/0000-0003-4777-038X
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.dplyr
 - type: software
   title: epicontacts
@@ -188,7 +211,7 @@ references:
   - family-names: Kamvar
     given-names: Zhian N.
     email: zkamvar@gmail.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.epicontacts
   version: '>= 1.1.3'
 - type: software
@@ -229,7 +252,7 @@ references:
     given-names: Teun
     name-particle: van den
     orcid: https://orcid.org/0000-0002-9335-7468
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.ggplot2
 - type: software
   title: incidence2
@@ -242,9 +265,9 @@ references:
     given-names: Tim
     email: tim.taylor@hiddenelephants.co.uk
     orcid: https://orcid.org/0000-0002-8587-7113
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.incidence2
-  version: '>= 2.1.0'
+  version: '>= 2.3.0'
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -256,7 +279,7 @@ references:
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.knitr
 - type: software
   title: rmarkdown
@@ -300,7 +323,7 @@ references:
     given-names: Richard
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.rmarkdown
 - type: software
   title: spelling
@@ -316,7 +339,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.hester@rstudio.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.spelling
 - type: software
   title: testthat
@@ -328,7 +351,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.testthat
   version: '>= 3.0.0'
 - type: software
@@ -346,6 +369,6 @@ references:
     email: davis@posit.co
   - family-names: Girlich
     given-names: Maximilian
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.tidyr
 

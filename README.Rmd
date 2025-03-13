@@ -26,6 +26,8 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/{{ gh_repo }}/branch/main/graph/badge.svg)](https://app.codecov.io/gh/{{ gh_repo }}?branch=main)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10471459.svg)](https://doi.org/10.5281/zenodo.10471459)
+[![CRAN status](https://www.r-pkg.org/badges/version/simulist)](https://CRAN.R-project.org/package=simulist)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/simulist)](https://cran.r-project.org/package=simulist)
 <!-- badges: end -->
 
 `{simulist}` is an R package to simulate individual-level infectious disease outbreak data, including line lists and contact tracing data. It can often be useful to have synthetic datasets like these available when demonstrating outbreak analytics techniques or testing new analysis methods.
@@ -202,6 +204,7 @@ citation("simulist")
 :package: :left_right_arrow: :package:  [{epiparameter}](https://epiverse-trace.github.io/epiparameter/) <br>
 :package: :left_right_arrow: :package: [{epicontacts}](https://www.repidemicsconsortium.org/epicontacts/) <br>
 :package: :left_right_arrow: :package: [{incidence2}](https://www.reconverse.org/incidence2/) <br>
+:package: :left_right_arrow: :package: [{cleanepi}](https://epiverse-trace.github.io/cleanepi/) <br>
 
 ## Related projects
 
@@ -229,7 +232,7 @@ In some cases the packages are dedicated to simulating line list and other epide
 | Explicit population size[^pop] | :x: | :white_check_mark: | :white_check_mark: | :x: | :x: | :x: |
 | R package | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
 | Actively maintained[^active] | :white_check_mark: | :x: | :x: | :x: | :x: | :white_check_mark: |
-| On CRAN | :x: | :x: | :x: | :x: | :x: |  NA |
+| On CRAN | :white_check_mark: | :x: | :x: | :x: | :x: |  NA |
 | Unit testing[^tests] | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :x: | NA |
 
 [^dist]: In this context _Parameterised with epi distributions_ means that the simulation uses epidemiological distributions (e.g. serial interval, infectious period) to parameterise the model and the parameters of these epi distributions can be modified by the user.
@@ -251,3 +254,5 @@ Some packages are related to {simulist} but do not simulate line list data. Thes
 - [`{epichains}`](https://github.com/epiverse-trace/epichains) an R package with functionality to simulate transmission chains using a branching process model.
 
 The {outbreaks} package is useful if data from a past outbreak data or generic line list data is required. The {ringbp} and {epichains} packages can be used to generate case data over time which can then be converted into a line list with some manual post-processing.
+
+Another package for creating messy data is the [{messy}](https://CRAN.R-project.org/package=messy) package. This can be used, either independently or in combination with `messy_linelist()`, to create messy line list and contacts data. 

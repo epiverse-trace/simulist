@@ -12,11 +12,10 @@
 #' (or probability) of hospitalisation for that age group. Should be between
 #' 0 and 1.
 #'
-#' For an age structured population, a `<data.frame>` with two columns:
-#' * `age_range`: a column with characters specifying the lower and upper bound
-#'  of that age group, separated by a hyphen (-). Both bounds are inclusive
-#' (integers). For example, an age group of one to ten would be given as
-#' `"1-10"`.
+#' For an age-structured population, a `<data.frame>` with two columns:
+#' * `age_limit`: a column with one `numeric` per cell for the lower bound
+#' (minimum) age of the age group (inclusive), except the last element which is
+#' the upper bound (maximum) of the population.
 #' * `proportion`: a column with the proportion of the population that are in
 #' that age group. Proportions must sum to one.
 #'
@@ -96,6 +95,14 @@
 #' `hosp_death_risk` will be automatically set to `NULL` if not manually
 #' specified.
 #'
+#' For hospitalised cases, the function ensures the onset-to-death time is
+#' greater than the onset-to-hospitalisation time. After many (1000) attempts,
+#' if an onset-to-death time (from `onset_to_death`) cannot be sampled that is
+#' greater than a onset-to-hospitalisation time (from `onset_to_hosp`) then
+#' the function will error. Due to this conditional sampling, the
+#' onset-to-death times in the line list may not resemble the distributional
+#' form input into the function.
+#'
 #' @param onset_to_recovery A `function` or an `<epiparameter>` object for the
 #' onset-to-recovery delay distribution. `onset_to_recovery` can also be `NULL`
 #' to not simulate dates for individuals that recovered.
@@ -109,6 +116,26 @@
 #'
 #' The default is `NULL` so by default cases that recover get an `NA` in the
 #' `$date_outcome` line list column.
+#'
+#' For hospitalised cases, the function ensures the onset-to-recovery time is
+#' greater than the onset-to-hospitalisation time. After many (1000) attempts,
+#' if an onset-to-recovery time (from `onset_to_recovery`) cannot be sampled
+#' that is greater than a onset-to-hospitalisation time (from `onset_to_hosp`)
+#' then the function will error. Due to this conditional sampling, the
+#' onset-to-recovery times in the line list may not resemble the distributional
+#' form input into the function.
+#'
+#' @param reporting_delay A `function` for the reporting delay distribution or
+#' `NULL`. The (random) number generating function creates delays between the
+#' time of symptom onset (`$date_onset`) and the case being reported
+#' (`$date_reporting`).
+#'
+#' The function can be defined or anonymous. The function must return a vector
+#' of `numeric`s for the length of the reporting delay. The function must have
+#' a single argument.
+#'
+#' The default is `NULL` so by default there is no reporting delay, and the
+#' `$date_reporting` line list column is identical to the `$date_onset` column.
 #'
 #' @param hosp_risk Either a single `numeric` for the hospitalisation risk of
 #' everyone in the population, or a `<data.frame>` with age specific
@@ -246,6 +273,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
                          onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
                          onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2.5, sdlog = 0.5), # nolint end line_lenght_linter
                          onset_to_recovery = NULL,
+                         reporting_delay = NULL,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,
                          non_hosp_death_risk = 0.05,
@@ -322,7 +350,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
   )
 
   if (is.data.frame(population_age)) {
-    population_age <- .check_age_df(population_age)
+    population_age <- .check_df(population_age, df_type = "age")
     age_range <- c(
       lower = min(population_age[, "min_age"]),
       upper = max(population_age[, "max_age"])
@@ -333,20 +361,23 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
     age_range <- population_age
   }
   if (is.data.frame(hosp_risk)) {
-    hosp_risk <- .check_risk_df(
+    hosp_risk <- .check_df(
       hosp_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
   if (is.data.frame(hosp_death_risk)) {
-    hosp_death_risk <- .check_risk_df(
+    hosp_death_risk <- .check_df(
       hosp_death_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
   if (is.data.frame(non_hosp_death_risk)) {
-    non_hosp_death_risk <- .check_risk_df(
+    non_hosp_death_risk <- .check_df(
       non_hosp_death_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
@@ -359,6 +390,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
+    reporting_delay = reporting_delay,
     hosp_risk = hosp_risk,
     hosp_death_risk = hosp_death_risk,
     non_hosp_death_risk = non_hosp_death_risk,

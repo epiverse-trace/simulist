@@ -6,7 +6,7 @@
 \alias{simulist-package}
 \title{simulist: Simulate Disease Outbreak Line List and Contacts Data}
 \description{
-Tools to simulate realistic raw case data for an epidemic in the form of line lists and contacts using a branching process. Simulated outbreaks are parameterised with epidemiological parameters and can have age structured populations, age-stratified hospitalisation and death risk and time-varying case fatality risk.
+Tools to simulate realistic raw case data for an epidemic in the form of line lists and contacts using a branching process. Simulated outbreaks are parameterised with epidemiological parameters and can have age-structured populations, age-stratified hospitalisation and death risk and time-varying case fatality risk.
 }
 \seealso{
 Useful links:
@@ -31,6 +31,7 @@ Other contributors:
   \item Pratik R. Gupte \email{pratik.gupte@lshtm.ac.uk} (\href{https://orcid.org/0000-0001-5294-7819}{ORCID}) [contributor, reviewer]
   \item Adam Kucharski \email{adam.kucharski@lshtm.ac.uk} (\href{https://orcid.org/0000-0001-8814-9421}{ORCID}) [reviewer]
   \item Chris Hartgerink \email{chris@data.org} (\href{https://orcid.org/0000-0003-1050-6809}{ORCID}) [reviewer]
+  \item London School of Hygiene and Tropical Medicine, LSHTM (00a0jsq62) [copyright holder]
 }
 
 }

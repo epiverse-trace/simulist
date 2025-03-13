@@ -23,3 +23,14 @@ test_that(".anonymise works as expected with repeated strings", {
     c("5dMaH9wQnr", "7YGuuP2Tjg", "5dMaH9wQnr")
   )
 })
+
+test_that(".as_df and .restore_df_subclass work as expected", {
+  df <- data.frame(a = 1)
+  class(df) <- c("tbl", "data.frame")
+  df <- .as_df(df)
+  expect_s3_class(df, class = "data.frame", exact = TRUE)
+  expect_contains(names(attributes(df)), ".class")
+  df <- .restore_df_subclass(df)
+  expect_s3_class(df, class = c("tbl", "data.frame"), exact = TRUE)
+  expect_false(".class" %in% names(attributes(df)))
+})

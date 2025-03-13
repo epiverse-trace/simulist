@@ -12,13 +12,9 @@
 #'
 #' @param .data A `<data.frame>` containing the infectious history from a
 #' branching process simulation ([.sim_network_bp()]).
-#' @param contact_type A `character` with the type of contact, either first
-#' contact (`"first"`), or last contact (`"last"`).
-#' @param distribution A `character` with the name of the distribution,
-#' following the base R convention for distribution naming (e.g. Poisson
-#' is `pois`).
-#' @param ... [dots] Extra arguments to be passed to the distribution function
-#' given in the `distribution` argument.
+#' @param first_contact_distribution,last_contact_distribution A `function` to
+#' generate the time for the first or last contact between the infector
+#' and infectee (exposure window). See [create_config()].
 #' @inheritParams sim_linelist
 #'
 #' @name .add_cols
@@ -32,56 +28,38 @@ NULL
 
 #' @name .add_cols
 .add_date_contact <- function(.data,
-                              contact_type = c("first", "last"),
-                              distribution = c("pois", "geom"),
-                              ...,
-                              outbreak_start_date = NULL) {
-  contact_type <- match.arg(contact_type)
-  distribution <- match.arg(distribution)
-
-  stopifnot(
-    "outbreak_start_date is only required for adding date of last contact" =
-      contact_type == "last" && !is.null(outbreak_start_date) ||
-      contact_type == "first" && is.null(outbreak_start_date)
+                              first_contact_distribution,
+                              last_contact_distribution,
+                              outbreak_start_date) {
+  .check_func_req_args(
+    first_contact_distribution,
+    func_name = "first_contact_distribution"
   )
-
-  rdist <- switch(distribution,
-    pois = stats::rpois,
-    geom = stats::rgeom
+  .check_func_req_args(
+    last_contact_distribution,
+    func_name = "last_contact_distribution"
   )
-
-  # c() over ...length() to ensure NULL is not counted by length
-  if (length(c(...)) == 0) {
-    stop("Distribution parameters are missing, check config", call. = FALSE)
+  distribution_eval <- c(
+    first_contact_distribution(1),
+    last_contact_distribution(1)
+  )
+  # random numbers generated from discrete distributions produce integers
+  if (any(!is.integer(distribution_eval) | distribution_eval < 0)) {
+    stop(
+      "First or last contact distribution specified in `config` must be a ",
+      "(random) number generating functions that produces nonnegative ",
+      "integers.",
+      call. = FALSE
+    )
   }
 
-  # name list elements with vec names to ensure arg matching in do.call
-  args <- c(nrow(.data), list(...))
+  # add date of first contact with infector
+  .data$date_first_contact <- .data$infector_time -
+    first_contact_distribution(nrow(.data))  + outbreak_start_date
 
-  contact_delay <- tryCatch(
-    do.call(rdist, args = args),
-    error = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    },
-    warning = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    }
-  )
-
-  if (contact_type == "first") {
-    # add date of first contact with infector
-    .data$date_first_contact <- .data$date_last_contact - contact_delay
-  } else {
-    # add date of last contact with infector
-    .data$date_last_contact <- .data$infector_time + contact_delay +
-      outbreak_start_date
-  }
+  # add date of last contact with infector
+  .data$date_last_contact <- .data$infector_time +
+    last_contact_distribution(nrow(.data)) + outbreak_start_date
 
   # return data
   .data
@@ -141,12 +119,12 @@ NULL
                          non_hosp_death_risk,
                          config) {
   infected_lgl_idx <- .data$infected == "infected"
-  num_infected <- sum(infected_lgl_idx)
   .data$outcome <- "contact"
   .data$outcome_time <- NA_real_
   .data$outcome[infected_lgl_idx] <- "recovered"
-  .data$outcome_time[infected_lgl_idx] <- .data$time[infected_lgl_idx] +
-    onset_to_recovery(num_infected)
+  .data <- .sample_outcome_time(
+    .data, onset_to_outcome = onset_to_recovery, idx = infected_lgl_idx
+  )
   hosp_lgl_idx <- !is.na(.data$hospitalisation) & infected_lgl_idx
   non_hosp_lgl_idx <- is.na(.data$hospitalisation) & infected_lgl_idx
 
@@ -204,8 +182,9 @@ NULL
       # died index requires individuals to be in idx group (e.g. hosp)
       died_lgl_idx <- as.logical(died_idx) & idx
       .data$outcome[died_lgl_idx] <- "died"
-      .data$outcome_time[died_lgl_idx] <- .data$time[died_lgl_idx] +
-        onset_to_death(sum(died_lgl_idx))
+      .data <- .sample_outcome_time(
+        .data, onset_to_outcome = onset_to_death, idx = died_lgl_idx
+      )
     }
     .data
   }
@@ -244,46 +223,46 @@ NULL
 }
 
 #' @name .add_cols
-.add_ct <- function(.data, distribution = c("norm", "lnorm"), ...) {
-  distribution <- match.arg(distribution)
-
-  rdist <- switch(distribution,
-    norm = stats::rnorm,
-    lnorm = stats::rlnorm
-  )
-
-  # c() over ...length() to ensure NULL is not counted by length
-  if (length(c(...)) == 0) {
-    stop("Distribution parameters are missing, check config", call. = FALSE)
+.add_ct <- function(.data, distribution) {
+  .check_func_req_args(distribution, func_name = "ct_distribution")
+  distribution_eval <- distribution(1)
+  if (!is.numeric(distribution_eval) || distribution_eval < 0) {
+    stop(
+      "Ct distribution specified in `config` must be a ",
+      "(random) number generating functions that produces positive numbers.",
+      call. = FALSE
+    )
   }
 
-  # name list elements with vec names to ensure arg matching in do.call
-  # as.list(c(...)) ensures that ... can be a list, vector or multiple args
-  args <- c(
-    n = sum(.data$case_type == "confirmed", na.rm = TRUE),
-    as.list(c(...))
-  )
-
-  ct_value <- tryCatch(
-    do.call(rdist, args = args),
-    error = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    },
-    warning = function(cnd) {
-      stop(
-        "Incorrect parameterisation of distribution, check config",
-        call. = FALSE
-      )
-    }
-  )
+  ct_value <- distribution(sum(.data$case_type == "confirmed", na.rm = TRUE))
   ct_value <- signif(ct_value, digits = 3)
 
   .data$ct_value <- NA_real_
   # which to handle NAs in data.frame col
   .data$ct_value[which(.data$case_type == "confirmed")] <- ct_value
+
+  # return data
+  .data
+}
+
+#' @name .add_cols
+.add_reporting_delay <- function(.data, reporting_delay) {
+  if (is.null(reporting_delay)) {
+    .data$date_reporting <- .data$date_onset
+    return(.data)
+  }
+  .check_func_req_args(reporting_delay, func_name = "reportin_delay")
+  # check if reporting_delay is NULL or generates a number
+  reporting_delay_eval <- reporting_delay(1)
+  if (!is.numeric(reporting_delay_eval)) {
+    stop(
+      "The `reporting_delay` must be NULL or a function that ",
+      "generates numbers.",
+      call. = FALSE
+    )
+  }
+  # add reporting delays
+  .data$date_reporting <- .data$date_onset + reporting_delay(nrow(.data))
 
   # return data
   .data

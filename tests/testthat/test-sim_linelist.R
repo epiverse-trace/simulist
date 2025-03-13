@@ -3,40 +3,14 @@ test_that("sim_linelist works as expected with defaults", {
   expect_snapshot(sim_linelist())
 })
 
-suppressMessages({
-  library(epiparameter)
-  contact_distribution <- epiparameter(
-    disease = "COVID-19",
-    epi_name = "contact distribution",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "pois",
-      prob_distribution_params = c(mean = 2)
-    )
-  )
-
-  infectious_period <- epiparameter(
-    disease = "COVID-19",
-    epi_name = "infectious period",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "gamma",
-      prob_distribution_params = c(shape = 1, scale = 1)
-    )
-  )
-
-  # get onset to hospital admission from {epiparameter} database
-  onset_to_hosp <- epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to hospitalisation",
-    single_epiparameter = TRUE
-  )
-
-  # get onset to death from {epiparameter} database
-  onset_to_death <- epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to death",
-    single_epiparameter = TRUE
-  )
-})
+contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
+infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
+onset_to_hosp <- function(x) {
+  stats::rlnorm(n = x, meanlog = 0.947, sdlog = 1.628)
+}
+onset_to_death <- function(x) {
+  stats::rlnorm(n = x, meanlog = 2.863, sdlog = 0.534)
+}
 
 test_that("sim_linelist works as expected", {
   set.seed(1)
@@ -95,9 +69,8 @@ test_that("sim_linelist works as expected with anonymous", {
 
 test_that("sim_linelist works as expected with age structure", {
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.2, 0)
   )
   set.seed(1)
   expect_snapshot(
@@ -118,9 +91,8 @@ test_that("sim_linelist works as expected with age-strat risks & age struct", {
     risk = c(0.1, 0.05, 0.2)
   )
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.2, 0)
   )
   set.seed(1)
   expect_snapshot(
@@ -138,17 +110,16 @@ test_that("sim_linelist works as expected with age-strat risks & age struct", {
 
 test_that("sim_linelist gives expected proportion of ages with age struct", {
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.2, 0.5, 0.3),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.2, 0.5, 0.3, 0)
   )
   set.seed(1)
   linelist <- sim_linelist(
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = 0.5,
-    onset_to_hosp = onset_to_hosp,
-    onset_to_death = onset_to_death,
+    onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1, sdlog = 0.5),
+    onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
     population_age = age_struct,
     outbreak_size = c(500, 5000)
   )
@@ -182,8 +153,7 @@ test_that("sim_linelist works as expected with modified config", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution = "geom",
-        last_contact_distribution_params = c(prob = 0.5)
+        last_contact_distribution = function(x) stats::rgeom(n = x, prob = 0.5)
       )
     )
   )
@@ -199,7 +169,7 @@ test_that("sim_linelist works as expected with modified config parameters", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution_params = c(lambda = 5)
+        last_contact_distribution = function(x) stats::rpois(n = x, lambda = 5)
       )
     )
   )
@@ -229,24 +199,10 @@ test_that("sim_linelist fails as expected with modified config", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution = "geom"
+        last_contact_distribution = function(x) stats::rgeom(n = x, lambda = 1)
       )
     ),
-    regexp = "Incorrect parameterisation of distribution, check config"
-  )
-
-  expect_error(
-    sim_linelist(
-      contact_distribution = contact_distribution,
-      infectious_period = infectious_period,
-      prob_infection = 0.5,
-      onset_to_hosp = onset_to_hosp,
-      onset_to_death = onset_to_death,
-      config = create_config(
-        ct_distribution = "gamma"
-      )
-    ),
-    regexp = "(arg)*(should be one of)"
+    regexp = "(unused argument)*(lambda = 1)"
   )
 })
 

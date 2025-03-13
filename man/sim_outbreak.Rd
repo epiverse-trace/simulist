@@ -11,6 +11,7 @@ sim_outbreak(
   onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
   onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2.5, sdlog = 0.5),
   onset_to_recovery = NULL,
+  reporting_delay = NULL,
   hosp_risk = 0.2,
   hosp_death_risk = 0.5,
   non_hosp_death_risk = 0.05,
@@ -99,7 +100,15 @@ number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2.5} and
 
 If \code{onset_to_death} is set to \code{NULL} then \code{non_hosp_death_risk} and
 \code{hosp_death_risk} will be automatically set to \code{NULL} if not manually
-specified.}
+specified.
+
+For hospitalised cases, the function ensures the onset-to-death time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-death time (from \code{onset_to_death}) cannot be sampled that is
+greater than a onset-to-hospitalisation time (from \code{onset_to_hosp}) then
+the function will error. Due to this conditional sampling, the
+onset-to-death times in the line list may not resemble the distributional
+form input into the function.}
 
 \item{onset_to_recovery}{A \code{function} or an \verb{<epiparameter>} object for the
 onset-to-recovery delay distribution. \code{onset_to_recovery} can also be \code{NULL}
@@ -113,7 +122,27 @@ An \verb{<epiparameter>} can be provided. This will be converted into a random
 number generator internally.
 
 The default is \code{NULL} so by default cases that recover get an \code{NA} in the
-\verb{$date_outcome} line list column.}
+\verb{$date_outcome} line list column.
+
+For hospitalised cases, the function ensures the onset-to-recovery time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-recovery time (from \code{onset_to_recovery}) cannot be sampled
+that is greater than a onset-to-hospitalisation time (from \code{onset_to_hosp})
+then the function will error. Due to this conditional sampling, the
+onset-to-recovery times in the line list may not resemble the distributional
+form input into the function.}
+
+\item{reporting_delay}{A \code{function} for the reporting delay distribution or
+\code{NULL}. The (random) number generating function creates delays between the
+time of symptom onset (\verb{$date_onset}) and the case being reported
+(\verb{$date_reporting}).
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the reporting delay. The function must have
+a single argument.
+
+The default is \code{NULL} so by default there is no reporting delay, and the
+\verb{$date_reporting} line list column is identical to the \verb{$date_onset} column.}
 
 \item{hosp_risk}{Either a single \code{numeric} for the hospitalisation risk of
 everyone in the population, or a \verb{<data.frame>} with age specific
@@ -201,12 +230,11 @@ arguments. This \verb{<data.frame>} should have two columns:
 0 and 1.
 }
 
-For an age structured population, a \verb{<data.frame>} with two columns:
+For an age-structured population, a \verb{<data.frame>} with two columns:
 \itemize{
-\item \code{age_range}: a column with characters specifying the lower and upper bound
-of that age group, separated by a hyphen (-). Both bounds are inclusive
-(integers). For example, an age group of one to ten would be given as
-\code{"1-10"}.
+\item \code{age_limit}: a column with one \code{numeric} per cell for the lower bound
+(minimum) age of the age group (inclusive), except the last element which is
+the upper bound (maximum) of the population.
 \item \code{proportion}: a column with the proportion of the population that are in
 that age group. Proportions must sum to one.
 }

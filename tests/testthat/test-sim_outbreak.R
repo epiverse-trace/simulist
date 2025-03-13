@@ -3,39 +3,15 @@ test_that("sim_outbreak works as expected with defaults", {
   expect_snapshot(sim_outbreak())
 })
 
-suppressMessages({
-  contact_distribution <- epiparameter::epiparameter(
-    disease = "COVID-19",
-    epi_name = "contact distribution",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "pois",
-      prob_distribution_params = c(mean = 2)
-    )
-  )
 
-  infectious_period <- epiparameter::epiparameter(
-    disease = "COVID-19",
-    epi_name = "infectious period",
-    prob_distribution = create_prob_distribution(
-      prob_distribution = "gamma",
-      prob_distribution_params = c(shape = 1, scale = 1)
-    )
-  )
-
-  # get onset to hospital admission from {epiparameter} database
-  onset_to_hosp <- epiparameter::epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to hospitalisation",
-    single_epiparameter = TRUE
-  )
-
-  # get onset to death from {epiparameter} database
-  onset_to_death <- epiparameter::epiparameter_db(
-    disease = "COVID-19",
-    epi_name = "onset to death",
-    single_epiparameter = TRUE
-  )
-})
+contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
+infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
+onset_to_hosp <- function(x) {
+  stats::rlnorm(n = x, meanlog = 0.947, sdlog = 1.628)
+}
+onset_to_death <- function(x) {
+  stats::rlnorm(n = x, meanlog = 2.863, sdlog = 0.534)
+}
 
 test_that("sim_outbreak works as expected", {
   set.seed(1)
@@ -94,9 +70,8 @@ test_that("sim_outbreak works as expected with age-strat risks", {
 
 test_that("sim_outbreak works as expected with age structure", {
   age_struct <- data.frame(
-    age_range = c("1-4", "5-79", "80-90"),
-    proportion = c(0.1, 0.7, 0.2),
-    stringsAsFactors = FALSE
+    age_limit = c(1, 5, 80, 90),
+    proportion = c(0.1, 0.7, 0.2, 0)
   )
   set.seed(1)
   expect_snapshot(

@@ -18,6 +18,7 @@
                           onset_to_hosp = NULL,
                           onset_to_death = NULL,
                           onset_to_recovery = NULL,
+                          reporting_delay = NULL,
                           hosp_risk = NULL,
                           hosp_death_risk = NULL,
                           non_hosp_death_risk = NULL,
@@ -57,6 +58,8 @@
   # add delays dates
   .data$date_onset <- .data$time + outbreak_start_date
 
+  .data <- .add_reporting_delay(.data, reporting_delay)
+
   # add exposure date for cases
   id_time <- data.frame(infector = .data$id, infector_time = .data$time)
 
@@ -69,16 +72,9 @@
 
   .data <- .add_date_contact(
     .data = .data,
-    contact_type = "last",
-    distribution = config$last_contact_distribution,
-    config$last_contact_distribution_params,
+    first_contact_distribution = config$first_contact_distribution,
+    last_contact_distribution = config$last_contact_distribution,
     outbreak_start_date = outbreak_start_date
-  )
-  .data <- .add_date_contact(
-    .data = .data,
-    contact_type = "first",
-    distribution = config$first_contact_distribution,
-    config$first_contact_distribution_params
   )
 
   # add random age and sex
@@ -123,8 +119,9 @@
     .data$date_outcome <- .data$outcome_time + outbreak_start_date
 
     linelist_cols <- c(
-      "id", "case_type", "sex", "age", "date_onset", "date_admission",
-      "outcome", "date_outcome", "date_first_contact", "date_last_contact"
+      "id", "case_type", "sex", "age", "date_onset", "date_reporting",
+      "date_admission", "outcome", "date_outcome", "date_first_contact",
+      "date_last_contact"
     )
 
     .data <- .add_names(.data = .data, anonymise = anonymise)
@@ -139,11 +136,7 @@
     )
 
     # add Ct if confirmed
-    .data <- .add_ct(
-      .data = .data,
-      distribution = config$ct_distribution,
-      config$ct_distribution_params
-    )
+    .data <- .add_ct(.data = .data, distribution = config$ct_distribution)
     linelist_cols <- c(linelist_cols, "ct_value")
   }
 
@@ -187,17 +180,16 @@
 
   if (sim_type == "contacts") {
     return(contacts_tbl)
-  } else {
-    .data <- .data[.data$infected == "infected", ]
-    .data <- .data[, linelist_cols]
-    row.names(.data) <- NULL
-
-    switch(sim_type,
-      linelist = return(.data),
-      outbreak = return(list(
-        linelist = .data,
-        contacts = contacts_tbl
-      ))
-    )
   }
+  .data <- .data[.data$infected == "infected", ]
+  .data <- .data[, linelist_cols]
+  row.names(.data) <- NULL
+
+  switch(sim_type,
+    linelist = return(.data),
+    outbreak = return(list(
+      linelist = .data,
+      contacts = contacts_tbl
+    ))
+  )
 }

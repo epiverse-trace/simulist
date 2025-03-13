@@ -1,40 +1,71 @@
-#' Check if `<data.frame>` defining age-stratified hospitalisation or death risk
-#' is correct
+#' Check if `<data.frame>` defining either age-stratified hospitalisation or
+#' death risk, or defining age structure of population is correct
 #'
 #' @param x A `<data.frame>`.
+#' @param df_type A `character` string, either `"risk"` or `"age"` to specify
+#' which input `<data.frame>` is being checked.
+#' @param age_range A `numeric` vector of length 2. Only required when
+#' `df_type = risk`, `NULL` by default.
 #'
 #' @return A `<data.frame>`, also called for error side-effects when input is
 #' invalid.
 #' @keywords internal
-.check_risk_df <- function(x, age_range) {
-  # check input
+.check_df <- function(x, df_type = c("risk", "age"), age_range = NULL) {
+  df_type <- match.arg(df_type)
+  col_name <- switch(df_type,
+    risk = "risk",
+    age = "proportion"
+  )
   stopifnot(
-    "Column names should be 'age_limit' & 'risk'" =
-      setequal(c("age_limit", "risk"), colnames(x)),
-    "Minimum age of lowest age group should match lower age range" =
-      age_range[["lower"]] == min(x$age_limit),
-    "Lower bound of oldest age group must be lower than highest age range" =
-      age_range[["upper"]] > max(x$age_limit),
-    "Age limit or risk cannot be NA or NaN" =
-      !anyNA(x),
-    "Risk should be between 0 and 1" =
-      min(x$risk) >= 0 && max(x$risk) <= 1,
-    "Age limit in risk data frame must be unique" =
+    "Age limit in data frame must be unique" =
       anyDuplicated(x$age_limit) == 0
   )
+  if (df_type == "risk") {
+    stopifnot(
+      "Column names should be 'age_limit' & 'risk'" =
+        setequal(c("age_limit", col_name), colnames(x)),
+      "Age limit or risk cannot be NA or NaN" =
+        !anyNA(x),
+      "`age_range` argument must be specified for risk <data.frame>" =
+        !is.null(age_range),
+      "Minimum age of lowest age group should match lower age range" =
+        age_range[["lower"]] == min(x$age_limit),
+      "Lower bound of oldest age group must be lower than highest age range" =
+        age_range[["upper"]] > max(x$age_limit),
+      "Risk should be between 0 and 1" =
+        min(x$risk) >= 0 && max(x$risk) <= 1
+    )
+  } else {
+    stopifnot(
+      "Column names should be 'age_limit' & 'proportion'" =
+        setequal(c("age_limit", col_name), colnames(x)),
+      "Age limit or proportion cannot be NA or NaN" =
+        !anyNA(x),
+      "Minimum age of lowest age group must be greater than zero" =
+        min(x$age_limit) > 0,
+      "Proportions of each age bracket should sum to 1" =
+        all.equal(sum(x$proportion), 1)
+    )
+  }
 
   # order risk df on age_limit
   x <- x[order(x$age_limit), ]
 
-  # format risk data frame
-  age_range_ <- age_range[["lower"]]:age_range[["upper"]]
+  if (df_type == "risk") {
+    # format risk data frame
+    age_range_ <- age_range[["lower"]]:age_range[["upper"]]
+  } else {
+    # extract bounds and groups
+    age_range_ <- min(x$age_limit):max(x$age_limit)
+  }
+
   # findInterval inclusive/exclusive bound rules match age bracket
   age_groups <- unname(split(age_range_, findInterval(age_range_, x$age_limit)))
 
   # add and sort data frames cols
   x$max_age <- vapply(age_groups, max, FUN.VALUE = numeric(1))
-  colnames(x) <- c("min_age", "risk", "max_age")
-  x <- x[, c("min_age", "max_age", "risk")]
+  colnames(x) <- c("min_age", col_name, "max_age")
+  x <- x[, c("min_age", "max_age", col_name)]
 
   # add informative row names
   row.names(x) <- paste0(
@@ -44,54 +75,7 @@
   row.names(x)[nrow(x)] <- paste0(
     "[", x$min_age[nrow(x)], ",", x$max_age[nrow(x)], "]"
   )
-
-  # return risk data frame
-  x
-}
-
-#' Check if `<data.frame>` defining age structure of population is correct
-#'
-#' @param x A `<data.frame>`.
-#'
-#' @return A `<data.frame>`, also called for error side-effects when input is
-#' invalid.
-#' @keywords internal
-.check_age_df <- function(x) {
-  # check input
-  stopifnot(
-    "Column names should be 'age_range' & 'proportion'" =
-      setequal(c("age_range", "proportion"), colnames(x)),
-    "Age range or proportion cannot be NA or NaN" =
-      !anyNA(x),
-    "Proportions of each age bracket should sum to 1" =
-      all.equal(sum(x$proportion), 1),
-    "All age groups should be separated with a '-' (e.g. '1-5')" =
-      all(grepl(pattern = "^\\d+(-)\\d+$", x = x$age_range)) # nolint nonportable_path_linter
-  )
-
-  # extract bounds and groups
-  age_bounds <- strsplit(x$age_range, split = "-", fixed = TRUE)
-  age_bounds <- lapply(age_bounds, as.numeric)
-  age_groups <- unlist(lapply(age_bounds, function(y) y[1]:y[2]))
-
-  # check age input
-  stopifnot(
-    "Age groups should be non-overlapping" =
-      anyDuplicated(age_groups) == 0,
-    "Age groups should be contiguous" =
-      all(min(age_groups):max(age_groups) %in% age_groups),
-    "Age groups should include only positive integers" =
-      checkmate::test_integerish(unlist(age_bounds), lower = 0)
-  )
-
-  # add and sort data frames cols
-  x <- data.frame(
-    min_age = vapply(age_bounds, "[[", FUN.VALUE = numeric(1), 1),
-    max_age = vapply(age_bounds, "[[", FUN.VALUE = numeric(1), 2),
-    proportion = x$proportion
-  )
-
-  # return age data frame
+  # return data frame
   x
 }
 
@@ -356,4 +340,34 @@
   }
 
   invisible(onset_to_hosp)
+}
+
+#' Check if \R object is line list from [sim_linelist()]
+#'
+#' @details
+#' This is a check that the object supplied to `linelist` is from the
+#' [sim_linelist()] or [sim_outbreak()] functions, it is not related to
+#' the class of the object, in other words, it does not check the object is
+#' of class `<linelist>`.
+#'
+#' @inheritParams messy_linelist
+#'
+#' @return Invisibly return the `linelist` `<data.frame>`. The function is
+#' called for its side-effects, which will error if the input is invalid.
+#' @keywords internal
+.check_linelist <- function(linelist) {
+  stopifnot(
+    "linelist must be a data.frame output from `sim_linelist()`." =
+      is.data.frame(linelist) && ncol(linelist) == 13 &&
+      setequal(
+        colnames(linelist), c(
+          "id", "case_name", "case_type", "sex", "age", "date_onset",
+          "date_reporting", "date_admission", "outcome", "date_outcome",
+          "date_first_contact", "date_last_contact", "ct_value"
+        )
+      ),
+    "`linelist$date_reporting` column cannot contain any NAs." =
+      !anyNA(linelist$date_reporting)
+  )
+  invisible(linelist)
 }

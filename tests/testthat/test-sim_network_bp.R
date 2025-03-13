@@ -1,28 +1,5 @@
-suppressMessages({
-  library(epiparameter)
-  contact_distribution <- as.function(
-    epiparameter(
-      disease = "COVID-19",
-      epi_name = "contact distribution",
-      prob_distribution = create_prob_distribution(
-        prob_distribution = "pois",
-        prob_distribution_params = c(mean = 2)
-      )
-    )
-  )
-
-  infectious_period <- as.function(
-    epiparameter(
-      disease = "COVID-19",
-      epi_name = "infectious period",
-      prob_distribution = create_prob_distribution(
-        prob_distribution = "gamma",
-        prob_distribution_params = c(shape = 1, scale = 1)
-      )
-    ),
-    func_type = "generate"
-  )
-})
+contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
+infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
 
 test_that(".sim_network_bp works as expected", {
   set.seed(1)
@@ -38,18 +15,7 @@ test_that(".sim_network_bp works as expected", {
 })
 
 test_that(".sim_network_bp works as expected with no contacts", {
-  suppressMessages(
-    contact_distribution <- as.function(
-      epiparameter(
-        disease = "COVID-19",
-        epi_name = "contact distribution",
-        prob_distribution = create_prob_distribution(
-          prob_distribution = "pois",
-          prob_distribution_params = c(mean = 1)
-        )
-      )
-    )
-  )
+  contact_distribution <- function(x) stats::dpois(x = x, lambda = 1)
   set.seed(1)
   expect_snapshot(
     .sim_network_bp(
@@ -90,19 +56,7 @@ test_that(".sim_network_bp warns as expected", {
 })
 
 test_that(".sim_network_bp errors with negative infectious period", {
-  suppressMessages({
-    infectious_period <- as.function(
-      epiparameter(
-        disease = "COVID-19",
-        epi_name = "infectious period",
-        prob_distribution = create_prob_distribution(
-          prob_distribution = "norm",
-          prob_distribution_params = c(mean = 10, sd = 5)
-        )
-      ),
-      func_type = "generate"
-    )
-  })
+  infectious_period <- function(x) stats::rnorm(n = x, mean = 10, sd = 5)
   set.seed(3)
   expect_error(
     .sim_network_bp(

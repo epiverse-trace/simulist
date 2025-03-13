@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -46,11 +48,13 @@ infectious_period <- epiparameter(
   )
 )
 
-# get onset to hospital admission from {epiparameter} database
-onset_to_hosp <- epiparameter_db(
+onset_to_hosp <- epiparameter(
   disease = "COVID-19",
   epi_name = "onset to hospitalisation",
-  single_epiparameter = TRUE
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 1, sdlog = 0.5)
+  )
 )
 
 # get onset to death from {epiparameter} database
@@ -96,37 +100,60 @@ Currently {simulist} outputs dates that are not rounded to the nearest day, i.e.
 
 ***Note*** storing dates as precise doubles and not as integer days may change in the near future.
 
-The `interval = "daily"` is required as {incidence2} requires rounded dates to aggregate cases per unit time and specifying the `interval` will do this automatically for us.
+The `interval = "daily"` is required as {incidence2} requires rounded dates to aggregate cases per unit time and specifying the `interval` will do this automatically for us. It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by setting `complete_dates = TRUE`, alternatively this can be achieved by using `incidence2::complete_dates()` on the `<incidence2>` object.
 
 ```{r create-incidence}
 # create incidence object
-daily <- incidence(x = linelist, date_index = "date_onset", interval = "daily")
+daily <- incidence(
+  x = linelist,
+  date_index = "date_onset",
+  interval = "daily",
+  complete_dates = TRUE
+)
 ```
 
-It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
-
-```{r, complete-dates, fig.cap="Daily incidence of cases from symptom onset including days with zero cases.", fig.width = 8, fig.height = 5}
-# impute for days without cases
-daily <- complete_dates(daily)
+```{r plot-daily}
+#| fig.alt: >
+#|   Histogram of incidence (epicurve) showing the daily incidence of cases
+#|   from symptom onset including days with zero cases. The plot shows the
+#|   outbreak increasing in incidence and then declining, similar to a normal
+#|   distribution.
 plot(daily)
 ```
 
 Alternatively, incidence can be plotting weekly:
 
-```{r plot-weekly, fig.cap="Weekly incidence of cases from symptom onset", fig.width = 8, fig.height = 5}
+```{r prep-weekly}
 weekly <- incidence(linelist, date_index = "date_onset", interval = "isoweek")
+```
+
+```{r plot-weekly}
+#| fig.alt: >
+#|   Histogram of incidence (epicurve) showing the weekly incidence of cases
+#|   from symptom onset including days with zero cases. The plot shows the
+#|   outbreak increasing in incidence and then declining, with some weeks late
+#|   in the outbreak have noticably high case counts.
 plot(weekly)
 ```
 
 In order to check differences between a group in the line list data, for example sex, the `<incidence2>` data object can be recreated, specifying which columns to group by.
 
-```{r, group-by-sex, fig.cap="Weekly incidence of cases from symptom onset facetted by sex", fig.width = 8, fig.height = 5}
+```{r, group-by-sex}
 weekly <- incidence(
   linelist,
   date_index = "date_onset",
   interval = "isoweek",
   groups = "sex"
 )
+```
+
+```{r plot-group-by-sex}
+#| fig.alt: >
+#|   Two histograms, in a single row, of incidence (epicurve) showing the
+#|   weekly incidence of cases from symtom onset including days with zero
+#|   cases, facetted by sex (left female, right male). The plot shows the
+#|   outbreak increasing in incidence and then declining, with epidemic curves
+#|   similar between sexes.
 plot(weekly)
 ```
  
@@ -156,8 +183,7 @@ linelist <- linelist %>%
   tidyr::pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  )
-linelist <- linelist %>%
+  ) %>%
   dplyr::rename(
     date_death = died,
     date_recovery = recovered
@@ -166,7 +192,7 @@ linelist <- linelist %>%
 
 ## {-}
  
-```{r, plot-onset-hospitalisation, fig.cap="Daily incidence of cases from symptom onset and incidence of hospitalisations and deaths.", fig.width = 8, fig.height = 5}
+```{r, prep-onset-hospitalisation}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -175,15 +201,25 @@ daily <- incidence(
     death = "date_death"
   ),
   interval = "daily",
-  groups = "sex"
+  groups = "sex",
+  complete_dates = TRUE
 )
-daily <- complete_dates(daily)
+```
+
+```{r plot-onset-hospitalisation}
+#| fig.alt: >
+#|   Six histograms, in a grid of two columns and three rows, of incidence
+#|   (epicurves) showing the daily incidence of cases from symtom onset
+#|   (bottom row), hospital admission (middle row), and death (top row).
+#|   The data is facetted by sex (left female, right male) and incidence event
+#|   (rows). The plot shows the outbreak fluctuating, with many fewer
+#|   hospital admissions and deaths than cases.
 plot(daily)
 ```
 
 ## Demographic data
 
-Please see the [Age structured population vignette](age-struct-pop.html) for examples of how to plot the distribution of ages within a line list data set, including age pyramids. 
+Please see the [Age-structured population vignette](age-struct-pop.html) for examples of how to plot the distribution of ages within a line list data set, including age pyramids. 
 
 The plotting code in vignettes is hidden by default, click the Code button with arrow to reveal the plotting code.
 
@@ -260,7 +296,12 @@ If you are viewing this vignette on the web (or on a web browser) the graph belo
 
 :::
 
-```{r, plot-epicontacts, fig.cap="Contact network from infectious disease outbreak. This includes all contacts, i.e. individuals that were infected and not infected"}
+```{r, plot-epicontacts}
+#| fig.alt: >
+#|   Contact network from infectious disease outbreak. This includes all
+#|   contacts, i.e. individuals that were infected and not infected. Each
+#|   individual is shown as a circle with a name tag, and arrows connecting
+#|   the contacts to show directionality of contact.
 plot(epicontacts)
 ```
 
@@ -280,7 +321,7 @@ outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case == "Y", ]
 
 ```{r, subset-linelist-tidyverse}
 library(dplyr)
-outbreak$contacts <- outbreak$contacts %>%
+outbreak$contacts <- outbreak$contacts %>% # nolint one_call_pipe_linter
   dplyr::filter(was_case == "Y")
 ```
 
@@ -306,7 +347,12 @@ epicontacts <- make_epicontacts(
 epicontacts
 ```
 
-```{r, plot-cases-epicontacts, fig.cap="Transmission chain from infectious disease outbreak. This includes only individuals that were infected, including confirmed, probable and suspected cases."}
+```{r, plot-cases-epicontacts}
+#| fig.alt: >
+#|   Transmission chain from infectious disease outbreak. This includes only
+#|   individuals that were infected, including confirmed, probable and
+#|   suspected cases. Each individual is shown as a circle with a name tag,
+#|   and arrows connecting the cases to show directionality of transmission.
 plot(epicontacts)
 ```
 

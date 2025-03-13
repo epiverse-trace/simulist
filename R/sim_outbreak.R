@@ -69,6 +69,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
                          onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
                          onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2.5, sdlog = 0.5), # nolint end line_length_linter
                          onset_to_recovery = NULL,
+                         reporting_delay = NULL,
                          hosp_risk = 0.2,
                          hosp_death_risk = 0.5,
                          non_hosp_death_risk = 0.05,
@@ -130,7 +131,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
   )
 
   if (is.data.frame(population_age)) {
-    population_age <- .check_age_df(population_age)
+    population_age <- .check_df(population_age, df_type = "age")
     age_range <- c(
       lower = min(population_age[, "min_age"]),
       upper = max(population_age[, "max_age"])
@@ -141,20 +142,23 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
     age_range <- population_age
   }
   if (is.data.frame(hosp_risk)) {
-    hosp_risk <- .check_risk_df(
+    hosp_risk <- .check_df(
       hosp_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
   if (is.data.frame(hosp_death_risk)) {
-    hosp_death_risk <- .check_risk_df(
+    hosp_death_risk <- .check_df(
       hosp_death_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
   if (is.data.frame(non_hosp_death_risk)) {
-    non_hosp_death_risk <- .check_risk_df(
+    non_hosp_death_risk <- .check_df(
       non_hosp_death_risk,
+      df_type = "risk",
       age_range = age_range
     )
   }
@@ -167,6 +171,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
+    reporting_delay = reporting_delay,
     hosp_risk = hosp_risk,
     hosp_death_risk = hosp_death_risk,
     non_hosp_death_risk = non_hosp_death_risk,

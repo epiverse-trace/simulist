@@ -68,6 +68,65 @@
   names_mf
 }
 
+#' Sample the onset-to-outcome time conditional that the outcome is after
+#' a hospitalisation event
+#'
+#' @description
+#' The outcome of a case, either died or recovered, can have a time of event,
+#' but this must be after the hospitalisation time, if a case has been admitted
+#' to hospital. This function samples either the onset-to-death or
+#' onset-to-recovery time conditional on it being greater than a
+#' onset-to-hospitalisation time for a given case, if the case was admitted
+#' to hospital. It does this by resampling onset-to-outcome (death or recovery)
+#' times if they are less than the onset-to-hospitalisation time (from
+#' [.add_hospitalisation()]).
+#'
+#' @inheritParams .add_cols
+#' @param onset_to_outcome A `function` for either the onset-to-death or
+#' onset-to-recovery delay distribution. `onset_to_outcome` can also be set to
+#' `NULL` to not simulate dates for individuals that died or recovered. See
+#' [sim_linelist()] documentation for more information.
+#' @param idx Either the `infected_lgl_idx` or `died_lgl_idx` from
+#' `.add_outcomes()` to define who to sample recovery or death times for,
+#' respectively.
+#'
+#' @return A `<data.frame>` with a potentially modified `$outcome_time` column.
+#' @keywords internal
+.sample_outcome_time <- function(.data,
+                                 onset_to_outcome,
+                                 idx) {
+  delay <- onset_to_outcome(sum(idx))
+
+  # if outcome times are NA then times don't need to be checked
+  if (anyNA(delay)) return(.data)
+
+  # get onset-to-hospitalisation delays from time of hospitalisation in outbreak
+  oth <- .data$hospitalisation[idx] - .data$time[idx]
+  # set non-hospitalised cases as -Inf for numerical comparison so
+  # onset-to-death and onset-to-recovery time cannot be smaller
+  oth[is.na(oth)] <- -Inf
+  counter <- 1L
+  # outcome (death/recovery) time must be after hospitalisation
+  while (any(delay < oth)) {
+    # resample delay to outcome
+    delay[delay < oth] <- onset_to_outcome(sum(delay < oth))
+    counter <- counter + 1L
+    if (counter > 1000L) {
+      stop(
+        "Cannot sample an onset-to-outcome time greater than a ",
+        "onset-to-hospitalisation time.\n Please check `onset_to_hosp`, ",
+        "`onset_to_death` and `onset_to_recovery`.\n Death and recovery times ",
+        "must be greater than hospital admission times.",
+        call. = FALSE
+      )
+    }
+  }
+  .data$outcome_time[idx] <- .data$time[idx] + delay
+
+  # return .data
+  .data
+}
+
 #' Anonymise names
 #'
 #' @description
@@ -208,4 +267,127 @@ as_function <- function(x) {
     )
   }
   contact_infectious_period
+}
+
+#' Introduce spelling mistake in `character` string.
+#'
+#' @description
+#' `.spelling_mistake()` only introduces spelling mistakes on strings with
+#' more than one character.
+#'
+#' @details
+#' A single letter is replaced at random, it is possible the letter is replaced
+#' with the same letter not resulting in a spelling mistake.
+#'
+#' @param char A single `character` string.
+#'
+#' @return A single `character` string.
+#' @keywords internal
+#' @noRd
+.spelling_mistake <- function(char) {
+  checkmate::assert_string(char)
+  if (nchar(char) < 2) return(char)
+  chars <- strsplit(char, "", fixed = TRUE)[[1]]
+  n_chars <- length(chars)
+  letter_idx <- sample.int(n = n_chars, size = 1)
+  chars[letter_idx] <- ifelse(
+    test = letter_idx == 1,
+    yes = sample(LETTERS, 1),
+    no = sample(letters, 1)
+  )
+  char <- paste(chars, collapse = "")
+  # return character string
+  char
+}
+
+#' Coerce and store `<data.frame>` subclass to `<data.frame>` and
+#' restore `<data.frame>` subclass to `<data.frame>` from attribute.
+#'
+#' @param x An \R object.
+#'
+#' @return A `<data.frame>` or subclass of `<data.frame>`.
+#' @keywords internal
+#' @name coerce-df
+NULL
+
+#' @rdname coerce-df
+.as_df <- function(x) {
+  stopifnot("Object must be a <data.frame>." = is.data.frame(x))
+  # if object is a subclass of <data.frame> store classes in attribute and
+  # unclass to <data.frame>
+  if (inherits(x, "data.frame", which = TRUE) > 1) {
+    # `.class` is not a reserved/special attribute see `?attributes`
+    attr(x, ".class") <- class(x)
+    x <- as.data.frame(x)
+  }
+  x
+}
+
+#' @rdname coerce-df
+.restore_df_subclass <- function(x) {
+  stopifnot("Object must be a <data.frame>." =  is.data.frame(x))
+  if (!is.null(attr(x, ".class"))) {
+    class(x) <- attr(x, ".class")
+    attr(x, ".class") <- NULL
+  }
+  x
+}
+
+#' Introduce user-specified proportion of custom missing values into a
+#' `<data.frame>`
+#'
+#' @inheritParams messy_linelist
+#' @param .args A list of setting from [messy_linelist()].
+#'
+#' @return A line list `<data.frame>`
+#' @keywords internal
+.add_missing <- function(linelist, .args) {
+  if (rlang::is_na(.args$missing_value)) {
+    # sample from non-NA elements if missing_value is NA
+    sample_idx <- which(!is.na(linelist))
+    # prevent sampling more than once per index (no replacement)
+    n_samples <- min(
+      ceiling(prod(dim(linelist)) * .args$prop_missing),
+      length(sample_idx)
+    )
+  } else {
+    # sample from all elements if missing_value is not NA
+    sample_idx <- seq_len(prod(dim(linelist)))
+    n_samples <- ceiling(prod(dim(linelist)) * .args$prop_missing)
+  }
+  # sample without replacement indices to make missing
+  missing_idx <- sample(x = sample_idx, size = n_samples)
+  # convert 1D index to 2D row-col index
+  missing_idx <- arrayInd(ind = missing_idx, .dim = dim(linelist))
+
+  msg <- character(0)
+  # set sampled index pairs to missing
+  for (i in seq_len(nrow(missing_idx))) {
+    missing_value <- .args$missing_value
+    ll_col <- missing_idx[i, 2]
+    # check and warn if user-specified missing_value causes type coercion
+    if (class(.args$missing_value) != class(linelist[, ll_col]) && # nolint class_equals_linter
+        !rlang::is_na(.args$missing_value)) {
+      # when types don't match convert to character to avoid unwanted coercion
+      # logical -> integer -> numeric -> character # nolint commented_code_linter
+      # not perfect, e.g. integer & numeric -> character
+      missing_value <- as.character(.args$missing_value)
+      # only convert column and append to warning msg if not character
+      if (!is.character(linelist[, ll_col])) {
+        linelist[, ll_col] <- as.character(linelist[, ll_col])
+        msg <- c(msg, colnames(linelist)[ll_col])
+      }
+    }
+    linelist[missing_idx[i, 1], missing_idx[i, 2]] <- missing_value
+  }
+  if (length(msg) > 0) {
+    # multiple of the same warnings can be appended only print each warning once
+    warning(
+      "The linelist columns:", "\n", sprintf("  - %s\n", unique(msg)),
+      " are being coerced to character due to type differences with ",
+      "`missing_value` supplied to `messy_linelist()`.",
+      call. = FALSE
+    )
+  }
+  linelist
 }

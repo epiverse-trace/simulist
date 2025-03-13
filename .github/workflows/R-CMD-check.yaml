@@ -54,11 +54,13 @@ jobs:
       fail-fast: false
       matrix:
         config:
+          # Test with the 3 R versions and the 3 platforms from CRAN checks
           - {os: macOS-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
           - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - {os: ubuntu-latest,   r: '4.1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
