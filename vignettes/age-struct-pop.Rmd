@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -95,7 +97,7 @@ head(linelist)
 
 We can plot the age distribution for individuals in the line list, binned into 5 year categories.
 
-```{r plot-age-range, fig.width = 8, fig.height = 5}
+```{r plot-age-range}
 #| fig.alt: >
 #|   A histogram for the age distribution of individuals in a simulated line
 #|   list sampled from a uniform distribution between 5 and 75. Ages are binned
@@ -152,7 +154,7 @@ head(linelist)
 
 Again we can plot the age distribution to see the age structure for individuals in the line list. Given the relative uniformity of the age structure specified it is not greatly different from the uniform age structure plotted above, other than having a higher upper age limit. The data is binned into 5 year categories and facetted by sex.
 
-```{r plot-age-struct, fig.width = 8, fig.height = 5}
+```{r plot-age-struct}
 #| fig.alt: >
 #|   Two histograms, facetted by sex, for the age distribution of individuals
 #|   in a simulated line list sampled from an age-structured population defined
@@ -203,7 +205,7 @@ head(linelist)
 ```
 A common and useful method for plotting age data is in the form of age pyramids. Here we partition the data by sex and plot the age distribution.
 
-```{r plot-age-struct-young, fig.width = 8, fig.height = 5}
+```{r plot-age-struct-young}
 linelist_m <- subset(linelist, subset = sex == "m")
 age_cats_m <- as.data.frame(table(floor(linelist_m$age / 5) * 5))
 colnames(age_cats_m) <- c("AgeCat", "Population")

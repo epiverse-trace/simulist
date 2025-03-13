@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -107,7 +109,7 @@ daily <- incidence(x = linelist, date_index = "date_onset", interval = "daily")
 
 It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
 
-```{r, complete-dates, fig.width = 8, fig.height = 5}
+```{r, complete-dates}
 # impute for days without cases
 daily <- complete_dates(daily)
 
@@ -121,7 +123,7 @@ plot(daily)
 
 Alternatively, incidence can be plotting weekly:
 
-```{r plot-weekly, fig.width = 8, fig.height = 5}
+```{r plot-weekly}
 weekly <- incidence(linelist, date_index = "date_onset", interval = "isoweek")
 
 #| fig.alt: >
@@ -134,7 +136,7 @@ plot(weekly)
 
 In order to check differences between a group in the line list data, for example sex, the `<incidence2>` data object can be recreated, specifying which columns to group by.
 
-```{r, group-by-sex, fig.width = 8, fig.height = 5}
+```{r, group-by-sex}
 weekly <- incidence(
   linelist,
   date_index = "date_onset",
@@ -186,7 +188,7 @@ linelist <- linelist %>%
 
 ## {-}
  
-```{r, plot-onset-hospitalisation, fig.width = 8, fig.height = 5}
+```{r, plot-onset-hospitalisation}
 daily <- incidence(
   linelist,
   date_index = c(
