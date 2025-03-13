@@ -107,28 +107,47 @@ daily <- incidence(x = linelist, date_index = "date_onset", interval = "daily")
 
 It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
 
-```{r, complete-dates, fig.cap="Daily incidence of cases from symptom onset including days with zero cases.", fig.width = 8, fig.height = 5}
+```{r, complete-dates, fig.width = 8, fig.height = 5}
 # impute for days without cases
 daily <- complete_dates(daily)
+
+#| fig.alt: >
+#|   Histogram of incidence (epicurve) showing the daily incidence of cases
+#|   from symptom onset including days with zero cases. The plot shows the 
+#|   outbreak increasing in incidence and then declining, similar to a normal
+#|   distribution.
 plot(daily)
 ```
 
 Alternatively, incidence can be plotting weekly:
 
-```{r plot-weekly, fig.cap="Weekly incidence of cases from symptom onset", fig.width = 8, fig.height = 5}
+```{r plot-weekly, fig.width = 8, fig.height = 5}
 weekly <- incidence(linelist, date_index = "date_onset", interval = "isoweek")
+
+#| fig.alt: >
+#|   Histogram of incidence (epicurve) showing the weekly incidence of cases
+#|   from symptom onset including days with zero cases. The plot shows the 
+#|   outbreak increasing in incidence and then declining, with some weeks late
+#|   in the outbreak have noticably high case counts.
 plot(weekly)
 ```
 
 In order to check differences between a group in the line list data, for example sex, the `<incidence2>` data object can be recreated, specifying which columns to group by.
 
-```{r, group-by-sex, fig.cap="Weekly incidence of cases from symptom onset facetted by sex", fig.width = 8, fig.height = 5}
+```{r, group-by-sex, fig.width = 8, fig.height = 5}
 weekly <- incidence(
   linelist,
   date_index = "date_onset",
   interval = "isoweek",
   groups = "sex"
 )
+
+#| fig.alt: >
+#|   Two histograms, in a single row, of incidence (epicurve) showing the 
+#|   weekly incidence of cases from symtom onset including days with zero 
+#|   cases, facetted by sex (left female, right male). The plot shows the 
+#|   outbreak increasing in incidence and then declining, with epidemic curves
+#|   similar between sexes.
 plot(weekly)
 ```
  
@@ -167,7 +186,7 @@ linelist <- linelist %>%
 
 ## {-}
  
-```{r, plot-onset-hospitalisation, fig.cap="Daily incidence of cases from symptom onset and incidence of hospitalisations and deaths.", fig.width = 8, fig.height = 5}
+```{r, plot-onset-hospitalisation, fig.width = 8, fig.height = 5}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -179,6 +198,14 @@ daily <- incidence(
   groups = "sex"
 )
 daily <- complete_dates(daily)
+
+#| fig.alt: >
+#|   Six histograms, in a grid of two columns and three rows, of incidence 
+#|   (epicurves) showing the daily incidence of cases from symtom onset 
+#|   (bottom row), hospital admission (middle row), and death (top row). 
+#|   The data is facetted by sex (left female, right male) and incidence event 
+#|   (rows). The plot shows the outbreak fluctuating, with many fewer
+#|   hospital admissions and deaths than cases.
 plot(daily)
 ```
 
@@ -261,7 +288,12 @@ If you are viewing this vignette on the web (or on a web browser) the graph belo
 
 :::
 
-```{r, plot-epicontacts, fig.cap="Contact network from infectious disease outbreak. This includes all contacts, i.e. individuals that were infected and not infected"}
+```{r, plot-epicontacts}
+#| fig.alt: >
+#|   Contact network from infectious disease outbreak. This includes all
+#|   contacts, i.e. individuals that were infected and not infected. Each
+#|   individual is shown as a circle with a name tag, and arrows connecting
+#|   the contacts to show directionality of contact.
 plot(epicontacts)
 ```
 
@@ -307,7 +339,12 @@ epicontacts <- make_epicontacts(
 epicontacts
 ```
 
-```{r, plot-cases-epicontacts, fig.cap="Transmission chain from infectious disease outbreak. This includes only individuals that were infected, including confirmed, probable and suspected cases."}
+```{r, plot-cases-epicontacts}
+#| fig.alt: >
+#|   Transmission chain from infectious disease outbreak. This includes only 
+#|   individuals that were infected, including confirmed, probable and 
+#|   suspected cases. Each individual is shown as a circle with a name tag, 
+#|   and arrows connecting the cases to show directionality of transmission.
 plot(epicontacts)
 ```
 
