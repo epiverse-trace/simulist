@@ -39,7 +39,7 @@ Suggests:
     dplyr,
     epicontacts (>= 1.1.3),
     ggplot2,
-    incidence2 (>= 2.1.0),
+    incidence2 (>= 2.3.0),
     knitr,
     rmarkdown,
     spelling,
