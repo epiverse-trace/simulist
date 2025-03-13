@@ -296,18 +296,19 @@ columns into their own columns using the <a href="https://tidyr.tidyverse.org/" 
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
 <span>    death <span class="op">=</span> <span class="st">"date_death"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
+<span>  interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
+<span>  complete_dates <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="time-varying-cfr_files/figure-html/plot-onset-hospitalisation-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.5 and the risk for non-hospitalised individuals is 0.05, and these risks are constant through time." width="768"><p class="caption">
-Daily incidence of cases from symptom onset and incidence of deaths.
-Case fatality risk for hospitalised individuals is 0.5 and the risk for
-non-hospitalised individuals is 0.05, and these risks are constant
-through time.
-</p>
-</div>
+<p>&lt;img
+src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-hospitalisation-1.png”
+alt=“Two histograms in a single column, showing the daily incidence of
+cases from symptom onset and incidence of deaths. Case fatality risk for
+hospitalised individuals is 0.5 and the risk of non-hospitalised
+individuals is 0.05, and these risks are constant through time. The
+y-axis is labelled”count” and the x-axis is labelled “date_index”. The
+plot shows fluctuating number of cases over time with substantially
+fewer deaths than cases.” width=“768” /&gt;</p>
 </div>
 <div class="section level2">
 <h2 id="higher-risk-of-case-fatality">Higher risk of case fatality<a class="anchor" aria-label="anchor" href="#higher-risk-of-case-fatality"></a>
@@ -370,18 +371,20 @@ infected.</p>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
 <span>    death <span class="op">=</span> <span class="st">"date_death"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="time-varying-cfr_files/figure-html/plot-onset-death-higher-risk-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.9 and the risk for non-hospitalised individuals is 0.75, and these risks are constant through time." width="768"><p class="caption">
-Daily incidence of cases from symptom onset and incidence of deaths.
-Case fatality risk for hospitalised individuals is 0.9 and the risk for
-non-hospitalised individuals is 0.75, and these risks are constant
-through time.
-</p>
-</div>
+<span>  interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
+<span>  complete_dates <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
+<p>&lt;img
+src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-death-higher-risk-1.png”
+alt=“Two histograms in a single column, showing the daily incidence of
+cases from symptom onset and incidence of deaths. Case fatality risk for
+hospitalised individuals is 0.9 and the risk of non-hospitalised
+individuals is 0.75, and these risks are constant through time. The
+y-axis is labelled”count” and the x-axis is labelled “date_index”. The
+plot shows growth and subsequent decline of the outbreak, with a similar
+number of cases and deaths over time.” width=“768” /&gt;</p>
 </div>
 <div class="section level2">
 <h2 id="continuous-time-varying-case-fatality-risk">Continuous time-varying case fatality risk<a class="anchor" aria-label="anchor" href="#continuous-time-varying-case-fatality-risk"></a>
@@ -398,32 +401,30 @@ death.</p>
 <p>The <code><a href="../reference/create_config.html">create_config()</a></code> function has no named arguments, and
 the argument you are modifying needs to be matched by name exactly (case
 sensitive). See <code>?create_config()</code> for documentation.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_config.html">create_config</a></span><span class="op">(</span></span>
 <span>  time_varying_death_risk <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">risk</span>, <span class="va">time</span><span class="op">)</span> <span class="va">risk</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.05</span> <span class="op">*</span> <span class="va">time</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Here we set the case fatality risk to exponentially decrease through
 time. This will provide a shallow (monotonic) decline of case fatality
 through the simulated epidemic.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">exp_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  time <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,</span>
 <span>  value <span class="op">=</span> <span class="va">config</span><span class="op">$</span><span class="fu">time_varying_death_risk</span><span class="op">(</span>risk <span class="op">=</span> <span class="fl">0.9</span>, time <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">exp_df</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">exp_df</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Time (Days)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="time-varying-cfr_files/figure-html/plot-exponential-dist-1.png" alt="The time-varying hospitalised case fatality risk function (`config$time_varying_death_risk`) throughout the epidemic. In this case the hospitalised risks (`hosp_death_risk`) are at their maximum value at day 0 and decline through time, with risk approaching zero at around day 100." width="768"><p class="caption">
-The time-varying hospitalised case fatality risk function
+<p><img src="time-varying-cfr_files/figure-html/plot-exponential-dist-1.png" alt="A scatter plot showing an exponential decline over time representing the time-varying hospitalised case fatality risk over time." width="768"></p>
+<p>The time-varying hospitalised case fatality risk function
 (<code>config$time_varying_death_risk</code>) throughout the epidemic.
 In this case the hospitalised risks (<code>hosp_death_risk</code>) are
 at their maximum value at day 0 and decline through time, with risk
-approaching zero at around day 100.
-</p>
-</div>
+approaching zero at around day 100.</p>
 <div class="alert alert-info">
 <p><em>Advanced</em></p>
 <p>The time-varying case fatality risk function modifies the the death
@@ -446,7 +447,7 @@ the risks will be lower, and when the exponential function approaches
 zero the risk of a case dying will also go to zero.</p>
 </div>
 <p>Simulating with the time-varying case fatality risk:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
@@ -481,7 +482,7 @@ zero the risk of a case dying will also go to zero.</p>
 <span><span class="co">#&gt; 4       NA</span></span>
 <span><span class="co">#&gt; 5       NA</span></span>
 <span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span></span>
 <span>    names_from <span class="op">=</span> <span class="va">outcome</span>,</span>
@@ -491,25 +492,28 @@ zero the risk of a case dying will also go to zero.</p>
 <span>    date_death <span class="op">=</span> <span class="va">died</span>,</span>
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
 <span>    death <span class="op">=</span> <span class="st">"date_death"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these decline exponentially through time." width="768"><p class="caption">
-Daily incidence of cases from symptom onset and incidence of deaths. The
-baseline case fatality risk for hospitalised individuals is 0.9 and for
+<span>  interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
+<span>  complete_dates <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
+<p>&lt;img
+src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-1.png”
+alt=“Two histograms in a single column, showing the daily incidence of
+cases from symptom onset and incidence of deaths. The baseline case
+fatality risk for hospitalised individuals is 0.9 and the risk of
 non-hospitalised individuals is 0.75, and these decline exponentially
-through time.
-</p>
-</div>
+through time. The y-axis is labelled”count” and the x-axis is labelled
+“date_index”. The plot shows fluctuating cases over time, and only a few
+deaths early in the epidemic and no deaths later in the outbreak.”
+width=“768” /&gt;</p>
 </div>
 <div class="section level2">
 <h2 id="stepwise-time-varying-case-fatality-risk">Stepwise time-varying case fatality risk<a class="anchor" aria-label="anchor" href="#stepwise-time-varying-case-fatality-risk"></a>
@@ -524,32 +528,30 @@ the baseline <code>hosp_death_risk</code> and
 <code>non_hosp_death_risk</code> for the first 60 days of the outbreak
 and then become zero (i.e. if an individual is infected after day 60
 they will definitely recover).</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_config.html">create_config</a></span><span class="op">(</span></span>
 <span>  time_varying_death_risk <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">risk</span>, <span class="va">time</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">60</span>, yes <span class="op">=</span> <span class="va">risk</span>, no <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stepwise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  time <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,</span>
 <span>  value <span class="op">=</span> <span class="va">config</span><span class="op">$</span><span class="fu">time_varying_death_risk</span><span class="op">(</span>risk <span class="op">=</span> <span class="fl">0.9</span>, time <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">stepwise_df</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">stepwise_df</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Time (Days)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="time-varying-cfr_files/figure-html/plot-stepwise-dist-1.png" alt="The time-varying case fatality risk function (`config$time_varying_death_risk`) for the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their user-supplied values from day 0 to day 60, and then become 0 onwards." width="768"><p class="caption">
-The time-varying case fatality risk function
+<p><img src="time-varying-cfr_files/figure-html/plot-stepwise-dist-1.png" alt="A scatter plot showing an step-wise function representing the time-varying hospitalised case fatality risk over time. The function outputs 0.9 if time (days) is less than 60, and 0 if not." width="768"></p>
+<p>The time-varying case fatality risk function
 (<code>config$time_varying_death_risk</code>) for the hospitalised death
 risk (<code>hosp_death_risk</code>) and non-hospitalised death risk
 (<code>non_hosp_death_risk</code>) throughout the epidemic. In this case
 the risks are at their user-supplied values from day 0 to day 60, and
-then become 0 onwards.
-</p>
-</div>
+then become 0 onwards.</p>
 <p>Simulating with the stepwise time-varying case fatality risk:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
@@ -584,7 +586,7 @@ then become 0 onwards.
 <span><span class="co">#&gt; 4       NA</span></span>
 <span><span class="co">#&gt; 5     25.9</span></span>
 <span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span></span>
 <span>    names_from <span class="op">=</span> <span class="va">outcome</span>,</span>
@@ -594,25 +596,28 @@ then become 0 onwards.
 <span>    date_death <span class="op">=</span> <span class="va">died</span>,</span>
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
 <span>    death <span class="op">=</span> <span class="st">"date_death"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these rates remain constant from days 0 to 60, and then go to 0 from day 60 onwards." width="768"><p class="caption">
-Daily incidence of cases from symptom onset and incidence of deaths. The
-maximum case fatality risk for hospitalised individuals is 0.9 and for
-non-hospitalised individuals is 0.75, and these rates remain constant
-from days 0 to 60, and then go to 0 from day 60 onwards.
-</p>
-</div>
+<span>  interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
+<span>  complete_dates <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
+<p>&lt;img
+src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-1.png”
+alt=“Two histograms in a single column, showing the daily incidence of
+cases from symptom onset and incidence of deaths. The baseline case
+fatality risk for hospitalised individuals is 0.9 and the risk of
+non-hospitalised individuals is 0.75, and these change in a step-wise
+manner at day 60 of the epidemic. The y-axis is labelled”count” and the
+x-axis is labelled “date_index”. The plot shows fluctuating cases over
+time, and deaths only occuring early in the epidemic and no deaths later
+in the outbreak.” width=“768” /&gt;</p>
 <p>The same stepwise function can also be used to specify time windows
 were the risk of death is reduced. Here we specify the
 <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code> in the
@@ -620,36 +625,34 @@ first 50 days of the epidemic, then between day 50 and day 100 the risk
 is reduced by half, and then from day 100 onwards the risk goes back to
 the rates specified by <code>hosp_death_risk</code> and
 <code>non_hosp_death_risk</code>.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_config.html">create_config</a></span><span class="op">(</span></span>
 <span>  time_varying_death_risk <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">risk</span>, <span class="va">time</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">time</span> <span class="op">&gt;</span> <span class="fl">50</span> <span class="op">&amp;</span> <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">100</span>, yes <span class="op">=</span> <span class="va">risk</span> <span class="op">*</span> <span class="fl">0.5</span>, no <span class="op">=</span> <span class="va">risk</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stepwise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  time <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,</span>
 <span>  value <span class="op">=</span> <span class="va">config</span><span class="op">$</span><span class="fu">time_varying_death_risk</span><span class="op">(</span>risk <span class="op">=</span> <span class="fl">0.9</span>, time <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">stepwise_df</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">stepwise_df</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Value"</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Time (Days)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="time-varying-cfr_files/figure-html/plot-stepwise-dist-window-1.png" alt="The time-varying case fatality risk function (`config$time_varying_death_risk`) which scales the hospitalised death risk (`hosp_death_risk`) and non-hospitalised death risk (`non_hosp_death_risk`) throughout the epidemic. In this case the risks are at their maximum, user-supplied, values from day 0 to day 50, and then half the risks from day 50 to day 100, and then return to their maximum value from day 100 onwards." width="768"><p class="caption">
-The time-varying case fatality risk function
+<p><img src="time-varying-cfr_files/figure-html/plot-stepwise-dist-window-1.png" alt="A scatter plot showing an step-wise function representing the time-varying hospitalised case fatality risk over time. The function outputs 0.9 if time (days) is less than 50 or greater than 100, and 0.45 if not." width="768"></p>
+<p>The time-varying case fatality risk function
 (<code>config$time_varying_death_risk</code>) which scales the
 hospitalised death risk (<code>hosp_death_risk</code>) and
 non-hospitalised death risk (<code>non_hosp_death_risk</code>)
 throughout the epidemic. In this case the risks are at their maximum,
 user-supplied, values from day 0 to day 50, and then half the risks from
 day 50 to day 100, and then return to their maximum value from day 100
-onwards.
-</p>
-</div>
+onwards.</p>
 <p>Simulating with the stepwise time-varying case fatality risk:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_linelist.html">sim_linelist</a></span><span class="op">(</span></span>
 <span>  contact_distribution <span class="op">=</span> <span class="va">contact_distribution</span>,</span>
 <span>  infectious_period <span class="op">=</span> <span class="va">infectious_period</span>,</span>
@@ -686,7 +689,7 @@ onwards.
 <span><span class="co">#&gt; 4     23.9</span></span>
 <span><span class="co">#&gt; 5     19.9</span></span>
 <span><span class="co">#&gt; 6     25.4</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span></span>
 <span>    names_from <span class="op">=</span> <span class="va">outcome</span>,</span>
@@ -696,28 +699,34 @@ onwards.
 <span>    date_death <span class="op">=</span> <span class="va">died</span>,</span>
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/incidence.html" class="external-link">incidence</a></span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    onset <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
 <span>    death <span class="op">=</span> <span class="st">"date_death"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  interval <span class="op">=</span> <span class="st">"daily"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">daily</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/incidence2/man/complete_dates.html" class="external-link">complete_dates</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-window-1.png" alt="Daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for hospitalised individuals is 0.9 and for non-hospitalised individuals is 0.75, and these rates remain constant from days 0 to 50, and then from days 50 to 100 the case fatality risk is halved (i.e `hosp_death_risk` = 0.45 and `non_hosp_death_risk` = 0.375), before going back to their original risks from day 100 onwards." width="768"><p class="caption">
-Daily incidence of cases from symptom onset and incidence of deaths. The
-maximum case fatality risk for hospitalised individuals is 0.9 and for
-non-hospitalised individuals is 0.75, and these rates remain constant
-from days 0 to 50, and then from days 50 to 100 the case fatality risk
-is halved (i.e <code>hosp_death_risk</code> = 0.45 and
+<span>  interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
+<span>  complete_dates <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
+<p>&lt;img
+src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-window-1.png”
+alt=“Two histograms in a single column, showing the daily incidence of
+cases from symptom onset and incidence of deaths. The maximum case
+fatality risk for hospitalised individuals is 0.9 and the risk of
+non-hospitalised individuals is 0.75, and these change in a step-wise
+manner at day 50 and 100 of the epidemic. The y-axis is labelled”count”
+and the x-axis is labelled “date_index”. The plot shows fluctuating
+cases over time, and deaths closely resemble the number of cases over
+time.” width=“768” /&gt;</p>
+<p>The maximum case fatality risk for hospitalised individuals is 0.9
+and for non-hospitalised individuals is 0.75, and these rates remain
+constant from days 0 to 50, and then from days 50 to 100 the case
+fatality risk is halved (i.e <code>hosp_death_risk</code> = 0.45 and
 <code>non_hosp_death_risk</code> = 0.375), before going back to their
-original risks from day 100 onwards.
-</p>
-</div>
+original risks from day 100 onwards.”</p>
 <p>This vignette does not explore applying a time-varying case fatality
 risk to age-stratified fatality risks, but this is possible with the
 <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> functions.
