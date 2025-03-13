@@ -105,9 +105,9 @@ The `interval = "daily"` is required as {incidence2} requires rounded dates to a
 ```{r create-incidence}
 # create incidence object
 daily <- incidence(
-  x = linelist, 
-  date_index = "date_onset", 
-  interval = "daily", 
+  x = linelist,
+  date_index = "date_onset",
+  interval = "daily",
   complete_dates = TRUE
 )
 ```
