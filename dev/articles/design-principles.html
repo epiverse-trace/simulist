@@ -127,6 +127,15 @@ package</a>.</p>
 <code>&lt;data.frame&gt;</code> or a <code>list</code> of
 <code>&lt;data.frame&gt;</code>s. This consistency across functions of a
 well-known data structure makes it easy to understand for users.</p>
+<p>Before the first stable release (v1.0.0) of {simulist} we cannot
+guarantee that two versions of the package will produce identical output
+when using the same function with the same seed (i.e. <em>output
+breaking change</em> as opposed to <em>API breaking change</em>). Given
+the many random number generation calls in the simulation code, it is
+too constraining to ensure reproducibility of function output between
+versions. We aim to ensure consistent and reproducible output from
+<code>sim_*()</code> functions between minor version releases after
+v1.0.0.</p>
 </div>
 <div class="section level2">
 <h2 id="package-architecture">Package architecture<a class="anchor" aria-label="anchor" href="#package-architecture"></a>
