@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
 )
 ```
 
@@ -140,7 +142,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-hospitalisation, fig.width = 8, fig.height = 5}
+```{r, plot-onset-hospitalisation}
 #| fig.alt: >
 #|   Two histograms in a single column, showing the daily incidence of cases 
 #|   from symptom onset and incidence of deaths. Case fatality risk for 
@@ -193,7 +195,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-higher-risk, fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-higher-risk}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -231,7 +233,7 @@ config <- create_config(
 
 Here we set the case fatality risk to exponentially decrease through time. This will provide a shallow (monotonic) decline of case fatality through the simulated epidemic. 
 
-```{r, plot-exponential-dist, fig.width = 8, fig.height = 5}
+```{r, plot-exponential-dist}
 exp_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
@@ -289,7 +291,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr, fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-time-varying-cfr}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -325,7 +327,7 @@ config <- create_config(
 # nolint end
 ```
 
-```{r, plot-stepwise-dist, fig.width = 8, fig.height = 5}
+```{r, plot-stepwise-dist}
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
@@ -374,7 +376,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr-stepwise, fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-time-varying-cfr-stepwise}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -406,7 +408,7 @@ config <- create_config(
 )
 ```
 
-```{r, plot-stepwise-dist-window, fig.width = 8, fig.height = 5}
+```{r, plot-stepwise-dist-window}
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
@@ -456,7 +458,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr-stepwise-window, fig.width = 8, fig.height = 5}
+```{r, plot-onset-death-time-varying-cfr-stepwise-window}
 daily <- incidence(
   linelist,
   date_index = c(
