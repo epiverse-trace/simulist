@@ -115,9 +115,9 @@ Here from the first 6 rows of the line list you can see differences between the 
 
 ```{r plot-linelist-events}
 #| fig.alt: >
-#|   A dot plot with the event dates in the line list plotted a points on the 
+#|   A dot plot with the event dates in the line list plotted a points on the
 #|   figure, connected by horizontal lines. One row in the dot plot corresponds
-#|   to one case (i.e. one row in the line list). The y-axis label is 
+#|   to one case (i.e. one row in the line list). The y-axis label is
 #|   "Case name", and the x-axis label is "Event date". The event types are
 #|   "Date admission" (red square), "Date Onset" (blue circle), "Date Outcome"
 #|   (green triangle), and "Date Reporting" (purple diamond). The plot shows
@@ -166,10 +166,10 @@ If we plot the difference between the date of symptom onset and reporting then, 
 
 ```{r plot-variable-reporting-delay}
 #| fig.alt: >
-#|   The distribution of reporting delays from a line list plotted as a 
+#|   The distribution of reporting delays from a line list plotted as a
 #|   histogram. The y-axis is the count, and the x-axis is the reporting delay
 #|   in days. Most of the histogram weight is around 5 and there a tail to the
-#|   distribution (left-skewed) with a small number of values above 40. The 
+#|   distribution (left-skewed) with a small number of values above 40. The
 #|   histogram looks approximately lognormally distributed.
 ggplot(data = linelist) +
   geom_histogram(
@@ -237,7 +237,7 @@ Here we define the time between the latest, or user-specified date, and the time
 
 In the plot below we show the _truncation time_ as a vertical line. If the date of reporting falls after the truncation time, then the case is removed from the line list, if it falls before the date of reporting but after the hospital admission and/or outcome date they are set to `NA`.
 
-```{r plot-linelist-events-trunc}
+```{r prep-linelist-events-trunc}
 tidy_linelist <- linelist %>%
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
@@ -247,11 +247,13 @@ tidy_linelist <- linelist %>%
 
 truncation_day <- 14
 trunc_date <- max(tidy_linelist$value, na.rm = TRUE) - truncation_day
+```
 
+```{r plot-linelist-events-trunc}
 #| fig.alt: >
-#|   A dot plot with the event dates in the line list plotted a points on the 
+#|   A dot plot with the event dates in the line list plotted a points on the
 #|   figure, connected by horizontal lines. One row in the dot plot corresponds
-#|   to one case (i.e. one row in the line list). The y-axis label is 
+#|   to one case (i.e. one row in the line list). The y-axis label is
 #|   "Case name", and the x-axis label is "Event date". The event types are
 #|   "Date admission" (red square), "Date Onset" (blue circle), "Date Outcome"
 #|   (green triangle), and "Date Reporting" (purple diamond). The plot shows
@@ -328,7 +330,7 @@ We can simulate another outbreak, this time with more cases, and plot the comple
 For a full overview of how to visualise outbreak data simulated with {simulist} see the [Visualising simulated data](vis-linelist.html) vignette.
 :::
 
-```{r sim-linelist-plot-incidence}
+```{r sim-linelist-incidence}
 # set seed to produce single wave outbreak
 set.seed(3)
 linelist <- sim_linelist(
@@ -347,11 +349,13 @@ weekly_inci <- incidence(
   interval = "epiweek",
   complete_dates = TRUE
 )
+```
 
+```{r sim-linelist-plot-incidence}
 #| fig.alt: >
-#|   An incidence curve (epicurve) of cases from symptom onset aggregated by 
-#|   week. The y-axis is the count, the x-axis is the date index. The 
-#|   weekly incidence increases from week 1 to week 6, then it gradually 
+#|   An incidence curve (epicurve) of cases from symptom onset aggregated by
+#|   week. The y-axis is the count, the x-axis is the date index. The
+#|   weekly incidence increases from week 1 to week 6, then it gradually
 #|   declines.
 plot(weekly_inci)
 ```
@@ -448,11 +452,11 @@ inci_late <- incidence(
 
 ```{r plot-trunc-stages-reporting-delay, fig.show="hold", out.width="30%"}
 #| fig.alt: >
-#|   Three incidence curves (epicurves) in a single row, the left plot is the 
+#|   Three incidence curves (epicurves) in a single row, the left plot is the
 #|   outbreak snapshot early in the outbreak, the middle plot is the outbreak
-#|   and the right plot is the end of the outbreak. The cases are aggregated 
+#|   and the right plot is the end of the outbreak. The cases are aggregated
 #|   by week. The y-axis is the count, the x-axis is the date index. This plot
-#|   shows fewer cases in the days before the truncation day due to 
+#|   shows fewer cases in the days before the truncation day due to
 #|   right-truncation of the reporting delay.
 plot(inci_early) +
   ggtitle("Early") +

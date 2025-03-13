@@ -144,12 +144,12 @@ linelist <- linelist %>%
 
 ```{r, plot-onset-hospitalisation}
 #| fig.alt: >
-#|   Two histograms in a single column, showing the daily incidence of cases 
-#|   from symptom onset and incidence of deaths. Case fatality risk for 
-#|   hospitalised individuals is 0.5 and the risk of non-hospitalised 
+#|   Two histograms in a single column, showing the daily incidence of cases
+#|   from symptom onset and incidence of deaths. Case fatality risk for
+#|   hospitalised individuals is 0.5 and the risk of non-hospitalised
 #|   individuals is 0.05, and these risks are constant through time. The
 #|   y-axis is labelled "count" and the x-axis is labelled "date_index". The
-#|   plot shows fluctuating number of cases over time with substantially 
+#|   plot shows fluctuating number of cases over time with substantially
 #|   fewer deaths than cases.
 daily <- incidence(
   linelist,
@@ -195,7 +195,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-higher-risk}
+```{r, prep-onset-death-higher-risk}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -205,14 +205,16 @@ daily <- incidence(
   interval = "daily"
 )
 daily <- complete_dates(daily)
+```
 
+```{r plot-onset-death-higher-risk}
 #| fig.alt: >
-#|   Two histograms in a single column, showing the daily incidence of cases 
-#|   from symptom onset and incidence of deaths. Case fatality risk for 
-#|   hospitalised individuals is 0.9 and the risk of non-hospitalised 
+#|   Two histograms in a single column, showing the daily incidence of cases
+#|   from symptom onset and incidence of deaths. Case fatality risk for
+#|   hospitalised individuals is 0.9 and the risk of non-hospitalised
 #|   individuals is 0.75, and these risks are constant through time. The
 #|   y-axis is labelled "count" and the x-axis is labelled "date_index". The
-#|   plot shows growth and subsequent decline of the outbreak, with a similar 
+#|   plot shows growth and subsequent decline of the outbreak, with a similar
 #|   number of cases and deaths over time.
 plot(daily)
 ```
@@ -233,12 +235,14 @@ config <- create_config(
 
 Here we set the case fatality risk to exponentially decrease through time. This will provide a shallow (monotonic) decline of case fatality through the simulated epidemic. 
 
-```{r, plot-exponential-dist}
+```{r, prep-exponential-dist}
 exp_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
 )
+```
 
+```{r plot-exponential-dist}
 #| fig.alt: >
 #|   A scatter plot showing an exponential decline over time representing the
 #|   time-varying hospitalised case fatality risk over time.
@@ -291,7 +295,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr}
+```{r, prep-onset-death-time-varying-cfr}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -301,11 +305,13 @@ daily <- incidence(
   interval = "daily"
 )
 daily <- complete_dates(daily)
+```
 
+```{r plot-onset-death-time-varying-cfr}
 #| fig.alt: >
-#|   Two histograms in a single column, showing the daily incidence of cases 
-#|   from symptom onset and incidence of deaths. The baseline case fatality 
-#|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised 
+#|   Two histograms in a single column, showing the daily incidence of cases
+#|   from symptom onset and incidence of deaths. The baseline case fatality
+#|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised
 #|   individuals is 0.75, and these decline exponentially through time. The
 #|   y-axis is labelled "count" and the x-axis is labelled "date_index". The
 #|   plot shows fluctuating cases over time, and only a few deaths early in the
@@ -327,12 +333,14 @@ config <- create_config(
 # nolint end
 ```
 
-```{r, plot-stepwise-dist}
+```{r, prep-stepwise-dist}
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
 )
+```
 
+```{r plot-stepwise-dist}
 #| fig.alt: >
 #|   A scatter plot showing an step-wise function representing the
 #|   time-varying hospitalised case fatality risk over time. The function
@@ -376,7 +384,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr-stepwise}
+```{r, prep-onset-death-time-varying-cfr-stepwise}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -386,11 +394,13 @@ daily <- incidence(
   interval = "daily"
 )
 daily <- complete_dates(daily)
+```
 
+```{r plot-onset-death-time-varying-cfr-stepwise}
 #| fig.alt: >
-#|   Two histograms in a single column, showing the daily incidence of cases 
-#|   from symptom onset and incidence of deaths. The baseline case fatality 
-#|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised 
+#|   Two histograms in a single column, showing the daily incidence of cases
+#|   from symptom onset and incidence of deaths. The baseline case fatality
+#|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised
 #|   individuals is 0.75, and these change in a step-wise manner at day 60 of
 #|   the epidemic. The y-axis is labelled "count" and the x-axis is labelled
 #|   "date_index". The plot shows fluctuating cases over time, and deaths only
@@ -408,16 +418,18 @@ config <- create_config(
 )
 ```
 
-```{r, plot-stepwise-dist-window}
+```{r, prep-stepwise-dist-window}
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
 )
+```
 
+```{r plot-stepwise-dist-window}
 #| fig.alt: >
 #|   A scatter plot showing an step-wise function representing the
 #|   time-varying hospitalised case fatality risk over time. The function
-#|   outputs 0.9 if time (days) is less than 50 or greater than 100, and 0.45 
+#|   outputs 0.9 if time (days) is less than 50 or greater than 100, and 0.45
 #|   if not.
 ggplot(stepwise_df) +
   geom_point(mapping = aes(x = time, y = value)) +
@@ -458,7 +470,7 @@ linelist <- linelist %>%
   )
 ```
 
-```{r, plot-onset-death-time-varying-cfr-stepwise-window}
+```{r, prep-onset-death-time-varying-cfr-stepwise-window}
 daily <- incidence(
   linelist,
   date_index = c(
@@ -468,14 +480,16 @@ daily <- incidence(
   interval = "daily"
 )
 daily <- complete_dates(daily)
+```
 
+```{r plot-onset-death-time-varying-cfr-stepwise-window}
 #| fig.alt: >
-#|   Two histograms in a single column, showing the daily incidence of cases 
-#|   from symptom onset and incidence of deaths. The maximum case fatality 
-#|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised 
+#|   Two histograms in a single column, showing the daily incidence of cases
+#|   from symptom onset and incidence of deaths. The maximum case fatality
+#|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised
 #|   individuals is 0.75, and these change in a step-wise manner at day 50 and
 #|   100 of the epidemic. The y-axis is labelled "count" and the x-axis is
-#|   labelled "date_index". The plot shows fluctuating cases over time, and 
+#|   labelled "date_index". The plot shows fluctuating cases over time, and
 #|   deaths closely resemble the number of cases over time.
 plot(daily)
 ```
