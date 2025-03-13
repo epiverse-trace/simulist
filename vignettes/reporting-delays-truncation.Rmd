@@ -326,7 +326,7 @@ We can simulate another outbreak, this time with more cases, and plot the comple
 For a full overview of how to visualise outbreak data simulated with {simulist} see the [Visualising simulated data](vis-linelist.html) vignette.
 :::
 
-```{r sim-linelist-plot-incidence, fig.cap="Weekly incidence of cases from symptom onset.", fig.width = 8, fig.height = 5}
+```{r sim-linelist-plot-incidence, fig.width = 8, fig.height = 5}
 # set seed to produce single wave outbreak
 set.seed(3)
 linelist <- sim_linelist(
@@ -345,10 +345,12 @@ weekly_inci <- incidence(
   interval = "epiweek",
   complete_dates = TRUE
 )
+
 #| fig.alt: >
-#|   An incidence curve (epicurve) of cases aggregated by week. The y-axis is
-#|   the count, the x-axis is the date index. The weekly incidence increases
-#|   from week 1 to week 6, then it gradually declines.
+#|   An incidence curve (epicurve) of cases from symptom onset aggregated by 
+#|   week. The y-axis is the count, the x-axis is the date index. The 
+#|   weekly incidence increases from week 1 to week 6, then it gradually 
+#|   declines.
 plot(weekly_inci)
 ```
 
@@ -393,7 +395,7 @@ inci_late <- incidence(
 
 Next we repeat this procedure of creating data sets for early, mid, and late in the outbreak. For this example we will use a reporting delay to illustrate the issue of under-reporting of recent cases when there is a time delay between symptom onset and reporting.
 
-```{r sim-linelist-plot-incidence-reporting-delay, fig.cap="Daily incidence of cases from symptom onset including days with zero cases.", fig.width = 8, fig.height = 5}
+```{r sim-linelist-plot-incidence-reporting-delay, fig.width = 8, fig.height = 5}
 # set seed to produce single wave outbreak
 set.seed(3)
 linelist <- sim_linelist(
