@@ -100,18 +100,16 @@ Currently {simulist} outputs dates that are not rounded to the nearest day, i.e.
 
 ***Note*** storing dates as precise doubles and not as integer days may change in the near future.
 
-The `interval = "daily"` is required as {incidence2} requires rounded dates to aggregate cases per unit time and specifying the `interval` will do this automatically for us.
+The `interval = "daily"` is required as {incidence2} requires rounded dates to aggregate cases per unit time and specifying the `interval` will do this automatically for us. It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by setting `complete_dates = TRUE`, alternatively this can be achieved by using `incidence2::complete_dates()` on the `<incidence2>` object.
 
 ```{r create-incidence}
 # create incidence object
-daily <- incidence(x = linelist, date_index = "date_onset", interval = "daily")
-```
-
-It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by the `complete_dates()` function in {incidence2}.
-
-```{r, complete-dates}
-# impute for days without cases
-daily <- complete_dates(daily)
+daily <- incidence(
+  x = linelist, 
+  date_index = "date_onset", 
+  interval = "daily", 
+  complete_dates = TRUE
+)
 ```
 
 ```{r plot-daily}
@@ -203,9 +201,9 @@ daily <- incidence(
     death = "date_death"
   ),
   interval = "daily",
-  groups = "sex"
+  groups = "sex",
+  complete_dates = TRUE
 )
-daily <- complete_dates(daily)
 ```
 
 ```{r plot-onset-hospitalisation}

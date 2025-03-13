@@ -157,9 +157,9 @@ daily <- incidence(
     onset = "date_onset",
     death = "date_death"
   ),
-  interval = "daily"
+  interval = "daily",
+  complete_dates = TRUE
 )
-daily <- complete_dates(daily)
 plot(daily)
 ```
 
@@ -202,9 +202,9 @@ daily <- incidence(
     onset = "date_onset",
     death = "date_death"
   ),
-  interval = "daily"
+  interval = "daily",
+  complete_dates = TRUE
 )
-daily <- complete_dates(daily)
 ```
 
 ```{r plot-onset-death-higher-risk}
@@ -302,9 +302,9 @@ daily <- incidence(
     onset = "date_onset",
     death = "date_death"
   ),
-  interval = "daily"
+  interval = "daily",
+  complete_dates = TRUE
 )
-daily <- complete_dates(daily)
 ```
 
 ```{r plot-onset-death-time-varying-cfr}
@@ -391,9 +391,9 @@ daily <- incidence(
     onset = "date_onset",
     death = "date_death"
   ),
-  interval = "daily"
+  interval = "daily",
+  complete_dates = TRUE
 )
-daily <- complete_dates(daily)
 ```
 
 ```{r plot-onset-death-time-varying-cfr-stepwise}
@@ -477,9 +477,9 @@ daily <- incidence(
     onset = "date_onset",
     death = "date_death"
   ),
-  interval = "daily"
+  interval = "daily",
+  complete_dates = TRUE
 )
-daily <- complete_dates(daily)
 ```
 
 ```{r plot-onset-death-time-varying-cfr-stepwise-window}
