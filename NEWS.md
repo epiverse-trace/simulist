@@ -1,4 +1,4 @@
-# simulist (development version)
+# simulist 0.5.0
 
 This minor version release expands the scope of _simulist_ to include two new post-processing functions: `truncate_linelist()` and `messy_linelist()`. Both of these functions modify a line list `<data.frame>` from `sim_linelist()` or `sim_outbreak()`, the line list now also includes a `$date_reporting` column.
 
