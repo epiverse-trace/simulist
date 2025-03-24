@@ -48,6 +48,11 @@ age-structured populations <br> :chart_with_upwards_trend: Constant or
 time-varying case fatality risk <br> :clipboard: Customisable
 probability of case types and contact tracing follow-up <br>
 
+Post-process simulated line list data for:
+
+:date: Real-time outbreak snapshots with right-truncation <br> :memo:
+Messy data with inconsistencies, mistakes and missing values <br>
+
 ## Installation
 
 The package can be installed from CRAN using
@@ -86,20 +91,27 @@ data set.
 set.seed(1)
 linelist <- sim_linelist()
 head(linelist)
-#>   id       case_name case_type sex age date_onset date_reporting date_admission
-#> 1  1     James Manis suspected   m  59 2023-01-01     2023-01-01     2023-01-09
-#> 2  2   Anisa Hatcher confirmed   f  90 2023-01-01     2023-01-01           <NA>
-#> 3  3     Morgan Bohn confirmed   f   4 2023-01-02     2023-01-02           <NA>
-#> 4  5    David Welter confirmed   m  29 2023-01-04     2023-01-04           <NA>
-#> 5  6   Sade Phillips suspected   f  14 2023-01-05     2023-01-05     2023-01-09
-#> 6  7 Sameeha al-Zaki  probable   f  85 2023-01-06     2023-01-06     2023-01-08
-#>     outcome date_outcome date_first_contact date_last_contact ct_value
-#> 1      died   2023-01-13               <NA>              <NA>       NA
-#> 2 recovered         <NA>         2022-12-31        2023-01-05     22.3
-#> 3 recovered         <NA>         2022-12-30        2023-01-01     24.5
-#> 4 recovered         <NA>         2023-01-05        2023-01-05     24.8
-#> 5      died   2023-01-23         2023-01-07        2023-01-08       NA
-#> 6 recovered         <NA>         2023-01-03        2023-01-06       NA
+#>   id        case_name case_type sex age date_onset date_reporting
+#> 1  1 Lolette Phillips suspected   f  59 2023-01-01     2023-01-01
+#> 2  2       James Jack suspected   m  90 2023-01-01     2023-01-01
+#> 3  3      Chen Kantha confirmed   m   4 2023-01-02     2023-01-02
+#> 4  5  Saleema al-Zaki  probable   f  29 2023-01-04     2023-01-04
+#> 5  6     David Ponzio confirmed   m  14 2023-01-05     2023-01-05
+#> 6  7 Christopher Ward  probable   m  85 2023-01-06     2023-01-06
+#>   date_admission   outcome date_outcome date_first_contact date_last_contact
+#> 1     2023-01-09      died   2023-01-13               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-03
+#> 3           <NA> recovered         <NA>         2022-12-28        2023-01-01
+#> 4           <NA> recovered         <NA>         2022-12-28        2023-01-04
+#> 5     2023-01-09      died   2023-01-23         2022-12-31        2023-01-04
+#> 6     2023-01-08 recovered         <NA>         2022-12-31        2023-01-06
+#>   ct_value
+#> 1       NA
+#> 2       NA
+#> 3     24.8
+#> 4       NA
+#> 5     24.6
+#> 6       NA
 ```
 
 However, to simulate a more realistic line list using epidemiological
@@ -138,19 +150,16 @@ infectious_period <- epiparameter::epiparameter(
 )
 #> Citation cannot be created as author, year, journal or title is missing
 
-# get onset to hospital admission from {epiparameter} database
-onset_to_hosp <- epiparameter::epiparameter_db(
+# create COVID-19 onset to hospital admission
+onset_to_hosp <- epiparameter(
   disease = "COVID-19",
   epi_name = "onset to hospitalisation",
-  single_epiparameter = TRUE
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 1, sdlog = 0.5)
+  )
 )
-#> Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan
-#> B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other
-#> Epidemiological Characteristics of 2019 Novel Coronavirus Infections
-#> with Right Truncation: A Statistical Analysis of Publicly Available
-#> Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
-#> <https://doi.org/10.3390/jcm9020538>.. 
-#> To retrieve the citation use the 'get_citation' function
+#> Citation cannot be created as author, year, journal or title is missing
 
 # get onset to death from {epiparameter} database
 onset_to_death <- epiparameter::epiparameter_db(
@@ -197,27 +206,27 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death
 )
 head(linelist)
-#>   id        case_name case_type sex age date_onset date_reporting
-#> 1  1     Kevin Pullen suspected   m  35 2023-01-01     2023-01-01
-#> 2  2 Maazin el-Othman confirmed   m  43 2023-01-01     2023-01-01
-#> 3  3 Faisal el-Vaziri confirmed   m   1 2023-01-01     2023-01-01
-#> 4  5     Jorge Marten suspected   m  78 2023-01-01     2023-01-01
-#> 5  6   Katelyn Catlin confirmed   f  22 2023-01-01     2023-01-01
-#> 6  8     Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
+#>   id              case_name case_type sex age date_onset date_reporting
+#> 1  1           Kevin Pullen suspected   m   1 2023-01-01     2023-01-01
+#> 2  2 Carisa Flores-Gonzalez confirmed   f  29 2023-01-01     2023-01-01
+#> 3  3       Maazin el-Othman confirmed   m  78 2023-01-01     2023-01-01
+#> 4  5       Faisal el-Vaziri suspected   m  70 2023-01-01     2023-01-01
+#> 5  6           Lynsey Duron confirmed   f  28 2023-01-01     2023-01-01
+#> 6  8         Lilibeth Black confirmed   f  61 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2     2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
-#> 3           <NA> recovered         <NA>         2022-12-30        2023-01-02
-#> 4     2023-01-03      died   2023-01-21         2022-12-29        2023-01-02
-#> 5     2023-01-28      died   2023-02-09         2023-01-01        2023-01-03
-#> 6           <NA> recovered         <NA>         2023-01-03        2023-01-04
+#> 1     2023-01-03      died   2023-01-18               <NA>              <NA>
+#> 2     2023-01-03      died   2023-02-09         2022-12-30        2023-01-08
+#> 3           <NA> recovered         <NA>         2022-12-31        2023-01-05
+#> 4     2023-01-04 recovered         <NA>         2022-12-31        2023-01-04
+#> 5     2023-01-05 recovered         <NA>         2022-12-29        2023-01-02
+#> 6           <NA> recovered         <NA>         2022-12-28        2023-01-05
 #>   ct_value
 #> 1       NA
-#> 2     25.3
-#> 3     25.8
+#> 2     25.8
+#> 3     24.9
 #> 4       NA
-#> 5     24.9
-#> 6     24.5
+#> 5     24.5
+#> 6     26.4
 ```
 
 In this example, the line list is simulated using the default values
@@ -237,25 +246,25 @@ linelist <- sim_linelist(
   outbreak_start_date = as.Date("2019-12-01")
 )
 head(linelist)
-#>   id            case_name case_type sex age date_onset date_reporting
-#> 1  1 Kristiana Acheampong confirmed   f  88 2019-12-01     2019-12-01
-#> 2  3   Jadeeda el-Abdalla confirmed   f   8 2019-12-01     2019-12-01
-#> 3  4     Dominic Sandoval  probable   m  48 2019-12-01     2019-12-01
-#> 4  5          Zoe Johnson confirmed   f   3 2019-12-01     2019-12-01
-#> 5  6        Breann Bruski  probable   f  25 2019-12-01     2019-12-01
-#> 6  7       Joseph Charley suspected   m  57 2019-12-01     2019-12-01
+#>   id          case_name case_type sex age date_onset date_reporting
+#> 1  1           Kacy Kim suspected   f  80 2019-12-01     2019-12-01
+#> 2  2        Jina Warnes  probable   f  85 2019-12-01     2019-12-01
+#> 3  4     Raadi el-Yasin  probable   m  76 2019-12-01     2019-12-01
+#> 4  8   Joshua Castaneda confirmed   m  12 2019-12-01     2019-12-01
+#> 5 11 Fat'hiyaa al-Zafar suspected   f  50 2019-12-01     2019-12-01
+#> 6 14    Matthew Sheldon  probable   m  54 2019-12-01     2019-12-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2019-11-30        2019-12-02
-#> 3           <NA> recovered         <NA>         2019-11-30        2019-12-03
-#> 4           <NA> recovered         <NA>         2019-12-02        2019-12-04
-#> 5           <NA> recovered         <NA>         2019-11-28        2019-12-04
-#> 6           <NA> recovered         <NA>         2019-12-05        2019-12-06
+#> 2           <NA> recovered         <NA>         2019-11-29        2019-12-05
+#> 3           <NA> recovered         <NA>         2019-11-29        2019-12-08
+#> 4           <NA>      died   2019-12-17         2019-11-26        2019-12-05
+#> 5           <NA> recovered         <NA>         2019-11-28        2019-12-01
+#> 6           <NA> recovered         <NA>         2019-11-25        2019-12-01
 #>   ct_value
-#> 1     28.3
-#> 2     23.2
+#> 1       NA
+#> 2       NA
 #> 3       NA
-#> 4     23.3
+#> 4     23.7
 #> 5       NA
 #> 6       NA
 ```
@@ -271,20 +280,20 @@ contacts <- sim_contacts(
   prob_infection = 0.5
 )
 head(contacts)
-#>               from                 to age sex date_first_contact
-#> 1 Naseefa al-Yasin      Efrain Armijo  53   m         2022-12-29
-#> 2 Naseefa al-Yasin    Matthew Kechter  20   m         2023-01-03
-#> 3 Naseefa al-Yasin Anthony Desantiago  69   m         2022-12-29
-#> 4 Naseefa al-Yasin     Brendan Miller  21   m         2023-01-01
-#> 5    Efrain Armijo    Alvaro Carrillo  51   m         2023-01-05
-#> 6    Efrain Armijo  Kristopher Blythe  57   m         2022-12-30
+#>                from                  to age sex date_first_contact
+#> 1    Rodrigo Deluca   Jeremiah Sitinjak  23   m         2023-01-01
+#> 2    Rodrigo Deluca          Eric Green  16   m         2022-12-30
+#> 3    Rodrigo Deluca           Skye Chee  40   f         2022-12-30
+#> 4    Rodrigo Deluca      Samantha Parga  20   f         2022-12-27
+#> 5    Rodrigo Deluca Abdul Rauf al-Mirza   4   m         2022-12-28
+#> 6 Jeremiah Sitinjak    Habsa Huntington   9   f         2022-12-29
 #>   date_last_contact was_case         status
-#> 1        2023-01-03        Y           case
-#> 2        2023-01-06        Y           case
+#> 1        2023-01-04        Y           case
+#> 2        2023-01-02        Y           case
 #> 3        2023-01-02        N under_followup
-#> 4        2023-01-04        N under_followup
-#> 5        2023-01-05        Y           case
-#> 6        2023-01-02        Y           case
+#> 4        2023-01-02        Y           case
+#> 5        2023-01-02        Y           case
+#> 6        2023-01-03        N under_followup
 ```
 
 If both the line list and contacts table are required, they can be
@@ -302,42 +311,42 @@ outbreak <- sim_outbreak(
   onset_to_death = onset_to_death
 )
 head(outbreak$linelist)
-#>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1        Telmen Chen  probable   m  59 2023-01-01     2023-01-01
-#> 2  2     Malakye Navajo confirmed   m  39 2023-01-01     2023-01-01
-#> 3  3     Radwa al-Bacho  probable   f  47 2023-01-01     2023-01-01
-#> 4  4    Matthew Dejulio suspected   m  59 2023-01-02     2023-01-02
-#> 5  6       Awn el-Kaber confirmed   m  56 2023-01-02     2023-01-02
-#> 6 12 Zainuddeen al-Hadi confirmed   m  11 2023-01-02     2023-01-02
+#>   id              case_name case_type sex age date_onset date_reporting
+#> 1  1         Joshua Lymburn  probable   m  45 2023-01-01     2023-01-01
+#> 2  2     Augustine Gonzales confirmed   m   9 2023-01-02     2023-01-02
+#> 3  4         Takeya Searles suspected   f  35 2023-01-02     2023-01-02
+#> 4  6             Luke Flood confirmed   m   4 2023-01-02     2023-01-02
+#> 5  8 Allison Fage-Armstrong  probable   f   2 2023-01-02     2023-01-02
+#> 6 10        Faai Z el-Safar  probable   m  48 2023-01-02     2023-01-02
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2     2023-01-01      died   2023-01-30         2023-01-05        2023-01-08
-#> 3           <NA> recovered         <NA>         2023-01-02        2023-01-03
-#> 4           <NA> recovered         <NA>         2023-01-02        2023-01-03
-#> 5           <NA> recovered         <NA>         2022-12-31        2023-01-03
-#> 6           <NA> recovered         <NA>         2022-12-29        2023-01-02
+#> 2           <NA> recovered         <NA>         2023-01-01        2023-01-05
+#> 3           <NA> recovered         <NA>         2022-12-31        2023-01-05
+#> 4           <NA> recovered         <NA>         2023-01-02        2023-01-05
+#> 5           <NA> recovered         <NA>         2022-12-31        2023-01-05
+#> 6           <NA> recovered         <NA>         2022-12-29        2023-01-06
 #>   ct_value
 #> 1       NA
-#> 2     23.8
+#> 2     24.6
 #> 3       NA
-#> 4       NA
-#> 5     25.0
-#> 6     26.5
+#> 4     25.7
+#> 5       NA
+#> 6       NA
 head(outbreak$contacts)
-#>             from              to age sex date_first_contact date_last_contact
-#> 1    Telmen Chen  Malakye Navajo  39   m         2023-01-05        2023-01-08
-#> 2    Telmen Chen  Radwa al-Bacho  47   f         2023-01-02        2023-01-03
-#> 3 Malakye Navajo Matthew Dejulio  59   m         2023-01-02        2023-01-03
-#> 4 Malakye Navajo    Gary Cruz Jr  20   m         2022-12-28        2023-01-01
-#> 5 Malakye Navajo    Awn el-Kaber  56   m         2022-12-31        2023-01-03
-#> 6 Malakye Navajo    Rogelio Loya  41   m         2022-12-31        2023-01-03
-#>   was_case           status
-#> 1        Y             case
-#> 2        Y             case
-#> 3        Y             case
-#> 4        N   under_followup
-#> 5        Y             case
-#> 6        N lost_to_followup
+#>                 from                 to age sex date_first_contact
+#> 1     Joshua Lymburn Augustine Gonzales   9   m         2023-01-01
+#> 2     Joshua Lymburn     Cecilia Cortez  81   f         2022-12-27
+#> 3     Joshua Lymburn     Takeya Searles  35   f         2022-12-31
+#> 4 Augustine Gonzales    Thorsen Stewart  75   m         2022-12-31
+#> 5 Augustine Gonzales         Luke Flood   4   m         2023-01-02
+#> 6 Augustine Gonzales          Suki Lang  15   f         2022-12-29
+#>   date_last_contact was_case         status
+#> 1        2023-01-05        Y           case
+#> 2        2023-01-03        N under_followup
+#> 3        2023-01-05        Y           case
+#> 4        2023-01-06        N under_followup
+#> 5        2023-01-05        Y           case
+#> 6        2023-01-03        N under_followup
 ```
 
 ## Help
