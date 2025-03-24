@@ -14,6 +14,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-8814-9421")),
     person("Chris", "Hartgerink", , "chris@data.org", role = "rev",
            comment = c(ORCID = "0000-0003-1050-6809")),
+    person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = "ctb",
+           comment = c(ORCID = "0000-0002-2842-3406")),
     person("London School of Hygiene and Tropical Medicine, LSHTM", role = "cph",
            comment = c(ROR = "00a0jsq62"))
   )
