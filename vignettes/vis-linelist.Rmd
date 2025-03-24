@@ -90,7 +90,7 @@ This line list contains `r nrow(linelist)` cases.
 
 ::: {.alert .alert-info}
 
-This section of the vignette is heavily based upon examples given in the [Get Started vignette in the {incidence2} package](https://www.reconverse.org/incidence2/articles/incidence2.html). It is highly recommended to read the documentation supplied in the [{incidence2} package](https://CRAN.R-project.org/package=incidence2) to explore the full range of functionality.
+This section of the vignette is heavily based upon examples given in the [An introduction to {incidence2} package vignette](https://www.reconverse.org/incidence2/doc/incidence2.html). It is highly recommended to read the documentation supplied in the [{incidence2} package](https://CRAN.R-project.org/package=incidence2) to explore the full range of functionality.
 
 :::
 
