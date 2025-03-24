@@ -113,11 +113,14 @@ infectious_period <- epiparameter::epiparameter(
   )
 )
 
-# get onset to hospital admission from {epiparameter} database
-onset_to_hosp <- epiparameter::epiparameter_db(
+# create COVID-19 onset to hospital admission
+onset_to_hosp <- epiparameter(
   disease = "COVID-19",
   epi_name = "onset to hospitalisation",
-  single_epiparameter = TRUE
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 1, sdlog = 0.5)
+  )
 )
 
 # get onset to death from {epiparameter} database
