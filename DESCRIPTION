@@ -1,6 +1,6 @@
 Package: simulist
 Title: Simulate Disease Outbreak Line List and Contacts Data
-Version: 0.5.0
+Version: 0.5.0.9000
 Authors@R: c(
     person("Joshua W.", "Lambert", , "joshua.lambert@lshtm.ac.uk", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-5218-3046")),
