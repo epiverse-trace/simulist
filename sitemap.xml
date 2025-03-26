@@ -6,6 +6,7 @@
 <url><loc>https://epiverse-trace.github.io/simulist/articles/age-struct-pop.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/articles/design-principles.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/articles/index.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/simulist/articles/reporting-delays-truncation.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/articles/simulist.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/articles/time-varying-cfr.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/articles/vis-linelist.html</loc></url>
@@ -14,20 +15,25 @@
 <url><loc>https://epiverse-trace.github.io/simulist/index.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/news/index.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/as_function.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/simulist/reference/coerce-df.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/create_config.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/dot-add_cols.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/simulist/reference/dot-add_missing.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/dot-anonymise.html</loc></url>
-<url><loc>https://epiverse-trace.github.io/simulist/reference/dot-check_age_df.html</loc></url>
-<url><loc>https://epiverse-trace.github.io/simulist/reference/dot-check_risk_df.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/simulist/reference/dot-check_df.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/simulist/reference/dot-check_linelist.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/dot-check_sim_input.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/dot-cross_check_sim_input.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/dot-sample_names.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/simulist/reference/dot-sample_outcome_time.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/dot-sim_internal.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/dot-sim_network_bp.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/index.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/simulist/reference/messy_linelist.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/sim_contacts.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/sim_linelist.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/sim_outbreak.html</loc></url>
 <url><loc>https://epiverse-trace.github.io/simulist/reference/simulist-package.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/simulist/reference/truncate_linelist.html</loc></url>
 </urlset>
 

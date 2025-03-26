@@ -13,7 +13,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.4.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,8 +28,9 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Customising simulated outbreak</h6></li>
     <li><a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a></li>
-    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a></li>
+    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age-structured population</a></li>
     <li><a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a></li>
+    <li><a class="dropdown-item" href="../articles/reporting-delays-truncation.html">Reporting delays and right-truncation of line list data</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Wrangling and plotting data</h6></li>
     <li><a class="dropdown-item" href="../articles/wrangling-linelist.html">Wrangling simulated outbreak data</a></li>
@@ -76,7 +77,36 @@
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt; Named elements to replace
 default settings. Only if names match exactly are elements replaced,
-otherwise the function errors.</p></dd>
+otherwise the function errors.</p>
+<p>Accepted arguments and their defaults are:</p>
+<dl><dt><code>last_contact_distribution</code></dt>
+<dd><p>A <code>function</code> to generate the
+time for last contact. Default parameterisation is a Poisson
+distribution with a \(\lambda\) of 3.</p></dd>
+
+<dt><code>first_contact_distribution</code></dt>
+<dd><p>A <code>function</code> to generate the time
+for the first contact. Default parameterisation is a Poisson
+distribution with a \(\lambda\) of 3.</p></dd>
+
+<dt><code>ct_distribution</code></dt>
+<dd><p>A <code>function</code> to generate Ct values for each
+confirmed case. Default parameterisation is a Normal distribution with
+a mean (\(\mu\)) of 25 and a standard deviation (\(\sigma\)) of 2.</p></dd>
+
+<dt><code>network</code></dt>
+<dd><p>A <code>character</code> string, either <code>"adjusted"</code> (default) or
+<code>"unadjusted"</code>.</p></dd>
+
+<dt><code>time_varying_death_risk</code></dt>
+<dd><p>By default is <code>NULL</code>, but can also accept
+a <code>function</code> with two arguments, <code>risk</code> and <code>time</code>, to apply a
+time varying death risk of hospitalised and non-hospitalised cases in
+the outbreak simulation. See
+<code><a href="../articles/time-varying-cfr.html">vignette("time-varying-cfr", package = "simulist")</a></code>.</p></dd>
+
+
+</dl></dd>
 
 </dl></div>
     <div class="section level2">
@@ -91,23 +121,17 @@ contact with infector), and the distribution of the Cycle threshold (Ct)
 value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 cases, the network effect in the simulation, and if there is a time-varying
 death risk.</p>
-<p>Accepted arguments and their defaults are:</p><ul><li><p><code>last_contact_distribution = "pois"</code></p></li>
-<li><p><code>last_contact_distribution_params = c(lambda = 3)</code></p></li>
-<li><p><code>first_contact_distribution = "pois"</code></p></li>
-<li><p><code>first_contact_distribution_params = c(lambda = 3)</code></p></li>
-<li><p><code>ct_distribution = "norm"</code></p></li>
-<li><p><code>ct_distribution_params = c(mean = 25, sd = 2)</code></p></li>
-<li><p><code>network = "adjusted"</code></p></li>
-<li><p><code>time_varying_death_risk = NULL</code></p></li>
-</ul><p>These parameters do not warrant their own arguments in
+<p>These parameters do not warrant their own arguments in
 <code><a href="sim_linelist.html">sim_linelist()</a></code> as they rarely need to be changed from their default
 setting. Therefore it is not worth increasing the number of <code><a href="sim_linelist.html">sim_linelist()</a></code>
 arguments to accommodate these and the <code>config</code> argument keeps the function
 signature simpler and more readable.</p>
-<p>The accepted distributions are:</p><ul><li><p><code>last_contact_distribution = c("pois", "geom")</code></p></li>
-<li><p><code>first_contact_distribution = c("pois", "geom")</code></p></li>
-<li><p><code>ct_distribution = c("norm", "lnorm")</code></p></li>
-</ul><p>The <code>network</code> option controls whether to sample contacts from a adjusted or
+<p>The <code>last_contact_distribution</code> and <code>first_contact_distribution</code> can accept
+any function that generates positive integers (e.g. discrete probability
+distribution, <code><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois()</a></code> or <code><a href="https://rdrr.io/r/stats/Geometric.html" class="external-link">rgeom()</a></code>). The <code>ct_distribution</code> can accept
+any function that generates real numbers (e.g. continuous or discrete
+probability distribution, <code><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm()</a></code>, <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>).</p>
+<p>The <code>network</code> option controls whether to sample contacts from a adjusted or
 unadjusted contact distribution. Adjusted (default) sampling uses
 \(q(n) \sim (n + 1)p(n + 1)\) where \(p(n)\) is the probability
 density function of a distribution, e.g., Poisson or Negative binomial.
@@ -120,25 +144,22 @@ a probability distribution \(p(n)\).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example with default configuration</span></span></span>
 <span class="r-in"><span><span class="fu">create_config</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $last_contact_distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "pois"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $last_contact_distribution_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lambda </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> stats::rpois(n = x, lambda = 3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5613dced6070&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5613dced58c8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $first_contact_distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "pois"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $first_contact_distribution_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lambda </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> stats::rpois(n = x, lambda = 3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5613dced6070&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5613dced58c8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ct_distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "norm"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ct_distribution_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean   sd </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   25    2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> stats::rnorm(n = x, mean = 25, sd = 2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5613dced5e08&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5613dced58c8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "adjusted"</span>
@@ -149,29 +170,24 @@ a probability distribution \(p(n)\).</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with customised Ct distribution</span></span></span>
 <span class="r-in"><span><span class="fu">create_config</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  ct_distribution <span class="op">=</span> <span class="st">"lnorm"</span>,</span></span>
-<span class="r-in"><span>  ct_distribution_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  ct_distribution <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $last_contact_distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "pois"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $last_contact_distribution_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lambda </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> stats::rpois(n = x, lambda = 3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5613dced6070&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5613dd5178b0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $first_contact_distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "pois"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $first_contact_distribution_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lambda </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> stats::rpois(n = x, lambda = 3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5613dced6070&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5613dd5178b0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ct_distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "lnorm"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ct_distribution_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> meanlog   sdlog </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       2       1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> rlnorm(n = x, meanlog = 2, sdlog = 1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5613dcc13e58&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "adjusted"</span>

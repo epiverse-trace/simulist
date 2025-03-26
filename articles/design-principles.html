@@ -33,7 +33,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.4.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,8 +50,9 @@
 <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Customising simulated outbreak</h6></li>
     <li><a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a></li>
-    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a></li>
+    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age-structured population</a></li>
     <li><a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a></li>
+    <li><a class="dropdown-item" href="../articles/reporting-delays-truncation.html">Reporting delays and right-truncation of line list data</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Wrangling and plotting data</h6></li>
     <li><a class="dropdown-item" href="../articles/wrangling-linelist.html">Wrangling simulated outbreak data</a></li>
@@ -125,16 +126,60 @@ package</a>.</p>
 <code>&lt;data.frame&gt;</code> or a <code>list</code> of
 <code>&lt;data.frame&gt;</code>s. This consistency across functions of a
 well-known data structure makes it easy to understand for users.</p>
+<p>Before the first stable release (v1.0.0) of {simulist} we cannot
+guarantee that two versions of the package will produce identical output
+when using the same function with the same seed (i.e. <em>output
+breaking change</em> as opposed to <em>API breaking change</em>). Given
+the many random number generation calls in the simulation code, it is
+too constraining to ensure reproducibility of function output between
+versions. We aim to ensure consistent and reproducible output from
+<code>sim_*()</code> functions between minor version releases after
+v1.0.0.</p>
 </div>
 <div class="section level2">
 <h2 id="package-architecture">Package architecture<a class="anchor" aria-label="anchor" href="#package-architecture"></a>
 </h2>
-<p><img src="../reference/figures/simulist_archi.png" width="700"></p>
+<p><img src="../reference/figures/simulist_archi.svg" width="800" alt="Package architecture diagram for the simulist R package for exported and internal functions, showing the call stack of all exported functions"><br></p>
 </div>
 <div class="section level2">
 <h2 id="design-decisions">Design decisions<a class="anchor" aria-label="anchor" href="#design-decisions"></a>
 </h2>
 <ul>
+<li>
+<p>The age-stratified risks of hospitalisation and deaths via
+<code>*_risk</code> function arguments, and age-structured population
+via <code>population_age</code> function argument both accept
+<code>&lt;data.frame&gt;</code>s to specify the age groups. The age
+groups are specified by an <code>$age_limit</code> column in the
+<code>&lt;data.frame&gt;</code>. This design follows <a href="https://github.com/epiforecasts/socialmixr/blob/main/R/contact_matrix.R" class="external-link">{socialmixr}</a>
+for defining age bounds was implemented in <a href="https://github.com/epiverse-trace/simulist/pull/14" class="external-link">pull request
+#14</a> for the <code>*_risk</code> arguments and in <a href="https://github.com/epiverse-trace/simulist/pull/200" class="external-link">pull request
+#200</a> for the <code>population_age</code> argument. The previous
+implementation used a <code>&lt;data.frame&gt;</code> structure that had
+two columns, one for a lower age limit and one for an upper age limit.
+Using age limits is judged to be preferred as it prevents input errors
+by the user when the age bounds are overlapping or non-contiguous
+(i.e. missing age groups). Since {simulist} v0.5.0, both approaches have
+a consistent structure with an age limits column and either a risk or
+proportion column. The specification of age groups using limits comes
+with some trade-offs which are documented here:</p>
+<ol style="list-style-type: decimal">
+<li><p>There is a small difference in the requirements of the
+<code>$age_limit</code> column when passing a
+<code>&lt;data.frame&gt;</code> to to either a <code>*_risk</code>
+argument or <code>population_age</code>. The default
+<code>population_age</code> is a two element <code>numeric</code> vector
+specifying the age range of the population. When supplying an
+age-structure <code>&lt;data.frame&gt;</code> to
+<code>population_age</code>, the <code>$age_limit</code> column contains
+the lower bound of each age group, but the upper range of the population
+is still required, so the last element in the <code>$age_limit</code>
+column is taken as the upper population age. This differs from the
+<code>$age_limit</code> column in the <code>&lt;data.frame&gt;</code>
+required for age-stratified risk, where each element is the lower age
+limit, and the upper range of the population age is taken from the
+<code>population_age</code> argument. This interaction of arguments is
+documented in the next point.</p></li>
 <li><p>When using age-stratified risks of hospitalisation and deaths
 (see <a href="age-strat-risks.html">Age-stratified hospitalisation and
 death risks vignette</a> for details) there is an interaction between
@@ -148,16 +193,9 @@ oldest age group is defined by the upper age given to the
 not ideal, as it can be more difficult to understand for users (as
 outlined in <a href="https://design.tidyverse.org/independent-meaning.html#whats-the-problem" class="external-link">The
 Tidy Design book</a>), however, the interaction does not change the
-interpretation of each argument which would be more convoluted. This
-design decision was taken when we changed the structure of the
-<code>&lt;data.frame&gt;</code> accepted as input to the
-<code>*_risk</code> arguments from having two columns for a lower and
-upper age limit, to a single column of lower age bounds. This change was
-made in <a href="https://github.com/epiverse-trace/simulist/pull/14" class="external-link">pull request
-#14</a> and follows the design of <a href="https://github.com/epiforecasts/socialmixr/blob/main/R/contact_matrix.R" class="external-link">{socialmixr}</a>
-for defining age bounds. The newer structure is judged to be preferred
-as it prevents input errors by the user when the age bounds are
-overlapping or non-contiguous (i.e. missing age groups).</p></li>
+interpretation of each argument which would be more convoluted.</p></li>
+</ol>
+</li>
 <li><p>The column names of the contact relationships (edges of the
 network) are called <code>from</code> and <code>to</code>. Names of the
 contacts table match {epicontacts} <code>&lt;epicontacts&gt;</code>
@@ -176,6 +214,15 @@ functions that simulate have a dot (<code>.</code>) prefix
 (e.g. <code><a href="../reference/dot-sim_internal.html">.sim_internal()</a></code>). Functions that create fixed data
 structures (i.e. data factory functions) have the naming convention
 (<code>create_*()</code> or <code>.create_*()</code>).</p></li>
+<li><p>Exported post-processing functions, i.e. those that are applied
+to the output of <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code>, use the naming convention
+<code>*_linelist()</code>. Where the <code>*</code> placeholder is a
+verb or adjective, e.g. <code><a href="../reference/messy_linelist.html">messy_linelist()</a></code> or
+<code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code>. This naming convention makes it clear
+that the functions operate on a line list
+<code>&lt;data.frame&gt;</code> and tries to minimise namespace
+conflicts e.g. <code>messy()</code> function from the <a href="https://cran.r-project.org/package=messy" class="external-link">{messy}</a>
+package.</p></li>
 <li><p>The use of a <code>config</code> argument in the simulation
 function is to reduce the number of arguments in the exported functions
 and provide as simple a user-interface as possible. The choice of what
@@ -247,27 +294,29 @@ are:</p>
 <ul>
 <li>{stats}</li>
 <li><a href="https://CRAN.R-project.org/package=checkmate" class="external-link">{checkmate}</a></li>
+<li><a href="https://CRAN.R-project.org/package=english" class="external-link">{english}</a></li>
 <li><a href="https://github.com/epiverse-trace/epiparameter" class="external-link">{epiparameter}</a></li>
 <li><a href="https://CRAN.R-project.org/package=randomNames" class="external-link">{randomNames}</a></li>
 </ul>
 <p>{stats} is distributed with the R language so is viewed as a
 lightweight dependency, that should already be installed on a user’s
 machine if they have R. {checkmate} is an input checking package widely
-used across Epiverse-TRACE packages. {epiparameter} is used to easily
-access epidemiological parameters from the package’s library, the
-package is currently unstable and actively developed, however, by using
-it in another package it can inform the development path of
-{epiparameter}. {randomNames} provides a utility function for generating
-random names for case and contact data. The functionality could be
-replicated in {simulist}, however the {randomNames} package is
-maintained and contains a range of name generation settings which
-warrants its use as a dependency.</p>
+used across Epiverse-TRACE packages. {english} is a lightweight, (hard)
+dependency free package which used to converted integers to words.
+{epiparameter} is used to easily access epidemiological parameters from
+the package’s library, the package is currently unstable and actively
+developed, however, by using it in another package it can inform the
+development path of {epiparameter}. {randomNames} provides a utility
+function for generating random names for case and contact data. The
+functionality could be replicated in {simulist}, however the
+{randomNames} package is maintained and contains a range of name
+generation settings which warrants its use as a dependency.</p>
 <p>The soft dependencies (and their minimum version requirements)
 are:</p>
 <ul>
 <li>
 <a href="https://CRAN.R-project.org/package=incidence2" class="external-link">{incidence2}</a>
-(&gt;= 2.1.0)</li>
+(&gt;= 2.3.0)</li>
 <li>
 <a href="https://CRAN.R-project.org/package=epicontacts" class="external-link">{epicontacts}</a>
 (&gt;= 1.1.3)</li>

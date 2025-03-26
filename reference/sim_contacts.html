@@ -13,7 +13,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.4.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,8 +28,9 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Customising simulated outbreak</h6></li>
     <li><a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a></li>
-    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a></li>
+    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age-structured population</a></li>
     <li><a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a></li>
+    <li><a class="dropdown-item" href="../articles/reporting-delays-truncation.html">Reporting delays and right-truncation of line list data</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Wrangling and plotting data</h6></li>
     <li><a class="dropdown-item" href="../articles/wrangling-linelist.html">Wrangling simulated outbreak data</a></li>
@@ -183,20 +184,20 @@ Ct values. See <code><a href="create_config.html">create_config()</a></code> for
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># quickly simulate contact tracing data using the function defaults</span></span></span>
 <span class="r-in"><span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="fu">sim_contacts</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">contacts</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                from             to age sex date_first_contact date_last_contact</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Carissa Goldstein   Priya Nguyen  85   f         2022-12-29        2023-01-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Carissa Goldstein   Shamika Ward  32   f         2022-12-29        2023-01-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Carissa Goldstein      Dawn Dang  67   f         2022-12-31        2023-01-04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Priya Nguyen Isaiah Wheaton  16   m         2023-01-05        2023-01-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         Dawn Dang  Saif el-Hamid  71   m         2023-01-10        2023-01-11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         Dawn Dang     Ryan Rahat  10   m         2023-01-07        2023-01-09</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   was_case  status</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        Y    case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2        N unknown</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3        Y    case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4        Y    case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        Y    case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6        Y    case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             from                   to age sex date_first_contact</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Samuel Macias       Ira Birmingham  52   m         2022-12-30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Ira Birmingham     Salvador Hinojos  47   m         2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Ira Birmingham      Justin Bradford  33   m         2023-01-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Ira Birmingham          Atsila Pico  49   f         2022-12-30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Ira Birmingham Ramziyya el-Mansouri  33   f         2022-12-31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Ira Birmingham             Tyler So  84   m         2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date_last_contact was_case         status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        2023-01-01        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        2023-01-06        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        2023-01-10        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        2023-01-07        N under_followup</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        2023-01-04        Y           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        2023-01-06        Y           case</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># to simulate more realistic contact tracing data load epiparameters from</span></span></span>
 <span class="r-in"><span><span class="co"># {epiparameter}</span></span></span>

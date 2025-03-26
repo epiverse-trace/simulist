@@ -5,11 +5,12 @@ articles:
   age-strat-risks: age-strat-risks.html
   age-struct-pop: age-struct-pop.html
   design-principles: design-principles.html
+  reporting-delays-truncation: reporting-delays-truncation.html
   simulist: simulist.html
   time-varying-cfr: time-varying-cfr.html
   vis-linelist: vis-linelist.html
   wrangling-linelist: wrangling-linelist.html
-last_built: 2025-01-10T14:45Z
+last_built: 2025-03-26T13:00Z
 urls:
   reference: https://epiverse-trace.github.io/simulist/reference
   article: https://epiverse-trace.github.io/simulist/articles

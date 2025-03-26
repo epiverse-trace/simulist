@@ -15,7 +15,7 @@ when sim_type is "contacts" or "outbreak" a contacts table as well.'><meta prope
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.4.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,8 +30,9 @@ when sim_type is "contacts" or "outbreak" a contacts table as well.'><meta prope
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Customising simulated outbreak</h6></li>
     <li><a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a></li>
-    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a></li>
+    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age-structured population</a></li>
     <li><a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a></li>
+    <li><a class="dropdown-item" href="../articles/reporting-delays-truncation.html">Reporting delays and right-truncation of line list data</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Wrangling and plotting data</h6></li>
     <li><a class="dropdown-item" href="../articles/wrangling-linelist.html">Wrangling simulated outbreak data</a></li>
@@ -77,6 +78,7 @@ when <code>sim_type</code> is <code>"contacts"</code> or <code>"outbreak"</code>
 <span>  onset_to_hosp <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  onset_to_recovery <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  reporting_delay <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hosp_death_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  non_hosp_death_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -168,7 +170,14 @@ number generator internally.</p>
 number generator (<code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code>) with <code>meanlog = 2.5</code> and <code>sdlog = 0.5</code>.</p>
 <p>If <code>onset_to_death</code> is set to <code>NULL</code> then <code>non_hosp_death_risk</code> and
 <code>hosp_death_risk</code> will be automatically set to <code>NULL</code> if not manually
-specified.</p></dd>
+specified.</p>
+<p>For hospitalised cases, the function ensures the onset-to-death time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-death time (from <code>onset_to_death</code>) cannot be sampled that is
+greater than a onset-to-hospitalisation time (from <code>onset_to_hosp</code>) then
+the function will error. Due to this conditional sampling, the
+onset-to-death times in the line list may not resemble the distributional
+form input into the function.</p></dd>
 
 
 <dt id="arg-onset-to-recovery">onset_to_recovery<a class="anchor" aria-label="anchor" href="#arg-onset-to-recovery"></a></dt>
@@ -181,7 +190,26 @@ must have a single argument.</p>
 <p>An <code>&lt;epiparameter&gt;</code> can be provided. This will be converted into a random
 number generator internally.</p>
 <p>The default is <code>NULL</code> so by default cases that recover get an <code>NA</code> in the
-<code>$date_outcome</code> line list column.</p></dd>
+<code>$date_outcome</code> line list column.</p>
+<p>For hospitalised cases, the function ensures the onset-to-recovery time is
+greater than the onset-to-hospitalisation time. After many (1000) attempts,
+if an onset-to-recovery time (from <code>onset_to_recovery</code>) cannot be sampled
+that is greater than a onset-to-hospitalisation time (from <code>onset_to_hosp</code>)
+then the function will error. Due to this conditional sampling, the
+onset-to-recovery times in the line list may not resemble the distributional
+form input into the function.</p></dd>
+
+
+<dt id="arg-reporting-delay">reporting_delay<a class="anchor" aria-label="anchor" href="#arg-reporting-delay"></a></dt>
+<dd><p>A <code>function</code> for the reporting delay distribution or
+<code>NULL</code>. The (random) number generating function creates delays between the
+time of symptom onset (<code>$date_onset</code>) and the case being reported
+(<code>$date_reporting</code>).</p>
+<p>The function can be defined or anonymous. The function must return a vector
+of <code>numeric</code>s for the length of the reporting delay. The function must have
+a single argument.</p>
+<p>The default is <code>NULL</code> so by default there is no reporting delay, and the
+<code>$date_reporting</code> line list column is identical to the <code>$date_onset</code> column.</p></dd>
 
 
 <dt id="arg-hosp-risk">hosp_risk<a class="anchor" aria-label="anchor" href="#arg-hosp-risk"></a></dt>

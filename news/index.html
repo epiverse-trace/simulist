@@ -13,7 +13,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.4.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,8 +28,9 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Customising simulated outbreak</h6></li>
     <li><a class="dropdown-item" href="../articles/age-strat-risks.html">Age-stratified hospitalisation and death risks</a></li>
-    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age structured population</a></li>
+    <li><a class="dropdown-item" href="../articles/age-struct-pop.html">Age-structured population</a></li>
     <li><a class="dropdown-item" href="../articles/time-varying-cfr.html">Time-varying case fatality risk</a></li>
+    <li><a class="dropdown-item" href="../articles/reporting-delays-truncation.html">Reporting delays and right-truncation of line list data</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Wrangling and plotting data</h6></li>
     <li><a class="dropdown-item" href="../articles/wrangling-linelist.html">Wrangling simulated outbreak data</a></li>
@@ -60,10 +61,54 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="simulist-development-version">simulist (development version)<a class="anchor" aria-label="anchor" href="#simulist-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.5.0" id="simulist-050">simulist 0.5.0<a class="anchor" aria-label="anchor" href="#simulist-050"></a></h2><p class="text-muted">CRAN release: 2025-03-25</p>
+<p>This minor version release expands the scope of <em>simulist</em> to include two new post-processing functions: <code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> and <code><a href="../reference/messy_linelist.html">messy_linelist()</a></code>. Both of these functions modify a line list <code>&lt;data.frame&gt;</code> from <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> or <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code>, the line list now also includes a <code>$date_reporting</code> column.</p>
+<p>This release has also focused on making the package interface more consistent and contains bugs fixes.</p>
+<div class="section level3">
+<h3 id="new-features-0-5-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-5-0"></a></h3>
+<div class="section level4">
+<h4 id="external-0-5-0">External<a class="anchor" aria-label="anchor" href="#external-0-5-0"></a></h4>
+<ul><li><p>The <code><a href="../reference/messy_linelist.html">messy_linelist()</a></code> function is added. This takes a simulated line list and creates a <em>“messy”</em> line list with inconsistencies, irregularities and missingness found in empirical outbreak data (<a href="https://github.com/epiverse-trace/simulist/issues/187" class="external-link">#187</a> &amp; <a href="https://github.com/epiverse-trace/simulist/issues/196" class="external-link">#196</a> &amp; <a href="https://github.com/epiverse-trace/simulist/issues/199" class="external-link">#199</a>)</p></li>
+<li><p>A reporting delay argument (<code>reporting_delay</code>) is now included in <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> to simulate reporting delays from the date of symptom onset (<code>$date_onset</code>) to date of reporting (<code>$date_reporting</code>) (<a href="https://github.com/epiverse-trace/simulist/issues/179" class="external-link">#179</a>).</p></li>
+<li><p>The <code><a href="../reference/truncate_linelist.html">truncate_linelist()</a></code> function is added. This takes a simulated line list and can create outbreak snapshots and right-truncation of real-time outbreak data (<a href="https://github.com/epiverse-trace/simulist/issues/179" class="external-link">#179</a> &amp; <a href="https://github.com/epiverse-trace/simulist/issues/193" class="external-link">#193</a> &amp; <a href="https://github.com/epiverse-trace/simulist/issues/201" class="external-link">#201</a> &amp; <a href="https://github.com/epiverse-trace/simulist/issues/211" class="external-link">#211</a>).</p></li>
+<li><p>A new vignette, <code>reporting_delays-truncation.Rmd</code>, on reporting delays and right-truncation for line list data has been added (<a href="https://github.com/epiverse-trace/simulist/issues/179" class="external-link">#179</a> &amp; <a href="https://github.com/epiverse-trace/simulist/issues/201" class="external-link">#201</a>).</p></li>
+<li><p>Alt text is added to all vignette figures (<a href="https://github.com/epiverse-trace/simulist/issues/214" class="external-link">#214</a>).</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="internal-0-5-0">Internal<a class="anchor" aria-label="anchor" href="#internal-0-5-0"></a></h4>
+<ul><li><p><code>{english}</code> is added as a package dependency for <code><a href="../reference/messy_linelist.html">messy_linelist()</a></code> (<a href="https://github.com/epiverse-trace/simulist/issues/187" class="external-link">#187</a>).</p></li>
+<li><p>R CMD check CI is now run on R v4.1, the minimum required R version for the package (<a href="https://github.com/epiverse-trace/simulist/issues/180" class="external-link">#180</a>).</p></li>
+<li><p><a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> is no longer used in testing (<a href="https://github.com/epiverse-trace/simulist/issues/177" class="external-link">#177</a>).</p></li>
+<li><p><code><a href="../reference/dot-check_linelist.html">.check_linelist()</a></code> is added for input checking in post-processing functions (<a href="https://github.com/epiverse-trace/simulist/issues/179" class="external-link">#179</a>).</p></li>
+<li><p><code>.check_age_df()</code> and <code>.check_risk_df()</code> have been merged into <code><a href="../reference/dot-check_df.html">.check_df()</a></code> thanks to the standardisation of the structure of <code>&lt;data.frame&gt;</code> objects required by <code>sim_*()</code> function arguments (<a href="https://github.com/epiverse-trace/simulist/issues/200" class="external-link">#200</a>).</p></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="breaking-changes-0-5-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-0"></a></h3>
+<ul><li><p><code><a href="../reference/create_config.html">create_config()</a></code> has been updated to accepted <code>function</code>s instead of a distribution name and a vector of parameters. This now matches the design of arguments that accept a <code>function</code> in <code>sim_*()</code> functions (<a href="https://github.com/epiverse-trace/simulist/issues/202" class="external-link">#202</a>).</p></li>
+<li><p>The structure of the age-structured population <code>&lt;data.frame&gt;</code> input into <code>sim_*()</code> functions has been standardised with the age-stratified risk <code>&lt;data.frame&gt;</code>s by using an <code>$age_limit</code> column instead of an <code>$age_range</code> <code>character</code> column (<a href="https://github.com/epiverse-trace/simulist/issues/200" class="external-link">#200</a>).</p></li>
+<li><p>The line list <code>&lt;data.frame&gt;</code> output by <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> now contains a <code>$date_reporting</code> column (<a href="https://github.com/epiverse-trace/simulist/issues/179" class="external-link">#179</a>).</p></li>
+<li><p>Outcome date (<code>$date_outcome</code>) is now conditioned to be after hospitalisation date (<code>$date_admission</code>) using the new internal <code><a href="../reference/dot-sample_outcome_time.html">.sample_outcome_time()</a></code> function. This is a breaking change as previously hospitalisation times could be before outcome times, <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> can now through an error if an outcome time cannot be sampled to be after the hospitalisation time (<a href="https://github.com/epiverse-trace/simulist/issues/178" class="external-link">#178</a>).</p></li>
+<li><p>The date of first contact is now sampled as the number of days before infection time (equal to symptom onset in the model) rather than days before date of last contact, as this could lead to the infection time before the first contact (<a href="https://github.com/epiverse-trace/simulist/issues/206" class="external-link">#206</a>).</p></li>
+<li><p>The minimum required R version for <em>simulist</em> is increased to v4.1.0 from v3.6.0 due to package dependencies (<a href="https://github.com/epiverse-trace/simulist/issues/180" class="external-link">#180</a>).</p></li>
+<li><p>The minimum required version of <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> (suggested dependency) is now v2.3.0 (<a href="https://github.com/epiverse-trace/simulist/issues/214" class="external-link">#214</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-0-5-0">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-5-0"></a></h3>
+<ul><li>Explicitly state function output breaking changes policy in <code>design-principles.Rmd</code> vignette (<a href="https://github.com/epiverse-trace/simulist/issues/208" class="external-link">#208</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-5-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-0"></a></h3>
+<ul><li><p>Date of symptom onset can no longer occur before date of first contact (<a href="https://github.com/epiverse-trace/simulist/issues/206" class="external-link">#206</a>).</p></li>
+<li><p>Outcome date can no longer occur before hospitalisation date (<a href="https://github.com/epiverse-trace/simulist/issues/178" class="external-link">#178</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-and-defunct-0-5-0">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-5-0"></a></h3>
+<ul><li>None</li>
+</ul></div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.0" id="simulist-040">simulist 0.4.0<a class="anchor" aria-label="anchor" href="#simulist-040"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.4.0" id="simulist-040">simulist 0.4.0<a class="anchor" aria-label="anchor" href="#simulist-040"></a></h2><p class="text-muted">CRAN release: 2025-01-10</p>
 <p>A minor version release of <em>simulist</em> containing various minor improvements to the functions and documentation, as well as removing some triggers for warning users. There are also a few bug fixes and internal enhancements.</p>
 <div class="section level3">
 <h3 id="new-features-0-4-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
@@ -73,7 +118,7 @@
 <li>Documentation for <code>sim_*()</code> function arguments that accept either a <code>function</code> or an <code>&lt;epiparameter&gt;</code> object has been improved (<a href="https://github.com/epiverse-trace/simulist/issues/149" class="external-link">#149</a>).</li>
 <li>
 <code>sim_*()</code> functions no longer warn if the user has not specified <code>*_risk</code> arguments and have set <code>onset_to_*</code> arguments to <code>NULL</code> (<a href="https://github.com/epiverse-trace/simulist/issues/149" class="external-link">#149</a>).</li>
-<li>All vignettes now use <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html" class="external-link">rmarkdown::html_vignette</a></code> for to correctly render the website and for maximum compatibility with {pkgdown} &gt;= 2.1.0. This removes figure numbering and code folding (<a href="https://github.com/epiverse-trace/simulist/issues/153" class="external-link">#153</a>).</li>
+<li>All vignettes now use <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html" class="external-link">rmarkdown::html_vignette</a></code> for to correctly render the website and for maximum compatibility with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> &gt;= 2.1.0. This removes figure numbering and code folding (<a href="https://github.com/epiverse-trace/simulist/issues/153" class="external-link">#153</a>).</li>
 </ul></div>
 <div class="section level4">
 <h4 id="internal-0-4-0">Internal<a class="anchor" aria-label="anchor" href="#internal-0-4-0"></a></h4>
@@ -94,7 +139,7 @@
 <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> no longer errors when <code>hosp_death_risk</code> is <code>NULL</code> and <code>onset_to_death</code> is parameterised as a delay distribution (<a href="https://github.com/epiverse-trace/simulist/issues/144" class="external-link">#144</a>).</li>
 <li>
 <code><a href="../reference/dot-add_cols.html">.add_ct()</a></code> generates the correct number of values and does not duplicate Ct values due to vector recycling (<a href="https://github.com/epiverse-trace/simulist/issues/158" class="external-link">#158</a>).</li>
-<li>Update {epiparameter} usage (<a href="https://github.com/epiverse-trace/simulist/issues/159" class="external-link">#159</a>).</li>
+<li>Update <a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> usage (<a href="https://github.com/epiverse-trace/simulist/issues/159" class="external-link">#159</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="deprecated-and-defunct-0-4-0">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-4-0"></a></h3>
@@ -187,7 +232,7 @@
 <div class="section level3">
 <h3 id="bug-fixes-0-2-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-2-0"></a></h3>
 <ul><li>
-<code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> now correctly runs with an age-structured population. In the previous version (v0.1.0), <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> did not call <code><a href="../reference/dot-check_age_df.html">.check_age_df()</a></code> and as a result the function errored, this is fixed as of PR <a href="https://github.com/epiverse-trace/simulist/issues/81" class="external-link">#81</a>.</li>
+<code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> now correctly runs with an age-structured population. In the previous version (v0.1.0), <code><a href="../reference/sim_contacts.html">sim_contacts()</a></code> did not call <code>.check_age_df()</code> and as a result the function errored, this is fixed as of PR <a href="https://github.com/epiverse-trace/simulist/issues/81" class="external-link">#81</a>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="deprecated-and-defunct-0-2-0">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-2-0"></a></h3>
@@ -210,11 +255,11 @@
 <li>Four general vignettes
 <ul><li>Get Started vignette (<code>simulist.Rmd</code>)</li>
 <li>Age-stratified hospitalisation and death risks vignette (<code>age-strat-risks.Rmd</code>)</li>
-<li>Age structured population vignette (<code>age-struct-pop.Rmd</code>)</li>
+<li>Age-structured population vignette (<code>age-struct-pop.Rmd</code>)</li>
 <li>Visualising simulated data (<code>vis-linelist.Rmd</code>)</li>
 </ul></li>
 <li>One developer focused vignette
-<ul><li>Design Principles for {simulist} (<code>design-principles.Rmd</code>)</li>
+<ul><li>Design Principles for <em>simulist</em> (<code>design-principles.Rmd</code>)</li>
 </ul></li>
 <li>Unit tests (100% code coverage) and documentation files.</li>
 <li>Continuous integration workflows for R package checks, rendering the README.md, calculating test coverage, deploying the pkgdown website, updating the citation file, and checking new package or system dependencies.</li>
