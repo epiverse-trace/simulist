@@ -31,7 +31,7 @@ bibliography: paper.bib
 
 ![simulist package hex logo, containing the words simulist and underneath, powered by data.org, with overlapping rectangles above the words](../man/figures/logo.svg){ width=240px }\
 
-Epidemic and pandemic preparedness and analytics response requires robust analysis methods and a deep understanding of outbreak data. We introduce simulist, is an open-source R package for simulating realistic infectious disease outbreak data. It is designed to allow users to generate data with specific disease outbreak characteristics by enabling flexible parameterisation of processes and variables, in particular, infectious disease epidemiology (e.g. delay distributions), contact patterns and demographic information, to simulate two common datasets in outbreak settings: 1) line list data, and 2) contact tracing data. It also offers post-processing of line list data to replicate right-truncation of real-time outbreak data, as well as creating "messy" data. 
+Epidemic and pandemic preparedness and analytics response requires robust analysis methods and a deep understanding of outbreak data. We introduce simulist, an open-source R package for simulating realistic infectious disease outbreak data. It is designed to allow users to generate data with specific disease outbreak characteristics by enabling flexible parameterisation of processes and variables, in particular, infectious disease epidemiology (e.g. delay distributions), contact patterns and demographic information, to simulate two common datasets in outbreak settings: 1) line list data, and 2) contact tracing data. It also offers post-processing of line list data to replicate right-truncation of real-time outbreak data, as well as creating "messy" data. 
 
 ## Statement of need
 
