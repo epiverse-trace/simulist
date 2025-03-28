@@ -81,7 +81,7 @@ The simulist R package is open-source and licensed under MIT. The source code is
 
 # Acknowledgements
 
-We would like to thank the entire Epiverse-TRACE team and community. Particular thanks to Hugo Gruson and Pratik Gupte for contributing and reviewing the package; Chris Hartgerink for reviewing the package; Sebastian Funk and James Azam for discussions about the simulation and real-time outbreak data; and Karim Mané, Abdoelnaser Degoot and Andree Valle Campos for discussions around data cleaning. Lastly, we thank the R-core team for the maintenance of the R language and the epidemiology R community. We thank data.org for their funding and support.
+We would like to thank the entire Epiverse-TRACE team and community. Particular thanks to Hugo Gruson and Pratik Gupte for contributing and reviewing the package; Chris Hartgerink for reviewing the package; Sebastian Funk and James Azam for discussions about the simulation and real-time outbreak data; and Karim Mané, Abdoelnaser Degoot and Andree Valle Campos for discussions around data cleaning. Thanks to James Azam for providing useful feedback on the paper. Lastly, we thank the R-core team for the maintenance of the R language and the epidemiology R community. We thank data.org for their funding and support.
 
 # References
 
