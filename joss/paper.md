@@ -63,7 +63,7 @@ Here we highlight some of the simulation functionality available:
 
 ***Simulating empirical outbreak data***
 
-The outbreak simulation produces precise, standardised, and complete data, hereafter referred to as _ideal_ data. However, in reality those working with line list data often encounter a myriad of issues where the data they have available differs from the _ideal_ data. In simulist we offer two post-processing functions that modify _ideal_ line list data output by `sim_linelist()`to include two empirical characteristics, 1) real-time outbreak data and right-truncation (`truncate_linelist()`) and 2) inconsistent, missing, and duplicated data, so-called _messy_ data (`messy_linelist()`).
+The outbreak simulation produces exact, standardised, and complete data, hereafter referred to as _ideal_ data. However, in reality those working with line list data often encounter a myriad of issues where the data they have available differs from the _ideal_ data. In simulist we offer two post-processing functions that modify _ideal_ line list data output by `sim_linelist()`to include two empirical characteristics, 1) real-time outbreak data and right-truncation (`truncate_linelist()`) and 2) inconsistent, missing, and duplicated data, so-called _messy_ data (`messy_linelist()`).
 
 Other functionality is documented in the [Get Started vignette](https://epiverse-trace.github.io/simulist/articles/simulist.html) and [Wrangling simulated outbreak data vignette](https://epiverse-trace.github.io/simulist/articles/wrangling-linelist.html).
 
