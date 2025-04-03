@@ -51,7 +51,7 @@ However, there is not to our knowledge a tool that offers an easy method to gene
 
 ![Part a.](incidence.png){ width=33% } ![Part b.](network.png){ width=33% } ![Part c.\label{fig:simulist}](multi-dot-plot.png){ width=33% }
 
-Figure 1: (a) daily incidence of symptom onset, hospital admission and deaths facetted by sex for an outbreak simulated with `sim_linelist()` and aggregated and plotted with `{incidence2}` (Taylor, 2024). (b) an `<epicontacts>` network plotted after converted from the output of `sim_outbreak()` (this network is interactive when rendered in an IDE or online). (c) a connected dot plot of the events in a line list simulated with `sim_linelist()`. 
+Figure 1: (a) daily incidence of symptom onset, hospital admission and deaths facetted by sex for an outbreak simulated with `sim_linelist()` and aggregated and plotted with `{incidence2}` [@taylorIncidence2ComputeHandle2020]. (b) an `<epicontacts>` network plotted after converted from the output of `sim_outbreak()` (this network is interactive when rendered in an IDE or online). (c) a connected dot plot of the events in a line list simulated with `sim_linelist()`. 
 
 Here we highlight some of the simulation functionality available:
 
