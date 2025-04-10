@@ -141,6 +141,20 @@ test_that("truncate_linelist sets dates as NA when between events", {
   )
 })
 
+test_that("truncate_linelist sets outcome as NA if date_outcome is >= trunc", {
+  # simulate with recovery times
+  set.seed(123)
+  ll <- sim_linelist(
+    onset_to_recovery = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
+  )
+  expect_false(anyNA(ll$date_outcome))
+  expect_false(anyNA(ll$outcome))
+  ll_trunc <- truncate_linelist(ll, truncation_day = 60)
+  expect_true(anyNA(ll_trunc$date_outcome))
+  expect_true(anyNA(ll_trunc$outcome))
+  expect_identical(is.na(ll_trunc$outcome), is.na(ll_trunc$date_outcome))
+})
+
 test_that("truncate_linelist warns if truncation_day is Date and unit given", {
   expect_warning(
     truncate_linelist(
