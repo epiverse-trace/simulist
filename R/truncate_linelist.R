@@ -120,6 +120,9 @@ truncate_linelist <- function(linelist,
   reported_lgl_idx <- trunc_date > linelist$date_reporting
   linelist <- linelist[reported_lgl_idx, ]
 
+  # convert outcomes more recent than truncation time to NA by outcome date
+  linelist$outcome[linelist$date_outcome > trunc_date] <- NA_character_
+
   # get date columns to be modified if after truncation time
   date_col_lgl_idx <- vapply(
     linelist, inherits, FUN.VALUE = logical(1), what = "Date"
