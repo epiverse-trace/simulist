@@ -298,17 +298,7 @@ between the <code>$date_onset</code> column and the
 <span><span class="co">#&gt; (`geom_line()`).</span></span>
 <span><span class="co">#&gt; Warning: Removed 1519 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
-<p>&lt;img
-src=“/home/runner/work/simulist/simulist/docs/dev/articles/reporting-delays-truncation_files/figure-html/plot-linelist-events-1.png”
-alt=“A dot plot with the event dates in the line list plotted a points
-on the figure, connected by horizontal lines. One row in the dot plot
-corresponds to one case (i.e. one row in the line list). The y-axis
-label is”Case name”, and the x-axis label is “Event date”. The event
-types are “Date admission” (red square), “Date Onset” (blue circle),
-“Date Outcome” (green triangle), and “Date Reporting” (purple diamond).
-The plot shows the distribution of delay times between each event for
-each individual in the line list, with the y-axis order by earliest date
-of symptom onset at the bottom.” width=“768” /&gt;</p>
+<p><img src="reporting-delays-truncation_files/figure-html/plot-linelist-events-1.png" alt="A dot plot with the event dates in the line list plotted a points on the figure, connected by horizontal lines. One row in the dot plot corresponds to one case (i.e. one row in the line list). The y-axis label is 'Case name', and the x-axis label is 'Event date'. The event types are 'Date admission' (red square), 'Date Onset' (blue circle), 'Date Outcome' (green triangle), and 'Date Reporting' (purple diamond). The plot shows the distribution of delay times between each event for each individual in the line list, with the y-axis order by earliest date of symptom onset at the bottom." width="768"></p>
 <p>If we plot the difference between the date of symptom onset and
 reporting then, as expected, the distribution is roughly lognormally
 distributed.</p>
@@ -505,18 +495,7 @@ set to <code>NA</code>.</p>
 <span><span class="co">#&gt; (`geom_line()`).</span></span>
 <span><span class="co">#&gt; Warning: Removed 22 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
-<p>&lt;img
-src=“/home/runner/work/simulist/simulist/docs/dev/articles/reporting-delays-truncation_files/figure-html/plot-linelist-events-trunc-1.png”
-alt=“A dot plot with the event dates in the line list plotted a points
-on the figure, connected by horizontal lines. One row in the dot plot
-corresponds to one case (i.e. one row in the line list). The y-axis
-label is”Case name”, and the x-axis label is “Event date”. The event
-types are “Date admission” (red square), “Date Onset” (blue circle),
-“Date Outcome” (green triangle), and “Date Reporting” (purple diamond).
-The plot shows the distribution of delay times between each event for
-each individual in the line list, with the y-axis order by earliest date
-of symptom onset at the bottom. There is a vertical dashed line showing
-when the truncation day is.” width=“768” /&gt;</p>
+<p><img src="reporting-delays-truncation_files/figure-html/plot-linelist-events-trunc-1.png" alt="A dot plot with the event dates in the line list plotted a points on the figure, connected by horizontal lines. One row in the dot plot corresponds to one case (i.e. one row in the line list). The y-axis label is 'Case name', and the x-axis label is 'Event date'. The event types are 'Date admission' (red square), 'Date Onset' (blue circle), 'Date Outcome' (green triangle), and 'Date Reporting' (purple diamond). The plot shows the distribution of delay times between each event for each individual in the line list, with the y-axis order by earliest date of symptom onset at the bottom. There is a vertical dashed line showing when the truncation day is." width="768"></p>
 <p>In this example several cases are removed as the reporting date
 occurs after the truncation time.</p>
 </div>

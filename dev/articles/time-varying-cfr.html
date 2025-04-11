@@ -300,15 +300,7 @@ columns into their own columns using the <a href="https://tidyr.tidyverse.org/" 
 <span>  complete_dates <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p>&lt;img
-src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-hospitalisation-1.png”
-alt=“Two histograms in a single column, showing the daily incidence of
-cases from symptom onset and incidence of deaths. Case fatality risk for
-hospitalised individuals is 0.5 and the risk of non-hospitalised
-individuals is 0.05, and these risks are constant through time. The
-y-axis is labelled”count” and the x-axis is labelled “date_index”. The
-plot shows fluctuating number of cases over time with substantially
-fewer deaths than cases.” width=“768” /&gt;</p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-hospitalisation-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.5 and the risk of non-hospitalised individuals is 0.05, and these risks are constant through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating number of cases over time with substantially fewer deaths than cases." width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="higher-risk-of-case-fatality">Higher risk of case fatality<a class="anchor" aria-label="anchor" href="#higher-risk-of-case-fatality"></a>
@@ -376,15 +368,7 @@ infected.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p>&lt;img
-src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-death-higher-risk-1.png”
-alt=“Two histograms in a single column, showing the daily incidence of
-cases from symptom onset and incidence of deaths. Case fatality risk for
-hospitalised individuals is 0.9 and the risk of non-hospitalised
-individuals is 0.75, and these risks are constant through time. The
-y-axis is labelled”count” and the x-axis is labelled “date_index”. The
-plot shows growth and subsequent decline of the outbreak, with a similar
-number of cases and deaths over time.” width=“768” /&gt;</p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-higher-risk-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these risks are constant through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows growth and subsequent decline of the outbreak, with a similar number of cases and deaths over time." width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="continuous-time-varying-case-fatality-risk">Continuous time-varying case fatality risk<a class="anchor" aria-label="anchor" href="#continuous-time-varying-case-fatality-risk"></a>
@@ -504,16 +488,7 @@ zero the risk of a case dying will also go to zero.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p>&lt;img
-src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-1.png”
-alt=“Two histograms in a single column, showing the daily incidence of
-cases from symptom onset and incidence of deaths. The baseline case
-fatality risk for hospitalised individuals is 0.9 and the risk of
-non-hospitalised individuals is 0.75, and these decline exponentially
-through time. The y-axis is labelled”count” and the x-axis is labelled
-“date_index”. The plot shows fluctuating cases over time, and only a few
-deaths early in the epidemic and no deaths later in the outbreak.”
-width=“768” /&gt;</p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these decline exponentially through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and only a few deaths early in the epidemic and no deaths later in the outbreak." width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="stepwise-time-varying-case-fatality-risk">Stepwise time-varying case fatality risk<a class="anchor" aria-label="anchor" href="#stepwise-time-varying-case-fatality-risk"></a>
@@ -608,16 +583,7 @@ then become 0 onwards.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p>&lt;img
-src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-1.png”
-alt=“Two histograms in a single column, showing the daily incidence of
-cases from symptom onset and incidence of deaths. The baseline case
-fatality risk for hospitalised individuals is 0.9 and the risk of
-non-hospitalised individuals is 0.75, and these change in a step-wise
-manner at day 60 of the epidemic. The y-axis is labelled”count” and the
-x-axis is labelled “date_index”. The plot shows fluctuating cases over
-time, and deaths only occuring early in the epidemic and no deaths later
-in the outbreak.” width=“768” /&gt;</p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these change in a step-wise manner at day 60 of the epidemic. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and deaths only occuring early in the  epidemic and no deaths later in the outbreak." width="768"></p>
 <p>The same stepwise function can also be used to specify time windows
 were the risk of death is reduced. Here we specify the
 <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code> in the
@@ -711,16 +677,7 @@ onwards.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p>&lt;img
-src=“/home/runner/work/simulist/simulist/docs/dev/articles/time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-window-1.png”
-alt=“Two histograms in a single column, showing the daily incidence of
-cases from symptom onset and incidence of deaths. The maximum case
-fatality risk for hospitalised individuals is 0.9 and the risk of
-non-hospitalised individuals is 0.75, and these change in a step-wise
-manner at day 50 and 100 of the epidemic. The y-axis is labelled”count”
-and the x-axis is labelled “date_index”. The plot shows fluctuating
-cases over time, and deaths closely resemble the number of cases over
-time.” width=“768” /&gt;</p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-window-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these change in a step-wise manner at day 50 and 100 of the epidemic. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and deaths closely resemble the number of cases over time." width="768"></p>
 <p>The maximum case fatality risk for hospitalised individuals is 0.9
 and for non-hospitalised individuals is 0.75, and these rates remain
 constant from days 0 to 50, and then from days 50 to 100 the case
