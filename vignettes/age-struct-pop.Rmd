@@ -102,8 +102,8 @@ We can plot the age distribution for individuals in the line list, binned into 5
 #|   A histogram for the age distribution of individuals in a simulated line
 #|   list sampled from a uniform distribution between 5 and 75. Ages are binned
 #|   into 5 year age groups. There is a small amount of variation in counts
-#|   of individuals in each group. The y-axis is labelled "Number of
-#|   Individuals", and the x-axis is labelled "Age".
+#|   of individuals in each group. The y-axis is labelled 'Number of
+#|   Individuals', and the x-axis is labelled 'Age'.
 ggplot(linelist[, c("sex", "age")]) +
   geom_histogram(
     mapping = aes(x = age),
@@ -161,7 +161,7 @@ Again we can plot the age distribution to see the age structure for individuals 
 #|   in the data.frame above. Ages are binned into 5 year age groups. There is
 #|   variation in counts of individuals in each group, and the histograms
 #|   between male (m) and female (f) are similar. The y-axis is labelled
-#|   "Number of Individuals", and the x-axis is labelled "Age".
+#|   'Number of Individuals', and the x-axis is labelled 'Age'.
 ggplot(linelist[, c("sex", "age")]) +
   geom_histogram(
     mapping = aes(x = age),
@@ -224,8 +224,8 @@ labels <- abs(breaks)
 ```{r, plot-age-struct-young}
 #| fig.alt: >
 #|   An age pyramid for a simulated line list with an age-structured population.
-#|   The y-axis is labeled "Lower bound of Age Category", the x-axis is labelled
-#|   "Population". The left of the age pyramid plots the number of female
+#|   The y-axis is labeled 'Lower bound of Age Category', the x-axis is labelled
+#|   'Population'. The left of the age pyramid plots the number of female
 #|   individuals (red) in each age category and the right of the age pyramid
 #|   plots the number of male individuals (blue) in each age category. The age
 #|   pyramid shows many young people in the population, aged below 10, and

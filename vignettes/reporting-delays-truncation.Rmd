@@ -118,9 +118,9 @@ Here from the first 6 rows of the line list you can see differences between the 
 #|   A dot plot with the event dates in the line list plotted a points on the
 #|   figure, connected by horizontal lines. One row in the dot plot corresponds
 #|   to one case (i.e. one row in the line list). The y-axis label is
-#|   "Case name", and the x-axis label is "Event date". The event types are
-#|   "Date admission" (red square), "Date Onset" (blue circle), "Date Outcome"
-#|   (green triangle), and "Date Reporting" (purple diamond). The plot shows
+#|   'Case name', and the x-axis label is 'Event date'. The event types are
+#|   'Date admission' (red square), 'Date Onset' (blue circle), 'Date Outcome'
+#|   (green triangle), and 'Date Reporting' (purple diamond). The plot shows
 #|   the distribution of delay times between each event for each individual in
 #|   the line list, with the y-axis order by earliest date of symptom onset at
 #|   the bottom.
@@ -254,9 +254,9 @@ trunc_date <- max(tidy_linelist$value, na.rm = TRUE) - truncation_day
 #|   A dot plot with the event dates in the line list plotted a points on the
 #|   figure, connected by horizontal lines. One row in the dot plot corresponds
 #|   to one case (i.e. one row in the line list). The y-axis label is
-#|   "Case name", and the x-axis label is "Event date". The event types are
-#|   "Date admission" (red square), "Date Onset" (blue circle), "Date Outcome"
-#|   (green triangle), and "Date Reporting" (purple diamond). The plot shows
+#|   'Case name', and the x-axis label is 'Event date'. The event types are
+#|   'Date admission' (red square), 'Date Onset' (blue circle), 'Date Outcome'
+#|   (green triangle), and 'Date Reporting' (purple diamond). The plot shows
 #|   the distribution of delay times between each event for each individual in
 #|   the line list, with the y-axis order by earliest date of symptom onset at
 #|   the bottom. There is a vertical dashed line showing when the truncation day
