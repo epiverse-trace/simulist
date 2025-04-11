@@ -310,6 +310,15 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
     }
   }
 
+  # if contact_distribution is an empirical distribution convert to function
+  if (is.vector(contact_distribution, mode = "numeric")) {
+    empirical_cd <- contact_distribution
+    contact_distribution <- function(n) {
+      sample(empirical_cd, size = n, replace = TRUE)
+    }
+    config$network <- "empirical"
+  }
+
   # check and convert distribution to func if needed before .check_sim_input()
   funcs <- as_function(
     list(

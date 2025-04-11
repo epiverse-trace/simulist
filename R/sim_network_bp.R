@@ -28,7 +28,7 @@
                             max_outbreak_size,
                             config) {
   if (is.null(config$network) ||
-      !config$network %in% c("adjusted", "unadjusted")) {
+      !config$network %in% c("adjusted", "unadjusted", "empirical")) {
     stop("Network incorrectly specified, check config", call. = FALSE)
   }
 
@@ -57,18 +57,21 @@
     # sample contact distribution (excess degree distribution)
     contact_dist_prob <- contact_distribution(0:1e4 + 1) * (0:1e4 + 1)
     contact_dist_prob <- contact_dist_prob / sum(contact_dist_prob)
-  } else {
+  } else if (config$network == "unadjusted") {
     contact_dist_prob <- contact_distribution(0:1e4)
+  }
+
+  if (config$network == "empirical") {
+    sample_contacts <- contact_distribution
+  } else {
+    sample_contacts <- function(n) {
+      sample(0:1e4, size = n, replace = TRUE, prob = contact_dist_prob)
+    }
   }
 
   # run loop until no more individuals are sampled
   while (next_gen_size > 0) {
-    contacts <- sample(
-      0:1e4,
-      size = next_gen_size,
-      replace = TRUE,
-      prob = contact_dist_prob
-    )
+    contacts <- sample_contacts(n = next_gen_size)
     # add contacts if sampled
     if (sum(contacts) > 0L) {
       chain_size <- chain_size + sum(contacts)
