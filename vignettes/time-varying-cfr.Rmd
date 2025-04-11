@@ -148,7 +148,7 @@ linelist <- linelist %>%
 #|   from symptom onset and incidence of deaths. Case fatality risk for
 #|   hospitalised individuals is 0.5 and the risk of non-hospitalised
 #|   individuals is 0.05, and these risks are constant through time. The
-#|   y-axis is labelled "count" and the x-axis is labelled "date_index". The
+#|   y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The
 #|   plot shows fluctuating number of cases over time with substantially
 #|   fewer deaths than cases.
 daily <- incidence(
@@ -213,7 +213,7 @@ daily <- incidence(
 #|   from symptom onset and incidence of deaths. Case fatality risk for
 #|   hospitalised individuals is 0.9 and the risk of non-hospitalised
 #|   individuals is 0.75, and these risks are constant through time. The
-#|   y-axis is labelled "count" and the x-axis is labelled "date_index". The
+#|   y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The
 #|   plot shows growth and subsequent decline of the outbreak, with a similar
 #|   number of cases and deaths over time.
 plot(daily)
@@ -313,7 +313,7 @@ daily <- incidence(
 #|   from symptom onset and incidence of deaths. The baseline case fatality
 #|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised
 #|   individuals is 0.75, and these decline exponentially through time. The
-#|   y-axis is labelled "count" and the x-axis is labelled "date_index". The
+#|   y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The
 #|   plot shows fluctuating cases over time, and only a few deaths early in the
 #|   epidemic and no deaths later in the outbreak.
 plot(daily)
@@ -402,8 +402,8 @@ daily <- incidence(
 #|   from symptom onset and incidence of deaths. The baseline case fatality
 #|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised
 #|   individuals is 0.75, and these change in a step-wise manner at day 60 of
-#|   the epidemic. The y-axis is labelled "count" and the x-axis is labelled
-#|   "date_index". The plot shows fluctuating cases over time, and deaths only
+#|   the epidemic. The y-axis is labelled 'count' and the x-axis is labelled
+#|   'date_index'. The plot shows fluctuating cases over time, and deaths only
 #|   occuring early in the  epidemic and no deaths later in the outbreak.
 plot(daily)
 ```
@@ -488,8 +488,8 @@ daily <- incidence(
 #|   from symptom onset and incidence of deaths. The maximum case fatality
 #|   risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised
 #|   individuals is 0.75, and these change in a step-wise manner at day 50 and
-#|   100 of the epidemic. The y-axis is labelled "count" and the x-axis is
-#|   labelled "date_index". The plot shows fluctuating cases over time, and
+#|   100 of the epidemic. The y-axis is labelled 'count' and the x-axis is
+#|   labelled 'date_index'. The plot shows fluctuating cases over time, and
 #|   deaths closely resemble the number of cases over time.
 plot(daily)
 ```
