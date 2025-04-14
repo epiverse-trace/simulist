@@ -98,7 +98,19 @@ To visualise the number of cases with onset on a particular day, the {incidence2
 
 Currently {simulist} outputs dates that are not rounded to the nearest day, i.e. it can be half way through a day. This is not obvious as R prints dates to the nearest day by default, and only by removing the date class (using `unclass()`) can you see the decimals (as R stores dates internally as the number of days since 1970-01-01).
 
-***Note*** storing dates as precise doubles and not as integer days may change in the near future.
+::: {.alert .alert-warning}
+
+{simulist} stores `<Date>`s as precise doubles and not as integer days. This can be misleading as R prints `<Date>`s to the nearest day. By default {incidence2} does not aggregate to the nearest day and without specifying an `interval` in `incidence()` it will aggregate to the same precision as the data. When supplied with non-whole `<Date>`s it will produce this warning. 
+
+```{r incidence-date-warn}
+# create incidence object
+daily <- incidence(
+  x = linelist,
+  date_index = "date_onset"
+)
+```
+
+:::
 
 The `interval = "daily"` is required as {incidence2} requires rounded dates to aggregate cases per unit time and specifying the `interval` will do this automatically for us. It is possible that not every date had the onset of symptoms, resulting in some dates missing entries. This is taken care of by setting `complete_dates = TRUE`, alternatively this can be achieved by using `incidence2::complete_dates()` on the `<incidence2>` object.
 
