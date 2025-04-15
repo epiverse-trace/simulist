@@ -267,7 +267,7 @@ references:
     orcid: https://orcid.org/0000-0002-8587-7113
   year: '2025'
   doi: 10.32614/CRAN.package.incidence2
-  version: '>= 2.3.0'
+  version: '>= 2.6.2'
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
