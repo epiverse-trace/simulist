@@ -58,6 +58,9 @@ are numbers (\code{numeric}, \code{characters} or words depending on
 }
 \value{
 A messy line list \verb{<data.frame>}.
+
+The output \verb{<data.frame>} has the same structure as the input \verb{<data.frame>}
+from \code{\link[=sim_linelist]{sim_linelist()}}, with messy entries.
 }
 \description{
 Take line list output from \code{\link[=sim_linelist]{sim_linelist()}} and replace elements of

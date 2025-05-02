@@ -202,6 +202,30 @@ Ct values. See \code{\link[=create_config]{create_config()}} for more informatio
 }
 \value{
 A line list \verb{<data.frame>}
+
+The structure of the output is:
+
+\describe{
+\item{\code{case_name}}{\code{character} column with name of case.}
+\item{\code{case_type}}{\code{character} column with type of case. By default it is
+either \code{"confirmed"}, \code{"probable"}, or \code{"suspected"}.}
+\item{\code{sex}}{\code{character} column with either \code{"m"} or \code{"f"} for the sex
+of the case.}
+\item{\code{age}}{\code{integer} with age of case.}
+\item{\code{date_onset}}{\verb{<Date>} column for date of symptom onset.}
+\item{\code{date_reporting}}{\verb{<Date>} column for the date of reporting
+(i.e. entry into line list).}
+\item{\code{date_admission}}{\verb{<Date>} column for date of hospital admission.}
+\item{\code{outcome}}{\code{character} column with the outcome status of each case.
+Either \code{"recovered"} or \code{"died"}.}
+\item{\code{date_outcome}}{\verb{<Date>} column for the date of outcome.}
+\item{\code{date_first_contact}}{\verb{<Date>} column for the first contact between
+infector and infectee (case).}
+\item{\code{date_last_contact}}{\verb{<Date>} column for the last contact between
+infector and infectee (case).}
+\item{\code{ct_value}}{\code{numeric} column with the Cycle threshold (Ct) value
+from qPCR for confirmed cases.}
+}
 }
 \description{
 The line list is simulated using a branching process and

@@ -9,8 +9,10 @@
 #' @inheritParams sim_contacts
 #'
 #' @return A list with two elements:
-#' 1. A line list `<data.frame>`
-#' 2. A contacts `<data.frame>`
+#' 1. A line list `<data.frame>` (see [sim_linelist()] for `<data.frame>`
+#' structure)
+#' 2. A contacts `<data.frame>` (see [sim_contacts()] for `<data.frame>`
+#' structure)
 #' @export
 #'
 #' @author Joshua W. Lambert

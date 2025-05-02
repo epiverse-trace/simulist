@@ -33,7 +33,7 @@ the outbreak simulation. See
 }}
 }
 \value{
-A list of settings for \code{\link[=sim_linelist]{sim_linelist()}}
+A list of settings for \code{\link[=sim_linelist]{sim_linelist()}}.
 }
 \description{
 Create a list of configuration settings for some details of \code{\link[=sim_linelist]{sim_linelist()}}
