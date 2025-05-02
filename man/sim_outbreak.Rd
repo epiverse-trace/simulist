@@ -210,8 +210,10 @@ Ct values. See \code{\link[=create_config]{create_config()}} for more informatio
 \value{
 A list with two elements:
 \enumerate{
-\item A line list \verb{<data.frame>}
-\item A contacts \verb{<data.frame>}
+\item A line list \verb{<data.frame>} (see \code{\link[=sim_linelist]{sim_linelist()}} for \verb{<data.frame>}
+structure)
+\item A contacts \verb{<data.frame>} (see \code{\link[=sim_contacts]{sim_contacts()}} for \verb{<data.frame>}
+structure)
 }
 }
 \description{

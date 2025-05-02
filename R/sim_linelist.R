@@ -196,6 +196,30 @@
 #' Ct values. See [create_config()] for more information.
 #'
 #' @return A line list `<data.frame>`
+#'
+#' The structure of the output is:
+#'
+#' \describe{
+#'   \item{`case_name`}{`character` column with name of case.}
+#'   \item{`case_type`}{`character` column with type of case. By default it is
+#'   either `"confirmed"`, `"probable"`, or `"suspected"`.}
+#'   \item{`sex`}{`character` column with either `"m"` or `"f"` for the sex
+#'   of the case.}
+#'   \item{`age`}{`integer` with age of case.}
+#'   \item{`date_onset`}{`<Date>` column for date of symptom onset.}
+#'   \item{`date_reporting`}{`<Date>` column for the date of reporting
+#'   (i.e. entry into line list).}
+#'   \item{`date_admission`}{`<Date>` column for date of hospital admission.}
+#'   \item{`outcome`}{`character` column with the outcome status of each case.
+#'   Either `"recovered"` or `"died"`.}
+#'   \item{`date_outcome`}{`<Date>` column for the date of outcome.}
+#'   \item{`date_first_contact`}{`<Date>` column for the first contact between
+#'   infector and infectee (case).}
+#'   \item{`date_last_contact`}{`<Date>` column for the last contact between
+#'   infector and infectee (case).}
+#'   \item{`ct_value`}{`numeric` column with the Cycle threshold (Ct) value
+#'   from qPCR for confirmed cases.}
+#' }
 #' @export
 #'
 #' @author Joshua W. Lambert, Carmen Tamayo

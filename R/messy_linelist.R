@@ -94,6 +94,9 @@
 #' contains identical _messy_ elements.
 #'
 #' @return A messy line list `<data.frame>`.
+#'
+#' The output `<data.frame>` has the same structure as the input `<data.frame>`
+#' from [sim_linelist()], with messy entries.
 #' @export
 #'
 #' @examples

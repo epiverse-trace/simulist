@@ -38,6 +38,10 @@
 #' the `truncation_day` as the time since the start of the outbreak.
 #'
 #' @return A line list `<data.frame>`.
+#'
+#' The output `<data.frame>` has the same structure as the input `<data.frame>`
+#' from [sim_linelist()], but can be a subset and dates after truncation set
+#' to `NA`.
 #' @export
 #'
 #' @examples

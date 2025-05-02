@@ -92,7 +92,26 @@ contact tracing status must sum to one.}
 Ct values. See \code{\link[=create_config]{create_config()}} for more information.}
 }
 \value{
-A contacts \verb{<data.frame>}
+A contacts \verb{<data.frame>}.
+
+The structure of the output is:
+
+\describe{
+\item{\code{from}}{\code{character} column with name of case.}
+\item{\code{to}}{\code{character} column with name of contacts of case.}
+\item{\code{age}}{\code{integer} with age of infectee.}
+\item{\code{sex}}{\code{character} column with either \code{"m"} or \code{"f"} for the sex
+of the contact.}
+\item{\code{date_first_contact}}{\verb{<Date>} column for the first contact between
+case and contacts.}
+\item{\code{date_last_contact}}{\verb{<Date>} column for the last contact between
+case and contacts.}
+\item{\code{was_case}}{\code{character} column with either \code{"Y"} or \code{"N"} for if
+the contact becomes a case.}
+\item{\code{status}}{\code{character} column with the status of each contact. By
+default it is either \code{"case"}, \code{"under_followup"} \code{"lost_to_followup"}, or
+\code{"unknown"}.}
+}
 }
 \description{
 Simulate contacts for an infectious disease outbreak

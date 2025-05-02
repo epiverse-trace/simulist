@@ -6,7 +6,26 @@
 #' be `"under_followup"`, `"lost_to_followup"`, `"unknown"`. Values of each
 #' contact tracing status must sum to one.
 #'
-#' @return A contacts `<data.frame>`
+#' @return A contacts `<data.frame>`.
+#'
+#' The structure of the output is:
+#'
+#' \describe{
+#'   \item{`from`}{`character` column with name of case.}
+#'   \item{`to`}{`character` column with name of contacts of case.}
+#'   \item{`age`}{`integer` with age of infectee.}
+#'   \item{`sex`}{`character` column with either `"m"` or `"f"` for the sex
+#'   of the contact.}
+#'   \item{`date_first_contact`}{`<Date>` column for the first contact between
+#'   case and contacts.}
+#'   \item{`date_last_contact`}{`<Date>` column for the last contact between
+#'   case and contacts.}
+#'   \item{`was_case`}{`character` column with either `"Y"` or `"N"` for if
+#'   the contact becomes a case.}
+#'   \item{`status`}{`character` column with the status of each contact. By
+#'   default it is either `"case"`, `"under_followup"` `"lost_to_followup"`, or
+#'   `"unknown"`.}
+#' }
 #' @export
 #'
 #' @author Joshua W. Lambert, Carmen Tamayo

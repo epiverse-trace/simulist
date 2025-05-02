@@ -37,6 +37,10 @@ the \code{truncation_day} as the time since the start of the outbreak.}
 }
 \value{
 A line list \verb{<data.frame>}.
+
+The output \verb{<data.frame>} has the same structure as the input \verb{<data.frame>}
+from \code{\link[=sim_linelist]{sim_linelist()}}, but can be a subset and dates after truncation set
+to \code{NA}.
 }
 \description{
 Adjust or subset the line list \verb{<data.frame>} by removing cases that

@@ -51,7 +51,7 @@
 #'   `vignette("time-varying-cfr", package = "simulist")`.}
 #' }
 #'
-#' @return A list of settings for [sim_linelist()]
+#' @return A list of settings for [sim_linelist()].
 #' @export
 #'
 #' @examples
