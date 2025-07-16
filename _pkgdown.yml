@@ -21,6 +21,10 @@ reference:
     contents:
     - messy_linelist
 
+  - title: Censor line list
+    contents:
+    - censor_linelist
+
   - title: Helper functions
     contents:
     - create_config
