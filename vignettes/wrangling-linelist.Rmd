@@ -97,6 +97,37 @@ linelist <- outbreak$linelist
 contacts <- outbreak$contacts
 ```
 
+## Censoring dates
+
+The date event columns in simulated line lists are stored to double point precision, meaning they are the exact event times. It is unusual to not store `<Date>` objects as integers, as explained in `?Dates`, and the `print()` function for `<Date>`s does not show that they may be part way through a day.
+
+Here we show this by printing the date of symptom onset for the simulated data, and then unclass it to show how it is stored internally.
+
+```{r}
+linelist$date_onset
+unclass(linelist$date_onset)
+```
+
+The `censor_linelist()` function can be used after `sim_linelist()` to censor the event dates to a given precision. Here we show censoring the dates to daily and weekly intervals. The daily censoring dates will look that same as before, but the dates will have any value after the decimal point set to zero. The weekly censored dates will be printed differently.
+
+```{r}
+daily_cens_linelist <- censor_linelist(linelist, interval = "daily")
+head(daily_cens_linelist)
+
+weekly_cens_linelist <- censor_linelist(linelist, interval = "weekly")
+head(weekly_cens_linelist)
+```
+
+See `?censor_linelist()` for more information on how to use this function.
+
+By using `censor_linelist()` it avoids common mistakes when working with `<Date>` objects. For example, rounding a date that is over half way through a day will mistakenly result in the next day. Using `censor_linelist()` avoids this and other common mistakes.
+
+```{r}
+linelist$date_onset
+round(linelist$date_onset)
+daily_cens_linelist$date_onset
+```
+
 ## Removing a line list column {.tabset}
 
 Not every column in the simulated line list may be required for the use case at hand. In this example we will remove the `$ct_value` column. For instance, if we wanted to simulate an outbreak for which no laboratory testing (e.g Polymerase chain reaction, PCR, testing) was available and thus a Cycle threshold (Ct) value would not be known for confirmed cases.
