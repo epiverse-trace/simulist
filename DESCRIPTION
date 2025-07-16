@@ -34,6 +34,7 @@ Imports:
     checkmate,
     english,
     epiparameter (>= 0.4.0),
+    grates,
     randomNames,
     rlang,
     stats
