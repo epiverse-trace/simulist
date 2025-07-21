@@ -128,6 +128,8 @@ round(linelist$date_onset)
 daily_cens_linelist$date_onset
 ```
 
+The censored line list dates can be used with methods that account for censoring when fitting delay distributions such as [{primarycensored}](https://primarycensored.epinowcast.org/).
+
 ## Removing a line list column {.tabset}
 
 Not every column in the simulated line list may be required for the use case at hand. In this example we will remove the `$ct_value` column. For instance, if we wanted to simulate an outbreak for which no laboratory testing (e.g Polymerase chain reaction, PCR, testing) was available and thus a Cycle threshold (Ct) value would not be known for confirmed cases.
