@@ -4,7 +4,11 @@
 \alias{censor_linelist}
 \title{Censor dates in line list}
 \usage{
-censor_linelist(linelist, interval)
+censor_linelist(
+  linelist,
+  interval,
+  reporting_artefact = c("none", "weekend_effects")
+)
 }
 \arguments{
 \item{linelist}{Line list \verb{<data.frame>} output from \code{\link[=sim_linelist]{sim_linelist()}}.}
@@ -21,6 +25,13 @@ interval for censoring. Valid \code{character} options are:
 
 See details for information of the date/period objects that are returned for
 each interval type.}
+
+\item{reporting_artefact}{A \code{character} string, either \code{"none"} (default) or
+\code{"weekend_effect"}. By default none of the dates are altered in other ways
+during censoring, however if \code{reporting_artefact = "weekend_effect"} then
+all the dates in the \verb{$date_reporting} column that fall on a weekend are
+shifted to the following Monday. This artefact is commonly referred to as the
+\href{https://doi.org/10.1186/s13104-025-07145-y}{"weekend effect"}.}
 }
 \value{
 A line list \verb{<data.frame>}.
@@ -65,4 +76,11 @@ linelist_cens <- censor_linelist(linelist, interval = "daily")
 
 # censor to a 3-day period
 linelist_cens <- censor_linelist(linelist, interval = 3)
+
+# no reporting of events on weekends
+linelist_cens <- censor_linelist(
+  linelist,
+  interval = "daily",
+  reporting_artefact = "weekend_effects"
+)
 }
