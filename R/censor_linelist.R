@@ -43,6 +43,13 @@
 #' See details for information of the date/period objects that are returned for
 #' each interval type.
 #'
+#' @param reporting_artefact A `character` string, either `"none"` (default) or
+#' `"weekend_effect"`. By default none of the dates are altered in other ways
+#' during censoring, however if `reporting_artefact = "weekend_effect"` then
+#' all the dates in the `$date_reporting` column that fall on a weekend are
+#' shifted to the following Monday. This artefact is commonly referred to as the
+#' ["weekend effect"](https://doi.org/10.1186/s13104-025-07145-y).
+#'
 #' @return A line list `<data.frame>`.
 #' @export
 #'
@@ -53,10 +60,19 @@
 #'
 #' # censor to a 3-day period
 #' linelist_cens <- censor_linelist(linelist, interval = 3)
+#'
+#' # no reporting of events on weekends
+#' linelist_cens <- censor_linelist(
+#'   linelist,
+#'   interval = "daily",
+#'   reporting_artefact = "weekend_effects"
+#' )
 censor_linelist <- function(linelist,
-                            interval) {
+                            interval,
+                            reporting_artefact = c("none", "weekend_effects")) {
   .check_linelist(linelist)
   linelist <- .as_df(linelist)
+  reporting_artefact <- match.arg(reporting_artefact)
 
   if (checkmate::test_number(interval)) {
     checkmate::assert_integerish(
@@ -77,6 +93,16 @@ censor_linelist <- function(linelist,
       tolower(interval),
       c("daily", "weekly", "epiweek", "monthly", "yearly")
     )
+
+    if (reporting_artefact == "weekend_effects") {
+      # shift weekend reporting dates to the following Monday
+      wday <- weekdays(linelist$date_reporting)
+      day_map <- c(
+        Monday = 0, Tuesday = 0, Wednesday = 0, Thursday = 0, Friday = 0,
+        Saturday = 2, Sunday = 1
+      )
+      linelist$date_reporting <- linelist$date_reporting + unname(day_map[wday])
+    }
 
     func <- switch(interval,
       # daily uses base R
