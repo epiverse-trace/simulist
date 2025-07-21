@@ -74,6 +74,16 @@ censor_linelist <- function(linelist,
   linelist <- .as_df(linelist)
   reporting_artefact <- match.arg(reporting_artefact)
 
+  if (reporting_artefact == "weekend_effects") {
+    # shift weekend reporting dates to the following Monday
+    wday <- weekdays(linelist$date_reporting)
+    day_map <- c(
+      Monday = 0, Tuesday = 0, Wednesday = 0, Thursday = 0, Friday = 0,
+      Saturday = 2, Sunday = 1
+    )
+    linelist$date_reporting <- linelist$date_reporting + unname(day_map[wday])
+  }
+
   if (checkmate::test_number(interval)) {
     checkmate::assert_integerish(
       interval, lower = 1, any.missing = FALSE, len = 1
@@ -93,16 +103,6 @@ censor_linelist <- function(linelist,
       tolower(interval),
       c("daily", "weekly", "epiweek", "monthly", "yearly")
     )
-
-    if (reporting_artefact == "weekend_effects") {
-      # shift weekend reporting dates to the following Monday
-      wday <- weekdays(linelist$date_reporting)
-      day_map <- c(
-        Monday = 0, Tuesday = 0, Wednesday = 0, Thursday = 0, Friday = 0,
-        Saturday = 2, Sunday = 1
-      )
-      linelist$date_reporting <- linelist$date_reporting + unname(day_map[wday])
-    }
 
     func <- switch(interval,
       # daily uses base R
