@@ -49,6 +49,16 @@
 #' all the dates in the `$date_reporting` column that fall on a weekend are
 #' shifted to the following Monday. This artefact is commonly referred to as the
 #' ["weekend effect"](https://doi.org/10.1186/s13104-025-07145-y).
+#' @param offset An `integer` or `<Date>` for the value to start counting the
+#' period from (0 is the start of the Unix epoch). Only applicable if
+#' `interval` is specified as an `integer`.
+#'
+#' Default date used to start counting from for the `<grates_period>` is the
+#' earliest symptom onset date (`$date_onset`). See [grates::as_period()] for
+#' more information.
+#'
+#' If setting `reporting_artefact = "weekend_effects"` the period may start or
+#' end on a weekend.
 #'
 #' @return A line list `<data.frame>`.
 #' @export
@@ -69,7 +79,8 @@
 #' )
 censor_linelist <- function(linelist,
                             interval,
-                            reporting_artefact = c("none", "weekend_effects")) {
+                            reporting_artefact = c("none", "weekend_effects"),
+                            offset = min(linelist$date_onset, na.rm = TRUE)) {
   .check_linelist(linelist)
   linelist <- .as_df(linelist)
   reporting_artefact <- match.arg(reporting_artefact)
@@ -92,7 +103,7 @@ censor_linelist <- function(linelist,
     linelist <- as.data.frame(
       lapply(linelist, function(x, interval) {
         if (inherits(x, "Date")) {
-          x <- grates::as_period(x, n = interval)
+          x <- grates::as_period(x, n = interval, offset = offset)
         }
         x
       },
