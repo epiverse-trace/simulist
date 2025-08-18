@@ -128,7 +128,7 @@ censor_linelist <- function(linelist,
         if (inherits(x, "Date")) {
           if (interval == "daily") {
             # origin for as.Date.numeric for R <4.3.0
-            x <- as.Date(floor(as.numeric(x, origin = "1970-01-01")))
+            x <- as.Date(floor(as.numeric(x)), origin = "1970-01-01")
           } else {
             x <- do.call(func, args = list(x))
           }
