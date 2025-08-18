@@ -7,7 +7,8 @@
 censor_linelist(
   linelist,
   interval,
-  reporting_artefact = c("none", "weekend_effects")
+  reporting_artefact = c("none", "weekend_effects"),
+  offset = min(linelist$date_onset, na.rm = TRUE)
 )
 }
 \arguments{
@@ -32,6 +33,17 @@ during censoring, however if \code{reporting_artefact = "weekend_effect"} then
 all the dates in the \verb{$date_reporting} column that fall on a weekend are
 shifted to the following Monday. This artefact is commonly referred to as the
 \href{https://doi.org/10.1186/s13104-025-07145-y}{"weekend effect"}.}
+
+\item{offset}{An \code{integer} or \verb{<Date>} for the value to start counting the
+period from (0 is the start of the Unix epoch). Only applicable if
+\code{interval} is specified as an \code{integer}.
+
+Default date used to start counting from for the \verb{<grates_period>} is the
+earliest symptom onset date (\verb{$date_onset}). See \code{\link[grates:period_class]{grates::as_period()}} for
+more information.
+
+If setting \code{reporting_artefact = "weekend_effects"} the period may start or
+end on a weekend.}
 }
 \value{
 A line list \verb{<data.frame>}.
