@@ -49,6 +49,7 @@ Post-process simulated line list data for:
 
 :date: Real-time outbreak snapshots with right-truncation <br>
 :memo: Messy data with inconsistencies, mistakes and missing values <br>
+:ledger: Censor dates to daily, epi- and iso-weekly, yearly and other groupings <br>
 
 ## Installation
 
