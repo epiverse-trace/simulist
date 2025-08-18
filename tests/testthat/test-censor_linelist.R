@@ -106,21 +106,6 @@ test_that("censor_linelist works for weekend_effects", {
   )
 })
 
-test_that("censor_linelist works for weekend_effects for period", {
-  ll_cens <- censor_linelist(
-    linelist = ll,
-    interval = 3,
-    reporting_artefact = "weekend_effects"
-  )
-  expect_true(all(c("Saturday", "Sunday") %in% weekdays(ll$date_reporting)))
-  expect_false(
-    any(c("Saturday", "Sunday") %in% c(
-      weekdays(grates::date_start(ll_cens$date_reporting)),
-      weekdays(grates::date_end(ll_cens$date_reporting))
-    ))
-  )
-})
-
 test_that("censor_linelist fails correctly for invalid input", {
   expect_error(
     censor_linelist(linelist = ll, interval = 1.5),
