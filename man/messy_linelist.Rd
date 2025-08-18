@@ -19,8 +19,9 @@ Accepted arguments and their defaults are:
 \item{\code{prop_missing}}{A \code{numeric} between 0 and 1 for the proportion of
 missing values introduced. Default is \code{0.1} (10\%).
 }
-\item{\code{missing_value}}{A single atomic \R object used to represent missing
-values. Default is \code{NA}.}
+\item{\code{missing_value}}{A vector with the missing value(s). If multiple
+values are supplied a missing value is randomly sampled for each cell
+in the line list. Default is \code{NA}.}
 \item{\code{prop_spelling_mistakes}}{A \code{numeric} between 0 and 1 used to
 specify the proportion of spelling mistakes in \code{character} columns.
 Default is \code{0.1} (10\%).

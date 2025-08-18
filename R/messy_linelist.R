@@ -16,8 +16,9 @@
 #'   \item{`prop_missing`}{A `numeric` between 0 and 1 for the proportion of
 #'   missing values introduced. Default is `0.1` (10%).
 #'   }
-#'   \item{`missing_value`}{A single atomic \R object used to represent missing
-#'   values. Default is `NA`.}
+#'   \item{`missing_value`}{A vector with the missing value(s). If multiple
+#'   values are supplied a missing value is randomly sampled for each cell
+#'   in the line list. Default is `NA`.}
 #'   \item{`prop_spelling_mistakes`}{A `numeric` between 0 and 1 used to
 #'   specify the proportion of spelling mistakes in `character` columns.
 #'   Default is `0.1` (10%).
