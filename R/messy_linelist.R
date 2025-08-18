@@ -155,7 +155,7 @@ messy_linelist <- function(linelist, ...) {
 
   # check args list after any user changes
   checkmate::assert_number(.args$prop_missing, lower = 0, upper = 1)
-  checkmate::assert_atomic(.args$missing_value, len = 1)
+  checkmate::assert_atomic(.args$missing_value)
   checkmate::assert_number(.args$prop_spelling_mistakes, lower = 0, upper = 1)
   checkmate::assert_logical(
     .args$inconsistent_sex, any.missing = FALSE, len = 1

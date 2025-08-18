@@ -363,15 +363,16 @@ NULL
   msg <- character(0)
   # set sampled index pairs to missing
   for (i in seq_len(nrow(missing_idx))) {
-    missing_value <- .args$missing_value
+    # if multiple missing values are supplied randomly pick one for each cell
+    missing_value <- sample(.args$missing_value, size = 1)
     ll_col <- missing_idx[i, 2]
     # check and warn if user-specified missing_value causes type coercion
-    if (class(.args$missing_value) != class(linelist[, ll_col]) && # nolint class_equals_linter
-        !rlang::is_na(.args$missing_value)) {
+    if (class(missing_value) != class(linelist[, ll_col]) && # nolint class_equals_linter
+        !rlang::is_na(missing_value)) {
       # when types don't match convert to character to avoid unwanted coercion
       # logical -> integer -> numeric -> character # nolint commented_code_linter
       # not perfect, e.g. integer & numeric -> character
-      missing_value <- as.character(.args$missing_value)
+      missing_value <- as.character(missing_value)
       # only convert column and append to warning msg if not character
       if (!is.character(linelist[, ll_col])) {
         linelist[, ll_col] <- as.character(linelist[, ll_col])
