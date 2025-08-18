@@ -156,14 +156,6 @@ test_that("messy_linelist works with missing_value vector", {
     missing_value = c("missing", "N/A", "Not Available")
   )
   expect_true(all(c("missing", "N/A", "Not Available") %in% unlist(messy_ll)))
-
-  # missing values of different types
-  messy_ll <- messy_linelist(
-    ll,
-    prop_missing = 0.8,
-    missing_value = c("missing", -99L)
-  )
-  expect_true(all(c("missing", "-99") %in% unlist(messy_ll)))
 })
 
 test_that("messy_linelist warns when coercing from missing_value", {
