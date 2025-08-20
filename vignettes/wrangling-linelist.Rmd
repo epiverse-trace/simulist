@@ -20,6 +20,7 @@ The {simulist} R package can generate line list data (`sim_linelist()`), contact
 library(simulist)
 library(epiparameter)
 library(dplyr)
+library(epicontacts)
 ```
 
 This vignette provides data wrangling examples using both functions available in the R language (commonly called "base R") as well as using [tidyverse R packages](https://www.tidyverse.org/), which are commonly applied to data science tasks in R. The tidyverse examples are shown by default, but select the "Base R" tab to see the equivalent functionality using base R. There are many other tools for wrangling data in R which are not covered by this vignette (e.g. [{data.table}](https://rdatatable.gitlab.io/data.table/)).
@@ -129,6 +130,131 @@ daily_cens_linelist$date_onset
 ```
 
 The censored line list dates can be used with methods that account for censoring when fitting delay distributions such as [{primarycensored}](https://primarycensored.epinowcast.org/).
+
+## Under-reporting of cases and contacts {.tabset}
+
+In this section we'll show how case line lists and contact tracing data sets can be subset to represent under-reporting, a common feature of real-world outbreak data, especially in resource-limited settings.
+
+In the line list each case in unlinked (i.e. information on each row is independent of information on every other row). This means we can remove rows in the line list without having to augment any remaining rows. We assume for this example that the probability of being reported, and thus included in the line list, is independent on case type, sex, age and the phase of the outbreak. 
+
+For this example we'll assume the case reporting probability in the line list is 50%.
+
+### Tidyverse
+
+```{r}
+linelist %>%
+  filter(as.logical(rbinom(n(), size = 1, prob = 0.5)))
+```
+
+### Base R
+
+```{r}
+idx <- as.logical(rbinom(n = nrow(linelist), size = 1, prob = 0.5))
+linelist[idx, ]
+```
+
+## {-}
+
+The above example randomly sample rows in the line list using the reporting probability resulting in different number of cases being kept each time the code is run. To subset the line list data and get the same number rows (i.e. cases) returned `slice_sample()` can be used instead.
+
+```{r}
+linelist %>%
+  dplyr::slice_sample(prop = 0.5) %>%
+  dplyr::arrange(id)
+```
+
+`slice_sample()` can reorder rows so we order by ID to keep the cases in order of symptom onset date.
+
+On to under-reporting in contact tracing data. Unlike line list data, contact tracing data is linked. The direction of contact and possibly transmission is recorded in the `$from` and `$to` columns. 
+
+For this example we will assume that the contact tracing under-reporting is applicable to infections and contacts that were not infected. However, the same method could be applied for under-reporting of the transmission chain by first subsetting to infections only (see `vis-linelist.Rmd` vignette for example).
+
+We plot the full contact network so it can be compared to the contact networks with under-reporting plotted below.
+
+```{r}
+epicontacts <- make_epicontacts(
+  linelist = linelist,
+  contacts = contacts,
+  id = "case_name",
+  from = "from",
+  to = "to",
+  directed = TRUE
+)
+plot(epicontacts)
+```
+
+First we randomly sample who is not reported in the outbreak data. For this example we assume the pool of people that can be unreported is everyone in the contact network (infections and contacts), and assume a 50% reporting probability.
+
+```{r}
+all_contacts <- unique(c(contacts$from, contacts$to))
+not_reported <- sample(x = all_contacts, size = 0.5 * length(all_contacts))
+not_reported
+```
+
+Next we subset the contact tracing data by removing infectees if that are not reported. Because the contact tracing data is linked across rows, we also need to set any unreported infectees to `NA` for any secondary infections they cause.
+
+```{r}
+for (person in not_reported) {
+  contacts <- contacts[contacts$to != person, ]
+  contacts[contacts$from %in% person, "from"] <- NA
+}
+head(contacts)
+```
+
+We can plot this new contact network with {epicontacts}. We'll need to subset the line list to have the same unreported cases. 
+
+```{r}
+linelist <- linelist[!linelist$case_name %in% not_reported, ]
+epicontacts <- make_epicontacts(
+  linelist = linelist,
+  contacts = contacts,
+  id = "case_name",
+  from = "from",
+  to = "to",
+  directed = TRUE
+)
+plot(epicontacts)
+```
+
+The above example can be thought of as resulting from incomplete recording or recall of contacts. A second method for under-reporting of contact tracing data is to assume that if a case is unreported then all of the cases and contacts stemming from the unreported case are lost.  
+
+For this example we'll sample a single individual not to report and then prune all cases and contacts from that individual in the network.
+
+```{r}
+all_contacts <- unique(c(contacts$from, contacts$to))
+not_reported <- sample(x = all_contacts, size = 1)
+not_reported
+```
+
+Then we can recursively pruned all cases and contacts that are the result from this individual (this can be zero if the person had no secondary cases or contacts).
+
+```{r}
+while (length(not_reported) > 0) {
+  contacts <- contacts[!contacts$to %in% not_reported, ]
+  not_reported_ <- contacts$to[contacts$from %in% not_reported]
+  contacts <- contacts[!contacts$from %in% not_reported, ]
+  not_reported <- not_reported_
+}
+```
+
+Just as above we can plot the new contact network using {epicontacts}.
+
+```{r}
+# subset line list to match under-reporting in contact tracing data
+linelist <- linelist[linelist$case_name %in% unique(contacts$from), ]
+
+epicontacts <- make_epicontacts(
+  linelist = linelist,
+  contacts = contacts,
+  id = "case_name",
+  from = "from",
+  to = "to",
+  directed = TRUE
+)
+plot(epicontacts)
+```
+
+There are more complex under-reporting depending on covariates in the line list and contact tracing data such as `$case_type` in the line list, with suspected cases most likely to go unreported, or `$status` in the contact tracing data, with `unknown` or `lost_to_followup` more likely to be under-reported.
 
 ## Removing a line list column {.tabset}
 
