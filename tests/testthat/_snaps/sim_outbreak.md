@@ -811,332 +811,332 @@
       325               John Trujillo                Haley Hamlin  82   f
       326                Haley Hamlin             Larissa Herrera  30   f
           date_first_contact date_last_contact was_case           status
-      1           2022-12-29        2023-01-03        Y             case
-      2           2022-12-28        2023-01-01        Y             case
-      3           2022-12-26        2023-01-02        N lost_to_followup
-      4           2022-12-28        2023-01-04        Y             case
-      5           2022-12-31        2023-01-04        Y             case
-      6           2022-12-31        2023-01-06        Y             case
-      7           2023-01-01        2023-01-02        N   under_followup
-      8           2023-01-03        2023-01-09        N   under_followup
-      9           2023-01-02        2023-01-07        Y             case
-      10          2023-01-03        2023-01-07        Y             case
-      11          2023-01-03        2023-01-11        Y             case
-      12          2022-12-30        2023-01-08        N   under_followup
-      13          2023-01-04        2023-01-09        Y             case
-      14          2023-01-09        2023-01-17        N   under_followup
-      15          2023-01-07        2023-01-16        N   under_followup
-      16          2023-01-11        2023-01-13        N   under_followup
-      17          2023-01-09        2023-01-17        Y             case
-      18          2023-01-07        2023-01-14        Y             case
-      19          2023-01-08        2023-01-13        N   under_followup
-      20          2023-01-09        2023-01-15        N   under_followup
-      21          2023-01-07        2023-01-17        Y             case
-      22          2023-01-12        2023-01-16        N   under_followup
-      23          2023-01-08        2023-01-15        Y             case
-      24          2023-01-11        2023-01-14        N   under_followup
-      25          2023-01-08        2023-01-13        N lost_to_followup
-      26          2023-01-09        2023-01-16        Y             case
-      27          2023-01-07        2023-01-15        N   under_followup
-      28          2023-01-08        2023-01-14        Y             case
-      29          2023-01-07        2023-01-13        Y             case
-      30          2023-01-10        2023-01-16        Y             case
-      31          2023-01-10        2023-01-17        N   under_followup
-      32          2023-01-12        2023-01-15        Y             case
-      33          2023-01-12        2023-01-18        Y             case
-      34          2023-01-16        2023-01-21        Y             case
-      35          2023-01-20        2023-01-23        N lost_to_followup
-      36          2023-01-19        2023-01-25        N lost_to_followup
-      37          2023-01-19        2023-01-23        Y             case
-      38          2023-01-18        2023-01-24        Y             case
-      39          2023-01-20        2023-01-26        N lost_to_followup
-      40          2023-01-17        2023-01-21        Y             case
-      41          2023-01-15        2023-01-20        N   under_followup
-      42          2023-01-14        2023-01-21        N   under_followup
-      43          2023-01-18        2023-01-21        Y             case
-      44          2023-01-19        2023-01-25        Y             case
-      45          2023-01-12        2023-01-18        N   under_followup
-      46          2023-01-23        2023-01-28        Y             case
-      47          2023-01-26        2023-01-29        N   under_followup
-      48          2023-01-19        2023-01-28        N lost_to_followup
-      49          2023-01-20        2023-01-28        Y             case
-      50          2023-01-22        2023-01-25        Y             case
-      51          2023-01-22        2023-01-26        N   under_followup
-      52          2023-01-20        2023-01-27        Y             case
-      53          2023-01-23        2023-01-29        Y             case
-      54          2023-01-17        2023-01-24        Y             case
-      55          2023-01-21        2023-01-26        Y             case
-      56          2023-01-18        2023-01-26        N   under_followup
-      57          2023-01-17        2023-01-22        Y             case
-      58          2023-01-15        2023-01-22        Y             case
-      59          2023-01-20        2023-01-23        Y             case
-      60          2023-01-28        2023-01-30        N   under_followup
-      61          2023-01-26        2023-02-02        N          unknown
-      62          2023-01-27        2023-01-31        Y             case
-      63          2023-01-26        2023-02-01        Y             case
-      64          2023-01-28        2023-02-02        Y             case
-      65          2023-01-27        2023-01-30        Y             case
-      66          2023-01-31        2023-02-08        N   under_followup
-      67          2023-01-24        2023-01-27        N   under_followup
-      68          2023-01-20        2023-01-27        N lost_to_followup
-      69          2023-01-23        2023-01-30        N   under_followup
-      70          2023-01-19        2023-01-28        Y             case
-      71          2023-01-21        2023-01-25        N lost_to_followup
-      72          2023-01-25        2023-02-02        Y             case
-      73          2023-01-28        2023-02-04        N lost_to_followup
-      74          2023-01-27        2023-02-05        N   under_followup
-      75          2023-01-25        2023-02-04        N   under_followup
-      76          2023-01-26        2023-02-01        Y             case
-      77          2023-01-26        2023-01-30        Y             case
-      78          2023-01-25        2023-02-03        N lost_to_followup
-      79          2023-01-31        2023-02-02        Y             case
-      80          2023-01-29        2023-02-04        N   under_followup
-      81          2023-01-28        2023-02-02        N   under_followup
-      82          2023-01-30        2023-02-03        N   under_followup
-      83          2023-01-29        2023-02-02        N   under_followup
-      84          2023-01-30        2023-02-05        Y             case
-      85          2023-01-30        2023-02-02        N   under_followup
-      86          2023-01-29        2023-02-04        N          unknown
-      87          2023-01-28        2023-01-30        Y             case
-      88          2023-01-24        2023-02-03        Y             case
-      89          2023-01-28        2023-02-05        Y             case
-      90          2023-01-28        2023-02-03        N   under_followup
-      91          2023-01-31        2023-02-08        N          unknown
-      92          2023-02-03        2023-02-05        Y             case
-      93          2023-02-02        2023-02-07        N   under_followup
-      94          2023-01-30        2023-02-05        N lost_to_followup
-      95          2023-01-28        2023-02-05        N   under_followup
-      96          2023-01-31        2023-02-04        Y             case
-      97          2023-01-27        2023-02-02        Y             case
-      98          2023-01-31        2023-02-07        N   under_followup
-      99          2023-01-27        2023-02-06        N   under_followup
-      100         2023-01-28        2023-02-09        Y             case
-      101         2023-01-29        2023-02-03        N   under_followup
-      102         2023-01-31        2023-02-07        N lost_to_followup
-      103         2023-02-02        2023-02-05        N   under_followup
-      104         2023-01-31        2023-02-07        N   under_followup
-      105         2023-01-31        2023-02-07        N   under_followup
-      106         2023-01-29        2023-02-10        N   under_followup
-      107         2023-01-31        2023-02-10        Y             case
-      108         2023-01-31        2023-02-06        N   under_followup
-      109         2023-01-30        2023-02-08        N   under_followup
-      110         2023-01-31        2023-02-05        Y             case
-      111         2023-02-02        2023-02-12        N   under_followup
-      112         2023-02-04        2023-02-08        Y             case
-      113         2023-02-10        2023-02-17        Y             case
-      114         2023-02-08        2023-02-12        N lost_to_followup
-      115         2023-02-08        2023-02-13        Y             case
-      116         2023-02-11        2023-02-15        N   under_followup
-      117         2023-02-10        2023-02-14        N   under_followup
-      118         2023-02-10        2023-02-12        Y             case
-      119         2023-02-10        2023-02-16        Y             case
-      120         2023-02-09        2023-02-21        N   under_followup
-      121         2023-02-24        2023-03-01        Y             case
-      122         2023-02-21        2023-02-26        Y             case
-      123         2023-02-23        2023-03-01        N lost_to_followup
-      124         2023-02-20        2023-02-26        Y             case
-      125         2023-02-22        2023-02-26        Y             case
-      126         2023-02-15        2023-02-22        N          unknown
-      127         2023-02-13        2023-02-19        N   under_followup
-      128         2023-02-28        2023-03-03        N   under_followup
-      129         2023-03-01        2023-03-07        Y             case
-      130         2023-03-01        2023-03-04        Y             case
-      131         2023-03-06        2023-03-11        N   under_followup
-      132         2023-02-27        2023-03-13        Y             case
-      133         2023-02-25        2023-03-02        N   under_followup
-      134         2023-02-24        2023-03-05        N   under_followup
-      135         2023-03-05        2023-03-12        N   under_followup
-      136         2023-03-05        2023-03-11        N   under_followup
-      137         2023-03-09        2023-03-11        Y             case
-      138         2023-03-09        2023-03-13        Y             case
-      139         2023-03-13        2023-03-23        N lost_to_followup
-      140         2023-03-16        2023-03-18        N lost_to_followup
-      141         2023-03-15        2023-03-20        Y             case
-      142         2023-03-16        2023-03-23        Y             case
-      143         2023-03-14        2023-03-22        N   under_followup
-      144         2023-03-08        2023-03-15        Y             case
-      145         2023-03-07        2023-03-14        Y             case
-      146         2023-03-09        2023-03-11        Y             case
-      147         2023-03-07        2023-03-10        N   under_followup
-      148         2023-03-03        2023-03-12        N          unknown
-      149         2023-03-03        2023-03-13        Y             case
-      150         2023-03-17        2023-03-28        N   under_followup
-      151         2023-03-17        2023-03-24        N   under_followup
-      152         2023-03-11        2023-03-22        Y             case
-      153         2023-03-14        2023-03-19        Y             case
-      154         2023-03-14        2023-03-16        Y             case
-      155         2023-03-12        2023-03-15        N   under_followup
-      156         2023-03-09        2023-03-18        Y             case
-      157         2023-03-08        2023-03-16        Y             case
-      158         2023-03-11        2023-03-18        Y             case
-      159         2023-03-12        2023-03-19        N   under_followup
-      160         2023-03-11        2023-03-18        N   under_followup
-      161         2023-03-08        2023-03-14        N   under_followup
-      162         2023-03-10        2023-03-18        Y             case
-      163         2023-03-14        2023-03-19        Y             case
-      164         2023-03-23        2023-03-27        N lost_to_followup
-      165         2023-03-20        2023-03-26        Y             case
-      166         2023-03-16        2023-03-21        N   under_followup
-      167         2023-03-14        2023-03-19        N   under_followup
-      168         2023-03-16        2023-03-22        N   under_followup
-      169         2023-03-16        2023-03-21        N   under_followup
-      170         2023-03-15        2023-03-19        Y             case
-      171         2023-03-13        2023-03-20        Y             case
-      172         2023-03-14        2023-03-16        Y             case
-      173         2023-03-13        2023-03-15        Y             case
-      174         2023-03-24        2023-03-28        Y             case
-      175         2023-03-20        2023-03-27        Y             case
-      176         2023-03-18        2023-03-23        Y             case
-      177         2023-03-17        2023-03-23        Y             case
-      178         2023-03-16        2023-03-20        N   under_followup
-      179         2023-03-12        2023-03-16        N   under_followup
-      180         2023-03-15        2023-03-22        N   under_followup
-      181         2023-03-12        2023-03-21        Y             case
-      182         2023-03-12        2023-03-17        N   under_followup
-      183         2023-03-23        2023-04-01        N lost_to_followup
-      184         2023-03-29        2023-03-31        N lost_to_followup
-      185         2023-03-23        2023-03-28        Y             case
-      186         2023-03-24        2023-03-27        N          unknown
-      187         2023-03-22        2023-03-29        N   under_followup
-      188         2023-03-22        2023-03-30        Y             case
-      189         2023-03-24        2023-03-28        N   under_followup
-      190         2023-03-23        2023-03-29        N   under_followup
-      191         2023-03-21        2023-03-30        N   under_followup
-      192         2023-03-22        2023-03-30        N   under_followup
-      193         2023-03-23        2023-03-29        N   under_followup
-      194         2023-03-24        2023-03-27        Y             case
-      195         2023-03-22        2023-03-27        Y             case
-      196         2023-03-23        2023-04-01        Y             case
-      197         2023-03-31        2023-04-06        N   under_followup
-      198         2023-04-03        2023-04-06        Y             case
-      199         2023-03-31        2023-04-07        Y             case
-      200         2023-04-01        2023-04-04        Y             case
-      201         2023-03-26        2023-04-02        Y             case
-      202         2023-03-27        2023-04-03        N   under_followup
-      203         2023-03-29        2023-03-29        N   under_followup
-      204         2023-03-24        2023-04-02        Y             case
-      205         2023-03-26        2023-03-29        N   under_followup
-      206         2023-03-25        2023-03-31        N   under_followup
-      207         2023-03-20        2023-04-03        N   under_followup
-      208         2023-03-24        2023-04-01        Y             case
-      209         2023-03-26        2023-04-03        Y             case
-      210         2023-03-29        2023-03-31        Y             case
-      211         2023-03-25        2023-03-28        N   under_followup
-      212         2023-04-04        2023-04-10        Y             case
-      213         2023-04-02        2023-04-05        Y             case
-      214         2023-04-07        2023-04-08        N   under_followup
-      215         2023-04-04        2023-04-11        N   under_followup
-      216         2023-03-31        2023-04-03        N   under_followup
-      217         2023-03-30        2023-04-06        N   under_followup
-      218         2023-03-30        2023-04-07        Y             case
-      219         2023-03-30        2023-04-08        N   under_followup
-      220         2023-03-31        2023-04-03        Y             case
-      221         2023-03-31        2023-04-04        N lost_to_followup
-      222         2023-04-01        2023-04-07        N   under_followup
-      223         2023-04-02        2023-04-08        Y             case
-      224         2023-03-29        2023-04-03        N lost_to_followup
-      225         2023-03-31        2023-04-04        Y             case
-      226         2023-03-27        2023-04-06        N   under_followup
-      227         2023-04-04        2023-04-09        N   under_followup
-      228         2023-04-09        2023-04-12        Y             case
-      229         2023-04-06        2023-04-11        Y             case
-      230         2023-04-09        2023-04-12        N   under_followup
-      231         2023-04-01        2023-04-10        Y             case
-      232         2023-04-02        2023-04-06        Y             case
-      233         2023-04-03        2023-04-09        Y             case
-      234         2023-04-06        2023-04-11        Y             case
-      235         2023-04-03        2023-04-11        Y             case
-      236         2023-04-05        2023-04-08        N          unknown
-      237         2023-04-09        2023-04-14        Y             case
-      238         2023-04-08        2023-04-15        N          unknown
-      239         2023-03-30        2023-04-08        Y             case
-      240         2023-03-30        2023-04-05        N lost_to_followup
-      241         2023-04-04        2023-04-14        N   under_followup
-      242         2023-04-02        2023-04-15        Y             case
-      243         2023-04-07        2023-04-11        N          unknown
-      244         2023-04-08        2023-04-12        Y             case
-      245         2023-04-08        2023-04-12        N   under_followup
-      246         2023-04-04        2023-04-11        N   under_followup
-      247         2023-04-08        2023-04-14        N   under_followup
-      248         2023-04-07        2023-04-14        N lost_to_followup
-      249         2023-04-09        2023-04-17        Y             case
-      250         2023-04-09        2023-04-11        Y             case
-      251         2023-04-08        2023-04-13        Y             case
-      252         2023-04-06        2023-04-14        Y             case
-      253         2023-04-11        2023-04-15        Y             case
-      254         2023-04-13        2023-04-19        Y             case
-      255         2023-04-14        2023-04-16        N lost_to_followup
-      256         2023-04-14        2023-04-16        N   under_followup
-      257         2023-04-11        2023-04-20        Y             case
-      258         2023-04-13        2023-04-18        N lost_to_followup
-      259         2023-04-13        2023-04-16        N   under_followup
-      260         2023-04-13        2023-04-21        Y             case
-      261         2023-04-10        2023-04-20        Y             case
-      262         2023-04-10        2023-04-16        N          unknown
-      263         2023-04-14        2023-04-22        Y             case
-      264         2023-04-15        2023-04-26        Y             case
-      265         2023-04-15        2023-04-22        N          unknown
-      266         2023-04-19        2023-04-27        Y             case
-      267         2023-04-20        2023-04-23        Y             case
-      268         2023-04-13        2023-04-19        N lost_to_followup
-      269         2023-04-14        2023-04-21        N   under_followup
-      270         2023-04-13        2023-04-17        N   under_followup
-      271         2023-04-14        2023-04-19        N   under_followup
-      272         2023-04-13        2023-04-16        N lost_to_followup
-      273         2023-04-23        2023-04-26        N   under_followup
-      274         2023-04-24        2023-04-30        N   under_followup
-      275         2023-04-12        2023-04-16        N   under_followup
-      276         2023-04-11        2023-04-14        Y             case
-      277         2023-04-23        2023-04-29        Y             case
-      278         2023-04-15        2023-04-24        Y             case
-      279         2023-04-16        2023-04-24        Y             case
-      280         2023-04-14        2023-04-21        N          unknown
-      281         2023-04-16        2023-04-22        Y             case
-      282         2023-04-20        2023-04-22        N   under_followup
-      283         2023-04-28        2023-05-01        Y             case
-      284         2023-04-23        2023-05-01        Y             case
-      285         2023-04-22        2023-04-27        N   under_followup
-      286         2023-04-22        2023-04-27        N   under_followup
-      287         2023-04-23        2023-04-26        N   under_followup
-      288         2023-04-21        2023-04-23        N   under_followup
-      289         2023-04-19        2023-04-23        N   under_followup
-      290         2023-04-19        2023-04-23        Y             case
-      291         2023-04-16        2023-04-22        Y             case
-      292         2023-04-29        2023-05-09        Y             case
-      293         2023-04-30        2023-05-05        N   under_followup
-      294         2023-05-02        2023-05-06        N   under_followup
-      295         2023-05-03        2023-05-07        Y             case
-      296         2023-05-01        2023-05-04        N   under_followup
-      297         2023-04-25        2023-05-05        Y             case
-      298         2023-04-27        2023-05-03        N lost_to_followup
-      299         2023-04-21        2023-04-28        N          unknown
-      300         2023-04-19        2023-05-02        Y             case
-      301         2023-04-18        2023-04-25        Y             case
-      302         2023-05-03        2023-05-08        N          unknown
-      303         2023-05-01        2023-05-07        Y             case
-      304         2023-05-03        2023-05-11        N          unknown
-      305         2023-04-28        2023-05-05        N lost_to_followup
-      306         2023-04-25        2023-05-06        Y             case
-      307         2023-04-30        2023-05-08        N   under_followup
-      308         2023-04-20        2023-04-24        N lost_to_followup
-      309         2023-04-19        2023-04-26        Y             case
-      310         2023-04-20        2023-04-27        Y             case
-      311         2023-04-22        2023-04-23        N   under_followup
-      312         2023-04-25        2023-04-30        Y             case
-      313         2023-05-06        2023-05-10        N lost_to_followup
-      314         2023-05-06        2023-05-10        N lost_to_followup
-      315         2023-05-05        2023-05-10        Y             case
-      316         2023-05-08        2023-05-09        N   under_followup
-      317         2023-04-21        2023-04-30        N   under_followup
-      318         2023-04-22        2023-05-01        N   under_followup
-      319         2023-04-22        2023-04-28        Y             case
-      320         2023-04-22        2023-04-30        N   under_followup
-      321         2023-04-25        2023-04-29        N   under_followup
-      322         2023-04-21        2023-04-28        N lost_to_followup
-      323         2023-05-08        2023-05-12        N   under_followup
-      324         2023-05-04        2023-05-15        N          unknown
-      325         2023-04-27        2023-05-03        Y             case
-      326         2023-05-03        2023-05-10        N   under_followup
+      1           2022-12-29        2023-01-03     TRUE             case
+      2           2022-12-28        2023-01-01     TRUE             case
+      3           2022-12-26        2023-01-02    FALSE lost_to_followup
+      4           2022-12-28        2023-01-04     TRUE             case
+      5           2022-12-31        2023-01-04     TRUE             case
+      6           2022-12-31        2023-01-06     TRUE             case
+      7           2023-01-01        2023-01-02    FALSE   under_followup
+      8           2023-01-03        2023-01-09    FALSE   under_followup
+      9           2023-01-02        2023-01-07     TRUE             case
+      10          2023-01-03        2023-01-07     TRUE             case
+      11          2023-01-03        2023-01-11     TRUE             case
+      12          2022-12-30        2023-01-08    FALSE   under_followup
+      13          2023-01-04        2023-01-09     TRUE             case
+      14          2023-01-09        2023-01-17    FALSE   under_followup
+      15          2023-01-07        2023-01-16    FALSE   under_followup
+      16          2023-01-11        2023-01-13    FALSE   under_followup
+      17          2023-01-09        2023-01-17     TRUE             case
+      18          2023-01-07        2023-01-14     TRUE             case
+      19          2023-01-08        2023-01-13    FALSE   under_followup
+      20          2023-01-09        2023-01-15    FALSE   under_followup
+      21          2023-01-07        2023-01-17     TRUE             case
+      22          2023-01-12        2023-01-16    FALSE   under_followup
+      23          2023-01-08        2023-01-15     TRUE             case
+      24          2023-01-11        2023-01-14    FALSE   under_followup
+      25          2023-01-08        2023-01-13    FALSE lost_to_followup
+      26          2023-01-09        2023-01-16     TRUE             case
+      27          2023-01-07        2023-01-15    FALSE   under_followup
+      28          2023-01-08        2023-01-14     TRUE             case
+      29          2023-01-07        2023-01-13     TRUE             case
+      30          2023-01-10        2023-01-16     TRUE             case
+      31          2023-01-10        2023-01-17    FALSE   under_followup
+      32          2023-01-12        2023-01-15     TRUE             case
+      33          2023-01-12        2023-01-18     TRUE             case
+      34          2023-01-16        2023-01-21     TRUE             case
+      35          2023-01-20        2023-01-23    FALSE lost_to_followup
+      36          2023-01-19        2023-01-25    FALSE lost_to_followup
+      37          2023-01-19        2023-01-23     TRUE             case
+      38          2023-01-18        2023-01-24     TRUE             case
+      39          2023-01-20        2023-01-26    FALSE lost_to_followup
+      40          2023-01-17        2023-01-21     TRUE             case
+      41          2023-01-15        2023-01-20    FALSE   under_followup
+      42          2023-01-14        2023-01-21    FALSE   under_followup
+      43          2023-01-18        2023-01-21     TRUE             case
+      44          2023-01-19        2023-01-25     TRUE             case
+      45          2023-01-12        2023-01-18    FALSE   under_followup
+      46          2023-01-23        2023-01-28     TRUE             case
+      47          2023-01-26        2023-01-29    FALSE   under_followup
+      48          2023-01-19        2023-01-28    FALSE lost_to_followup
+      49          2023-01-20        2023-01-28     TRUE             case
+      50          2023-01-22        2023-01-25     TRUE             case
+      51          2023-01-22        2023-01-26    FALSE   under_followup
+      52          2023-01-20        2023-01-27     TRUE             case
+      53          2023-01-23        2023-01-29     TRUE             case
+      54          2023-01-17        2023-01-24     TRUE             case
+      55          2023-01-21        2023-01-26     TRUE             case
+      56          2023-01-18        2023-01-26    FALSE   under_followup
+      57          2023-01-17        2023-01-22     TRUE             case
+      58          2023-01-15        2023-01-22     TRUE             case
+      59          2023-01-20        2023-01-23     TRUE             case
+      60          2023-01-28        2023-01-30    FALSE   under_followup
+      61          2023-01-26        2023-02-02    FALSE          unknown
+      62          2023-01-27        2023-01-31     TRUE             case
+      63          2023-01-26        2023-02-01     TRUE             case
+      64          2023-01-28        2023-02-02     TRUE             case
+      65          2023-01-27        2023-01-30     TRUE             case
+      66          2023-01-31        2023-02-08    FALSE   under_followup
+      67          2023-01-24        2023-01-27    FALSE   under_followup
+      68          2023-01-20        2023-01-27    FALSE lost_to_followup
+      69          2023-01-23        2023-01-30    FALSE   under_followup
+      70          2023-01-19        2023-01-28     TRUE             case
+      71          2023-01-21        2023-01-25    FALSE lost_to_followup
+      72          2023-01-25        2023-02-02     TRUE             case
+      73          2023-01-28        2023-02-04    FALSE lost_to_followup
+      74          2023-01-27        2023-02-05    FALSE   under_followup
+      75          2023-01-25        2023-02-04    FALSE   under_followup
+      76          2023-01-26        2023-02-01     TRUE             case
+      77          2023-01-26        2023-01-30     TRUE             case
+      78          2023-01-25        2023-02-03    FALSE lost_to_followup
+      79          2023-01-31        2023-02-02     TRUE             case
+      80          2023-01-29        2023-02-04    FALSE   under_followup
+      81          2023-01-28        2023-02-02    FALSE   under_followup
+      82          2023-01-30        2023-02-03    FALSE   under_followup
+      83          2023-01-29        2023-02-02    FALSE   under_followup
+      84          2023-01-30        2023-02-05     TRUE             case
+      85          2023-01-30        2023-02-02    FALSE   under_followup
+      86          2023-01-29        2023-02-04    FALSE          unknown
+      87          2023-01-28        2023-01-30     TRUE             case
+      88          2023-01-24        2023-02-03     TRUE             case
+      89          2023-01-28        2023-02-05     TRUE             case
+      90          2023-01-28        2023-02-03    FALSE   under_followup
+      91          2023-01-31        2023-02-08    FALSE          unknown
+      92          2023-02-03        2023-02-05     TRUE             case
+      93          2023-02-02        2023-02-07    FALSE   under_followup
+      94          2023-01-30        2023-02-05    FALSE lost_to_followup
+      95          2023-01-28        2023-02-05    FALSE   under_followup
+      96          2023-01-31        2023-02-04     TRUE             case
+      97          2023-01-27        2023-02-02     TRUE             case
+      98          2023-01-31        2023-02-07    FALSE   under_followup
+      99          2023-01-27        2023-02-06    FALSE   under_followup
+      100         2023-01-28        2023-02-09     TRUE             case
+      101         2023-01-29        2023-02-03    FALSE   under_followup
+      102         2023-01-31        2023-02-07    FALSE lost_to_followup
+      103         2023-02-02        2023-02-05    FALSE   under_followup
+      104         2023-01-31        2023-02-07    FALSE   under_followup
+      105         2023-01-31        2023-02-07    FALSE   under_followup
+      106         2023-01-29        2023-02-10    FALSE   under_followup
+      107         2023-01-31        2023-02-10     TRUE             case
+      108         2023-01-31        2023-02-06    FALSE   under_followup
+      109         2023-01-30        2023-02-08    FALSE   under_followup
+      110         2023-01-31        2023-02-05     TRUE             case
+      111         2023-02-02        2023-02-12    FALSE   under_followup
+      112         2023-02-04        2023-02-08     TRUE             case
+      113         2023-02-10        2023-02-17     TRUE             case
+      114         2023-02-08        2023-02-12    FALSE lost_to_followup
+      115         2023-02-08        2023-02-13     TRUE             case
+      116         2023-02-11        2023-02-15    FALSE   under_followup
+      117         2023-02-10        2023-02-14    FALSE   under_followup
+      118         2023-02-10        2023-02-12     TRUE             case
+      119         2023-02-10        2023-02-16     TRUE             case
+      120         2023-02-09        2023-02-21    FALSE   under_followup
+      121         2023-02-24        2023-03-01     TRUE             case
+      122         2023-02-21        2023-02-26     TRUE             case
+      123         2023-02-23        2023-03-01    FALSE lost_to_followup
+      124         2023-02-20        2023-02-26     TRUE             case
+      125         2023-02-22        2023-02-26     TRUE             case
+      126         2023-02-15        2023-02-22    FALSE          unknown
+      127         2023-02-13        2023-02-19    FALSE   under_followup
+      128         2023-02-28        2023-03-03    FALSE   under_followup
+      129         2023-03-01        2023-03-07     TRUE             case
+      130         2023-03-01        2023-03-04     TRUE             case
+      131         2023-03-06        2023-03-11    FALSE   under_followup
+      132         2023-02-27        2023-03-13     TRUE             case
+      133         2023-02-25        2023-03-02    FALSE   under_followup
+      134         2023-02-24        2023-03-05    FALSE   under_followup
+      135         2023-03-05        2023-03-12    FALSE   under_followup
+      136         2023-03-05        2023-03-11    FALSE   under_followup
+      137         2023-03-09        2023-03-11     TRUE             case
+      138         2023-03-09        2023-03-13     TRUE             case
+      139         2023-03-13        2023-03-23    FALSE lost_to_followup
+      140         2023-03-16        2023-03-18    FALSE lost_to_followup
+      141         2023-03-15        2023-03-20     TRUE             case
+      142         2023-03-16        2023-03-23     TRUE             case
+      143         2023-03-14        2023-03-22    FALSE   under_followup
+      144         2023-03-08        2023-03-15     TRUE             case
+      145         2023-03-07        2023-03-14     TRUE             case
+      146         2023-03-09        2023-03-11     TRUE             case
+      147         2023-03-07        2023-03-10    FALSE   under_followup
+      148         2023-03-03        2023-03-12    FALSE          unknown
+      149         2023-03-03        2023-03-13     TRUE             case
+      150         2023-03-17        2023-03-28    FALSE   under_followup
+      151         2023-03-17        2023-03-24    FALSE   under_followup
+      152         2023-03-11        2023-03-22     TRUE             case
+      153         2023-03-14        2023-03-19     TRUE             case
+      154         2023-03-14        2023-03-16     TRUE             case
+      155         2023-03-12        2023-03-15    FALSE   under_followup
+      156         2023-03-09        2023-03-18     TRUE             case
+      157         2023-03-08        2023-03-16     TRUE             case
+      158         2023-03-11        2023-03-18     TRUE             case
+      159         2023-03-12        2023-03-19    FALSE   under_followup
+      160         2023-03-11        2023-03-18    FALSE   under_followup
+      161         2023-03-08        2023-03-14    FALSE   under_followup
+      162         2023-03-10        2023-03-18     TRUE             case
+      163         2023-03-14        2023-03-19     TRUE             case
+      164         2023-03-23        2023-03-27    FALSE lost_to_followup
+      165         2023-03-20        2023-03-26     TRUE             case
+      166         2023-03-16        2023-03-21    FALSE   under_followup
+      167         2023-03-14        2023-03-19    FALSE   under_followup
+      168         2023-03-16        2023-03-22    FALSE   under_followup
+      169         2023-03-16        2023-03-21    FALSE   under_followup
+      170         2023-03-15        2023-03-19     TRUE             case
+      171         2023-03-13        2023-03-20     TRUE             case
+      172         2023-03-14        2023-03-16     TRUE             case
+      173         2023-03-13        2023-03-15     TRUE             case
+      174         2023-03-24        2023-03-28     TRUE             case
+      175         2023-03-20        2023-03-27     TRUE             case
+      176         2023-03-18        2023-03-23     TRUE             case
+      177         2023-03-17        2023-03-23     TRUE             case
+      178         2023-03-16        2023-03-20    FALSE   under_followup
+      179         2023-03-12        2023-03-16    FALSE   under_followup
+      180         2023-03-15        2023-03-22    FALSE   under_followup
+      181         2023-03-12        2023-03-21     TRUE             case
+      182         2023-03-12        2023-03-17    FALSE   under_followup
+      183         2023-03-23        2023-04-01    FALSE lost_to_followup
+      184         2023-03-29        2023-03-31    FALSE lost_to_followup
+      185         2023-03-23        2023-03-28     TRUE             case
+      186         2023-03-24        2023-03-27    FALSE          unknown
+      187         2023-03-22        2023-03-29    FALSE   under_followup
+      188         2023-03-22        2023-03-30     TRUE             case
+      189         2023-03-24        2023-03-28    FALSE   under_followup
+      190         2023-03-23        2023-03-29    FALSE   under_followup
+      191         2023-03-21        2023-03-30    FALSE   under_followup
+      192         2023-03-22        2023-03-30    FALSE   under_followup
+      193         2023-03-23        2023-03-29    FALSE   under_followup
+      194         2023-03-24        2023-03-27     TRUE             case
+      195         2023-03-22        2023-03-27     TRUE             case
+      196         2023-03-23        2023-04-01     TRUE             case
+      197         2023-03-31        2023-04-06    FALSE   under_followup
+      198         2023-04-03        2023-04-06     TRUE             case
+      199         2023-03-31        2023-04-07     TRUE             case
+      200         2023-04-01        2023-04-04     TRUE             case
+      201         2023-03-26        2023-04-02     TRUE             case
+      202         2023-03-27        2023-04-03    FALSE   under_followup
+      203         2023-03-29        2023-03-29    FALSE   under_followup
+      204         2023-03-24        2023-04-02     TRUE             case
+      205         2023-03-26        2023-03-29    FALSE   under_followup
+      206         2023-03-25        2023-03-31    FALSE   under_followup
+      207         2023-03-20        2023-04-03    FALSE   under_followup
+      208         2023-03-24        2023-04-01     TRUE             case
+      209         2023-03-26        2023-04-03     TRUE             case
+      210         2023-03-29        2023-03-31     TRUE             case
+      211         2023-03-25        2023-03-28    FALSE   under_followup
+      212         2023-04-04        2023-04-10     TRUE             case
+      213         2023-04-02        2023-04-05     TRUE             case
+      214         2023-04-07        2023-04-08    FALSE   under_followup
+      215         2023-04-04        2023-04-11    FALSE   under_followup
+      216         2023-03-31        2023-04-03    FALSE   under_followup
+      217         2023-03-30        2023-04-06    FALSE   under_followup
+      218         2023-03-30        2023-04-07     TRUE             case
+      219         2023-03-30        2023-04-08    FALSE   under_followup
+      220         2023-03-31        2023-04-03     TRUE             case
+      221         2023-03-31        2023-04-04    FALSE lost_to_followup
+      222         2023-04-01        2023-04-07    FALSE   under_followup
+      223         2023-04-02        2023-04-08     TRUE             case
+      224         2023-03-29        2023-04-03    FALSE lost_to_followup
+      225         2023-03-31        2023-04-04     TRUE             case
+      226         2023-03-27        2023-04-06    FALSE   under_followup
+      227         2023-04-04        2023-04-09    FALSE   under_followup
+      228         2023-04-09        2023-04-12     TRUE             case
+      229         2023-04-06        2023-04-11     TRUE             case
+      230         2023-04-09        2023-04-12    FALSE   under_followup
+      231         2023-04-01        2023-04-10     TRUE             case
+      232         2023-04-02        2023-04-06     TRUE             case
+      233         2023-04-03        2023-04-09     TRUE             case
+      234         2023-04-06        2023-04-11     TRUE             case
+      235         2023-04-03        2023-04-11     TRUE             case
+      236         2023-04-05        2023-04-08    FALSE          unknown
+      237         2023-04-09        2023-04-14     TRUE             case
+      238         2023-04-08        2023-04-15    FALSE          unknown
+      239         2023-03-30        2023-04-08     TRUE             case
+      240         2023-03-30        2023-04-05    FALSE lost_to_followup
+      241         2023-04-04        2023-04-14    FALSE   under_followup
+      242         2023-04-02        2023-04-15     TRUE             case
+      243         2023-04-07        2023-04-11    FALSE          unknown
+      244         2023-04-08        2023-04-12     TRUE             case
+      245         2023-04-08        2023-04-12    FALSE   under_followup
+      246         2023-04-04        2023-04-11    FALSE   under_followup
+      247         2023-04-08        2023-04-14    FALSE   under_followup
+      248         2023-04-07        2023-04-14    FALSE lost_to_followup
+      249         2023-04-09        2023-04-17     TRUE             case
+      250         2023-04-09        2023-04-11     TRUE             case
+      251         2023-04-08        2023-04-13     TRUE             case
+      252         2023-04-06        2023-04-14     TRUE             case
+      253         2023-04-11        2023-04-15     TRUE             case
+      254         2023-04-13        2023-04-19     TRUE             case
+      255         2023-04-14        2023-04-16    FALSE lost_to_followup
+      256         2023-04-14        2023-04-16    FALSE   under_followup
+      257         2023-04-11        2023-04-20     TRUE             case
+      258         2023-04-13        2023-04-18    FALSE lost_to_followup
+      259         2023-04-13        2023-04-16    FALSE   under_followup
+      260         2023-04-13        2023-04-21     TRUE             case
+      261         2023-04-10        2023-04-20     TRUE             case
+      262         2023-04-10        2023-04-16    FALSE          unknown
+      263         2023-04-14        2023-04-22     TRUE             case
+      264         2023-04-15        2023-04-26     TRUE             case
+      265         2023-04-15        2023-04-22    FALSE          unknown
+      266         2023-04-19        2023-04-27     TRUE             case
+      267         2023-04-20        2023-04-23     TRUE             case
+      268         2023-04-13        2023-04-19    FALSE lost_to_followup
+      269         2023-04-14        2023-04-21    FALSE   under_followup
+      270         2023-04-13        2023-04-17    FALSE   under_followup
+      271         2023-04-14        2023-04-19    FALSE   under_followup
+      272         2023-04-13        2023-04-16    FALSE lost_to_followup
+      273         2023-04-23        2023-04-26    FALSE   under_followup
+      274         2023-04-24        2023-04-30    FALSE   under_followup
+      275         2023-04-12        2023-04-16    FALSE   under_followup
+      276         2023-04-11        2023-04-14     TRUE             case
+      277         2023-04-23        2023-04-29     TRUE             case
+      278         2023-04-15        2023-04-24     TRUE             case
+      279         2023-04-16        2023-04-24     TRUE             case
+      280         2023-04-14        2023-04-21    FALSE          unknown
+      281         2023-04-16        2023-04-22     TRUE             case
+      282         2023-04-20        2023-04-22    FALSE   under_followup
+      283         2023-04-28        2023-05-01     TRUE             case
+      284         2023-04-23        2023-05-01     TRUE             case
+      285         2023-04-22        2023-04-27    FALSE   under_followup
+      286         2023-04-22        2023-04-27    FALSE   under_followup
+      287         2023-04-23        2023-04-26    FALSE   under_followup
+      288         2023-04-21        2023-04-23    FALSE   under_followup
+      289         2023-04-19        2023-04-23    FALSE   under_followup
+      290         2023-04-19        2023-04-23     TRUE             case
+      291         2023-04-16        2023-04-22     TRUE             case
+      292         2023-04-29        2023-05-09     TRUE             case
+      293         2023-04-30        2023-05-05    FALSE   under_followup
+      294         2023-05-02        2023-05-06    FALSE   under_followup
+      295         2023-05-03        2023-05-07     TRUE             case
+      296         2023-05-01        2023-05-04    FALSE   under_followup
+      297         2023-04-25        2023-05-05     TRUE             case
+      298         2023-04-27        2023-05-03    FALSE lost_to_followup
+      299         2023-04-21        2023-04-28    FALSE          unknown
+      300         2023-04-19        2023-05-02     TRUE             case
+      301         2023-04-18        2023-04-25     TRUE             case
+      302         2023-05-03        2023-05-08    FALSE          unknown
+      303         2023-05-01        2023-05-07     TRUE             case
+      304         2023-05-03        2023-05-11    FALSE          unknown
+      305         2023-04-28        2023-05-05    FALSE lost_to_followup
+      306         2023-04-25        2023-05-06     TRUE             case
+      307         2023-04-30        2023-05-08    FALSE   under_followup
+      308         2023-04-20        2023-04-24    FALSE lost_to_followup
+      309         2023-04-19        2023-04-26     TRUE             case
+      310         2023-04-20        2023-04-27     TRUE             case
+      311         2023-04-22        2023-04-23    FALSE   under_followup
+      312         2023-04-25        2023-04-30     TRUE             case
+      313         2023-05-06        2023-05-10    FALSE lost_to_followup
+      314         2023-05-06        2023-05-10    FALSE lost_to_followup
+      315         2023-05-05        2023-05-10     TRUE             case
+      316         2023-05-08        2023-05-09    FALSE   under_followup
+      317         2023-04-21        2023-04-30    FALSE   under_followup
+      318         2023-04-22        2023-05-01    FALSE   under_followup
+      319         2023-04-22        2023-04-28     TRUE             case
+      320         2023-04-22        2023-04-30    FALSE   under_followup
+      321         2023-04-25        2023-04-29    FALSE   under_followup
+      322         2023-04-21        2023-04-28    FALSE lost_to_followup
+      323         2023-05-08        2023-05-12    FALSE   under_followup
+      324         2023-05-04        2023-05-15    FALSE          unknown
+      325         2023-04-27        2023-05-03     TRUE             case
+      326         2023-05-03        2023-05-10    FALSE   under_followup
       
 
 # sim_outbreak works as expected
@@ -1210,27 +1210,27 @@
       20       Marquaja Johnson               Kevin Waid  20   m         2022-12-29
       21           Corey Alcala            Sean Shrestha  24   m         2022-12-27
          date_last_contact was_case           status
-      1         2023-01-08        Y             case
-      2         2023-01-05        Y             case
-      3         2023-01-03        N   under_followup
-      4         2023-01-04        Y             case
-      5         2023-01-02        Y             case
-      6         2023-01-01        N   under_followup
-      7         2023-01-05        Y             case
-      8         2023-01-02        N lost_to_followup
-      9         2023-01-04        N lost_to_followup
-      10        2023-01-04        Y             case
-      11        2023-01-09        Y             case
-      12        2023-01-04        Y             case
-      13        2023-01-04        N   under_followup
-      14        2023-01-02        N   under_followup
-      15        2023-01-05        N   under_followup
-      16        2023-01-04        N          unknown
-      17        2023-01-04        Y             case
-      18        2023-01-03        N lost_to_followup
-      19        2023-01-03        Y             case
-      20        2023-01-04        N lost_to_followup
-      21        2023-01-05        Y             case
+      1         2023-01-08     TRUE             case
+      2         2023-01-05     TRUE             case
+      3         2023-01-03    FALSE   under_followup
+      4         2023-01-04     TRUE             case
+      5         2023-01-02     TRUE             case
+      6         2023-01-01    FALSE   under_followup
+      7         2023-01-05     TRUE             case
+      8         2023-01-02    FALSE lost_to_followup
+      9         2023-01-04    FALSE lost_to_followup
+      10        2023-01-04     TRUE             case
+      11        2023-01-09     TRUE             case
+      12        2023-01-04     TRUE             case
+      13        2023-01-04    FALSE   under_followup
+      14        2023-01-02    FALSE   under_followup
+      15        2023-01-05    FALSE   under_followup
+      16        2023-01-04    FALSE          unknown
+      17        2023-01-04     TRUE             case
+      18        2023-01-03    FALSE lost_to_followup
+      19        2023-01-03     TRUE             case
+      20        2023-01-04    FALSE lost_to_followup
+      21        2023-01-05     TRUE             case
       
 
 # sim_outbreak works as expected with anonymised
@@ -1270,27 +1270,27 @@
       
       $contacts
                from         to age sex date_first_contact date_last_contact was_case
-      1  OvsRrRMCAJ FEY3qKY39Z  29   f         2022-12-30        2023-01-08        Y
-      2  OvsRrRMCAJ yiuuoY8Kxn  78   m         2022-12-31        2023-01-05        Y
-      3  FEY3qKY39Z g7AzDS6oXf  22   f         2022-12-30        2023-01-03        N
-      4  FEY3qKY39Z Huaqm1SzNb  70   m         2022-12-31        2023-01-04        Y
-      5  yiuuoY8Kxn O5h4yEtT6t  28   f         2022-12-29        2023-01-02        Y
-      6  yiuuoY8Kxn ejRt34oCba  37   f         2022-12-27        2023-01-01        N
-      7  yiuuoY8Kxn 8e6yKFNmyd  61   f         2022-12-28        2023-01-05        Y
-      8  Huaqm1SzNb PL7XeZaLTm  46   m         2022-12-28        2023-01-02        N
-      9  O5h4yEtT6t hWsVUBVWYT  67   f         2022-12-29        2023-01-04        N
-      10 8e6yKFNmyd Lkhw9tYeb1  86   m         2022-12-30        2023-01-04        Y
-      11 8e6yKFNmyd elczXnmE3U  71   m         2022-12-28        2023-01-09        Y
-      12 8e6yKFNmyd 4HDzSVgVAW  51   f         2022-12-29        2023-01-04        Y
-      13 Lkhw9tYeb1 QihvSfYVAR  44   m         2022-12-28        2023-01-04        N
-      14 Lkhw9tYeb1 DjDafq8m2z  49   f         2022-12-30        2023-01-02        N
-      15 Lkhw9tYeb1 bFUJRewLYt  60   f         2022-12-30        2023-01-05        N
-      16 elczXnmE3U BBlIdUTzmc  56   f         2022-12-24        2023-01-04        N
-      17 4HDzSVgVAW To9HLY9VZd  49   m         2022-12-29        2023-01-04        Y
-      18 4HDzSVgVAW zuuT3p6Kxu  50   m         2022-12-30        2023-01-03        N
-      19 4HDzSVgVAW czwJ3WvUcV   7   f         2022-12-31        2023-01-03        Y
-      20 4HDzSVgVAW V4dJ6ZKaUK  20   m         2022-12-29        2023-01-04        N
-      21 To9HLY9VZd vu5Ak6RZkf  24   m         2022-12-27        2023-01-05        Y
+      1  OvsRrRMCAJ FEY3qKY39Z  29   f         2022-12-30        2023-01-08     TRUE
+      2  OvsRrRMCAJ yiuuoY8Kxn  78   m         2022-12-31        2023-01-05     TRUE
+      3  FEY3qKY39Z g7AzDS6oXf  22   f         2022-12-30        2023-01-03    FALSE
+      4  FEY3qKY39Z Huaqm1SzNb  70   m         2022-12-31        2023-01-04     TRUE
+      5  yiuuoY8Kxn O5h4yEtT6t  28   f         2022-12-29        2023-01-02     TRUE
+      6  yiuuoY8Kxn ejRt34oCba  37   f         2022-12-27        2023-01-01    FALSE
+      7  yiuuoY8Kxn 8e6yKFNmyd  61   f         2022-12-28        2023-01-05     TRUE
+      8  Huaqm1SzNb PL7XeZaLTm  46   m         2022-12-28        2023-01-02    FALSE
+      9  O5h4yEtT6t hWsVUBVWYT  67   f         2022-12-29        2023-01-04    FALSE
+      10 8e6yKFNmyd Lkhw9tYeb1  86   m         2022-12-30        2023-01-04     TRUE
+      11 8e6yKFNmyd elczXnmE3U  71   m         2022-12-28        2023-01-09     TRUE
+      12 8e6yKFNmyd 4HDzSVgVAW  51   f         2022-12-29        2023-01-04     TRUE
+      13 Lkhw9tYeb1 QihvSfYVAR  44   m         2022-12-28        2023-01-04    FALSE
+      14 Lkhw9tYeb1 DjDafq8m2z  49   f         2022-12-30        2023-01-02    FALSE
+      15 Lkhw9tYeb1 bFUJRewLYt  60   f         2022-12-30        2023-01-05    FALSE
+      16 elczXnmE3U BBlIdUTzmc  56   f         2022-12-24        2023-01-04    FALSE
+      17 4HDzSVgVAW To9HLY9VZd  49   m         2022-12-29        2023-01-04     TRUE
+      18 4HDzSVgVAW zuuT3p6Kxu  50   m         2022-12-30        2023-01-03    FALSE
+      19 4HDzSVgVAW czwJ3WvUcV   7   f         2022-12-31        2023-01-03     TRUE
+      20 4HDzSVgVAW V4dJ6ZKaUK  20   m         2022-12-29        2023-01-04    FALSE
+      21 To9HLY9VZd vu5Ak6RZkf  24   m         2022-12-27        2023-01-05     TRUE
                    status
       1              case
       2              case
@@ -1388,27 +1388,27 @@
       20  Mikhaila Carlson         Jared Chambers  20   m         2022-12-29
       21    Tae Woo Nguyen         Thomas Morales  24   m         2022-12-27
          date_last_contact was_case           status
-      1         2023-01-08        Y             case
-      2         2023-01-05        Y             case
-      3         2023-01-03        N          unknown
-      4         2023-01-04        Y             case
-      5         2023-01-02        Y             case
-      6         2023-01-01        N lost_to_followup
-      7         2023-01-05        Y             case
-      8         2023-01-02        N lost_to_followup
-      9         2023-01-04        N          unknown
-      10        2023-01-04        Y             case
-      11        2023-01-09        Y             case
-      12        2023-01-04        Y             case
-      13        2023-01-04        N          unknown
-      14        2023-01-02        N   under_followup
-      15        2023-01-05        N   under_followup
-      16        2023-01-04        N   under_followup
-      17        2023-01-04        Y             case
-      18        2023-01-03        N   under_followup
-      19        2023-01-03        Y             case
-      20        2023-01-04        N   under_followup
-      21        2023-01-05        Y             case
+      1         2023-01-08     TRUE             case
+      2         2023-01-05     TRUE             case
+      3         2023-01-03    FALSE          unknown
+      4         2023-01-04     TRUE             case
+      5         2023-01-02     TRUE             case
+      6         2023-01-01    FALSE lost_to_followup
+      7         2023-01-05     TRUE             case
+      8         2023-01-02    FALSE lost_to_followup
+      9         2023-01-04    FALSE          unknown
+      10        2023-01-04     TRUE             case
+      11        2023-01-09     TRUE             case
+      12        2023-01-04     TRUE             case
+      13        2023-01-04    FALSE          unknown
+      14        2023-01-02    FALSE   under_followup
+      15        2023-01-05    FALSE   under_followup
+      16        2023-01-04    FALSE   under_followup
+      17        2023-01-04     TRUE             case
+      18        2023-01-03    FALSE   under_followup
+      19        2023-01-03     TRUE             case
+      20        2023-01-04    FALSE   under_followup
+      21        2023-01-05     TRUE             case
       
 
 # sim_outbreak works as expected with age structure
@@ -1483,26 +1483,26 @@
       20               Megan Hayes          Bassaam el-Majid  25   m
       21           Jackson Carlson           Qaaid al-Madani  48   m
          date_first_contact date_last_contact was_case           status
-      1          2022-12-30        2023-01-08        Y             case
-      2          2022-12-31        2023-01-05        Y             case
-      3          2022-12-30        2023-01-03        N   under_followup
-      4          2022-12-31        2023-01-04        Y             case
-      5          2022-12-29        2023-01-02        Y             case
-      6          2022-12-27        2023-01-01        N   under_followup
-      7          2022-12-28        2023-01-05        Y             case
-      8          2022-12-28        2023-01-02        N   under_followup
-      9          2022-12-29        2023-01-04        N lost_to_followup
-      10         2022-12-30        2023-01-04        Y             case
-      11         2022-12-28        2023-01-09        Y             case
-      12         2022-12-29        2023-01-04        Y             case
-      13         2022-12-28        2023-01-04        N   under_followup
-      14         2022-12-30        2023-01-02        N   under_followup
-      15         2022-12-30        2023-01-05        N   under_followup
-      16         2022-12-24        2023-01-04        N   under_followup
-      17         2022-12-29        2023-01-04        Y             case
-      18         2022-12-30        2023-01-03        N   under_followup
-      19         2022-12-31        2023-01-03        Y             case
-      20         2022-12-29        2023-01-04        N   under_followup
-      21         2022-12-27        2023-01-05        Y             case
+      1          2022-12-30        2023-01-08     TRUE             case
+      2          2022-12-31        2023-01-05     TRUE             case
+      3          2022-12-30        2023-01-03    FALSE   under_followup
+      4          2022-12-31        2023-01-04     TRUE             case
+      5          2022-12-29        2023-01-02     TRUE             case
+      6          2022-12-27        2023-01-01    FALSE   under_followup
+      7          2022-12-28        2023-01-05     TRUE             case
+      8          2022-12-28        2023-01-02    FALSE   under_followup
+      9          2022-12-29        2023-01-04    FALSE lost_to_followup
+      10         2022-12-30        2023-01-04     TRUE             case
+      11         2022-12-28        2023-01-09     TRUE             case
+      12         2022-12-29        2023-01-04     TRUE             case
+      13         2022-12-28        2023-01-04    FALSE   under_followup
+      14         2022-12-30        2023-01-02    FALSE   under_followup
+      15         2022-12-30        2023-01-05    FALSE   under_followup
+      16         2022-12-24        2023-01-04    FALSE   under_followup
+      17         2022-12-29        2023-01-04     TRUE             case
+      18         2022-12-30        2023-01-03    FALSE   under_followup
+      19         2022-12-31        2023-01-03     TRUE             case
+      20         2022-12-29        2023-01-04    FALSE   under_followup
+      21         2022-12-27        2023-01-05     TRUE             case
       
 

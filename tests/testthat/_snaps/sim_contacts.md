@@ -25,26 +25,26 @@
       19          Dominica Abeyta        Arkaan al-Faris  22   m         2023-02-04
       20          Dominica Abeyta          Olivia Carson  70   f         2023-02-03
          date_last_contact was_case           status
-      1         2023-01-04        N   under_followup
-      2         2023-01-06        Y             case
-      3         2023-01-18        Y             case
-      4         2023-01-18        N lost_to_followup
-      5         2023-01-17        N   under_followup
-      6         2023-01-18        Y             case
-      7         2023-01-20        N lost_to_followup
-      8         2023-01-19        Y             case
-      9         2023-01-30        N   under_followup
-      10        2023-01-22        Y             case
-      11        2023-01-22        N   under_followup
-      12        2023-01-31        Y             case
-      13        2023-01-26        N   under_followup
-      14        2023-02-03        Y             case
-      15        2023-02-04        N lost_to_followup
-      16        2023-02-06        Y             case
-      17        2023-02-09        N   under_followup
-      18        2023-02-08        N   under_followup
-      19        2023-02-12        Y             case
-      20        2023-02-09        N lost_to_followup
+      1         2023-01-04    FALSE   under_followup
+      2         2023-01-06     TRUE             case
+      3         2023-01-18     TRUE             case
+      4         2023-01-18    FALSE lost_to_followup
+      5         2023-01-17    FALSE   under_followup
+      6         2023-01-18     TRUE             case
+      7         2023-01-20    FALSE lost_to_followup
+      8         2023-01-19     TRUE             case
+      9         2023-01-30    FALSE   under_followup
+      10        2023-01-22     TRUE             case
+      11        2023-01-22    FALSE   under_followup
+      12        2023-01-31     TRUE             case
+      13        2023-01-26    FALSE   under_followup
+      14        2023-02-03     TRUE             case
+      15        2023-02-04    FALSE lost_to_followup
+      16        2023-02-06     TRUE             case
+      17        2023-02-09    FALSE   under_followup
+      18        2023-02-08    FALSE   under_followup
+      19        2023-02-12     TRUE             case
+      20        2023-02-09    FALSE lost_to_followup
 
 # sim_contacts works as expected
 
@@ -79,31 +79,31 @@
       24    Shan Saldanha           Preston Miles  75   m         2023-01-03
       25  Alexander Brown              Drue White  31   m         2022-12-30
          date_last_contact was_case           status
-      1         2023-01-04        N   under_followup
-      2         2023-01-04        Y             case
-      3         2023-01-10        Y             case
-      4         2023-01-05        N   under_followup
-      5         2023-01-05        N   under_followup
-      6         2023-01-03        N          unknown
-      7         2023-01-06        Y             case
-      8         2023-01-05        Y             case
-      9         2023-01-05        N lost_to_followup
-      10        2023-01-04        Y             case
-      11        2023-01-04        N   under_followup
-      12        2023-01-05        Y             case
-      13        2023-01-05        N   under_followup
-      14        2023-01-03        Y             case
-      15        2023-01-02        Y             case
-      16        2023-01-05        Y             case
-      17        2023-01-09        N   under_followup
-      18        2023-01-06        N   under_followup
-      19        2023-01-06        N          unknown
-      20        2023-01-06        N lost_to_followup
-      21        2023-01-10        Y             case
-      22        2023-01-06        N   under_followup
-      23        2023-01-07        N   under_followup
-      24        2023-01-06        Y             case
-      25        2023-01-05        N   under_followup
+      1         2023-01-04    FALSE   under_followup
+      2         2023-01-04     TRUE             case
+      3         2023-01-10     TRUE             case
+      4         2023-01-05    FALSE   under_followup
+      5         2023-01-05    FALSE   under_followup
+      6         2023-01-03    FALSE          unknown
+      7         2023-01-06     TRUE             case
+      8         2023-01-05     TRUE             case
+      9         2023-01-05    FALSE lost_to_followup
+      10        2023-01-04     TRUE             case
+      11        2023-01-04    FALSE   under_followup
+      12        2023-01-05     TRUE             case
+      13        2023-01-05    FALSE   under_followup
+      14        2023-01-03     TRUE             case
+      15        2023-01-02     TRUE             case
+      16        2023-01-05     TRUE             case
+      17        2023-01-09    FALSE   under_followup
+      18        2023-01-06    FALSE   under_followup
+      19        2023-01-06    FALSE          unknown
+      20        2023-01-06    FALSE lost_to_followup
+      21        2023-01-10     TRUE             case
+      22        2023-01-06    FALSE   under_followup
+      23        2023-01-07    FALSE   under_followup
+      24        2023-01-06     TRUE             case
+      25        2023-01-05    FALSE   under_followup
 
 # sim_contacts works as expected with modified config
 
@@ -139,31 +139,31 @@
       24        Kaitlin Gonzalez           Jennifer Tran  72   f         2022-12-31
       25            Jakob Galvan           Alawi el-Diab  36   m         2022-12-31
          date_last_contact was_case           status
-      1         2023-01-01        N   under_followup
-      2         2023-01-01        Y             case
-      3         2023-01-02        Y             case
-      4         2023-01-03        N lost_to_followup
-      5         2023-01-02        N lost_to_followup
-      6         2023-01-03        N   under_followup
-      7         2023-01-02        Y             case
-      8         2023-01-02        Y             case
-      9         2023-01-03        N   under_followup
-      10        2023-01-02        Y             case
-      11        2023-01-02        N   under_followup
-      12        2023-01-03        Y             case
-      13        2023-01-03        N          unknown
-      14        2023-01-03        Y             case
-      15        2023-01-03        Y             case
-      16        2023-01-02        Y             case
-      17        2023-01-05        N lost_to_followup
-      18        2023-01-04        N lost_to_followup
-      19        2023-01-05        N          unknown
-      20        2023-01-04        N          unknown
-      21        2023-01-03        Y             case
-      22        2023-01-04        N   under_followup
-      23        2023-01-03        N   under_followup
-      24        2023-01-06        Y             case
-      25        2023-01-05        N   under_followup
+      1         2023-01-01    FALSE   under_followup
+      2         2023-01-01     TRUE             case
+      3         2023-01-02     TRUE             case
+      4         2023-01-03    FALSE lost_to_followup
+      5         2023-01-02    FALSE lost_to_followup
+      6         2023-01-03    FALSE   under_followup
+      7         2023-01-02     TRUE             case
+      8         2023-01-02     TRUE             case
+      9         2023-01-03    FALSE   under_followup
+      10        2023-01-02     TRUE             case
+      11        2023-01-02    FALSE   under_followup
+      12        2023-01-03     TRUE             case
+      13        2023-01-03    FALSE          unknown
+      14        2023-01-03     TRUE             case
+      15        2023-01-03     TRUE             case
+      16        2023-01-02     TRUE             case
+      17        2023-01-05    FALSE lost_to_followup
+      18        2023-01-04    FALSE lost_to_followup
+      19        2023-01-05    FALSE          unknown
+      20        2023-01-04    FALSE          unknown
+      21        2023-01-03     TRUE             case
+      22        2023-01-04    FALSE   under_followup
+      23        2023-01-03    FALSE   under_followup
+      24        2023-01-06     TRUE             case
+      25        2023-01-05    FALSE   under_followup
 
 # sim_contacts works as expected with modified config parameters
 
@@ -199,31 +199,31 @@
       24    Shan Saldanha           Preston Miles  75   m         2023-01-03
       25  Alexander Brown              Drue White  31   m         2022-12-30
          date_last_contact was_case           status
-      1         2023-01-06        N   under_followup
-      2         2023-01-07        Y             case
-      3         2023-01-13        Y             case
-      4         2023-01-07        N   under_followup
-      5         2023-01-07        N   under_followup
-      6         2023-01-05        N          unknown
-      7         2023-01-08        Y             case
-      8         2023-01-07        Y             case
-      9         2023-01-07        N lost_to_followup
-      10        2023-01-05        Y             case
-      11        2023-01-05        N   under_followup
-      12        2023-01-07        Y             case
-      13        2023-01-07        N   under_followup
-      14        2023-01-04        Y             case
-      15        2023-01-03        Y             case
-      16        2023-01-08        Y             case
-      17        2023-01-11        N   under_followup
-      18        2023-01-08        N   under_followup
-      19        2023-01-08        N          unknown
-      20        2023-01-08        N lost_to_followup
-      21        2023-01-13        Y             case
-      22        2023-01-08        N   under_followup
-      23        2023-01-09        N   under_followup
-      24        2023-01-08        Y             case
-      25        2023-01-06        N   under_followup
+      1         2023-01-06    FALSE   under_followup
+      2         2023-01-07     TRUE             case
+      3         2023-01-13     TRUE             case
+      4         2023-01-07    FALSE   under_followup
+      5         2023-01-07    FALSE   under_followup
+      6         2023-01-05    FALSE          unknown
+      7         2023-01-08     TRUE             case
+      8         2023-01-07     TRUE             case
+      9         2023-01-07    FALSE lost_to_followup
+      10        2023-01-05     TRUE             case
+      11        2023-01-05    FALSE   under_followup
+      12        2023-01-07     TRUE             case
+      13        2023-01-07    FALSE   under_followup
+      14        2023-01-04     TRUE             case
+      15        2023-01-03     TRUE             case
+      16        2023-01-08     TRUE             case
+      17        2023-01-11    FALSE   under_followup
+      18        2023-01-08    FALSE   under_followup
+      19        2023-01-08    FALSE          unknown
+      20        2023-01-08    FALSE lost_to_followup
+      21        2023-01-13     TRUE             case
+      22        2023-01-08    FALSE   under_followup
+      23        2023-01-09    FALSE   under_followup
+      24        2023-01-08     TRUE             case
+      25        2023-01-06    FALSE   under_followup
 
 # sim_contacts works as expected with age structure
 
@@ -258,29 +258,29 @@
       24     Natasha Vigil James Wilson-Parson  66   m         2023-01-03
       25   Wallace Eriacho     Anthony Johnson  88   m         2022-12-30
          date_last_contact was_case         status
-      1         2023-01-04        N under_followup
-      2         2023-01-04        Y           case
-      3         2023-01-10        Y           case
-      4         2023-01-05        N under_followup
-      5         2023-01-05        N under_followup
-      6         2023-01-03        N under_followup
-      7         2023-01-06        Y           case
-      8         2023-01-05        Y           case
-      9         2023-01-05        N under_followup
-      10        2023-01-04        Y           case
-      11        2023-01-04        N under_followup
-      12        2023-01-05        Y           case
-      13        2023-01-05        N under_followup
-      14        2023-01-03        Y           case
-      15        2023-01-02        Y           case
-      16        2023-01-05        Y           case
-      17        2023-01-09        N        unknown
-      18        2023-01-06        N under_followup
-      19        2023-01-06        N under_followup
-      20        2023-01-06        N        unknown
-      21        2023-01-10        Y           case
-      22        2023-01-06        N under_followup
-      23        2023-01-07        N under_followup
-      24        2023-01-06        Y           case
-      25        2023-01-05        N under_followup
+      1         2023-01-04    FALSE under_followup
+      2         2023-01-04     TRUE           case
+      3         2023-01-10     TRUE           case
+      4         2023-01-05    FALSE under_followup
+      5         2023-01-05    FALSE under_followup
+      6         2023-01-03    FALSE under_followup
+      7         2023-01-06     TRUE           case
+      8         2023-01-05     TRUE           case
+      9         2023-01-05    FALSE under_followup
+      10        2023-01-04     TRUE           case
+      11        2023-01-04    FALSE under_followup
+      12        2023-01-05     TRUE           case
+      13        2023-01-05    FALSE under_followup
+      14        2023-01-03     TRUE           case
+      15        2023-01-02     TRUE           case
+      16        2023-01-05     TRUE           case
+      17        2023-01-09    FALSE        unknown
+      18        2023-01-06    FALSE under_followup
+      19        2023-01-06    FALSE under_followup
+      20        2023-01-06    FALSE        unknown
+      21        2023-01-10     TRUE           case
+      22        2023-01-06    FALSE under_followup
+      23        2023-01-07    FALSE under_followup
+      24        2023-01-06     TRUE           case
+      25        2023-01-05    FALSE under_followup
 
