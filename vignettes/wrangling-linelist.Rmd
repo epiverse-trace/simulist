@@ -194,20 +194,22 @@ not_reported
 Next we subset the contact tracing data by removing infectees if that are not reported. Because the contact tracing data is linked across rows, we also need to set any unreported infectees to `NA` for any secondary infections they cause.
 
 ```{r}
+# make copy of contact tracing data for under-reporting
+contacts_ur <- contacts
 for (person in not_reported) {
-  contacts <- contacts[contacts$to != person, ]
-  contacts[contacts$from %in% person, "from"] <- NA
+  contacts_ur <- contacts_ur[contacts_ur$to != person, ]
+  contacts_ur[contacts_ur$from %in% person, "from"] <- NA
 }
-head(contacts)
+head(contacts_ur)
 ```
 
 We can plot this new contact network with {epicontacts}. We'll need to subset the line list to have the same unreported cases. 
 
 ```{r}
-linelist <- linelist[!linelist$case_name %in% not_reported, ]
+linelist_ur <- linelist[!linelist$case_name %in% not_reported, ]
 epicontacts <- make_epicontacts(
-  linelist = linelist,
-  contacts = contacts,
+  linelist = linelist_ur,
+  contacts = contacts_ur,
   id = "case_name",
   from = "from",
   to = "to",
@@ -229,23 +231,26 @@ not_reported
 Then we can recursively pruned all cases and contacts that are the result from this individual (this can be zero if the person had no secondary cases or contacts).
 
 ```{r}
+# make copy of contact tracing data for under-reporting
+contacts_ur <- contacts
 while (length(not_reported) > 0) {
-  contacts <- contacts[!contacts$to %in% not_reported, ]
-  not_reported_ <- contacts$to[contacts$from %in% not_reported]
-  contacts <- contacts[!contacts$from %in% not_reported, ]
+  contacts_ur <- contacts_ur[!contacts_ur$to %in% not_reported, ]
+  not_reported_ <- contacts_ur$to[contacts_ur$from %in% not_reported]
+  contacts_ur <- contacts_ur[!contacts_ur$from %in% not_reported, ]
   not_reported <- not_reported_
 }
+head(contacts_ur)
 ```
 
 Just as above we can plot the new contact network using {epicontacts}.
 
 ```{r}
 # subset line list to match under-reporting in contact tracing data
-linelist <- linelist[linelist$case_name %in% unique(contacts$from), ]
+linelist_ur <- linelist[linelist$case_name %in% unique(contacts$from), ]
 
 epicontacts <- make_epicontacts(
-  linelist = linelist,
-  contacts = contacts,
+  linelist = linelist_ur,
+  contacts = contacts_ur,
   id = "case_name",
   from = "from",
   to = "to",
