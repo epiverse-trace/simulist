@@ -326,7 +326,7 @@ By default the outbreak simulated by `sim_outbreak()` contains contacts of cases
 #### Base R
 
 ```{r, subset-linelist-base-r}
-outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case == "Y", ]
+outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case, ]
 ```
 
 #### Tidyverse
@@ -334,7 +334,7 @@ outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case == "Y", ]
 ```{r, subset-linelist-tidyverse}
 library(dplyr)
 outbreak$contacts <- outbreak$contacts %>% # nolint one_call_pipe_linter
-  dplyr::filter(was_case == "Y")
+  dplyr::filter(was_case)
 ```
 
 ## {-}
