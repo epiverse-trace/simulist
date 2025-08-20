@@ -121,6 +121,19 @@ references:
   doi: 10.32614/CRAN.package.epiparameter
   version: '>= 0.4.0'
 - type: software
+  title: grates
+  abstract: 'grates: Grouped Date Classes'
+  notes: Imports
+  url: https://www.reconverse.org/grates/
+  repository: https://CRAN.R-project.org/package=grates
+  authors:
+  - family-names: Taylor
+    given-names: Tim
+    email: tim.taylor@hiddenelephants.co.uk
+    orcid: https://orcid.org/0000-0002-8587-7113
+  year: '2025'
+  doi: 10.32614/CRAN.package.grates
+- type: software
   title: randomNames
   abstract: 'randomNames: Generate Random Given and Surnames'
   notes: Imports
