@@ -22,7 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Carmen Tamayo \email{carmen.tamayo-cuartero@lshtm.ac.uk} (\href{https://orcid.org/0000-0003-4184-2864}{ORCID})
+  \item Carmen Tamayo Cuartero \email{carmen.tamayo-cuartero@lshtm.ac.uk} (\href{https://orcid.org/0000-0003-4184-2864}{ORCID})
 }
 
 Other contributors:
