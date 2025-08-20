@@ -219,6 +219,103 @@ to simulate the same line list multiple times.</p>
 <span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">outbreak</span><span class="op">$</span><span class="va">linelist</span></span>
 <span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="censoring-dates">Censoring dates<a class="anchor" aria-label="anchor" href="#censoring-dates"></a>
+</h2>
+<p>The date event columns in simulated line lists are stored to double
+point precision, meaning they are the exact event times. It is unusual
+to not store <code>&lt;Date&gt;</code> objects as integers, as explained
+in <code><a href="https://rdrr.io/r/base/Dates.html" class="external-link">?Dates</a></code>, and the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> function for
+<code>&lt;Date&gt;</code>s does not show that they may be part way
+through a day.</p>
+<p>Here we show this by printing the date of symptom onset for the
+simulated data, and then unclass it to show how it is stored
+internally.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span><span class="op">$</span><span class="va">date_onset</span></span>
+<span><span class="co">#&gt;  [1] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-02"</span></span>
+<span><span class="co">#&gt;  [6] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01"</span></span>
+<span><span class="co">#&gt; [11] "2023-01-02" "2023-01-02" "2023-01-02"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">date_onset</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] 19358.00 19358.24 19358.04 19358.38 19359.16 19358.85 19358.14 19358.70</span></span>
+<span><span class="co">#&gt;  [9] 19358.41 19358.97 19359.40 19359.47 19359.51</span></span></code></pre></div>
+<p>The <code><a href="../reference/censor_linelist.html">censor_linelist()</a></code> function can be used after
+<code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> to censor the event dates to a given
+precision. Here we show censoring the dates to daily and weekly
+intervals. The daily censoring dates will look that same as before, but
+the dates will have any value after the decimal point set to zero. The
+weekly censored dates will be printed differently.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">daily_cens_linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/censor_linelist.html">censor_linelist</a></span><span class="op">(</span><span class="va">linelist</span>, interval <span class="op">=</span> <span class="st">"daily"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">daily_cens_linelist</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   id             case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1         Fabian Mrazik confirmed   m  90 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  3       Ashley Martinez confirmed   f  71 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 3  4                Tia Vu  probable   f  48 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 4  5 Abdul Majeed el-Saleh confirmed   m  77 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 5  6        Courtney Flood suspected   f  83 2023-01-02     2023-01-02</span></span>
+<span><span class="co">#&gt; 6  7          Joseph Jiron suspected   m  56 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2     2023-01-08      died   2023-01-10         2022-12-26        2023-01-06</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-05</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-08</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-26        2023-01-04</span></span>
+<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-03</span></span>
+<span><span class="co">#&gt;   ct_value</span></span>
+<span><span class="co">#&gt; 1     21.9</span></span>
+<span><span class="co">#&gt; 2     22.7</span></span>
+<span><span class="co">#&gt; 3       NA</span></span>
+<span><span class="co">#&gt; 4     27.4</span></span>
+<span><span class="co">#&gt; 5       NA</span></span>
+<span><span class="co">#&gt; 6       NA</span></span>
+<span></span>
+<span><span class="va">weekly_cens_linelist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/censor_linelist.html">censor_linelist</a></span><span class="op">(</span><span class="va">linelist</span>, interval <span class="op">=</span> <span class="st">"weekly"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">weekly_cens_linelist</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   id             case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1         Fabian Mrazik confirmed   m  90   2022-W52       2022-W52</span></span>
+<span><span class="co">#&gt; 2  3       Ashley Martinez confirmed   f  71   2022-W52       2022-W52</span></span>
+<span><span class="co">#&gt; 3  4                Tia Vu  probable   f  48   2022-W52       2022-W52</span></span>
+<span><span class="co">#&gt; 4  5 Abdul Majeed el-Saleh confirmed   m  77   2022-W52       2022-W52</span></span>
+<span><span class="co">#&gt; 5  6        Courtney Flood suspected   f  83   2023-W01       2023-W01</span></span>
+<span><span class="co">#&gt; 6  7          Joseph Jiron suspected   m  56   2022-W52       2022-W52</span></span>
+<span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2       2023-W01      died     2023-W02           2022-W52          2023-W01</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;           2022-W52          2023-W01</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;           2022-W52          2023-W01</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;           2022-W52          2023-W01</span></span>
+<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;           2022-W52          2023-W01</span></span>
+<span><span class="co">#&gt;   ct_value</span></span>
+<span><span class="co">#&gt; 1     21.9</span></span>
+<span><span class="co">#&gt; 2     22.7</span></span>
+<span><span class="co">#&gt; 3       NA</span></span>
+<span><span class="co">#&gt; 4     27.4</span></span>
+<span><span class="co">#&gt; 5       NA</span></span>
+<span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
+<p>See <code>?censor_linelist()</code> for more information on how to
+use this function.</p>
+<p>By using <code><a href="../reference/censor_linelist.html">censor_linelist()</a></code> it avoids common mistakes
+when working with <code>&lt;Date&gt;</code> objects. For example,
+rounding a date that is over half way through a day will mistakenly
+result in the next day. Using <code><a href="../reference/censor_linelist.html">censor_linelist()</a></code> avoids this
+and other common mistakes.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linelist</span><span class="op">$</span><span class="va">date_onset</span></span>
+<span><span class="co">#&gt;  [1] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-02"</span></span>
+<span><span class="co">#&gt;  [6] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01"</span></span>
+<span><span class="co">#&gt; [11] "2023-01-02" "2023-01-02" "2023-01-02"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">$</span><span class="va">date_onset</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-02"</span></span>
+<span><span class="co">#&gt;  [6] "2023-01-02" "2023-01-01" "2023-01-02" "2023-01-01" "2023-01-02"</span></span>
+<span><span class="co">#&gt; [11] "2023-01-02" "2023-01-02" "2023-01-03"</span></span>
+<span><span class="va">daily_cens_linelist</span><span class="op">$</span><span class="va">date_onset</span></span>
+<span><span class="co">#&gt;  [1] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-02"</span></span>
+<span><span class="co">#&gt;  [6] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01"</span></span>
+<span><span class="co">#&gt; [11] "2023-01-02" "2023-01-02" "2023-01-02"</span></span></code></pre></div>
+<p>The censored line list dates can be used with methods that account
+for censoring when fitting delay distributions such as <a href="https://primarycensored.epinowcast.org/" class="external-link">{primarycensored}</a>.</p>
+</div>
 <div class="section level2 tabset">
 <h2 class="tabset" id="removing-a-line-list-column">Removing a line list column<a class="anchor" aria-label="anchor" href="#removing-a-line-list-column"></a>
 </h2>
@@ -237,7 +334,7 @@ not be known for confirmed cases.</p>
 <div class="tab-content">
 <div class="active  tab-pane" id="tidyverse" role="tabpanel" aria-labelledby="tidyverse-tab">
 
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove column by name</span></span>
 <span><span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># nolint one_call_pipe_linter</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">ct_value</span><span class="op">)</span></span>
@@ -272,7 +369,7 @@ not be known for confirmed cases.</p>
 </div>
 <div class="tab-pane" id="base-r" role="tabpanel" aria-labelledby="base-r-tab">
 
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove column by numeric column indexing</span></span>
 <span><span class="co"># ct_value is column 12 (the last column)</span></span>
 <span><span class="va">linelist</span><span class="op">[</span>, <span class="op">-</span><span class="fl">12</span><span class="op">]</span></span>
