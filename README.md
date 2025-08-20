@@ -378,8 +378,8 @@ By contributing to this project, you agree to abide by its terms.
 citation("simulist")
 #> To cite package 'simulist' in publications use:
 #> 
-#>   Lambert J, Tamayo C (2025). _simulist: Simulate Disease Outbreak Line
-#>   List and Contacts Data_. doi:10.5281/zenodo.10471458
+#>   Lambert J, Tamayo Cuartero C (2025). _simulist: Simulate Disease
+#>   Outbreak Line List and Contacts Data_. doi:10.5281/zenodo.10471458
 #>   <https://doi.org/10.5281/zenodo.10471458>,
 #>   <https://epiverse-trace.github.io/simulist/>.
 #> 
@@ -387,7 +387,7 @@ citation("simulist")
 #> 
 #>   @Manual{,
 #>     title = {simulist: Simulate Disease Outbreak Line List and Contacts Data},
-#>     author = {Joshua W. Lambert and Carmen Tamayo},
+#>     author = {Joshua W. Lambert and Carmen {Tamayo Cuartero}},
 #>     year = {2025},
 #>     doi = {10.5281/zenodo.10471458},
 #>     url = {https://epiverse-trace.github.io/simulist/},
@@ -472,7 +472,7 @@ a [pull request](https://github.com/epiverse-trace/simulist/pulls).
 
 Other R packages for simulating epidemic dynamics can be found in the
 *Epidemic simulation models* section of the [Epidemiology CRAN task
-view](https://cran.r-project.org/web/views/Epidemiology.html).
+view](https://CRAN.R-project.org/view=Epidemiology).
 
 Some packages are related to {simulist} but do not simulate line list
 data. These include:
