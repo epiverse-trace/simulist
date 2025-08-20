@@ -106,8 +106,8 @@ of the contact.}
 case and contacts.}
 \item{\code{date_last_contact}}{\verb{<Date>} column for the last contact between
 case and contacts.}
-\item{\code{was_case}}{\code{character} column with either \code{"Y"} or \code{"N"} for if
-the contact becomes a case.}
+\item{\code{was_case}}{\code{logical} boolean column with either \code{TRUE} or \code{FALSE}
+for if the contact becomes a case.}
 \item{\code{status}}{\code{character} column with the status of each contact. By
 default it is either \code{"case"}, \code{"under_followup"} \code{"lost_to_followup"}, or
 \code{"unknown"}.}
