@@ -12,6 +12,7 @@ config
 CoV
 COVID
 Ct
+Cuartero
 Deon
 df
 DHIS
@@ -89,6 +90,7 @@ st
 stochasticity
 svg
 tabset
+Tamayo
 testthat
 th
 threejs
