@@ -257,7 +257,7 @@ In some cases the packages are dedicated to simulating line list and other epide
 
 If there is another package with this functionality missing from the list that should be added, or if a package included in this list has been updated and the table should reflect this please contribute by making an [issue](https://github.com/epiverse-trace/simulist/issues) or a [pull request](https://github.com/epiverse-trace/simulist/pulls). 
 
-Other R packages for simulating epidemic dynamics can be found in the _Epidemic simulation models_ section of the [Epidemiology CRAN task view](https://cran.r-project.org/web/views/Epidemiology.html).
+Other R packages for simulating epidemic dynamics can be found in the _Epidemic simulation models_ section of the [Epidemiology CRAN task view](https://CRAN.R-project.org/view=Epidemiology).
 
 Some packages are related to {simulist} but do not simulate line list data. These include:
 
