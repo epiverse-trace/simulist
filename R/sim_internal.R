@@ -156,22 +156,18 @@
       "from", "to", "age", "sex", "date_first_contact",
       "date_last_contact"
     )
-    contacts_tbl$was_case <- ifelse(
-      test = .data$infected == "infected",
-      yes = "Y",
-      no = "N"
-    )
+    contacts_tbl$was_case <- .data$infected == "infected"
 
     # add contact tracing status
-    pick_N <- which(contacts_tbl$was_case == "N")
+    non_infect_contact_lgl_idx <- !contacts_tbl$was_case
     status_type <- sample(
       names(contact_tracing_status_probs),
-      size = length(pick_N),
+      size = sum(non_infect_contact_lgl_idx),
       replace = TRUE,
       prob = contact_tracing_status_probs
     )
     contacts_tbl$status <- "case"
-    contacts_tbl$status[pick_N] <- status_type
+    contacts_tbl$status[non_infect_contact_lgl_idx] <- status_type
 
     contacts_tbl <- contacts_tbl[-1, ]
 

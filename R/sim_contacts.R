@@ -20,8 +20,8 @@
 #'   case and contacts.}
 #'   \item{`date_last_contact`}{`<Date>` column for the last contact between
 #'   case and contacts.}
-#'   \item{`was_case`}{`character` column with either `"Y"` or `"N"` for if
-#'   the contact becomes a case.}
+#'   \item{`was_case`}{`logical` boolean column with either `TRUE` or `FALSE`
+#'   for if the contact becomes a case.}
 #'   \item{`status`}{`character` column with the status of each contact. By
 #'   default it is either `"case"`, `"under_followup"` `"lost_to_followup"`, or
 #'   `"unknown"`.}
