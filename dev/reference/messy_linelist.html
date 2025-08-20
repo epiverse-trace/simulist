@@ -94,8 +94,9 @@ otherwise the function errors.</p>
 missing values introduced. Default is <code>0.1</code> (10%).</p></dd>
 
 <dt><code>missing_value</code></dt>
-<dd><p>A single atomic <span style="R">R</span> object used to represent missing
-values. Default is <code>NA</code>.</p></dd>
+<dd><p>A vector with the missing value(s). If multiple
+values are supplied a missing value is randomly sampled for each cell
+in the line list. Default is <code>NA</code>.</p></dd>
 
 <dt><code>prop_spelling_mistakes</code></dt>
 <dd><p>A <code>numeric</code> between 0 and 1 used to
