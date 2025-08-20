@@ -293,12 +293,12 @@ head(contacts)
 #> 5    Rodrigo Deluca Abdul Rauf al-Mirza   4   m         2022-12-28
 #> 6 Jeremiah Sitinjak    Habsa Huntington   9   f         2022-12-29
 #>   date_last_contact was_case         status
-#> 1        2023-01-04        Y           case
-#> 2        2023-01-02        Y           case
-#> 3        2023-01-02        N under_followup
-#> 4        2023-01-02        Y           case
-#> 5        2023-01-02        Y           case
-#> 6        2023-01-03        N under_followup
+#> 1        2023-01-04     TRUE           case
+#> 2        2023-01-02     TRUE           case
+#> 3        2023-01-02    FALSE under_followup
+#> 4        2023-01-02     TRUE           case
+#> 5        2023-01-02     TRUE           case
+#> 6        2023-01-03    FALSE under_followup
 ```
 
 If both the line list and contacts table are required, they can be
@@ -346,12 +346,12 @@ head(outbreak$contacts)
 #> 5 Augustine Gonzales         Luke Flood   4   m         2023-01-02
 #> 6 Augustine Gonzales          Suki Lang  15   f         2022-12-29
 #>   date_last_contact was_case         status
-#> 1        2023-01-05        Y           case
-#> 2        2023-01-03        N under_followup
-#> 3        2023-01-05        Y           case
-#> 4        2023-01-06        N under_followup
-#> 5        2023-01-05        Y           case
-#> 6        2023-01-03        N under_followup
+#> 1        2023-01-05     TRUE           case
+#> 2        2023-01-03    FALSE under_followup
+#> 3        2023-01-05     TRUE           case
+#> 4        2023-01-06    FALSE under_followup
+#> 5        2023-01-05     TRUE           case
+#> 6        2023-01-03    FALSE under_followup
 ```
 
 ## Help
