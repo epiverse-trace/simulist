@@ -1,5 +1,43 @@
 # simulist (development version)
 
+In this minor version release we have continued to make a range of improvements across the package. A new line list post-processing function, `censor_linelist()`, makes it easy to group dates into various intervals, the `messy_linelist()` introduced in v0.5.0 is enhanced, and the package documentation is expanded to cover under-reporting in outbreak data and censoring dates. There are also a couple of minor bug fixes.
+
+The development status of the package is updated to _stable_ from _experimental_ to reflect the long term stability and low probability of major changes.   
+
+## New features
+
+* A new `censor_linelist()` function is added to the package. This is a new post-processing function for line list data to censor `<Date>` to daily, weekly and other user-defined time periods. The `censor_linelist()` also has a weekend-effect option to replicate the low reporting over weekends. This new feature also adds the {grates} package as a dependency (#240).
+
+* `messy_linelist()` can now accept a vector with multiple `missing_value`s to allow different values to represent missing data (#241).
+
+* A demonstration of how to replicate under-reporting of line list and contact tracing data is added to the `wrangling-linelist.Rmd` vignette. The demo contains examples for multiple types of under-reporting data found in real-world outbreaks (#244).
+
+## Breaking changes
+
+* The `$was_case` column in contact tracing data simulated by `sim_contacts()` now contains `logical` boolean values instead of `"Y"` and `"N"` `character` strings (#243).
+
+* The minimum R version required by the package is incremented to v4.2.0 due to a recursive dependency on {fastymd} (#235).
+
+## Minor changes
+
+* Documentation on censoring dates is added to `wrangling-linelist.Rmd` (#240). 
+
+* Documentation on interoperability between {simulist} and {incidence2} for double precision `<Date>`s and warning for not specifying `interval` in `incidence2::incidence()` is added to `vis-linelist.Rmd` (#232).
+
+* The lifecycle of the package has been updated from _experimental_ to _stable_ (#229).
+
+* `@return` function documentation for exported functions is improved (#235).
+
+## Bug fixes
+
+* `truncate_linelist()` sets `$outcome` to `NA` if they are more recent than truncation time. This matches the way `$date_outcome` was handled in `truncate_linelist()` in v0.5.0 (#228).
+
+* Alt-text in vignettes is fixed to render correctly on pkgdown website (#230).
+
+## Deprecated and defunct
+
+* None
+
 # simulist 0.5.0
 
 This minor version release expands the scope of _simulist_ to include two new post-processing functions: `truncate_linelist()` and `messy_linelist()`. Both of these functions modify a line list `<data.frame>` from `sim_linelist()` or `sim_outbreak()`, the line list now also includes a `$date_reporting` column.
