@@ -7,7 +7,7 @@
    viewBox="0 0 1000 800"
    version="1.1"
    id="svg5"
-   sodipodi:docname="simulist_architecture_v5.svg"
+   sodipodi:docname="simulist_archi.svg"
    inkscape:version="1.2.1 (9c6d41e, 2022-07-14)"
    inkscape:export-filename="simulist_architecture_v5.png"
    inkscape:export-xdpi="300"
@@ -28,13 +28,13 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.22302415"
-     inkscape:cx="2069.2826"
-     inkscape:cy="1430.3384"
-     inkscape:window-width="1512"
-     inkscape:window-height="832"
+     inkscape:cx="1777.8344"
+     inkscape:cy="941.60206"
+     inkscape:window-width="1496"
+     inkscape:window-height="786"
      inkscape:window-x="0"
      inkscape:window-y="38"
-     inkscape:window-maximized="1"
+     inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      showguides="false" />
   <defs
@@ -2956,7 +2956,8 @@
     <g
        aria-label="truncate_linelist()"
        id="text502-2-1-5-9"
-       style="font-size:8.46667px;font-family:'.SF NS Mono';-inkscape-font-specification:'.SF NS Mono, @wght=295';font-variation-settings:'wght' 295;stroke:#000000;stroke-width:0.264583">
+       style="font-size:8.46667px;font-family:'.SF NS Mono';-inkscape-font-specification:'.SF NS Mono, @wght=295';font-variation-settings:'wght' 295;stroke:#000000;stroke-width:0.264583"
+       transform="translate(-5.5926585)">
       <path
          d="m 706.92385,63.67822 v 1.157552 h -1.1989 v 0.458887 h 1.1989 v 2.707846 q 0,0.438217 0.17776,0.731739 0.17777,0.289388 0.5333,0.434082 0.35554,0.144694 0.88884,0.144694 0.1943,0 0.45062,-0.01654 0.25631,-0.01654 0.35553,-0.03307 v -0.46302 q -0.10749,0.01654 -0.32659,0.02481 -0.21911,0.0083 -0.45062,0.0083 -0.52917,0 -0.81029,-0.214974 -0.27699,-0.219108 -0.27699,-0.63252 v -2.69131 h 1.86449 v -0.458887 h -1.86449 V 63.67822 Z"
          id="path5137" />
@@ -3018,7 +3019,8 @@
     <g
        aria-label="messy_linelist()"
        id="text502-2-1-5-9-3"
-       style="font-size:8.46667px;font-family:'.SF NS Mono';-inkscape-font-specification:'.SF NS Mono, @wght=295';font-variation-settings:'wght' 295;stroke:#000000;stroke-width:0.264583">
+       style="font-size:8.46667px;font-family:'.SF NS Mono';-inkscape-font-specification:'.SF NS Mono, @wght=295';font-variation-settings:'wght' 295;stroke:#000000;stroke-width:0.264583"
+       transform="translate(-20.807069)">
       <path
          d="m 835.1562,66.092544 q 0,-0.661459 -0.24804,-0.996322 -0.24392,-0.334864 -0.73174,-0.334864 -0.34313,0 -0.60358,0.181901 -0.26045,0.181902 -0.3514,0.487826 h -0.0579 q -0.0703,-0.318327 -0.28939,-0.49196 -0.21497,-0.177767 -0.5333,-0.177767 -0.30592,0 -0.53744,0.181901 -0.22737,0.177767 -0.31419,0.487826 h -0.0579 v -0.595313 h -0.49196 v 4.452444 h 0.5085 v -2.980698 q 0,-0.49196 0.19017,-0.77308 0.1943,-0.285254 0.52917,-0.285254 0.31832,0 0.47542,0.243913 0.16123,0.239779 0.16123,0.719336 v 3.075783 h 0.5085 v -2.980698 q 0,-0.496094 0.18603,-0.777214 0.19017,-0.28112 0.51677,-0.28112 0.31419,0 0.47129,0.243913 0.16123,0.243913 0.16123,0.72347 v 3.071649 h 0.50849 z"
          id="path5104" />
@@ -3274,8 +3276,8 @@
        d="M 306,54.223392 H 476.52864 V 78.584627 H 306 Z" />
     <path
        id="rect22576-8"
-       style="fill:none;stroke:#106ba0;stroke-width:2.58875"
-       d="M 697.01007,50.294373 H 925.36806 V 90.705627 H 697.01007 Z" />
+       style="fill:none;stroke:#106ba0;stroke-width:2.9634"
+       d="m 691.4817,50.481695 h 302.03661 v 40.03661 H 691.4817 Z" />
     <path
        id="rect22582"
        style="fill:none;stroke:#3cbed2;stroke-width:2"
@@ -3656,7 +3658,29 @@
        d="m 317.93616,391.2211 h 150.98945 v 26.23016 H 317.93616 Z" />
     <path
        id="rect22574-7-6"
-       style="fill:none;stroke:#106ba0;stroke-width:2"
-       d="m 821.52362,56.741837 h 94.94653 v 24.132215 h -94.94653 z" />
+       style="fill:none;stroke:#106ba0;stroke-width:1.92905"
+       d="m 805.96452,56.706364 h 88.07094 v 24.203161 h -88.07094 z" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.87778px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:none;stroke:#000000;stroke-width:0.183"
+       x="134.10289"
+       y="140.84242"
+       id="text2495"><tspan
+         sodipodi:role="line"
+         id="tspan2493"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.87778px;font-family:'.SF NS Mono';-inkscape-font-specification:'.SF NS Mono';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.183"
+         x="134.10289"
+         y="140.84242">censor_linelist()</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.183"
+       x="900.37488"
+       y="68.722076"
+       id="text2495-3"><tspan
+         sodipodi:role="line"
+         id="tspan2493-8"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'.SF NS Mono';-inkscape-font-specification:'.SF NS Mono';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.183"
+         x="900.37488"
+         y="68.722076">censor_linelist()</tspan></text>
   </g>
 </svg>
