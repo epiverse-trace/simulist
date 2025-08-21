@@ -32,7 +32,7 @@ each interval type.}
 during censoring, however if \code{reporting_artefact = "weekend_effect"} then
 all the dates in the \verb{$date_reporting} column that fall on a weekend are
 shifted to the following Monday. This artefact is commonly referred to as the
-\href{https://doi.org/10.1186/s13104-025-07145-y}{"weekend effect"}.}
+"weekend effect" (see \doi{10.1186/s13104-025-07145-y}).}
 
 \item{offset}{An \code{integer} or \verb{<Date>} for the value to start counting the
 period from (0 is the start of the Unix epoch). Only applicable if
