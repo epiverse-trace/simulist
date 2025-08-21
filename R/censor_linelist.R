@@ -48,7 +48,7 @@
 #' during censoring, however if `reporting_artefact = "weekend_effect"` then
 #' all the dates in the `$date_reporting` column that fall on a weekend are
 #' shifted to the following Monday. This artefact is commonly referred to as the
-#' ["weekend effect"](https://doi.org/10.1186/s13104-025-07145-y).
+#' "weekend effect" (see \doi{10.1186/s13104-025-07145-y}).
 #' @param offset An `integer` or `<Date>` for the value to start counting the
 #' period from (0 is the start of the Unix epoch). Only applicable if
 #' `interval` is specified as an `integer`.
