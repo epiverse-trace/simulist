@@ -1,7 +1,7 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* winbuilder flags 1 NOTE: Author field differs from that derived from Authors@R. I only have an `Authors@R` field, not an `Author` or `Maintainer` field, and per the R-pkg-devel mailing list (message from 2018) it can be ignored.
+* Running R CMD check (with _R_CHECK_INCOMING_REMOTE_) flags 403 warnings for LSHTM URLs but these are valid URLs and are not flagged on winbuilder.
 
 * There are no papers describing the methods used in this package.
