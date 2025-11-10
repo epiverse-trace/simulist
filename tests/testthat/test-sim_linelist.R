@@ -468,3 +468,32 @@ test_that("sim_linelist fails as expected with time-varying cfr", {
     regexp = "(Time-varying)*(risk outside)*(0)*(1)*(Check time-varying func)",
   )
 })
+
+test_that("sim_linelist fails as expected with invalid probability for sex", {
+  expect_error(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = create_config(
+        prob_male = -1
+      )
+    ),
+    regexp = "`prob_male` in `config` must be >= 0 and <=1"
+  )
+  expect_error(
+    sim_linelist(
+      contact_distribution = contact_distribution,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
+      onset_to_hosp = onset_to_hosp,
+      onset_to_death = onset_to_death,
+      config = create_config(
+        prob_male = 1.1
+      )
+    ),
+    regexp = "`prob_male` in `config` must be >= 0 and <=1"
+  )
+})
