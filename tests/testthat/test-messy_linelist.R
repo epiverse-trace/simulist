@@ -32,7 +32,7 @@ test_that("messy_linelist works with different missing_value", {
 
 test_that("messy_linelist works with higher proportion of spelling mistakes", {
   # set seed to ensure spelling mistakes are introduced
-  set.seed(3)
+  set.seed(1)
   messy_ll <- messy_linelist(
     ll,
     prop_spelling_mistakes = 1,
