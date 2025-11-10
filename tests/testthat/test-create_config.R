@@ -1,12 +1,12 @@
 test_that("create_config works as expected with defaults", {
   config <- create_config()
   expect_type(config, type = "list")
-  expect_length(config, 5)
+  expect_length(config, 6)
   expect_named(
     config,
     c(
       "last_contact_distribution", "first_contact_distribution",
-      "ct_distribution", "network", "time_varying_death_risk"
+      "ct_distribution", "network", "time_varying_death_risk", "prob_male"
     )
   )
 })
@@ -16,12 +16,12 @@ test_that("create_config works as expected modifying element", {
     last_contact_distribution = function(n) rgeom(n = n, prob = 0.5)
   )
   expect_type(config, type = "list")
-  expect_length(config, 5)
+  expect_length(config, 6)
   expect_named(
     config,
     c(
       "last_contact_distribution", "first_contact_distribution",
-      "ct_distribution", "network", "time_varying_death_risk"
+      "ct_distribution", "network", "time_varying_death_risk", "prob_male"
     )
   )
   expect_identical(
@@ -38,12 +38,12 @@ test_that("create_config works as expected with spliced list", {
     )
   )
   expect_type(config, type = "list")
-  expect_length(config, 5)
+  expect_length(config, 6)
   expect_named(
     config,
     c(
       "last_contact_distribution", "first_contact_distribution",
-      "ct_distribution", "network", "time_varying_death_risk"
+      "ct_distribution", "network", "time_varying_death_risk", "prob_male"
     )
   )
   expect_identical(
@@ -62,12 +62,12 @@ test_that("create_config works as expected with spliced list", {
     )
   )
   expect_type(config, type = "list")
-  expect_length(config, 5)
+  expect_length(config, 6)
   expect_named(
     config,
     c(
       "last_contact_distribution", "first_contact_distribution",
-      "ct_distribution", "network", "time_varying_death_risk"
+      "ct_distribution", "network", "time_varying_death_risk", "prob_male"
     )
   )
   expect_identical(
