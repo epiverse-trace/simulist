@@ -30,6 +30,10 @@ a \code{function} with two arguments, \code{risk} and \code{time}, to apply a
 time varying death risk of hospitalised and non-hospitalised cases in
 the outbreak simulation. See
 \code{vignette("time-varying-cfr", package = "simulist")}.}
+\item{\code{prob_male}}{By default is 0.5, so there is a equal probability of
+each case or contact being male or female. The value must be non-negative
+and less than or equal to 1. Smaller values will result in a higher
+probability of female contacts and cases (1 - \code{prob_male}).}
 }}
 }
 \value{
@@ -44,7 +48,8 @@ around time windows around infections (time of first contact and last
 contact with infector), and the distribution of the Cycle threshold (Ct)
 value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 cases, the network effect in the simulation, and if there is a time-varying
-death risk.
+death risk, as well as the probability of a case or contact being
+male/female.
 
 These parameters do not warrant their own arguments in
 \code{\link[=sim_linelist]{sim_linelist()}} as they rarely need to be changed from their default

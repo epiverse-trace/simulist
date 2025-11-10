@@ -5,7 +5,8 @@
 #' contact with infector), and the distribution of the Cycle threshold (Ct)
 #' value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 #' cases, the network effect in the simulation, and if there is a time-varying
-#' death risk.
+#' death risk, as well as the probability of a case or contact being
+#' male/female.
 #'
 #' These parameters do not warrant their own arguments in
 #' [sim_linelist()] as they rarely need to be changed from their default
@@ -49,6 +50,10 @@
 #'   time varying death risk of hospitalised and non-hospitalised cases in
 #'   the outbreak simulation. See
 #'   `vignette("time-varying-cfr", package = "simulist")`.}
+#'   \item{`prob_male`}{By default is 0.5, so there is a equal probability of
+#'   each case or contact being male or female. The value must be non-negative
+#'   and less than or equal to 1. Smaller values will result in a higher
+#'   probability of female contacts and cases (1 - `prob_male`).}
 #' }
 #'
 #' @return A list of settings for [sim_linelist()].
@@ -68,7 +73,8 @@ create_config <- function(...) {
     first_contact_distribution = function(n) stats::rpois(n = n, lambda = 3),
     ct_distribution = function(n) stats::rnorm(n = n, mean = 25, sd = 2),
     network = "adjusted",
-    time_varying_death_risk = NULL
+    time_varying_death_risk = NULL,
+    prob_male = 0.5
   )
 
   # capture dynamic dots
