@@ -19,7 +19,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10471459.svg)](https://doi.org/10.5281/zenodo.10471459)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10471458.svg)](https://doi.org/10.5281/zenodo.10471458)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/simulist)](https://CRAN.R-project.org/package=simulist)
 [![CRAN
