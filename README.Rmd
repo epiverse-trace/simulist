@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/{{ gh_repo }}/branch/main/graph/badge.svg)](https://app.codecov.io/gh/{{ gh_repo }}?branch=main)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10471459.svg)](https://doi.org/10.5281/zenodo.10471459)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10471458.svg)](https://doi.org/10.5281/zenodo.10471458)
 [![CRAN status](https://www.r-pkg.org/badges/version/simulist)](https://CRAN.R-project.org/package=simulist)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/simulist)](https://cran.r-project.org/package=simulist)
 <!-- badges: end -->
