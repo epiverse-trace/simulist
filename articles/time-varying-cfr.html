@@ -91,7 +91,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Time-varying case fatality risk</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/simulist/blob/v0.6.0/vignettes/time-varying-cfr.Rmd" class="external-link"><code>vignettes/time-varying-cfr.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/simulist/blob/main/vignettes/time-varying-cfr.Rmd" class="external-link"><code>vignettes/time-varying-cfr.Rmd</code></a></small>
       <div class="d-none name"><code>time-varying-cfr.Rmd</code></div>
     </div>
 
@@ -298,7 +298,7 @@ columns into their own columns using the <a href="https://tidyr.tidyverse.org/" 
 <span>  complete_dates <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p><img src="time-varying-cfr_files/figure-html/plot-onset-hospitalisation-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.5 and the risk of non-hospitalised individuals is 0.05, and these risks are constant through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating number of cases over time with substantially fewer deaths than cases." width="768"></p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-hospitalisation-1.png" class="r-plt" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.5 and the risk of non-hospitalised individuals is 0.05, and these risks are constant through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating number of cases over time with substantially fewer deaths than cases." width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="higher-risk-of-case-fatality">Higher risk of case fatality<a class="anchor" aria-label="anchor" href="#higher-risk-of-case-fatality"></a>
@@ -366,7 +366,7 @@ infected.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-higher-risk-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these risks are constant through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows growth and subsequent decline of the outbreak, with a similar number of cases and deaths over time." width="768"></p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-higher-risk-1.png" class="r-plt" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. Case fatality risk for hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these risks are constant through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows growth and subsequent decline of the outbreak, with a similar number of cases and deaths over time." width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="continuous-time-varying-case-fatality-risk">Continuous time-varying case fatality risk<a class="anchor" aria-label="anchor" href="#continuous-time-varying-case-fatality-risk"></a>
@@ -401,7 +401,7 @@ through the simulated epidemic.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Time (Days)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="time-varying-cfr_files/figure-html/plot-exponential-dist-1.png" alt="A scatter plot showing an exponential decline over time representing the time-varying hospitalised case fatality risk over time." width="768"></p>
+<p><img src="time-varying-cfr_files/figure-html/plot-exponential-dist-1.png" class="r-plt" alt="A scatter plot showing an exponential decline over time representing the time-varying hospitalised case fatality risk over time." width="768"></p>
 <p>The time-varying hospitalised case fatality risk function
 (<code>config$time_varying_death_risk</code>) throughout the epidemic.
 In this case the hospitalised risks (<code>hosp_death_risk</code>) are
@@ -486,7 +486,7 @@ zero the risk of a case dying will also go to zero.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these decline exponentially through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and only a few deaths early in the epidemic and no deaths later in the outbreak." width="768"></p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-1.png" class="r-plt" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these decline exponentially through time. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and only a few deaths early in the epidemic and no deaths later in the outbreak." width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="stepwise-time-varying-case-fatality-risk">Stepwise time-varying case fatality risk<a class="anchor" aria-label="anchor" href="#stepwise-time-varying-case-fatality-risk"></a>
@@ -516,7 +516,7 @@ they will definitely recover).</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Time (Days)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="time-varying-cfr_files/figure-html/plot-stepwise-dist-1.png" alt="A scatter plot showing an step-wise function representing the time-varying hospitalised case fatality risk over time. The function outputs 0.9 if time (days) is less than 60, and 0 if not." width="768"></p>
+<p><img src="time-varying-cfr_files/figure-html/plot-stepwise-dist-1.png" class="r-plt" alt="A scatter plot showing an step-wise function representing the time-varying hospitalised case fatality risk over time. The function outputs 0.9 if time (days) is less than 60, and 0 if not." width="768"></p>
 <p>The time-varying case fatality risk function
 (<code>config$time_varying_death_risk</code>) for the hospitalised death
 risk (<code>hosp_death_risk</code>) and non-hospitalised death risk
@@ -581,7 +581,7 @@ then become 0 onwards.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these change in a step-wise manner at day 60 of the epidemic. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and deaths only occuring early in the  epidemic and no deaths later in the outbreak." width="768"></p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-1.png" class="r-plt" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The baseline case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these change in a step-wise manner at day 60 of the epidemic. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and deaths only occuring early in the  epidemic and no deaths later in the outbreak." width="768"></p>
 <p>The same stepwise function can also be used to specify time windows
 were the risk of death is reduced. Here we specify the
 <code>hosp_death_risk</code> and <code>non_hosp_death_risk</code> in the
@@ -606,7 +606,7 @@ the rates specified by <code>hosp_death_risk</code> and
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Value"</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Time (Days)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="time-varying-cfr_files/figure-html/plot-stepwise-dist-window-1.png" alt="A scatter plot showing an step-wise function representing the time-varying hospitalised case fatality risk over time. The function outputs 0.9 if time (days) is less than 50 or greater than 100, and 0.45 if not." width="768"></p>
+<p><img src="time-varying-cfr_files/figure-html/plot-stepwise-dist-window-1.png" class="r-plt" alt="A scatter plot showing an step-wise function representing the time-varying hospitalised case fatality risk over time. The function outputs 0.9 if time (days) is less than 50 or greater than 100, and 0.45 if not." width="768"></p>
 <p>The time-varying case fatality risk function
 (<code>config$time_varying_death_risk</code>) which scales the
 hospitalised death risk (<code>hosp_death_risk</code>) and
@@ -675,7 +675,7 @@ onwards.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
-<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-window-1.png" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these change in a step-wise manner at day 50 and 100 of the epidemic. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and deaths closely resemble the number of cases over time." width="768"></p>
+<p><img src="time-varying-cfr_files/figure-html/plot-onset-death-time-varying-cfr-stepwise-window-1.png" class="r-plt" alt="Two histograms in a single column, showing the daily incidence of cases from symptom onset and incidence of deaths. The maximum case fatality risk for  hospitalised individuals is 0.9 and the risk of non-hospitalised individuals is 0.75, and these change in a step-wise manner at day 50 and 100 of the epidemic. The y-axis is labelled 'count' and the x-axis is labelled 'date_index'. The plot shows fluctuating cases over time, and deaths closely resemble the number of cases over time." width="768"></p>
 <p>The maximum case fatality risk for hospitalised individuals is 0.9
 and for non-hospitalised individuals is 0.75, and these rates remain
 constant from days 0 to 50, and then from days 50 to 100 the case
@@ -710,7 +710,7 @@ please make the request in an <a href="https://github.com/epiverse-trace/simulis
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3. Theme provided by <a href="https://github.com/epiverse-trace/epiversetheme" class="external-link">epiversetheme</a> 0.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0. Theme provided by <a href="https://github.com/epiverse-trace/epiversetheme" class="external-link">epiversetheme</a> 0.1.0.</p>
 </div>
 
     </footer>
