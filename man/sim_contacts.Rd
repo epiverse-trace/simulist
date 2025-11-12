@@ -6,7 +6,7 @@
 \usage{
 sim_contacts(
   contact_distribution = function(x) stats::dpois(x = x, lambda = 2),
-  infectious_period = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+  infectious_period = function(n) stats::rlnorm(n = n, meanlog = 2, sdlog = 0.5),
   prob_infection = 0.5,
   outbreak_start_date = as.Date("2023-01-01"),
   anonymise = FALSE,

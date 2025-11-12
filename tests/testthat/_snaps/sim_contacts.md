@@ -110,7 +110,7 @@
     Code
       sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, config = create_config(last_contact_distribution = function(
-          x) stats::rgeom(n = x, prob = 0.5)))
+          n) stats::rgeom(n = n, prob = 0.5)))
     Output
                             from                      to age sex date_first_contact
       1            Gabriel Berry          Preston Larson  16   m         2022-12-28
@@ -170,7 +170,7 @@
     Code
       sim_contacts(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, config = create_config(last_contact_distribution = function(
-          x) stats::rpois(n = x, lambda = 5)))
+          n) stats::rpois(n = n, lambda = 5)))
     Output
                      from                      to age sex date_first_contact
       1      Alivia Perez      Barrington Johnson  44   m         2022-12-29

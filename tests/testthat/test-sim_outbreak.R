@@ -5,12 +5,12 @@ test_that("sim_outbreak works as expected with defaults", {
 
 
 contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
-infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
-onset_to_hosp <- function(x) {
-  stats::rlnorm(n = x, meanlog = 0.947, sdlog = 1.628)
+infectious_period <- function(n) stats::rgamma(n = n, shape = 1, scale = 1)
+onset_to_hosp <- function(n) {
+  stats::rlnorm(n = n, meanlog = 0.947, sdlog = 1.628)
 }
-onset_to_death <- function(x) {
-  stats::rlnorm(n = x, meanlog = 2.863, sdlog = 0.534)
+onset_to_death <- function(n) {
+  stats::rlnorm(n = n, meanlog = 2.863, sdlog = 0.534)
 }
 
 test_that("sim_outbreak works as expected", {

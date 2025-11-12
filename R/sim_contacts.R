@@ -62,7 +62,7 @@
 #'   prob_infection = 0.5
 #' )
 sim_contacts <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2), # nolint line_length_linter.
-                         infectious_period = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5), # nolint line_length_linter.
+                         infectious_period = function(n) stats::rlnorm(n = n, meanlog = 2, sdlog = 0.5), # nolint line_length_linter.
                          prob_infection = 0.5,
                          outbreak_start_date = as.Date("2023-01-01"),
                          anonymise = FALSE,

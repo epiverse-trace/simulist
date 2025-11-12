@@ -1,17 +1,17 @@
-onset_to_hosp <- function(x) {
-  stats::rlnorm(n = x, meanlog = 0.947, sdlog = 1.628)
+onset_to_hosp <- function(n) {
+  stats::rlnorm(n = n, meanlog = 0.947, sdlog = 1.628)
 }
-onset_to_death <- function(x) {
-  stats::rlnorm(n = x, meanlog = 2.863, sdlog = 0.534)
+onset_to_death <- function(n) {
+  stats::rlnorm(n = n, meanlog = 2.863, sdlog = 0.534)
 }
-onset_to_recovery <- function(x) rep(NA, times = x)
+onset_to_recovery <- function(n) rep(NA, times = n)
 
 test_that(".add_date_contact works as expected", {
   ll <- readRDS(file = file.path("testdata", "pre_date_contact.rds"))
   linelist <- .add_date_contact(
     .data = ll,
-    first_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
-    last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+    first_contact_distribution = function(n) stats::rpois(n = n, lambda = 3),
+    last_contact_distribution = function(n) stats::rpois(n = n, lambda = 3),
     outbreak_start_date = as.Date("2023-01-01")
   )
   expect_s3_class(linelist, class = "data.frame")
@@ -29,10 +29,10 @@ test_that(".add_date_contact fails as expected for non-integers", {
   expect_error(
     .add_date_contact(
       .data = ll,
-      first_contact_distribution = function(x) {
-        stats::rlnorm(n = x, meanlog = 1, sdlog = 1)
+      first_contact_distribution = function(n) {
+        stats::rlnorm(n = n, meanlog = 1, sdlog = 1)
       },
-      last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+      last_contact_distribution = function(n) stats::rpois(n = n, lambda = 3),
       outbreak_start_date = as.Date("2023-01-01")
     ),
     regexp = "(contact distribution)*(must)*(produce)*(nonnegative integers)"
@@ -41,8 +41,8 @@ test_that(".add_date_contact fails as expected for non-integers", {
   expect_error(
     .add_date_contact(
       .data = ll,
-      first_contact_distribution = function(x) "x",
-      last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+      first_contact_distribution = function(n) "n",
+      last_contact_distribution = function(n) stats::rpois(n = n, lambda = 3),
       outbreak_start_date = as.Date("2023-01-01")
     ),
     regexp = "(contact distribution)*(must)*(produce)*(nonnegative integers)"
@@ -52,7 +52,7 @@ test_that(".add_date_contact fails as expected for non-integers", {
     .add_date_contact(
       .data = ll,
       first_contact_distribution = "pois",
-      last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
+      last_contact_distribution = function(n) stats::rpois(n = n, lambda = 3),
       outbreak_start_date = as.Date("2023-01-01")
     ),
     regexp = "(Assertion)*(failed)*(Must be a function, not 'character')"
@@ -212,7 +212,7 @@ test_that(".add_ct works as expected", {
   ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   linelist <- .add_ct(
     .data = ll,
-    distribution = function(x) stats::rnorm(n = x, mean = 3, sd = 0.5)
+    distribution = function(n) stats::rnorm(n = n, mean = 3, sd = 0.5)
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$ct_value, type = "double")
@@ -224,7 +224,7 @@ test_that(".add_ct works as expected with different parameter", {
   ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   linelist <- .add_ct(
     .data = ll,
-    distribution = function(x) stats::rnorm(n = x, mean = 30, sd = 2)
+    distribution = function(n) stats::rnorm(n = n, mean = 30, sd = 2)
   )
   expect_s3_class(linelist, class = "data.frame")
   expect_type(linelist$ct_value, type = "double")
@@ -235,12 +235,12 @@ test_that(".add_ct works as expected with different parameter", {
 test_that(".add_ct fails as expected", {
   ll <- readRDS(file.path("testdata", "pre_ct.rds"))
   expect_error(
-    .add_ct(.data = ll, distribution = function(x) "x"),
+    .add_ct(.data = ll, distribution = function(n) "n"),
     regexp = "(Ct distribution)*(must)*(produce)*(positive numbers)"
   )
 
   expect_error(
-    .add_ct(.data = ll, distribution = function(x) -1),
+    .add_ct(.data = ll, distribution = function(n) -1),
     regexp = "(Ct distribution)*(must)*(produce)*(positive numbers)"
   )
 

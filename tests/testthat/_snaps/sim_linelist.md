@@ -708,8 +708,8 @@
     Code
       sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
-        config = create_config(last_contact_distribution = function(x) stats::rgeom(
-          n = x, prob = 0.5)))
+        config = create_config(last_contact_distribution = function(n) stats::rgeom(
+          n = n, prob = 0.5)))
     Output
          id             case_name case_type sex age date_onset date_reporting
       1   1          Claire Hicks confirmed   f  44 2023-01-01     2023-01-01
@@ -756,8 +756,8 @@
     Code
       sim_linelist(contact_distribution = contact_distribution, infectious_period = infectious_period,
         prob_infection = 0.5, onset_to_hosp = onset_to_hosp, onset_to_death = onset_to_death,
-        config = create_config(last_contact_distribution = function(x) stats::rpois(
-          n = x, lambda = 5)))
+        config = create_config(last_contact_distribution = function(n) stats::rpois(
+          n = n, lambda = 5)))
     Output
          id              case_name case_type sex age date_onset date_reporting
       1   1           Kevin Pullen suspected   m   1 2023-01-01     2023-01-01

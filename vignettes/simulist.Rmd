@@ -231,9 +231,9 @@ The `contact_distribution`, `infectious_period`, `onset_to_hosp`, `onset_to_deat
 
 ```{r, sim-outbreak-func}
 contact_distribution <- function(x) dpois(x = x, lambda = 2)
-infectious_period <- function(x) rgamma(n = x, shape = 2, scale = 2)
-onset_to_hosp <- function(x) rlnorm(n = x, meanlog = 1.5, sdlog = 0.5)
-onset_to_death <- function(x) rweibull(n = x, shape = 1, scale = 5)
+infectious_period <- function(n) rgamma(n = n, shape = 2, scale = 2)
+onset_to_hosp <- function(n) rlnorm(n = n, meanlog = 1.5, sdlog = 0.5)
+onset_to_death <- function(n) rweibull(n = n, shape = 1, scale = 5)
 
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
@@ -251,10 +251,10 @@ head(outbreak$contacts)
 ```{r, sim-outbreak-anon-func}
 outbreak <- sim_outbreak(
   contact_distribution = function(x) dpois(x = x, lambda = 2),
-  infectious_period = function(x) rgamma(n = x, shape = 2, scale = 2),
+  infectious_period = function(n) rgamma(n = n, shape = 2, scale = 2),
   prob_infection = 0.5,
-  onset_to_hosp = function(x) rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
-  onset_to_death = function(x) rweibull(n = x, shape = 1, scale = 5)
+  onset_to_hosp = function(n) rlnorm(n = n, meanlog = 1.5, sdlog = 0.5),
+  onset_to_death = function(n) rweibull(n = n, shape = 1, scale = 5)
 )
 head(outbreak$linelist)
 head(outbreak$contacts)

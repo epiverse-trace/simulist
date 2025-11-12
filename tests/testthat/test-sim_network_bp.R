@@ -1,5 +1,5 @@
 contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
-infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
+infectious_period <- function(n) stats::rgamma(n = n, shape = 1, scale = 1)
 
 test_that(".sim_network_bp works as expected", {
   set.seed(1)
@@ -56,7 +56,7 @@ test_that(".sim_network_bp warns as expected", {
 })
 
 test_that(".sim_network_bp errors with negative infectious period", {
-  infectious_period <- function(x) stats::rnorm(n = x, mean = 10, sd = 5)
+  infectious_period <- function(n) stats::rnorm(n = n, mean = 10, sd = 5)
   set.seed(3)
   expect_error(
     .sim_network_bp(

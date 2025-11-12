@@ -71,6 +71,6 @@ create_config()
 
 # example with customised Ct distribution
 create_config(
-  ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
+  ct_distribution = function(n) rlnorm(n = n, meanlog = 2, sdlog = 1)
 )
 }
