@@ -77,8 +77,18 @@
     outbreak_start_date = outbreak_start_date
   )
 
+  stopifnot(
+    "`prob_male` in `config` must be >= 0 and <=1" =
+      config$prob_male >= 0 && config$prob_male <= 1
+  )
+
   # add random age and sex
-  .data$sex <- sample(c("m", "f"), replace = TRUE, size = nrow(.data))
+  .data$sex <- sample(
+    c("m", "f"),
+    replace = TRUE,
+    size = nrow(.data),
+    prob = c(config$prob_male, (1 - config$prob_male))
+  )
   if (is.data.frame(population_age)) {
     age_groups <- apply(population_age, MARGIN = 1, function(x) x[1]:x[2])
     sample_weight <- rep(population_age$proportion, times = lengths(age_groups))
