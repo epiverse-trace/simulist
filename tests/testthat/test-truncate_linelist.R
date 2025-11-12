@@ -128,8 +128,8 @@ test_that("truncate_linelist sets dates as NA when between events", {
   # hospitalisation and onset to death to truncate between reporting and event
   ll <- sim_linelist(
     hosp_risk = 0.9,
-    onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 3, sdlog = 0.1),
-    onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 3, sdlog = 0.1)
+    onset_to_hosp = function(n) stats::rlnorm(n = n, meanlog = 3, sdlog = 0.1),
+    onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 3, sdlog = 0.1)
   )
   ll_trunc <- truncate_linelist(ll, truncation_day = 30)
   # it is possible that the proportion of NAs in the truncated data is lower
@@ -145,7 +145,7 @@ test_that("truncate_linelist sets outcome as NA if date_outcome is >= trunc", {
   # simulate with recovery times
   set.seed(123)
   ll <- sim_linelist(
-    onset_to_recovery = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
+    onset_to_recovery = function(n) rlnorm(n = n, meanlog = 2, sdlog = 1)
   )
   expect_false(anyNA(ll$date_outcome))
   expect_false(anyNA(ll$outcome))

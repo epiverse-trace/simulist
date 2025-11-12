@@ -4,12 +4,12 @@ test_that("sim_linelist works as expected with defaults", {
 })
 
 contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
-infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
-onset_to_hosp <- function(x) {
-  stats::rlnorm(n = x, meanlog = 0.947, sdlog = 1.628)
+infectious_period <- function(n) stats::rgamma(n = n, shape = 1, scale = 1)
+onset_to_hosp <- function(n) {
+  stats::rlnorm(n = n, meanlog = 0.947, sdlog = 1.628)
 }
-onset_to_death <- function(x) {
-  stats::rlnorm(n = x, meanlog = 2.863, sdlog = 0.534)
+onset_to_death <- function(n) {
+  stats::rlnorm(n = n, meanlog = 2.863, sdlog = 0.534)
 }
 
 test_that("sim_linelist works as expected", {
@@ -118,8 +118,8 @@ test_that("sim_linelist gives expected proportion of ages with age struct", {
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = 0.5,
-    onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1, sdlog = 0.5),
-    onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+    onset_to_hosp = function(n) stats::rlnorm(n = n, meanlog = 1, sdlog = 0.5),
+    onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 2, sdlog = 0.5),
     population_age = age_struct,
     outbreak_size = c(500, 5000)
   )
@@ -153,7 +153,7 @@ test_that("sim_linelist works as expected with modified config", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution = function(x) stats::rgeom(n = x, prob = 0.5)
+        last_contact_distribution = function(n) stats::rgeom(n = n, prob = 0.5)
       )
     )
   )
@@ -169,7 +169,7 @@ test_that("sim_linelist works as expected with modified config parameters", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution = function(x) stats::rpois(n = x, lambda = 5)
+        last_contact_distribution = function(n) stats::rpois(n = n, lambda = 5)
       )
     )
   )
@@ -199,7 +199,7 @@ test_that("sim_linelist fails as expected with modified config", {
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       config = create_config(
-        last_contact_distribution = function(x) stats::rgeom(n = x, lambda = 1)
+        last_contact_distribution = function(n) stats::rgeom(n = n, lambda = 1)
       )
     ),
     regexp = "(unused argument)*(lambda = 1)"

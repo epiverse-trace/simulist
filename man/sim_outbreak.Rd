@@ -6,10 +6,10 @@
 \usage{
 sim_outbreak(
   contact_distribution = function(x) stats::dpois(x = x, lambda = 2),
-  infectious_period = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+  infectious_period = function(n) stats::rlnorm(n = n, meanlog = 2, sdlog = 0.5),
   prob_infection = 0.5,
-  onset_to_hosp = function(x) stats::rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
-  onset_to_death = function(x) stats::rlnorm(n = x, meanlog = 2.5, sdlog = 0.5),
+  onset_to_hosp = function(n) stats::rlnorm(n = n, meanlog = 1.5, sdlog = 0.5),
+  onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 2.5, sdlog = 0.5),
   onset_to_recovery = NULL,
   reporting_delay = NULL,
   hosp_risk = 0.2,

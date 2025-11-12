@@ -162,14 +162,14 @@ test_that(".check_df fails as expected for age", {
 })
 
 contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
-infectious_period <- function(x) stats::rgamma(n = x, shape = 1, scale = 1)
-onset_to_hosp <- function(x) {
-  stats::rlnorm(n = x, meanlog = 0.947, sdlog = 1.628)
+infectious_period <- function(n) stats::rgamma(n = n, shape = 1, scale = 1)
+onset_to_hosp <- function(n) {
+  stats::rlnorm(n = n, meanlog = 0.947, sdlog = 1.628)
 }
-onset_to_death <- function(x) {
-  stats::rlnorm(n = x, meanlog = 2.863, sdlog = 0.534)
+onset_to_death <- function(n) {
+  stats::rlnorm(n = n, meanlog = 2.863, sdlog = 0.534)
 }
-onset_to_recovery <- function(x) stats::rlnorm(n = x, meanlog = 3, sdlog = 1)
+onset_to_recovery <- function(n) stats::rlnorm(n = n, meanlog = 3, sdlog = 1)
 
 test_that(".check_sim_input works as expected", {
   chk <- .check_sim_input(
@@ -359,7 +359,7 @@ test_that(".cross_check_sim_input works as expected with <data.frame> risks", {
 test_that(".cross_check_sim_input warns as expected", {
   expect_warning(
     .cross_check_sim_input(
-      onset_to_hosp = function(x) rep(NA, times = x),
+      onset_to_hosp = function(n) rep(NA, times = n),
       onset_to_death = onset_to_death,
       hosp_risk = 0.2,
       hosp_death_risk = 0.5,
@@ -373,7 +373,7 @@ test_that(".cross_check_sim_input warns as expected", {
 
   expect_warning(
     .cross_check_sim_input(
-      onset_to_hosp = function(x) rep(NA, times = x),
+      onset_to_hosp = function(n) rep(NA, times = n),
       onset_to_death = onset_to_death,
       hosp_risk = 0.2,
       hosp_death_risk = 0.5,
@@ -387,7 +387,7 @@ test_that(".cross_check_sim_input warns as expected", {
   expect_warning(
     .cross_check_sim_input(
       onset_to_hosp = onset_to_hosp,
-      onset_to_death = function(x) rep(NA, times = x),
+      onset_to_death = function(n) rep(NA, times = n),
       hosp_risk = 0.2,
       hosp_death_risk = 0.5,
       non_hosp_death_risk = 0.05
