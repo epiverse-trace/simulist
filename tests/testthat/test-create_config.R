@@ -13,7 +13,7 @@ test_that("create_config works as expected with defaults", {
 
 test_that("create_config works as expected modifying element", {
   config <- create_config(
-    last_contact_distribution = function(x) rgeom(n = x, prob = 0.5)
+    last_contact_distribution = function(n) rgeom(n = n, prob = 0.5)
   )
   expect_type(config, type = "list")
   expect_length(config, 5)
@@ -26,15 +26,15 @@ test_that("create_config works as expected modifying element", {
   )
   expect_identical(
     config$last_contact_distribution,
-    function(x) rgeom(n = x, prob = 0.5)
+    function(n) rgeom(n = n, prob = 0.5)
   )
 })
 
 test_that("create_config works as expected with spliced list", {
   config <- create_config(
     !!!list(
-      last_contact_distribution = function(x) rpois(n = x, lambda = 2),
-      ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
+      last_contact_distribution = function(n) rpois(n = n, lambda = 2),
+      ct_distribution = function(n) rlnorm(n = n, meanlog = 2, sdlog = 1)
     )
   )
   expect_type(config, type = "list")
@@ -48,17 +48,17 @@ test_that("create_config works as expected with spliced list", {
   )
   expect_identical(
     config$last_contact_distribution,
-    function(x) rpois(n = x, lambda = 2)
+    function(n) rpois(n = n, lambda = 2)
   )
   expect_identical(
     config$ct_distribution,
-    function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
+    function(n) rlnorm(n = n, meanlog = 2, sdlog = 1)
   )
 
   config <- create_config(
-    last_contact_distribution = function(x) rpois(n = x, lambda = 4),
+    last_contact_distribution = function(n) rpois(n = n, lambda = 4),
     !!!list(
-      ct_distribution = function(x) rlnorm(n = x, meanlog = 3, sdlog = 1)
+      ct_distribution = function(n) rlnorm(n = n, meanlog = 3, sdlog = 1)
     )
   )
   expect_type(config, type = "list")
@@ -72,18 +72,18 @@ test_that("create_config works as expected with spliced list", {
   )
   expect_identical(
     config$last_contact_distribution,
-    function(x) rpois(n = x, lambda = 4)
+    function(n) rpois(n = n, lambda = 4)
   )
   expect_identical(
     config$ct_distribution,
-    function(x) rlnorm(n = x, meanlog = 3, sdlog = 1)
+    function(n) rlnorm(n = n, meanlog = 3, sdlog = 1)
   )
 })
 
 test_that("create_config fails as expected misspelling modifying element", {
   # test also checks that partial name matching of list names does not happen
   expect_error(
-    create_config(last_contact_dist = function(x) rpois(n = x, lambda = 1)),
+    create_config(last_contact_dist = function(n) rpois(n = n, lambda = 1)),
     regexp = "Incorrect argument names supplied to create_config"
   )
 })
@@ -95,7 +95,7 @@ test_that("create_config fails as expected with unnamed elements", {
   )
   expect_error(
     create_config(
-      ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1),
+      ct_distribution = function(n) rlnorm(n = n, meanlog = 2, sdlog = 1),
       "unadjusted"
     ),
     regexp = "Incorrect argument names supplied to create_config"
@@ -105,14 +105,14 @@ test_that("create_config fails as expected with unnamed elements", {
 test_that("create_config fails as expected with list input", {
   expect_error(
     create_config(
-      list(ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1))
+      list(ct_distribution = function(n) rlnorm(n = n, meanlog = 2, sdlog = 1))
     ),
     regexp = "Incorrect argument names supplied to create_config"
   )
   expect_error(
     create_config(
-      list(last_contact_distribution = function(x) rpois(n = x, lambda = 1)),
-      ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
+      list(last_contact_distribution = function(n) rpois(n = n, lambda = 1)),
+      ct_distribution = function(n) rlnorm(n = n, meanlog = 2, sdlog = 1)
     ),
     regexp = "Incorrect argument names supplied to create_config"
   )

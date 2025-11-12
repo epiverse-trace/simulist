@@ -60,13 +60,13 @@
 #'
 #' # example with customised Ct distribution
 #' create_config(
-#'   ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
+#'   ct_distribution = function(n) rlnorm(n = n, meanlog = 2, sdlog = 1)
 #' )
 create_config <- function(...) {
   .args <- list(
-    last_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
-    first_contact_distribution = function(x) stats::rpois(n = x, lambda = 3),
-    ct_distribution = function(x) stats::rnorm(n = x, mean = 25, sd = 2),
+    last_contact_distribution = function(n) stats::rpois(n = n, lambda = 3),
+    first_contact_distribution = function(n) stats::rpois(n = n, lambda = 3),
+    ct_distribution = function(n) stats::rnorm(n = n, mean = 25, sd = 2),
     network = "adjusted",
     time_varying_death_risk = NULL
   )
