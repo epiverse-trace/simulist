@@ -58,7 +58,13 @@
   # add delays dates
   .data$date_onset <- .data$time + outbreak_start_date
 
-  .data <- .add_reporting_delay(.data, reporting_delay)
+  # add reporting delays
+  if (sim_type %in% c("linelist", "outbreak")) {
+    .data$date_reporting <- .data$date_onset + reporting_delay(nrow(.data))
+  } else {
+    # reporting_delay is NULL in sim_contacts()
+    .data$date_reporting <- .data$date_onset
+  }
 
   # add exposure date for cases
   id_time <- data.frame(infector = .data$id, infector_time = .data$time)
