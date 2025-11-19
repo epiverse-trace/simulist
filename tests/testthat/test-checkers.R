@@ -321,6 +321,23 @@ test_that(".check_sim_input fails as expected", {
     ),
     regexp = "(Assertion on)*(outbreak_size)*(failed)"
   )
+  expect_error(
+    .check_sim_input(
+      sim_type = "linelist",
+      contact_distribution = contact_distribution,
+      infectious_period = infectious_period,
+      prob_infection = 0.5,
+      outbreak_start_date = as.Date("2023-01-01"),
+      outbreak_size = c(10, 1e4),
+      population_age = c(1, 90),
+      onset_to_hosp = function(n) rlnorm(n = n, meanlog = 1, sdlog = 1),
+      onset_to_death = function(n) rlnorm(n = n, meanlog = 1, sdlog = 1),
+      onset_to_recovery = function(n) rlnorm(n = n, meanlog = 1, sdlog = 1),
+      reporting_delay = function(n) rep("0", times = n)
+    ),
+    regexp =
+      "The `reporting_delay` must be NULL or a function that generates numbers."
+  )
 })
 
 test_that(".cross_check_sim_input works as expected with numeric risk", {
