@@ -170,6 +170,7 @@ onset_to_death <- function(n) {
   stats::rlnorm(n = n, meanlog = 2.863, sdlog = 0.534)
 }
 onset_to_recovery <- function(n) stats::rlnorm(n = n, meanlog = 3, sdlog = 1)
+reporting_delay <- function(n) rep(0, times = n)
 
 test_that(".check_sim_input works as expected", {
   chk <- .check_sim_input(
@@ -182,6 +183,7 @@ test_that(".check_sim_input works as expected", {
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
+    reporting_delay = reporting_delay,
     anonymise = FALSE,
     case_type_probs = c(
       suspected = 0.2,
@@ -211,6 +213,7 @@ test_that(".check_sim_input works as expected", {
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
+    reporting_delay = reporting_delay,
     anonymise = FALSE,
     case_type_probs = c(
       suspected = 0.2,
@@ -254,6 +257,7 @@ test_that(".check_sim_input works as expected with NULL risks", {
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
+    reporting_delay = reporting_delay,
     anonymise = FALSE,
     case_type_probs = c(
       suspected = 0.2,
