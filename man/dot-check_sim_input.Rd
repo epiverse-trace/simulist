@@ -14,6 +14,7 @@
   onset_to_hosp = NULL,
   onset_to_death = NULL,
   onset_to_recovery = NULL,
+  reporting_delay = NULL,
   anonymise = NULL,
   case_type_probs = NULL,
   contact_tracing_status_probs = NULL,
@@ -145,6 +146,18 @@ that is greater than a onset-to-hospitalisation time (from \code{onset_to_hosp})
 then the function will error. Due to this conditional sampling, the
 onset-to-recovery times in the line list may not resemble the distributional
 form input into the function.}
+
+\item{reporting_delay}{A \code{function} for the reporting delay distribution or
+\code{NULL}. The (random) number generating function creates delays between the
+time of symptom onset (\verb{$date_onset}) and the case being reported
+(\verb{$date_reporting}).
+
+The function can be defined or anonymous. The function must return a vector
+of \code{numeric}s for the length of the reporting delay. The function must have
+a single argument.
+
+The default is \code{NULL} so by default there is no reporting delay, and the
+\verb{$date_reporting} line list column is identical to the \verb{$date_onset} column.}
 
 \item{anonymise}{A \code{logical} boolean for whether case names should be
 anonymised. Default is \code{FALSE}.}
