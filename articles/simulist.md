@@ -518,9 +518,9 @@ demonstrate how to use both.
 
 ``` r
 contact_distribution <- function(x) dpois(x = x, lambda = 2)
-infectious_period <- function(x) rgamma(n = x, shape = 2, scale = 2)
-onset_to_hosp <- function(x) rlnorm(n = x, meanlog = 1.5, sdlog = 0.5)
-onset_to_death <- function(x) rweibull(n = x, shape = 1, scale = 5)
+infectious_period <- function(n) rgamma(n = n, shape = 2, scale = 2)
+onset_to_hosp <- function(n) rlnorm(n = n, meanlog = 1.5, sdlog = 0.5)
+onset_to_death <- function(n) rweibull(n = n, shape = 1, scale = 5)
 
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
@@ -566,10 +566,10 @@ head(outbreak$contacts)
 ``` r
 outbreak <- sim_outbreak(
   contact_distribution = function(x) dpois(x = x, lambda = 2),
-  infectious_period = function(x) rgamma(n = x, shape = 2, scale = 2),
+  infectious_period = function(n) rgamma(n = n, shape = 2, scale = 2),
   prob_infection = 0.5,
-  onset_to_hosp = function(x) rlnorm(n = x, meanlog = 1.5, sdlog = 0.5),
-  onset_to_death = function(x) rweibull(n = x, shape = 1, scale = 5)
+  onset_to_hosp = function(n) rlnorm(n = n, meanlog = 1.5, sdlog = 0.5),
+  onset_to_death = function(n) rweibull(n = n, shape = 1, scale = 5)
 )
 head(outbreak$linelist)
 #>   id             case_name case_type sex age date_onset date_reporting

@@ -96,22 +96,22 @@ from a probability distribution \\p(n)\\.
 # example with default configuration
 create_config()
 #> $last_contact_distribution
-#> function (x) 
-#> stats::rpois(n = x, lambda = 3)
-#> <bytecode: 0x56276d202580>
-#> <environment: 0x56276e72f848>
+#> function (n) 
+#> stats::rpois(n = n, lambda = 3)
+#> <bytecode: 0x5571aa1aae30>
+#> <environment: 0x5571ac49df00>
 #> 
 #> $first_contact_distribution
-#> function (x) 
-#> stats::rpois(n = x, lambda = 3)
-#> <bytecode: 0x56276d202580>
-#> <environment: 0x56276e72f848>
+#> function (n) 
+#> stats::rpois(n = n, lambda = 3)
+#> <bytecode: 0x5571aa1aae30>
+#> <environment: 0x5571ac49df00>
 #> 
 #> $ct_distribution
-#> function (x) 
-#> stats::rnorm(n = x, mean = 25, sd = 2)
-#> <bytecode: 0x56276d202318>
-#> <environment: 0x56276e72f848>
+#> function (n) 
+#> stats::rnorm(n = n, mean = 25, sd = 2)
+#> <bytecode: 0x5571aa1ab098>
+#> <environment: 0x5571ac49df00>
 #> 
 #> $network
 #> [1] "adjusted"
@@ -122,24 +122,24 @@ create_config()
 
 # example with customised Ct distribution
 create_config(
-  ct_distribution = function(x) rlnorm(n = x, meanlog = 2, sdlog = 1)
+  ct_distribution = function(n) rlnorm(n = n, meanlog = 2, sdlog = 1)
 )
 #> $last_contact_distribution
-#> function (x) 
-#> stats::rpois(n = x, lambda = 3)
-#> <bytecode: 0x56276d202580>
-#> <environment: 0x56276dffdd20>
+#> function (n) 
+#> stats::rpois(n = n, lambda = 3)
+#> <bytecode: 0x5571aa1aae30>
+#> <environment: 0x5571ae526340>
 #> 
 #> $first_contact_distribution
-#> function (x) 
-#> stats::rpois(n = x, lambda = 3)
-#> <bytecode: 0x56276d202580>
-#> <environment: 0x56276dffdd20>
+#> function (n) 
+#> stats::rpois(n = n, lambda = 3)
+#> <bytecode: 0x5571aa1aae30>
+#> <environment: 0x5571ae526340>
 #> 
 #> $ct_distribution
-#> function (x) 
-#> rlnorm(n = x, meanlog = 2, sdlog = 1)
-#> <environment: 0x56276d030a98>
+#> function (n) 
+#> rlnorm(n = n, meanlog = 2, sdlog = 1)
+#> <environment: 0x5571ad0b7400>
 #> 
 #> $network
 #> [1] "adjusted"

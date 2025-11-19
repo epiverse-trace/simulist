@@ -228,7 +228,7 @@ approximately 4.5 days and standard deviation of 5.9 days).</p>
 <span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
-<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id            case_name case_type sex age date_onset date_reporting</span></span>
@@ -333,7 +333,7 @@ delay.</p>
 <span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
-<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">5</span>, times <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">5</span>, times <span class="op">=</span> <span class="va">n</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_reporting</span></span>
@@ -407,7 +407,7 @@ with a lognormal reporting delay with <code>meanlog = 2</code> and
 <span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
-<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># first 6 rows of linelist</span></span>
@@ -630,7 +630,7 @@ a time delay between symptom onset and reporting.</p>
 <span>  prob_infection <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
-<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">x</span>, meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">5000</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">

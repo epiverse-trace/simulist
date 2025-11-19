@@ -148,7 +148,7 @@ linelist <- sim_linelist(
   prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  reporting_delay = function(x) rlnorm(n = x, meanlog = 1, sdlog = 1)
+  reporting_delay = function(n) rlnorm(n = n, meanlog = 1, sdlog = 1)
 )
 head(linelist)
 #>   id            case_name case_type sex age date_onset date_reporting
@@ -278,7 +278,7 @@ linelist <- sim_linelist(
   prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  reporting_delay = function(x) rep(5, times = x)
+  reporting_delay = function(n) rep(5, times = n)
 )
 head(linelist)
 #>   id          case_name case_type sex age date_onset date_reporting
@@ -356,7 +356,7 @@ linelist <- sim_linelist(
   prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  reporting_delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5)
+  reporting_delay = function(n) rlnorm(n = n, meanlog = 2, sdlog = 0.5)
 )
 
 # first 6 rows of linelist
@@ -616,7 +616,7 @@ linelist <- sim_linelist(
   prob_infection = 0.5,
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
-  reporting_delay = function(x) rlnorm(n = x, meanlog = 2, sdlog = 0.5),
+  reporting_delay = function(n) rlnorm(n = n, meanlog = 2, sdlog = 0.5),
   outbreak_size = c(500, 5000)
 )
 ```
