@@ -244,26 +244,3 @@ NULL
   # return data
   .data
 }
-
-#' @name .add_cols
-.add_reporting_delay <- function(.data, reporting_delay) {
-  if (is.null(reporting_delay)) {
-    .data$date_reporting <- .data$date_onset
-    return(.data)
-  }
-  .check_func_req_args(reporting_delay, func_name = "reportin_delay")
-  # check if reporting_delay is NULL or generates a number
-  reporting_delay_eval <- reporting_delay(1)
-  if (!is.numeric(reporting_delay_eval)) {
-    stop(
-      "The `reporting_delay` must be NULL or a function that ",
-      "generates numbers.",
-      call. = FALSE
-    )
-  }
-  # add reporting delays
-  .data$date_reporting <- .data$date_onset + reporting_delay(nrow(.data))
-
-  # return data
-  .data
-}
