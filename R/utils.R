@@ -211,7 +211,11 @@ as_function <- function(x) {
       (inherits(x$onset_to_hosp, c("function", "epiparameter")) ||
          is.null(x$onset_to_hosp)) &&
       (inherits(x$onset_to_death, c("function", "epiparameter")) ||
-         is.null(x$onset_to_death))
+         is.null(x$onset_to_death)) &&
+      (inherits(x$onset_to_recovery, c("function", "epiparameter")) ||
+         is.null(x$onset_to_recovery)) &&
+      (inherits(x$reporting_delay, c("function", "epiparameter")) ||
+         is.null(x$reporting_delay))
   )
   contact_distribution <- as.function(
     x$contact_distribution,
@@ -239,6 +243,12 @@ as_function <- function(x) {
       func_type = "generate"
     )
   }
+  if (is.null(x$reporting_delay)) {
+    # function to generate 0 as reporting date is equal to onset date by default
+    reporting_delay <- function(n) rep(0, times = n)
+  } else {
+    reporting_delay <- as.function(x$reporting_delay, func_type = "generate")
+  }
 
   # return list of functions
   list(
@@ -246,7 +256,8 @@ as_function <- function(x) {
     infectious_period = infectious_period,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
-    onset_to_recovery = onset_to_recovery
+    onset_to_recovery = onset_to_recovery,
+    reporting_delay = reporting_delay
   )
 }
 
