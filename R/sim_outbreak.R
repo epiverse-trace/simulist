@@ -99,7 +99,8 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
       infectious_period = infectious_period,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
-      onset_to_recovery = onset_to_recovery
+      onset_to_recovery = onset_to_recovery,
+      reporting_delay = reporting_delay
     )
   )
   contact_distribution <- funcs$contact_distribution
@@ -107,6 +108,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
   onset_to_hosp <- funcs$onset_to_hosp
   onset_to_death <- funcs$onset_to_death
   onset_to_recovery <- funcs$onset_to_recovery
+  reporting_delay <- funcs$reporting_delay
 
   .check_sim_input(
     sim_type = "outbreak",
@@ -118,6 +120,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
+    reporting_delay = reporting_delay,
     anonymise = anonymise,
     case_type_probs = case_type_probs,
     contact_tracing_status_probs = contact_tracing_status_probs,
