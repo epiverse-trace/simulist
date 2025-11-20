@@ -51,8 +51,6 @@ However, to our knowledge, there are no existing tools that offer an easy method
 
 ![The daily incidence of cases, hospitalisations and deaths, facetted by sex for a simulated outbreak.\label{fig:simulist}](incidence.png)
 
-Figure 1: (a) daily incidence of symptom onset, hospital admission and deaths facetted by sex for a simulated line list and aggregated and plotted with `incidence2` [@taylorIncidence2ComputeHandle2020]. (b) an `<epicontacts>` network plotted after converted from a simulated line list and contact tracing dataset (this network is interactive when rendered in an IDE or online). (c) a connected dot plot of the events in a simulated line list. All code to reproduce the plots can be found at https://github.com/epiverse-trace/simulist/blob/joss/joss/joss-figs.R, and more examples of these types of plots can be found in the [Visualising simulated data vignette](https://epiverse-trace.github.io/simulist/articles/vis-linelist.html).
-
 Here we highlight some of the simulation functionality available:
 
 ***Age-stratified hospitalisation and death risks***: the outbreak simulation includes three risks: hospitalisation risk, death risk in hospital, and death risk outside of hospital, which all, by default accept a single number to define the population risk. In many infectious disease outbreaks risk is non-uniform across ages, so `simulist` accepts risks stratified by age using a user-defined `data.frame`, so any age-stratification is accepted. See the [Age-stratified hospitalisation and death risks vignette](https://epiverse-trace.github.io/simulist/index.html) for a complete explanation.
