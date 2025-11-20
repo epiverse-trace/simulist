@@ -15,6 +15,7 @@ Check if arguments input to simulation function are valid
   onset_to_hosp = NULL,
   onset_to_death = NULL,
   onset_to_recovery = NULL,
+  reporting_delay = NULL,
   anonymise = NULL,
   case_type_probs = NULL,
   contact_tracing_status_probs = NULL,
@@ -176,6 +177,24 @@ Check if arguments input to simulation function are valid
   will error. Due to this conditional sampling, the onset-to-recovery
   times in the line list may not resemble the distributional form input
   into the function.
+
+- reporting_delay:
+
+  A `function` or an `<epiparameter>` object for the reporting delay
+  distribution. `reporting_delay` can also be `NULL` to not simulate
+  delays from symptom onset to date of reporting, in which case the date
+  of reporting will be assumed to be equal to the date of onset. The
+  (random) number generating function creates delays between the time of
+  symptom onset (`$date_onset`) and the case being reported
+  (`$date_reporting`).
+
+  The function can be defined or anonymous. The function must return a
+  vector of `numeric`s for the length of the reporting delay. The
+  function must have a single argument.
+
+  The default is `NULL` so by default there is no reporting delay, and
+  the `$date_reporting` line list column is identical to the
+  `$date_onset` column.
 
 - anonymise:
 

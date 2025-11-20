@@ -196,8 +196,11 @@ form input into the function.</p></dd>
 
 
 <dt id="arg-reporting-delay">reporting_delay<a class="anchor" aria-label="anchor" href="#arg-reporting-delay"></a></dt>
-<dd><p>A <code>function</code> for the reporting delay distribution or
-<code>NULL</code>. The (random) number generating function creates delays between the
+<dd><p>A <code>function</code> or an <code>&lt;epiparameter&gt;</code> object for the
+reporting delay distribution. <code>reporting_delay</code> can also be <code>NULL</code> to not
+simulate delays from symptom onset to date of reporting, in which case the
+date of reporting will be assumed to be equal to the date of onset.
+The (random) number generating function creates delays between the
 time of symptom onset (<code>$date_onset</code>) and the case being reported
 (<code>$date_reporting</code>).</p>
 <p>The function can be defined or anonymous. The function must return a vector

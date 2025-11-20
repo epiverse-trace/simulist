@@ -151,27 +151,20 @@ linelist <- sim_linelist(
   reporting_delay = function(n) rlnorm(n = n, meanlog = 1, sdlog = 1)
 )
 head(linelist)
-#>   id            case_name case_type sex age date_onset date_reporting
-#> 1  1       Yoonus al-Azam suspected   m  51 2023-01-01     2023-01-07
-#> 2  2       Kristina Clark confirmed   f  53 2023-01-04     2023-01-06
-#> 3  3         Karen Meehan confirmed   f  16 2023-01-05     2023-01-20
-#> 4  4 Ritika Brandenburger suspected   f  41 2023-01-05     2023-01-09
-#> 5  5       Steven Kaliski confirmed   m   4 2023-01-04     2023-01-09
-#> 6  6          Keely Atene suspected   f  68 2023-01-05     2023-01-12
-#>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1     2023-01-03      died   2023-01-26               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-28        2023-01-03
-#> 3           <NA> recovered         <NA>         2022-12-29        2023-01-06
-#> 4           <NA> recovered         <NA>         2022-12-31        2023-01-05
-#> 5           <NA> recovered         <NA>         2023-01-02        2023-01-05
-#> 6           <NA> recovered         <NA>         2023-01-02        2023-01-06
-#>   ct_value
-#> 1       NA
-#> 2     26.1
-#> 3     26.6
-#> 4       NA
-#> 5     25.0
-#> 6       NA
+#>   id       case_name case_type sex age date_onset date_reporting date_admission
+#> 1  1   Tiarra Morris confirmed   f  42 2023-01-01     2023-01-02           <NA>
+#> 2  4     Keiara Yang suspected   f  63 2023-01-04     2023-01-08           <NA>
+#> 3  7  Monika Watters confirmed   f  83 2023-01-01     2023-01-02           <NA>
+#> 4 11      Tina Zhang confirmed   f  21 2023-01-03     2023-01-09           <NA>
+#> 5 13 Nicholas Polaco  probable   m  36 2023-01-05     2023-01-11           <NA>
+#> 6 14    Vidya Nguyen confirmed   f  84 2023-01-06     2023-01-08           <NA>
+#>     outcome date_outcome date_first_contact date_last_contact ct_value
+#> 1 recovered         <NA>               <NA>              <NA>     24.1
+#> 2 recovered         <NA>         2022-12-25        2023-01-06       NA
+#> 3 recovered         <NA>         2022-12-30        2023-01-04     23.9
+#> 4 recovered         <NA>         2022-12-30        2023-01-03     29.7
+#> 5 recovered         <NA>         2023-01-01        2023-01-07       NA
+#> 6 recovered         <NA>         2022-12-31        2023-01-09     24.0
 ```
 
 Here from the first 6 rows of the line list you can see differences
@@ -214,9 +207,9 @@ ggplot(data = tidy_linelist) +
   ) +
   theme_bw() +
   theme(legend.position = "bottom", axis.text.y = element_text(size = 4))
-#> Warning: Removed 1519 rows containing missing values or values outside the scale range
+#> Warning: Removed 32 rows containing missing values or values outside the scale range
 #> (`geom_line()`).
-#> Warning: Removed 1519 rows containing missing values or values outside the scale range
+#> Warning: Removed 32 rows containing missing values or values outside the scale range
 #> (`geom_point()`).
 ```
 
@@ -281,44 +274,30 @@ linelist <- sim_linelist(
   reporting_delay = function(n) rep(5, times = n)
 )
 head(linelist)
-#>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1       Caleb Froome confirmed   m  47 2023-01-01     2023-01-06
-#> 2  2    Zubair el-Kalil  probable   m  41 2023-01-07     2023-01-12
-#> 3  3   Cameron Williams  probable   m  79 2023-01-09     2023-01-14
-#> 4  4      Aiyana Garcia confirmed   f  70 2023-01-10     2023-01-15
-#> 5  6 Miguel Line-Torres suspected   m  50 2023-01-10     2023-01-15
-#> 6  7       Teagan Dixon confirmed   f  80 2023-01-10     2023-01-15
+#>   id         case_name case_type sex age date_onset date_reporting
+#> 1  1 Fawzaana el-Baten  probable   f   1 2023-01-01     2023-01-06
+#> 2  2        Roy Chihak confirmed   m  34 2023-01-03     2023-01-08
+#> 3  3    Andrew Angeles confirmed   m  76 2023-01-03     2023-01-08
+#> 4  4     Bryan Stancil confirmed   m  14 2023-01-07     2023-01-12
+#> 5  5     Ellen Carlson confirmed   f  67 2023-01-04     2023-01-09
+#> 6  8     Taylor Thrift confirmed   f  90 2023-01-13     2023-01-18
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1     2023-01-05      died   2023-01-26               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-26        2023-01-02
-#> 3           <NA> recovered         <NA>         2023-01-03        2023-01-11
-#> 4           <NA> recovered         <NA>         2023-01-03        2023-01-10
-#> 5           <NA> recovered         <NA>         2023-01-07        2023-01-11
-#> 6     2023-01-13      died   2023-01-30         2023-01-05        2023-01-10
+#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 2     2023-01-06      died   2023-01-08         2022-12-25        2023-01-02
+#> 3           <NA> recovered         <NA>         2022-12-29        2023-01-07
+#> 4           <NA> recovered         <NA>         2023-01-03        2023-01-05
+#> 5           <NA> recovered         <NA>         2023-01-02        2023-01-07
+#> 6           <NA>      died   2023-01-24         2023-01-03        2023-01-07
 #>   ct_value
-#> 1     23.6
-#> 2       NA
-#> 3       NA
-#> 4     28.2
-#> 5       NA
-#> 6     26.9
+#> 1       NA
+#> 2     22.4
+#> 3     22.9
+#> 4     25.3
+#> 5     26.8
+#> 6     24.4
 linelist$date_reporting - linelist$date_onset
 #> Time differences in days
-#>   [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#>  [38] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#>  [75] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [112] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [149] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [186] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [223] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [260] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [297] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [334] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [371] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [408] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [445] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [482] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-#> [519] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#>  [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
 ```
 
 ## Truncation
@@ -362,19 +341,19 @@ linelist <- sim_linelist(
 # first 6 rows of linelist
 head(linelist)
 #>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1 Daiveante Labarrie confirmed   m  59 2023-01-01     2023-01-05
-#> 2  2       Phayd Garcia confirmed   m   3 2023-01-07     2023-01-13
-#> 3  3  Jenifer Castaneda suspected   f  53 2023-01-01     2023-01-07
-#> 4  8      Asya Woolfolk confirmed   f  42 2023-01-14     2023-01-25
-#> 5  9 Amaani el-Abdullah  probable   f  73 2023-01-03     2023-01-08
-#> 6 10       Bella Nguyen confirmed   f  89 2023-01-03     2023-01-11
+#> 1  1  Jenifer Castaneda confirmed   f  18 2023-01-01     2023-01-05
+#> 2  2      Abigail Krpan confirmed   f  66 2023-01-07     2023-01-11
+#> 3  3        John Rivera suspected   m  59 2023-01-01     2023-01-07
+#> 4  8      Asya Woolfolk confirmed   f  37 2023-01-14     2023-01-28
+#> 5  9 Amaani el-Abdullah  probable   f  64 2023-01-03     2023-01-14
+#> 6 10       Bella Nguyen confirmed   f  42 2023-01-03     2023-01-08
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1     2023-01-05 recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-27        2023-01-06
-#> 3           <NA> recovered         <NA>         2023-01-01        2023-01-04
-#> 4           <NA> recovered         <NA>         2023-01-07        2023-01-11
-#> 5           <NA> recovered         <NA>         2022-12-25        2023-01-04
-#> 6           <NA> recovered         <NA>         2022-12-30        2023-01-02
+#> 2           <NA> recovered         <NA>         2022-12-28        2023-01-04
+#> 3     2023-01-08 recovered         <NA>         2022-12-28        2023-01-04
+#> 4           <NA>      died   2023-02-02         2023-01-04        2023-01-10
+#> 5           <NA> recovered         <NA>         2022-12-30        2023-01-02
+#> 6     2023-01-05      died   2023-02-04         2023-01-01        2023-01-05
 #>   ct_value
 #> 1     22.3
 #> 2     27.4
@@ -443,9 +422,9 @@ ggplot(data = tidy_linelist) +
   ) +
   theme_bw() +
   theme(legend.position = "bottom", axis.text.y = element_text(size = 4))
-#> Warning: Removed 22 rows containing missing values or values outside the scale range
+#> Warning: Removed 20 rows containing missing values or values outside the scale range
 #> (`geom_line()`).
-#> Warning: Removed 22 rows containing missing values or values outside the scale range
+#> Warning: Removed 20 rows containing missing values or values outside the scale range
 #> (`geom_point()`).
 ```
 

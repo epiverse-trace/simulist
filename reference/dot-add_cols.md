@@ -34,8 +34,6 @@ The event date could be first contact, last contact or other.
 .add_names(.data, anonymise = FALSE)
 
 .add_ct(.data, distribution)
-
-.add_reporting_delay(.data, reporting_delay)
 ```
 
 ## Arguments
@@ -182,21 +180,6 @@ The event date could be first contact, last contact or other.
 
   A `logical` boolean for whether case names should be anonymised.
   Default is `FALSE`.
-
-- reporting_delay:
-
-  A `function` for the reporting delay distribution or `NULL`. The
-  (random) number generating function creates delays between the time of
-  symptom onset (`$date_onset`) and the case being reported
-  (`$date_reporting`).
-
-  The function can be defined or anonymous. The function must return a
-  vector of `numeric`s for the length of the reporting delay. The
-  function must have a single argument.
-
-  The default is `NULL` so by default there is no reporting delay, and
-  the `$date_reporting` line list column is identical to the
-  `$date_onset` column.
 
 ## Value
 
