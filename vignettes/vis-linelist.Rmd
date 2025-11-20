@@ -169,6 +169,10 @@ weekly <- incidence(
 plot(weekly)
 ```
  
+::: {.alert .alert-info}
+The simulated data plotted above used the default equal probability of each contact and case being male or female. To adjust the probability that each contact/case is male/female adjust `prob_male` in the `config` argument (see `create_config()` for details).
+:::
+ 
 To visualise the onset, hospitalisation and death incidence in the same plot they can be jointly specified to the `date_index` argument of `incidence2::incidence()`. 
 
 First the outcome data needs to be pivoted from long data to wide data to be input into `incidence2::incidence()`.
