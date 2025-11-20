@@ -477,7 +477,9 @@ definitely recover).
 
 ``` r
 config <- create_config(
-  time_varying_death_risk = function(risk, time) ifelse(test = time < 60, yes = risk, no = 0)
+  time_varying_death_risk = function(risk, time) {
+    ifelse(test = time < 60, yes = risk, no = 0)
+  }
 )
 ```
 

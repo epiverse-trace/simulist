@@ -470,7 +470,7 @@ outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case, ]
 
 ``` r
 library(dplyr)
-outbreak$contacts <- outbreak$contacts %>% # nolint one_call_pipe_linter
+outbreak$contacts <- outbreak$contacts %>%
   dplyr::filter(was_case)
 ```
 

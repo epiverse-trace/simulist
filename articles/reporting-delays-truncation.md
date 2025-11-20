@@ -175,8 +175,10 @@ tidy_linelist <- linelist %>%
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
   ) %>%
-  mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>% # nolint consecutive_mutate_linter
-  mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)) # nolint consecutive_mutate_linter
+  mutate(
+    ordering_value = ifelse(name == "date_onset", value, NA),
+    case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
+  )
 
 ggplot(data = tidy_linelist) +
   geom_line(
@@ -383,8 +385,10 @@ tidy_linelist <- linelist %>%
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
   ) %>%
-  mutate(ordering_value = ifelse(name == "date_onset", value, NA)) %>% # nolint consecutive_mutate_linter
-  mutate(case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)) # nolint consecutive_mutate_linter
+  mutate(
+    ordering_value = ifelse(name == "date_onset", value, NA),
+    case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
+  )
 
 truncation_day <- 14
 trunc_date <- max(tidy_linelist$value, na.rm = TRUE) - truncation_day

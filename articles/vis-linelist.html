@@ -508,7 +508,7 @@ only plot the transmission network of cases from the outbreak.</p>
 
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># nolint one_call_pipe_linter</span></span>
+<span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">was_case</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>

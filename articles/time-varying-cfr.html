@@ -503,7 +503,9 @@ and then become zero (i.e. if an individual is infected after day 60
 they will definitely recover).</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_config.html">create_config</a></span><span class="op">(</span></span>
-<span>  time_varying_death_risk <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">risk</span>, <span class="va">time</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">60</span>, yes <span class="op">=</span> <span class="va">risk</span>, no <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span>  time_varying_death_risk <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">risk</span>, <span class="va">time</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>test <span class="op">=</span> <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">60</span>, yes <span class="op">=</span> <span class="va">risk</span>, no <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stepwise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>

@@ -531,7 +531,7 @@ cases.
 
 ``` r
 # remove column by name
-linelist %>% # nolint one_call_pipe_linter
+linelist %>%
   select(!ct_value)
 #>    id             case_name case_type sex age date_onset date_reporting
 #> 1   1         Fabian Mrazik confirmed   m  90 2023-01-01     2023-01-01
