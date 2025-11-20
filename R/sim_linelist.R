@@ -296,11 +296,11 @@
 #'   hosp_risk = age_dep_hosp_risk
 #' )
 #' head(linelist)
-sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2), # nolint start line_lenght_linter
+sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2), # nolint start: line_length_linter.
                          infectious_period = function(n) stats::rlnorm(n = n, meanlog = 2, sdlog = 0.5),
                          prob_infection = 0.5,
                          onset_to_hosp = function(n) stats::rlnorm(n = n, meanlog = 1.5, sdlog = 0.5),
-                         onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 2.5, sdlog = 0.5), # nolint end line_lenght_linter
+                         onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 2.5, sdlog = 0.5), # nolint end
                          onset_to_recovery = NULL,
                          reporting_delay = NULL,
                          hosp_risk = 0.2,

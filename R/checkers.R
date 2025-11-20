@@ -97,7 +97,8 @@
 #' @return Invisibly return the `sim_type` `character` string. The function is
 #' called for its side-effects, which will error if the input is invalid.
 #' @keywords internal
-.check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"), # nolint cyclocomp_linter
+# nolint start: cyclocomp_linter.
+.check_sim_input <- function(sim_type = c("linelist", "contacts", "outbreak"),
                              contact_distribution,
                              infectious_period,
                              prob_infection,
@@ -193,6 +194,7 @@
 
   invisible(sim_type)
 }
+# nolint end
 
 #' Check distribution function has n required arguments
 #'
@@ -213,7 +215,7 @@
   # for which formals(fn) would return NULL and cause the check to error
   # errors non-informatively for specials such as `if`
   valid_func <- checkmate::test_function(func) &&
-    sum(mapply(function(x, y) { # nolint undesirable function
+    sum(mapply(function(x, y) { # nolint: undesirable_function.
       is.name(x) && y != "..."
     }, formals(args(func)), names(formals(args(func))))) == n_req_args
 
@@ -264,7 +266,7 @@
 #' called for its side-effects, which will error or warn if the input is
 #' invalid.
 #' @keywords internal
-.cross_check_sim_input <- function(onset_to_hosp, # nolint cyclocomp_linter
+.cross_check_sim_input <- function(onset_to_hosp, # nolint: cyclocomp_linter.
                                    onset_to_death,
                                    hosp_risk,
                                    hosp_death_risk,
