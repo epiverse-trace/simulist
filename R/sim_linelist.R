@@ -125,8 +125,11 @@
 #' onset-to-recovery times in the line list may not resemble the distributional
 #' form input into the function.
 #'
-#' @param reporting_delay A `function` for the reporting delay distribution or
-#' `NULL`. The (random) number generating function creates delays between the
+#' @param reporting_delay A `function` or an `<epiparameter>` object for the
+#' reporting delay distribution. `reporting_delay` can also be `NULL` to not
+#' simulate delays from symptom onset to date of reporting, in which case the
+#' date of reporting will be assumed to be equal to the date of onset.
+#' The (random) number generating function creates delays between the
 #' time of symptom onset (`$date_onset`) and the case being reported
 #' (`$date_reporting`).
 #'
