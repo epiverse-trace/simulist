@@ -24,6 +24,7 @@ Plotting can be useful to identify certain transmission dynamics and patterns in
 library(simulist)
 library(epiparameter)
 library(incidence2)
+library(ggplot2)
 library(epicontacts)
 ```
 
@@ -227,6 +228,102 @@ daily <- incidence(
 #|   (rows). The plot shows the outbreak fluctuating, with many fewer
 #|   hospital admissions and deaths than cases.
 plot(daily)
+```
+
+## Visualising individual event dates
+
+Instead of plotting the aggregated number of cases, deaths, or other events, we can plot each individuals timeline of events.
+
+For this example we will use a reporting delay distribution so the date of reporting lags after the date of symptom onset. We also supply an onset-to-recovery delay distribution so that all outcomes (died or recovered) have an event date. By default outcome dates for cases that recover are missing.
+
+```{r, define-reporting-and-recovery-delays}
+onset_to_recovery <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "onset to recovery",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 2, sdlog = 0.5)
+  )
+)
+
+reporting_delay <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "reporting delay",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 1, sdlog = 0.5)
+  )
+)
+```
+
+We can now simulate a new line list with dates for symptom onset, reporting, hospital admission and outcome for each case.
+
+```{r resim-linelist} 
+set.seed(1)
+linelist <- sim_linelist(
+  contact_distribution = contact_distribution,
+  infectious_period = infectious_period,
+  prob_infection = 0.33,
+  onset_to_hosp = onset_to_hosp,
+  onset_to_death = onset_to_death,
+  onset_to_recovery = onset_to_recovery,
+  reporting_delay = reporting_delay,
+  hosp_risk = 0.5,
+  outbreak_size = c(10, 50)
+)
+```
+
+Here we plot the line list with each case on its own row and the timeline of the outbreak on the x-axis. For clarity, we'll just plot the first 10 cases in the line list.
+
+```{r, tidy-case-events}
+tidy_linelist <- linelist[1:10, ] %>%
+  pivot_longer(
+    cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
+  ) %>%
+  mutate(
+    ordering_value = ifelse(name == "date_onset", value, NA),
+    case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
+  )
+```
+
+```{r, plot-case-events}
+#| fig.alt: >
+#|   Case timelines showing key epidemiological events for individual cases.
+#|   Each horizontal line represents one case, ordered by date of onset. Points
+#|   mark four event types recorded in the line list: date of onset (blue
+#|   circles), date of admission (red squares), date of reporting (purple
+#|   diamonds), and date of outcome (green triangles). The temporal spacing of
+#|   these markers illustrates variation in delays between symptom onset,
+#|   healthcare seeking, reporting, and eventual outcomes across cases.
+ggplot(data = tidy_linelist) +
+  geom_line(
+    mapping = aes(x = value, y = case_name),
+    linewidth = 0.25
+  ) +
+  geom_point(
+    mapping = aes(
+      x = value,
+      y = case_name,
+      shape = name,
+      col = name
+    ), size = 2
+  ) +
+  scale_x_date(name = "Event date", date_breaks = "week") +
+  scale_y_discrete(name = "Case name") +
+  scale_color_brewer(
+    palette = "Set1",
+    name = "Event type",
+    labels = c("Date Admission", "Date Onset", "Date Outcome", "Date Reporting")
+  ) +
+  scale_shape_manual(
+    name = "Event type",
+    labels = c(
+      "Date Admission", "Date Onset", "Date Outcome", "Date Reporting"
+    ),
+    values = c(15, 16, 17, 18)
+  ) +
+  theme_bw() +
+  theme(legend.position = "bottom", axis.text.y = element_text(size = 4))
 ```
 
 ## Demographic data
