@@ -67,7 +67,7 @@ Other functionality is documented in the [Get Started vignette](https://epiverse
 
 ## Package Design
 
-The `simulist` package is developed around certain design principles: _interoperability_ with other R packages for upstream (e.g. `epiparameter`) or downstream (e.g. `epicontacts` \autoref{fig:simulist}) use; _ease of use_ of functions (all simulation functions have sensible defaults for use out-of-the-box); and _transparency_, all design decisions are documented in the [Design Principles vignette](https://epiverse-trace.github.io/simulist/articles/design-principles.html) and help developer onboarding. Simulation functions output a `data.frame` (or `list` of `data.frame`s) enabling users to easily transform and manipulate the data, for example with the tidyverse R packages; and post-processing functions are compatible with `data.frame` subclasses (e.g. `<tibble>` or `<data.table>`). 
+The `simulist` package is developed around certain design principles: _interoperability_ with other R packages for upstream (e.g. `epiparameter`) or downstream (e.g. `epicontacts` Figure~\ref{fig:simulist}) use; _ease of use_ of functions (all simulation functions have sensible defaults for use out-of-the-box); and _transparency_, all design decisions are documented in the [Design Principles vignette](https://epiverse-trace.github.io/simulist/articles/design-principles.html) and help developer onboarding. Simulation functions output a `data.frame` (or `list` of `data.frame`s) enabling users to easily transform and manipulate the data, for example with the tidyverse R packages; and post-processing functions are compatible with `data.frame` subclasses (e.g. `<tibble>` or `<data.table>`). 
 
 ## Other resources
 
