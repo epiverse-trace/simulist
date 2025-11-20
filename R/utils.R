@@ -201,7 +201,7 @@
 #'
 #' @return A list of `function`s.
 #' @keywords internal
-as_function <- function(x) {
+as_function <- function(x) { # nolint cyclocomp_linter
   stopifnot(
     "Input delay distributions need to be either functions or <epiparameter>" =
       inherits(x$contact_distribution, c("function", "epiparameter")) &&
