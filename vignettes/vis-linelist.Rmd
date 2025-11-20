@@ -333,7 +333,7 @@ outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case, ]
 
 ```{r, subset-linelist-tidyverse}
 library(dplyr)
-outbreak$contacts <- outbreak$contacts %>% # nolint one_call_pipe_linter
+outbreak$contacts <- outbreak$contacts %>% # nolint: one_call_pipe_linter.
   dplyr::filter(was_case)
 ```
 

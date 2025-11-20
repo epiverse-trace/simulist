@@ -276,7 +276,9 @@ messy_linelist <- function(linelist, ...) {
   if (.args$inconsistent_dates) {
     date_col <- startsWith(colnames(linelist), "date_")
     date_fmt <- sample(
-      c("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y", "%d %B %Y", "%d %b %Y"), # nolint nonportable_path_linter
+      # nolint start: nonportable_path_linter.
+      c("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y", "%d %B %Y", "%d %b %Y"),
+      # nolint end
       size = nrow(linelist),
       replace = TRUE
     )

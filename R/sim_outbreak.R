@@ -67,11 +67,11 @@
 #'   onset_to_hosp = onset_to_hosp,
 #'   onset_to_death = onset_to_death
 #' )
-sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2), # nolint start line_length_linter
+sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2), # nolint start: line_length_linter.
                          infectious_period = function(n) stats::rlnorm(n = n, meanlog = 2, sdlog = 0.5),
                          prob_infection = 0.5,
                          onset_to_hosp = function(n) stats::rlnorm(n = n, meanlog = 1.5, sdlog = 0.5),
-                         onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 2.5, sdlog = 0.5), # nolint end line_length_linter
+                         onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 2.5, sdlog = 0.5), # nolint end
                          onset_to_recovery = NULL,
                          reporting_delay = NULL,
                          hosp_risk = 0.2,

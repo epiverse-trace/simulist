@@ -378,10 +378,14 @@ NULL
     missing_value <- sample(.args$missing_value, size = 1)
     ll_col <- missing_idx[i, 2]
     # check and warn if user-specified missing_value causes type coercion
-    if (class(missing_value) != class(linelist[, ll_col]) && # nolint class_equals_linter
+    # nolint start: class_equals_linter.
+    if (class(missing_value) != class(linelist[, ll_col]) &&
         !rlang::is_na(missing_value)) {
+    # nolint end
       # when types don't match convert to character to avoid unwanted coercion
-      # logical -> integer -> numeric -> character # nolint commented_code_linter
+      # nolint start: commented_code_linter.
+      # logical -> integer -> numeric -> character
+      # nolint end
       # not perfect, e.g. integer & numeric -> character
       missing_value <- as.character(missing_value)
       # only convert column and append to warning msg if not character
