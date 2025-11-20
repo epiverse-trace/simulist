@@ -130,8 +130,11 @@ then the function will error. Due to this conditional sampling, the
 onset-to-recovery times in the line list may not resemble the distributional
 form input into the function.}
 
-\item{reporting_delay}{A \code{function} for the reporting delay distribution or
-\code{NULL}. The (random) number generating function creates delays between the
+\item{reporting_delay}{A \code{function} or an \verb{<epiparameter>} object for the
+reporting delay distribution. \code{reporting_delay} can also be \code{NULL} to not
+simulate delays from symptom onset to date of reporting, in which case the
+date of reporting will be assumed to be equal to the date of onset.
+The (random) number generating function creates delays between the
 time of symptom onset (\verb{$date_onset}) and the case being reported
 (\verb{$date_reporting}).
 
