@@ -267,10 +267,12 @@ Not every column in the simulated line list may be required for the use case at 
 
 ### Tidyverse
 
-```{r, rm-ct-col-tidyverse}
+```{r, rm-ct-col-tidyverse, echo=2:3}
+# nolint start: one_call_pipe_linter.
 # remove column by name
-linelist %>% # nolint: one_call_pipe_linter.
+linelist %>%
   select(!ct_value)
+# nolint end
 ```
 
 ### Base R
