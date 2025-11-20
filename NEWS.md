@@ -1,3 +1,5 @@
+# simulist (development version)
+
 # simulist 0.6.0
 
 In this minor version release we have continued to make a range of improvements across the package. A new line list post-processing function, `censor_linelist()`, makes it easy to group dates into various intervals, `messy_linelist()` introduced in v0.5.0 is enhanced, and the package documentation is expanded to cover under-reporting in outbreak data and censoring dates. There are also a couple of minor bug fixes.
