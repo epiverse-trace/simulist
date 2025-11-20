@@ -3,6 +3,7 @@ library(tidyr)
 library(dplyr)
 library(incidence2)
 library(ggplot2)
+library(epicontacts)
 
 # Plot onset, admission, death incidence ----------------------------------
 
@@ -34,7 +35,14 @@ weekly <- incidence2::incidence(
   groups = "sex",
   complete_dates = TRUE
 )
-inci_plot <- plot(weekly)
+
+# formatting for plotting facetted variables
+weekly$sex[weekly$sex == "f"] <- "Female"
+weekly$sex[weekly$sex == "m"] <- "Male"
+weekly$count_variable <- tools:::toTitleCase(weekly$count_variable)
+
+inci_plot <- plot(weekly, angle = 45) +
+  labs(x = "Date Index", y = "Count")
 
 ggplot2::ggsave(
   filename = file.path("joss", "incidence.png"),
