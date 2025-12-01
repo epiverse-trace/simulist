@@ -98,20 +98,20 @@ create_config()
 #> $last_contact_distribution
 #> function (n) 
 #> stats::rpois(n = n, lambda = 3)
-#> <bytecode: 0x555832c7ab18>
-#> <environment: 0x555838f0ba58>
+#> <bytecode: 0x560b92df67c8>
+#> <environment: 0x560b953e93a0>
 #> 
 #> $first_contact_distribution
 #> function (n) 
 #> stats::rpois(n = n, lambda = 3)
-#> <bytecode: 0x555832c7ab18>
-#> <environment: 0x555838f0ba58>
+#> <bytecode: 0x560b92df67c8>
+#> <environment: 0x560b953e93a0>
 #> 
 #> $ct_distribution
 #> function (n) 
 #> stats::rnorm(n = n, mean = 25, sd = 2)
-#> <bytecode: 0x555832c7ad80>
-#> <environment: 0x555838f0ba58>
+#> <bytecode: 0x560b92df6560>
+#> <environment: 0x560b953e93a0>
 #> 
 #> $network
 #> [1] "adjusted"
@@ -127,19 +127,19 @@ create_config(
 #> $last_contact_distribution
 #> function (n) 
 #> stats::rpois(n = n, lambda = 3)
-#> <bytecode: 0x555832c7ab18>
-#> <environment: 0x555838658800>
+#> <bytecode: 0x560b92df67c8>
+#> <environment: 0x560b9500f5b8>
 #> 
 #> $first_contact_distribution
 #> function (n) 
 #> stats::rpois(n = n, lambda = 3)
-#> <bytecode: 0x555832c7ab18>
-#> <environment: 0x555838658800>
+#> <bytecode: 0x560b92df67c8>
+#> <environment: 0x560b9500f5b8>
 #> 
 #> $ct_distribution
 #> function (n) 
 #> rlnorm(n = n, meanlog = 2, sdlog = 1)
-#> <environment: 0x55583908bc08>
+#> <environment: 0x560b93e38c98>
 #> 
 #> $network
 #> [1] "adjusted"
