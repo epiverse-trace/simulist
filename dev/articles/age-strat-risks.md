@@ -287,7 +287,8 @@ linelist <- sim_linelist(
   onset_to_death = onset_to_death,
   hosp_risk = age_dep_hosp_risk
 )
-#> Error in .check_df(hosp_risk, df_type = "risk", age_range = age_range): Lower bound of oldest age group must be lower than highest age range
+#> Error in `.check_df()`:
+#> ! Lower bound of oldest age group must be lower than highest age range
 ```
 
 In order to make this code run with the age-stratified hospitalisation

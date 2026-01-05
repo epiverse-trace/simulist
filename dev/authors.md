@@ -32,7 +32,7 @@
 Source:
 [`inst/CITATION`](https://github.com/epiverse-trace/simulist/blob/main/inst/CITATION)
 
-Lambert J, Tamayo Cuartero C (2025). *simulist: Simulate Disease
+Lambert J, Tamayo Cuartero C (2026). *simulist: Simulate Disease
 Outbreak Line List and Contacts Data*.
 [doi:10.5281/zenodo.10471458](https://doi.org/10.5281/zenodo.10471458),
 <https://epiverse-trace.github.io/simulist/>.
@@ -40,7 +40,7 @@ Outbreak Line List and Contacts Data*.
     @Manual{,
       title = {simulist: Simulate Disease Outbreak Line List and Contacts Data},
       author = {Joshua W. Lambert and Carmen {Tamayo Cuartero}},
-      year = {2025},
+      year = {2026},
       doi = {10.5281/zenodo.10471458},
       url = {https://epiverse-trace.github.io/simulist/},
     }

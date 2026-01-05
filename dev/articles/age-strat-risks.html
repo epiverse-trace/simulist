@@ -366,7 +366,8 @@ lower age limit exceeds the age range the function will not run.</p>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in .check_df(hosp_risk, df_type = "risk", age_range = age_range): Lower bound of oldest age group must be lower than highest age range</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `.check_df()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Lower bound of oldest age group must be lower than highest age range</span></span></code></pre></div>
 <p>In order to make this code run with the age-stratified
 hospitalisation risk given, the <code>population_age</code> can be
 adjusted. Here the oldest age bracket is now 95 to 100

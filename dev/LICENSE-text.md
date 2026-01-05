@@ -1,4 +1,4 @@
 # License
 
-    YEAR: 2023-2025
+    YEAR: 2023-2026
     COPYRIGHT HOLDER: simulist authors
