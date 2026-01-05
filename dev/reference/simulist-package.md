@@ -45,5 +45,5 @@ Other contributors:
 - Sebastian Funk <sebastian.funk@lshtm.ac.uk>
   ([ORCID](https://orcid.org/0000-0002-2842-3406)) \[contributor\]
 
-- London School of Hygiene and Tropical Medicine, LSHTM (00a0jsq62)
-  \[copyright holder\]
+- London School of Hygiene and Tropical Medicine, LSHTM
+  ([ROR](https://ror.org/00a0jsq62)) \[copyright holder\]
