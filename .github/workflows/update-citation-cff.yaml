@@ -8,9 +8,9 @@ on:
     branches:
       - main
     paths:
-      - DESCRIPTION
-      - inst/CITATION
-      - .github/workflows/update-citation-cff.yaml
+      - 'DESCRIPTION'
+      - 'inst/CITATION'
+      - '.github/workflows/update-citation-cff.yaml'
   workflow_dispatch:
 
 name: Update CITATION.cff
@@ -57,3 +57,4 @@ jobs:
 
             Please verify the changes before merging.
           branch: update-citation-cff
+          add-paths: CITATION.cff
