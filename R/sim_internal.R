@@ -15,6 +15,7 @@
                           contact_distribution,
                           infectious_period,
                           prob_infection,
+                          incubation_period,
                           onset_to_hosp = NULL,
                           onset_to_death = NULL,
                           onset_to_recovery = NULL,
@@ -56,7 +57,8 @@
   names(.data)[names(.data) == "ancestor"] <- "infector"
 
   # add delays dates
-  .data$date_onset <- .data$time + outbreak_start_date
+  .data$date_onset <- .data$time + outbreak_start_date +
+    incubation_period(nrow(.data))
 
   # add reporting delays
   if (sim_type %in% c("linelist", "outbreak")) {
