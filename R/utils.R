@@ -206,8 +206,10 @@ as_function <- function(x) { # nolint: cyclocomp_linter.
     "Input delay distributions need to be either functions or <epiparameter>" =
       inherits(x$contact_distribution, c("function", "epiparameter")) &&
       inherits(x$infectious_period, c("function", "epiparameter")),
-    "onset_to_hosp, onset_to_death and onset_to_recovery need to be a function,
-    <epiparameter> or NULL" =
+    "incubation_period, onset_to_hosp, onset_to_death and onset_to_recovery
+    need to be a function, <epiparameter> or NULL" =
+      (inherits(x$incubation_period, c("function", "epiparameter")) ||
+         is.null(x$incubation_period)) &&
       (inherits(x$onset_to_hosp, c("function", "epiparameter")) ||
          is.null(x$onset_to_hosp)) &&
       (inherits(x$onset_to_death, c("function", "epiparameter")) ||
@@ -222,6 +224,15 @@ as_function <- function(x) { # nolint: cyclocomp_linter.
     func_type = "density"
   )
   infectious_period <- as.function(x$infectious_period, func_type = "generate")
+  if (is.null(x$incubation_period)) {
+    # function to generate 0 as onset date is equal to infection date by default
+    incubation_period <- function(x) rep(0, times = x)
+  } else {
+    incubation_period <- as.function(
+      x$incubation_period,
+      func_type = "generate"
+    )
+  }
   if (is.null(x$onset_to_hosp)) {
     # function to generate NA instead of hospitalisation times
     onset_to_hosp <- function(x) rep(NA, times = x)
@@ -254,6 +265,7 @@ as_function <- function(x) { # nolint: cyclocomp_linter.
   list(
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
+    incubation_period = incubation_period,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
