@@ -105,6 +105,12 @@ time varying death risk of hospitalised and non-hospitalised cases in
 the outbreak simulation. See
 <code><a href="../articles/time-varying-cfr.html">vignette("time-varying-cfr", package = "simulist")</a></code>.</p></dd>
 
+<dt><code>prob_male</code></dt>
+<dd><p>By default is 0.5, so there is a equal probability of
+each case or contact being male or female. The value must be non-negative
+and less than or equal to 1. Smaller values will result in a higher
+probability of female contacts and cases (1 - <code>prob_male</code>).</p></dd>
+
 
 </dl></dd>
 
@@ -120,7 +126,8 @@ around time windows around infections (time of first contact and last
 contact with infector), and the distribution of the Cycle threshold (Ct)
 value from a Real-time PCR or quantitative PCR (qPCR) for confirmed
 cases, the network effect in the simulation, and if there is a time-varying
-death risk.</p>
+death risk, as well as the probability of a case or contact being
+male/female.</p>
 <p>These parameters do not warrant their own arguments in
 <code><a href="sim_linelist.html">sim_linelist()</a></code> as they rarely need to be changed from their default
 setting. Therefore it is not worth increasing the number of <code><a href="sim_linelist.html">sim_linelist()</a></code>
@@ -146,26 +153,29 @@ a probability distribution \(p(n)\).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $last_contact_distribution</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (n) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> stats::rpois(n = n, lambda = 3)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5570802b9408&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55707e642770&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5556f5a05e40&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5556f7ffe848&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $first_contact_distribution</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (n) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> stats::rpois(n = n, lambda = 3)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5570802b9408&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55707e642770&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5556f5a05e40&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5556f7ffe848&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ct_distribution</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (n) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> stats::rnorm(n = n, mean = 25, sd = 2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5570802b91a0&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55707e642770&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5556f5a02278&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5556f7ffe848&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "adjusted"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $time_varying_death_risk</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $prob_male</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example with customised Ct distribution</span></span></span>
@@ -175,25 +185,28 @@ a probability distribution \(p(n)\).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $last_contact_distribution</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (n) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> stats::rpois(n = n, lambda = 3)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5570802b9408&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5570802f6f48&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5556f5a05e40&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5556f7a3fc90&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $first_contact_distribution</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (n) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> stats::rpois(n = n, lambda = 3)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5570802b9408&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5570802f6f48&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5556f5a05e40&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5556f7a3fc90&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ct_distribution</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (n) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rlnorm(n = n, meanlog = 2, sdlog = 1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x55707e35fb10&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5556f8833d30&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "adjusted"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $time_varying_death_risk</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $prob_male</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

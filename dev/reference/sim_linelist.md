@@ -348,20 +348,27 @@ Joshua W. Lambert, Carmen Tamayo
 # quickly simulate a line list using the function defaults
 linelist <- sim_linelist()
 head(linelist)
-#>   id      case_name case_type sex age date_onset date_reporting date_admission
-#> 1  1    Matthew Ahn confirmed   m  36 2023-01-01     2023-01-01     2023-01-03
-#> 2  2  Sean Johnston confirmed   m  16 2023-01-05     2023-01-05     2023-01-11
-#> 3  4   Richard Mead confirmed   m  29 2023-01-10     2023-01-10           <NA>
-#> 4  5 Nathan Jimenez  probable   m  88 2023-01-11     2023-01-11           <NA>
-#> 5  6     Justin Lee suspected   m  70 2023-01-06     2023-01-06           <NA>
-#> 6  7 Jaymes Wilburn confirmed   m  90 2023-01-13     2023-01-13           <NA>
-#>     outcome date_outcome date_first_contact date_last_contact ct_value
-#> 1 recovered         <NA>               <NA>              <NA>     27.2
-#> 2      died   2023-01-20         2022-12-28        2023-01-02     21.1
-#> 3 recovered         <NA>         2023-01-01        2023-01-03     21.9
-#> 4 recovered         <NA>         2023-01-03        2023-01-12       NA
-#> 5 recovered         <NA>         2023-01-01        2023-01-07       NA
-#> 6 recovered         <NA>         2023-01-05        2023-01-14     22.7
+#>   id               case_name case_type sex age date_onset date_reporting
+#> 1  1             Grace Soeur confirmed   f  74 2023-01-01     2023-01-01
+#> 2  2         Antonio Jackson confirmed   m  43 2023-01-04     2023-01-04
+#> 3  5              Ailec Fung confirmed   m  65 2023-01-05     2023-01-05
+#> 4  6 Eriberto Mendez-Cordova  probable   m  89 2023-01-09     2023-01-09
+#> 5  8           Conor Willson suspected   m   1 2023-01-15     2023-01-15
+#> 6  9       Taahir al-Shaheed confirmed   m  24 2023-01-12     2023-01-12
+#>   date_admission   outcome date_outcome date_first_contact date_last_contact
+#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 2     2023-01-11 recovered         <NA>         2022-12-31        2023-01-04
+#> 3           <NA> recovered         <NA>         2022-12-29        2023-01-06
+#> 4           <NA> recovered         <NA>         2023-01-03        2023-01-08
+#> 5           <NA> recovered         <NA>         2023-01-03        2023-01-08
+#> 6           <NA> recovered         <NA>         2023-01-05        2023-01-13
+#>   ct_value
+#> 1     24.1
+#> 2     24.7
+#> 3     22.3
+#> 4       NA
+#> 5       NA
+#> 6     24.9
 
 # to simulate a more realistic line list load epiparameters from
 # {epiparameter}
@@ -419,27 +426,27 @@ linelist <- sim_linelist(
   hosp_risk = 0.5
 )
 head(linelist)
-#>   id        case_name case_type sex age date_onset date_reporting
-#> 1  1  Amjad al-Sultan confirmed   m  49 2023-01-01     2023-01-01
-#> 2  4     Megan Nguyen confirmed   f  51 2023-01-02     2023-01-02
-#> 3  5     Jose Padilla confirmed   m  81 2023-01-01     2023-01-01
-#> 4  6 David Goodfellow confirmed   m  79 2023-01-01     2023-01-01
-#> 5  9 Jordan Victorino confirmed   m  35 2023-01-01     2023-01-01
-#> 6 11   Andrew Redding confirmed   m   8 2023-01-02     2023-01-02
+#>   id                case_name case_type sex age date_onset date_reporting
+#> 1  1         Kajanee Padovich confirmed   f  31 2023-01-01     2023-01-01
+#> 2  4      Thaamir el-Siddiqui confirmed   m  83 2023-01-01     2023-01-01
+#> 3  5 Brianna Casillas Ramirez  probable   f  52 2023-01-01     2023-01-01
+#> 4  7             Colin Montle  probable   m  26 2023-01-01     2023-01-01
+#> 5  9         Suphaporn Morris  probable   f  57 2023-01-01     2023-01-01
+#> 6 13         Kaarim el-Khatib  probable   m  76 2023-01-02     2023-01-02
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-26        2023-01-07
-#> 3           <NA> recovered         <NA>         2022-12-29        2023-01-02
-#> 4           <NA> recovered         <NA>         2022-12-30        2023-01-01
-#> 5     2023-01-04      died   2023-01-22         2022-12-25        2023-01-08
-#> 6     2023-01-03      died   2023-01-14         2022-12-27        2023-01-02
+#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-06
+#> 3     2023-01-08      died   2023-01-13         2022-12-30        2023-01-04
+#> 4     2023-01-03      died   2023-01-15         2022-12-28        2023-01-04
+#> 5           <NA> recovered         <NA>         2022-12-27        2023-01-04
+#> 6           <NA> recovered         <NA>         2022-12-27        2023-01-03
 #>   ct_value
-#> 1     24.3
-#> 2     23.4
-#> 3     24.1
-#> 4     26.6
-#> 5     27.6
-#> 6     22.4
+#> 1     25.4
+#> 2     27.2
+#> 3       NA
+#> 4       NA
+#> 5       NA
+#> 6       NA
 
 # example with age-stratified hospitalisation risk
 # 20% for over 80s
@@ -459,24 +466,24 @@ linelist <- sim_linelist(
 )
 head(linelist)
 #>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1      Jacob Berrien  probable   m  39 2023-01-01     2023-01-01
-#> 2  2    Timothy Brosius confirmed   m  49 2023-01-01     2023-01-01
-#> 3  4   Emmanuel Carreon  probable   m  63 2023-01-01     2023-01-01
-#> 4  6      Alyssa Chavez  probable   f  35 2023-01-01     2023-01-01
-#> 5  7      Brandy Guzman  probable   f  60 2023-01-02     2023-01-02
-#> 6 10 Daifallah al-Amber confirmed   m  84 2023-01-01     2023-01-01
+#> 1  1         Sean Lange confirmed   m  50 2023-01-01     2023-01-01
+#> 2  2  Courtland Johnson  probable   m  73 2023-01-01     2023-01-01
+#> 3  4  Chalee Tampubolon suspected   m  87 2023-01-03     2023-01-03
+#> 4  5      Vinh Kitazono confirmed   m  57 2023-01-03     2023-01-03
+#> 5  6 Paris Breckenridge  probable   f  76 2023-01-02     2023-01-02
+#> 6  7         Josue Cruz confirmed   m  33 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-28        2023-01-05
-#> 3           <NA> recovered         <NA>         2022-12-31        2023-01-01
-#> 4           <NA> recovered         <NA>         2022-12-28        2023-01-05
-#> 5           <NA> recovered         <NA>         2022-12-28        2023-01-03
-#> 6           <NA> recovered         <NA>         2023-01-01        2023-01-04
+#> 2           <NA> recovered         <NA>         2022-12-30        2023-01-05
+#> 3           <NA>      died   2023-01-28         2022-12-28        2023-01-07
+#> 4           <NA>      died   2023-01-24         2022-12-29        2023-01-05
+#> 5           <NA> recovered         <NA>         2022-12-27        2023-01-03
+#> 6           <NA> recovered         <NA>         2022-12-27        2023-01-03
 #>   ct_value
-#> 1       NA
-#> 2     23.9
+#> 1     29.0
+#> 2       NA
 #> 3       NA
-#> 4       NA
+#> 4     27.4
 #> 5       NA
-#> 6     25.2
+#> 6     23.6
 ```

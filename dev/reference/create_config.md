@@ -50,6 +50,13 @@ create_config(...)
       simulation. See
       [`vignette("time-varying-cfr", package = "simulist")`](https://epiverse-trace.github.io/simulist/dev/articles/time-varying-cfr.md).
 
+  `prob_male`
+
+  :   By default is 0.5, so there is a equal probability of each case or
+      contact being male or female. The value must be non-negative and
+      less than or equal to 1. Smaller values will result in a higher
+      probability of female contacts and cases (1 - `prob_male`).
+
 ## Value
 
 A list of settings for
@@ -63,7 +70,8 @@ controls the small details around time windows around infections (time
 of first contact and last contact with infector), and the distribution
 of the Cycle threshold (Ct) value from a Real-time PCR or quantitative
 PCR (qPCR) for confirmed cases, the network effect in the simulation,
-and if there is a time-varying death risk.
+and if there is a time-varying death risk, as well as the probability of
+a case or contact being male/female.
 
 These parameters do not warrant their own arguments in
 [`sim_linelist()`](https://epiverse-trace.github.io/simulist/dev/reference/sim_linelist.md)
@@ -98,26 +106,29 @@ create_config()
 #> $last_contact_distribution
 #> function (n) 
 #> stats::rpois(n = n, lambda = 3)
-#> <bytecode: 0x5570802b9408>
-#> <environment: 0x55707e642770>
+#> <bytecode: 0x5556f5a05e40>
+#> <environment: 0x5556f7ffe848>
 #> 
 #> $first_contact_distribution
 #> function (n) 
 #> stats::rpois(n = n, lambda = 3)
-#> <bytecode: 0x5570802b9408>
-#> <environment: 0x55707e642770>
+#> <bytecode: 0x5556f5a05e40>
+#> <environment: 0x5556f7ffe848>
 #> 
 #> $ct_distribution
 #> function (n) 
 #> stats::rnorm(n = n, mean = 25, sd = 2)
-#> <bytecode: 0x5570802b91a0>
-#> <environment: 0x55707e642770>
+#> <bytecode: 0x5556f5a02278>
+#> <environment: 0x5556f7ffe848>
 #> 
 #> $network
 #> [1] "adjusted"
 #> 
 #> $time_varying_death_risk
 #> NULL
+#> 
+#> $prob_male
+#> [1] 0.5
 #> 
 
 # example with customised Ct distribution
@@ -127,24 +138,27 @@ create_config(
 #> $last_contact_distribution
 #> function (n) 
 #> stats::rpois(n = n, lambda = 3)
-#> <bytecode: 0x5570802b9408>
-#> <environment: 0x5570802f6f48>
+#> <bytecode: 0x5556f5a05e40>
+#> <environment: 0x5556f7a3fc90>
 #> 
 #> $first_contact_distribution
 #> function (n) 
 #> stats::rpois(n = n, lambda = 3)
-#> <bytecode: 0x5570802b9408>
-#> <environment: 0x5570802f6f48>
+#> <bytecode: 0x5556f5a05e40>
+#> <environment: 0x5556f7a3fc90>
 #> 
 #> $ct_distribution
 #> function (n) 
 #> rlnorm(n = n, meanlog = 2, sdlog = 1)
-#> <environment: 0x55707e35fb10>
+#> <environment: 0x5556f8833d30>
 #> 
 #> $network
 #> [1] "adjusted"
 #> 
 #> $time_varying_death_risk
 #> NULL
+#> 
+#> $prob_male
+#> [1] 0.5
 #> 
 ```
