@@ -200,8 +200,8 @@
   row.names(.data) <- NULL
 
   switch(sim_type,
-    linelist = return(.data),
-    outbreak = return(list(
+    linelist = return(.data), # nolint: return_linter
+    outbreak = return(list( # nolint: return_linter
       linelist = .data,
       contacts = contacts_tbl
     ))
