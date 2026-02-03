@@ -242,9 +242,28 @@ We start by simulating a line list. We include an onset-to-recovery delay distri
 
 ```{r, sim-subset-linelist}
 set.seed(123)
+
+onset_to_recovery <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "onset to recovert",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 2, sdlog = 0.5)
+  )
+)
+
+reporting_delay <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "reporting delay",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 1, sdlog = 0.5)
+  )
+)
+
 linelist <- sim_linelist(
-  onset_to_recovery = function(x) stats::rlnorm(n = x, meanlog = 2, sdlog = 0.5),
-  reporting_delay = function(x) stats::rlnorm(n = x, meanlog = 1, sdlog = 0.5),
+  onset_to_recovery = onset_to_recovery,
+  reporting_delay = reporting_delay,
   hosp_risk = 0.8
 )
 linelist <- linelist[1:10, ]
@@ -260,8 +279,8 @@ tidy_linelist <- linelist %>%
   mutate(
     ordering_value = ifelse(name == "date_onset", value, NA),
     case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
-) 
-  
+)
+
 tidy_linelist$name <- factor(
   tidy_linelist$name,
   levels = c("date_onset", "date_reporting", "date_admission", "date_outcome")
