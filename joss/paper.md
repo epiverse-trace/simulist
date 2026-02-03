@@ -57,7 +57,7 @@ However, to our knowledge, there are no existing tools that offer an easy method
 
 Here we highlight some of the simulation functionality available:
 
-***Age-stratified hospitalisation and death risks***: the outbreak simulation includes three risks: hospitalisation risk, death risk in hospital, and death risk outside of hospital, which all, by default, accept a single number to define the population risk. In many infectious disease outbreaks risk is non-uniform across ages. `simulist` accepts risks stratified by age using a user-defined `data.frame`, so that any age-stratification can be specified. See the [Age-stratified hospitalisation and death risks vignette](https://epiverse-trace.github.io/simulist/index.html) for a complete explanation.
+***Age-stratified hospitalisation and death risks***: the outbreak simulation includes three risks: hospitalisation risk, death risk in hospital, and death risk outside of hospital, which all, by default, accept a single number to define the population risk. In many infectious disease outbreaks risk is non-uniform across ages. `simulist` accepts risks stratified by age using a user-defined `data.frame`, so that any age-stratification can be specified. See the [Age-stratified hospitalisation and death risks vignette](https://epiverse-trace.github.io/simulist/articles/age-strat-risks.html) for a complete explanation.
 
 ***Age-structured population***: the outbreak simulation in `simulist` assumes a uniform population age between a lower and upper age range (0 and 90 by default). However, to accurately generate synthetic data for outbreak scenarios where the population age structure is known this can be input into the outbreak simulation, again using a user-defined `data.frame` to flexibly specify an arbitrary number of age groups and proportions. See the [Age-structured population vignette](https://epiverse-trace.github.io/simulist/articles/age-struct-pop.html) for more details and a worked example.
 
@@ -77,7 +77,7 @@ The `simulist` package is developed around certain design principles: _interoper
 
 ## Availability
 
-The `simulist` R package is open-source and licensed under MIT. The source code is available on GitHub. The package can be downloaded from [CRAN](https://cran.r-project.org/package=simulist), [R-universe](https://epiverse-trace.r-universe.dev/simulist) or [GitHub](https://github.com/epiverse-trace/simulist). Code to reproduce figures in this paper can be found at the [`simulist` GitHub repository](https://github.com/epiverse-trace/simulist/blob/6d2a1fdd5ea963f1cd1a60c1a0f834997e333692/joss/joss-figs.R).
+The `simulist` R package is open-source and licensed under MIT. The source code is available on GitHub. The package can be downloaded from [CRAN](https://cran.r-project.org/package=simulist), [R-universe](https://epiverse-trace.r-universe.dev/simulist) or [GitHub](https://github.com/epiverse-trace/simulist). Code to reproduce figures in this paper can be found at the [`simulist` GitHub repository](https://github.com/epiverse-trace/simulist/blob/55114b0a7b765d84b6baefc12c96f08457cc7c91/joss/joss-figs.R).
 
 # Acknowledgements
 
