@@ -1,5 +1,35 @@
 # simulist (development version)
 
+This minor version release contains a range of minor updates and accompanies the _simulist_ publication in the [Journal of Open Source Software (JOSS)](https://joss.theoj.org/).
+
+## New features
+
+* The sampling of sex for line list and contacts data can now be weighted instead of assuming a uniform probability via `prob_male` in `config` (#255).
+
+* The `reporting_delay` argument in `sim_linelist()` and `sim_outbreak()` now supports `<epiparameter>` objects, matching the functionality of the other delay distribution arguments (#262).
+
+* A new line list events plot has been added to the `vis-linelist.Rmd` vignette (#278).
+
+## Breaking changes
+
+* None
+
+## Minor changes
+
+* Added `dependabot` (#258).
+
+* GitHub actions versions are updated (multiple PRs).
+
+* `.lintr` is updated to include more linters (#279) and the `# nolint` flag syntax is fixed (#263).
+
+## Bug fixes
+
+* None
+
+## Deprecated and defunct
+
+* None
+
 # simulist 0.6.0
 
 In this minor version release we have continued to make a range of improvements across the package. A new line list post-processing function, `censor_linelist()`, makes it easy to group dates into various intervals, `messy_linelist()` introduced in v0.5.0 is enhanced, and the package documentation is expanded to cover under-reporting in outbreak data and censoring dates. There are also a couple of minor bug fixes.
