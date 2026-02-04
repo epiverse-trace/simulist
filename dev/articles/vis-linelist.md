@@ -17,6 +17,17 @@ library(epiparameter)
 library(incidence2)
 #> Loading required package: grates
 library(epicontacts)
+library(tidyr)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+library(ggplot2)
 ```
 
 First we load the required delay distributions using the {epiparameter}
@@ -231,8 +242,6 @@ linelist$date_recovery[linelist$outcome == "died"] <- NA
 ```
 
 ``` r
-library(tidyr)
-library(dplyr)
 linelist <- linelist %>%
   tidyr::pivot_wider(
     names_from = outcome,
@@ -271,6 +280,114 @@ data is facetted by sex (left female, right male) and incidence event
 (rows). The plot shows the outbreak fluctuating, with many fewer
 hospital admissions and deaths than
 cases.](vis-linelist_files/figure-html/plot-onset-hospitalisation-1.png)
+
+## Visualising line list events through time
+
+Instead of plotting the number of cases on a particular day, we can plot
+each individual’s events over the course of their infection.
+
+We start by simulating a line list. We include an onset-to-recovery
+delay distribution so all cases have an outcome, a reporting delay so
+the date cases are reported is after their symptom onset, and set a high
+risk of hospitalisation to get many hospital admission events. We subset
+to the first 10 cases so the events on the plot are clear, however, this
+subsetting is not required.
+
+``` r
+set.seed(123)
+
+onset_to_recovery <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "onset to recovert",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 2, sdlog = 0.5)
+  )
+)
+#> Citation cannot be created as author, year, journal or title is missing
+
+reporting_delay <- epiparameter(
+  disease = "COVID-19",
+  epi_name = "reporting delay",
+  prob_distribution = create_prob_distribution(
+    prob_distribution = "lnorm",
+    prob_distribution_params = c(meanlog = 1, sdlog = 0.5)
+  )
+)
+#> Citation cannot be created as author, year, journal or title is missing
+
+linelist <- sim_linelist(
+  onset_to_recovery = onset_to_recovery,
+  reporting_delay = reporting_delay,
+  hosp_risk = 0.8
+)
+linelist <- linelist[1:10, ]
+```
+
+We need to reshape the line list to *tidy* data in order to easily plot
+it with {ggplot2}.
+
+``` r
+tidy_linelist <- linelist %>%
+  pivot_longer(
+    cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
+  ) %>%
+  mutate(
+    ordering_value = ifelse(name == "date_onset", value, NA),
+    case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
+)
+
+tidy_linelist$name <- factor(
+  tidy_linelist$name,
+  levels = c("date_onset", "date_reporting", "date_admission", "date_outcome")
+)
+```
+
+``` r
+ggplot(data = tidy_linelist) +
+  geom_line(
+    mapping = aes(x = value, y = case_name),
+    linewidth = 0.25
+  ) +
+  geom_point(
+    mapping = aes(
+      x = value,
+      y = case_name,
+      shape = name,
+      col = name
+    ),
+    size = 2
+  ) +
+  scale_x_date(name = "Event date", date_breaks = "week") +
+  scale_y_discrete(name = "Case name") +
+  scale_color_brewer(
+    palette = "Set1",
+    name = "Event type",
+    labels = c("Date Onset", "Date Reporting", "Date Admission", "Date Outcome")
+  ) +
+  scale_shape_manual(
+    name = "Event type",
+    labels = c(
+      "Date Onset", "Date Reporting", "Date Admission", "Date Outcome"
+    ),
+    values = c(15, 16, 17, 18)
+  ) +
+  theme_bw() +
+  theme(
+    legend.position = "bottom",
+    axis.text.x = element_text(
+      angle = 45,
+      vjust = 1,
+      hjust = 1
+    )
+  )
+#> Warning: Removed 1 row containing missing values or values outside the scale range
+#> (`geom_line()`).
+#> Warning: Removed 1 row containing missing values or values outside the scale range
+#> (`geom_point()`).
+```
+
+![](vis-linelist_files/figure-html/plot-events-1.png)
 
 ## Demographic data
 
@@ -476,7 +593,6 @@ outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case, ]
 ```
 
 ``` r
-library(dplyr)
 outbreak$contacts <- outbreak$contacts %>%
   dplyr::filter(was_case)
 ```
