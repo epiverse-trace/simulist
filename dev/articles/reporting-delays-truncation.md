@@ -178,10 +178,10 @@ Here from the first 6 rows of the line list you can see differences
 between the `$date_onset` column and the `$date_reporting` column.
 
 ``` r
-tidy_linelist <- linelist %>%
+tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
-  ) %>%
+  ) |>
   mutate(
     ordering_value = ifelse(name == "date_onset", value, NA),
     case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
@@ -402,10 +402,10 @@ removed from the line list, if it falls before the date of reporting but
 after the hospital admission and/or outcome date they are set to `NA`.
 
 ``` r
-tidy_linelist <- linelist %>%
+tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
-  ) %>%
+  ) |>
   mutate(
     ordering_value = ifelse(name == "date_onset", value, NA),
     case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)

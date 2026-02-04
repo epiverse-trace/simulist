@@ -300,11 +300,11 @@ data to be input into <code><a href="https://rdrr.io/pkg/incidence2/man/incidenc
 <div class="tab-pane" id="tidyverse" role="tabpanel" aria-labelledby="tidyverse-tab">
 
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span></span>
 <span>    names_from <span class="op">=</span> <span class="va">outcome</span>,</span>
 <span>    values_from <span class="op">=</span> <span class="va">date_outcome</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span></span>
 <span>    date_death <span class="op">=</span> <span class="va">died</span>,</span>
 <span>    date_recovery <span class="op">=</span> <span class="va">recovered</span></span>
@@ -374,10 +374,10 @@ subsetting is not required.</p>
 <p>We need to reshape the line list to <em>tidy</em> data in order to
 easily plot it with {ggplot2}.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tidy_linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">tidy_linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
 <span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date_onset"</span>, <span class="st">"date_reporting"</span>, <span class="st">"date_admission"</span>, <span class="st">"date_outcome"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    ordering_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"date_onset"</span>, <span class="va">value</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
 <span>    case_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">case_name</span>, <span class="va">ordering_value</span>, <span class="va">min</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -624,7 +624,7 @@ only plot the transmission network of cases from the outbreak.</p>
 <div class="tab-pane" id="tidyverse-1" role="tabpanel" aria-labelledby="tidyverse-1-tab">
 
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="va">outbreak</span><span class="op">$</span><span class="va">contacts</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">was_case</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>

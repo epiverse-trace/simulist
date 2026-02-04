@@ -271,7 +271,7 @@ list is 50%.
 - Base R
 
 ``` r
-linelist %>%
+linelist |>
   filter(as.logical(rbinom(n(), size = 1, prob = 0.5)))
 #>   id      case_name case_type sex age date_onset date_reporting date_admission
 #> 1  4      Tara Yang  probable   f  48 2023-01-01     2023-01-01           <NA>
@@ -333,8 +333,8 @@ number rows (i.e. cases) returned
 be used instead.
 
 ``` r
-linelist %>%
-  dplyr::slice_sample(prop = 0.5) %>%
+linelist |>
+  dplyr::slice_sample(prop = 0.5) |>
   dplyr::arrange(id)
 #>   id        case_name case_type sex age date_onset date_reporting
 #> 1  3 Rayyaan al-Basha  probable   m  71 2023-01-01     2023-01-01
@@ -530,7 +530,7 @@ cases.
 
 ``` r
 # remove column by name
-linelist %>%
+linelist |>
   select(!ct_value)
 #>    id                case_name case_type sex age date_onset date_reporting
 #> 1   1            Joseph Lovato suspected   m  90 2023-01-01     2023-01-01

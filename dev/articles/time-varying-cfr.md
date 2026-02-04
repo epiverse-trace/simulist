@@ -197,11 +197,11 @@ using the [{tidyr}](https://tidyr.tidyverse.org/) and
 [Tidyverse](https://www.tidyverse.org/).
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -269,11 +269,11 @@ head(linelist)
 ```
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -418,11 +418,11 @@ head(linelist)
 ```
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -545,11 +545,11 @@ head(linelist)
 ```
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -666,11 +666,11 @@ head(linelist)
 ```
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
