@@ -131,11 +131,11 @@ For more information on using {incidence2} to plot line list data see the [Visua
 Before converting the line list `<data.frame>` to an `<incidence>` object we need to ungroup the outcome columns into their own columns using the [{tidyr}](https://tidyr.tidyverse.org/) and [{dplyr}](https://dplyr.tidyverse.org/) R packages from the [Tidyverse](https://www.tidyverse.org/).
 
 ```{r, reshape-linelist}
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -184,11 +184,11 @@ head(linelist)
 ```
 
 ```{r, reshape-linelist-higher-death-risk}
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -284,11 +284,11 @@ head(linelist)
 ```
 
 ```{r, reshape-linelist-time-varying-cfr}
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -376,11 +376,11 @@ head(linelist)
 ```
 
 ```{r, reshape-linelist-time-varying-cfr-stepwise}
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -462,11 +462,11 @@ head(linelist)
 ```
 
 ```{r, reshape-linelist-time-varying-cfr-stepwise-window}
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered

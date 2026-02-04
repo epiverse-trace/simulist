@@ -142,7 +142,7 @@ For this example we'll assume the case reporting probability in the line list is
 ### Tidyverse
 
 ```{r}
-linelist %>%
+linelist |>
   filter(as.logical(rbinom(n(), size = 1, prob = 0.5)))
 ```
 
@@ -158,8 +158,8 @@ linelist[idx, ]
 The above example randomly sample rows in the line list using the reporting probability resulting in different number of cases being kept each time the code is run. To subset the line list data and get the same number rows (i.e. cases) returned `slice_sample()` can be used instead.
 
 ```{r}
-linelist %>%
-  dplyr::slice_sample(prop = 0.5) %>%
+linelist |>
+  dplyr::slice_sample(prop = 0.5) |>
   dplyr::arrange(id)
 ```
 
@@ -270,7 +270,7 @@ Not every column in the simulated line list may be required for the use case at 
 ```{r, rm-ct-col-tidyverse, echo=2:3}
 # nolint start: one_call_pipe_linter.
 # remove column by name
-linelist %>%
+linelist |>
   select(!ct_value)
 # nolint end
 ```

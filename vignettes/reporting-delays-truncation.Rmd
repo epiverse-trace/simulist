@@ -124,10 +124,10 @@ Here from the first 6 rows of the line list you can see differences between the 
 #|   the distribution of delay times between each event for each individual in
 #|   the line list, with the y-axis order by earliest date of symptom onset at
 #|   the bottom.
-tidy_linelist <- linelist %>%
+tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
-  ) %>%
+  ) |>
   mutate(
     ordering_value = ifelse(name == "date_onset", value, NA),
     case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
@@ -240,10 +240,10 @@ Here we define the time between the latest, or user-specified date, and the time
 In the plot below we show the _truncation time_ as a vertical line. If the date of reporting falls after the truncation time, then the case is removed from the line list, if it falls before the date of reporting but after the hospital admission and/or outcome date they are set to `NA`.
 
 ```{r prep-linelist-events-trunc}
-tidy_linelist <- linelist %>%
+tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
-  ) %>%
+  ) |>
   mutate(
     ordering_value = ifelse(name == "date_onset", value, NA),
     case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
