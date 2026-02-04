@@ -196,11 +196,11 @@ linelist$date_recovery[linelist$outcome == "died"] <- NA
 #### Tidyverse
 
 ```{r, reshape-linelist-tidyverse, message=FALSE}
-linelist <- linelist %>%
+linelist <- linelist |>
   tidyr::pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   dplyr::rename(
     date_death = died,
     date_recovery = recovered
@@ -272,10 +272,10 @@ linelist <- linelist[1:10, ]
 We need to reshape the line list to _tidy_ data in order to easily plot it with {ggplot2}.
 
 ```{r, prep-events}
-tidy_linelist <- linelist %>%
+tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
-  ) %>%
+  ) |>
   mutate(
     ordering_value = ifelse(name == "date_onset", value, NA),
     case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
@@ -431,7 +431,7 @@ outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case, ]
 
 ```{r, subset-linelist-tidyverse, echo=2}
 # nolint start: one_call_pipe_linter.
-outbreak$contacts <- outbreak$contacts %>%
+outbreak$contacts <- outbreak$contacts |>
   dplyr::filter(was_case)
 # nolint end
 ```
