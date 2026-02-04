@@ -23,7 +23,7 @@ library(dplyr)
 library(epicontacts)
 ```
 
-This vignette provides data wrangling examples using both functions available in the R language (commonly called "base R") as well as using [tidyverse R packages](https://www.tidyverse.org/), which are commonly applied to data science tasks in R. The tidyverse examples are shown by default, but select the "Base R" tab to see the equivalent functionality using base R. There are many other tools for wrangling data in R which are not covered by this vignette (e.g. [{data.table}](https://rdatatable.gitlab.io/data.table/)).
+This vignette provides data wrangling examples using both functions available in the R language (commonly called "base R") as well as using [tidyverse R packages](https://tidyverse.org/), which are commonly applied to data science tasks in R. The tidyverse examples are shown by default, but select the "Base R" tab to see the equivalent functionality using base R. There are many other tools for wrangling data in R which are not covered by this vignette (e.g. [{data.table}](https://rdatatable.gitlab.io/data.table/)).
 
 ::: {.alert .alert-info}
 See these great resources for more information on general data wrangling in R:
