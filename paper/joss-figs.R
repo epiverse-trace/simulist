@@ -45,7 +45,7 @@ inci_plot <- plot(weekly, angle = 45) +
   labs(x = "Date Index", y = "Count")
 
 ggplot2::ggsave(
-  filename = file.path("joss", "incidence.png"),
+  filename = file.path("paper", "incidence.png"),
   plot = inci_plot
 )
 
@@ -129,6 +129,6 @@ ll_plot <- ggplot(data = tidy_linelist) +
 
 
 ggplot2::ggsave(
-  filename = file.path("joss", "multi-dot-plot.png"),
+  filename = file.path("paper", "multi-dot-plot.png"),
   plot = ll_plot
 )
