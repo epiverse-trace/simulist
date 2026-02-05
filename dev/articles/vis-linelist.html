@@ -110,6 +110,7 @@ looks as expected given how the simulation was parameterised.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: grates</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.repidemicsconsortium.org/epicontacts/" class="external-link">epicontacts</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -332,16 +333,17 @@ data to be input into <code><a href="https://rdrr.io/pkg/incidence2/man/incidenc
 <p><img src="vis-linelist_files/figure-html/plot-onset-hospitalisation-1.png" class="r-plt" alt="Six histograms, in a grid of two columns and three rows, of incidence (epicurves) showing the daily incidence of cases from symtom onset (bottom row), hospital admission (middle row), and death (top row). The data is facetted by sex (left female, right male) and incidence event (rows). The plot shows the outbreak fluctuating, with many fewer hospital admissions and deaths than cases." width="768"></p>
 </div>
 <div class="section level2">
-<h2 id="visualising-line-list-events-through-time">Visualising line list events through time<a class="anchor" aria-label="anchor" href="#visualising-line-list-events-through-time"></a>
+<h2 id="visualising-individual-line-list-events-through-time">Visualising individual line list events through time<a class="anchor" aria-label="anchor" href="#visualising-individual-line-list-events-through-time"></a>
 </h2>
-<p>Instead of plotting the number of cases on a particular day, we can
-plot each individual’s events over the course of their infection.</p>
+<p>Instead of plotting the aggregated number of cases, deaths, or other
+events on a particular day, we can plot each individual’s timeline
+events over the course of their infection.</p>
 <p>We start by simulating a line list. We include an onset-to-recovery
-delay distribution so all cases have an outcome, a reporting delay so
-the date cases are reported is after their symptom onset, and set a high
-risk of hospitalisation to get many hospital admission events. We subset
-to the first 10 cases so the events on the plot are clear, however, this
-subsetting is not required.</p>
+delay distribution so all cases have an outcome (died or recovered)
+date, a reporting delay so the date cases are reported is after their
+symptom onset date, and set a high risk of hospitalisation to get many
+hospital admission events. We subset to the first 10 cases so the events
+on the plot are clear, however, this subsetting is not required.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
@@ -387,6 +389,9 @@ easily plot it with {ggplot2}.</p>
 <span>  <span class="va">tidy_linelist</span><span class="op">$</span><span class="va">name</span>,</span>
 <span>  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date_onset"</span>, <span class="st">"date_reporting"</span>, <span class="st">"date_admission"</span>, <span class="st">"date_outcome"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>Here we plot the line list with each case on its own row and the
+timeline of the outbreak on the x-axis. For clarity, we’ll just plot the
+first 10 cases in the line list.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tidy_linelist</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span></span>
@@ -429,7 +434,7 @@ easily plot it with {ggplot2}.</p>
 <span><span class="co">#&gt; (`geom_line()`).</span></span>
 <span><span class="co">#&gt; Warning: Removed 1 row containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
-<p><img src="vis-linelist_files/figure-html/plot-events-1.png" class="r-plt" alt="" width="768"></p>
+<p><img src="vis-linelist_files/figure-html/plot-events-1.png" class="r-plt" alt="Case timelines showing key epidemiological events for individual cases. Each horizontal line represents one case, ordered by date of onset. Points mark four event types recorded in the line list: date of onset (red squares), date of reporting (blue circles), date of admission (green triangles), and date of outcome (purple diamonds). The temporal spacing of these markers illustrates variation in delays between symptom onset, healthcare seeking, reporting, and eventual outcomes across cases." width="768"></p>
 </div>
 <div class="section level2">
 <h2 id="demographic-data">Demographic data<a class="anchor" aria-label="anchor" href="#demographic-data"></a>

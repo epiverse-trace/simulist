@@ -16,6 +16,7 @@ library(simulist)
 library(epiparameter)
 library(incidence2)
 #> Loading required package: grates
+library(ggplot2)
 library(epicontacts)
 library(tidyr)
 library(dplyr)
@@ -281,17 +282,18 @@ data is facetted by sex (left female, right male) and incidence event
 hospital admissions and deaths than
 cases.](vis-linelist_files/figure-html/plot-onset-hospitalisation-1.png)
 
-## Visualising line list events through time
+## Visualising individual line list events through time
 
-Instead of plotting the number of cases on a particular day, we can plot
-each individual’s events over the course of their infection.
+Instead of plotting the aggregated number of cases, deaths, or other
+events on a particular day, we can plot each individual’s timeline
+events over the course of their infection.
 
 We start by simulating a line list. We include an onset-to-recovery
-delay distribution so all cases have an outcome, a reporting delay so
-the date cases are reported is after their symptom onset, and set a high
-risk of hospitalisation to get many hospital admission events. We subset
-to the first 10 cases so the events on the plot are clear, however, this
-subsetting is not required.
+delay distribution so all cases have an outcome (died or recovered)
+date, a reporting delay so the date cases are reported is after their
+symptom onset date, and set a high risk of hospitalisation to get many
+hospital admission events. We subset to the first 10 cases so the events
+on the plot are clear, however, this subsetting is not required.
 
 ``` r
 set.seed(123)
@@ -343,6 +345,10 @@ tidy_linelist$name <- factor(
 )
 ```
 
+Here we plot the line list with each case on its own row and the
+timeline of the outbreak on the x-axis. For clarity, we’ll just plot the
+first 10 cases in the line list.
+
 ``` r
 ggplot(data = tidy_linelist) +
   geom_line(
@@ -387,7 +393,14 @@ ggplot(data = tidy_linelist) +
 #> (`geom_point()`).
 ```
 
-![](vis-linelist_files/figure-html/plot-events-1.png)
+![Case timelines showing key epidemiological events for individual
+cases. Each horizontal line represents one case, ordered by date of
+onset. Points mark four event types recorded in the line list: date of
+onset (red squares), date of reporting (blue circles), date of admission
+(green triangles), and date of outcome (purple diamonds). The temporal
+spacing of these markers illustrates variation in delays between symptom
+onset, healthcare seeking, reporting, and eventual outcomes across
+cases.](vis-linelist_files/figure-html/plot-events-1.png)
 
 ## Demographic data
 
