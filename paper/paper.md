@@ -77,7 +77,7 @@ The `simulist` package is developed around certain design principles: _interoper
 
 ## Availability
 
-The `simulist` R package is open-source and licensed under MIT. The source code is available on GitHub. The package can be downloaded from [CRAN](https://cran.r-project.org/package=simulist), [R-universe](https://epiverse-trace.r-universe.dev/simulist) or [GitHub](https://github.com/epiverse-trace/simulist). Code to reproduce figures in this paper can be found at the [`simulist` GitHub repository](https://github.com/epiverse-trace/simulist/blob/55114b0a7b765d84b6baefc12c96f08457cc7c91/joss/joss-figs.R).
+The `simulist` R package is open-source and licensed under MIT. The source code is available on GitHub. The package can be downloaded from [CRAN](https://cran.r-project.org/package=simulist), [R-universe](https://epiverse-trace.r-universe.dev/simulist) or [GitHub](https://github.com/epiverse-trace/simulist). Code to reproduce figures in this paper can be found at the [`simulist` GitHub repository](https://github.com/epiverse-trace/simulist/blob/55114b0a7b765d84b6baefc12c96f08457cc7c91/paper/joss-figs.R).
 
 # Acknowledgements
 
