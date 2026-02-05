@@ -295,7 +295,7 @@ Here we plot the line list with each case on its own row and the timeline of the
 #|   Case timelines showing key epidemiological events for individual cases.
 #|   Each horizontal line represents one case, ordered by date of onset. Points
 #|   mark four event types recorded in the line list: date of onset (red
-#|   squares), date of reporting (blue circles), date of admission (green 
+#|   squares), date of reporting (blue circles), date of admission (green
 #|   triangles), and date of outcome (purple diamonds). The temporal spacing of
 #|   these markers illustrates variation in delays between symptom onset,
 #|   healthcare seeking, reporting, and eventual outcomes across cases.
