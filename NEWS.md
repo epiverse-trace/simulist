@@ -1,4 +1,34 @@
-# simulist (development version)
+# simulist 0.7.0
+
+This minor version release contains a range of minor updates and accompanies the _simulist_ publication in the [Journal of Open Source Software (JOSS)](https://joss.theoj.org/).
+
+## New features
+
+* The sampling of sex for line list and contacts data can now be weighted instead of assuming a uniform probability via `prob_male` in `config` (#255).
+
+* The `reporting_delay` argument in `sim_linelist()` and `sim_outbreak()` now supports `<epiparameter>` objects, matching the functionality of the other delay distribution arguments (#262).
+
+* A new line list events plot has been added to the `vis-linelist.Rmd` vignette (#278).
+
+## Breaking changes
+
+* None
+
+## Minor changes
+
+* Added `dependabot` (#258).
+
+* GitHub actions versions are updated (multiple PRs).
+
+* `.lintr` is updated to include more linters (#279) and the `# nolint` flag syntax is fixed (#263).
+
+## Bug fixes
+
+* None
+
+## Deprecated and defunct
+
+* None
 
 # simulist 0.6.0
 

@@ -52,6 +52,7 @@ Kobo
 lifecycle
 Lifecycle
 linelist
+linters
 lintr
 LLsim
 lognormally
@@ -73,6 +74,7 @@ pkgdown
 Poisson
 Pratik
 primarycensored
+PRs
 px
 qPCR
 R's

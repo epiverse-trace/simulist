@@ -267,4 +267,4 @@ Some packages are related to {simulist} but do not simulate line list data. Thes
 
 The {outbreaks} package is useful if data from a past outbreak data or generic line list data is required. The {ringbp} and {epichains} packages can be used to generate case data over time which can then be converted into a line list with some manual post-processing.
 
-Another package for creating messy data is the [{messy}](https://CRAN.R-project.org/package=messy) package. This can be used, either independently or in combination with `messy_linelist()`, to create messy line list and contacts data. 
+Another package for creating messy data is the [{messy}](https://CRAN.R-project.org/package=messy) package. This can be used, either independently or in combination with `messy_linelist()`, to create messy line list and contacts data.

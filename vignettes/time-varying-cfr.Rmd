@@ -128,7 +128,7 @@ To visualise the incidence of cases and deaths over time we will use the [{incid
 For more information on using {incidence2} to plot line list data see the [Visualising simulated data](vis-linelist.html) vignette.
 :::
 
-Before converting the line list `<data.frame>` to an `<incidence>` object we need to ungroup the outcome columns into their own columns using the [{tidyr}](https://tidyr.tidyverse.org/) and [{dplyr}](https://dplyr.tidyverse.org/) R packages from the [Tidyverse](https://www.tidyverse.org/).
+Before converting the line list `<data.frame>` to an `<incidence>` object we need to ungroup the outcome columns into their own columns using the [{tidyr}](https://tidyr.tidyverse.org/) and [{dplyr}](https://dplyr.tidyverse.org/) R packages from the [Tidyverse](https://tidyverse.org/).
 
 ```{r, reshape-linelist}
 linelist <- linelist |>
