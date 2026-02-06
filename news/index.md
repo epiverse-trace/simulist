@@ -1,6 +1,12 @@
 # Changelog
 
+## simulist 0.7.1
+
+- Minor fixes to *simulist* JOSS paper for publication.
+
 ## simulist 0.7.0
+
+CRAN release: 2026-02-06
 
 This minor version release contains a range of minor updates and
 accompanies the *simulist* publication in the [Journal of Open Source
