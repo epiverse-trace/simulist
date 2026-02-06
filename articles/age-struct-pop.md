@@ -137,13 +137,13 @@ linelist <- sim_linelist(
   outbreak_size = c(100, 1e4)
 )
 head(linelist)
-#>   id         case_name case_type sex age date_onset date_reporting
-#> 1  1     Kendra Haider  probable   f  56 2023-01-01     2023-01-01
-#> 2  2 Cante Truefeather suspected   f   7 2023-01-01     2023-01-01
-#> 3  3      K'Ara Fisher suspected   f  15 2023-01-01     2023-01-01
-#> 4  5   Raymond Qureshi  probable   m  60 2023-01-02     2023-01-02
-#> 5  6   Keshaun Bennett suspected   m  57 2023-01-02     2023-01-02
-#> 6  8       Faline Thao confirmed   f  38 2023-01-01     2023-01-01
+#>   id               case_name case_type sex age date_onset date_reporting
+#> 1  1          Jawonna Exline confirmed   f  56 2023-01-01     2023-01-01
+#> 2  2           Marcelo Barco  probable   m   7 2023-01-01     2023-01-01
+#> 3  3 Tamara Casiano-Martinez suspected   f  15 2023-01-01     2023-01-01
+#> 4  5        Chukwuma Jackson confirmed   m  60 2023-01-02     2023-01-02
+#> 5  6        Jasoor el-Khalid confirmed   m  57 2023-01-02     2023-01-02
+#> 6  8        Haajara al-Zahra suspected   f  38 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-30        2023-01-05
@@ -152,12 +152,12 @@ head(linelist)
 #> 5           <NA> recovered         <NA>         2022-12-26        2023-01-03
 #> 6           <NA> recovered         <NA>         2022-12-28        2023-01-02
 #>   ct_value
-#> 1       NA
+#> 1     24.1
 #> 2       NA
 #> 3       NA
-#> 4       NA
-#> 5       NA
-#> 6     23.7
+#> 4     26.4
+#> 5     25.3
+#> 6       NA
 ```
 
 We can plot the age distribution for individuals in the line list,
@@ -233,13 +233,13 @@ linelist <- sim_linelist(
 )
 
 head(linelist)
-#>   id        case_name case_type sex age date_onset date_reporting
-#> 1  1 Daniel Hernandez suspected   m  22 2023-01-01     2023-01-01
-#> 2  3 Shaamil el-Qasim suspected   m  26 2023-01-01     2023-01-01
-#> 3  4     Omar Peinado  probable   m  59 2023-01-01     2023-01-01
-#> 4  6      Jason Sinka confirmed   m  60 2023-01-01     2023-01-01
-#> 5  7  Mariah Martinez confirmed   f  72 2023-01-01     2023-01-01
-#> 6  8  Joseline Bobian confirmed   f  16 2023-01-01     2023-01-01
+#>   id            case_name case_type sex age date_onset date_reporting
+#> 1  1           Joe Valdez confirmed   m  22 2023-01-01     2023-01-01
+#> 2  3       Aslam al-Kamal  probable   m  26 2023-01-01     2023-01-01
+#> 3  4        Bryan Camacho  probable   m  59 2023-01-01     2023-01-01
+#> 4  6           Matthew Ho suspected   m  60 2023-01-01     2023-01-01
+#> 5  7    Ghuzaila el-Hasan suspected   f  72 2023-01-01     2023-01-01
+#> 6  8 Chase Salgado Orozco confirmed   m  16 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-29        2023-01-05
@@ -248,12 +248,12 @@ head(linelist)
 #> 5           <NA> recovered         <NA>         2022-12-27        2023-01-03
 #> 6     2023-01-04      died   2023-01-07         2023-01-01        2023-01-03
 #>   ct_value
-#> 1       NA
+#> 1     27.7
 #> 2       NA
 #> 3       NA
-#> 4     26.3
-#> 5     25.8
-#> 6     24.6
+#> 4       NA
+#> 5       NA
+#> 6     22.8
 ```
 
 Again we can plot the age distribution to see the age structure for
@@ -317,13 +317,13 @@ linelist <- sim_linelist(
 )
 
 head(linelist)
-#>   id             case_name case_type sex age date_onset date_reporting
-#> 1  1         Tanner Latham confirmed   m  17 2023-01-01     2023-01-01
-#> 2  2        Derrick Mishra  probable   m  53 2023-01-01     2023-01-01
-#> 3  4     Saabiqa al-Haidar confirmed   f  20 2023-01-01     2023-01-01
-#> 4  5 Antione Malone-Rogers suspected   m   6 2023-01-01     2023-01-01
-#> 5  6         Ariel Ramirez  probable   f  14 2023-01-04     2023-01-04
-#> 6  8     Brendan Van Eaton suspected   m  60 2023-01-01     2023-01-01
+#>   id            case_name case_type sex age date_onset date_reporting
+#> 1  1        Ezra Mcintosh  probable   m  17 2023-01-01     2023-01-01
+#> 2  2      Daniela Maestas confirmed   f  53 2023-01-01     2023-01-01
+#> 3  4 Maranda Maldonado Jr confirmed   f  20 2023-01-01     2023-01-01
+#> 4  5         Jason Lawson suspected   m   6 2023-01-01     2023-01-01
+#> 5  6   Alexis Pelayo-Pena  probable   f  14 2023-01-04     2023-01-04
+#> 6  8      Megan Mattorano confirmed   f  60 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-29        2023-01-03
@@ -332,12 +332,12 @@ head(linelist)
 #> 5           <NA> recovered         <NA>         2022-12-28        2023-01-04
 #> 6           <NA> recovered         <NA>         2022-12-29        2023-01-08
 #>   ct_value
-#> 1     26.7
-#> 2       NA
-#> 3     21.8
+#> 1       NA
+#> 2     22.7
+#> 3     22.3
 #> 4       NA
 #> 5       NA
-#> 6       NA
+#> 6     22.9
 ```
 
 A common and useful method for plotting age data is in the form of age

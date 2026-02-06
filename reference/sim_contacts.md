@@ -172,13 +172,13 @@ contacts <- sim_contacts()
 #> Warning: Number of cases exceeds maximum outbreak size. 
 #> Returning data early with 10152 cases and 20191 total contacts (including cases).
 head(contacts)
-#>               from                to age sex date_first_contact
-#> 1 Arshad el-Hannan    Stephanie Phan  85   f         2022-12-31
-#> 2 Arshad el-Hannan    Bryan Williams  10   m         2022-12-26
-#> 3   Stephanie Phan Harrison Gonzales  25   f         2023-01-10
-#> 4   Stephanie Phan    Jordan Pittman  17   m         2023-01-09
-#> 5   Stephanie Phan  Shadhaa al-Jamal  47   f         2023-01-09
-#> 6   Stephanie Phan    Sara Rodriguez  48   f         2023-01-10
+#>                from                to age sex date_first_contact
+#> 1    Dalena Meadows Nabeela el-Saadeh  85   f         2022-12-31
+#> 2    Dalena Meadows Haitham el-Zamani  10   m         2022-12-26
+#> 3 Nabeela el-Saadeh  Luc Demmer-White  25   m         2023-01-10
+#> 4 Nabeela el-Saadeh   Zachary Johnson  17   m         2023-01-09
+#> 5 Nabeela el-Saadeh Sebastian Benally  47   m         2023-01-09
+#> 6 Nabeela el-Saadeh  Raamiz al-Salame  48   m         2023-01-10
 #>   date_last_contact was_case         status
 #> 1        2023-01-04     TRUE           case
 #> 2        2023-01-03     TRUE           case

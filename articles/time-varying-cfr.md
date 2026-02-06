@@ -159,13 +159,13 @@ linelist <- sim_linelist(
 
 # first 6 rows of linelist
 head(linelist)
-#>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1  Reylando Yohannes  probable   m  40 2023-01-01     2023-01-01
-#> 2  2         David Baca confirmed   m  12 2023-01-04     2023-01-04
-#> 3  4     Kristopher Zhu  probable   m  45 2023-01-05     2023-01-05
-#> 4  6 Muntasir al-Kaiser  probable   m  36 2023-01-07     2023-01-07
-#> 5  7      Emma Kirscher  probable   f  42 2023-01-09     2023-01-09
-#> 6  8           Jehan Ly confirmed   f  14 2023-01-08     2023-01-08
+#>   id         case_name case_type sex age date_onset date_reporting
+#> 1  1    Douglas Carter suspected   m  40 2023-01-01     2023-01-01
+#> 2  2 Demetrice Harding  probable   m  12 2023-01-04     2023-01-04
+#> 3  4    Pernell Steele  probable   m  45 2023-01-05     2023-01-05
+#> 4  6  Sumbula al-Yusuf  probable   f  36 2023-01-07     2023-01-07
+#> 5  7      Xin Geronimo  probable   m  42 2023-01-09     2023-01-09
+#> 6  8 Haafil el-Salameh  probable   m  14 2023-01-08     2023-01-08
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-31        2023-01-04
@@ -175,11 +175,11 @@ head(linelist)
 #> 6     2023-01-09 recovered         <NA>         2022-12-31        2023-01-08
 #>   ct_value
 #> 1       NA
-#> 2     24.9
+#> 2       NA
 #> 3       NA
 #> 4       NA
 #> 5       NA
-#> 6     26.3
+#> 6       NA
 ```
 
 To visualise the incidence of cases and deaths over time we will use the
@@ -194,14 +194,14 @@ Before converting the line list `<data.frame>` to an `<incidence>`
 object we need to ungroup the outcome columns into their own columns
 using the [{tidyr}](https://tidyr.tidyverse.org/) and
 [{dplyr}](https://dplyr.tidyverse.org/) R packages from the
-[Tidyverse](https://www.tidyverse.org/).
+[Tidyverse](https://tidyverse.org/).
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -252,35 +252,28 @@ linelist <- sim_linelist(
 #> Returning data early with 1026 cases and 1994 total contacts (including cases).
 
 head(linelist)
-#>   id             case_name case_type sex age date_onset date_reporting
-#> 1  1 Christopher Bishop Jr confirmed   m  42 2023-01-01     2023-01-01
-#> 2  2         Sophie Nedved confirmed   f  25 2023-01-06     2023-01-06
-#> 3  4          Bianca Doell suspected   f  64 2023-01-07     2023-01-07
-#> 4  6          Brandy Allen confirmed   f  46 2023-01-09     2023-01-09
-#> 5  8    Zakiyya el-Shareef suspected   f  78 2023-01-08     2023-01-08
-#> 6 10              Xai Yang suspected   m  13 2023-01-15     2023-01-15
-#>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1     2023-01-05 recovered         <NA>               <NA>              <NA>
-#> 2     2023-01-09      died   2023-02-26         2022-12-31        2023-01-03
-#> 3           <NA>      died   2023-01-27         2023-01-01        2023-01-08
-#> 4           <NA>      died   2023-01-23         2023-01-04        2023-01-07
-#> 5           <NA> recovered         <NA>         2023-01-05        2023-01-11
-#> 6           <NA> recovered         <NA>         2023-01-06        2023-01-11
-#>   ct_value
-#> 1     19.6
-#> 2     28.7
-#> 3       NA
-#> 4     21.7
-#> 5       NA
-#> 6       NA
+#>   id       case_name case_type sex age date_onset date_reporting date_admission
+#> 1  1  Lara Pickering confirmed   f  42 2023-01-01     2023-01-01     2023-01-05
+#> 2  2   Sidnee Jensen  probable   f  25 2023-01-06     2023-01-06     2023-01-09
+#> 3  4  Allison Denbow confirmed   f  64 2023-01-07     2023-01-07           <NA>
+#> 4  6 Noora al-Ahmadi  probable   f  46 2023-01-09     2023-01-09           <NA>
+#> 5  8    Legend Tracy confirmed   m  78 2023-01-08     2023-01-08           <NA>
+#> 6 10     Cory Wilson suspected   m  13 2023-01-15     2023-01-15           <NA>
+#>     outcome date_outcome date_first_contact date_last_contact ct_value
+#> 1 recovered         <NA>               <NA>              <NA>     22.9
+#> 2      died   2023-02-26         2022-12-31        2023-01-03       NA
+#> 3      died   2023-01-27         2023-01-01        2023-01-08     22.9
+#> 4      died   2023-01-23         2023-01-04        2023-01-07       NA
+#> 5 recovered         <NA>         2023-01-05        2023-01-11     26.4
+#> 6 recovered         <NA>         2023-01-06        2023-01-11       NA
 ```
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -401,13 +394,13 @@ linelist <- sim_linelist(
 )
 
 head(linelist)
-#>   id              case_name case_type sex age date_onset date_reporting
-#> 1  1 Eduardo Avalos Chavira confirmed   m  59 2023-01-01     2023-01-01
-#> 2  2    Danielle Lopez-Shue confirmed   f   2 2023-01-06     2023-01-06
-#> 3  3          Rebecca Begay suspected   f  14 2023-01-02     2023-01-02
-#> 4  6          Miguel Cortez  probable   m  49 2023-01-07     2023-01-07
-#> 5  8            Cam Tu Reed  probable   f  22 2023-01-08     2023-01-08
-#> 6 11            Kyla Tafoya suspected   f  40 2023-01-04     2023-01-04
+#>   id         case_name case_type sex age date_onset date_reporting
+#> 1  1  Thomas Velasquez  probable   m  59 2023-01-01     2023-01-01
+#> 2  2 Demeakie Williams confirmed   f   2 2023-01-06     2023-01-06
+#> 3  3    Marquille Neal confirmed   m  14 2023-01-02     2023-01-02
+#> 4  6      Hector Perez  probable   m  49 2023-01-07     2023-01-07
+#> 5  8    Carlos Botello confirmed   m  22 2023-01-08     2023-01-08
+#> 6 11 Raakaan al-Younes confirmed   m  40 2023-01-04     2023-01-04
 #>   date_admission outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA>    died   2023-01-19               <NA>              <NA>
 #> 2     2023-01-09    died   2023-02-01         2022-12-30        2023-01-07
@@ -416,20 +409,20 @@ head(linelist)
 #> 5     2023-01-11    died   2023-01-22         2023-01-03        2023-01-08
 #> 6           <NA>    died   2023-01-13         2022-12-27        2023-01-06
 #>   ct_value
-#> 1     26.2
-#> 2     25.7
-#> 3       NA
+#> 1       NA
+#> 2     26.2
+#> 3     25.9
 #> 4       NA
-#> 5       NA
-#> 6       NA
+#> 5     26.0
+#> 6     27.5
 ```
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -524,37 +517,39 @@ linelist <- sim_linelist(
   outbreak_size = c(500, 1000),
   config = config
 )
+#> Warning: Number of cases exceeds maximum outbreak size. 
+#> Returning data early with 1004 cases and 1982 total contacts (including cases).
 
 head(linelist)
-#>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1    Lannis Crossley confirmed   f  54 2023-01-01     2023-01-01
-#> 2  2 Brittany Masteller confirmed   f  44 2023-01-05     2023-01-05
-#> 3  4   Hamood al-Jabara confirmed   m  69 2023-01-07     2023-01-07
-#> 4  5    Vanessa Salazar suspected   f  29 2023-01-11     2023-01-11
-#> 5  6  Domineque Matthes confirmed   f  16 2023-01-10     2023-01-10
-#> 6  8       Ana Melendez suspected   f  71 2023-01-09     2023-01-09
+#>   id              case_name case_type sex age date_onset date_reporting
+#> 1  1             Ranny Tran confirmed   m  23 2023-01-01     2023-01-01
+#> 2  2      Safiyya el-Badour confirmed   f  29 2023-01-05     2023-01-05
+#> 3  3              Rachel Vu  probable   f  81 2023-01-17     2023-01-17
+#> 4  5 Abdur Raheem al-Arshad suspected   m  58 2023-01-19     2023-01-19
+#> 5  6       Saleema al-Zaher confirmed   f  79 2023-01-19     2023-01-19
+#> 6  8        Nicholas Yazzie suspected   m  44 2023-01-20     2023-01-20
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-26        2023-01-03
-#> 3     2023-01-08      died   2023-01-15         2022-12-26        2023-01-02
-#> 4           <NA>      died   2023-03-06         2023-01-02        2023-01-09
-#> 5           <NA>      died   2023-01-25         2023-01-03        2023-01-07
-#> 6           <NA>      died   2023-01-14         2023-01-03        2023-01-09
+#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-02
+#> 3           <NA> recovered         <NA>         2023-01-05        2023-01-07
+#> 4           <NA>      died   2023-01-30         2023-01-15        2023-01-18
+#> 5           <NA>      died   2023-02-19         2023-01-15        2023-01-22
+#> 6           <NA>      died   2023-02-02         2023-01-13        2023-01-19
 #>   ct_value
-#> 1     27.3
-#> 2     23.5
-#> 3     26.4
+#> 1     27.7
+#> 2     26.8
+#> 3       NA
 #> 4       NA
-#> 5     25.9
+#> 5     28.1
 #> 6       NA
 ```
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered
@@ -645,39 +640,37 @@ linelist <- sim_linelist(
   outbreak_size = c(500, 1000),
   config = config
 )
-#> Warning: Number of cases exceeds maximum outbreak size. 
-#> Returning data early with 1009 cases and 1973 total contacts (including cases).
 
 head(linelist)
-#>   id         case_name case_type sex age date_onset date_reporting
-#> 1  1    Dang Autterson  probable   m  48 2023-01-01     2023-01-01
-#> 2  2 Darrion Beauchamp  probable   m   4 2023-01-02     2023-01-02
-#> 3  3     Alexis Geebro  probable   f  58 2023-01-07     2023-01-07
-#> 4  6  Angelica Herrera confirmed   f  31 2023-01-02     2023-01-02
-#> 5  7   Catherine Scott confirmed   f  77 2023-01-10     2023-01-10
-#> 6  8      Mario Ibarra confirmed   m  62 2023-01-08     2023-01-08
-#>   date_admission outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA>    died   2023-01-22               <NA>              <NA>
-#> 2     2023-01-05    died   2023-02-05         2022-12-30        2023-01-01
-#> 3     2023-01-09    died   2023-01-25         2023-01-01        2023-01-02
-#> 4     2023-01-04    died   2023-01-13         2022-12-30        2023-01-06
-#> 5           <NA>    died   2023-01-19         2023-01-04        2023-01-10
-#> 6           <NA>    died   2023-02-12         2023-01-05        2023-01-11
+#>   id            case_name case_type sex age date_onset date_reporting
+#> 1  1     Kathryn Thurston confirmed   f  35 2023-01-01     2023-01-01
+#> 2  2     Kaatima al-Ahmed confirmed   f  54 2023-01-02     2023-01-02
+#> 3  4        Horatio Sobhi confirmed   m  78 2023-01-03     2023-01-03
+#> 4  5     Brittney Pollock  probable   f  16 2023-01-16     2023-01-16
+#> 5  7 Esteidi Ayala Petrie confirmed   f  31 2023-01-04     2023-01-04
+#> 6 10          Brandon Sok confirmed   m  36 2023-01-19     2023-01-19
+#>   date_admission   outcome date_outcome date_first_contact date_last_contact
+#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 2     2023-01-04      died   2023-01-23         2023-01-01        2023-01-04
+#> 3           <NA>      died   2023-01-23         2022-12-28        2023-01-05
+#> 4           <NA> recovered         <NA>         2022-12-27        2023-01-03
+#> 5           <NA>      died   2023-01-09         2023-01-01        2023-01-04
+#> 6           <NA>      died   2023-02-11         2023-01-11        2023-01-19
 #>   ct_value
-#> 1       NA
-#> 2       NA
-#> 3       NA
-#> 4     23.9
-#> 5     19.9
-#> 6     25.4
+#> 1     23.1
+#> 2     26.6
+#> 3     27.2
+#> 4       NA
+#> 5     23.4
+#> 6     28.2
 ```
 
 ``` r
-linelist <- linelist %>%
+linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
     values_from = date_outcome
-  ) %>%
+  ) |>
   rename(
     date_death = died,
     date_recovery = recovered

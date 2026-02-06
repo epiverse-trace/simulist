@@ -151,30 +151,37 @@ linelist <- sim_linelist(
   reporting_delay = function(n) rlnorm(n = n, meanlog = 1, sdlog = 1)
 )
 head(linelist)
-#>   id       case_name case_type sex age date_onset date_reporting date_admission
-#> 1  1   Tiarra Morris confirmed   f  42 2023-01-01     2023-01-02           <NA>
-#> 2  4     Keiara Yang suspected   f  63 2023-01-04     2023-01-08           <NA>
-#> 3  7  Monika Watters confirmed   f  83 2023-01-01     2023-01-02           <NA>
-#> 4 11      Tina Zhang confirmed   f  21 2023-01-03     2023-01-09           <NA>
-#> 5 13 Nicholas Polaco  probable   m  36 2023-01-05     2023-01-11           <NA>
-#> 6 14    Vidya Nguyen confirmed   f  84 2023-01-06     2023-01-08           <NA>
-#>     outcome date_outcome date_first_contact date_last_contact ct_value
-#> 1 recovered         <NA>               <NA>              <NA>     24.1
-#> 2 recovered         <NA>         2022-12-25        2023-01-06       NA
-#> 3 recovered         <NA>         2022-12-30        2023-01-04     23.9
-#> 4 recovered         <NA>         2022-12-30        2023-01-03     29.7
-#> 5 recovered         <NA>         2023-01-01        2023-01-07       NA
-#> 6 recovered         <NA>         2022-12-31        2023-01-09     24.0
+#>   id           case_name case_type sex age date_onset date_reporting
+#> 1  1       Subhi el-Akel suspected   m  39 2023-01-01     2023-01-03
+#> 2  2  Victoria Cervantes  probable   f  23 2023-01-04     2023-01-11
+#> 3  3 Abdullah el-Shareef confirmed   m  51 2023-01-05     2023-01-07
+#> 4  4         Dillon Wing  probable   m  53 2023-01-05     2023-01-19
+#> 5  5            Heidi Le confirmed   f  16 2023-01-04     2023-01-09
+#> 6  6       Jaliah Verner  probable   f  41 2023-01-05     2023-01-10
+#>   date_admission   outcome date_outcome date_first_contact date_last_contact
+#> 1     2023-01-01      died   2023-01-17               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-28        2023-01-04
+#> 3     2023-01-13      died   2023-01-31         2022-12-30        2023-01-07
+#> 4           <NA> recovered         <NA>         2022-12-31        2023-01-06
+#> 5           <NA> recovered         <NA>         2022-12-29        2023-01-06
+#> 6           <NA> recovered         <NA>         2023-01-01        2023-01-06
+#>   ct_value
+#> 1       NA
+#> 2       NA
+#> 3     27.1
+#> 4       NA
+#> 5     25.9
+#> 6       NA
 ```
 
 Here from the first 6 rows of the line list you can see differences
 between the `$date_onset` column and the `$date_reporting` column.
 
 ``` r
-tidy_linelist <- linelist %>%
+tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
-  ) %>%
+  ) |>
   mutate(
     ordering_value = ifelse(name == "date_onset", value, NA),
     case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)
@@ -209,9 +216,9 @@ ggplot(data = tidy_linelist) +
   ) +
   theme_bw() +
   theme(legend.position = "bottom", axis.text.y = element_text(size = 4))
-#> Warning: Removed 32 rows containing missing values or values outside the scale range
+#> Warning: Removed 1513 rows containing missing values or values outside the scale range
 #> (`geom_line()`).
-#> Warning: Removed 32 rows containing missing values or values outside the scale range
+#> Warning: Removed 1513 rows containing missing values or values outside the scale range
 #> (`geom_point()`).
 ```
 
@@ -276,30 +283,44 @@ linelist <- sim_linelist(
   reporting_delay = function(n) rep(5, times = n)
 )
 head(linelist)
-#>   id         case_name case_type sex age date_onset date_reporting
-#> 1  1 Fawzaana el-Baten  probable   f   1 2023-01-01     2023-01-06
-#> 2  2        Roy Chihak confirmed   m  34 2023-01-03     2023-01-08
-#> 3  3    Andrew Angeles confirmed   m  76 2023-01-03     2023-01-08
-#> 4  4     Bryan Stancil confirmed   m  14 2023-01-07     2023-01-12
-#> 5  5     Ellen Carlson confirmed   f  67 2023-01-04     2023-01-09
-#> 6  8     Taylor Thrift confirmed   f  90 2023-01-13     2023-01-18
+#>   id          case_name case_type sex age date_onset date_reporting
+#> 1  1     Jonathan Welsh  probable   m  22 2023-01-01     2023-01-06
+#> 2  2    Sandra Trujillo  probable   f  31 2023-01-02     2023-01-07
+#> 3  3   Natasha Gonzalez confirmed   f  47 2023-01-03     2023-01-08
+#> 4  5    Jeffrey Rudolph  probable   m  79 2023-01-03     2023-01-08
+#> 5  6   Desire Chavarria suspected   f  70 2023-01-03     2023-01-08
+#> 6  7 Christopher Garcia  probable   m  24 2023-01-05     2023-01-10
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2     2023-01-06      died   2023-01-08         2022-12-25        2023-01-02
-#> 3           <NA> recovered         <NA>         2022-12-29        2023-01-07
-#> 4           <NA> recovered         <NA>         2023-01-03        2023-01-05
-#> 5           <NA> recovered         <NA>         2023-01-02        2023-01-07
-#> 6           <NA>      died   2023-01-24         2023-01-03        2023-01-07
+#> 2           <NA> recovered         <NA>         2022-12-26        2023-01-05
+#> 3           <NA> recovered         <NA>         2022-12-28        2023-01-02
+#> 4           <NA> recovered         <NA>         2023-01-01        2023-01-05
+#> 5           <NA> recovered         <NA>         2022-12-31        2023-01-03
+#> 6     2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
 #>   ct_value
 #> 1       NA
-#> 2     22.4
-#> 3     22.9
-#> 4     25.3
-#> 5     26.8
-#> 6     24.4
+#> 2       NA
+#> 3     29.1
+#> 4       NA
+#> 5       NA
+#> 6       NA
 linelist$date_reporting - linelist$date_onset
 #> Time differences in days
-#>  [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#>   [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#>  [38] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#>  [75] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [112] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [149] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [186] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [223] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [260] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [297] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [334] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [371] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [408] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [445] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [482] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+#> [519] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
 ```
 
 ## Truncation
@@ -342,13 +363,13 @@ linelist <- sim_linelist(
 
 # first 6 rows of linelist
 head(linelist)
-#>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1  Jenifer Castaneda confirmed   f  18 2023-01-01     2023-01-05
-#> 2  2      Abigail Krpan confirmed   f  66 2023-01-07     2023-01-11
-#> 3  3        John Rivera suspected   m  59 2023-01-01     2023-01-07
-#> 4  8      Asya Woolfolk confirmed   f  37 2023-01-14     2023-01-28
-#> 5  9 Amaani el-Abdullah  probable   f  64 2023-01-03     2023-01-14
-#> 6 10       Bella Nguyen confirmed   f  42 2023-01-03     2023-01-08
+#>   id            case_name case_type sex age date_onset date_reporting
+#> 1  1      Abraham Dechand  probable   m  18 2023-01-01     2023-01-05
+#> 2  2 Damari Jones-Carroll  probable   m  66 2023-01-07     2023-01-11
+#> 3  3         Thaylor Boyd  probable   m  59 2023-01-01     2023-01-07
+#> 4  8    Haazima al-Halaby  probable   f  37 2023-01-14     2023-01-28
+#> 5  9   Pauline Gomez Cano  probable   f  64 2023-01-03     2023-01-14
+#> 6 10       Unais al-Saeed  probable   m  42 2023-01-03     2023-01-08
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1     2023-01-05 recovered         <NA>               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-28        2023-01-04
@@ -357,12 +378,12 @@ head(linelist)
 #> 5           <NA> recovered         <NA>         2022-12-30        2023-01-02
 #> 6     2023-01-05      died   2023-02-04         2023-01-01        2023-01-05
 #>   ct_value
-#> 1     22.3
-#> 2     27.4
+#> 1       NA
+#> 2       NA
 #> 3       NA
-#> 4     28.0
+#> 4       NA
 #> 5       NA
-#> 6     26.9
+#> 6       NA
 ```
 
 The *truncation time* is the time/date at which we want to take a
@@ -381,10 +402,10 @@ removed from the line list, if it falls before the date of reporting but
 after the hospital admission and/or outcome date they are set to `NA`.
 
 ``` r
-tidy_linelist <- linelist %>%
+tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
-  ) %>%
+  ) |>
   mutate(
     ordering_value = ifelse(name == "date_onset", value, NA),
     case_name = reorder(case_name, ordering_value, min, na.rm = TRUE)

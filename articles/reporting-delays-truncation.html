@@ -32,7 +32,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -231,28 +231,35 @@ approximately 4.5 days and standard deviation of 5.9 days).</p>
 <span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">1</span>, sdlog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id       case_name case_type sex age date_onset date_reporting date_admission</span></span>
-<span><span class="co">#&gt; 1  1   Tiarra Morris confirmed   f  42 2023-01-01     2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  4     Keiara Yang suspected   f  63 2023-01-04     2023-01-08           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  7  Monika Watters confirmed   f  83 2023-01-01     2023-01-02           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4 11      Tina Zhang confirmed   f  21 2023-01-03     2023-01-09           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5 13 Nicholas Polaco  probable   m  36 2023-01-05     2023-01-11           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6 14    Vidya Nguyen confirmed   f  84 2023-01-06     2023-01-08           &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;     outcome date_outcome date_first_contact date_last_contact ct_value</span></span>
-<span><span class="co">#&gt; 1 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.1</span></span>
-<span><span class="co">#&gt; 2 recovered         &lt;NA&gt;         2022-12-25        2023-01-06       NA</span></span>
-<span><span class="co">#&gt; 3 recovered         &lt;NA&gt;         2022-12-30        2023-01-04     23.9</span></span>
-<span><span class="co">#&gt; 4 recovered         &lt;NA&gt;         2022-12-30        2023-01-03     29.7</span></span>
-<span><span class="co">#&gt; 5 recovered         &lt;NA&gt;         2023-01-01        2023-01-07       NA</span></span>
-<span><span class="co">#&gt; 6 recovered         &lt;NA&gt;         2022-12-31        2023-01-09     24.0</span></span></code></pre></div>
+<span><span class="co">#&gt;   id           case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1       Subhi el-Akel suspected   m  39 2023-01-01     2023-01-03</span></span>
+<span><span class="co">#&gt; 2  2  Victoria Cervantes  probable   f  23 2023-01-04     2023-01-11</span></span>
+<span><span class="co">#&gt; 3  3 Abdullah el-Shareef confirmed   m  51 2023-01-05     2023-01-07</span></span>
+<span><span class="co">#&gt; 4  4         Dillon Wing  probable   m  53 2023-01-05     2023-01-19</span></span>
+<span><span class="co">#&gt; 5  5            Heidi Le confirmed   f  16 2023-01-04     2023-01-09</span></span>
+<span><span class="co">#&gt; 6  6       Jaliah Verner  probable   f  41 2023-01-05     2023-01-10</span></span>
+<span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
+<span><span class="co">#&gt; 1     2023-01-01      died   2023-01-17               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-04</span></span>
+<span><span class="co">#&gt; 3     2023-01-13      died   2023-01-31         2022-12-30        2023-01-07</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-06</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-06</span></span>
+<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-01        2023-01-06</span></span>
+<span><span class="co">#&gt;   ct_value</span></span>
+<span><span class="co">#&gt; 1       NA</span></span>
+<span><span class="co">#&gt; 2       NA</span></span>
+<span><span class="co">#&gt; 3     27.1</span></span>
+<span><span class="co">#&gt; 4       NA</span></span>
+<span><span class="co">#&gt; 5     25.9</span></span>
+<span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
 <p>Here from the first 6 rows of the line list you can see differences
 between the <code>$date_onset</code> column and the
 <code>$date_reporting</code> column.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tidy_linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">tidy_linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
 <span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date_onset"</span>, <span class="st">"date_reporting"</span>, <span class="st">"date_admission"</span>, <span class="st">"date_outcome"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    ordering_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"date_onset"</span>, <span class="va">value</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
 <span>    case_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">case_name</span>, <span class="va">ordering_value</span>, <span class="va">min</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -287,9 +294,9 @@ between the <code>$date_onset</code> column and the
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>, axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 32 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 1513 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_line()`).</span></span>
-<span><span class="co">#&gt; Warning: Removed 32 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 1513 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
 <p><img src="reporting-delays-truncation_files/figure-html/plot-linelist-events-1.png" class="r-plt" alt="A dot plot with the event dates in the line list plotted a points on the figure, connected by horizontal lines. One row in the dot plot corresponds to one case (i.e. one row in the line list). The y-axis label is 'Case name', and the x-axis label is 'Event date'. The event types are 'Date admission' (red square), 'Date Onset' (blue circle), 'Date Outcome' (green triangle), and 'Date Reporting' (purple diamond). The plot shows the distribution of delay times between each event for each individual in the line list, with the y-axis order by earliest date of symptom onset at the bottom." width="768"></p>
 <p>If we plot the difference between the date of symptom onset and
@@ -331,30 +338,44 @@ delay.</p>
 <span>  reporting_delay <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">5</span>, times <span class="op">=</span> <span class="va">n</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1 Fawzaana el-Baten  probable   f   1 2023-01-01     2023-01-06</span></span>
-<span><span class="co">#&gt; 2  2        Roy Chihak confirmed   m  34 2023-01-03     2023-01-08</span></span>
-<span><span class="co">#&gt; 3  3    Andrew Angeles confirmed   m  76 2023-01-03     2023-01-08</span></span>
-<span><span class="co">#&gt; 4  4     Bryan Stancil confirmed   m  14 2023-01-07     2023-01-12</span></span>
-<span><span class="co">#&gt; 5  5     Ellen Carlson confirmed   f  67 2023-01-04     2023-01-09</span></span>
-<span><span class="co">#&gt; 6  8     Taylor Thrift confirmed   f  90 2023-01-13     2023-01-18</span></span>
+<span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1     Jonathan Welsh  probable   m  22 2023-01-01     2023-01-06</span></span>
+<span><span class="co">#&gt; 2  2    Sandra Trujillo  probable   f  31 2023-01-02     2023-01-07</span></span>
+<span><span class="co">#&gt; 3  3   Natasha Gonzalez confirmed   f  47 2023-01-03     2023-01-08</span></span>
+<span><span class="co">#&gt; 4  5    Jeffrey Rudolph  probable   m  79 2023-01-03     2023-01-08</span></span>
+<span><span class="co">#&gt; 5  6   Desire Chavarria suspected   f  70 2023-01-03     2023-01-08</span></span>
+<span><span class="co">#&gt; 6  7 Christopher Garcia  probable   m  24 2023-01-05     2023-01-10</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2     2023-01-06      died   2023-01-08         2022-12-25        2023-01-02</span></span>
-<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-07</span></span>
-<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-03        2023-01-05</span></span>
-<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-02        2023-01-07</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt;      died   2023-01-24         2023-01-03        2023-01-07</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-26        2023-01-05</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-02</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-01        2023-01-05</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-03</span></span>
+<span><span class="co">#&gt; 6     2023-01-07 recovered         &lt;NA&gt;         2022-12-30        2023-01-05</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
 <span><span class="co">#&gt; 1       NA</span></span>
-<span><span class="co">#&gt; 2     22.4</span></span>
-<span><span class="co">#&gt; 3     22.9</span></span>
-<span><span class="co">#&gt; 4     25.3</span></span>
-<span><span class="co">#&gt; 5     26.8</span></span>
-<span><span class="co">#&gt; 6     24.4</span></span>
+<span><span class="co">#&gt; 2       NA</span></span>
+<span><span class="co">#&gt; 3     29.1</span></span>
+<span><span class="co">#&gt; 4       NA</span></span>
+<span><span class="co">#&gt; 5       NA</span></span>
+<span><span class="co">#&gt; 6       NA</span></span>
 <span><span class="va">linelist</span><span class="op">$</span><span class="va">date_reporting</span> <span class="op">-</span> <span class="va">linelist</span><span class="op">$</span><span class="va">date_onset</span></span>
 <span><span class="co">#&gt; Time differences in days</span></span>
-<span><span class="co">#&gt;  [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt;  [38] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt;  [75] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [112] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [149] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [186] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [223] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [260] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [297] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [334] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [371] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [408] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [445] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [482] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span>
+<span><span class="co">#&gt; [519] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="truncation">Truncation<a class="anchor" aria-label="anchor" href="#truncation"></a>
@@ -393,13 +414,13 @@ with a lognormal reporting delay with <code>meanlog = 2</code> and
 <span></span>
 <span><span class="co"># first 6 rows of linelist</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1  Jenifer Castaneda confirmed   f  18 2023-01-01     2023-01-05</span></span>
-<span><span class="co">#&gt; 2  2      Abigail Krpan confirmed   f  66 2023-01-07     2023-01-11</span></span>
-<span><span class="co">#&gt; 3  3        John Rivera suspected   m  59 2023-01-01     2023-01-07</span></span>
-<span><span class="co">#&gt; 4  8      Asya Woolfolk confirmed   f  37 2023-01-14     2023-01-28</span></span>
-<span><span class="co">#&gt; 5  9 Amaani el-Abdullah  probable   f  64 2023-01-03     2023-01-14</span></span>
-<span><span class="co">#&gt; 6 10       Bella Nguyen confirmed   f  42 2023-01-03     2023-01-08</span></span>
+<span><span class="co">#&gt;   id            case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1      Abraham Dechand  probable   m  18 2023-01-01     2023-01-05</span></span>
+<span><span class="co">#&gt; 2  2 Damari Jones-Carroll  probable   m  66 2023-01-07     2023-01-11</span></span>
+<span><span class="co">#&gt; 3  3         Thaylor Boyd  probable   m  59 2023-01-01     2023-01-07</span></span>
+<span><span class="co">#&gt; 4  8    Haazima al-Halaby  probable   f  37 2023-01-14     2023-01-28</span></span>
+<span><span class="co">#&gt; 5  9   Pauline Gomez Cano  probable   f  64 2023-01-03     2023-01-14</span></span>
+<span><span class="co">#&gt; 6 10       Unais al-Saeed  probable   m  42 2023-01-03     2023-01-08</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1     2023-01-05 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-04</span></span>
@@ -408,12 +429,12 @@ with a lognormal reporting delay with <code>meanlog = 2</code> and
 <span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-02</span></span>
 <span><span class="co">#&gt; 6     2023-01-05      died   2023-02-04         2023-01-01        2023-01-05</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
-<span><span class="co">#&gt; 1     22.3</span></span>
-<span><span class="co">#&gt; 2     27.4</span></span>
+<span><span class="co">#&gt; 1       NA</span></span>
+<span><span class="co">#&gt; 2       NA</span></span>
 <span><span class="co">#&gt; 3       NA</span></span>
-<span><span class="co">#&gt; 4     28.0</span></span>
+<span><span class="co">#&gt; 4       NA</span></span>
 <span><span class="co">#&gt; 5       NA</span></span>
-<span><span class="co">#&gt; 6     26.9</span></span></code></pre></div>
+<span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
 <p>The <em>truncation time</em> is the time/date at which we want to
 take a snapshot of the line list and see what it would have looked like
 on that day (i.e. real-time during the outbreak). By default
@@ -429,10 +450,10 @@ case is removed from the line list, if it falls before the date of
 reporting but after the hospital admission and/or outcome date they are
 set to <code>NA</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tidy_linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">tidy_linelist</span> <span class="op">&lt;-</span> <span class="va">linelist</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
 <span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date_onset"</span>, <span class="st">"date_reporting"</span>, <span class="st">"date_admission"</span>, <span class="st">"date_outcome"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    ordering_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"date_onset"</span>, <span class="va">value</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
 <span>    case_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">case_name</span>, <span class="va">ordering_value</span>, <span class="va">min</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>

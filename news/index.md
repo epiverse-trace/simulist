@@ -1,5 +1,54 @@
 # Changelog
 
+## simulist 0.7.0
+
+This minor version release contains a range of minor updates and
+accompanies the *simulist* publication in the [Journal of Open Source
+Software (JOSS)](https://joss.theoj.org/).
+
+### New features
+
+- The sampling of sex for line list and contacts data can now be
+  weighted instead of assuming a uniform probability via `prob_male` in
+  `config`
+  ([\#255](https://github.com/epiverse-trace/simulist/issues/255)).
+
+- The `reporting_delay` argument in
+  [`sim_linelist()`](https://epiverse-trace.github.io/simulist/reference/sim_linelist.md)
+  and
+  [`sim_outbreak()`](https://epiverse-trace.github.io/simulist/reference/sim_outbreak.md)
+  now supports `<epiparameter>` objects, matching the functionality of
+  the other delay distribution arguments
+  ([\#262](https://github.com/epiverse-trace/simulist/issues/262)).
+
+- A new line list events plot has been added to the `vis-linelist.Rmd`
+  vignette
+  ([\#278](https://github.com/epiverse-trace/simulist/issues/278)).
+
+### Breaking changes
+
+- None
+
+### Minor changes
+
+- Added `dependabot`
+  ([\#258](https://github.com/epiverse-trace/simulist/issues/258)).
+
+- GitHub actions versions are updated (multiple PRs).
+
+- `.lintr` is updated to include more linters
+  ([\#279](https://github.com/epiverse-trace/simulist/issues/279)) and
+  the `# nolint` flag syntax is fixed
+  ([\#263](https://github.com/epiverse-trace/simulist/issues/263)).
+
+### Bug fixes
+
+- None
+
+### Deprecated and defunct
+
+- None
+
 ## simulist 0.6.0
 
 CRAN release: 2025-08-28

@@ -13,7 +13,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">simulist</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,6 +60,34 @@
       <small>Source: <a href="https://github.com/epiverse-trace/simulist/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.0" id="simulist-070">simulist 0.7.0<a class="anchor" aria-label="anchor" href="#simulist-070"></a></h2>
+<p>This minor version release contains a range of minor updates and accompanies the <em>simulist</em> publication in the <a href="https://joss.theoj.org/" class="external-link">Journal of Open Source Software (JOSS)</a>.</p>
+<div class="section level3">
+<h3 id="new-features-0-7-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-7-0"></a></h3>
+<ul><li><p>The sampling of sex for line list and contacts data can now be weighted instead of assuming a uniform probability via <code>prob_male</code> in <code>config</code> (<a href="https://github.com/epiverse-trace/simulist/issues/255" class="external-link">#255</a>).</p></li>
+<li><p>The <code>reporting_delay</code> argument in <code><a href="../reference/sim_linelist.html">sim_linelist()</a></code> and <code><a href="../reference/sim_outbreak.html">sim_outbreak()</a></code> now supports <code>&lt;epiparameter&gt;</code> objects, matching the functionality of the other delay distribution arguments (<a href="https://github.com/epiverse-trace/simulist/issues/262" class="external-link">#262</a>).</p></li>
+<li><p>A new line list events plot has been added to the <code>vis-linelist.Rmd</code> vignette (<a href="https://github.com/epiverse-trace/simulist/issues/278" class="external-link">#278</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="breaking-changes-0-7-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-7-0"></a></h3>
+<ul><li>None</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-changes-0-7-0">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-7-0"></a></h3>
+<ul><li><p>Added <code>dependabot</code> (<a href="https://github.com/epiverse-trace/simulist/issues/258" class="external-link">#258</a>).</p></li>
+<li><p>GitHub actions versions are updated (multiple PRs).</p></li>
+<li><p><code>.lintr</code> is updated to include more linters (<a href="https://github.com/epiverse-trace/simulist/issues/279" class="external-link">#279</a>) and the <code># nolint</code> flag syntax is fixed (<a href="https://github.com/epiverse-trace/simulist/issues/263" class="external-link">#263</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-7-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-0"></a></h3>
+<ul><li>None</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-and-defunct-0-7-0">Deprecated and defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-7-0"></a></h3>
+<ul><li>None</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="simulist-060">simulist 0.6.0<a class="anchor" aria-label="anchor" href="#simulist-060"></a></h2><p class="text-muted">CRAN release: 2025-08-28</p>
 <p>In this minor version release we have continued to make a range of improvements across the package. A new line list post-processing function, <code><a href="../reference/censor_linelist.html">censor_linelist()</a></code>, makes it easy to group dates into various intervals, <code><a href="../reference/messy_linelist.html">messy_linelist()</a></code> introduced in v0.5.0 is enhanced, and the package documentation is expanded to cover under-reporting in outbreak data and censoring dates. There are also a couple of minor bug fixes.</p>

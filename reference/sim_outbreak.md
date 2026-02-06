@@ -310,42 +310,42 @@ Joshua W. Lambert
 # quickly simulate an outbreak using the function defaults
 outbreak <- sim_outbreak()
 head(outbreak$linelist)
-#>   id              case_name case_type sex age date_onset date_reporting
-#> 1  1         Mario Chirinos confirmed   m  18 2023-01-01     2023-01-01
-#> 2  2         Cecilia Bernal suspected   f  65 2023-01-09     2023-01-09
-#> 3  3      Brittany Callahan confirmed   f   5 2023-01-04     2023-01-04
-#> 4  4         Jordyn Hidalgo  probable   f  35 2023-01-07     2023-01-07
-#> 5  6        James Erdenebat confirmed   m   5 2023-01-14     2023-01-14
-#> 6  7 Marissa Left Hand Bull suspected   f  68 2023-01-10     2023-01-10
+#>   id        case_name case_type sex age date_onset date_reporting
+#> 1  1        Sariah Do  probable   f  77 2023-01-01     2023-01-01
+#> 2  3    Steven Decker  probable   m  90 2023-01-01     2023-01-01
+#> 3  4     Connor Weems confirmed   m  83 2023-01-02     2023-01-02
+#> 4  5 Kiduse Blackburn confirmed   m  56 2023-01-05     2023-01-05
+#> 5  6      Jayde Duran confirmed   f  18 2023-01-02     2023-01-02
+#> 6  7   Katherine Doan confirmed   f  73 2023-01-02     2023-01-02
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-28        2023-01-03
-#> 3     2023-01-06 recovered         <NA>         2022-12-30        2023-01-03
-#> 4     2023-01-09      died   2023-01-16         2022-12-30        2023-01-03
-#> 5           <NA> recovered         <NA>         2023-01-04        2023-01-10
-#> 6           <NA> recovered         <NA>         2022-12-30        2023-01-07
+#> 2           <NA> recovered         <NA>         2022-12-30        2023-01-05
+#> 3           <NA> recovered         <NA>         2022-12-30        2023-01-04
+#> 4     2023-01-08      died   2023-01-30         2022-12-30        2023-01-02
+#> 5           <NA> recovered         <NA>         2022-12-29        2023-01-04
+#> 6           <NA> recovered         <NA>         2022-12-29        2023-01-04
 #>   ct_value
-#> 1     25.1
+#> 1       NA
 #> 2       NA
-#> 3     25.6
-#> 4       NA
-#> 5     23.3
-#> 6       NA
+#> 3     24.7
+#> 4     23.3
+#> 5     22.1
+#> 6     20.3
 head(outbreak$contacts)
-#>                from                     to age sex date_first_contact
-#> 1    Mario Chirinos         Cecilia Bernal  65   f         2022-12-28
-#> 2    Mario Chirinos      Brittany Callahan   5   f         2022-12-30
-#> 3    Mario Chirinos         Jordyn Hidalgo  35   f         2022-12-30
-#> 4    Cecilia Bernal         Marcus Streaty  20   m         2023-01-06
-#> 5    Cecilia Bernal        James Erdenebat   5   m         2023-01-04
-#> 6 Brittany Callahan Marissa Left Hand Bull  68   f         2022-12-30
-#>   date_last_contact was_case         status
-#> 1        2023-01-03     TRUE           case
-#> 2        2023-01-03     TRUE           case
-#> 3        2023-01-03     TRUE           case
-#> 4        2023-01-12    FALSE under_followup
-#> 5        2023-01-10     TRUE           case
-#> 6        2023-01-07     TRUE           case
+#>            from               to age sex date_first_contact date_last_contact
+#> 1     Sariah Do   Surafale Wells  15   m         2022-12-30        2023-01-03
+#> 2     Sariah Do    Steven Decker  90   m         2022-12-30        2023-01-05
+#> 3 Steven Decker     Connor Weems  83   m         2022-12-30        2023-01-04
+#> 4 Steven Decker Kiduse Blackburn  56   m         2022-12-30        2023-01-02
+#> 5 Steven Decker      Jayde Duran  18   f         2022-12-29        2023-01-04
+#> 6 Steven Decker   Katherine Doan  73   f         2022-12-29        2023-01-04
+#>   was_case         status
+#> 1    FALSE under_followup
+#> 2     TRUE           case
+#> 3     TRUE           case
+#> 4     TRUE           case
+#> 5     TRUE           case
+#> 6     TRUE           case
 
 # to simulate a more realistic outbreak load epiparameters from
 # {epiparameter}
