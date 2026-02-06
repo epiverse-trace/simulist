@@ -30,7 +30,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/epiverse-trace/simulist/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/epiverse-trace/simulist/blob/v0.7.1/inst/CITATION)
 
 Lambert J, Tamayo Cuartero C (2026). *simulist: Simulate Disease
 Outbreak Line List and Contacts Data*.
