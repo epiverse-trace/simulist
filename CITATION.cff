@@ -8,7 +8,7 @@ message: 'To cite package "simulist" in publications use:'
 type: software
 license: MIT
 title: 'simulist: Simulate Disease Outbreak Line List and Contacts Data'
-version: 0.6.0.9000
+version: 0.7.0
 doi: 10.5281/zenodo.10471458
 identifiers:
 - type: doi
