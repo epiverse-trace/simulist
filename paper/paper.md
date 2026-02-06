@@ -51,7 +51,7 @@ However, to our knowledge, there are no existing tools that offer an easy method
 
 ![A connected dot plot of the timeline of events in a simulated line list. Data are simulated and all case names are randomly generated. See _Visualising simulated data vignette_ at <https://epiverse-trace.github.io/simulist/articles/vis-linelist.html> or in R (`vignette("vis-linelist", package = "simulist")`) for more information.\label{fig:events}](multi-dot-plot.png)
 
-![The daily incidence of symptom onset, hospital admission and deaths facetted by sex for a simulated line list and aggregated and plotted with `incidence2` [@taylorIncidence2ComputeHandle2020]. See _Visualising simulated data vignette_ at <https://epiverse-trace.github.io/simulist/articles/vis-linelist.html> or in R (`vignette("vis-linelist", package = "simulist")`) for more information.\label{fig:incidence}](incidence.png) 
+![The weekly incidence of symptom onset, hospital admission and deaths facetted by sex for a simulated line list and aggregated and plotted with `incidence2` [@taylorIncidence2ComputeHandle2020]. See _Visualising simulated data vignette_ at <https://epiverse-trace.github.io/simulist/articles/vis-linelist.html> or in R (`vignette("vis-linelist", package = "simulist")`) for more information.\label{fig:incidence}](incidence.png) 
 
 ![A simulated contact network (line list and contact tracing dataset), converted to an `<epicontacts>` object and plotted with `epicontacts` (this network is interactive when rendered in an IDE or online). See _Visualising simulated data vignette_ at <https://epiverse-trace.github.io/simulist/articles/vis-linelist.html> or in R (`vignette("vis-linelist", package = "simulist")`) for more information.\label{fig:network}](network.png)
 
@@ -77,7 +77,7 @@ The `simulist` package is developed around certain design principles: _interoper
 
 ## Availability
 
-The `simulist` R package is open-source and licensed under MIT. The source code is available on GitHub. The package can be downloaded from [CRAN](https://cran.r-project.org/package=simulist), [R-universe](https://epiverse-trace.r-universe.dev/simulist) or [GitHub](https://github.com/epiverse-trace/simulist). Code to reproduce figures in this paper can be found at the [`simulist` GitHub repository](https://github.com/epiverse-trace/simulist/blob/55114b0a7b765d84b6baefc12c96f08457cc7c91/paper/joss-figs.R).
+The `simulist` R package is open-source and licensed under MIT. The source code is available on GitHub. The package can be downloaded from [CRAN](https://cran.r-project.org/package=simulist), [R-universe](https://epiverse-trace.r-universe.dev/simulist) or [GitHub](https://github.com/epiverse-trace/simulist). Code to reproduce figures in this paper can be found at the [`simulist` GitHub repository](https://github.com/epiverse-trace/simulist/blob/main/paper/joss-figs.R).
 
 # Acknowledgements
 
