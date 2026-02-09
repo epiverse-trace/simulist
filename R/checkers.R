@@ -102,6 +102,7 @@
                              contact_distribution,
                              infectious_period,
                              prob_infection,
+                             incubation_period = NULL,
                              outbreak_start_date,
                              outbreak_size,
                              onset_to_hosp = NULL,
@@ -130,6 +131,7 @@
   )
 
   if (sim_type %in% c("linelist", "outbreak")) {
+    .check_func_req_args(incubation_period, func_name = "incubation_period")
     .check_func_req_args(onset_to_hosp, func_name = "onset_to_hosp")
     .check_func_req_args(onset_to_death, func_name = "onset_to_death")
     .check_func_req_args(onset_to_recovery, func_name = "onset_to_recovery")

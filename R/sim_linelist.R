@@ -60,6 +60,27 @@
 #' @param prob_infection A single `numeric` for the probability of a secondary
 #' contact being infected by an infected primary contact.
 #'
+#' @param incubation_period A `function` or an `<epiparameter>` object for the
+#' incubation period. `incubation_period` can also be set to `NULL` to not
+#' simulate a delay between being infected and becoming symptomatic.
+
+#' The `incubation_period` defines the duration from becoming infected to
+#' becoming symptomatic. In the simulation, individuals are assumed to
+#' become infectious immediately after being infected (the latency period is
+#' assumed to be zero). Incubation periods must be strictly positive.
+#'
+#' The function can be defined or anonymous. The function must return a vector
+#' of randomly generated real numbers representing sampled incubation periods.
+#' The function must have a single argument, the number of random infectious
+#' periods to generate.
+#'
+#' An `<epiparameter>` can be provided. This will be converted into random
+#' number generator internally.
+#'
+#' The default is `NULL` which is equivalent to setting all incubation periods
+#' to zero, so by default infected individuals become symptomatic at the same
+#' time as they become infected.
+#'
 #' @param onset_to_hosp A `function` or an `<epiparameter>` object for the
 #' onset-to-hospitalisation delay distribution. `onset_to_hosp` can also be
 #' set to `NULL` to not simulate hospitalisation (admission) dates.
@@ -299,6 +320,7 @@
 sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2), # nolint start: line_length_linter.
                          infectious_period = function(n) stats::rlnorm(n = n, meanlog = 2, sdlog = 0.5),
                          prob_infection = 0.5,
+                         incubation_period = NULL,
                          onset_to_hosp = function(n) stats::rlnorm(n = n, meanlog = 1.5, sdlog = 0.5),
                          onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 2.5, sdlog = 0.5), # nolint end
                          onset_to_recovery = NULL,
@@ -342,6 +364,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
     list(
       contact_distribution = contact_distribution,
       infectious_period = infectious_period,
+      incubation_period = incubation_period,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       onset_to_recovery = onset_to_recovery,
@@ -350,6 +373,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
   )
   contact_distribution <- funcs$contact_distribution
   infectious_period <- funcs$infectious_period
+  incubation_period <- funcs$incubation_period
   onset_to_hosp <- funcs$onset_to_hosp
   onset_to_death <- funcs$onset_to_death
   onset_to_recovery <- funcs$onset_to_recovery
@@ -360,6 +384,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = prob_infection,
+    incubation_period = incubation_period,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,
     onset_to_hosp = onset_to_hosp,
@@ -419,6 +444,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = prob_infection,
+    incubation_period = incubation_period,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
