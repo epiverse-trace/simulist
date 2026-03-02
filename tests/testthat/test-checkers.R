@@ -163,6 +163,7 @@ test_that(".check_df fails as expected for age", {
 
 contact_distribution <- function(x) stats::dpois(x = x, lambda = 2)
 infectious_period <- function(n) stats::rgamma(n = n, shape = 1, scale = 1)
+incubation_period <- function(n) rep(0, times = n)
 onset_to_hosp <- function(n) {
   stats::rlnorm(n = n, meanlog = 0.947, sdlog = 1.628)
 }
@@ -178,6 +179,7 @@ test_that(".check_sim_input works as expected", {
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = 0.5,
+    incubation_period = incubation_period,
     outbreak_start_date = as.Date("2023-01-01"),
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
@@ -208,6 +210,7 @@ test_that(".check_sim_input works as expected", {
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = 0.5,
+    incubation_period = incubation_period,
     outbreak_start_date = as.Date("2023-01-01"),
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
@@ -252,6 +255,7 @@ test_that(".check_sim_input works as expected with NULL risks", {
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = 0.5,
+    incubation_period = incubation_period,
     outbreak_start_date = as.Date("2023-01-01"),
     outbreak_size = c(10, 1e4),
     onset_to_hosp = onset_to_hosp,
@@ -327,6 +331,7 @@ test_that(".check_sim_input fails as expected", {
       contact_distribution = contact_distribution,
       infectious_period = infectious_period,
       prob_infection = 0.5,
+      incubation_period = incubation_period,
       outbreak_start_date = as.Date("2023-01-01"),
       outbreak_size = c(10, 1e4),
       population_age = c(1, 90),

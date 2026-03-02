@@ -9,6 +9,7 @@
   contact_distribution,
   infectious_period,
   prob_infection,
+  incubation_period = NULL,
   outbreak_start_date,
   outbreak_size,
   onset_to_hosp = NULL,
@@ -68,6 +69,26 @@ number generator (\code{\link[=rlnorm]{rlnorm()}}) with \code{meanlog = 2} and \
 
 \item{prob_infection}{A single \code{numeric} for the probability of a secondary
 contact being infected by an infected primary contact.}
+
+\item{incubation_period}{A \code{function} or an \verb{<epiparameter>} object for the
+incubation period. \code{incubation_period} can also be set to \code{NULL} to not
+simulate a delay between being infected and becoming symptomatic.
+The \code{incubation_period} defines the duration from becoming infected to
+becoming symptomatic. In the simulation, individuals are assumed to
+become infectious immediately after being infected (the latency period is
+assumed to be zero). Incubation periods must be strictly positive.
+
+The function can be defined or anonymous. The function must return a vector
+of randomly generated real numbers representing sampled incubation periods.
+The function must have a single argument, the number of random infectious
+periods to generate.
+
+An \verb{<epiparameter>} can be provided. This will be converted into random
+number generator internally.
+
+The default is \code{NULL} which is equivalent to setting all incubation periods
+to zero, so by default infected individuals become symptomatic at the same
+time as they become infected.}
 
 \item{outbreak_start_date}{A \code{date} for the start of the outbreak.}
 
