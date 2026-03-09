@@ -24,6 +24,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 status](https://www.r-pkg.org/badges/version/simulist)](https://CRAN.R-project.org/package=simulist)
 [![CRAN
 downloads](https://cranlogs.r-pkg.org/badges/simulist)](https://cran.r-project.org/package=simulist)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.08781/status.svg)](https://doi.org/10.21105/joss.08781)
 <!-- badges: end -->
 
 `{simulist}` is an R package to simulate individual-level infectious
@@ -374,23 +375,30 @@ By contributing to this project, you agree to abide by its terms.
 
 ## Citing this package
 
+To cite the `{simulist}` package, please cite the publication in the
+Journal of Open Source Software (JOSS), see below.
+
 ``` r
 citation("simulist")
 #> To cite package 'simulist' in publications use:
 #> 
-#>   Lambert J, Tamayo Cuartero C (2026). _simulist: Simulate Disease
-#>   Outbreak Line List and Contacts Data_. doi:10.5281/zenodo.10471458
-#>   <https://doi.org/10.5281/zenodo.10471458>,
-#>   <https://epiverse-trace.github.io/simulist/>.
+#>   Lambert J, Kucharski A, Tamayo Cuartero C (2026). "simulist: An R
+#>   package to simulate disease outbreak line list and contacts data."
+#>   _Journal of Open Source Software_, *11*(119), 8781.
+#>   doi:10.21105/joss.08781 <https://doi.org/10.21105/joss.08781>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Manual{,
-#>     title = {simulist: Simulate Disease Outbreak Line List and Contacts Data},
-#>     author = {Joshua W. Lambert and Carmen {Tamayo Cuartero}},
+#>   @Article{,
+#>     title = {simulist: An R package to simulate disease outbreak line list and contacts data},
+#>     author = {Joshua W. Lambert and Adam Kucharski and Carmen {Tamayo Cuartero}},
+#>     journal = {Journal of Open Source Software},
 #>     year = {2026},
-#>     doi = {10.5281/zenodo.10471458},
-#>     url = {https://epiverse-trace.github.io/simulist/},
+#>     volume = {11},
+#>     number = {119},
+#>     pages = {8781},
+#>     doi = {10.21105/joss.08781},
+#>     publisher = {The Open Journal},
 #>   }
 ```
 
