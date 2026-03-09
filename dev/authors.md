@@ -32,15 +32,19 @@
 Source:
 [`inst/CITATION`](https://github.com/epiverse-trace/simulist/blob/main/inst/CITATION)
 
-Lambert J, Tamayo Cuartero C (2026). *simulist: Simulate Disease
-Outbreak Line List and Contacts Data*.
-[doi:10.5281/zenodo.10471458](https://doi.org/10.5281/zenodo.10471458),
-<https://epiverse-trace.github.io/simulist/>.
+Lambert J, Kucharski A, Tamayo Cuartero C (2026). “simulist: An R
+package to simulate disease outbreak line list and contacts data.”
+*Journal of Open Source Software*, **11**(119), 8781.
+[doi:10.21105/joss.08781](https://doi.org/10.21105/joss.08781).
 
-    @Manual{,
-      title = {simulist: Simulate Disease Outbreak Line List and Contacts Data},
-      author = {Joshua W. Lambert and Carmen {Tamayo Cuartero}},
+    @Article{,
+      title = {simulist: An R package to simulate disease outbreak line list and contacts data},
+      author = {Joshua W. Lambert and Adam Kucharski and Carmen {Tamayo Cuartero}},
+      journal = {Journal of Open Source Software},
       year = {2026},
-      doi = {10.5281/zenodo.10471458},
-      url = {https://epiverse-trace.github.io/simulist/},
+      volume = {11},
+      number = {119},
+      pages = {8781},
+      doi = {10.21105/joss.08781},
+      publisher = {The Open Journal},
     }
