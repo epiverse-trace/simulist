@@ -12,11 +12,5 @@ bibentry(
   number = 119,
   pages = 8781,
   doi = "10.21105/joss.08781",
-  publisher = "The Open Journal",
-  textVersion = paste(
-    "Lambert, J.W., Kucharski, A., & Tamayo Cuartero, C. (2026).",
-    "simulist: An R package to simulate disease outbreak line list and contacts data.",
-    "Journal of Open Source Software, 11(119), 8781.",
-    "https://doi.org/10.21105/joss.08781"
-  )
+  publisher = "The Open Journal"
 )
