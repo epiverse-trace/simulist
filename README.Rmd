@@ -206,6 +206,8 @@ By contributing to this project, you agree to abide by its terms.
 
 ## Citing this package
 
+To cite the `{simulist}` package, please cite the publication in the Journal of Open Source Software (JOSS), see below.
+
 ```{r message=FALSE, warning=FALSE}
 citation("simulist")
 ```
