@@ -1,24 +1,22 @@
-# Code copied from citation()
-author <- meta$`Authors@R`
-if (length(author)) {
-    aar <- .read_authors_at_R_field(author)
-    author <- Filter(function(e) {
-        !(is.null(e$given) && is.null(e$family)) && !is.na(match("aut",
-            e$role))
-    }, aar)
-}
-
-if (is.null(meta$Date)) {
-  date <- format(Sys.Date(), "%Y")
-} else {
-  date <- format(as.Date(meta$Date), "%Y")
-}
-
 bibentry(
-  bibtype = "Manual",
-  title   = paste0(meta$Package, ": ", gsub("[[:space:]]+", " ", meta$Title)),
-  author  = author,
-  year    = date,
-  doi     = "10.5281/zenodo.10471458",
-  url     = "https://epiverse-trace.github.io/simulist/"
+  bibtype = "Article",
+  title = "simulist: An R package to simulate disease outbreak line list and contacts data",
+  author = c(
+    person(given = "Joshua W.", family = "Lambert", comment = c(ORCID = "0000-0001-5218-3046")),
+    person(given = "Adam", family = "Kucharski", comment = c(ORCID = "0000-0001-8814-9421")),
+    person("Carmen", "Tamayo Cuartero", comment = c(ORCID = "0000-0003-4184-2864"))
+  ),
+  journal = "Journal of Open Source Software",
+  year = 2026,
+  volume = 11,
+  number = 119,
+  pages = 8781,
+  doi = "10.21105/joss.08781",
+  publisher = "The Open Journal",
+  textVersion = paste(
+    "Lambert, J.W., Kucharski, A., & Tamayo Cuartero, C. (2026).",
+    "simulist: An R package to simulate disease outbreak line list and contacts data.",
+    "Journal of Open Source Software, 11(119), 8781.",
+    "https://doi.org/10.21105/joss.08781"
+  )
 )
