@@ -67,7 +67,7 @@ sim_contacts <- function(contact_distribution = function(x) stats::dpois(x = x, 
                          outbreak_start_date = as.Date("2023-01-01"),
                          anonymise = FALSE,
                          outbreak_size = c(10, 1e4),
-                         population_age = c(1, 90),
+                         population_age = c(0, 90),
                          contact_tracing_status_probs = c(
                            under_followup = 0.7,
                            lost_to_followup = 0.2,
