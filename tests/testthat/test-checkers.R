@@ -1,25 +1,25 @@
 test_that(".check_df works as expected for risk", {
   age_dep_hosp_risk <- data.frame(
-    age_limit = c(1, 5, 80),
+    age_limit = c(0, 5, 80),
     risk = c(0.1, 0.05, 0.2)
   )
   age_dep_hosp_risk <- .check_df(
     age_dep_hosp_risk,
     df_type = "risk",
-    age_range = c(lower = 1, upper = 90)
+    age_range = c(lower = 0, upper = 90)
   )
   expect_s3_class(age_dep_hosp_risk, class = "data.frame")
   expect_identical(dim(age_dep_hosp_risk), c(3L, 3L))
   expect_identical(colnames(age_dep_hosp_risk), c("min_age", "max_age", "risk"))
   expect_identical(
     row.names(age_dep_hosp_risk),
-    c("[1,5)", "[5,80)", "[80,90]")
+    c("[0,5)", "[5,80)", "[80,90]")
   )
 })
 
 test_that(".check_df works as expected for age", {
   age_struct <- data.frame(
-    age_limit = c(1, 5, 80, 90),
+    age_limit = c(0, 5, 80, 90),
     proportion = c(0.1, 0.7, 0.2, 0)
   )
   age_struct <- .check_df(age_struct, df_type = "age")
@@ -28,7 +28,7 @@ test_that(".check_df works as expected for age", {
   expect_identical(colnames(age_struct), c("min_age", "max_age", "proportion"))
   expect_identical(
     row.names(age_struct),
-    c("[1,5)", "[5,80)", "[80,90)", "[90,90]")
+    c("[0,5)", "[5,80)", "[80,90)", "[90,90]")
   )
 })
 
@@ -39,7 +39,7 @@ test_that(".check_df fails as expected", {
   )
 
   age_dep_hosp_risk <- data.frame(
-    age_limit = c(1, 5, 5),
+    age_limit = c(0, 5, 5),
     risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
@@ -52,7 +52,7 @@ test_that(".check_df fails as expected", {
   )
 
   age_struct <- data.frame(
-    age_limit = c(1, 5, 5),
+    age_limit = c(0, 5, 5),
     proportion = c(0.5, 0.5, 0)
   )
   expect_error(
@@ -89,14 +89,14 @@ test_that(".check_df fails as expected for risk", {
   )
 
   age_dep_hosp_risk <- data.frame(
-    age_limit = c(1, 5, 90),
+    age_limit = c(0, 5, 90),
     risk = c(0.1, 0.05, 0.2)
   )
   expect_error(
     .check_df(
       age_dep_hosp_risk,
       df_type = "risk",
-      age_range = c(lower = 1, upper = 90)
+      age_range = c(lower = 0, upper = 90)
     ),
     regexp =
       "Lower bound of oldest age group must be lower than highest age range"
