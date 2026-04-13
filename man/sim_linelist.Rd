@@ -312,7 +312,7 @@ head(linelist)
 # 10\% for under 5s
 # 5\% for the rest
 age_dep_hosp_risk <- data.frame(
-  age_limit = c(1, 5, 80),
+  age_limit = c(0, 5, 80),
   risk = c(0.1, 0.05, 0.2)
 )
 linelist <- sim_linelist(
