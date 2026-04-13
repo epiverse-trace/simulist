@@ -18,7 +18,7 @@ sim_linelist(
   outbreak_start_date = as.Date("2023-01-01"),
   anonymise = FALSE,
   outbreak_size = c(10, 10000),
-  population_age = c(1, 90),
+  population_age = c(0, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.3, confirmed = 0.5),
   config = create_config()
 )

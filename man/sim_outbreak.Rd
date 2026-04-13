@@ -18,7 +18,7 @@ sim_outbreak(
   outbreak_start_date = as.Date("2023-01-01"),
   anonymise = FALSE,
   outbreak_size = c(10, 10000),
-  population_age = c(1, 90),
+  population_age = c(0, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.3, confirmed = 0.5),
   contact_tracing_status_probs = c(under_followup = 0.7, lost_to_followup = 0.2, unknown
     = 0.1),

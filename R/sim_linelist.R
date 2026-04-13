@@ -309,7 +309,7 @@ sim_linelist <- function(contact_distribution = function(x) stats::dpois(x = x, 
                          outbreak_start_date = as.Date("2023-01-01"),
                          anonymise = FALSE,
                          outbreak_size = c(10, 1e4),
-                         population_age = c(1, 90),
+                         population_age = c(0, 90),
                          case_type_probs = c(
                            suspected = 0.2,
                            probable = 0.3,
