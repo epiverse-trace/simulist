@@ -42,15 +42,15 @@ test_that("sim_outbreak works as expected with anonymised", {
 
 test_that("sim_outbreak works as expected with age-strat risks", {
   age_dep_hosp_risk <- data.frame(
-    age_limit = c(1, 5, 80),
+    age_limit = c(0, 5, 80),
     risk = c(0.1, 0.05, 0.2)
   )
   age_dep_hosp_death_risk <- data.frame(
-    age_limit = c(1, 5, 80),
+    age_limit = c(0, 5, 80),
     risk = c(0.1, 0.05, 0.2)
   )
   age_dep_non_hosp_death_risk <- data.frame(
-    age_limit = c(1, 5, 80),
+    age_limit = c(0, 5, 80),
     risk = c(0.05, 0.025, 0.1)
   )
   set.seed(1)
