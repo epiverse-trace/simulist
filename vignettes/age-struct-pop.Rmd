@@ -76,7 +76,7 @@ set.seed(1)
 
 ## Uniform population age
 
-By default `sim_linelist()` simulates individuals ages assuming a uniform distribution between 1 and 90. To change this age range, a vector of two numbers can be supplied to the `population_age` argument. Here we simulate an outbreak in a population with a population ranging from 5 to 75 (inclusive, `[5,75]`).
+By default `sim_linelist()` simulates individuals ages assuming a uniform distribution between 0 and 90. To change this age range, a vector of two numbers can be supplied to the `population_age` argument. Here we simulate an outbreak in a population with a population ranging from 5 to 75 (inclusive, `[5,75]`).
 
 ***Note***: all ages are assumed to be in the unit of years and need to be integers (or at least ["integerish"](https://rlang.r-lib.org/reference/is_integerish.html) if stored as double).
 
@@ -116,7 +116,7 @@ ggplot(linelist[, c("sex", "age")]) +
   theme_bw()
 ```
 
-If the `population_age` argument was left unspecified, it would have assumed the default age range of 1 to 90 (`c(1, 90)`).
+If the `population_age` argument was left unspecified, it would have assumed the default age range of 0 to 90 (`c(0, 90)`).
 
 ## Structured population age
 
