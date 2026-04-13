@@ -41,8 +41,8 @@
         setequal(c("age_limit", col_name), colnames(x)),
       "Age limit or proportion cannot be NA or NaN" =
         !anyNA(x),
-      "Minimum age of lowest age group must be greater than zero" =
-        min(x$age_limit) > 0,
+      "Minimum age of lowest age group must be greater than or equal to zero" =
+        min(x$age_limit) >= 0,
       "Proportions of each age bracket should sum to 1" =
         all.equal(sum(x$proportion), 1)
     )
