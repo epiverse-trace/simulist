@@ -205,20 +205,20 @@ times.</p>
 <span></span>
 <span><span class="co"># first 6 rows of linelist</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id            case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1   Jennifer Pritchett confirmed   f   1 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  2         Tyler Payson confirmed   f  29 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  3            Sean Wong confirmed   m  78 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 4  5       Bishr al-Safar confirmed   m  70 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 5  6 Francisco Montgomery  probable   m  28 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 6  8         Jack Millard suspected   m  61 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1 Jennifer Pritchett confirmed   f   0 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  2       Tyler Payson confirmed   f  28 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 3  3   Faisal al-Hallal confirmed   m  77 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 4  5    Collin Johnston confirmed   m  69 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 5  6           Kaleb Le  probable   m  27 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 6  8   Muslim el-Radwan suspected   m  60 2023-01-01     2023-01-01</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1     2023-01-03      died   2023-01-18               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2     2023-01-03      died   2023-02-09         2022-12-30        2023-01-08</span></span>
-<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-05</span></span>
-<span><span class="co">#&gt; 4     2023-01-04 recovered         &lt;NA&gt;         2022-12-31        2023-01-04</span></span>
-<span><span class="co">#&gt; 5     2023-01-05 recovered         &lt;NA&gt;         2022-12-29        2023-01-02</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-05</span></span>
+<span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-08</span></span>
+<span><span class="co">#&gt; 3     2023-01-03      died   2023-01-10         2022-12-31        2023-01-05</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-04</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-02</span></span>
+<span><span class="co">#&gt; 6     2023-01-05 recovered         &lt;NA&gt;         2022-12-28        2023-01-05</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
 <span><span class="co">#&gt; 1     27.1</span></span>
 <span><span class="co">#&gt; 2     25.2</span></span>
@@ -244,27 +244,20 @@ hospitalised and non-hospitalised groups is lower.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id         case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1    Karlena Garner confirmed   f  32 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  3 Cassandra Le Beau suspected   f  48 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  4      Lauren Moran confirmed   f   3 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 4  5       Alexis Ware confirmed   f  25 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 5  6       Sophia Cruz  probable   f  57 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 6  7      Amanda Quast confirmed   f   9 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-03</span></span>
-<span><span class="co">#&gt; 3     2023-01-05 recovered         &lt;NA&gt;         2022-12-29        2023-01-07</span></span>
-<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-27        2023-01-02</span></span>
-<span><span class="co">#&gt; 5     2023-01-04      died   2023-01-19         2022-12-29        2023-01-04</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-05</span></span>
-<span><span class="co">#&gt;   ct_value</span></span>
-<span><span class="co">#&gt; 1     26.3</span></span>
-<span><span class="co">#&gt; 2       NA</span></span>
-<span><span class="co">#&gt; 3     26.2</span></span>
-<span><span class="co">#&gt; 4     28.5</span></span>
-<span><span class="co">#&gt; 5       NA</span></span>
-<span><span class="co">#&gt; 6     28.6</span></span></code></pre></div>
+<span><span class="co">#&gt;   id       case_name case_type sex age date_onset date_reporting date_admission</span></span>
+<span><span class="co">#&gt; 1  1 Safwa el-Badour confirmed   f  31 2023-01-01     2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2  3  Destiny Walker confirmed   f  47 2023-01-01     2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3  4   Halley Finley suspected   f   2 2023-01-01     2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4  5 Tahaani el-Azer  probable   f  24 2023-01-01     2023-01-01     2023-01-05</span></span>
+<span><span class="co">#&gt; 5  6     Grace Davis suspected   f  56 2023-01-01     2023-01-01     2023-01-02</span></span>
+<span><span class="co">#&gt; 6  7     Yusra Adams confirmed   f   8 2023-01-01     2023-01-01           &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;     outcome date_outcome date_first_contact date_last_contact ct_value</span></span>
+<span><span class="co">#&gt; 1 recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     23.2</span></span>
+<span><span class="co">#&gt; 2 recovered         &lt;NA&gt;         2022-12-29        2023-01-03     23.6</span></span>
+<span><span class="co">#&gt; 3 recovered         &lt;NA&gt;         2022-12-29        2023-01-07       NA</span></span>
+<span><span class="co">#&gt; 4 recovered         &lt;NA&gt;         2022-12-27        2023-01-02       NA</span></span>
+<span><span class="co">#&gt; 5 recovered         &lt;NA&gt;         2022-12-29        2023-01-04       NA</span></span>
+<span><span class="co">#&gt; 6 recovered         &lt;NA&gt;         2022-12-31        2023-01-05     23.3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="age-stratified-hospitalisation-and-death-risks">Age-stratified hospitalisation and death risks<a class="anchor" aria-label="anchor" href="#age-stratified-hospitalisation-and-death-risks"></a>
@@ -287,17 +280,17 @@ so in this example the oldest age bracket will be 80-90 (inclusive). The
 minimum age of each age group is inclusive, and the maximum age of each
 age group is exclusive, except the oldest age group which is inclusive
 of the minimum and maximum age. In this example the first age group is
-the first element of each vector, so the minimum age is 1, maximum age
+the first element of each vector, so the minimum age is 0, maximum age
 is four (as the next age group starts at five), and the hospitalisation
 risk for that group is 0.1. Each age group forms a row in the table.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_hosp_risk</span></span>
 <span><span class="co">#&gt;   age_limit risk</span></span>
-<span><span class="co">#&gt; 1         1 0.10</span></span>
+<span><span class="co">#&gt; 1         0 0.10</span></span>
 <span><span class="co">#&gt; 2         5 0.05</span></span>
 <span><span class="co">#&gt; 3        80 0.20</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -312,25 +305,25 @@ risk for that group is 0.1. Each age group forms a row in the table.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id        case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1 Madalyn Crawford  probable   f  53 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  2   Miranda Romero confirmed   f  20 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  3 Andrzej Stephens confirmed   m  69 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 4  6  Brandi Burciaga suspected   f  57 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 5  7     Chase Dedios confirmed   m  89 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 6  9    Edward Benson  probable   m  57 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 1  1     Bradley Born confirmed   m  82 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  3     Edrick Sniff  probable   m  10 2023-01-03     2023-01-03</span></span>
+<span><span class="co">#&gt; 3  4 Antonia Jonathan suspected   f  24 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 4  5 Hannah Kolodziej confirmed   f  10 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 5  6  Jana Richardson  probable   f  56 2023-01-02     2023-01-02</span></span>
+<span><span class="co">#&gt; 6  8    Suhaa al-Arif  probable   f  56 2023-01-03     2023-01-03</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
-<span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-05</span></span>
-<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-04</span></span>
-<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-05</span></span>
-<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-26        2023-01-05</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-04</span></span>
+<span><span class="co">#&gt; 1           &lt;NA&gt;      died   2023-01-12               &lt;NA&gt;              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-04</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-04</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-02</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-01        2023-01-04</span></span>
+<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-05</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
-<span><span class="co">#&gt; 1       NA</span></span>
-<span><span class="co">#&gt; 2     26.9</span></span>
-<span><span class="co">#&gt; 3     24.2</span></span>
-<span><span class="co">#&gt; 4       NA</span></span>
-<span><span class="co">#&gt; 5     19.6</span></span>
+<span><span class="co">#&gt; 1     25.1</span></span>
+<span><span class="co">#&gt; 2       NA</span></span>
+<span><span class="co">#&gt; 3       NA</span></span>
+<span><span class="co">#&gt; 4     21.2</span></span>
+<span><span class="co">#&gt; 5       NA</span></span>
 <span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
 <div class="alert alert-warning">
 <p>The minimum age of the youngest age group must match the age range
@@ -339,22 +332,22 @@ specified in the <code>population_age</code> argument of
 <code>&lt;data.frame&gt;</code> must not be older than the upper age
 range. If these conditions are not met the function will error.</p>
 <p>If the age-stratified risk table does not match the default
-(<code>c(1, 90)</code>), the <code>population_age</code> argument will
+(<code>c(0, 90)</code>), the <code>population_age</code> argument will
 need to be set to match.</p>
 </div>
-<p>For example, the default age range of the population is 1 to 90
-(inclusive). In our example above, the lowest age group started at 1 and
+<p>For example, the default age range of the population is 0 to 90
+(inclusive). In our example above, the lowest age group started at 0 and
 the oldest age group stopped at 90. This matches the default
-<code>population_age = c(1, 90)</code>. However, see here that if the
+<code>population_age = c(0, 90)</code>. However, see here that if the
 lower age limit exceeds the age range the function will not run.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">95</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">95</span><span class="op">)</span>,</span>
 <span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_hosp_risk</span></span>
 <span><span class="co">#&gt;   age_limit risk</span></span>
-<span><span class="co">#&gt; 1         1 0.10</span></span>
+<span><span class="co">#&gt; 1         0 0.10</span></span>
 <span><span class="co">#&gt; 2         5 0.05</span></span>
 <span><span class="co">#&gt; 3        95 0.20</span></span>
 <span></span>
@@ -374,7 +367,7 @@ adjusted. Here the oldest age bracket is now 95 to 100
 (<code>[95, 100]</code>).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">95</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">95</span><span class="op">)</span>,</span>
 <span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -385,31 +378,31 @@ adjusted. Here the oldest age bracket is now 95 to 100
 <span>  onset_to_hosp <span class="op">=</span> <span class="va">onset_to_hosp</span>,</span>
 <span>  onset_to_death <span class="op">=</span> <span class="va">onset_to_death</span>,</span>
 <span>  hosp_risk <span class="op">=</span> <span class="va">age_dep_hosp_risk</span>,</span>
-<span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id        case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1     Joshua Evans  probable   m  36 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  3 Marshall Johnson  probable   m  68 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  5 Brandon Williams suspected   m   7 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 4  6 Marcella Roberts confirmed   f  82 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 5  7       Andro Dinh suspected   m  23 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 6 10      Chase Wisda  probable   m  89 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt;   id           case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1    Jordano Cisneros confirmed   m  48 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  2    Akira Stephenson  probable   f  74 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 3  4      Karlie Johnson  probable   f  47 2023-01-02     2023-01-02</span></span>
+<span><span class="co">#&gt; 4  6 Sheldon Scantlebury confirmed   m  77 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 5  9      Bilaal al-Amer confirmed   m  90 2023-01-02     2023-01-02</span></span>
+<span><span class="co">#&gt; 6 10    Thaaqib al-Pasha confirmed   m  46 2023-01-01     2023-01-01</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-02</span></span>
-<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-31        2023-01-04</span></span>
-<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-26        2023-01-03</span></span>
-<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-02</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-26        2023-01-02</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-01</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-02</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-05</span></span>
+<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-05</span></span>
+<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-06</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
-<span><span class="co">#&gt; 1       NA</span></span>
+<span><span class="co">#&gt; 1     25.8</span></span>
 <span><span class="co">#&gt; 2       NA</span></span>
 <span><span class="co">#&gt; 3       NA</span></span>
-<span><span class="co">#&gt; 4     26.8</span></span>
-<span><span class="co">#&gt; 5       NA</span></span>
-<span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 4     23.8</span></span>
+<span><span class="co">#&gt; 5     27.9</span></span>
+<span><span class="co">#&gt; 6     26.4</span></span></code></pre></div>
 <p>Exactly the same method of age-stratified risks applies to death
 risks. First create the <code>&lt;data.frame&gt;</code> with the age
 groups and their respective, in this case, death risks, and then supply
@@ -419,12 +412,12 @@ and outside the hospital, respectively, or both.</p>
 <p>Here are a couple of examples:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_death_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.1</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_hosp_death_risk</span></span>
 <span><span class="co">#&gt;   age_limit risk</span></span>
-<span><span class="co">#&gt; 1         1  0.3</span></span>
+<span><span class="co">#&gt; 1         0  0.3</span></span>
 <span><span class="co">#&gt; 2         5  0.1</span></span>
 <span><span class="co">#&gt; 3        80  0.6</span></span>
 <span></span>
@@ -438,12 +431,12 @@ and outside the hospital, respectively, or both.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_non_hosp_death_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_non_hosp_death_risk</span></span>
 <span><span class="co">#&gt;   age_limit risk</span></span>
-<span><span class="co">#&gt; 1         1 0.10</span></span>
+<span><span class="co">#&gt; 1         0 0.10</span></span>
 <span><span class="co">#&gt; 2         5 0.05</span></span>
 <span><span class="co">#&gt; 3        80 0.10</span></span>
 <span></span>
@@ -461,15 +454,15 @@ case the hospitalisation risk, and death risks inside and outside of
 hospital, are all specified.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_dep_hosp_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_hosp_death_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.1</span>, <span class="fl">0.6</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">age_dep_non_hosp_death_risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
+<span>  age_limit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">80</span><span class="op">)</span>,</span>
 <span>  risk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -485,27 +478,27 @@ hospital, are all specified.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id          case_name case_type sex age date_onset date_reporting</span></span>
-<span><span class="co">#&gt; 1  1          Jong Pham confirmed   m  22 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 2  2  Yaasmeena el-Khan  probable   f  22 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 3  3 Ghaazi al-Abdullah suspected   m  28 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 4  4   Nu'ma el-Shariff  probable   f  30 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 5  6  Young Woen Nguyen  probable   m  71 2023-01-01     2023-01-01</span></span>
-<span><span class="co">#&gt; 6  8    Alexandra Solis  probable   f  49 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt;   id            case_name case_type sex age date_onset date_reporting</span></span>
+<span><span class="co">#&gt; 1  1 Justin Locquiao-Rima  probable   m   5 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 2  2        Nuha el-Mitri suspected   f  29 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 3  3        Corey Marquez confirmed   m  36 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 4  6        Bryan Gadison confirmed   m  26 2023-01-01     2023-01-01</span></span>
+<span><span class="co">#&gt; 5  9      Janice Reynolds confirmed   f  34 2023-01-02     2023-01-02</span></span>
+<span><span class="co">#&gt; 6 10      Brittany Dedios confirmed   f   2 2023-01-02     2023-01-02</span></span>
 <span><span class="co">#&gt;   date_admission   outcome date_outcome date_first_contact date_last_contact</span></span>
 <span><span class="co">#&gt; 1           &lt;NA&gt; recovered         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-06</span></span>
-<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2023-01-01        2023-01-05</span></span>
-<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-05</span></span>
-<span><span class="co">#&gt; 5           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-02</span></span>
-<span><span class="co">#&gt; 6           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-03</span></span>
+<span><span class="co">#&gt; 2           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-28        2023-01-06</span></span>
+<span><span class="co">#&gt; 3           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-30        2023-01-03</span></span>
+<span><span class="co">#&gt; 4           &lt;NA&gt; recovered         &lt;NA&gt;         2022-12-29        2023-01-04</span></span>
+<span><span class="co">#&gt; 5     2023-01-04 recovered         &lt;NA&gt;         2022-12-25        2023-01-02</span></span>
+<span><span class="co">#&gt; 6     2023-01-06      died   2023-01-09         2022-12-30        2023-01-05</span></span>
 <span><span class="co">#&gt;   ct_value</span></span>
-<span><span class="co">#&gt; 1     24.3</span></span>
+<span><span class="co">#&gt; 1       NA</span></span>
 <span><span class="co">#&gt; 2       NA</span></span>
-<span><span class="co">#&gt; 3       NA</span></span>
-<span><span class="co">#&gt; 4       NA</span></span>
-<span><span class="co">#&gt; 5       NA</span></span>
-<span><span class="co">#&gt; 6       NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 3     25.1</span></span>
+<span><span class="co">#&gt; 4     27.9</span></span>
+<span><span class="co">#&gt; 5     24.9</span></span>
+<span><span class="co">#&gt; 6     27.4</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

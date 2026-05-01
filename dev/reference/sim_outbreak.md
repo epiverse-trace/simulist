@@ -20,7 +20,7 @@ sim_outbreak(
   outbreak_start_date = as.Date("2023-01-01"),
   anonymise = FALSE,
   outbreak_size = c(10, 10000),
-  population_age = c(1, 90),
+  population_age = c(0, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.3, confirmed = 0.5),
   contact_tracing_status_probs = c(under_followup = 0.7, lost_to_followup = 0.2, unknown
     = 0.1),
@@ -310,35 +310,42 @@ Joshua W. Lambert
 # quickly simulate an outbreak using the function defaults
 outbreak <- sim_outbreak()
 head(outbreak$linelist)
-#>   id      case_name case_type sex age date_onset date_reporting date_admission
-#> 1  1  Anthony Thach confirmed   m  75 2023-01-01     2023-01-01           <NA>
-#> 2  2    Jose Tafoya confirmed   m  32 2023-01-14     2023-01-14           <NA>
-#> 3  4 Muhsin al-Rauf confirmed   m  85 2023-01-10     2023-01-10           <NA>
-#> 4  5    Miriam Meza  probable   f   3 2023-01-08     2023-01-08           <NA>
-#> 5  6 Naomi Weckmann confirmed   f  75 2023-01-15     2023-01-15           <NA>
-#> 6  7    Heaven Lehi confirmed   f  75 2023-01-18     2023-01-18     2023-01-20
-#>     outcome date_outcome date_first_contact date_last_contact ct_value
-#> 1 recovered         <NA>               <NA>              <NA>     23.8
-#> 2 recovered         <NA>         2022-12-27        2023-01-04     24.8
-#> 3 recovered         <NA>         2022-12-28        2023-01-07     26.8
-#> 4 recovered         <NA>         2022-12-29        2023-01-03       NA
-#> 5 recovered         <NA>         2023-01-10        2023-01-17     24.2
-#> 6      died   2023-02-01         2023-01-11        2023-01-15     22.3
+#>   id         case_name case_type sex age date_onset date_reporting
+#> 1  1    Macella Seiler confirmed   f   7 2023-01-01     2023-01-01
+#> 2  2 Walker Williamson confirmed   m  89 2023-01-08     2023-01-08
+#> 3  3      Natalie Cano confirmed   f  70 2023-01-16     2023-01-16
+#> 4  4 Hanaboyo Richmond confirmed   f   9 2023-01-18     2023-01-18
+#> 5  5      Naima Nguyen confirmed   f  78 2023-01-19     2023-01-19
+#> 6  7 Francisco Estrada confirmed   m  55 2023-01-21     2023-01-21
+#>   date_admission   outcome date_outcome date_first_contact date_last_contact
+#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-05
+#> 3     2023-01-21      died   2023-01-25         2023-01-05        2023-01-11
+#> 4     2023-01-21 recovered         <NA>         2023-01-08        2023-01-12
+#> 5           <NA> recovered         <NA>         2023-01-14        2023-01-23
+#> 6           <NA> recovered         <NA>         2023-01-12        2023-01-16
+#>   ct_value
+#> 1     25.3
+#> 2     25.6
+#> 3     25.5
+#> 4     25.0
+#> 5     20.7
+#> 6     25.5
 head(outbreak$contacts)
-#>            from                  to age sex date_first_contact
-#> 1 Anthony Thach         Jose Tafoya  32   m         2022-12-27
-#> 2 Anthony Thach Christopher Crippen  14   m         2022-12-28
-#> 3 Anthony Thach      Muhsin al-Rauf  85   m         2022-12-28
-#> 4 Anthony Thach         Miriam Meza   3   f         2022-12-29
-#> 5   Jose Tafoya      Naomi Weckmann  75   f         2023-01-10
-#> 6   Jose Tafoya         Heaven Lehi  75   f         2023-01-11
+#>                from                to age sex date_first_contact
+#> 1    Macella Seiler Walker Williamson  89   m         2022-12-29
+#> 2 Walker Williamson      Natalie Cano  70   f         2023-01-05
+#> 3 Walker Williamson Hanaboyo Richmond   9   f         2023-01-08
+#> 4      Natalie Cano      Naima Nguyen  78   f         2023-01-14
+#> 5      Natalie Cano  Jennifer Heredia   4   f         2023-01-15
+#> 6      Natalie Cano Francisco Estrada  55   m         2023-01-12
 #>   date_last_contact was_case         status
-#> 1        2023-01-04     TRUE           case
-#> 2        2023-01-05    FALSE under_followup
-#> 3        2023-01-07     TRUE           case
-#> 4        2023-01-03     TRUE           case
-#> 5        2023-01-17     TRUE           case
-#> 6        2023-01-15     TRUE           case
+#> 1        2023-01-05     TRUE           case
+#> 2        2023-01-11     TRUE           case
+#> 3        2023-01-12     TRUE           case
+#> 4        2023-01-23     TRUE           case
+#> 5        2023-01-17    FALSE under_followup
+#> 6        2023-01-16     TRUE           case
 
 # to simulate a more realistic outbreak load epiparameters from
 # {epiparameter}

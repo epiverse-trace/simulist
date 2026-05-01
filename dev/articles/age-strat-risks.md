@@ -37,6 +37,7 @@ function can accommodate age-stratified risks by accepting a
 `<data.frame>` instead of a single risk for the entire population.
 
 ``` r
+
 library(simulist)
 library(epiparameter)
 ```
@@ -46,6 +47,7 @@ Here is an example that uses the default hospitalisation and death risks
 distributions using the {epiparameter} package.
 
 ``` r
+
 contact_distribution <- epiparameter(
   disease = "COVID-19",
   epi_name = "contact distribution",
@@ -96,6 +98,7 @@ is rendered. When using {simulist}, setting the seed is not required
 unless you need to simulate the same line list multiple times.
 
 ``` r
+
 set.seed(1)
 ```
 
@@ -108,6 +111,7 @@ Simulate a line list with population-wide default risks:
 - death risk outside of hospitals `0.05`
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -118,20 +122,20 @@ linelist <- sim_linelist(
 
 # first 6 rows of linelist
 head(linelist)
-#>   id            case_name case_type sex age date_onset date_reporting
-#> 1  1   Jennifer Pritchett confirmed   f   1 2023-01-01     2023-01-01
-#> 2  2         Tyler Payson confirmed   f  29 2023-01-01     2023-01-01
-#> 3  3            Sean Wong confirmed   m  78 2023-01-01     2023-01-01
-#> 4  5       Bishr al-Safar confirmed   m  70 2023-01-01     2023-01-01
-#> 5  6 Francisco Montgomery  probable   m  28 2023-01-01     2023-01-01
-#> 6  8         Jack Millard suspected   m  61 2023-01-01     2023-01-01
+#>   id          case_name case_type sex age date_onset date_reporting
+#> 1  1 Jennifer Pritchett confirmed   f   0 2023-01-01     2023-01-01
+#> 2  2       Tyler Payson confirmed   f  28 2023-01-01     2023-01-01
+#> 3  3   Faisal al-Hallal confirmed   m  77 2023-01-01     2023-01-01
+#> 4  5    Collin Johnston confirmed   m  69 2023-01-01     2023-01-01
+#> 5  6           Kaleb Le  probable   m  27 2023-01-01     2023-01-01
+#> 6  8   Muslim el-Radwan suspected   m  60 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1     2023-01-03      died   2023-01-18               <NA>              <NA>
-#> 2     2023-01-03      died   2023-02-09         2022-12-30        2023-01-08
-#> 3           <NA> recovered         <NA>         2022-12-31        2023-01-05
-#> 4     2023-01-04 recovered         <NA>         2022-12-31        2023-01-04
-#> 5     2023-01-05 recovered         <NA>         2022-12-29        2023-01-02
-#> 6           <NA> recovered         <NA>         2022-12-28        2023-01-05
+#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-30        2023-01-08
+#> 3     2023-01-03      died   2023-01-10         2022-12-31        2023-01-05
+#> 4           <NA> recovered         <NA>         2022-12-31        2023-01-04
+#> 5           <NA> recovered         <NA>         2022-12-29        2023-01-02
+#> 6     2023-01-05 recovered         <NA>         2022-12-28        2023-01-05
 #>   ct_value
 #> 1     27.1
 #> 2     25.2
@@ -148,6 +152,7 @@ infected is higher, but the mortality risk for both hospitalised and
 non-hospitalised groups is lower.
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -160,27 +165,20 @@ linelist <- sim_linelist(
 )
 
 head(linelist)
-#>   id         case_name case_type sex age date_onset date_reporting
-#> 1  1    Karlena Garner confirmed   f  32 2023-01-01     2023-01-01
-#> 2  3 Cassandra Le Beau suspected   f  48 2023-01-01     2023-01-01
-#> 3  4      Lauren Moran confirmed   f   3 2023-01-01     2023-01-01
-#> 4  5       Alexis Ware confirmed   f  25 2023-01-01     2023-01-01
-#> 5  6       Sophia Cruz  probable   f  57 2023-01-01     2023-01-01
-#> 6  7      Amanda Quast confirmed   f   9 2023-01-01     2023-01-01
-#>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-03
-#> 3     2023-01-05 recovered         <NA>         2022-12-29        2023-01-07
-#> 4           <NA> recovered         <NA>         2022-12-27        2023-01-02
-#> 5     2023-01-04      died   2023-01-19         2022-12-29        2023-01-04
-#> 6           <NA> recovered         <NA>         2022-12-31        2023-01-05
-#>   ct_value
-#> 1     26.3
-#> 2       NA
-#> 3     26.2
-#> 4     28.5
-#> 5       NA
-#> 6     28.6
+#>   id       case_name case_type sex age date_onset date_reporting date_admission
+#> 1  1 Safwa el-Badour confirmed   f  31 2023-01-01     2023-01-01           <NA>
+#> 2  3  Destiny Walker confirmed   f  47 2023-01-01     2023-01-01           <NA>
+#> 3  4   Halley Finley suspected   f   2 2023-01-01     2023-01-01           <NA>
+#> 4  5 Tahaani el-Azer  probable   f  24 2023-01-01     2023-01-01     2023-01-05
+#> 5  6     Grace Davis suspected   f  56 2023-01-01     2023-01-01     2023-01-02
+#> 6  7     Yusra Adams confirmed   f   8 2023-01-01     2023-01-01           <NA>
+#>     outcome date_outcome date_first_contact date_last_contact ct_value
+#> 1 recovered         <NA>               <NA>              <NA>     23.2
+#> 2 recovered         <NA>         2022-12-29        2023-01-03     23.6
+#> 3 recovered         <NA>         2022-12-29        2023-01-07       NA
+#> 4 recovered         <NA>         2022-12-27        2023-01-02       NA
+#> 5 recovered         <NA>         2022-12-29        2023-01-04       NA
+#> 6 recovered         <NA>         2022-12-31        2023-01-05     23.3
 ```
 
 ## Age-stratified hospitalisation and death risks
@@ -201,23 +199,25 @@ example the oldest age bracket will be 80-90 (inclusive). The minimum
 age of each age group is inclusive, and the maximum age of each age
 group is exclusive, except the oldest age group which is inclusive of
 the minimum and maximum age. In this example the first age group is the
-first element of each vector, so the minimum age is 1, maximum age is
+first element of each vector, so the minimum age is 0, maximum age is
 four (as the next age group starts at five), and the hospitalisation
 risk for that group is 0.1. Each age group forms a row in the table.
 
 ``` r
+
 age_dep_hosp_risk <- data.frame(
-  age_limit = c(1, 5, 80),
+  age_limit = c(0, 5, 80),
   risk = c(0.1, 0.05, 0.2)
 )
 age_dep_hosp_risk
 #>   age_limit risk
-#> 1         1 0.10
+#> 1         0 0.10
 #> 2         5 0.05
 #> 3        80 0.20
 ```
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -229,25 +229,25 @@ linelist <- sim_linelist(
 
 head(linelist)
 #>   id        case_name case_type sex age date_onset date_reporting
-#> 1  1 Madalyn Crawford  probable   f  53 2023-01-01     2023-01-01
-#> 2  2   Miranda Romero confirmed   f  20 2023-01-01     2023-01-01
-#> 3  3 Andrzej Stephens confirmed   m  69 2023-01-01     2023-01-01
-#> 4  6  Brandi Burciaga suspected   f  57 2023-01-01     2023-01-01
-#> 5  7     Chase Dedios confirmed   m  89 2023-01-01     2023-01-01
-#> 6  9    Edward Benson  probable   m  57 2023-01-01     2023-01-01
+#> 1  1     Bradley Born confirmed   m  82 2023-01-01     2023-01-01
+#> 2  3     Edrick Sniff  probable   m  10 2023-01-03     2023-01-03
+#> 3  4 Antonia Jonathan suspected   f  24 2023-01-01     2023-01-01
+#> 4  5 Hannah Kolodziej confirmed   f  10 2023-01-01     2023-01-01
+#> 5  6  Jana Richardson  probable   f  56 2023-01-02     2023-01-02
+#> 6  8    Suhaa al-Arif  probable   f  56 2023-01-03     2023-01-03
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-31        2023-01-05
-#> 3           <NA> recovered         <NA>         2022-12-29        2023-01-04
-#> 4           <NA> recovered         <NA>         2022-12-30        2023-01-05
-#> 5           <NA> recovered         <NA>         2022-12-26        2023-01-05
-#> 6           <NA> recovered         <NA>         2022-12-30        2023-01-04
+#> 1           <NA>      died   2023-01-12               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-30        2023-01-04
+#> 3           <NA> recovered         <NA>         2022-12-28        2023-01-04
+#> 4           <NA> recovered         <NA>         2022-12-29        2023-01-02
+#> 5           <NA> recovered         <NA>         2023-01-01        2023-01-04
+#> 6           <NA> recovered         <NA>         2022-12-31        2023-01-05
 #>   ct_value
-#> 1       NA
-#> 2     26.9
-#> 3     24.2
-#> 4       NA
-#> 5     19.6
+#> 1     25.1
+#> 2       NA
+#> 3       NA
+#> 4     21.2
+#> 5       NA
 #> 6       NA
 ```
 
@@ -259,23 +259,24 @@ than the upper age range. If these conditions are not met the function
 will error.
 
 If the age-stratified risk table does not match the default
-(`c(1, 90)`), the `population_age` argument will need to be set to
+(`c(0, 90)`), the `population_age` argument will need to be set to
 match.
 
-For example, the default age range of the population is 1 to 90
-(inclusive). In our example above, the lowest age group started at 1 and
+For example, the default age range of the population is 0 to 90
+(inclusive). In our example above, the lowest age group started at 0 and
 the oldest age group stopped at 90. This matches the default
-`population_age = c(1, 90)`. However, see here that if the lower age
+`population_age = c(0, 90)`. However, see here that if the lower age
 limit exceeds the age range the function will not run.
 
 ``` r
+
 age_dep_hosp_risk <- data.frame(
-  age_limit = c(1, 5, 95),
+  age_limit = c(0, 5, 95),
   risk = c(0.1, 0.05, 0.2)
 )
 age_dep_hosp_risk
 #>   age_limit risk
-#> 1         1 0.10
+#> 1         0 0.10
 #> 2         5 0.05
 #> 3        95 0.20
 
@@ -296,8 +297,9 @@ risk given, the `population_age` can be adjusted. Here the oldest age
 bracket is now 95 to 100 (`[95, 100]`).
 
 ``` r
+
 age_dep_hosp_risk <- data.frame(
-  age_limit = c(1, 5, 95),
+  age_limit = c(0, 5, 95),
   risk = c(0.1, 0.05, 0.2)
 )
 
@@ -308,31 +310,31 @@ linelist <- sim_linelist(
   onset_to_hosp = onset_to_hosp,
   onset_to_death = onset_to_death,
   hosp_risk = age_dep_hosp_risk,
-  population_age = c(1, 100)
+  population_age = c(0, 100)
 )
 
 head(linelist)
-#>   id        case_name case_type sex age date_onset date_reporting
-#> 1  1     Joshua Evans  probable   m  36 2023-01-01     2023-01-01
-#> 2  3 Marshall Johnson  probable   m  68 2023-01-01     2023-01-01
-#> 3  5 Brandon Williams suspected   m   7 2023-01-01     2023-01-01
-#> 4  6 Marcella Roberts confirmed   f  82 2023-01-01     2023-01-01
-#> 5  7       Andro Dinh suspected   m  23 2023-01-01     2023-01-01
-#> 6 10      Chase Wisda  probable   m  89 2023-01-01     2023-01-01
+#>   id           case_name case_type sex age date_onset date_reporting
+#> 1  1    Jordano Cisneros confirmed   m  48 2023-01-01     2023-01-01
+#> 2  2    Akira Stephenson  probable   f  74 2023-01-01     2023-01-01
+#> 3  4      Karlie Johnson  probable   f  47 2023-01-02     2023-01-02
+#> 4  6 Sheldon Scantlebury confirmed   m  77 2023-01-01     2023-01-01
+#> 5  9      Bilaal al-Amer confirmed   m  90 2023-01-02     2023-01-02
+#> 6 10    Thaaqib al-Pasha confirmed   m  46 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-31        2023-01-02
-#> 3           <NA> recovered         <NA>         2022-12-31        2023-01-04
-#> 4           <NA> recovered         <NA>         2022-12-26        2023-01-03
-#> 5           <NA> recovered         <NA>         2022-12-28        2023-01-02
-#> 6           <NA> recovered         <NA>         2022-12-26        2023-01-02
+#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-01
+#> 3           <NA> recovered         <NA>         2022-12-28        2023-01-02
+#> 4           <NA> recovered         <NA>         2022-12-29        2023-01-05
+#> 5           <NA> recovered         <NA>         2022-12-30        2023-01-05
+#> 6           <NA> recovered         <NA>         2022-12-30        2023-01-06
 #>   ct_value
-#> 1       NA
+#> 1     25.8
 #> 2       NA
 #> 3       NA
-#> 4     26.8
-#> 5       NA
-#> 6       NA
+#> 4     23.8
+#> 5     27.9
+#> 6     26.4
 ```
 
 Exactly the same method of age-stratified risks applies to death risks.
@@ -344,13 +346,14 @@ death risks in and outside the hospital, respectively, or both.
 Here are a couple of examples:
 
 ``` r
+
 age_dep_hosp_death_risk <- data.frame(
-  age_limit = c(1, 5, 80),
+  age_limit = c(0, 5, 80),
   risk = c(0.3, 0.1, 0.6)
 )
 age_dep_hosp_death_risk
 #>   age_limit risk
-#> 1         1  0.3
+#> 1         0  0.3
 #> 2         5  0.1
 #> 3        80  0.6
 
@@ -365,13 +368,14 @@ linelist <- sim_linelist(
 ```
 
 ``` r
+
 age_dep_non_hosp_death_risk <- data.frame(
-  age_limit = c(1, 5, 80),
+  age_limit = c(0, 5, 80),
   risk = c(0.1, 0.05, 0.1)
 )
 age_dep_non_hosp_death_risk
 #>   age_limit risk
-#> 1         1 0.10
+#> 1         0 0.10
 #> 2         5 0.05
 #> 3        80 0.10
 
@@ -391,16 +395,17 @@ case the hospitalisation risk, and death risks inside and outside of
 hospital, are all specified.
 
 ``` r
+
 age_dep_hosp_risk <- data.frame(
-  age_limit = c(1, 5, 80),
+  age_limit = c(0, 5, 80),
   risk = c(0.1, 0.05, 0.2)
 )
 age_dep_hosp_death_risk <- data.frame(
-  age_limit = c(1, 5, 80),
+  age_limit = c(0, 5, 80),
   risk = c(0.3, 0.1, 0.6)
 )
 age_dep_non_hosp_death_risk <- data.frame(
-  age_limit = c(1, 5, 80),
+  age_limit = c(0, 5, 80),
   risk = c(0.1, 0.05, 0.1)
 )
 
@@ -416,25 +421,25 @@ linelist <- sim_linelist(
 )
 
 head(linelist)
-#>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1          Jong Pham confirmed   m  22 2023-01-01     2023-01-01
-#> 2  2  Yaasmeena el-Khan  probable   f  22 2023-01-01     2023-01-01
-#> 3  3 Ghaazi al-Abdullah suspected   m  28 2023-01-01     2023-01-01
-#> 4  4   Nu'ma el-Shariff  probable   f  30 2023-01-01     2023-01-01
-#> 5  6  Young Woen Nguyen  probable   m  71 2023-01-01     2023-01-01
-#> 6  8    Alexandra Solis  probable   f  49 2023-01-01     2023-01-01
+#>   id            case_name case_type sex age date_onset date_reporting
+#> 1  1 Justin Locquiao-Rima  probable   m   5 2023-01-01     2023-01-01
+#> 2  2        Nuha el-Mitri suspected   f  29 2023-01-01     2023-01-01
+#> 3  3        Corey Marquez confirmed   m  36 2023-01-01     2023-01-01
+#> 4  6        Bryan Gadison confirmed   m  26 2023-01-01     2023-01-01
+#> 5  9      Janice Reynolds confirmed   f  34 2023-01-02     2023-01-02
+#> 6 10      Brittany Dedios confirmed   f   2 2023-01-02     2023-01-02
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-06
-#> 3           <NA> recovered         <NA>         2023-01-01        2023-01-05
-#> 4           <NA> recovered         <NA>         2022-12-28        2023-01-05
-#> 5           <NA> recovered         <NA>         2022-12-30        2023-01-02
-#> 6           <NA> recovered         <NA>         2022-12-30        2023-01-03
+#> 2           <NA> recovered         <NA>         2022-12-28        2023-01-06
+#> 3           <NA> recovered         <NA>         2022-12-30        2023-01-03
+#> 4           <NA> recovered         <NA>         2022-12-29        2023-01-04
+#> 5     2023-01-04 recovered         <NA>         2022-12-25        2023-01-02
+#> 6     2023-01-06      died   2023-01-09         2022-12-30        2023-01-05
 #>   ct_value
-#> 1     24.3
+#> 1       NA
 #> 2       NA
-#> 3       NA
-#> 4       NA
-#> 5       NA
-#> 6       NA
+#> 3     25.1
+#> 4     27.9
+#> 5     24.9
+#> 6     27.4
 ```

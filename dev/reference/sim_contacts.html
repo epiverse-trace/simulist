@@ -74,7 +74,7 @@
 <span>  outbreak_start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2023-01-01"</span><span class="op">)</span>,</span>
 <span>  anonymise <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  outbreak_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10000</span><span class="op">)</span>,</span>
-<span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  population_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">90</span><span class="op">)</span>,</span>
 <span>  contact_tracing_status_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>under_followup <span class="op">=</span> <span class="fl">0.7</span>, lost_to_followup <span class="op">=</span> <span class="fl">0.2</span>, unknown</span>
 <span>    <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span>
 <span>  config <span class="op">=</span> <span class="fu"><a href="create_config.html">create_config</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -216,20 +216,20 @@ default it is either <code>"case"</code>, <code>"under_followup"</code> <code>"l
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># quickly simulate contact tracing data using the function defaults</span></span></span>
 <span class="r-in"><span><span class="va">contacts</span> <span class="op">&lt;-</span> <span class="fu">sim_contacts</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">contacts</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              from               to age sex date_first_contact date_last_contact</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Mai Talusani  Dominic Alferes  77   m         2022-12-27        2023-01-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Mai Talusani     Johnaton Lor  61   m         2023-01-01        2023-01-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Dominic Alferes  Perri Nishimoto  24   f         2023-01-03        2023-01-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Dominic Alferes      Raul Duarte  49   m         2022-12-30        2023-01-10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    Johnaton Lor    Dennis Romero  43   m         2022-12-31        2023-01-06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    Johnaton Lor Crissela Howells  16   f         2022-12-30        2023-01-06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   was_case         status</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     TRUE           case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     TRUE           case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    FALSE under_followup</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     TRUE           case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     TRUE           case</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     TRUE           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              from                     to age sex date_first_contact</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Mai Talusani           Johnaton Lor  76   m         2022-12-27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Mai Talusani        Dominic Alferes  60   m         2023-01-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Johnaton Lor        Perri Nishimoto  23   f         2023-01-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Johnaton Lor Edgar Gutierrez-Matias  48   m         2022-12-30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Dominic Alferes              Scott Tam  42   m         2022-12-31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Dominic Alferes       Crissela Howells  15   f         2022-12-30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date_last_contact was_case         status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        2023-01-03     TRUE           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        2023-01-02     TRUE           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        2023-01-07    FALSE under_followup</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        2023-01-10     TRUE           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        2023-01-06     TRUE           case</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        2023-01-06     TRUE           case</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># to simulate more realistic contact tracing data load epiparameters from</span></span></span>
 <span class="r-in"><span><span class="co"># {epiparameter}</span></span></span>

@@ -17,6 +17,7 @@ tasks that may be performed on simulated line list or contact tracing
 data.
 
 ``` r
+
 library(simulist)
 library(epiparameter)
 library(dplyr)
@@ -68,6 +69,7 @@ Data on epidemiological parameters and distributions are read from the
 {epiparameter} R package.
 
 ``` r
+
 # create contact distribution (not available from {epiparameter} database)
 contact_distribution <- epiparameter(
   disease = "COVID-19",
@@ -124,10 +126,12 @@ using {simulist}, setting the seed is not required unless you need to
 simulate the same line list multiple times.
 
 ``` r
+
 set.seed(123)
 ```
 
 ``` r
+
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -152,6 +156,7 @@ Here we show this by printing the date of symptom onset for the
 simulated data, and then unclass it to show how it is stored internally.
 
 ``` r
+
 linelist$date_onset
 #>  [1] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-02"
 #>  [6] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01"
@@ -172,15 +177,16 @@ decimal point set to zero. The weekly censored dates will be printed
 differently.
 
 ``` r
+
 daily_cens_linelist <- censor_linelist(linelist, interval = "daily")
 head(daily_cens_linelist)
 #>   id                case_name case_type sex age date_onset date_reporting
-#> 1  1            Joseph Lovato suspected   m  90 2023-01-01     2023-01-01
-#> 2  3         Rayyaan al-Basha  probable   m  71 2023-01-01     2023-01-01
-#> 3  4                Tara Yang  probable   f  48 2023-01-01     2023-01-01
-#> 4  5           Brianna Madden confirmed   f  77 2023-01-01     2023-01-01
-#> 5  6 Miguel Cabral-Hollowhorn suspected   m  83 2023-01-02     2023-01-02
-#> 6  7           Matthew Samadh confirmed   m  56 2023-01-01     2023-01-01
+#> 1  1            Joseph Lovato suspected   m  89 2023-01-01     2023-01-01
+#> 2  3         Rayyaan al-Basha  probable   m  70 2023-01-01     2023-01-01
+#> 3  4                Tara Yang  probable   f  47 2023-01-01     2023-01-01
+#> 4  5           Brianna Madden confirmed   f  76 2023-01-01     2023-01-01
+#> 5  6 Miguel Cabral-Hollowhorn suspected   m  82 2023-01-02     2023-01-02
+#> 6  7           Matthew Samadh confirmed   m  55 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
 #> 2     2023-01-08      died   2023-01-10         2022-12-26        2023-01-06
@@ -199,12 +205,12 @@ head(daily_cens_linelist)
 weekly_cens_linelist <- censor_linelist(linelist, interval = "weekly")
 head(weekly_cens_linelist)
 #>   id                case_name case_type sex age date_onset date_reporting
-#> 1  1            Joseph Lovato suspected   m  90   2022-W52       2022-W52
-#> 2  3         Rayyaan al-Basha  probable   m  71   2022-W52       2022-W52
-#> 3  4                Tara Yang  probable   f  48   2022-W52       2022-W52
-#> 4  5           Brianna Madden confirmed   f  77   2022-W52       2022-W52
-#> 5  6 Miguel Cabral-Hollowhorn suspected   m  83   2023-W01       2023-W01
-#> 6  7           Matthew Samadh confirmed   m  56   2022-W52       2022-W52
+#> 1  1            Joseph Lovato suspected   m  89   2022-W52       2022-W52
+#> 2  3         Rayyaan al-Basha  probable   m  70   2022-W52       2022-W52
+#> 3  4                Tara Yang  probable   f  47   2022-W52       2022-W52
+#> 4  5           Brianna Madden confirmed   f  76   2022-W52       2022-W52
+#> 5  6 Miguel Cabral-Hollowhorn suspected   m  82   2023-W01       2023-W01
+#> 6  7           Matthew Samadh confirmed   m  55   2022-W52       2022-W52
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
 #> 2       2023-W01      died     2023-W02           2022-W52          2023-W01
@@ -233,6 +239,7 @@ mistakenly result in the next day. Using
 avoids this and other common mistakes.
 
 ``` r
+
 linelist$date_onset
 #>  [1] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-02"
 #>  [6] "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01" "2023-01-01"
@@ -271,16 +278,17 @@ list is 50%.
 - Base R
 
 ``` r
+
 linelist |>
   filter(as.logical(rbinom(n(), size = 1, prob = 0.5)))
 #>   id      case_name case_type sex age date_onset date_reporting date_admission
-#> 1  4      Tara Yang  probable   f  48 2023-01-01     2023-01-01           <NA>
-#> 2  5 Brianna Madden confirmed   f  77 2023-01-01     2023-01-01           <NA>
-#> 3  7 Matthew Samadh confirmed   m  56 2023-01-01     2023-01-01           <NA>
-#> 4 10  Brissa Huerta  probable   f   1 2023-01-01     2023-01-01           <NA>
-#> 5 14  Jonathan Mace confirmed   m  16 2023-01-01     2023-01-01     2023-01-02
-#> 6 16    Hunter Curl suspected   m  54 2023-01-02     2023-01-02     2023-01-05
-#> 7 24       Emily Lo confirmed   f  49 2023-01-02     2023-01-02           <NA>
+#> 1  4      Tara Yang  probable   f  47 2023-01-01     2023-01-01           <NA>
+#> 2  5 Brianna Madden confirmed   f  76 2023-01-01     2023-01-01           <NA>
+#> 3  7 Matthew Samadh confirmed   m  55 2023-01-01     2023-01-01           <NA>
+#> 4 10  Brissa Huerta  probable   f   0 2023-01-01     2023-01-01           <NA>
+#> 5 14  Jonathan Mace confirmed   m  15 2023-01-01     2023-01-01     2023-01-02
+#> 6 16    Hunter Curl suspected   m  53 2023-01-02     2023-01-02     2023-01-05
+#> 7 24       Emily Lo confirmed   f  48 2023-01-02     2023-01-02           <NA>
 #>     outcome date_outcome date_first_contact date_last_contact ct_value
 #> 1 recovered         <NA>         2022-12-30        2023-01-05       NA
 #> 2 recovered         <NA>         2022-12-31        2023-01-08     24.1
@@ -292,17 +300,18 @@ linelist |>
 ```
 
 ``` r
+
 idx <- as.logical(rbinom(n = nrow(linelist), size = 1, prob = 0.5))
 linelist[idx, ]
 #>    id                case_name case_type sex age date_onset date_reporting
-#> 1   1            Joseph Lovato suspected   m  90 2023-01-01     2023-01-01
-#> 2   3         Rayyaan al-Basha  probable   m  71 2023-01-01     2023-01-01
-#> 5   6 Miguel Cabral-Hollowhorn suspected   m  83 2023-01-02     2023-01-02
-#> 6   7           Matthew Samadh confirmed   m  56 2023-01-01     2023-01-01
-#> 9  10            Brissa Huerta  probable   f   1 2023-01-01     2023-01-01
-#> 10 14            Jonathan Mace confirmed   m  16 2023-01-01     2023-01-01
-#> 11 16              Hunter Curl suspected   m  54 2023-01-02     2023-01-02
-#> 13 24                 Emily Lo confirmed   f  49 2023-01-02     2023-01-02
+#> 1   1            Joseph Lovato suspected   m  89 2023-01-01     2023-01-01
+#> 2   3         Rayyaan al-Basha  probable   m  70 2023-01-01     2023-01-01
+#> 5   6 Miguel Cabral-Hollowhorn suspected   m  82 2023-01-02     2023-01-02
+#> 6   7           Matthew Samadh confirmed   m  55 2023-01-01     2023-01-01
+#> 9  10            Brissa Huerta  probable   f   0 2023-01-01     2023-01-01
+#> 10 14            Jonathan Mace confirmed   m  15 2023-01-01     2023-01-01
+#> 11 16              Hunter Curl suspected   m  53 2023-01-02     2023-01-02
+#> 13 24                 Emily Lo confirmed   f  48 2023-01-02     2023-01-02
 #>    date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1            <NA> recovered         <NA>               <NA>              <NA>
 #> 2      2023-01-08      died   2023-01-10         2022-12-26        2023-01-06
@@ -333,16 +342,17 @@ number rows (i.e. cases) returned
 be used instead.
 
 ``` r
+
 linelist |>
   dplyr::slice_sample(prop = 0.5) |>
   dplyr::arrange(id)
 #>   id        case_name case_type sex age date_onset date_reporting
-#> 1  3 Rayyaan al-Basha  probable   m  71 2023-01-01     2023-01-01
-#> 2  4        Tara Yang  probable   f  48 2023-01-01     2023-01-01
-#> 3  5   Brianna Madden confirmed   f  77 2023-01-01     2023-01-01
-#> 4  8       Sara Salas confirmed   f  39 2023-01-01     2023-01-01
-#> 5 10    Brissa Huerta  probable   f   1 2023-01-01     2023-01-01
-#> 6 14    Jonathan Mace confirmed   m  16 2023-01-01     2023-01-01
+#> 1  3 Rayyaan al-Basha  probable   m  70 2023-01-01     2023-01-01
+#> 2  4        Tara Yang  probable   f  47 2023-01-01     2023-01-01
+#> 3  5   Brianna Madden confirmed   f  76 2023-01-01     2023-01-01
+#> 4  8       Sara Salas confirmed   f  38 2023-01-01     2023-01-01
+#> 5 10    Brissa Huerta  probable   f   0 2023-01-01     2023-01-01
+#> 6 14    Jonathan Mace confirmed   m  15 2023-01-01     2023-01-01
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1     2023-01-08      died   2023-01-10         2022-12-26        2023-01-06
 #> 2           <NA> recovered         <NA>         2022-12-30        2023-01-05
@@ -377,6 +387,7 @@ We plot the full contact network so it can be compared to the contact
 networks with under-reporting plotted below.
 
 ``` r
+
 epicontacts <- make_epicontacts(
   linelist = linelist,
   contacts = contacts,
@@ -394,6 +405,7 @@ everyone in the contact network (infections and contacts), and assume a
 50% reporting probability.
 
 ``` r
+
 all_contacts <- unique(c(contacts$from, contacts$to))
 not_reported <- sample(x = all_contacts, size = 0.5 * length(all_contacts))
 not_reported
@@ -409,6 +421,7 @@ rows, we also need to set any unreported infectees to `NA` for any
 secondary infections they cause.
 
 ``` r
+
 # make copy of contact tracing data for under-reporting
 contacts_ur <- contacts
 for (person in not_reported) {
@@ -417,12 +430,12 @@ for (person in not_reported) {
 }
 head(contacts_ur)
 #>                        from                       to age sex date_first_contact
-#> 1                      <NA>           Carly Gallegos   9   f         2022-12-31
-#> 3                      <NA>                Tara Yang  48   f         2022-12-30
-#> 5                      <NA> Miguel Cabral-Hollowhorn  83   m         2022-12-26
-#> 6                      <NA>           Matthew Samadh  56   m         2022-12-28
-#> 9                      <NA>            Brissa Huerta   1   f         2022-12-26
-#> 10 Miguel Cabral-Hollowhorn           Manuel Hartman  40   m         2022-12-30
+#> 1                      <NA>           Carly Gallegos   8   f         2022-12-31
+#> 3                      <NA>                Tara Yang  47   f         2022-12-30
+#> 5                      <NA> Miguel Cabral-Hollowhorn  82   m         2022-12-26
+#> 6                      <NA>           Matthew Samadh  55   m         2022-12-28
+#> 9                      <NA>            Brissa Huerta   0   f         2022-12-26
+#> 10 Miguel Cabral-Hollowhorn           Manuel Hartman  39   m         2022-12-30
 #>    date_last_contact was_case           status
 #> 1         2023-01-05    FALSE lost_to_followup
 #> 3         2023-01-05     TRUE             case
@@ -436,6 +449,7 @@ We can plot this new contact network with {epicontacts}. We’ll need to
 subset the line list to have the same unreported cases.
 
 ``` r
+
 linelist_ur <- linelist[!linelist$case_name %in% not_reported, ]
 epicontacts <- make_epicontacts(
   linelist = linelist_ur,
@@ -457,6 +471,7 @@ For this example we’ll sample a single individual not to report and then
 prune all cases and contacts from that individual in the network.
 
 ``` r
+
 all_contacts <- unique(c(contacts$from, contacts$to))
 not_reported <- sample(x = all_contacts, size = 1)
 not_reported
@@ -468,6 +483,7 @@ result from this individual (this can be zero if the person had no
 secondary cases or contacts).
 
 ``` r
+
 # make copy of contact tracing data for under-reporting
 contacts_ur <- contacts
 while (length(not_reported) > 0) {
@@ -478,12 +494,12 @@ while (length(not_reported) > 0) {
 }
 head(contacts_ur)
 #>               from                       to age sex date_first_contact
-#> 1    Joseph Lovato           Carly Gallegos   9   f         2022-12-31
-#> 2    Joseph Lovato         Rayyaan al-Basha  71   m         2022-12-26
-#> 3    Joseph Lovato                Tara Yang  48   f         2022-12-30
-#> 4    Joseph Lovato           Brianna Madden  77   f         2022-12-31
-#> 5 Rayyaan al-Basha Miguel Cabral-Hollowhorn  83   m         2022-12-26
-#> 6 Rayyaan al-Basha           Matthew Samadh  56   m         2022-12-28
+#> 1    Joseph Lovato           Carly Gallegos   8   f         2022-12-31
+#> 2    Joseph Lovato         Rayyaan al-Basha  70   m         2022-12-26
+#> 3    Joseph Lovato                Tara Yang  47   f         2022-12-30
+#> 4    Joseph Lovato           Brianna Madden  76   f         2022-12-31
+#> 5 Rayyaan al-Basha Miguel Cabral-Hollowhorn  82   m         2022-12-26
+#> 6 Rayyaan al-Basha           Matthew Samadh  55   m         2022-12-28
 #>   date_last_contact was_case           status
 #> 1        2023-01-05    FALSE lost_to_followup
 #> 2        2023-01-06     TRUE             case
@@ -496,6 +512,7 @@ head(contacts_ur)
 Just as above we can plot the new contact network using {epicontacts}.
 
 ``` r
+
 # subset line list to match under-reporting in contact tracing data
 linelist_ur <- linelist[linelist$case_name %in% unique(contacts$from), ]
 
@@ -529,23 +546,24 @@ cases.
 - Base R
 
 ``` r
+
 # remove column by name
 linelist |>
   select(!ct_value)
 #>    id                case_name case_type sex age date_onset date_reporting
-#> 1   1            Joseph Lovato suspected   m  90 2023-01-01     2023-01-01
-#> 2   3         Rayyaan al-Basha  probable   m  71 2023-01-01     2023-01-01
-#> 3   4                Tara Yang  probable   f  48 2023-01-01     2023-01-01
-#> 4   5           Brianna Madden confirmed   f  77 2023-01-01     2023-01-01
-#> 5   6 Miguel Cabral-Hollowhorn suspected   m  83 2023-01-02     2023-01-02
-#> 6   7           Matthew Samadh confirmed   m  56 2023-01-01     2023-01-01
-#> 7   8               Sara Salas confirmed   f  39 2023-01-01     2023-01-01
-#> 8   9           Krista Walborn suspected   f  68 2023-01-01     2023-01-01
-#> 9  10            Brissa Huerta  probable   f   1 2023-01-01     2023-01-01
-#> 10 14            Jonathan Mace confirmed   m  16 2023-01-01     2023-01-01
-#> 11 16              Hunter Curl suspected   m  54 2023-01-02     2023-01-02
-#> 12 21         Cody Johnson III confirmed   m  36 2023-01-02     2023-01-02
-#> 13 24                 Emily Lo confirmed   f  49 2023-01-02     2023-01-02
+#> 1   1            Joseph Lovato suspected   m  89 2023-01-01     2023-01-01
+#> 2   3         Rayyaan al-Basha  probable   m  70 2023-01-01     2023-01-01
+#> 3   4                Tara Yang  probable   f  47 2023-01-01     2023-01-01
+#> 4   5           Brianna Madden confirmed   f  76 2023-01-01     2023-01-01
+#> 5   6 Miguel Cabral-Hollowhorn suspected   m  82 2023-01-02     2023-01-02
+#> 6   7           Matthew Samadh confirmed   m  55 2023-01-01     2023-01-01
+#> 7   8               Sara Salas confirmed   f  38 2023-01-01     2023-01-01
+#> 8   9           Krista Walborn suspected   f  67 2023-01-01     2023-01-01
+#> 9  10            Brissa Huerta  probable   f   0 2023-01-01     2023-01-01
+#> 10 14            Jonathan Mace confirmed   m  15 2023-01-01     2023-01-01
+#> 11 16              Hunter Curl suspected   m  53 2023-01-02     2023-01-02
+#> 12 21         Cody Johnson III confirmed   m  35 2023-01-02     2023-01-02
+#> 13 24                 Emily Lo confirmed   f  48 2023-01-02     2023-01-02
 #>    date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1            <NA> recovered         <NA>               <NA>              <NA>
 #> 2      2023-01-08      died   2023-01-10         2022-12-26        2023-01-06
@@ -563,23 +581,24 @@ linelist |>
 ```
 
 ``` r
+
 # remove column by numeric column indexing
 # ct_value is column 12 (the last column)
 linelist[, -12]
 #>    id                case_name case_type sex age date_onset date_reporting
-#> 1   1            Joseph Lovato suspected   m  90 2023-01-01     2023-01-01
-#> 2   3         Rayyaan al-Basha  probable   m  71 2023-01-01     2023-01-01
-#> 3   4                Tara Yang  probable   f  48 2023-01-01     2023-01-01
-#> 4   5           Brianna Madden confirmed   f  77 2023-01-01     2023-01-01
-#> 5   6 Miguel Cabral-Hollowhorn suspected   m  83 2023-01-02     2023-01-02
-#> 6   7           Matthew Samadh confirmed   m  56 2023-01-01     2023-01-01
-#> 7   8               Sara Salas confirmed   f  39 2023-01-01     2023-01-01
-#> 8   9           Krista Walborn suspected   f  68 2023-01-01     2023-01-01
-#> 9  10            Brissa Huerta  probable   f   1 2023-01-01     2023-01-01
-#> 10 14            Jonathan Mace confirmed   m  16 2023-01-01     2023-01-01
-#> 11 16              Hunter Curl suspected   m  54 2023-01-02     2023-01-02
-#> 12 21         Cody Johnson III confirmed   m  36 2023-01-02     2023-01-02
-#> 13 24                 Emily Lo confirmed   f  49 2023-01-02     2023-01-02
+#> 1   1            Joseph Lovato suspected   m  89 2023-01-01     2023-01-01
+#> 2   3         Rayyaan al-Basha  probable   m  70 2023-01-01     2023-01-01
+#> 3   4                Tara Yang  probable   f  47 2023-01-01     2023-01-01
+#> 4   5           Brianna Madden confirmed   f  76 2023-01-01     2023-01-01
+#> 5   6 Miguel Cabral-Hollowhorn suspected   m  82 2023-01-02     2023-01-02
+#> 6   7           Matthew Samadh confirmed   m  55 2023-01-01     2023-01-01
+#> 7   8               Sara Salas confirmed   f  38 2023-01-01     2023-01-01
+#> 8   9           Krista Walborn suspected   f  67 2023-01-01     2023-01-01
+#> 9  10            Brissa Huerta  probable   f   0 2023-01-01     2023-01-01
+#> 10 14            Jonathan Mace confirmed   m  15 2023-01-01     2023-01-01
+#> 11 16              Hunter Curl suspected   m  53 2023-01-02     2023-01-02
+#> 12 21         Cody Johnson III confirmed   m  35 2023-01-02     2023-01-02
+#> 13 24                 Emily Lo confirmed   f  48 2023-01-02     2023-01-02
 #>    date_admission   outcome date_outcome date_first_contact ct_value
 #> 1            <NA> recovered         <NA>               <NA>       NA
 #> 2      2023-01-08      died   2023-01-10         2022-12-26       NA
@@ -598,19 +617,19 @@ linelist[, -12]
 # remove column by column name
 linelist[, colnames(linelist) != "ct_value"]
 #>    id                case_name case_type sex age date_onset date_reporting
-#> 1   1            Joseph Lovato suspected   m  90 2023-01-01     2023-01-01
-#> 2   3         Rayyaan al-Basha  probable   m  71 2023-01-01     2023-01-01
-#> 3   4                Tara Yang  probable   f  48 2023-01-01     2023-01-01
-#> 4   5           Brianna Madden confirmed   f  77 2023-01-01     2023-01-01
-#> 5   6 Miguel Cabral-Hollowhorn suspected   m  83 2023-01-02     2023-01-02
-#> 6   7           Matthew Samadh confirmed   m  56 2023-01-01     2023-01-01
-#> 7   8               Sara Salas confirmed   f  39 2023-01-01     2023-01-01
-#> 8   9           Krista Walborn suspected   f  68 2023-01-01     2023-01-01
-#> 9  10            Brissa Huerta  probable   f   1 2023-01-01     2023-01-01
-#> 10 14            Jonathan Mace confirmed   m  16 2023-01-01     2023-01-01
-#> 11 16              Hunter Curl suspected   m  54 2023-01-02     2023-01-02
-#> 12 21         Cody Johnson III confirmed   m  36 2023-01-02     2023-01-02
-#> 13 24                 Emily Lo confirmed   f  49 2023-01-02     2023-01-02
+#> 1   1            Joseph Lovato suspected   m  89 2023-01-01     2023-01-01
+#> 2   3         Rayyaan al-Basha  probable   m  70 2023-01-01     2023-01-01
+#> 3   4                Tara Yang  probable   f  47 2023-01-01     2023-01-01
+#> 4   5           Brianna Madden confirmed   f  76 2023-01-01     2023-01-01
+#> 5   6 Miguel Cabral-Hollowhorn suspected   m  82 2023-01-02     2023-01-02
+#> 6   7           Matthew Samadh confirmed   m  55 2023-01-01     2023-01-01
+#> 7   8               Sara Salas confirmed   f  38 2023-01-01     2023-01-01
+#> 8   9           Krista Walborn suspected   f  67 2023-01-01     2023-01-01
+#> 9  10            Brissa Huerta  probable   f   0 2023-01-01     2023-01-01
+#> 10 14            Jonathan Mace confirmed   m  15 2023-01-01     2023-01-01
+#> 11 16              Hunter Curl suspected   m  53 2023-01-02     2023-01-02
+#> 12 21         Cody Johnson III confirmed   m  35 2023-01-02     2023-01-02
+#> 13 24                 Emily Lo confirmed   f  48 2023-01-02     2023-01-02
 #>    date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1            <NA> recovered         <NA>               <NA>              <NA>
 #> 2      2023-01-08      died   2023-01-10         2022-12-26        2023-01-06
@@ -630,19 +649,19 @@ linelist[, colnames(linelist) != "ct_value"]
 linelist$ct_value <- NULL
 linelist
 #>    id                case_name case_type sex age date_onset date_reporting
-#> 1   1            Joseph Lovato suspected   m  90 2023-01-01     2023-01-01
-#> 2   3         Rayyaan al-Basha  probable   m  71 2023-01-01     2023-01-01
-#> 3   4                Tara Yang  probable   f  48 2023-01-01     2023-01-01
-#> 4   5           Brianna Madden confirmed   f  77 2023-01-01     2023-01-01
-#> 5   6 Miguel Cabral-Hollowhorn suspected   m  83 2023-01-02     2023-01-02
-#> 6   7           Matthew Samadh confirmed   m  56 2023-01-01     2023-01-01
-#> 7   8               Sara Salas confirmed   f  39 2023-01-01     2023-01-01
-#> 8   9           Krista Walborn suspected   f  68 2023-01-01     2023-01-01
-#> 9  10            Brissa Huerta  probable   f   1 2023-01-01     2023-01-01
-#> 10 14            Jonathan Mace confirmed   m  16 2023-01-01     2023-01-01
-#> 11 16              Hunter Curl suspected   m  54 2023-01-02     2023-01-02
-#> 12 21         Cody Johnson III confirmed   m  36 2023-01-02     2023-01-02
-#> 13 24                 Emily Lo confirmed   f  49 2023-01-02     2023-01-02
+#> 1   1            Joseph Lovato suspected   m  89 2023-01-01     2023-01-01
+#> 2   3         Rayyaan al-Basha  probable   m  70 2023-01-01     2023-01-01
+#> 3   4                Tara Yang  probable   f  47 2023-01-01     2023-01-01
+#> 4   5           Brianna Madden confirmed   f  76 2023-01-01     2023-01-01
+#> 5   6 Miguel Cabral-Hollowhorn suspected   m  82 2023-01-02     2023-01-02
+#> 6   7           Matthew Samadh confirmed   m  55 2023-01-01     2023-01-01
+#> 7   8               Sara Salas confirmed   f  38 2023-01-01     2023-01-01
+#> 8   9           Krista Walborn suspected   f  67 2023-01-01     2023-01-01
+#> 9  10            Brissa Huerta  probable   f   0 2023-01-01     2023-01-01
+#> 10 14            Jonathan Mace confirmed   m  15 2023-01-01     2023-01-01
+#> 11 16              Hunter Curl suspected   m  53 2023-01-02     2023-01-02
+#> 12 21         Cody Johnson III confirmed   m  35 2023-01-02     2023-01-02
+#> 13 24                 Emily Lo confirmed   f  48 2023-01-02     2023-01-02
 #>    date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1            <NA> recovered         <NA>               <NA>              <NA>
 #> 2      2023-01-08      died   2023-01-10         2022-12-26        2023-01-06

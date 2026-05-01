@@ -43,6 +43,7 @@ and it being reported, it does not reflect reporting of hospitalisation
 or outcome times.
 
 ``` r
+
 library(simulist)
 library(epiparameter)
 library(tidyr)
@@ -64,6 +65,7 @@ First we load the required delay distributions using the {epiparameter}
 package.
 
 ``` r
+
 contact_distribution <- epiparameter(
   disease = "COVID-19",
   epi_name = "contact distribution",
@@ -114,6 +116,7 @@ is rendered. When using {simulist}, setting the seed is not required
 unless you need to simulate the same line list multiple times.
 
 ``` r
+
 set.seed(123)
 ```
 
@@ -121,6 +124,7 @@ Using a simple line list simulation without specifying a reporting delay
 will produce reporting times identical to symptom onset times:
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -142,6 +146,7 @@ to a lognormal distribution with parameters: `meanlog = 1` and
 of 5.9 days).
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -151,33 +156,34 @@ linelist <- sim_linelist(
   reporting_delay = function(n) rlnorm(n = n, meanlog = 1, sdlog = 1)
 )
 head(linelist)
-#>   id           case_name case_type sex age date_onset date_reporting
-#> 1  1       Subhi el-Akel suspected   m  39 2023-01-01     2023-01-03
-#> 2  2  Victoria Cervantes  probable   f  23 2023-01-04     2023-01-11
-#> 3  3 Abdullah el-Shareef confirmed   m  51 2023-01-05     2023-01-07
-#> 4  4         Dillon Wing  probable   m  53 2023-01-05     2023-01-19
-#> 5  5            Heidi Le confirmed   f  16 2023-01-04     2023-01-09
-#> 6  6       Jaliah Verner  probable   f  41 2023-01-05     2023-01-10
+#>   id        case_name case_type sex age date_onset date_reporting
+#> 1  1  Lawrence Wright  probable   m  38 2023-01-01     2023-01-03
+#> 2  2    Brianna Gomez confirmed   f  22 2023-01-04     2023-01-11
+#> 3  3 Brandon Friehauf suspected   m  50 2023-01-05     2023-01-07
+#> 4  4   Young Okamatsu suspected   m  52 2023-01-05     2023-01-19
+#> 5  5    Reyna Herrera  probable   f  15 2023-01-04     2023-01-09
+#> 6  6       Tessa Thao confirmed   f  40 2023-01-05     2023-01-10
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1     2023-01-01      died   2023-01-17               <NA>              <NA>
+#> 1           <NA> recovered         <NA>               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-28        2023-01-04
-#> 3     2023-01-13      died   2023-01-31         2022-12-30        2023-01-07
+#> 3           <NA> recovered         <NA>         2022-12-30        2023-01-07
 #> 4           <NA> recovered         <NA>         2022-12-31        2023-01-06
 #> 5           <NA> recovered         <NA>         2022-12-29        2023-01-06
 #> 6           <NA> recovered         <NA>         2023-01-01        2023-01-06
 #>   ct_value
 #> 1       NA
-#> 2       NA
-#> 3     27.1
+#> 2     23.9
+#> 3       NA
 #> 4       NA
-#> 5     25.9
-#> 6       NA
+#> 5       NA
+#> 6     24.0
 ```
 
 Here from the first 6 rows of the line list you can see differences
 between the `$date_onset` column and the `$date_reporting` column.
 
 ``` r
+
 tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
@@ -216,9 +222,9 @@ ggplot(data = tidy_linelist) +
   ) +
   theme_bw() +
   theme(legend.position = "bottom", axis.text.y = element_text(size = 4))
-#> Warning: Removed 1513 rows containing missing values or values outside the scale range
+#> Warning: Removed 1553 rows containing missing values or values outside the scale range
 #> (`geom_line()`).
-#> Warning: Removed 1513 rows containing missing values or values outside the scale range
+#> Warning: Removed 1553 rows containing missing values or values outside the scale range
 #> (`geom_point()`).
 ```
 
@@ -238,6 +244,7 @@ reporting then, as expected, the distribution is roughly lognormally
 distributed.
 
 ``` r
+
 ggplot(data = linelist) +
   geom_histogram(
     mapping = aes(x = as.numeric(date_reporting - date_onset)),
@@ -274,6 +281,7 @@ We once again simulate to produce a line list with a fixed reporting
 delay.
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -283,20 +291,20 @@ linelist <- sim_linelist(
   reporting_delay = function(n) rep(5, times = n)
 )
 head(linelist)
-#>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1     Jonathan Welsh  probable   m  22 2023-01-01     2023-01-06
-#> 2  2    Sandra Trujillo  probable   f  31 2023-01-02     2023-01-07
-#> 3  3   Natasha Gonzalez confirmed   f  47 2023-01-03     2023-01-08
-#> 4  5    Jeffrey Rudolph  probable   m  79 2023-01-03     2023-01-08
-#> 5  6   Desire Chavarria suspected   f  70 2023-01-03     2023-01-08
-#> 6  7 Christopher Garcia  probable   m  24 2023-01-05     2023-01-10
+#>   id            case_name case_type sex age date_onset date_reporting
+#> 1  1           Brent Bird  probable   m  21 2023-01-01     2023-01-06
+#> 2  2     Anjellica Valdez  probable   f  30 2023-01-02     2023-01-07
+#> 3  3   Makayla Roubideaux confirmed   f  46 2023-01-03     2023-01-08
+#> 4  5        Jordan Barros  probable   m  78 2023-01-03     2023-01-08
+#> 5  6     Danielle Swanson suspected   f  69 2023-01-03     2023-01-08
+#> 6  7 Christopher Cespedes  probable   m  23 2023-01-05     2023-01-10
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 1     2023-01-04      died   2023-01-10               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-26        2023-01-05
-#> 3           <NA> recovered         <NA>         2022-12-28        2023-01-02
+#> 3     2023-01-08      died   2023-01-20         2022-12-28        2023-01-02
 #> 4           <NA> recovered         <NA>         2023-01-01        2023-01-05
 #> 5           <NA> recovered         <NA>         2022-12-31        2023-01-03
-#> 6     2023-01-07 recovered         <NA>         2022-12-30        2023-01-05
+#> 6           <NA> recovered         <NA>         2022-12-30        2023-01-05
 #>   ct_value
 #> 1       NA
 #> 2       NA
@@ -333,9 +341,9 @@ cases might not have been recorded. It can also happen if cases are no
 longer recorded after a certain point in time.
 
 Right-truncated outbreak data, in particular line list data, can give
-the impression that the incidence is decreasing ($R$ \< 1), however this
-can be an artefact resulting from the fact the data is right-truncated,
-and the outbreak can be stable or growing.
+the impression that the incidence is decreasing ($`R`$ \< 1), however
+this can be an artefact resulting from the fact the data is
+right-truncated, and the outbreak can be stable or growing.
 
 By default {simulist} simulates an outbreak from start to finish.
 Therefore, the line list or contact data contain all cases and outcomes.
@@ -350,6 +358,7 @@ Re-simulating a simple line list using
 with a lognormal reporting delay with `meanlog = 2` and `sdlog = 0.5`.
 
 ``` r
+
 # set seed to produce small line list
 set.seed(3)
 linelist <- sim_linelist(
@@ -364,12 +373,12 @@ linelist <- sim_linelist(
 # first 6 rows of linelist
 head(linelist)
 #>   id            case_name case_type sex age date_onset date_reporting
-#> 1  1      Abraham Dechand  probable   m  18 2023-01-01     2023-01-05
-#> 2  2 Damari Jones-Carroll  probable   m  66 2023-01-07     2023-01-11
-#> 3  3         Thaylor Boyd  probable   m  59 2023-01-01     2023-01-07
-#> 4  8    Haazima al-Halaby  probable   f  37 2023-01-14     2023-01-28
-#> 5  9   Pauline Gomez Cano  probable   f  64 2023-01-03     2023-01-14
-#> 6 10       Unais al-Saeed  probable   m  42 2023-01-03     2023-01-08
+#> 1  1      Abraham Dechand  probable   m  17 2023-01-01     2023-01-05
+#> 2  2 Damari Jones-Carroll  probable   m  65 2023-01-07     2023-01-11
+#> 3  3         Thaylor Boyd  probable   m  58 2023-01-01     2023-01-07
+#> 4  8    Haazima al-Halaby  probable   f  36 2023-01-14     2023-01-28
+#> 5  9   Pauline Gomez Cano  probable   f  63 2023-01-03     2023-01-14
+#> 6 10       Unais al-Saeed  probable   m  41 2023-01-03     2023-01-08
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1     2023-01-05 recovered         <NA>               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-28        2023-01-04
@@ -402,6 +411,7 @@ removed from the line list, if it falls before the date of reporting but
 after the hospital admission and/or outcome date they are set to `NA`.
 
 ``` r
+
 tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
@@ -416,6 +426,7 @@ trunc_date <- max(tidy_linelist$value, na.rm = TRUE) - truncation_day
 ```
 
 ``` r
+
 ggplot(data = tidy_linelist) +
   geom_line(
     mapping = aes(x = value, y = case_name),
@@ -469,6 +480,7 @@ In this example several cases are removed as the reporting date occurs
 after the truncation time.
 
 ``` r
+
 linelist_trunc <- truncate_linelist(linelist = linelist)
 ```
 
@@ -497,6 +509,7 @@ days, weeks, months or years since the start of the outbreak. Here we
 right-truncate the line list 3 months since the start of the outbreak.
 
 ``` r
+
 linelist_trunc <- truncate_linelist(
   linelist = linelist,
   truncation_day = 3,
@@ -509,12 +522,12 @@ linelist_trunc <- truncate_linelist(
 
 It is not possible to simulate a line list with
 [`sim_linelist()`](https://epiverse-trace.github.io/simulist/dev/reference/sim_linelist.md)
-that is mid-way through an outbreak[¹](#fn1). This can make it difficult
-to generate outbreak data sets that resemble early outbreak dynamics
-where incidence is increasing, or mid-outbreak, or late in an outbreak
-as the disease approaches extinction. These types of data sets are
-useful for testing outbreak analytics method that are applied in
-real-time outbreak scenarios.
+that is mid-way through an outbreak[^1]. This can make it difficult to
+generate outbreak data sets that resemble early outbreak dynamics where
+incidence is increasing, or mid-outbreak, or late in an outbreak as the
+disease approaches extinction. These types of data sets are useful for
+testing outbreak analytics method that are applied in real-time outbreak
+scenarios.
 
 The
 [`truncate_linelist()`](https://epiverse-trace.github.io/simulist/dev/reference/truncate_linelist.md)
@@ -532,6 +545,7 @@ data](https://epiverse-trace.github.io/simulist/dev/articles/vis-linelist.md)
 vignette.
 
 ``` r
+
 # set seed to produce single wave outbreak
 set.seed(3)
 linelist <- sim_linelist(
@@ -553,6 +567,7 @@ weekly_inci <- incidence(
 ```
 
 ``` r
+
 plot(weekly_inci)
 ```
 
@@ -572,6 +587,7 @@ We can specify a `<Date>` object to the `truncation_day` argument in
 to specify the date we want to apply the right truncation to.
 
 ``` r
+
 linelist_early <- truncate_linelist(
   linelist = linelist,
   truncation_day = as.Date("2023-02-01")
@@ -612,6 +628,7 @@ illustrate the issue of under-reporting of recent cases when there is a
 time delay between symptom onset and reporting.
 
 ``` r
+
 # set seed to produce single wave outbreak
 set.seed(3)
 linelist <- sim_linelist(
@@ -626,6 +643,7 @@ linelist <- sim_linelist(
 ```
 
 ``` r
+
 linelist_early <- truncate_linelist(
   linelist = linelist,
   truncation_day = as.Date("2023-02-01")
@@ -661,6 +679,7 @@ inci_late <- incidence(
 ```
 
 ``` r
+
 plot(inci_early) +
   ggtitle("Early") +
   theme(plot.title = element_text(size = 25, hjust = 0.5))
@@ -702,9 +721,7 @@ real-time reproduction number such as
 [{EpiNow2}](https://epiforecasts.io/EpiNow2/) or
 [{epinowcast}](https://package.epinowcast.org/).
 
-------------------------------------------------------------------------
-
-1.  [`sim_linelist()`](https://epiverse-trace.github.io/simulist/dev/reference/sim_linelist.md)
+[^1]: [`sim_linelist()`](https://epiverse-trace.github.io/simulist/dev/reference/sim_linelist.md)
     simulates an outbreak to extinction except in cases where the number
     of infected individuals exceeds the maximum outbreak size specified
     in the `outbreak_size` argument in

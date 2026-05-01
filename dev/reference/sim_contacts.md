@@ -12,7 +12,7 @@ sim_contacts(
   outbreak_start_date = as.Date("2023-01-01"),
   anonymise = FALSE,
   outbreak_size = c(10, 10000),
-  population_age = c(1, 90),
+  population_age = c(0, 90),
   contact_tracing_status_probs = c(under_followup = 0.7, lost_to_followup = 0.2, unknown
     = 0.1),
   config = create_config()
@@ -170,20 +170,20 @@ Joshua W. Lambert, Carmen Tamayo
 # quickly simulate contact tracing data using the function defaults
 contacts <- sim_contacts()
 head(contacts)
-#>              from               to age sex date_first_contact date_last_contact
-#> 1    Mai Talusani  Dominic Alferes  77   m         2022-12-27        2023-01-03
-#> 2    Mai Talusani     Johnaton Lor  61   m         2023-01-01        2023-01-02
-#> 3 Dominic Alferes  Perri Nishimoto  24   f         2023-01-03        2023-01-07
-#> 4 Dominic Alferes      Raul Duarte  49   m         2022-12-30        2023-01-10
-#> 5    Johnaton Lor    Dennis Romero  43   m         2022-12-31        2023-01-06
-#> 6    Johnaton Lor Crissela Howells  16   f         2022-12-30        2023-01-06
-#>   was_case         status
-#> 1     TRUE           case
-#> 2     TRUE           case
-#> 3    FALSE under_followup
-#> 4     TRUE           case
-#> 5     TRUE           case
-#> 6     TRUE           case
+#>              from                     to age sex date_first_contact
+#> 1    Mai Talusani           Johnaton Lor  76   m         2022-12-27
+#> 2    Mai Talusani        Dominic Alferes  60   m         2023-01-01
+#> 3    Johnaton Lor        Perri Nishimoto  23   f         2023-01-03
+#> 4    Johnaton Lor Edgar Gutierrez-Matias  48   m         2022-12-30
+#> 5 Dominic Alferes              Scott Tam  42   m         2022-12-31
+#> 6 Dominic Alferes       Crissela Howells  15   f         2022-12-30
+#>   date_last_contact was_case         status
+#> 1        2023-01-03     TRUE           case
+#> 2        2023-01-02     TRUE           case
+#> 3        2023-01-07    FALSE under_followup
+#> 4        2023-01-10     TRUE           case
+#> 5        2023-01-06     TRUE           case
+#> 6        2023-01-06     TRUE           case
 
 # to simulate more realistic contact tracing data load epiparameters from
 # {epiparameter}

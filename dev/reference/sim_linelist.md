@@ -20,7 +20,7 @@ sim_linelist(
   outbreak_start_date = as.Date("2023-01-01"),
   anonymise = FALSE,
   outbreak_size = c(10, 10000),
-  population_age = c(1, 90),
+  population_age = c(0, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.3, confirmed = 0.5),
   config = create_config()
 )
@@ -348,26 +348,26 @@ Joshua W. Lambert, Carmen Tamayo
 # quickly simulate a line list using the function defaults
 linelist <- sim_linelist()
 head(linelist)
-#>   id              case_name case_type sex age date_onset date_reporting
-#> 1  1          Alivia Dennis confirmed   f  43 2023-01-01     2023-01-01
-#> 2  3             Dana Quast suspected   f  26 2023-01-04     2023-01-04
-#> 3  5        Marissa Charley  probable   f  22 2023-01-05     2023-01-05
-#> 4  6 Abdul Wahaab el-Maroun confirmed   m  24 2023-01-04     2023-01-04
-#> 5  7         R'Mond Antoine confirmed   m  87 2023-01-09     2023-01-09
-#> 6  8         Samira Mohamed suspected   f   8 2023-01-07     2023-01-07
+#>   id         case_name case_type sex age date_onset date_reporting
+#> 1  1    Faseeha el-Dar  probable   f  42 2023-01-01     2023-01-01
+#> 2  3 Young Dyadantumbe confirmed   f  25 2023-01-04     2023-01-04
+#> 3  5   Lauren Markovic confirmed   f  21 2023-01-05     2023-01-05
+#> 4  6          Ron Mast suspected   m  23 2023-01-04     2023-01-04
+#> 5  7      Justin Drake confirmed   m  86 2023-01-09     2023-01-09
+#> 6  8   Elizabeth Quast suspected   f   7 2023-01-07     2023-01-07
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 1           <NA>      died   2023-01-14               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-26        2023-01-01
 #> 3           <NA> recovered         <NA>         2023-01-03        2023-01-09
 #> 4           <NA> recovered         <NA>         2022-12-31        2023-01-08
 #> 5           <NA> recovered         <NA>         2022-12-31        2023-01-08
 #> 6           <NA> recovered         <NA>         2023-01-03        2023-01-07
 #>   ct_value
-#> 1     20.7
-#> 2       NA
-#> 3       NA
-#> 4     24.4
-#> 5     25.3
+#> 1       NA
+#> 2     24.4
+#> 3     25.3
+#> 4       NA
+#> 5     28.5
 #> 6       NA
 
 # to simulate a more realistic line list load epiparameters from
@@ -427,33 +427,33 @@ linelist <- sim_linelist(
 )
 head(linelist)
 #>   id          case_name case_type sex age date_onset date_reporting
-#> 1  1 Taylor Ebelsheiser confirmed   m   7 2023-01-01     2023-01-01
-#> 2  2        Mai Jing Le suspected   f  24 2023-01-01     2023-01-01
-#> 3  3       Krista Chase suspected   f  68 2023-01-01     2023-01-01
-#> 4  4      Vantasia Abdi confirmed   f  28 2023-01-01     2023-01-01
-#> 5  7   Daianaira Aragon  probable   f  15 2023-01-02     2023-01-02
-#> 6  8       Erick Brewer confirmed   m  49 2023-01-01     2023-01-01
+#> 1  1        Lerria Ware confirmed   f  82 2023-01-01     2023-01-01
+#> 2  4 Jessica Emanuelson suspected   f  38 2023-01-03     2023-01-03
+#> 3  6        Tabor Brown  probable   f  81 2023-01-02     2023-01-02
+#> 4 10  Arianna Rodriguez suspected   f  35 2023-01-04     2023-01-04
+#> 5 11   Rif'a al-Shariff confirmed   f  28 2023-01-04     2023-01-04
+#> 6 12    Malcolm Biggers confirmed   m  80 2023-01-04     2023-01-04
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1     2023-01-08      died   2023-01-19               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-06
-#> 3     2023-01-04      died   2023-02-02         2022-12-31        2023-01-02
-#> 4           <NA> recovered         <NA>         2022-12-29        2023-01-06
-#> 5     2023-01-06      died   2023-01-14         2022-12-29        2023-01-03
-#> 6           <NA> recovered         <NA>         2022-12-30        2023-01-02
+#> 1     2023-01-03 recovered         <NA>               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-28        2023-01-01
+#> 3           <NA> recovered         <NA>         2022-12-30        2023-01-03
+#> 4     2023-01-07      died   2023-01-17         2023-01-01        2023-01-05
+#> 5           <NA> recovered         <NA>         2022-12-31        2023-01-07
+#> 6           <NA> recovered         <NA>         2023-01-01        2023-01-05
 #>   ct_value
-#> 1     27.8
+#> 1     22.2
 #> 2       NA
 #> 3       NA
-#> 4     28.7
-#> 5       NA
-#> 6     21.3
+#> 4       NA
+#> 5     25.6
+#> 6     26.6
 
 # example with age-stratified hospitalisation risk
 # 20% for over 80s
 # 10% for under 5s
 # 5% for the rest
 age_dep_hosp_risk <- data.frame(
-  age_limit = c(1, 5, 80),
+  age_limit = c(0, 5, 80),
   risk = c(0.1, 0.05, 0.2)
 )
 linelist <- sim_linelist(
@@ -465,25 +465,25 @@ linelist <- sim_linelist(
   hosp_risk = age_dep_hosp_risk
 )
 head(linelist)
-#>   id            case_name case_type sex age date_onset date_reporting
-#> 1  1     Saabira al-Samad confirmed   f  34 2023-01-01     2023-01-01
-#> 2  3 Pradyumna Steenburgh  probable   m  65 2023-01-01     2023-01-01
-#> 3  4       Govanni Foster suspected   m  31 2023-01-01     2023-01-01
-#> 4  6          Edward Hall confirmed   m  19 2023-01-01     2023-01-01
-#> 5  7       Erminio Topaha confirmed   m   3 2023-01-01     2023-01-01
-#> 6  8     Antonio Mengesha  probable   m  12 2023-01-01     2023-01-01
+#>   id        case_name case_type sex age date_onset date_reporting
+#> 1  1 Waheeba al-Uddin suspected   f  89 2023-01-01     2023-01-01
+#> 2  2   Rashaa el-Baig  probable   f  39 2023-01-01     2023-01-01
+#> 3  3  Noora al-Rahimi  probable   f  36 2023-01-01     2023-01-01
+#> 4  6     Talia Garner  probable   f  30 2023-01-01     2023-01-01
+#> 5  7      Justin Hill suspected   m  33 2023-01-01     2023-01-01
+#> 6  9    Spencer Adams confirmed   m  69 2023-01-02     2023-01-02
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2023-01-01        2023-01-02
-#> 3           <NA> recovered         <NA>         2022-12-30        2023-01-01
-#> 4           <NA> recovered         <NA>         2022-12-26        2023-01-02
-#> 5           <NA>      died   2023-01-09         2022-12-31        2023-01-03
-#> 6           <NA> recovered         <NA>         2022-12-31        2023-01-04
+#> 1     2023-01-03 recovered         <NA>               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-26        2023-01-02
+#> 3           <NA> recovered         <NA>         2022-12-29        2023-01-02
+#> 4           <NA> recovered         <NA>         2022-12-31        2023-01-03
+#> 5           <NA> recovered         <NA>         2022-12-31        2023-01-06
+#> 6     2023-01-05      died   2023-01-15         2022-12-31        2023-01-02
 #>   ct_value
-#> 1     29.5
+#> 1       NA
 #> 2       NA
 #> 3       NA
-#> 4     24.9
-#> 5     25.2
-#> 6       NA
+#> 4       NA
+#> 5       NA
+#> 6       28
 ```

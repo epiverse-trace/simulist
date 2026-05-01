@@ -37,6 +37,7 @@ groupings
 The package can be installed from CRAN using
 
 ``` r
+
 install.packages("simulist")
 ```
 
@@ -45,6 +46,7 @@ You can install the development version of
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # check whether {pak} is installed
 if(!require("pak")) install.packages("pak")
 pak::pak("epiverse-trace/simulist")
@@ -54,12 +56,14 @@ Alternatively, install pre-compiled binaries from [the Epiverse TRACE
 R-universe](https://epiverse-trace.r-universe.dev/simulist)
 
 ``` r
+
 install.packages("simulist", repos = c("https://epiverse-trace.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ## Quick start
 
 ``` r
+
 library(simulist)
 ```
 
@@ -69,6 +73,7 @@ The function provides sensible defaults to quickly generate a
 epidemiologically valid data set.
 
 ``` r
+
 set.seed(1)
 linelist <- sim_linelist()
 head(linelist)
@@ -107,10 +112,12 @@ infectiousness, onset-to-hospitalisation delay, and onset-to-death
 delay.
 
 ``` r
+
 library(epiparameter)
 ```
 
 ``` r
+
 # create COVID-19 contact distribution
 contact_distribution <- epiparameter::epiparameter(
   disease = "COVID-19",
@@ -182,6 +189,7 @@ supplied to the `outbreak_size` argument) can be used to return a line
 list early without producing an excessively large data set.
 
 ``` r
+
 set.seed(1)
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
@@ -223,6 +231,7 @@ start date of the outbreak is 1st January 2023. To modify either of
 these, we can specify them in the function.
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -261,6 +270,7 @@ tracing dataset) we can use the same parameters defined for the example
 above.
 
 ``` r
+
 contacts <- sim_contacts(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -294,6 +304,7 @@ to produce a line list and contacts table of the same outbreak (the
 arguments also have the same default settings as the other functions).
 
 ``` r
+
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -366,6 +377,7 @@ package, please cite the publication in the Journal of Open Source
 Software (JOSS), see below.
 
 ``` r
+
 citation("simulist")
 #> To cite package 'simulist' in publications use:
 #> 
@@ -442,17 +454,17 @@ simulation is one part of a wider R package (e.g. {EpiNow}).
 
 Table of line list simulator features
 
-|                                               | {simulist} | {LLsim} | {simulacr} | {epidict} | {EpiNow} | generative-nowcasting |
-|-----------------------------------------------|------------|---------|------------|-----------|----------|-----------------------|
-| Simulates line list                           | ✅         | ✅      | ✅         | ✅        | ✅       | ✅                    |
-| Simulates contacts                            | ✅         | ✅      | ✅         | ❌        | ❌       | ❌                    |
-| Parameterised with epi distributions[¹](#fn1) | ✅         | ✅      | ✅         | ❌        | ✅       | ✅                    |
-| Interoperable with {epicontacts}              | ✅         | ✅      | ✅         | ❌        | ❌       | ❌                    |
-| Explicit population size[²](#fn2)             | ❌         | ✅      | ✅         | ❌        | ❌       | ❌                    |
-| R package                                     | ✅         | ✅      | ✅         | ✅        | ✅       | ❌                    |
-| Actively maintained[³](#fn3)                  | ✅         | ❌      | ❌         | ❌        | ❌       | ✅                    |
-| On CRAN                                       | ✅         | ❌      | ❌         | ❌        | ❌       | NA                    |
-| Unit testing[⁴](#fn4)                         | ✅         | ✅      | ❌         | ✅        | ❌       | NA                    |
+|  | {simulist} | {LLsim} | {simulacr} | {epidict} | {EpiNow} | generative-nowcasting |
+|----|----|----|----|----|----|----|
+| Simulates line list | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Simulates contacts | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| Parameterised with epi distributions[^1] | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Interoperable with {epicontacts} | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| Explicit population size[^2] | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| R package | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Actively maintained[^3] | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| On CRAN | ✅ | ❌ | ❌ | ❌ | ❌ | NA |
+| Unit testing[^4] | ✅ | ✅ | ❌ | ✅ | ❌ | NA |
 
 If there is another package with this functionality missing from the
 list that should be added, or if a package included in this list has
@@ -489,21 +501,19 @@ used, either independently or in combination with
 [`messy_linelist()`](https://epiverse-trace.github.io/simulist/dev/reference/messy_linelist.md),
 to create messy line list and contacts data.
 
-------------------------------------------------------------------------
-
-1.  In this context *Parameterised with epi distributions* means that
+[^1]: In this context *Parameterised with epi distributions* means that
     the simulation uses epidemiological distributions (e.g. serial
     interval, infectious period) to parameterise the model and the
     parameters of these epi distributions can be modified by the user.
 
-2.  *Explicit population size* refers to the simulation using a finite
+[^2]: *Explicit population size* refers to the simulation using a finite
     population size which is controlled by the user for the depletion of
     susceptible individuals in the model.
 
-3.  We define *Actively maintained* as the repository having a commit to
-    the main branch within the last 12 months.
+[^3]: We define *Actively maintained* as the repository having a commit
+    to the main branch within the last 12 months.
 
-4.  *Unit testing* is ticked if the package contains any form of
+[^4]: *Unit testing* is ticked if the package contains any form of
     testing, this can use any testing framework, for example
     [{testthat}](https://CRAN.R-project.org/package=testthat) or
     [{tinytest}](https://CRAN.R-project.org/package=tinytest).

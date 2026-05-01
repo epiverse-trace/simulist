@@ -38,6 +38,7 @@ time-varying case fatality risk can be set when calling
 (see below for details).
 
 ``` r
+
 library(simulist)
 library(epiparameter)
 library(tidyr)
@@ -65,6 +66,7 @@ epidemiological parameters (onset-to-hospitalisation and
 onset-to-death).
 
 ``` r
+
 contact_distribution <- epiparameter(
   disease = "COVID-19",
   epi_name = "contact distribution",
@@ -116,6 +118,7 @@ is rendered. When using {simulist}, setting the seed is not required
 unless you need to simulate the same line list multiple times.
 
 ``` r
+
 set.seed(1)
 ```
 
@@ -145,6 +148,7 @@ Size](https://epiverse-trace.github.io/simulist/dev/articles/simulist.html#Contr
 for more information on this.
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -159,26 +163,26 @@ linelist <- sim_linelist(
 
 # first 6 rows of linelist
 head(linelist)
-#>   id         case_name case_type sex age date_onset date_reporting
-#> 1  1    Douglas Carter suspected   m  40 2023-01-01     2023-01-01
-#> 2  2 Demetrice Harding  probable   m  12 2023-01-04     2023-01-04
-#> 3  4    Pernell Steele  probable   m  45 2023-01-05     2023-01-05
-#> 4  6  Sumbula al-Yusuf  probable   f  36 2023-01-07     2023-01-07
-#> 5  7      Xin Geronimo  probable   m  42 2023-01-09     2023-01-09
-#> 6  8 Haafil el-Salameh  probable   m  14 2023-01-08     2023-01-08
+#>   id        case_name case_type sex age date_onset date_reporting
+#> 1  1  Draven Martinez confirmed   m  39 2023-01-01     2023-01-01
+#> 2  2 Du Shawn Mathews confirmed   m  11 2023-01-04     2023-01-04
+#> 3  4     Hunter Herde suspected   m  44 2023-01-05     2023-01-05
+#> 4  6     Monaca Embry confirmed   f  35 2023-01-07     2023-01-07
+#> 5  7   Michael Galvan confirmed   m  41 2023-01-09     2023-01-09
+#> 6  8  Rashaan Montoya suspected   m  13 2023-01-08     2023-01-08
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
 #> 1           <NA> recovered         <NA>               <NA>              <NA>
 #> 2           <NA> recovered         <NA>         2022-12-31        2023-01-04
-#> 3           <NA> recovered         <NA>         2022-12-30        2023-01-04
-#> 4     2023-01-09 recovered         <NA>         2023-01-03        2023-01-08
-#> 5           <NA> recovered         <NA>         2023-01-01        2023-01-06
-#> 6     2023-01-09 recovered         <NA>         2022-12-31        2023-01-08
+#> 3     2023-01-08      died   2023-01-24         2022-12-30        2023-01-04
+#> 4           <NA> recovered         <NA>         2023-01-03        2023-01-08
+#> 5     2023-01-10      died   2023-01-21         2023-01-01        2023-01-06
+#> 6           <NA> recovered         <NA>         2022-12-31        2023-01-08
 #>   ct_value
-#> 1       NA
-#> 2       NA
+#> 1     24.4
+#> 2     24.8
 #> 3       NA
-#> 4       NA
-#> 5       NA
+#> 4     25.1
+#> 5     26.5
 #> 6       NA
 ```
 
@@ -197,6 +201,7 @@ using the [{tidyr}](https://tidyr.tidyverse.org/) and
 [Tidyverse](https://tidyverse.org/).
 
 ``` r
+
 linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
@@ -209,6 +214,7 @@ linelist <- linelist |>
 ```
 
 ``` r
+
 daily <- incidence(
   linelist,
   date_index = c(
@@ -237,6 +243,7 @@ for both hospitalised (`hosp_death_risk`) and non-hospitalised
 (`non_hosp_death_risk`) individuals infected.
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -252,23 +259,24 @@ linelist <- sim_linelist(
 #> Returning data early with 1026 cases and 1994 total contacts (including cases).
 
 head(linelist)
-#>   id       case_name case_type sex age date_onset date_reporting date_admission
-#> 1  1  Lara Pickering confirmed   f  42 2023-01-01     2023-01-01     2023-01-05
-#> 2  2   Sidnee Jensen  probable   f  25 2023-01-06     2023-01-06     2023-01-09
-#> 3  4  Allison Denbow confirmed   f  64 2023-01-07     2023-01-07           <NA>
-#> 4  6 Noora al-Ahmadi  probable   f  46 2023-01-09     2023-01-09           <NA>
-#> 5  8    Legend Tracy confirmed   m  78 2023-01-08     2023-01-08           <NA>
-#> 6 10     Cory Wilson suspected   m  13 2023-01-15     2023-01-15           <NA>
+#>   id      case_name case_type sex age date_onset date_reporting date_admission
+#> 1  1  Roget Parsons  probable   f  41 2023-01-01     2023-01-01     2023-01-02
+#> 2  2 Najwa al-Mahdi confirmed   f  24 2023-01-06     2023-01-06           <NA>
+#> 3  4      Sandra Do suspected   f  63 2023-01-07     2023-01-07           <NA>
+#> 4  6  Frenice Parks  probable   f  45 2023-01-09     2023-01-09     2023-01-11
+#> 5  8   David Howell confirmed   m  77 2023-01-08     2023-01-08           <NA>
+#> 6 10  Fawz al-Sadri  probable   m  12 2023-01-15     2023-01-15     2023-01-18
 #>     outcome date_outcome date_first_contact date_last_contact ct_value
-#> 1 recovered         <NA>               <NA>              <NA>     22.9
-#> 2      died   2023-02-26         2022-12-31        2023-01-03       NA
-#> 3      died   2023-01-27         2023-01-01        2023-01-08     22.9
-#> 4      died   2023-01-23         2023-01-04        2023-01-07       NA
-#> 5 recovered         <NA>         2023-01-05        2023-01-11     26.4
-#> 6 recovered         <NA>         2023-01-06        2023-01-11       NA
+#> 1      died   2023-01-16               <NA>              <NA>       NA
+#> 2      died   2023-01-23         2022-12-31        2023-01-03     24.4
+#> 3 recovered         <NA>         2023-01-01        2023-01-08       NA
+#> 4 recovered         <NA>         2023-01-04        2023-01-07       NA
+#> 5      died   2023-01-19         2023-01-05        2023-01-11     25.6
+#> 6      died   2023-01-22         2023-01-06        2023-01-11       NA
 ```
 
 ``` r
+
 linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
@@ -281,6 +289,7 @@ linelist <- linelist |>
 ```
 
 ``` r
+
 daily <- incidence(
   linelist,
   date_index = c(
@@ -293,6 +302,7 @@ daily <- incidence(
 ```
 
 ``` r
+
 plot(daily)
 ```
 
@@ -324,6 +334,7 @@ needs to be matched by name exactly (case sensitive). See
 `?create_config()` for documentation.
 
 ``` r
+
 config <- create_config(
   time_varying_death_risk = function(risk, time) risk * exp(-0.05 * time)
 )
@@ -334,6 +345,7 @@ time. This will provide a shallow (monotonic) decline of case fatality
 through the simulated epidemic.
 
 ``` r
+
 exp_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
@@ -341,6 +353,7 @@ exp_df <- data.frame(
 ```
 
 ``` r
+
 ggplot(exp_df) +
   geom_point(mapping = aes(x = time, y = value)) +
   scale_y_continuous(name = "Value") +
@@ -375,12 +388,13 @@ In the example below `hosp_death_risk` is `0.9` and
 function is an exponential decline. This means that on day 0 of the
 epidemic (i.e. first infection seeds the outbreak) the risks will be
 `0.9` and `0.75`. But any time after the start of the epidemic
-($t_{0} + \Delta t$) the risks will be lower, and when the exponential
+($`t_0 + \Delta t`$) the risks will be lower, and when the exponential
 function approaches zero the risk of a case dying will also go to zero.
 
 Simulating with the time-varying case fatality risk:
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -395,29 +409,30 @@ linelist <- sim_linelist(
 
 head(linelist)
 #>   id         case_name case_type sex age date_onset date_reporting
-#> 1  1  Thomas Velasquez  probable   m  59 2023-01-01     2023-01-01
-#> 2  2 Demeakie Williams confirmed   f   2 2023-01-06     2023-01-06
-#> 3  3    Marquille Neal confirmed   m  14 2023-01-02     2023-01-02
-#> 4  6      Hector Perez  probable   m  49 2023-01-07     2023-01-07
-#> 5  8    Carlos Botello confirmed   m  22 2023-01-08     2023-01-08
-#> 6 11 Raakaan al-Younes confirmed   m  40 2023-01-04     2023-01-04
-#>   date_admission outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA>    died   2023-01-19               <NA>              <NA>
-#> 2     2023-01-09    died   2023-02-01         2022-12-30        2023-01-07
-#> 3           <NA>    died   2023-01-31         2022-12-31        2023-01-04
-#> 4           <NA>    died   2023-01-26         2023-01-05        2023-01-08
-#> 5     2023-01-11    died   2023-01-22         2023-01-03        2023-01-08
-#> 6           <NA>    died   2023-01-13         2022-12-27        2023-01-06
+#> 1  1          Ryan Moe confirmed   m  58 2023-01-01     2023-01-01
+#> 2  2   Shannon Saponas confirmed   f   1 2023-01-06     2023-01-06
+#> 3  3     Austin Hewitt confirmed   m  13 2023-01-02     2023-01-02
+#> 4  6 Casey Albrechtsen confirmed   m  48 2023-01-07     2023-01-07
+#> 5  8    Rajaa el-Assaf confirmed   m  21 2023-01-08     2023-01-08
+#> 6 11     Aaqil el-Diab confirmed   m  39 2023-01-04     2023-01-04
+#>   date_admission   outcome date_outcome date_first_contact date_last_contact
+#> 1           <NA>      died   2023-01-14               <NA>              <NA>
+#> 2           <NA>      died   2023-01-29         2022-12-30        2023-01-07
+#> 3           <NA>      died   2023-02-03         2022-12-31        2023-01-04
+#> 4           <NA> recovered         <NA>         2023-01-05        2023-01-08
+#> 5           <NA> recovered         <NA>         2023-01-03        2023-01-08
+#> 6           <NA> recovered         <NA>         2022-12-27        2023-01-06
 #>   ct_value
-#> 1       NA
-#> 2     26.2
-#> 3     25.9
-#> 4       NA
-#> 5     26.0
-#> 6     27.5
+#> 1     26.5
+#> 2     26.3
+#> 3     26.1
+#> 4     21.7
+#> 5     26.2
+#> 6     25.7
 ```
 
 ``` r
+
 linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
@@ -430,6 +445,7 @@ linelist <- linelist |>
 ```
 
 ``` r
+
 daily <- incidence(
   linelist,
   date_index = c(
@@ -442,6 +458,7 @@ daily <- incidence(
 ```
 
 ``` r
+
 plot(daily)
 ```
 
@@ -469,6 +486,7 @@ become zero (i.e. if an individual is infected after day 60 they will
 definitely recover).
 
 ``` r
+
 config <- create_config(
   time_varying_death_risk = function(risk, time) {
     ifelse(test = time < 60, yes = risk, no = 0)
@@ -477,6 +495,7 @@ config <- create_config(
 ```
 
 ``` r
+
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
@@ -484,6 +503,7 @@ stepwise_df <- data.frame(
 ```
 
 ``` r
+
 ggplot(stepwise_df) +
   geom_point(mapping = aes(x = time, y = value)) +
   scale_y_continuous(name = "Value") +
@@ -506,6 +526,7 @@ are at their user-supplied values from day 0 to day 60, and then become
 Simulating with the stepwise time-varying case fatality risk:
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -518,33 +539,34 @@ linelist <- sim_linelist(
   config = config
 )
 #> Warning: Number of cases exceeds maximum outbreak size. 
-#> Returning data early with 1004 cases and 1982 total contacts (including cases).
+#> Returning data early with 1013 cases and 1938 total contacts (including cases).
 
 head(linelist)
-#>   id              case_name case_type sex age date_onset date_reporting
-#> 1  1             Ranny Tran confirmed   m  23 2023-01-01     2023-01-01
-#> 2  2      Safiyya el-Badour confirmed   f  29 2023-01-05     2023-01-05
-#> 3  3              Rachel Vu  probable   f  81 2023-01-17     2023-01-17
-#> 4  5 Abdur Raheem al-Arshad suspected   m  58 2023-01-19     2023-01-19
-#> 5  6       Saleema al-Zaher confirmed   f  79 2023-01-19     2023-01-19
-#> 6  8        Nicholas Yazzie suspected   m  44 2023-01-20     2023-01-20
-#>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA> recovered         <NA>               <NA>              <NA>
-#> 2           <NA> recovered         <NA>         2022-12-29        2023-01-02
-#> 3           <NA> recovered         <NA>         2023-01-05        2023-01-07
-#> 4           <NA>      died   2023-01-30         2023-01-15        2023-01-18
-#> 5           <NA>      died   2023-02-19         2023-01-15        2023-01-22
-#> 6           <NA>      died   2023-02-02         2023-01-13        2023-01-19
+#>   id             case_name case_type sex age date_onset date_reporting
+#> 1  1        Skyler Sprague  probable   m  82 2023-01-01     2023-01-01
+#> 2  2          Amru al-Hoda confirmed   m  20 2023-01-01     2023-01-01
+#> 3  3        Kayla Anzlovar confirmed   f   5 2023-01-08     2023-01-08
+#> 4  4             Tuan Tran confirmed   m   2 2023-01-08     2023-01-08
+#> 5  5 Joaquinignacio Kalaga  probable   m  24 2023-01-05     2023-01-05
+#> 6  9          Alexis Pogue confirmed   f  90 2023-01-28     2023-01-28
+#>   date_admission outcome date_outcome date_first_contact date_last_contact
+#> 1           <NA>    died   2023-01-09               <NA>              <NA>
+#> 2           <NA>    died   2023-02-10         2022-12-30        2023-01-04
+#> 3           <NA>    died   2023-01-21         2022-12-29        2023-01-05
+#> 4           <NA>    died   2023-02-01         2022-12-30        2023-01-05
+#> 5           <NA>    died   2023-01-30         2022-12-30        2023-01-03
+#> 6           <NA>    died   2023-02-10         2023-01-02        2023-01-11
 #>   ct_value
-#> 1     27.7
+#> 1       NA
 #> 2     26.8
-#> 3       NA
-#> 4       NA
-#> 5     28.1
-#> 6       NA
+#> 3     25.5
+#> 4     25.9
+#> 5       NA
+#> 6     24.4
 ```
 
 ``` r
+
 linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
@@ -557,6 +579,7 @@ linelist <- linelist |>
 ```
 
 ``` r
+
 daily <- incidence(
   linelist,
   date_index = c(
@@ -569,6 +592,7 @@ daily <- incidence(
 ```
 
 ``` r
+
 plot(daily)
 ```
 
@@ -590,6 +614,7 @@ onwards the risk goes back to the rates specified by `hosp_death_risk`
 and `non_hosp_death_risk`.
 
 ``` r
+
 config <- create_config(
   time_varying_death_risk = function(risk, time) {
     ifelse(test = time > 50 & time < 100, yes = risk * 0.5, no = risk)
@@ -598,6 +623,7 @@ config <- create_config(
 ```
 
 ``` r
+
 stepwise_df <- data.frame(
   time = 1:150,
   value = config$time_varying_death_risk(risk = 0.9, time = 1:150)
@@ -605,6 +631,7 @@ stepwise_df <- data.frame(
 ```
 
 ``` r
+
 ggplot(stepwise_df) +
   geom_point(mapping = aes(x = time, y = value)) +
   scale_y_continuous(name = "Value", limits = c(0, 1)) +
@@ -629,6 +656,7 @@ maximum value from day 100 onwards.
 Simulating with the stepwise time-varying case fatality risk:
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -642,30 +670,31 @@ linelist <- sim_linelist(
 )
 
 head(linelist)
-#>   id            case_name case_type sex age date_onset date_reporting
-#> 1  1     Kathryn Thurston confirmed   f  35 2023-01-01     2023-01-01
-#> 2  2     Kaatima al-Ahmed confirmed   f  54 2023-01-02     2023-01-02
-#> 3  4        Horatio Sobhi confirmed   m  78 2023-01-03     2023-01-03
-#> 4  5     Brittney Pollock  probable   f  16 2023-01-16     2023-01-16
-#> 5  7 Esteidi Ayala Petrie confirmed   f  31 2023-01-04     2023-01-04
-#> 6 10          Brandon Sok confirmed   m  36 2023-01-19     2023-01-19
+#>   id          case_name case_type sex age date_onset date_reporting
+#> 1  1        Abrah Cross  probable   f  34 2023-01-01     2023-01-01
+#> 2  2      Kenitra Brown confirmed   f  53 2023-01-02     2023-01-02
+#> 3  4          Ja Bolden suspected   m  77 2023-01-03     2023-01-03
+#> 4  5      Adinidiin Lee  probable   f  15 2023-01-16     2023-01-16
+#> 5  7 Mariam Hailemicael  probable   f  30 2023-01-04     2023-01-04
+#> 6 10   Zackarie Mullins  probable   m  35 2023-01-19     2023-01-19
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 1     2023-01-02 recovered         <NA>               <NA>              <NA>
 #> 2     2023-01-04      died   2023-01-23         2023-01-01        2023-01-04
-#> 3           <NA>      died   2023-01-23         2022-12-28        2023-01-05
-#> 4           <NA> recovered         <NA>         2022-12-27        2023-01-03
-#> 5           <NA>      died   2023-01-09         2023-01-01        2023-01-04
-#> 6           <NA>      died   2023-02-11         2023-01-11        2023-01-19
+#> 3           <NA>      died   2023-01-20         2022-12-28        2023-01-05
+#> 4     2023-01-20      died   2023-01-24         2022-12-27        2023-01-03
+#> 5           <NA>      died   2023-01-19         2023-01-01        2023-01-04
+#> 6           <NA>      died   2023-01-31         2023-01-11        2023-01-19
 #>   ct_value
-#> 1     23.1
-#> 2     26.6
-#> 3     27.2
+#> 1       NA
+#> 2     23.2
+#> 3       NA
 #> 4       NA
-#> 5     23.4
-#> 6     28.2
+#> 5       NA
+#> 6       NA
 ```
 
 ``` r
+
 linelist <- linelist |>
   pivot_wider(
     names_from = outcome,
@@ -678,6 +707,7 @@ linelist <- linelist |>
 ```
 
 ``` r
+
 daily <- incidence(
   linelist,
   date_index = c(
@@ -690,6 +720,7 @@ daily <- incidence(
 ```
 
 ``` r
+
 plot(daily)
 ```
 

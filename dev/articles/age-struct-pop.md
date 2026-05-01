@@ -37,6 +37,7 @@ structure, [for example younger populations such as Nigeria, or older
 populations such as Japan](https://ourworldindata.org/age-structure).
 
 ``` r
+
 library(simulist)
 library(epiparameter)
 library(ggplot2)
@@ -49,6 +50,7 @@ contact distribution and the infectious period are manually defined as
 they are not yet available from the {epiparameter} database.
 
 ``` r
+
 contact_distribution <- epiparameter(
   disease = "COVID-19",
   epi_name = "contact distribution",
@@ -104,6 +106,7 @@ is not required unless you need to simulate the same line list multiple
 times.
 
 ``` r
+
 set.seed(1)
 ```
 
@@ -111,7 +114,7 @@ set.seed(1)
 
 By default
 [`sim_linelist()`](https://epiverse-trace.github.io/simulist/dev/reference/sim_linelist.md)
-simulates individuals ages assuming a uniform distribution between 1 and
+simulates individuals ages assuming a uniform distribution between 0 and
 90. To change this age range, a vector of two numbers can be supplied to
 the `population_age` argument. Here we simulate an outbreak in a
 population with a population ranging from 5 to 75 (inclusive, `[5,75]`).
@@ -127,6 +130,7 @@ outbreak size is left at `1e4`) to clearly visualise the distribution of
 ages.
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -164,6 +168,7 @@ We can plot the age distribution for individuals in the line list,
 binned into 5 year categories.
 
 ``` r
+
 ggplot(linelist[, c("sex", "age")]) +
   geom_histogram(
     mapping = aes(x = age),
@@ -184,7 +189,7 @@ Individuals', and the x-axis is labelled
 'Age'.](age-struct-pop_files/figure-html/plot-age-range-1.png)
 
 If the `population_age` argument was left unspecified, it would have
-assumed the default age range of 1 to 90 (`c(1, 90)`).
+assumed the default age range of 0 to 90 (`c(0, 90)`).
 
 ## Structured population age
 
@@ -209,6 +214,7 @@ column) is inclusive. There will be no individuals in the population
 younger then 1 or older than 90.
 
 ``` r
+
 age_struct <- data.frame(
   age_limit = c(1, 20, 60, 90),
   proportion = c(0.3, 0.4, 0.3, 0)
@@ -222,6 +228,7 @@ age_struct
 ```
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -263,6 +270,7 @@ structure plotted above, other than having a higher upper age limit. The
 data is binned into 5 year categories and facetted by sex.
 
 ``` r
+
 ggplot(linelist[, c("sex", "age")]) +
   geom_histogram(
     mapping = aes(x = age),
@@ -292,6 +300,7 @@ An example for a much younger population could instead specify:
 - `0.1` (or 10%) for 60-75 years old
 
 ``` r
+
 age_struct <- data.frame(
   age_limit = c(1, 10, 30, 60, 75),
   proportion = c(0.4, 0.3, 0.2, 0.1, 0)
@@ -306,6 +315,7 @@ age_struct
 ```
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -345,6 +355,7 @@ pyramids. Here we partition the data by sex and plot the age
 distribution.
 
 ``` r
+
 linelist_m <- subset(linelist, subset = sex == "m")
 age_cats_m <- as.data.frame(table(floor(linelist_m$age / 5) * 5))
 colnames(age_cats_m) <- c("AgeCat", "Population")
@@ -361,6 +372,7 @@ labels <- abs(breaks)
 ```
 
 ``` r
+
 ggplot(age_cats) +
   geom_col(mapping = aes(x = Population, y = factor(AgeCat), fill = sex)) +
   scale_y_discrete(name = "Lower bound of Age Category") +

@@ -12,6 +12,7 @@ patterns in the simulated data, or just to check that the simulated data
 looks as expected given how the simulation was parameterised.
 
 ``` r
+
 library(simulist)
 library(epiparameter)
 library(incidence2)
@@ -35,6 +36,7 @@ First we load the required delay distributions using the {epiparameter}
 package.
 
 ``` r
+
 contact_distribution <- epiparameter(
   disease = "COVID-19",
   epi_name = "contact distribution",
@@ -85,12 +87,14 @@ is rendered. When using {simulist}, setting the seed is not required
 unless you need to simulate the same line list multiple times.
 
 ``` r
+
 set.seed(123)
 ```
 
 Using a simple line list simulation with the factory default settings:
 
 ``` r
+
 linelist <- sim_linelist(
   contact_distribution = contact_distribution,
   infectious_period = infectious_period,
@@ -132,6 +136,7 @@ will aggregate to the same precision as the data. When supplied with
 non-whole `<Date>`s it will produce this warning.
 
 ``` r
+
 # create incidence object
 daily <- incidence(
   x = linelist,
@@ -155,6 +160,7 @@ can be achieved by using
 on the `<incidence2>` object.
 
 ``` r
+
 # create incidence object
 daily <- incidence(
   x = linelist,
@@ -165,6 +171,7 @@ daily <- incidence(
 ```
 
 ``` r
+
 plot(daily)
 ```
 
@@ -176,10 +183,12 @@ distribution.](vis-linelist_files/figure-html/plot-daily-1.png)
 Alternatively, incidence can be plotting weekly:
 
 ``` r
+
 weekly <- incidence(linelist, date_index = "date_onset", interval = "isoweek")
 ```
 
 ``` r
+
 plot(weekly)
 ```
 
@@ -194,6 +203,7 @@ example sex, the `<incidence2>` data object can be recreated, specifying
 which columns to group by.
 
 ``` r
+
 weekly <- incidence(
   linelist,
   date_index = "date_onset",
@@ -203,6 +213,7 @@ weekly <- incidence(
 ```
 
 ``` r
+
 plot(weekly)
 ```
 
@@ -234,6 +245,7 @@ to be input into
 - Tidyverse
 
 ``` r
+
 # this can also be achieved with the reshape() function but the user interface
 # for that function is complicated so here we just create the columns manually
 linelist$date_death <- linelist$date_outcome
@@ -243,6 +255,7 @@ linelist$date_recovery[linelist$outcome == "died"] <- NA
 ```
 
 ``` r
+
 linelist <- linelist |>
   tidyr::pivot_wider(
     names_from = outcome,
@@ -257,6 +270,7 @@ linelist <- linelist |>
 ## 
 
 ``` r
+
 daily <- incidence(
   linelist,
   date_index = c(
@@ -271,6 +285,7 @@ daily <- incidence(
 ```
 
 ``` r
+
 plot(daily)
 ```
 
@@ -296,6 +311,7 @@ hospital admission events. We subset to the first 10 cases so the events
 on the plot are clear, however, this subsetting is not required.
 
 ``` r
+
 set.seed(123)
 
 onset_to_recovery <- epiparameter(
@@ -330,6 +346,7 @@ We need to reshape the line list to *tidy* data in order to easily plot
 it with {ggplot2}.
 
 ``` r
+
 tidy_linelist <- linelist |>
   pivot_longer(
     cols = c("date_onset", "date_reporting", "date_admission", "date_outcome")
@@ -350,6 +367,7 @@ timeline of the outbreak on the x-axis. For clarity, we’ll just plot the
 first 10 cases in the line list.
 
 ``` r
+
 ggplot(data = tidy_linelist) +
   geom_line(
     mapping = aes(x = value, y = case_name),
@@ -387,9 +405,9 @@ ggplot(data = tidy_linelist) +
       hjust = 1
     )
   )
-#> Warning: Removed 1 row containing missing values or values outside the scale range
+#> Warning: Removed 2 rows containing missing values or values outside the scale range
 #> (`geom_line()`).
-#> Warning: Removed 1 row containing missing values or values outside the scale range
+#> Warning: Removed 2 rows containing missing values or values outside the scale range
 #> (`geom_point()`).
 ```
 
@@ -447,6 +465,7 @@ distributions that we used to simulate a line list above, but reduce the
 mean number of contacts in the contact distribution to 2.
 
 ``` r
+
 contact_distribution <- epiparameter(
   disease = "COVID-19",
   epi_name = "contact distribution",
@@ -459,6 +478,7 @@ contact_distribution <- epiparameter(
 ```
 
 ``` r
+
 set.seed(1)
 outbreak <- sim_outbreak(
   contact_distribution = contact_distribution,
@@ -468,20 +488,20 @@ outbreak <- sim_outbreak(
   onset_to_death = onset_to_death
 )
 head(outbreak$linelist)
-#>   id            case_name case_type sex age date_onset date_reporting
-#> 1  1   Jennifer Pritchett confirmed   f   1 2023-01-01     2023-01-01
-#> 2  2         Tyler Payson confirmed   f  29 2023-01-01     2023-01-01
-#> 3  3            Sean Wong confirmed   m  78 2023-01-02     2023-01-02
-#> 4  5       Bishr al-Safar confirmed   m  70 2023-01-05     2023-01-05
-#> 5  6 Francisco Montgomery  probable   m  28 2023-01-02     2023-01-02
-#> 6  8         Jack Millard suspected   m  61 2023-01-04     2023-01-04
+#>   id          case_name case_type sex age date_onset date_reporting
+#> 1  1 Jennifer Pritchett confirmed   f   0 2023-01-01     2023-01-01
+#> 2  2       Tyler Payson confirmed   f  28 2023-01-01     2023-01-01
+#> 3  3   Faisal al-Hallal confirmed   m  77 2023-01-02     2023-01-02
+#> 4  5           Kaleb Le confirmed   m  69 2023-01-05     2023-01-05
+#> 5  6   Dhaakir al-Safar  probable   m  27 2023-01-02     2023-01-02
+#> 6  8       Corey Cabral suspected   m  60 2023-01-04     2023-01-04
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1     2023-01-03      died   2023-01-18               <NA>              <NA>
-#> 2     2023-01-03      died   2023-02-09         2022-12-30        2023-01-08
-#> 3           <NA> recovered         <NA>         2022-12-31        2023-01-05
-#> 4     2023-01-08 recovered         <NA>         2022-12-31        2023-01-04
-#> 5     2023-01-06 recovered         <NA>         2022-12-30        2023-01-03
-#> 6           <NA> recovered         <NA>         2022-12-29        2023-01-06
+#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-30        2023-01-08
+#> 3     2023-01-04      died   2023-01-11         2022-12-31        2023-01-05
+#> 4           <NA> recovered         <NA>         2022-12-31        2023-01-04
+#> 5           <NA> recovered         <NA>         2022-12-30        2023-01-03
+#> 6     2023-01-08 recovered         <NA>         2022-12-29        2023-01-06
 #>   ct_value
 #> 1     27.1
 #> 2     25.2
@@ -490,13 +510,13 @@ head(outbreak$linelist)
 #> 5       NA
 #> 6       NA
 head(outbreak$contacts)
-#>                 from                   to age sex date_first_contact
-#> 1 Jennifer Pritchett         Tyler Payson  29   f         2022-12-30
-#> 2 Jennifer Pritchett            Sean Wong  78   m         2022-12-31
-#> 3       Tyler Payson     Muneeb al-Hallal  22   m         2022-12-30
-#> 4       Tyler Payson       Bishr al-Safar  70   m         2022-12-31
-#> 5          Sean Wong Francisco Montgomery  28   m         2022-12-30
-#> 6          Sean Wong           Andi Trang  37   m         2022-12-28
+#>                 from               to age sex date_first_contact
+#> 1 Jennifer Pritchett     Tyler Payson  28   f         2022-12-30
+#> 2 Jennifer Pritchett Faisal al-Hallal  77   m         2022-12-31
+#> 3       Tyler Payson  Collin Johnston  21   m         2022-12-30
+#> 4       Tyler Payson         Kaleb Le  69   m         2022-12-31
+#> 5   Faisal al-Hallal Dhaakir al-Safar  27   m         2022-12-30
+#> 6   Faisal al-Hallal   Junaid el-Huda  36   m         2022-12-28
 #>   date_last_contact was_case           status
 #> 1        2023-01-08     TRUE             case
 #> 2        2023-01-05     TRUE             case
@@ -510,6 +530,7 @@ Using the line list and contacts data simulated we can create the
 `<epicontacts>` object.
 
 ``` r
+
 epicontacts <- make_epicontacts(
   linelist = outbreak$linelist,
   contacts = outbreak$contacts,
@@ -524,6 +545,7 @@ The `<epicontacts>` object comes with a custom printing feature to see
 the data.
 
 ``` r
+
 epicontacts
 #> 
 #> /// Epidemiological Contacts //
@@ -536,18 +558,18 @@ epicontacts
 #> # A tibble: 12 × 13
 #>    id        id.1 case_type sex     age date_onset date_reporting date_admission
 #>    <chr>    <int> <chr>     <chr> <int> <date>     <date>         <date>        
-#>  1 Jennife…     1 confirmed f         1 2023-01-01 2023-01-01     2023-01-03    
-#>  2 Tyler P…     2 confirmed f        29 2023-01-01 2023-01-01     2023-01-03    
-#>  3 Sean Wo…     3 confirmed m        78 2023-01-02 2023-01-02     NA            
-#>  4 Bishr a…     5 confirmed m        70 2023-01-05 2023-01-05     2023-01-08    
-#>  5 Francis…     6 probable  m        28 2023-01-02 2023-01-02     2023-01-06    
-#>  6 Jack Mi…     8 suspected m        61 2023-01-04 2023-01-04     NA            
-#>  7 Robert …    11 confirmed m        86 2023-01-04 2023-01-04     NA            
-#>  8 Olivia …    12 probable  f        71 2023-01-06 2023-01-06     2023-01-08    
-#>  9 Hope Ho…    13 probable  f        51 2023-01-07 2023-01-07     NA            
-#> 10 Preston…    19 probable  m        50 2023-01-09 2023-01-09     NA            
-#> 11 Reece M…    21 probable  m        20 2023-01-11 2023-01-11     NA            
-#> 12 Wyona F…    22 confirmed f        24 2023-01-11 2023-01-11     NA            
+#>  1 Jennife…     1 confirmed f         0 2023-01-01 2023-01-01     NA            
+#>  2 Tyler P…     2 confirmed f        28 2023-01-01 2023-01-01     NA            
+#>  3 Faisal …     3 confirmed m        77 2023-01-02 2023-01-02     2023-01-04    
+#>  4 Kaleb Le     5 confirmed m        69 2023-01-05 2023-01-05     NA            
+#>  5 Dhaakir…     6 probable  m        27 2023-01-02 2023-01-02     NA            
+#>  6 Corey C…     8 suspected m        60 2023-01-04 2023-01-04     2023-01-08    
+#>  7 Daniel …    11 confirmed m        85 2023-01-04 2023-01-04     NA            
+#>  8 Olivia …    12 probable  f        70 2023-01-06 2023-01-06     NA            
+#>  9 Hope Ho…    13 probable  f        50 2023-01-07 2023-01-07     NA            
+#> 10 Trusten…    19 probable  m        49 2023-01-09 2023-01-09     2023-01-12    
+#> 11 Robert …    21 probable  m         6 2023-01-11 2023-01-11     NA            
+#> 12 Wyona F…    22 confirmed f        19 2023-01-11 2023-01-11     NA            
 #> # ℹ 5 more variables: outcome <chr>, date_outcome <date>,
 #> #   date_first_contact <date>, date_last_contact <date>, ct_value <dbl>
 #> 
@@ -556,16 +578,16 @@ epicontacts
 #> # A tibble: 21 × 8
 #>    from   to      age sex   date_first_contact date_last_contact was_case status
 #>    <chr>  <chr> <int> <chr> <date>             <date>            <lgl>    <chr> 
-#>  1 Jenni… Tyle…    29 f     2022-12-30         2023-01-08        TRUE     case  
-#>  2 Jenni… Sean…    78 m     2022-12-31         2023-01-05        TRUE     case  
-#>  3 Tyler… Mune…    22 m     2022-12-30         2023-01-03        FALSE    under…
-#>  4 Tyler… Bish…    70 m     2022-12-31         2023-01-04        TRUE     case  
-#>  5 Sean … Fran…    28 m     2022-12-30         2023-01-03        TRUE     case  
-#>  6 Sean … Andi…    37 m     2022-12-28         2023-01-02        FALSE    lost_…
-#>  7 Sean … Jack…    61 m     2022-12-29         2023-01-06        TRUE     case  
-#>  8 Bishr… Aver…    46 m     2023-01-01         2023-01-06        FALSE    lost_…
-#>  9 Franc… Anth…    67 m     2022-12-30         2023-01-05        FALSE    under…
-#> 10 Jack … Robe…    86 m     2023-01-02         2023-01-07        TRUE     case  
+#>  1 Jenni… Tyle…    28 f     2022-12-30         2023-01-08        TRUE     case  
+#>  2 Jenni… Fais…    77 m     2022-12-31         2023-01-05        TRUE     case  
+#>  3 Tyler… Coll…    21 m     2022-12-30         2023-01-03        FALSE    under…
+#>  4 Tyler… Kale…    69 m     2022-12-31         2023-01-04        TRUE     case  
+#>  5 Faisa… Dhaa…    27 m     2022-12-30         2023-01-03        TRUE     case  
+#>  6 Faisa… Juna…    36 m     2022-12-28         2023-01-02        FALSE    lost_…
+#>  7 Faisa… Core…    60 m     2022-12-29         2023-01-06        TRUE     case  
+#>  8 Kaleb… Sean…    45 m     2023-01-01         2023-01-06        FALSE    lost_…
+#>  9 Dhaak… Nich…    66 m     2022-12-30         2023-01-05        FALSE    under…
+#> 10 Corey… Dani…    85 m     2023-01-02         2023-01-07        TRUE     case  
 #> # ℹ 11 more rows
 ```
 
@@ -580,6 +602,7 @@ in the network using the drop-down menu, to zoom in and out of the plot
 by scrolling, and to move the network using the mouse to drag and drop.
 
 ``` r
+
 plot(epicontacts)
 ```
 
@@ -602,10 +625,12 @@ only plot the transmission network of cases from the outbreak.
 - Tidyverse
 
 ``` r
+
 outbreak$contacts <- outbreak$contacts[outbreak$contacts$was_case, ]
 ```
 
 ``` r
+
 outbreak$contacts <- outbreak$contacts |>
   dplyr::filter(was_case)
 ```
@@ -613,21 +638,22 @@ outbreak$contacts <- outbreak$contacts |>
 ## 
 
 ``` r
+
 head(outbreak$linelist)
-#>   id            case_name case_type sex age date_onset date_reporting
-#> 1  1   Jennifer Pritchett confirmed   f   1 2023-01-01     2023-01-01
-#> 2  2         Tyler Payson confirmed   f  29 2023-01-01     2023-01-01
-#> 3  3            Sean Wong confirmed   m  78 2023-01-02     2023-01-02
-#> 4  5       Bishr al-Safar confirmed   m  70 2023-01-05     2023-01-05
-#> 5  6 Francisco Montgomery  probable   m  28 2023-01-02     2023-01-02
-#> 6  8         Jack Millard suspected   m  61 2023-01-04     2023-01-04
+#>   id          case_name case_type sex age date_onset date_reporting
+#> 1  1 Jennifer Pritchett confirmed   f   0 2023-01-01     2023-01-01
+#> 2  2       Tyler Payson confirmed   f  28 2023-01-01     2023-01-01
+#> 3  3   Faisal al-Hallal confirmed   m  77 2023-01-02     2023-01-02
+#> 4  5           Kaleb Le confirmed   m  69 2023-01-05     2023-01-05
+#> 5  6   Dhaakir al-Safar  probable   m  27 2023-01-02     2023-01-02
+#> 6  8       Corey Cabral suspected   m  60 2023-01-04     2023-01-04
 #>   date_admission   outcome date_outcome date_first_contact date_last_contact
-#> 1     2023-01-03      died   2023-01-18               <NA>              <NA>
-#> 2     2023-01-03      died   2023-02-09         2022-12-30        2023-01-08
-#> 3           <NA> recovered         <NA>         2022-12-31        2023-01-05
-#> 4     2023-01-08 recovered         <NA>         2022-12-31        2023-01-04
-#> 5     2023-01-06 recovered         <NA>         2022-12-30        2023-01-03
-#> 6           <NA> recovered         <NA>         2022-12-29        2023-01-06
+#> 1           <NA> recovered         <NA>               <NA>              <NA>
+#> 2           <NA> recovered         <NA>         2022-12-30        2023-01-08
+#> 3     2023-01-04      died   2023-01-11         2022-12-31        2023-01-05
+#> 4           <NA> recovered         <NA>         2022-12-31        2023-01-04
+#> 5           <NA> recovered         <NA>         2022-12-30        2023-01-03
+#> 6     2023-01-08 recovered         <NA>         2022-12-29        2023-01-06
 #>   ct_value
 #> 1     27.1
 #> 2     25.2
@@ -636,13 +662,13 @@ head(outbreak$linelist)
 #> 5       NA
 #> 6       NA
 head(outbreak$contacts)
-#>                 from                   to age sex date_first_contact
-#> 1 Jennifer Pritchett         Tyler Payson  29   f         2022-12-30
-#> 2 Jennifer Pritchett            Sean Wong  78   m         2022-12-31
-#> 3       Tyler Payson       Bishr al-Safar  70   m         2022-12-31
-#> 4          Sean Wong Francisco Montgomery  28   m         2022-12-30
-#> 5          Sean Wong         Jack Millard  61   m         2022-12-29
-#> 6       Jack Millard        Robert Abeyta  86   m         2023-01-02
+#>                 from               to age sex date_first_contact
+#> 1 Jennifer Pritchett     Tyler Payson  28   f         2022-12-30
+#> 2 Jennifer Pritchett Faisal al-Hallal  77   m         2022-12-31
+#> 3       Tyler Payson         Kaleb Le  69   m         2022-12-31
+#> 4   Faisal al-Hallal Dhaakir al-Safar  27   m         2022-12-30
+#> 5   Faisal al-Hallal     Corey Cabral  60   m         2022-12-29
+#> 6       Corey Cabral     Daniel Yoder  85   m         2023-01-02
 #>   date_last_contact was_case status
 #> 1        2023-01-08     TRUE   case
 #> 2        2023-01-05     TRUE   case
@@ -653,6 +679,7 @@ head(outbreak$contacts)
 ```
 
 ``` r
+
 epicontacts <- make_epicontacts(
   linelist = outbreak$linelist,
   contacts = outbreak$contacts,
@@ -664,6 +691,7 @@ epicontacts <- make_epicontacts(
 ```
 
 ``` r
+
 epicontacts
 #> 
 #> /// Epidemiological Contacts //
@@ -676,18 +704,18 @@ epicontacts
 #> # A tibble: 12 × 13
 #>    id        id.1 case_type sex     age date_onset date_reporting date_admission
 #>    <chr>    <int> <chr>     <chr> <int> <date>     <date>         <date>        
-#>  1 Jennife…     1 confirmed f         1 2023-01-01 2023-01-01     2023-01-03    
-#>  2 Tyler P…     2 confirmed f        29 2023-01-01 2023-01-01     2023-01-03    
-#>  3 Sean Wo…     3 confirmed m        78 2023-01-02 2023-01-02     NA            
-#>  4 Bishr a…     5 confirmed m        70 2023-01-05 2023-01-05     2023-01-08    
-#>  5 Francis…     6 probable  m        28 2023-01-02 2023-01-02     2023-01-06    
-#>  6 Jack Mi…     8 suspected m        61 2023-01-04 2023-01-04     NA            
-#>  7 Robert …    11 confirmed m        86 2023-01-04 2023-01-04     NA            
-#>  8 Olivia …    12 probable  f        71 2023-01-06 2023-01-06     2023-01-08    
-#>  9 Hope Ho…    13 probable  f        51 2023-01-07 2023-01-07     NA            
-#> 10 Preston…    19 probable  m        50 2023-01-09 2023-01-09     NA            
-#> 11 Reece M…    21 probable  m        20 2023-01-11 2023-01-11     NA            
-#> 12 Wyona F…    22 confirmed f        24 2023-01-11 2023-01-11     NA            
+#>  1 Jennife…     1 confirmed f         0 2023-01-01 2023-01-01     NA            
+#>  2 Tyler P…     2 confirmed f        28 2023-01-01 2023-01-01     NA            
+#>  3 Faisal …     3 confirmed m        77 2023-01-02 2023-01-02     2023-01-04    
+#>  4 Kaleb Le     5 confirmed m        69 2023-01-05 2023-01-05     NA            
+#>  5 Dhaakir…     6 probable  m        27 2023-01-02 2023-01-02     NA            
+#>  6 Corey C…     8 suspected m        60 2023-01-04 2023-01-04     2023-01-08    
+#>  7 Daniel …    11 confirmed m        85 2023-01-04 2023-01-04     NA            
+#>  8 Olivia …    12 probable  f        70 2023-01-06 2023-01-06     NA            
+#>  9 Hope Ho…    13 probable  f        50 2023-01-07 2023-01-07     NA            
+#> 10 Trusten…    19 probable  m        49 2023-01-09 2023-01-09     2023-01-12    
+#> 11 Robert …    21 probable  m         6 2023-01-11 2023-01-11     NA            
+#> 12 Wyona F…    22 confirmed f        19 2023-01-11 2023-01-11     NA            
 #> # ℹ 5 more variables: outcome <chr>, date_outcome <date>,
 #> #   date_first_contact <date>, date_last_contact <date>, ct_value <dbl>
 #> 
@@ -696,20 +724,21 @@ epicontacts
 #> # A tibble: 11 × 8
 #>    from   to      age sex   date_first_contact date_last_contact was_case status
 #>    <chr>  <chr> <int> <chr> <date>             <date>            <lgl>    <chr> 
-#>  1 Jenni… Tyle…    29 f     2022-12-30         2023-01-08        TRUE     case  
-#>  2 Jenni… Sean…    78 m     2022-12-31         2023-01-05        TRUE     case  
-#>  3 Tyler… Bish…    70 m     2022-12-31         2023-01-04        TRUE     case  
-#>  4 Sean … Fran…    28 m     2022-12-30         2023-01-03        TRUE     case  
-#>  5 Sean … Jack…    61 m     2022-12-29         2023-01-06        TRUE     case  
-#>  6 Jack … Robe…    86 m     2023-01-02         2023-01-07        TRUE     case  
-#>  7 Jack … Oliv…    71 f     2022-12-31         2023-01-12        TRUE     case  
-#>  8 Jack … Hope…    51 f     2023-01-01         2023-01-07        TRUE     case  
-#>  9 Hope … Pres…    50 m     2023-01-05         2023-01-09        TRUE     case  
-#> 10 Hope … Reec…    20 m     2023-01-04         2023-01-10        TRUE     case  
-#> 11 Prest… Wyon…    24 f     2023-01-03         2023-01-12        TRUE     case
+#>  1 Jenni… Tyle…    28 f     2022-12-30         2023-01-08        TRUE     case  
+#>  2 Jenni… Fais…    77 m     2022-12-31         2023-01-05        TRUE     case  
+#>  3 Tyler… Kale…    69 m     2022-12-31         2023-01-04        TRUE     case  
+#>  4 Faisa… Dhaa…    27 m     2022-12-30         2023-01-03        TRUE     case  
+#>  5 Faisa… Core…    60 m     2022-12-29         2023-01-06        TRUE     case  
+#>  6 Corey… Dani…    85 m     2023-01-02         2023-01-07        TRUE     case  
+#>  7 Corey… Oliv…    70 f     2022-12-31         2023-01-12        TRUE     case  
+#>  8 Corey… Hope…    50 f     2023-01-01         2023-01-07        TRUE     case  
+#>  9 Hope … Trus…    49 m     2023-01-05         2023-01-09        TRUE     case  
+#> 10 Hope … Robe…     6 m     2023-01-04         2023-01-10        TRUE     case  
+#> 11 Trust… Wyon…    19 f     2023-01-03         2023-01-12        TRUE     case
 ```
 
 ``` r
+
 plot(epicontacts)
 ```
 
