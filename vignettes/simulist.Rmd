@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+options(epiparameter = list(verbose = FALSE))
 ```
 
 This is an introductory vignette to the {simulist} R package. {simulist} simulates two types of common epidemiological data collected during infectious disease outbreaks: 1) a line list, which provides individual-level descriptions of cases in an outbreak; 2) a contact dataset, which provides details of which others individuals were in contact with each of the cases.
