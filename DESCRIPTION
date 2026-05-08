@@ -38,7 +38,7 @@ Imports:
     randomNames,
     rlang,
     stats
-Suggests: 
+Suggests:
     dplyr,
     epicontacts (>= 1.1.3),
     ggplot2,
@@ -48,7 +48,9 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     tidyr
-VignetteBuilder: 
+Remotes:
+    epiverse-trace/epiparameter
+VignetteBuilder:
     knitr
 Config/Needs/website: epiverse-trace/epiversetheme
 Config/testthat/edition: 3
