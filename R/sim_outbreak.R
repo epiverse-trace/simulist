@@ -70,6 +70,7 @@
 sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, lambda = 2), # nolint start: line_length_linter.
                          infectious_period = function(n) stats::rlnorm(n = n, meanlog = 2, sdlog = 0.5),
                          prob_infection = 0.5,
+                         incubation_period = NULL,
                          onset_to_hosp = function(n) stats::rlnorm(n = n, meanlog = 1.5, sdlog = 0.5),
                          onset_to_death = function(n) stats::rlnorm(n = n, meanlog = 2.5, sdlog = 0.5), # nolint end
                          onset_to_recovery = NULL,
@@ -97,6 +98,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
     list(
       contact_distribution = contact_distribution,
       infectious_period = infectious_period,
+      incubation_period = incubation_period,
       onset_to_hosp = onset_to_hosp,
       onset_to_death = onset_to_death,
       onset_to_recovery = onset_to_recovery,
@@ -105,6 +107,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
   )
   contact_distribution <- funcs$contact_distribution
   infectious_period <- funcs$infectious_period
+  incubation_period <- funcs$incubation_period
   onset_to_hosp <- funcs$onset_to_hosp
   onset_to_death <- funcs$onset_to_death
   onset_to_recovery <- funcs$onset_to_recovery
@@ -115,6 +118,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = prob_infection,
+    incubation_period = incubation_period,
     outbreak_start_date = outbreak_start_date,
     outbreak_size = outbreak_size,
     onset_to_hosp = onset_to_hosp,
@@ -175,6 +179,7 @@ sim_outbreak <- function(contact_distribution = function(x) stats::dpois(x = x, 
     contact_distribution = contact_distribution,
     infectious_period = infectious_period,
     prob_infection = prob_infection,
+    incubation_period = incubation_period,
     onset_to_hosp = onset_to_hosp,
     onset_to_death = onset_to_death,
     onset_to_recovery = onset_to_recovery,
